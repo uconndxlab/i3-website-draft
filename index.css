@@ -166,7 +166,7 @@ h1,h2{
     font-size:10vw;
 }
 
-.hero, .about, .subunit, .work, .build, .contact{
+.hero, .subunit, .work, .build, .contact{
     padding-top:100px;
     padding-bottom:100px;
     
@@ -258,7 +258,7 @@ h1,h2{
   }
 
   /*circle*/
-  .circle{
+  .circle1, .circle2,.circle3{
     position: absolute;
     border-radius: 50%;
     border: 3px dashed var(--black);
@@ -291,6 +291,41 @@ h1,h2{
     mix-blend-mode: difference;
 
   }
+
+  .circle-outside{
+    display:none;
+  }
+
+  @media (min-width: 768px) {
+    .circle-outside{
+      display:block;
+      left:180px;
+      top:250px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .circle-outside{
+      left:240px;
+      top:250px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .circle-outside{
+      left:280px;
+      top:250px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .circle-outside{
+      left:330px;
+      top:250px;
+    }
+  }
+
+  
 
   /*work */
   .work{
@@ -335,4 +370,8 @@ h1,h2{
 
   .build{
     background:var(--black);
+    background-image: url(img/bin-background.svg);
+    background-size:cover;
+    background-position:bottom 0px right 0px;
+    background-repeat:no-repeat;
   }
