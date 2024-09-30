@@ -57,6 +57,13 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-size: 1.5em;
 }
 
+.case-study hr{
+  color:rgba(255,255,255,0.5);
+  background-color:rgba(255,255,255,0.5);
+  border:none;
+  height:2px;
+}
+
 .hero-header {
   transform: translate3d(0, 0, 0);
   will-change: opacity;
@@ -123,6 +130,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   overflow: hidden;
   transition: max-height 0.5s;
 }
+
 #our-work.expanded {
   max-height: unset;
 }
@@ -497,6 +505,14 @@ h1, .h1, h2, .h2 {
   font-weight: 900;
 }
 
+.case-study h1, .case-study h2, .case-study h3{
+  font-weight:600;
+}
+
+.case-study h1, .case-study h3{
+  color:#1E2023
+}
+
 .display-btn {
   padding: 0 !important;
 }
@@ -553,6 +569,11 @@ h1, .h1, h2, .h2 {
 
 .card-title {
   font-weight: 800;
+}
+
+.card-dark{
+  background:rgba(255,255,255,0.1);
+  height:100%;
 }
 
 .col img {
@@ -645,8 +666,12 @@ div.wrap > div:hover {
   padding-top:0px!important;
 }
 
-.modal-body .badge{
-  background-color:var(--accent-2)!important;
+.modal-body .badge, .case-study .badge{
+  background-color:var(--accent-3)!important;
+}
+
+.case-study .badge-2{
+  background-color:var(--accent-4)!important;
 }
 
 .modal-footer{
