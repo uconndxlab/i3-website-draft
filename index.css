@@ -677,3 +677,45 @@ div.wrap > div:hover {
 .modal-footer{
   border-top:0px!important;
 }
+
+/*accordion*/
+.accordion{
+  --bs-accordion-border-color: none;
+}
+.accordion-item{
+  border:0px solid;
+  border-radius:5px;
+}
+
+.accordion-button,.accordion-body,.accordion-button:not(.collapsed),.accordion-item:first-of-type .accordion-button,button:focus:not(:focus-visible){
+  background:#EDF9FF;
+  border-left:8px solid var(--accent-1);
+}
+
+.accordion-button:not(.collapsed){
+  font-weight:600;
+}
+
+.accordion-button:focus{
+  box-shadow:none;
+  border-color:transparent;
+}
+
+.accordion-body{
+  border-radius:0px 0px 5px 5px;
+}
+
+.accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed{
+  border-radius:5px;
+  transition:1.2s;
+}
+
+.accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button{
+  border-radius:5px 5px 0px 0px;
+  transition:0s;
+}
+
+.accordion-button{
+  padding-top:20px;
+  padding-bottom:20px;
+}
