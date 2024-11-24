@@ -619,12 +619,31 @@ div.wrap > div:hover {
 }
 
 /*team*/
+#team{
+  background:var(--accent-2);
+  border-top:15px solid var(--accent-1);
+}
+
 #team img{
   border-radius:50%!important;
   padding:10px;
   border:2px dashed var(--white);
   z-index:2!important;
   position:relative;
+}
+
+#team #students img{
+  padding:0px;
+  border:none;
+  height:fit-content;
+}
+
+#team .staff img{
+  transition: 0.3s ease-in-out;
+}
+
+#team .staff:hover img{
+  padding:0px;
 }
 
 #team .row .row, #students .row{
@@ -634,18 +653,22 @@ div.wrap > div:hover {
 }
 
 #team .name{
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.1);
   border-radius:var(--bs-border-radius);
   padding-top:30px!important;
   margin-top:-35px!important;
   z-index:1!important;
   min-height:150px;
+  transition: 0.4s ease-in-out;
 }
 
 #team #students .name{
   padding:20px!important;
   margin-top:0px!important;
-  min-height:120px!important;
+}
+
+#team #students .name:hover, #team .staff:hover .name{
+  box-shadow: 0px 4px 10px 4px rgba(255, 255, 255, 0.2);
 }
 
 #team .col-md-4{
@@ -691,7 +714,7 @@ div.wrap > div:hover {
   border-radius:5px;
 }
 
-.accordion-button,.accordion-body,.accordion-button:not(.collapsed),.accordion-item:first-of-type .accordion-button,button:focus:not(:focus-visible){
+.accordion-button,.accordion-body,.accordion-button:not(.collapsed),.accordion-item:first-of-type .accordion-button,.accordion-button:focus:not(:focus-visible){
   background:#EDF9FF;
   border-left:8px solid var(--accent-1);
 }
@@ -722,4 +745,15 @@ div.wrap > div:hover {
 .accordion-button{
   padding-top:20px;
   padding-bottom:20px;
+}
+
+/* color filter slider*/
+#filter-input{
+  width:auto;
+  margin-top:40px;
+}
+@media (min-width: 768px) {
+#filter-input{
+  writing-mode: vertical-lr;
+}
 }

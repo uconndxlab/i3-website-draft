@@ -106,10 +106,10 @@
     </nav>
   </header>
 
-  <main class="">
-    <div class="container hero py-10">
+  <main id="filter-wrapper">
+    <div class="container hero py-10 row justify-content-between">
 
-      <div class="subheader" style="display:flex; align-items:center;">
+      <div class="subheader col-md-11 p-0" style="display:flex; align-items:center;">
         <div class="" style="display:flex;flex-direction:column;">
           <span class="dot" style="background-color:var(--accent-1)"></span>
           <span class="dot" style="background-color:var(--accent-2)"></span>
@@ -124,6 +124,8 @@
 
 
       </div>
+
+      <input id="filter-input" step=1 type="range" min=0 max=360 value=0 class="col-md-1 p-0">
     </div>
 
     <div class="position-relative overflow-hidden">
@@ -1425,11 +1427,11 @@
     </div>
 
 
-    <div class="bg-dark text-white py-15" id="team">
+    <div class="text-white py-15" id="team">
       <div class="container">
         <h2 class="text-white display-header mb-4" data-aos="fade-right">The Team</h2>
         <div class="row mb-5">
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/salisbury.jpg" width="200" class="img-fluid rounded-1" alt="Joel Salisbury">
@@ -1440,7 +1442,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/kelleher.jpg" class="img-fluid rounded-1" width="200" alt="Brian Kelleher">
@@ -1451,7 +1453,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/lacroix.jpg" class="img-fluid rounded-1" width="200" alt="Natalie Lacroix">
@@ -1462,7 +1464,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/winston.jpg" class="img-fluid rounded-1" width="200" alt="Jeff Winston">
@@ -1473,7 +1475,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/ameri.JPEG" class="img-fluid rounded-1" width="200" alt="Jon Ameri">
@@ -1488,7 +1490,7 @@
 
         <h3 class="text-white mb-4" data-aos="fade-right">Faculty Advisors</h3>
         <div class="row mb-5">
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/daley.jpg" width="200" class="img-fluid rounded-1" alt="Brian Daley">
@@ -1499,7 +1501,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 mb-5" data-aos="fade-right">
+          <div class="staff col-md-4 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
               <div class="col-auto">
                 <img src="img/i3/people/vert.jpg" width="200" class="img-fluid rounded-1" alt="Michael Vertefeuille">
@@ -1514,109 +1516,154 @@
 
 
         <h3 class="text-white mb-4" data-aos="fade-right">Students</h3>
-        <div class="row" id="students">
-          <div class="col-md-6 col-lg-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Denzel Allen
-                <a href="https://www.linkedin.com/in/denzelallenuconn/" class="text-white ms-2" target="_blank"><i
-                    class="bi bi-linkedin"></i></a>
+        <div class="row pb-4" id="students">
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
+            <div class="name d-flex">
+              <div>
+              <h5 class="text-white"><span class="me-2">Emma Adams</span>
               </h5>
-              <p class="mb-1">Student Project Manager</p>
+              <p class="mb-1">Student Web Developer</p>
+            </div>
             </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Lauren Busavage
-                <a href="https://www.linkedin.com/in/lauren-busavage/" class="text-white ms-2" target="_blank"><i
+            <div class="name d-flex">
+              <img src="img/i3/people/busavage.png" class="img-fluid rounded-1" width="100" alt="Lauren Busavage">
+              <div style="margin-left:20px;">
+              <h5 class="text-white"><span class="me-2">Lauren Busavage</span>
+                <a href="https://www.linkedin.com/in/lauren-busavage/" class="text-white" target="_blank"><i
                     class="bi bi-linkedin"></i></a>
               </h5>
               <p class="mb-1">Student Web Developer</p>
             </div>
+            </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Ryan Cohutt
-                <a href="https://www.linkedin.com/in/ryan-cohutt/" class="text-white ms-2" target="_blank"><i
+            <div class="name d-flex">
+              <div>
+              <h5 class="text-white"><span class="me-2">Ryan Cohutt</span>
+                <a href="https://www.linkedin.com/in/ryan-cohutt/" class="text-white" target="_blank"><i
                     class="bi bi-linkedin"></i></a>
               </h5>
               <p class="mb-1">Student UI/UX Designer</p>
             </div>
+            </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
+            <div class="name d-flex">
+              <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1" width="100" alt="Maggie Danielewicz">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">Maggie Danielewicz</span>
+                  <a href="http://www.linkedin.com/in/magdalena-danielewicz" class="text-white " target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </h5>
+              <p class="mb-1">Student Web Developer</p>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
+            <div class="name d-flex">
+              <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1" width="100" alt="Luna Gonzalez">
+
+              <div style="margin-left:20px;">
               <h5 class="text-white">Luna Gonzalez
               </h5>
               <p class="mb-1">Student Illustrator</p>
             </div>
+            </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Jack Medrek
-                <a href="https://www.linkedin.com/in/john-medrek-072a31212/" class="text-white ms-2" target="_blank"><i
+            <div class="name d-flex">
+              <div>
+              <h5 class="text-white"><span class="me-2">Aaron Mark</span>
+              </h5>
+              <p class="mb-1">Student Web Developer</p>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
+            <div class="name d-flex">
+              <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1" width="100" alt="Jack Medrek">
+              <div style="margin-left:20px;">
+              <h5 class="text-white"><span class="me-2">Jack Medrek</span>
+                <a href="https://www.linkedin.com/in/john-medrek-072a31212/" class="text-white" target="_blank"><i
                     class="bi bi-linkedin"></i></a>
               </h5>
               <p class="mb-1">Student Software Developer</p>
-              <a href="/johnmedrek.com" class="text-light-blue small">johnmedrek.com</a>
+              <a href="http://johnmedrek.com" class="text-white small" target="_blank">johnmedrek.com</a>
+            </div>
             </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Agatha Michalska
-                <a href="https://www.linkedin.com/in/agatha-michalska/" class="text-white ms-2" target="_blank"><i
+            <div class="name d-flex">
+              <div>
+              <h5 class="text-white"><span class="me-2">Kailey Moore</span>
+              </h5>
+              <p class="mb-1">Student UI/UX Designer</p>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
+            <div class="name d-flex">
+              <img src="img/i3/people/michalska.jpg" class="img-fluid rounded-1" width="100" alt="Agatha Michalska">
+              <div style="margin-left:20px;">
+              <h5 class="text-white"><span class="me-2">Agatha Michalska</span>
+                <a href="https://www.linkedin.com/in/agatha-michalska/" class="text-white" target="_blank"><i
                     class="bi bi-linkedin"></i></a>
               </h5>
               <p class="mb-1">Student Project Manager</p>
             </div>
+            </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Zoe Orie
-                <a href="https://www.linkedin.com/in/zoe-orie-84a12a227/" class="text-white ms-2" target="_blank"><i
+            <div class="name d-flex">
+              <div>
+              <h5 class="text-white"><span class="me-2">Emelia Salmon</span>
+                <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" class="text-white" target="_blank"><i
                     class="bi bi-linkedin"></i></a>
               </h5>
               <p class="mb-1">Student UI/UX Designer</p>
-              <a href="/zoeorie.com" class="text-light-blue small">zoeorie.com</a>
+              <a href="http://esalmon.com" class="text-white small" target="_blank">esalmon.com</a>
+            </div>
             </div>
           </div>
+
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Kara Rondinelli
-                <a href="https://www.linkedin.com/in/kara-rondinelli-93708b1b4/" class="text-white ms-2"
-                  target="_blank"><i class="bi bi-linkedin"></i></a>
-              </h5>
-              <p class="mb-1">Student UI/UX Designer</p>
-              <a href="/kararondinelli.com" class="text-light-blue small">kararondinelli.com</a>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Emelia Salmon
-                <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" class="text-white ms-2" target="_blank"><i
-                    class="bi bi-linkedin"></i></a>
-              </h5>
-              <p class="mb-1">Student UI/UX Designer</p>
-              <a href="/esalmon.com" class="text-light-blue small">esalmon.com</a>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Melina Sandel
-                <a href="https://www.linkedin.com/in/melina-sandel/" class="text-white ms-2" target="_blank"><i
-                    class="bi bi-linkedin"></i></a>
-              </h5>
-              <p class="mb-1">Student UI/UX Designer</p>
-              <a href="/melinasandel.com" class="text-light-blue small">melinasandel.com</a>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
-            <div class="name">
-              <h5 class="text-white">Julian Setiadi
-                <a href="https://www.linkedin.com/in/juliansetiadi/" class="text-white ms-2" target="_blank"><i
+            <div class="name d-flex">
+              <img src="img/i3/people/setiadi.jpeg" class="img-fluid rounded-1" width="100" alt="Julain Setiadi">
+              <div style="margin-left:20px;">
+              <h5 class="text-white"><span class="me-2">Julian Setiadi</span>
+                <a href="https://www.linkedin.com/in/juliansetiadi/" class="text-white" target="_blank"><i
                     class="bi bi-linkedin"></i></a>
               </h5>
               <p class="mb-1">Student Software Developer</p>
             </div>
+            </div>
           </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right">
+            <div class="name d-flex">
+              <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1" width="100" alt="William Shostak">
+              <div style="margin-left:20px;">
+              <h5 class="text-white"><span class="me-2">William Shostak</span>
+                <a href="https://www.linkedin.com/in/willshostak/" class="text-white" target="_blank"><i
+                    class="bi bi-linkedin"></i></a>
+              </h5>
+              <p class="mb-1">Student Software Developer</p>
+            </div>
+            </div>
+          </div>
+
           <div class="col-md-6 col-lg-4 mb-2" data-aos="fade-right">
             <div class="name">
               <h5 class="text-white">Beth Simmons-Emms
@@ -1624,12 +1671,14 @@
               <p class="mb-1">Student Web Developer</p>
             </div>
           </div>
+
         </div>
+        <a href="alumni.html" class="text-white">View Our Alumni</a>
       </div>
     </div>
 
 
-    <div style="border-top:2px solid var(--black);height:2px;margin-top:20px;"></div>
+    <div class="style" style="border-top:2px solid var(--accent-2);height:2px;margin-top:20px;"></div>
 
     <div class="contact" id="contact">
       <div class="container py-15">
@@ -1679,6 +1728,7 @@
       crossorigin="anonymous"></script>
     <script src="aos-master/dist/aos.js"></script>
     <script>
+      
       /*background color change*/
       $(window).scroll(function () {
 
@@ -1912,6 +1962,23 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+  <script>
+      /*color filter slider*/
+      var tiles = document.querySelectorAll('nav,.hero,.about,.subunit,.filter-pills,.modal-header,.modal-body .badge,.modal-footer,.build,#contact,.footer-flair,footer,#team,.style');
+      var extiles = document.querySelectorAll('#team img, #contact iframe')
+      document.getElementById('filter-input').oninput = function() {
+        tiles.forEach((item) => {
+          var filter = 'hue-rotate(xdeg)'.replace('x', this.value);
+          item.style.filter = filter;
+          item.style.webkitFilter = filter;
+        })
+        extiles.forEach((item) => {
+          var filter2 = 'hue-rotate(xdeg)'.replace('x', 360-this.value);
+          item.style.filter = filter2;
+          item.style.webkitFilter = filter2;
+        })
+      }
+  </script>
 
 </body>
 
