@@ -130,9 +130,8 @@
 
     <div class="position-relative overflow-hidden">
       <div class="about text-white">
-        <div class="container intro-text py-7">
-          <div class="row d-flex align-items-center justify-content-center">
-            <div class="col-md-6">
+        <div class="container intro-text row parallax">
+            <div class="col-md-8 py-7">
               <h2 data-aos="fade-left" class="display-header mb-5 text-white panel" data-color="color-3">What is [i3]?
               </h2>
               <p data-aos="fade-left" class="panel" data-color="color-4">At i3, our mission is to help UConn thrive by
@@ -145,13 +144,14 @@
                 lean and agile approach, we build, test, and iterate to ensure our solutions meet the ever-evolving
                 needs of the university community.</p>
             </div>
-            <div class="col-md-6 mb-2" style="position:relative">
+            <!--<div class="col-md-6 mb-2" style="position:relative">
               <img style="object-fit:contain;" data-aos="fade-left" src="img/i3/bin-i3.svg" width="100%" height="500px"
                 alt="i3 logo in binary">
               <img style="object-fit:contain;padding:0px 0px;position:absolute;" class="circle circle-outside"
                 src="img/i3/bin-i3-outside.svg" width="100%" height="500px" alt="decoration outside logo">
-            </div>
-          </div>
+            
+            </div>-->
+            <img id="about-logo" class="pb-7" src="img/i3/CORE Logos (white vector) PNG-21.png" width="100%" alt="i3 logo">
         </div>
       </div>
     </div>
@@ -1826,13 +1826,23 @@
         }
       };
 
-      /*rotate circle*/
+      /*rotate circle
       var elem = document.getElementsByClassName('circle');
 
       window.addEventListener('scroll', function () {
         var value = window.scrollY * 0.25;
         for (var i = 0; i < elem.length; i++) {
           elem[i].style.transform = `translatex(-50%) translatey(-50%) rotate(${value}deg)`;
+        }
+      });*/
+
+      /*shift logo on scroll*/
+      var parallax = document.getElementsByClassName('parallax');
+
+      window.addEventListener('scroll', function () {
+        var value = window.scrollY * 0.1;
+        for (var i = 0; i < parallax.length; i++) {
+          parallax[i].style.backgroundPosition = `right ${value}%`;
         }
       });
 
@@ -1937,13 +1947,16 @@
 
   <footer>
     <div class="py-5">
-      <div class="container">
+      <div class="container d-flex justify-content-between">
+        <div>
         <h2 class="normal text-medium fw-bold mb-4">Internal Insights &amp; Innovation</h2>
         <div class="d-flex align-items-center">
           <div class="pe-6">
             <p>i3@uconn.edu</p>
           </div>
         </div>
+        </div>
+      <img src="img/i3/CORE Logos (Black Vector) PNG-21.png" alt="i3 logo" width="75" style="object-fit:contain;">
       </div>
     </div>
     <div class="bg-dark text-white py-5">

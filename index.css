@@ -332,6 +332,27 @@ header nav ul:not(.dropdown-menu) li a:hover {
   mix-blend-mode: difference;
 }
 
+/*parallax*/
+@media (min-width: 768px) {
+
+.parallax {
+  /* The image used */
+  background-image: url("img/i3/CORE\ Logos\ \(White\ Vector\).svg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size:200px;
+}
+
+#about-logo{
+  display:none;
+}
+}
+
 /*button*/
 .btn-arrow-slide-cont {
   position: relative;
