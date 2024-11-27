@@ -656,7 +656,7 @@ div.wrap > div:hover {
 #team #students img{
   padding:0px;
   border:none;
-  height:fit-content;
+  height:fit-content!important;
 }
 
 #team .staff img{
