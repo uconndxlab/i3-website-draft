@@ -770,11 +770,38 @@ div.wrap > div:hover {
 
 /* color filter slider*/
 #filter-input{
-  width:auto;
+  width:10px;
   margin-top:40px;
 }
 @media (min-width: 768px) {
 #filter-input{
   writing-mode: vertical-lr;
+  margin-top:0px;
 }
+}
+
+#filter-input::-webkit-slider-thumb:hover{
+  box-shadow: 0 0 0 10px rgba(77, 179, 255, .1);
+  border-radius:50%;
+}
+#filter-input:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 10px rgba(77, 179, 255, .2);
+  border-radius:50%;
+}
+#filter-input:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 10px rgba(77, 179, 255, .2);
+  border-radius:50%;
+}
+
+#filter-input::-moz-range-thumb:hover {
+  box-shadow: 0 0 0 10px rgba(77, 179, 255, .1);
+  border-radius:50%;
+}
+#filter-input:active::-moz-range-thumb {
+  box-shadow: 0 0 0 10px rgba(77, 179, 255, .2);
+  border-radius:50%;
+}
+#filter-input:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 10px rgba(77, 179, 255, .2);
+  border-radius:50%;  
 }
