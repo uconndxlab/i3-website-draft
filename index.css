@@ -667,7 +667,7 @@ div.wrap > div:hover {
   padding:0px;
 }
 
-#team .row .row, #students .row{
+#team .row .row{
   text-align:center;
   justify-content:center;
   width:100%;
@@ -686,6 +686,8 @@ div.wrap > div:hover {
 #team #students .name{
   padding:20px!important;
   margin-top:0px!important;
+  height:100%;
+  text-align:left;
 }
 
 #team #students .name:hover, #team .staff:hover .name{
@@ -702,6 +704,30 @@ div.wrap > div:hover {
   justify-content:center;
   align-items:stretch;
 }
+
+
+/*carousel*/
+#team .carousel-control-next, #team .carousel-control-prev{
+ align-items:end;
+ width:auto;
+}
+
+#team .carousel-indicators {
+  margin-bottom:0px;
+  margin-left:0;
+  margin-right:0;
+}
+
+#team #students .name{
+  margin-top:0px;
+  padding-top:0px;
+  padding:20px;
+}
+
+.carousel-item .row{
+  width:auto!important;
+}
+
 
 /*modal*/
 .modal-header {
