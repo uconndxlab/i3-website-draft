@@ -814,13 +814,14 @@ div.wrap > div:hover {
 
 /* color filter slider*/
 #filter-input{
-  width:10px;
+  width:auto;
   margin-top:40px;
 }
 @media (min-width: 768px) {
 #filter-input{
   writing-mode: vertical-lr;
   margin-top:0px;
+  width:10px;
 }
 }
 

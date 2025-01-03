@@ -218,21 +218,21 @@
           </div>
         </div>
 
-        <div class="row numbers py-7">
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>30+</h3>
+        <div class="row numbers py-7" data-aos="fade-up">
+          <div class="col-md-3 d-flex flex-column text-center" >
+            <h3 class="value"><span id="count1"></span>+</h3>
             <p>Grant-funded projects</p>
           </div>
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>25+</h3>
+          <div class="col-md-3 d-flex flex-column text-center">
+            <h3 class="value"><span id="count2"></span>+</h3>
             <p>UConn Students Employed in Accelerator</p>
           </div>
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>30%</h3>
+          <div class="col-md-3 d-flex flex-column text-center">
+            <h3 class="value"><span id="count3"></span>%</h3>
             <p>Cost-savings on Average (compared to External Vendors)</p>
           </div>
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>15+</h3>
+          <div class="col-md-3 d-flex flex-column text-center">
+            <h3 class="value"><span id="count4"></span>+</h3>
             <p>UConn Departments & Centers Partnered</p>
           </div>
         </div>
@@ -294,21 +294,21 @@
         </div>
 
         
-        <div class="row numbers pt-7">
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>30+</h3>
+        <div class="row numbers pt-7" data-aos="fade-up">
+          <div class="col-md-3 d-flex flex-column text-center" >
+            <h3 class="value"><span id="count5"></span>+</h3>
             <p>Grant-funded projects</p>
           </div>
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>25+</h3>
+          <div class="col-md-3 d-flex flex-column text-center">
+            <h3 class="value"><span id="count6"></span>+</h3>
             <p>UConn Students Employed in Accelerator</p>
           </div>
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>30%</h3>
+          <div class="col-md-3 d-flex flex-column text-center">
+            <h3 class="value"><span id="count7"></span>%</h3>
             <p>Cost-savings on Average (compared to External Vendors)</p>
           </div>
-          <div class="col-md-3 d-flex flex-column text-center"data-aos="fade-up">
-            <h3>15+</h3>
+          <div class="col-md-3 d-flex flex-column text-center">
+            <h3 class="value"><span id="count8"></span>+</h3>
             <p>UConn Departments & Centers Partnered</p>
           </div>
         </div>
@@ -2065,6 +2065,7 @@
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"></script>
     <script src="aos-master/dist/aos.js"></script>
+
     <script>
       
       /*background color change*/
@@ -2261,17 +2262,69 @@
         });
       })()
 
-      /**
-       * AOS v2 Initialization
-       * @url https://github.com/michalsnik/aos/tree/v2#init-aos
-       */
-      AOS.init({
-        duration: 1000,
-        disable: Boolean(window.innerWidth < 1024),
-        delay: 200,
-        once: true
+  // Initialize AOS
+  AOS.init({
+    duration: 1000,  // Duration for fade-up animation
+    delay: 200,      // Delay before starting the fade-up animation
+    once: true,      // Only trigger once when it enters the viewport
+    disable: Boolean(window.innerWidth < 1024),  // Disable on small screens
+  });
+
+  // Wait for the DOM to load
+  document.addEventListener("DOMContentLoaded", () => {
+
+  // Function to animate counting
+  function counter(id, start, end, duration) {
+    let obj = document.getElementById(id),
+        current = start,
+        range = end - start,
+        increment = end > start ? 1 : -1,
+        step = Math.abs(Math.floor(duration / range)),
+        timer = setInterval(() => {
+          current += increment;
+          obj.textContent = current;
+          if (current == end) {
+            clearInterval(timer);
+          }
+        }, step);
+  }
+
+  // Intersection Observer to trigger number counter when in view
+  function observeCounter(id, start, end, duration) {
+    const element = document.getElementById(id);
+    const options = {
+      root: null, // viewport as root
+      rootMargin: '0px',
+      threshold: 0.5 // Trigger when 50% of the element is in the viewport
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          counter(id, start, end, duration);
+          observer.unobserve(entry.target); // Stop observing after it starts counting
+        }
       });
+    }, options);
+
+    observer.observe(element); // Start observing the element
+  }
+
+  // Call observeCounter for each number
+  observeCounter("count1", 0, 30, 2000);
+  observeCounter("count2", 100, 25, 2000); 
+  observeCounter("count3", 0, 30, 2000); 
+  observeCounter("count4", 0, 15, 2000); 
+  observeCounter("count5", 0, 30, 2000);
+  observeCounter("count6", 100, 25, 2000); 
+  observeCounter("count7", 0, 30, 2000); 
+  observeCounter("count8", 0, 15, 2000); 
+  });
+
+
+
     </script>
+
   </main>
 
   <div class="footer-flair" style="margin-top:-10px;">
@@ -2314,7 +2367,7 @@
   <script>
       /*color filter slider*/
       var tiles = document.querySelectorAll('nav,.hero,.about,.subunit,.filter-pills,.modal-header,.modal-body .badge,.modal-footer,.build,#contact,.footer-flair,footer,#team,.style');
-      var extiles = document.querySelectorAll('#team img, #contact iframe')
+      var extiles = document.querySelectorAll('#team img, #contact iframe,.subunit img')
       document.getElementById('filter-input').oninput = function() {
         tiles.forEach((item) => {
           var filter = 'hue-rotate(xdeg)'.replace('x', this.value);
