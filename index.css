@@ -732,8 +732,9 @@ div.wrap > div:hover {
 
 #team .carousel-indicators {
   margin-bottom:0px;
-  margin-left:0;
-  margin-right:0;
+  margin-left:auto;
+  margin-right:auto;
+  width:max-content;
 }
 
 #team #students .name{
