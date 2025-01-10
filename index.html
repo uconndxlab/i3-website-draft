@@ -14,6 +14,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/i3.css">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://use.typekit.net/lmy8hrr.css">
 
 </head>
 
@@ -329,12 +330,10 @@
               <button class="nav-link text-white fw-bold has-background">All Work</button>
             </li>
             <li class="nav-item">
-              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="research">Research
-                Focus</button>
+              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="research">Digital Experience Group</button>
             </li>
             <li class="nav-item">
-              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="internal">Internal
-                Focus</button>
+              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="internal">Cubed Labs</button>
             </li>
             <div class="pill-background position-absolute bg-primary"></div>
           </ul>
@@ -1739,45 +1738,44 @@
         <h3 class="text-white mb-4" data-aos="fade-right">Students</h3>
         <a href="alumni.html" class="text-white"  data-aos="fade-left">View Our Alumni</a>
         </div>
-      <div id="students" class="carousel slide row" >
-        <div class="carousel-indicators" data-aos="fade-up">
-          <button type="button" data-bs-target="#students" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#students" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#students" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#students" data-bs-slide-to="3" aria-label="Slide 4"></button>
-          <button type="button" data-bs-target="#students" data-bs-slide-to="4" aria-label="Slide 5"></button>
-          <button type="button" data-bs-target="#students" data-bs-slide-to="5" aria-label="Slide 6"></button>
-          <button type="button" data-bs-target="#students" data-bs-slide-to="6" aria-label="Slide 7"></button>
-
-
-        </div>
-        <div class="carousel-inner">
-
-          <div class="carousel-item active">
-            <div class="row">
-
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+      <div id="students" class="row pb-4">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#adams">
                 <div class="name d-flex">
                   <div>
                   <h5 class="text-white"><span class="me-2">Emma Adams</span>
                   </h5>
                   <p class="mb-1">Student Web Developer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
                 </div>
                 </div>
               </div>
+
+            <div class="modal fade p-0 text-dark" id="adams" tabindex="-1" role="dialog"
+              aria-labelledby="Emma Adams"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <h3 class="modal-title">Emma Adams</h3>
+                    <p><strong>Student Web Developer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
     
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#busavage">
                 <div class="name d-flex">
-                  <img src="img/i3/people/busavage.png" class="img-fluid rounded-1" width="150" alt="Lauren Busavage">
+                  <img src="img/i3/people/busavage.png" class="img-fluid rounded-1" width="100" alt="Lauren Busavage">
                   <div style="margin-left:20px;">
                   <h5 class="text-white"><span class="me-2">Lauren Busavage</span>
                   </h5>
                   <p class="mb-1">Student Web Developer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                  <div class="text-white mt-3" style="font-size:26px;">
+                  <div class="text-white" style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/lauren-busavage/" class="text-white" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
                   </div> 
@@ -1785,33 +1783,66 @@
                 </div>
               </div>
 
+              <div class="modal fade p-0 text-dark" id="busavage" tabindex="-1" role="dialog"
+              aria-labelledby="Lauren Busavage"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <img src="img/i3/people/busavage.png" class="img-fluid rounded-1 mb-4" width="150" alt="Lauren Busavage">
+                    <h3 class="modal-title">Lauren Busavage</h3>
+                    <p><strong>Student Web Developer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="https://www.linkedin.com/in/lauren-busavage/" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                    </div> 
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-item">
-            <div class="row">
-
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#clarke">
                 <div class="name d-flex">
                   <div>
                   <h5 class="text-white"><span class="me-2">Kelis Clarke</span>
                   </h5>
                   <p class="mb-1">Student UI/UX Designer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
                 </div>
                 </div>
               </div>
+
+              <div class="modal fade p-0 text-dark" id="clarke" tabindex="-1" role="dialog"
+              aria-labelledby="Kelis Clarke"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <h3 class="modal-title">Kelis Clarke</h3>
+                    <p><strong>Student UI/UX Designer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
     
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#cohutt">
                 <div class="name d-flex">
                   <div>
                   <h5 class="text-white"><span class="me-2">Ryan Cohutt</span>
                   </h5>
                   <p class="mb-1">Student UI/UX Designer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                  <div class="text-white mt-3" style="font-size:26px;">
+                  <div class="text-white " style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/ryan-cohutt/" class="text-white" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
                   </div> 
@@ -1819,71 +1850,137 @@
                 </div>
               </div>
 
+              <div class="modal fade p-0 text-dark" id="cohutt" tabindex="-1" role="dialog"
+              aria-labelledby="Ryan Cohutt"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <h3 class="modal-title">Ryan Cohutt</h3>
+                    <p><strong>Student UI/UX Designer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="https://www.linkedin.com/in/ryan-cohutt/" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                    </div> 
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-item">
-            <div class="row">
-
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#danielewicz">
                 <div class="name d-flex">
-                  <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1" width="150" alt="Maggie Danielewicz">
+                  <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1" width="100" alt="Maggie Danielewicz">
                   <div style="margin-left:20px;">
                     <h5 class="text-white"><span class="me-2">Maggie Danielewicz</span>
                     </h5>
                   <p class="mb-1">Student Web Developer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                  <div class="text-white mt-3" style="font-size:26px;">
+                  <div class="text-white " style="font-size:26px;">
                     <a href="http://www.linkedin.com/in/magdalena-danielewicz" class="text-white" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
                   </div>  
                 </div>
                 </div>
               </div>
+
+              <div class="modal fade p-0 text-dark" id="danielewicz" tabindex="-1" role="dialog"
+              aria-labelledby="Maggie Danielewicz"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Maggie Danielewicz">
+                    <h3 class="modal-title">Maggie Danielewicz</h3>
+                    <p><strong>Student Web Developer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="http://www.linkedin.com/in/magdalena-danielewicz" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
     
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#gonzalez">
                 <div class="name d-flex">
-                  <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1" width="150" alt="Luna Gonzalez">
+                  <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1" width="100" alt="Luna Gonzalez">
     
                   <div style="margin-left:20px;">
                   <h5 class="text-white">Luna Gonzalez
                   </h5>
                   <p class="mb-1">Student Illustrator</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
                 </div>
                 </div>
               </div>
 
+              <div class="modal fade p-0 text-dark" id="gonzalez" tabindex="-1" role="dialog"
+              aria-labelledby="Luna Gonzalez"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Luna Gonzalez">
+                    <h3 class="modal-title">Luna Gonzalez</h3>
+                    <p><strong>Student Illustrator</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="carousel-item">
-            <div class="row">
-
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#mark">
                 <div class="name d-flex">
                   <div>
                   <h5 class="text-white"><span class="me-2">Aaron Mark</span>
                   </h5>
                   <p class="mb-1">Student Web Developer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
                 </div>
                 </div>
               </div>
+
+              <div class="modal fade p-0 text-dark" id="mark" tabindex="-1" role="dialog"
+              aria-labelledby="Aaron Mark"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <h3 class="modal-title">Aaron Mark</h3>
+                    <p><strong>Student Web Developer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
     
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#medrek">
                 <div class="name d-flex">
-                  <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1" width="150" alt="Jack Medrek">
+                  <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1" width="100" alt="Jack Medrek">
                   <div style="margin-left:20px;">
                   <h5 class="text-white"><span class="me-2">Jack Medrek</span>
                   </h5>
                   <p class="mb-1">Student Software Developer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                  <div class="text-white mt-3" style="font-size:26px;">
+                  <div class="text-white" style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/john-medrek-072a31212/" class="text-white" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
                     <a href="http://johnmedrek.com" class="text-white ms-2" target="_blank"><i
@@ -1893,55 +1990,108 @@
                 </div>
               </div>
 
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row">
-
-              <div class="col-md-6 mb-6" data-aos="fade-right">
-                <div class="name d-flex">
-                  <div>
-                  <h5 class="text-white"><span class="me-2">Kailey Moore</span>
-                  </h5>
-                  <p class="mb-1">Student UI/UX Designer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                </div>
+              <div class="modal fade p-0 text-dark" id="medrek" tabindex="-1" role="dialog"
+              aria-labelledby="Jack Medrek"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Jack Medrek">
+                    <h3 class="modal-title">Jack Medrek</h3>
+                    <p><strong>Student Software Developer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="https://www.linkedin.com/in/john-medrek-072a31212/" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                      <a href="http://johnmedrek.com" class="ms-2" target="_blank"><i
+                          class="bi bi-globe"></i></a>   
+                    </div> 
+                  </div>
                 </div>
               </div>
+            </div>
     
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#michalska">
                 <div class="name d-flex">
-                  <img src="img/i3/people/michalska.jpg" class="img-fluid rounded-1" width="150" alt="Agatha Michalska">
+                  <img src="img/i3/people/michalska.jpg" class="img-fluid rounded-1" width="100" alt="Agatha Michalska">
                   <div style="margin-left:20px;">
                   <h5 class="text-white"><span class="me-2">Agatha Michalska</span>
                   </h5>
                   <p class="mb-1">Student Project Manager</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                  <div class="text-white mt-3" style="font-size:26px;">
+                  <div class="text-white" style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/agatha-michalska/" class="text-white" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
                   </div>  
                 </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="carousel-item">
-          <div class="row">
-            <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="modal fade p-0 text-dark" id="michalska" tabindex="-1" role="dialog"
+              aria-labelledby="Agatha Michalska"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <img src="img/i3/people/michalska.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Agatha Michalska">
+                    <h3 class="modal-title">Agatha Michalska</h3>
+                    <p><strong>Student Project Manager</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="https://www.linkedin.com/in/agatha-michalska/" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#moore">
+                <div class="name d-flex">
+                  <div>
+                  <h5 class="text-white"><span class="me-2">Kailey Moore</span>
+                  </h5>
+                  <p class="mb-1">Student UI/UX Designer</p>
+                </div>
+                </div>
+              </div>
+
+              <div class="modal fade p-0 text-dark" id="moore" tabindex="-1" role="dialog"
+              aria-labelledby="Kailey Moore"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <h3 class="modal-title">Kailey Moore</h3>
+                    <p><strong>Student UI/UX Designer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#shostak">
               <div class="name d-flex">
-                <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1" width="150" alt="William Shostak">
+                <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1" width="100" alt="William Shostak">
                 <div style="margin-left:20px;">
                 <h5 class="text-white"><span class="me-2">William Shostak</span>
                 </h5>
                 <p class="mb-1">Student Software Developer</p>
-                <hr>
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>
-                <div class="text-white mt-3" style="font-size:26px;">
+                <div class="text-white" style="font-size:26px;">
                   <a href="https://www.linkedin.com/in/willshostak/" class="text-white" target="_blank"><i
                       class="bi bi-linkedin"></i></a>
                 </div>  
@@ -1949,29 +2099,64 @@
               </div>
             </div>
 
-            <div class="col-md-6 mb-6" data-aos="fade-right">
+            <div class="modal fade p-0 text-dark" id="shostak" tabindex="-1" role="dialog"
+            aria-labelledby="William Shostak"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="William Shostak">
+                  <h3 class="modal-title">William Shostak</h3>
+                  <p><strong>Student Software Developer</strong></p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/willshostak/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#simmons-emms">
               <div class="name">
                 <h5 class="text-white">Beth Simmons-Emms
                 </h5>
                 <p class="mb-1">Student Web Developer</p>
-                <hr>
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>
+              </div>
+            </div>
+
+            <div class="modal fade p-0 text-dark" id="simmons-emms" tabindex="-1" role="dialog"
+            aria-labelledby="Beth Simmons-Emms"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <h3 class="modal-title">Beth Simmons-Emms</h3>
+                  <p><strong>Student Web Developer</strong></p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                </div>
               </div>
             </div>
           </div>
-          </div>
           
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#salmon">
               <div class="name d-flex">
                 <div>
                 <h5 class="text-white"><span class="me-2">Emelia Salmon</span>
                 </h5>
                 <p class="mb-1">Student UI/UX Designer</p>
-                <hr>
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>
-                <div class="text-white mt-3" style="font-size:26px;">
+                <div class="text-white" style="font-size:26px;">
                   <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" class="text-white" target="_blank"><i
                       class="bi bi-linkedin"></i></a>
                   <a href="http://esalmon.com" class="text-white ms-2" target="_blank"><i
@@ -1981,35 +2166,72 @@
               </div>
               </div>
 
-              <div class="col-md-6 mb-6" data-aos="fade-right">
+              <div class="modal fade p-0 text-dark" id="salmon" tabindex="-1" role="dialog"
+              aria-labelledby="Emelia Salmon"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <h3 class="modal-title">Emelia Salmon</h3>
+                    <p><strong>Student UI/UX Designer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                      <a href="http://esalmon.com" class="ms-2" target="_blank"><i
+                          class="bi bi-globe"></i></a>   
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#setiadi">
                 <div class="name d-flex">
-                  <img src="img/i3/people/setiadi.jpeg" class="img-fluid rounded-1" width="150" alt="Julain Setiadi">
+                  <img src="img/i3/people/setiadi.jpeg" class="img-fluid rounded-1" width="100" alt="Julain Setiadi">
                   <div style="margin-left:20px;">
                   <h5 class="text-white"><span class="me-2">Julian Setiadi</span>
                   </h5>
                   <p class="mb-1">Student Software Developer</p>
-                  <hr>
-                  <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit libero in augue dignissim vehicula. Aenean commodo enim in metus gravida, et scelerisque orci pretium. Ut nec nunc blandit, posuere diam sed, fringilla velit.</small>  
-                  <div class="text-white mt-3" style="font-size:26px;">
+                  <div class="text-white" style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/juliansetiadi/" class="text-white" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
                   </div>  
                 </div>
                 </div>
               </div>
+              
+              <div class="modal fade p-0 text-dark" id="setiadi" tabindex="-1" role="dialog"
+              aria-labelledby="Julian Setiadi"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <img src="img/i3/people/setiadi.jpeg" class="img-fluid rounded-1 mb-4" width="150" alt="Julain Setiadi">
+                    <h3 class="modal-title">Julian Setiadi</h3>
+                    <p><strong>Student Software Developer</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non pretium justo, non rutrum velit. Suspendisse potenti. Fusce tincidunt leo ac felis accumsan semper. Ut diam nulla, aliquet egestas ligula at, facilisis posuere lacus. Nunc aliquet ligula metus, sed commodo libero volutpat at.</p>
+                    <div style="font-size:26px;">
+                      <a href="https://www.linkedin.com/in/juliansetiadi/" target="_blank"><i
+                          class="bi bi-linkedin"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
           
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#students" data-bs-slide="prev" data-aos="fade-left">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#students" data-bs-slide="next" data-aos="fade-right">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+
         <div class="d-flex justify-content-center">
           <div data-aos="fade-up" class="my-4 btn display-btn btn-arrow-slide"> <a href="student-hiring.html"
             class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:205px"> <span
@@ -2017,7 +2239,7 @@
                 class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
               class="btn-arrow-slide-text"> Join Our Team </span> </a> </div>
         </div>
-      </div>
+        
     </div>
     </div>
 
@@ -2040,7 +2262,7 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label class="form-label">Your Email</label>
+                <label class="form-label">Email Address</label>
                 <input type="email" name="_replyto" class="form-control" />
               </div>
               <div class="mb-3">
@@ -2342,22 +2564,17 @@
   </div>
 
   <footer>
-    <div class="py-5">
-      <div class="container d-flex justify-content-between">
-        <div>
-        <h2 class="normal text-medium fw-bold mb-4">Internal Insights &amp; Innovation</h2>
-        <div class="d-flex align-items-center">
-          <div class="pe-6">
-            <a href="mailto:i3@uconn.edu" style="color:#2a2a2a;"><p>i3@uconn.edu</p></a>
-          </div>
-        </div>
-        </div>
-      <img src="img/i3/CORE Logos (Black Vector) PNG-21.png" alt="i3 logo" width="75" style="object-fit:contain;">
-      </div>
+    <!--start light footer-->
+    <div class="i3-footer i3-footer--light py-4">
+      <img src = "img/i3/i3-symbol-blue.svg" alt="i3 symbol"/>
+      <p>Powered by 
+      </p>
+      <a class="i3-footer-btn" href="https://i3.core.uconn.edu/"> i3 </a>
     </div>
+    <!--end light footer-->
     <div class="bg-dark text-white py-5">
       <div class="container">
-        <div class="d-flex flex-column flex-lg-row align-items-center links-underline-on-hover text-small">
+        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center links-underline-on-hover text-small">
           <a class="link-light pe-lg-5 mb-2" href="https://uconn.edu">&copy; 2024 University of Connecticut</a>
           <a class="link-light pe-lg-5 mb-2" href="https://provost.uconn.edu">Office of the Provost</a>
           <a class="link-light pe-lg-5 mb-2" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers,

@@ -496,6 +496,70 @@ header nav ul:not(.dropdown-menu) li a:hover {
   text-decoration: underline;
 }
 
+.i3-footer{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.i3-footer p{
+font-family: "area-normal", sans-serif;
+font-weight: 400;
+font-style: normal;
+padding:10px 0px;
+margin-bottom:0px;
+}
+
+.i3-footer a{
+  font-family: "rockwell", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  height:min-content;
+}
+
+.i3-footer img{
+  width:38px;
+  margin:0px 5px;
+}
+
+.i3-footer-btn{
+  --corner: 10px; /* the size on the corner */
+  --thickness: 2px;  /* the thickness of the border */
+  --gap: 6px; /* the gap between the border and image */
+  
+  padding: 8px 12px;
+  outline-offset: calc(-1*var(--thickness));
+  -webkit-mask:
+    conic-gradient(at var(--corner) var(--corner),#0000 75%,#000 0)
+    0 0/calc(100% - var(--corner)) calc(100% - var(--corner)),
+    linear-gradient(#000 0 0) content-box;
+  transition: .2s;
+  cursor: pointer;
+  text-decoration:none;
+  display:flex;
+  height:20px;
+  align-items:center;
+  width:fit-content;
+  margin:0px 5px;
+}
+
+.i3-footer-btn:hover {
+  outline-offset: calc(var(--gap)/-1);
+}
+
+/* light footer styles */
+
+.i3-footer--light{
+  background:#fff;
+}
+
+.i3-footer--light a{
+  color:#0034DA;
+}
+
+.i3-footer--light .i3-footer-btn {
+  outline: var(--thickness) solid #4DB3FF; /* the corner color */
+}
 /**
  * Animations
  */
@@ -637,7 +701,7 @@ div.wrap > div:hover {
 }
 .build {
   background: var(--black);
-  background-image: url(/img/i3/bin-background.svg);
+  background-image: url(img/i3/bin-background.svg);
   background-size: cover;
   background-position: bottom 0px right 0px;
   background-repeat: no-repeat;
