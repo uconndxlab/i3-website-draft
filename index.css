@@ -11,6 +11,7 @@
 
 main {
   min-height: 70vh;
+  overflow-x:hidden;
 }
 
 /**
@@ -770,6 +771,10 @@ div.wrap > div:hover {
   margin-top:0px!important;
   height:100%;
   text-align:left;
+}
+
+#team #students .name:hover{
+  cursor:pointer;
 }
 
 #team #students .name:hover, #team .staff:hover .name{
