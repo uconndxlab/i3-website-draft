@@ -4464,6 +4464,24 @@ textarea.form-control-lg {
   display: block;
 }
 
+#uc-site-parent{
+  text-transform: uppercase;
+  margin-bottom:0px;
+}
+
+#uc-site-parent a{
+  color: #000000;
+  text-decoration:none;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
+}
+
+
+#uc-site-parent a:hover{
+  text-decoration:underline;
+}
+
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;

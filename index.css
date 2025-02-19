@@ -735,6 +735,7 @@ div.wrap > div:hover {
   padding:0px;
   border:none;
   height:fit-content!important;
+  object-fit:cover;
 }
 
 #team .staff img{
