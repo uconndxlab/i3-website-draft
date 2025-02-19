@@ -734,8 +734,17 @@ div.wrap > div:hover {
 #team #students img{
   padding:0px;
   border:none;
-  height:fit-content!important;
+  height:100px;
   object-fit:cover;
+}
+
+#team #students .modal-body img{
+  height:150px;
+}
+
+.staff{
+  display:flex;
+  justify-content: center;
 }
 
 #team .staff img{
