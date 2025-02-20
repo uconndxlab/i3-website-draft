@@ -65,7 +65,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .hero {
-  height:45vh;
+  height:35vh;
 }
 
 .hero-header {
@@ -359,7 +359,7 @@ header nav ul:not(.dropdown-menu) li a:hover {
 
 
 
-#what-we-do .nav-link, .hero .nav-link {
+#what-we-do .nav-link, .hero .nav-link, .about .nav-link {
   font-family: 'area-normal', sans-serif;
   color:var(--accent-3);
   font-weight: 700;
@@ -369,21 +369,41 @@ header nav ul:not(.dropdown-menu) li a:hover {
   
 }
 
+.about .nav-link {
+  color:#fff;
+  border:1px solid white;
+}
+
+#what-we-do {
+  padding-top:48px;
+}
+
 #whatWeDoTabs {
   border:none!important;
 }
 
-#what-we-do .nav-link.active, .hero .nav-link.active {
+#what-we-do .nav-link.active, .hero .nav-link.active, .about .nav-link.active {
   /* little oval background somehow */
   background: var(--accent-3);
   color: var(--white);
   border-radius: 100px;
+}
 
+.about .nav-link.active {
+  background: var(--accent-3);
+  color: var(--white);
+  border-radius: 100px;
 }
 
 #what-we-do .nav-link:hover, .hero .nav-link:hover {
   background: var(--accent-3);
   color: var(--white);
+  border-radius: 100px;
+}
+
+.about .nav-link:hover {
+  background: #fff;
+  color: var(--accent-3);
   border-radius: 100px;
 }
   
