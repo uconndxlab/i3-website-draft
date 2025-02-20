@@ -77,6 +77,7 @@ h6,
 
 .hero {
   height: 30vh;
+  min-height: 400px;
 }
 
 .hero-header {
