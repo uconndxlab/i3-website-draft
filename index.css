@@ -64,6 +64,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   height:2px;
 }
 
+.hero {
+  height:45vh;
+}
+
 .hero-header {
   transform: translate3d(0, 0, 0);
   will-change: opacity;
@@ -125,7 +129,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
  * Work Filter
  */
 #our-work {
-  max-height: 1000px;
+  max-height: 1800px;
   background: #292B2E;
   overflow: hidden;
   transition: max-height 0.5s;
@@ -352,6 +356,47 @@ header nav ul:not(.dropdown-menu) li a:hover {
   display:none;
 }
 }
+
+
+
+#what-we-do .nav-link, .hero .nav-link {
+  font-family: 'area-normal', sans-serif;
+  color:var(--accent-3);
+  font-weight: 700;
+  border:none;
+  border-radius: 100px;
+  font-size:16px!important;
+  
+}
+
+#whatWeDoTabs {
+  border:none!important;
+}
+
+#what-we-do .nav-link.active, .hero .nav-link.active {
+  /* little oval background somehow */
+  background: var(--accent-3);
+  color: var(--white);
+  border-radius: 100px;
+
+}
+
+#what-we-do .nav-link:hover, .hero .nav-link:hover {
+  background: var(--accent-3);
+  color: var(--white);
+  border-radius: 100px;
+}
+  
+#what-we-do .nav-link.active:hover, .hero .nav-link.active:hover {
+  background: var(--accent-3);
+  color: var(--white);
+  border-radius: 100px;
+
+  
+}
+
+
+
 
 /*button*/
 .btn-arrow-slide-cont {

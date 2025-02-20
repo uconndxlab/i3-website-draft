@@ -11,7 +11,8 @@
 
   <link rel="stylesheet" href="https://use.typekit.net/nct3yok.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/i3.css">
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://use.typekit.net/lmy8hrr.css">
@@ -29,7 +30,7 @@
                 <span id="wordmark" aria-hidden="false">UConn</span>
               </a>
               <a id="home-link" href="https://uconn.edu/">
-                <span class="no-css">University of Connecticut school of</span>
+                <span class="no-css">University of Connecticut</span>
                 <span id="university-of-connecticut">University of Connecticut</span>
               </a>
             </div>
@@ -82,12 +83,12 @@
       </div>
     </div>
   </div>
-  <header style="padding-top:10px">
+  <header style="background-color:#fff; padding-top:10px; position:sticky; top:0;z-index:1000;">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <div>
-        <p id="uc-site-parent"><a  href="https://provost.uconn.edu/">Office of the Provost</a></p>
-        <a class="navbar-brand fw-bold" href="https://innovation.provost.uconn.edu/">Internal Insights &amp; Innovation</a>
+          <p id="uc-site-parent"><a href="https://provost.uconn.edu/">Office of the Provost</a></p>
+          <a class="navbar-brand fw-bold" href="#top">Internal Insights &amp; Innovation</a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#i3navbarContent"
           aria-controls="i3navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,6 +96,9 @@
         </button>
         <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#what-we-do">What We Do</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#our-work">Our Work</a>
             </li>
@@ -121,8 +125,8 @@
           <span class="dot" style="background-color:var(--accent-3)"></span>
         </div>
         <div style="height: 7rem;" class="d-flex align-items-center ps-2">
-          <h2 class="typewrite-static-text" style="margin:0;margin-top:0.64rem;color:var(--black)">We <span href="" class="typewrite"
-              data-period="2000"
+          <h2 class="typewrite-static-text" style="margin:0;margin-top:0.64rem;color:var(--black)">We <span href=""
+              class="typewrite" data-period="2000"
               data-type='[ "create websites", "build systems", "explore technology", "implement solutions","develop apps" ]'>develop
               apps</span><span class="type-cursor" id="typeCursor">|</span> for UConn.</h2>
         </div>
@@ -130,26 +134,35 @@
 
       </div>
 
-      <input id="filter-input" step=1 type="range" min=0 max=360 value=0 class="col-md-1 p-0">
+      <input id="filter-input" step=1 type="range" min=0 max=360 value=0 class="col-md-1 p-0 d-none d-md-block">
+
+
     </div>
 
     <div class="position-relative overflow-hidden">
       <div class="about text-white">
         <div class="container intro-text row parallax">
-            <div class="col-md-8 py-7 px-0">
-              <h2 data-aos="fade-left" class="display-header my-4 text-white panel" data-color="color-3">What is [i3]?
-              </h2>
-              <p data-aos="fade-left" class="panel" data-color="color-4">At i3, we create custom software and web solutions while maximizing the use of existing resources to support the university's business processes, academic operations, and research initiatives.</p>
-              <p data-aos="fade-left">We we're not trying to reinvent the wheel— sometimes, we just help our colleagues find the wheel and use it, making the most of the tools already available at UConn. But when the wheel doesn't fit the task, we step in with a lean, agile approach—building, testing, and refining solutions that adapt to the university's evolving needs.</p>
-            </div>
-            <!--<div class="col-md-6 mb-2" style="position:relative">
+          <div class="col-md-8 py-7 px-0">
+            <h2 data-aos="fade-left" class="display-header my-4 text-white panel" data-color="color-3">What is [i3]?
+            </h2>
+            <p data-aos="fade-left" class="panel" data-color="color-4">At i3, we create custom software and web
+              solutions while maximizing the use of existing resources to support the university's business processes,
+              academic operations, and research initiatives.</p>
+            <p data-aos="fade-left">We we're not trying to reinvent the wheel— sometimes, we just help our colleagues
+              find the wheel and use it, making the most of the tools already available at UConn. But when the wheel
+              doesn't fit the task, we step in with a lean, agile approach—building, testing, and refining solutions
+              that adapt to the university's evolving needs.</p>
+
+          </div>
+          <!--<div class="col-md-6 mb-2" style="position:relative">
               <img style="object-fit:contain;" data-aos="fade-left" src="img/i3/bin-i3.svg" width="100%" height="500px"
                 alt="i3 logo in binary">
               <img style="object-fit:contain;padding:0px 0px;position:absolute;" class="circle circle-outside"
                 src="img/i3/bin-i3-outside.svg" width="100%" height="500px" alt="decoration outside logo">
             
             </div>-->
-            <img id="about-logo" class="pb-7" src="img/i3/CORE Logos (white vector) PNG-21.png" width="100%" alt="i3 logo">
+          <img id="about-logo" class="pb-7 d-none" src="img/i3/CORE Logos (white vector) PNG-21.png" width="100%"
+            alt="i3 logo">
         </div>
       </div>
     </div>
@@ -158,119 +171,178 @@
     <div class="position-relative overflow-x-hidden">
       <div class="circle circle1"></div>
       <div class="circle circle2"></div>
-      <div class="subunit container position-relative py-15">
-        <p data-aos="fade-up"><span class="badge pt-2" style="background-color:var(--black)">For UConn and Beyond</span></p>
-        <h2 data-aos="fade-up" class="display-header mb-4" style="color:var(--accent-3)">Cubed Labs (❒ labs)</h2>
-        <div class="row">
-          <div data-aos="fade-up" class="col-md-4 mb-4">
-            <div class="">
-              <div class="card-body">
-                <p class="card-text">We partner with UConn administration and departments to enhance their systems through tailored digital solutions. Whether developing custom tools or optimizing existing resources, our goal is to provide digital services that simplify and improve the experience for UConn faculty, staff, and students.
-                </p>
-                <ul>
-                  <li>Custom Web and Software Development</li>
-                  <li>Data Integrations with existing University Systems</li>
-                  <li>Technology Consultation</li>
-                  <li>KFS-friendly Internal Billing</li>
-                </ul>
-                <div class="btn display-btn btn-arrow-slide"> <a href="#our-work"
-                  class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:280px"> <span
-                    class="btn-arrow-slide-circle" aria-hidden="true"> <span
-                      class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
-                    class="btn-arrow-slide-text"> More Cubed Labs Work </span> </a> </div>
-                </div>
-            </div>
-          </div>
-          <div data-aos="flip-right" class="col-md-4 mb-4">
-            <div class="card display-card pt-0" style="background:#E5F2FD;border-bottom:8px solid var(--accent-2)!important;">
-              <div class="card-body d-flex flex-column">
-                <img src="img/i3/work/rif.png" alt="Placeholder graphic" class="img-fluid mb-3">
-                <h5 class="card-title pt-2">Research Insights for Faculty</h5>
-                <p class="card-text">RIF is a website that provides UConn faculty and staff with access to financial reports on their sponsored project accounts.  Powered by the data from OVPR, faculty and staff can view transactions, comment and review on monthly reports, and even project through the account's lifespan.  
-                </p>
-                <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a href="https://rif.core.uconn.edu/" target="_blank"
-                  class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:160px"> <span
-                    class="btn-arrow-slide-circle" aria-hidden="true"> <span
-                      class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
-                    class="btn-arrow-slide-text"> Visit RIF </span> </a> </div>
+      <div id="what-we-do" class="subunit container position-relative py-15">
+        <!-- What We Do -->
+        <h2 data-aos="fade-up" class="display-header mb-6" style="color:var(--black)">What We Do</h2>
+        <ul class="nav nav-tabs my-6" id="whatWeDoTabs" role="tablist"
+          style="font-family: 'Source Sans Pro', sans-serif; font-size: 1.1rem;">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="cubed-labs-tab" data-bs-toggle="tab" data-bs-target="#cubed-labs"
+              type="button" role="tab" aria-controls="cubed-labs" aria-selected="true">
+              For UConn and Beyond
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="dxg-tab" data-bs-toggle="tab" data-bs-target="#dxg" type="button" role="tab"
+              aria-controls="dxg" aria-selected="false">
+              For Research
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="whatWeDoTabsContent">
+          <div class="tab-pane fade show active" id="cubed-labs" role="tabpanel" aria-labelledby="cubed-labs-tab">
+            <p data-aos="fade-up" class="mb-4 d-none"><span class="badge bg-dark me-2">For UConn and Beyond</span> </p>
+            <h3 data-aos="fade-up" class="display-header mb-4" style="color:var(--accent-3); font-size: 1.5rem;">Cubed
+              Labs (❒ labs)</h3>
+            <div class="row">
+              <div data-aos="fade-up" class="col-md-4 mb-4">
+                <div class="">
+                  <div class="card-body">
+                    <p class="card-text">We partner with UConn administration and departments to enhance their systems
+                      through tailored digital solutions. Whether developing custom tools or optimizing existing
+                      resources, our goal is to provide digital services that simplify and improve the experience for
+                      UConn faculty, staff, and students.</p>
+                    <ul>
+                      <li>Custom Web and Software Development</li>
+                      <li>Data Integrations with existing University Systems</li>
+                      <li>Technology Consultation</li>
+                      <li>KFS-friendly Internal Billing</li>
+                    </ul>
+                    <div class="btn display-btn btn-arrow-slide">
+                      <a onclick="filterCubedLabs()" href="#our-work"
+                        class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:280px"
+                        onclick="filterCubedLabs()">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                          <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> More Cubed Labs Work </span>
+                      </a>
+                    </div>
+
+                    <script>
+                      function filterCubedLabs() {
+                        var elements = document.querySelectorAll('.filter-pills .nav-link');
+                        elements.forEach(function (element) {
+                          if (element.getAttribute('data-filter') === 'internal') {
+                            element.click();
+                          }
+                        });
+                      }
+                    </script>
+                  </div>
                 </div>
               </div>
+              <div data-aos="flip-right" class="col-md-4 mb-4">
+                <div class="card display-card pt-0"
+                  style="background:#E5F2FD;border-bottom:8px solid var(--accent-2)!important;">
+                  <div class="card-body d-flex flex-column">
+                    <img src="img/i3/work/rif.png" alt="Placeholder graphic" class="img-fluid mb-3">
+                    <h5 class="card-title pt-2">Research Insights for Faculty</h5>
+                    <p class="card-text">RIF is a website that provides UConn faculty and staff with access to financial
+                      reports on their sponsored project accounts. Powered by the data from OVPR, faculty and staff can
+                      view transactions, comment and review on monthly reports, and even project through the account's
+                      lifespan.</p>
+                    <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a
+                        href="https://rif.core.uconn.edu/" target="_blank"
+                        class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:160px"> <span
+                          class="btn-arrow-slide-circle" aria-hidden="true"> <span
+                            class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
+                          class="btn-arrow-slide-text"> Visit RIF </span> </a> </div>
+                  </div>
+                </div>
+              </div>
+              <div data-aos="flip-right" class="col-md-4 mb-4">
+                <div class="card display-card pt-0"
+                  style="background:#E5EDFB;border-bottom:8px solid var(--accent-3)!important;">
+                  <div class="card-body d-flex flex-column">
+                    <img src="img/i3/work/nexus.png" alt="Nexus graphic" class="img-fluid mb-3">
+                    <h5 class="card-title pt-2">Nexus</h5>
+                    <p class="card-text">Nexus, a University of Connecticut engagement and retention platform, places
+                      actionable data in the hands of the advising community to foster student success. Tools include
+                      dashboards, appointment scheduling, note sharing, event registration, and more.</p>
+                    <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a
+                        href="https://nexus.uconn.edu/" target="_blank"
+                        class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:180px"> <span
+                          class="btn-arrow-slide-circle" aria-hidden="true"> <span
+                            class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
+                          class="btn-arrow-slide-text"> Visit Nexus </span> </a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div data-aos="flip-right" class="col-md-4 mb-4">
-            <div class="card display-card pt-0" style="background:#E5EDFB;border-bottom:8px solid var(--accent-3)!important;">
-              <div class="card-body d-flex flex-column">
-                <img src="img/i3/work/nexus.png" alt="Nexus graphic" class="img-fluid mb-3">
-                <h5 class="card-title pt-2">Nexus</h5>
-                <p class="card-text">Nexus, a University of Connecticut engagement and retention platform, places actionable data in the hands of the advising community to foster student success. Tools include dashboards, appointment scheduling, note sharing, event registration, and more.
-                </p>
-                <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a href="https://nexus.uconn.edu/" target="_blank"
-                  class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:180px"> <span
-                    class="btn-arrow-slide-circle" aria-hidden="true"> <span
-                      class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
-                    class="btn-arrow-slide-text"> Visit Nexus </span> </a> </div>
+
+          <div class="tab-pane fade" id="dxg" role="tabpanel" aria-labelledby="dxg-tab">
+            <p data-aos="fade-up" class="mb-4 d-none"><span class="badge bg-dark me-2">For Researchers</span> </p>
+            <h3 data-aos="fade-up" class="display-header mb-4" style="color:var(--accent-3); font-size: 1.5rem;">The
+              Digital Experience Group</h3>
+            <div class="row">
+              <div data-aos="fade-up" class="col-md-4 mb-4">
+                <div class="">
+                  <div class="card-body">
+                    <p class="card-text">I3 operates a Digital Services Core (the Digital Experience Group), providing
+                      the UConn Research Community with access to app development, web design, UI/UX design, and other
+                      innovative technology services, helping researchers bring their grant funded projects to life with
+                      cutting-edge digital solutions.</p>
+                    <ul>
+                      <li>Custom Web & Application Development</li>
+                      <li>Consultation & Quote for Digital Services</li>
+                      <li>Data Visualization & Reporting</li>
+                      <li>Domain Name Management & Hosting</li>
+                      <li>Grant-Friendly internal billing via KFS</li>
+                    </ul>
+                    <div class="btn display-btn btn-arrow-slide"> <a onclick="filterDXG()" href="#our-work"
+                        class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:220px"> <span
+                          class="btn-arrow-slide-circle" aria-hidden="true"> <span
+                            class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
+                          class="btn-arrow-slide-text"> More DXG Work </span> </a> </div>
+                  </div>
+                </div>
+              </div>
+              <div data-aos="flip-right" class="col-md-4 mb-4">
+                <div class="card display-card pt-0"
+                  style="background:#E5F2FD;border-bottom:8px solid var(--accent-2)!important;">
+                  <div class="card-body d-flex flex-column">
+                    <img src="img/i3/work/sourcery.png" alt="Sourcery graphic" class="img-fluid mb-3">
+                    <h5 class="card-title pt-2">Sourcery</h5>
+                    <p class="card-text">A collaboration between Greenhouse Studios and i3, Sourcery is a mobile
+                      application designed to give researchers and archivists a platform to request and provide
+                      reference scans for documents and other research items.</p>
+                    <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a
+                        href="https://sourceryapp.org/" target="_blank"
+                        class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:200px"> <span
+                          class="btn-arrow-slide-circle" aria-hidden="true"> <span
+                            class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
+                          class="btn-arrow-slide-text"> Visit Sourcery </span> </a> </div>
+                  </div>
+                </div>
+              </div>
+              <div data-aos="flip-right" class="col-md-4 mb-4">
+                <div class="card display-card pt-0"
+                  style="background:#E5EDFB;border-bottom:8px solid var(--accent-3)!important;">
+                  <div class="card-body d-flex flex-column">
+                    <img src="img/i3/work/wellscan.png" alt="WellSCAN graphic" class="img-fluid mb-3">
+                    <h5 class="card-title pt-2">WellSCAN</h5>
+                    <p class="card-text">Built in collaboration with the UConn Rudd Center for Food Policy & Health,
+                      WellSCAN is a website and mobile-friendly scanning application made to help food banks and food
+                      pantries better identify, rank, and log the nutritional quality of their inventory, based on the
+                      HER guidelines.</p>
+                    <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a
+                        href="https://wellscan.io/" target="_blank"
+                        class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:210px"> <span
+                          class="btn-arrow-slide-circle" aria-hidden="true"> <span
+                            class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
+                          class="btn-arrow-slide-text"> Visit WellSCAN </span> </a> </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <p data-aos="fade-up"><span class="badge pt-2 mt-10" style="background-color:var(--black)">For Researchers</span></p>
-        <h2 data-aos="fade-up" class="display-header mb-4" style="color:var(--accent-3)">The Digital Experience Group</h2>
-        <div class="row">
-          <div data-aos="fade-up" class="col-md-4 mb-4">
-            <div class="">
-              <div class="card-body">
-                <p class="card-text">I3 operates a Digital Services Core (the Digital Experience Group), providing the UConn Research Community with access to app development, web design, UI/UX design, and other innovative technology services, helping researchers bring their grant funded projects to life with cutting-edge digital solutions. 
-                </p>
-                <ul>
-                  <li>Custom Web & Application Development</li>
-                  <li>Consultation & Quote for Digital Services</li>
-                  <li>Data Visualization & Reporting</li>
-                  <li>Domain Name Management & Hosting</li>
-                  <li>Grant-Friendly internal billing via KFS</li>
-                </ul>
-                <div class="btn display-btn btn-arrow-slide"> <a href="#our-work"
-                  class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:220px"> <span
-                    class="btn-arrow-slide-circle" aria-hidden="true"> <span
-                      class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
-                    class="btn-arrow-slide-text"> More DXG Work </span> </a> </div>
-                </div>
-            </div>
-          </div>
-          <div data-aos="flip-right" class="col-md-4 mb-4">
-            <div class="card display-card pt-0" style="background:#E5F2FD;border-bottom:8px solid var(--accent-2)!important;">
-              <div class="card-body d-flex flex-column">
-                <img src="img/i3/work/sourcery.png" alt="Sourcery graphic" class="img-fluid mb-3">
-                <h5 class="card-title pt-2">Sourcery</h5>
-                <p class="card-text">A collaboration between Greenhouse Studios and i3, Sourcery is a mobile application designed to give researchers and archivists a platform to request and provide reference scans for documents and other research items.  
-                </p>
-                <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a href="https://sourceryapp.org/" target="_blank"
-                  class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:200px"> <span
-                    class="btn-arrow-slide-circle" aria-hidden="true"> <span
-                      class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
-                    class="btn-arrow-slide-text"> Visit Sourcery </span> </a> </div>
-                </div>
-              </div>
-          </div>
-          <div data-aos="flip-right" class="col-md-4 mb-4">
-            <div class="card display-card pt-0" style="background:#E5EDFB;border-bottom:8px solid var(--accent-3)!important;">
-              <div class="card-body d-flex flex-column">
-                <img src="img/i3/work/wellscan.png" alt="WellSCAN graphic" class="img-fluid mb-3">
-                <h5 class="card-title pt-2">WellSCAN</h5>
-                <p class="card-text">Built in collaboration with the UConn Rudd Center for Food Policy & Health, WellSCAN is a website and mobile-friendly scanning application made to help food banks and food pantries better identify, rank, and log the nutritional quality of their inventory, based on the HER guidelines.  
-                </p>
-                <div class="btn display-btn btn-arrow-slide text-start" style="margin-top:auto;"> <a href="https://wellscan.io/" target="_blank"
-                  class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:210px"> <span
-                    class="btn-arrow-slide-circle" aria-hidden="true"> <span
-                      class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
-                    class="btn-arrow-slide-text"> Visit WellSCAN </span> </a> </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
         <div class="row numbers pt-7" data-aos="fade-up">
-          <div class="col-md-3 d-flex flex-column text-center" >
+          <div class="col-md-3 d-flex flex-column text-center">
             <h3 class="value"><span id="count5"></span>+</h3>
             <p>Grant-funded projects</p>
           </div>
@@ -287,7 +359,6 @@
             <p>Factoid Left to Think Of</p>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -304,35 +375,34 @@
               <button class="nav-link text-white fw-bold has-background">All Work</button>
             </li>
             <li class="nav-item">
-              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="research">Digital Experience Group</button>
+              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="research">Digital
+                Experience Group</button>
             </li>
             <li class="nav-item">
-              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="internal">Cubed Labs</button>
+              <button class="nav-link text-white fw-bold" data-color="var(--accent-2)" data-filter="internal">Cubed
+                Labs</button>
             </li>
             <div class="pill-background position-absolute bg-primary"></div>
           </ul>
         </div>
         <div id="work-results">
           <div class="row">
-
-
-
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="internal" data-aos-anchor="#our-work">
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal0">
-                <h4 class="text-white">Stamford Data Science</h4>
+                data-bs-toggle="modal" data-bs-target="#workModal19">
+                <h4 class="text-white">QuantumCT</h4>
               </div>
-              <img src="img/i3/work/sdsi.png" data-aos-anchor="#our-work">
+              <img src="img/i3/work/quantum.png" data-aos-anchor="#our-work">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal0" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Stamford Data Science Initiative" aria-hidden="true">
+            <div class="modal fade p-0 text-dark" id="workModal19" tabindex="-1" role="dialog"
+              aria-labelledby="QuantumCT" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Stamford Data Science Initiative</h3>
+                    <h3 class="modal-title">QuantumCT</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -341,21 +411,401 @@
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
                     </p>
-                    <img src="img/i3/work/sdsi.png" alt="UConn Stamford Data Science Initiative graphic"
-                      class="img-fluid mb-3">
-                    <p>Under the leadership of Creative Director, DMD Professor Samantha Olschan, our team designed and
-                      built the website for UConn's new Stamford Data Science Initiative. The web design and development
-                      was led by Emily Ha with Faculty Support from Brian Daley, Joel Salisbury, and Mike Vertefeuille.
-                    </p>
+                    <img src="img/i3/work/quantum.png" alt="QuantumCT Website graphic" class="img-fluid mb-3">
+                    <p>QuantumCT is a public-private partnership accelerating the adoption of quantum technologies in
+                      Connecticut and working with a broad coalition of partners to lay the groundwork for expansive,
+                      equitable economic development.</p>
+                    <p>In partnership with the Office of the Vice President for Research, i3 designed and developed a
+                      WordPress website for the QauntumCT initiative.</p>
                   </div>
 
                   <div class="modal-footer">
-                    <a href="https://stamforddatascience.com/index.html" target="_blank" class="btn btn-primary">View
-                      Site</a>
+                    <a href="https://quantumct.org/" target="_blank" class="btn btn-primary">View Site</a>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal16">
+                <h4 class="text-white">Research Insights for Faculty</h4>
+              </div>
+              <img src="img/i3/work/rif.png" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal16" tabindex="-1" role="dialog"
+              aria-labelledby="Research Insights for Faculty" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Research Insights for Faculty</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                    </p>
+                    <img src="img/i3/work/rif.png" alt="Research Insights Website graphic" class="img-fluid mb-3">
+                    <p>Developed with the Office of the Vice President for Research, this application is designed to
+                      provide UConn faculty and their staff with monthly financial reports and other tools to help them
+                      review and manage their sponsored project accounts.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://rif.core.uconn.edu" target="_blank" class="btn btn-primary">View Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal33">
+                <h4 class="text-white">UConn Impact</h4>
+              </div>
+              <img src="img/i3/work/impact.png" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal33" tabindex="-1" role="dialog"
+              aria-labelledby="UConn Impact" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">UConn Impact</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Email Marketing</span>
+                    </p>
+                    <img src="img/i3/work/impact.png" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
+                    <p>i3 created promotional materials for the UConn Economic Development Forum and redesigned the
+                      Impact website to reflect their range of servcies.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://impact.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="research" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal4">
+                <h4 class="text-white">Sourcery</h4>
+              </div>
+              <img src="img/i3/work/sourcery.png" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal4" tabindex="-1" role="dialog" aria-labelledby="Sourcery"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Sourcery</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Mobile PWA</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                    </p>
+                    <img src="img/i3/work/sourcery.png" alt="Sourcery graphic" class="img-fluid mb-3">
+                    <p>Sourcery emerged from the design process of Greenhouse Studios and from the project team's past
+                      work and ongoing interests in research software for the humanities.
+                    <p>
+                    <p>Working with Greenhouse Studios, we developed an application that gives researchers access to
+                      documents that can't be found online by paying other researchers to find them.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://sourceryapp.org" target="_blank" class="btn btn-primary">View App</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+            data-filter="internal" data-aos-anchor="#our-work">
+            <div
+              class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+              data-bs-toggle="modal" data-bs-target="#workModal20">
+              <h4 class="text-white">Nexus</h4>
+            </div>
+            <img src="img/i3/work/nexus.png" data-aos-anchor="#our-work">
+          </div>
+          <div class="modal fade p-0 text-dark" id="workModal20" tabindex="-1" role="dialog" aria-labelledby="Nexus"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">Nexus</h3>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <p>
+                    <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                  </p>
+                  <img src="img/i3/work/nexus.png" alt="Nexus Coming Soon graphic" class="img-fluid mb-3">
+                  <p>Nexus, a University of Connecticut engagement and retention platform, places actionable data in
+                    the hands of the advising community to foster student success. Nexus complements the university's
+                    student support services and enhances information sharing between students, staff, and faculty.
+                    Tools include dashboards, appointment scheduling, note sharing, event registration, and more.</p>
+                </div>
+
+                <div class="modal-footer">
+                  <a href="https://nexus.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="research" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal37">
+                <h4 class="text-white">WellSAT</h4>
+              </div>
+              <img src="img/i3/work/wellsat.png" data-aos-anchor="#our-work" alt="wellsat graphic">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal37" tabindex="-1" role="dialog" aria-labelledby="WellSAT"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">WellSAT</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UI Design</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                    </p>
+                    <img src="img/i3/work/wellsat.png" alt="wellsat graphic" class="img-fluid mb-3">
+                    <p>I3 redesigned the Wellness School Assessment Tool (WellSAT) with a user-friendly interface and
+                      introduced new features in version 3.0. WellSAT lets you score your written district wellness
+                      policy and rate your district’s implementation of school wellness practices.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://www.wellsat.org/" target="_blank" class="btn btn-primary">View Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal34">
+                <h4 class="text-white">EJ TCTAC</h4>
+              </div>
+              <img src="img/i3/work/ejtctac.png" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal34" tabindex="-1" role="dialog"
+              aria-labelledby="EJ TCTAC" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">EJ TCTAC</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                    </p>
+                    <img src="img/i3/work/ejtctac.png" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
+                    <p>i3 assisted EJ TCTAC in accelerating their website development and meeting the standards of the
+                      Environmental Protection Agency.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://environmental-justice.program.uconn.edu/" target="_blank"
+                      class="btn btn-primary">View Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal35">
+                <h4 class="text-white">Innovation in Connecticut</h4>
+              </div>
+              <img src="img/i3/work/innovation-in-ct.png" data-aos-anchor="#our-work" alt="innovation in ct poster">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal35" tabindex="-1" role="dialog"
+              aria-labelledby="Innovation in Connecticut" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Innovation in Connecticut</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Poster Design</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Printwork</span>
+                    </p>
+                    <img src="img/i3/work/innovation-in-ct.png" alt="Innovation in CT poster" class="img-fluid mb-3">
+                    <p>"Innovation in Connecticut" is a feature documentary project delving into the rich tapestry of
+                      Connecticut's history of innovation, showcasing both established pioneers in various fields as
+                      well as emerging young innovators. I3 created the documentary poster for print and web marketing.
+                    </p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://www.imdb.com/title/tt33371819/" target="_blank" class="btn btn-primary">IMDb
+                      Page</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal17">
+                <h4 class="text-white">POET</h4>
+              </div>
+              <img src="img/i3/work/poet.png" alt="POET graphic" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal17" tabindex="-1" role="dialog"
+              aria-labelledby="Faculty Salary Lookup Tool" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">POET</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                    </p>
+                    <img src="img/i3/work/poet.png" alt="POET graphic" class="img-fluid mb-3">
+                    <p>Developed with the Office of the Provost, POET is a collection of tools offered by the Provost's
+                      Office to help streamline operations, foster collaboration, and empower academic decisionmaking.
+                    </p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://poet.provost.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+ 
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal22">
+                <h4 class="text-white">Werth Institute</h4>
+              </div>
+              <img src="img/i3/work/werth.png" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal22" tabindex="-1" role="dialog"
+              aria-labelledby="Werth Institute for Entrepreneurship and Innovation" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Werth Institute for Entrepreneurship and Innovation</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                    </p>
+                    <img src="img/i3/work/werth.png" alt="Werth Website graphic" class="img-fluid mb-3">
+                    <p>i3 designed and developed the new primary website for the Werth Institute of Entrepreneurship and
+                      Innovation.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://werth.institute.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="internal" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal32">
+                <h4 class="text-white">UConn Research</h4>
+              </div>
+              <img src="img/i3/work/ovpr.jpg" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal32" tabindex="-1" role="dialog"
+              aria-labelledby="OVPR Website" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">UConn Research</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                    </p>
+                    <img src="img/i3/work/ovpr.jpg" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
+                    <p>i3 worked with the Office of the Vice President of Research to redesign their site to reach
+                      internal and external audiences.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://research.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
@@ -396,8 +846,85 @@
                 </div>
               </div>
             </div>
+
+
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
+              data-filter="research" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal28">
+                <h4 class="text-white">CSMNH Shark Illustrations</h4>
+              </div>
+              <img src="img/i3/work/shark-illustration.jpg" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal28" tabindex="-1" role="dialog"
+              aria-labelledby="Connecticut State Museum of Natural History Shark Illustrations" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Connecticut State Museum of Natural History Shark Illustrations</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-success">Illustration</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-success">Print Production</span>
+                    </p>
+                    <img src="img/i3/work/shark-illustration.jpg" alt="Shark Illustration" class="img-fluid mb-3">
+                    <p>i3 worked with the Connecticut State Museum of Natural History to illustrate sharks and print
+                      them large enough to become a wall display.</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="research" data-aos-anchor="#our-work">
+              <div
+                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                data-bs-toggle="modal" data-bs-target="#workModal0">
+                <h4 class="text-white">Stamford Data Science</h4>
+              </div>
+              <img src="img/i3/work/sdsi.png" data-aos-anchor="#our-work">
+            </div>
+            <div class="modal fade p-0 text-dark" id="workModal0" tabindex="-1" role="dialog"
+              aria-labelledby="UConn Stamford Data Science Initiative" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <!--Content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">UConn Stamford Data Science Initiative</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    <p>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                    </p>
+                    <img src="img/i3/work/sdsi.png" alt="UConn Stamford Data Science Initiative graphic"
+                      class="img-fluid mb-3">
+                    <p>Under the leadership of Creative Director, DMD Professor Samantha Olschan, our team designed and
+                      built the website for UConn's new Stamford Data Science Initiative. The web design and development
+                      was led by Emily Ha with Faculty Support from Brian Daley, Joel Salisbury, and Mike Vertefeuille.
+                    </p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://stamforddatascience.com/index.html" target="_blank" class="btn btn-primary">View
+                      Site</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+              data-filter="research" data-aos-anchor="#our-work">
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal3">
@@ -438,45 +965,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="research" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal4">
-                <h4 class="text-white">Sourcery</h4>
-              </div>
-              <img src="img/i3/work/sourcery.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal4" tabindex="-1" role="dialog" aria-labelledby="Sourcery"
-              aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Sourcery</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Mobile PWA</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
-                    </p>
-                    <img src="img/i3/work/sourcery.png" alt="Sourcery graphic" class="img-fluid mb-3">
-                    <p>Sourcery emerged from the design process of Greenhouse Studios and from the project team's past
-                      work and ongoing interests in research software for the humanities.
-                    <p>
-                    <p>Working with Greenhouse Studios, we developed an application that gives researchers access to
-                      documents that can't be found online by paying other researchers to find them.</p>
-                  </div>
 
-                  <div class="modal-footer">
-                    <a href="https://sourceryapp.org" target="_blank" class="btn btn-primary">View App</a>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
@@ -519,7 +1008,7 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal6">
-                <h4 class="text-white">Financial Game</h4>
+                <h4 class="text-white">Breadwinner Game</h4>
               </div>
               <img src="img/i3/work/financial-game.png" data-aos-anchor="#our-work">
             </div>
@@ -529,7 +1018,7 @@
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Financial Game</h3>
+                    <h3 class="modal-title">Breadwinner Game</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -539,12 +1028,25 @@
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
                     </p>
                     <img src="img/i3/work/financial-game.png" alt="Financial Game graphic" class="img-fluid mb-3">
-                    <p>Launching soon!</p>
+                    <p>Are you ready to try out life as a young adult entering the Connecticut workforce fulltime?
+                      During this game, you’ll have a chance to make financial decisions you are likely to face. In this
+                      game, you are a young, single adult and have completed the entry level educational requirements
+                      for your chosen occupation.</p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="https://career.uconn.edu/resources/the-breadwinner-game/" target="_blank"
+                      class="btn btn-primary">Learn More about Breadwinner</a>
                   </div>
 
                 </div>
               </div>
             </div>
+
+
+
+
+
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
@@ -624,7 +1126,7 @@
               </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
+              data-filter="research" data-aos-anchor="#our-work">
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal9">
@@ -844,6 +1346,8 @@
                 </div>
               </div>
             </div>
+
+
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
@@ -875,72 +1379,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal16">
-                <h4 class="text-white">Research Insights for Faculty</h4>
-              </div>
-              <img src="img/i3/work/rif.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal16" tabindex="-1" role="dialog"
-              aria-labelledby="Research Insights for Faculty" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Research Insights for Faculty</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                    </p>
-                    <img src="img/i3/work/rif.png" alt="Research Insights Website graphic" class="img-fluid mb-3">
-                    <p>Developed with the Office of the Vice President for Research, this application is designed to
-                      provide UConn faculty and their staff with monthly financial reports and other tools to help them
-                      review and manage their sponsored project accounts.</p>
-                  </div>
 
-                  <div class="modal-footer">
-                    <a href="https://rif.core.uconn.edu" target="_blank" class="btn btn-primary">View Site</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal17">
-                <h4 class="text-white">POET</h4>
-              </div>
-              <img src="img/i3/work/poet.png" alt="POET graphic" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal17" tabindex="-1" role="dialog"
-              aria-labelledby="Faculty Salary Lookup Tool" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">POET</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                    </p>
-                    <img src="img/i3/work/poet.png" alt="POET graphic" class="img-fluid mb-3">
-                    <p>Developed with the Office of the Provost, this tool displays a variety of faculty salary
-                      information depending on your role at the university.</p>
-                  </div>
 
-                </div>
-              </div>
-            </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="internal" data-aos-anchor="#our-work">
               <div
@@ -964,7 +1404,8 @@
                     <p>
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
                     </p>
-                    <img src="img/i3/work/travel-funds.png" alt="Statistical Consulting Website graphic" class="img-fluid mb-3">
+                    <img src="img/i3/work/travel-funds.png" alt="Statistical Consulting Website graphic"
+                      class="img-fluid mb-3">
                     <p>This website allows the submission and management of UConn Faculty travel fund requests.</p>
                   </div>
 
@@ -974,84 +1415,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal19">
-                <h4 class="text-white">QuantumCT</h4>
-              </div>
-              <img src="img/i3/work/quantum.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal19" tabindex="-1" role="dialog"
-              aria-labelledby="QuantumCT" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">QuantumCT</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
-                    </p>
-                    <img src="img/i3/work/quantum.png" alt="QuantumCT Website graphic" class="img-fluid mb-3">
-                    <p>QuantumCT is a public-private partnership accelerating the adoption of quantum technologies in
-                      Connecticut and working with a broad coalition of partners to lay the groundwork for expansive,
-                      equitable economic development.</p>
-                    <p>In partnership with the Office of the Vice President for Research, i3 designed and developed a
-                      WordPress website for the QauntumCT initiative.</p>
-                  </div>
 
-                  <div class="modal-footer">
-                    <a href="https://quantumct.org/" target="_blank" class="btn btn-primary">View Site</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal20">
-                <h4 class="text-white">Nexus</h4>
-              </div>
-              <img src="img/i3/work/nexus.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal20" tabindex="-1" role="dialog" aria-labelledby="Nexus"
-              aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Nexus</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                    </p>
-                    <img src="img/i3/work/nexus.png" alt="Nexus Coming Soon graphic" class="img-fluid mb-3">
-                    <p>Nexus, a University of Connecticut engagement and retention platform, places actionable data in
-                      the hands of the advising community to foster student success. Nexus complements the university's
-                      student support services and enhances information sharing between students, staff, and faculty.
-                      Tools include dashboards, appointment scheduling, note sharing, event registration, and more.</p>
-                  </div>
 
-                  <div class="modal-footer">
-                    <a href="https://nexus.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+
+
+            <div class="d-none col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="internal" data-aos-anchor="#our-work">
               <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
+                class=" position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal21">
                 <h4 class="text-white">Syllabus</h4>
               </div>
@@ -1084,41 +1455,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal22">
-                <h4 class="text-white">Werth Institute</h4>
-              </div>
-              <img src="img/i3/work/werth.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal22" tabindex="-1" role="dialog"
-              aria-labelledby="Werth Institute for Entrepreneurship and Innovation" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Werth Institute for Entrepreneurship and Innovation</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
-                    </p>
-                    <img src="img/i3/work/werth.png" alt="Werth Website graphic" class="img-fluid mb-3">
-                    <p>i3 designed and developed the new primary website for the Werth Institute of Entrepreneurship and
-                      Innovation.</p>
-                  </div>
 
-                  <div class="modal-footer">
-                    <a href="https://werth.institute.uconn.edu/" target="_blank" class="btn btn-primary">View Site</a>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
@@ -1180,7 +1517,8 @@
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
                     </p>
-                    <img src="img/i3/work/extension.png" alt="Extension Publication Website graphic" class="img-fluid mb-3">
+                    <img src="img/i3/work/extension.png" alt="Extension Publication Website graphic"
+                      class="img-fluid mb-3">
                     <p>i3 designed and developed the publication search template used in the College of Agriculture,
                       Health and Natural Resources - Extension News and Publications website.</p>
                   </div>
@@ -1192,7 +1530,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
+
+
+
+            <div class="d-none col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
@@ -1223,6 +1564,10 @@
                 </div>
               </div>
             </div>
+
+
+
+
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="internal" data-aos-anchor="#our-work">
               <div
@@ -1289,38 +1634,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal28">
-                <h4 class="text-white">Gant Shark Illustrations</h4>
-              </div>
-              <img src="img/i3/work/shark-illustration.jpg" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal28" tabindex="-1" role="dialog"
-              aria-labelledby="Connecticut State Museum of Natural History Shark Illustrations" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Connecticut State Museum of Natural History Shark Illustrations</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-success">Illustration</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-success">Print Production</span>
-                    </p>
-                    <img src="img/i3/work/shark-illustration.jpg" alt="Shark Illustration" class="img-fluid mb-3">
-                    <p>i3 worked with the Connecticut State Museum of Natural History to illustrate sharks and print
-                      them large enough to become a wall display.</p>
-                  </div>
 
-                </div>
-              </div>
-            </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
               data-filter="research" data-aos-anchor="#our-work">
               <div
@@ -1345,7 +1659,8 @@
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
                     </p>
-                    <img src="img/i3/work/pandemic-journaling.png" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
+                    <img src="img/i3/work/pandemic-journaling.png" alt="Hiring Maps Website graphic"
+                      class="img-fluid mb-3">
                     <p>i3 worked with the Pandemic Journaling Project to develop a search and filter interface for their
                       featured entries.</p>
                   </div>
@@ -1358,251 +1673,51 @@
               </div>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal31">
-                <h4 class="text-white">Annual Report Print Design</h4>
-              </div>
-              <img src="img/i3/plalceholder.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal31" tabindex="-1" role="dialog"
-              aria-labelledby="Annual Report Print Design" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Annual Report Print Design</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-success">Print Production</span>
-                    </p>
-                    <p>Coming soon.</p>
-                  </div>
 
-                </div>
-              </div>
-            </div>
+
+
+
+
+
+
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
+              data-filter="research" data-aos-anchor="#our-work">
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal32">
-                <h4 class="text-white">OVPR Website</h4>
+                data-bs-toggle="modal" data-bs-target="#workModal36">
+                <h4 class="text-white">USDA RMA and FSA Crop Reporting Deadlines</h4>
               </div>
-              <img src="img/i3/work/ovpr.jpg" data-aos-anchor="#our-work">
+              <img src="img/i3/work/crop-insurance.png" data-aos-anchor="#our-work" alt="crop insurance graphic">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal32" tabindex="-1" role="dialog"
-              aria-labelledby="OVPR Website" aria-hidden="true">
+            <div class="modal fade p-0 text-dark" id="workModal36" tabindex="-1" role="dialog"
+              aria-labelledby="USDA RMA and FSA Crop Reporting Deadlines" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">OVPR Website</h3>
+                    <h3 class="modal-title">USDA RMA and FSA Crop Reporting Deadlines</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
                   <div class="modal-body">
                     <p>
                       <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
+                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Email Notifications</span>
                     </p>
-                    <img src="img/i3/work/ovpr.jpg" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
-                    <p>i3 worked with the Office of the Vice President of Research to redesign their site to reach internal and external audiences.</p>
+                    <img src="img/i3/work/crop-insurance.png" alt="crop insurance graphic" class="img-fluid mb-3">
+                    <p>I3 created the USDA RMA and FSA Program Deadlines reminder tool that allows policyholders to sign
+                      up for text and email reminders for their crop reporting deadlines.</p>
                   </div>
 
                   <div class="modal-footer">
-                    <a href="https://research.uconn.edu/" target="_blank"
-                      class="btn btn-primary">View Site</a>
+                    <a href="https://cropdeadlines.core.uconn.edu/login" target="_blank" class="btn btn-primary">View
+                      Site</a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal33">
-                <h4 class="text-white">UConn Impact</h4>
-              </div>
-              <img src="img/i3/work/impact.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal33" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Impact" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">UConn Impact</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Email Marketing</span>
-                    </p>
-                    <img src="img/i3/work/impact.png" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
-                    <p>i3 created promotional materials for the UConn Economic Development Forum and redesigned the Impact website to reflect their range of servcies.</p>
-                  </div>
 
-                  <div class="modal-footer">
-                    <a href="https://impact.uconn.edu/" target="_blank"
-                      class="btn btn-primary">View Site</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal34">
-                <h4 class="text-white">EJ TCTAC</h4>
-              </div>
-              <img src="img/i3/work/ejtctac.png" data-aos-anchor="#our-work">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal34" tabindex="-1" role="dialog"
-              aria-labelledby="EJ TCTAC" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">EJ TCTAC</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
-                    </p>
-                    <img src="img/i3/work/ejtctac.png" alt="Hiring Maps Website graphic" class="img-fluid mb-3">
-                    <p>i3 assisted EJ TCTAC in accelerating their website development and meeting the standards of the Environmental Protection Agency.</p>
-                  </div>
-
-                  <div class="modal-footer">
-                    <a href="https://environmental-justice.program.uconn.edu/" target="_blank"
-                      class="btn btn-primary">View Site</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-              data-filter="internal" data-aos-anchor="#our-work">
-              <div
-                class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-                data-bs-toggle="modal" data-bs-target="#workModal35">
-                <h4 class="text-white">Innovation in Connecticut</h4>
-              </div>
-              <img src="img/i3/work/innovation-in-ct.png" data-aos-anchor="#our-work" alt="innovation in ct poster">
-            </div>
-            <div class="modal fade p-0 text-dark" id="workModal35" tabindex="-1" role="dialog"
-              aria-labelledby="Innovation in Connecticut" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Innovation in Connecticut</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <p>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Poster Design</span>
-                      <span class="badge pt-2 me-2 mb-2 text-bg-primary">Printwork</span>
-                    </p>
-                    <img src="img/i3/work/innovation-in-ct.png" alt="Innovation in CT poster" class="img-fluid mb-3">
-                    <p>"Innovation in Connecticut" is a feature documentary project delving into the rich tapestry of Connecticut's history of innovation, showcasing both established pioneers in various fields as well as emerging young innovators. I3 created the documentary poster for print and web marketing.</p>
-                  </div>
-
-                  <div class="modal-footer">
-                    <a href="https://www.imdb.com/title/tt33371819/" target="_blank"
-                      class="btn btn-primary">IMDb Page</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-            data-filter="research" data-aos-anchor="#our-work">
-            <div
-              class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-              data-bs-toggle="modal" data-bs-target="#workModal36">
-              <h4 class="text-white">USDA RMA and FSA Crop Reporting Deadlines</h4>
-            </div>
-            <img src="img/i3/work/crop-insurance.png" data-aos-anchor="#our-work" alt="crop insurance graphic">
-          </div>
-          <div class="modal fade p-0 text-dark" id="workModal36" tabindex="-1" role="dialog"
-            aria-labelledby="USDA RMA and FSA Crop Reporting Deadlines" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <!--Content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h3 class="modal-title">USDA RMA and FSA Crop Reporting Deadlines</h3>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <!--Body-->
-                <div class="modal-body">
-                  <p>
-                    <span class="badge pt-2 me-2 mb-2 text-bg-primary">Web Development</span>
-                    <span class="badge pt-2 me-2 mb-2 text-bg-primary">Email Notifications</span>
-                  </p>
-                  <img src="img/i3/work/crop-insurance.png" alt="crop insurance graphic" class="img-fluid mb-3">
-                  <p>I3 created the USDA RMA and FSA Program Deadlines reminder tool that allows policyholders to sign up for text and email reminders for their crop reporting deadlines.</p>
-                </div>
-
-                <div class="modal-footer">
-                  <a href="https://cropdeadlines.core.uconn.edu/login" target="_blank"
-                    class="btn btn-primary">View Site</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 work-item position-relative" data-aos="flip-right"
-          data-filter="research" data-aos-anchor="#our-work">
-          <div
-            class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
-            data-bs-toggle="modal" data-bs-target="#workModal37">
-            <h4 class="text-white">WellSAT</h4>
-          </div>
-          <img src="img/i3/work/wellsat.png" data-aos-anchor="#our-work" alt="wellsat graphic">
-        </div>
-        <div class="modal fade p-0 text-dark" id="workModal37" tabindex="-1" role="dialog"
-          aria-labelledby="WellSAT" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <!--Content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="modal-title">WellSAT</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <!--Body-->
-              <div class="modal-body">
-                <p>
-                  <span class="badge pt-2 me-2 mb-2 text-bg-primary">UI Design</span>
-                  <span class="badge pt-2 me-2 mb-2 text-bg-primary">UX Design</span>
-                </p>
-                <img src="img/i3/work/wellsat.png" alt="wellsat graphic" class="img-fluid mb-3">
-                <p>I3 redesigned the Wellness School Assessment Tool (WellSAT) with a user-friendly interface and introduced new features in version 3.0. WellSAT lets you score your written district wellness policy and rate your district’s implementation of school wellness practices.</p>
-              </div>
-
-              <div class="modal-footer">
-                <a href="https://www.wellsat.org/" target="_blank"
-                  class="btn btn-primary">View Site</a>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
           </div>
@@ -1745,366 +1860,28 @@
         </div>
 
         <div class="d-flex justify-content-between">
-        <h3 class="text-white mb-4" data-aos="fade-right">Students</h3>
-        <a href="alumni.html" class="text-white"  data-aos="fade-left">View Our Alumni</a>
+          <h3 class="text-white mb-4" data-aos="fade-right">Students</h3>
+          <a href="alumni.html" class="text-white" data-aos="fade-left">View Our Alumni</a>
         </div>
-      <div id="students" class="row pb-4">
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#adams">
-                <div class="name d-flex">
-                  <img src="img/i3/people/adams.jpg" class="img-fluid rounded-1" width="100" alt="Emma Adams">
-                  <div style="margin-left:20px;">
-                  <h5 class="text-white"><span class="me-2">Emma Adams</span>
-                  </h5>
-                  <p class="mb-1">Student Web Developer</p>
-                  <div class="text-white" style="font-size:26px;">
-                    <a href="https://www.linkedin.com/in/emma-adams-ct/" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                    <a href="https://emma-adams.replit.app/" class="text-white ms-2" target="_blank"><i
-                        class="bi bi-globe"></i></a>   
-                  </div> 
-                </div>
-                </div>
-              </div>
-
-            <div class="modal fade p-0 text-dark" id="adams" tabindex="-1" role="dialog"
-              aria-labelledby="Emma Adams"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <img src="img/i3/people/adams.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Emma Adams">
-                    <h3 class="modal-title">Emma Adams</h3>
-                    <p><strong>Student Web Developer</strong></p>
-                    <p>Hi! My name is Emma and I am a junior Computer Science major at the University of Connecticut. I love building web applications and I am passionate about exploring how emerging technology can be used to promote community and social impact. Through my coursework and projects, I have developed skills in full-stack development, user experience design, and cloud computing. When I am not coding, I play basketball with friends, sew, and give tours to prospective UConn Engineering students!</p>
-                    <div class="text-white" style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/emma-adams-ct/" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                      <a href="https://emma-adams.replit.app/" class="ms-2" target="_blank"><i
-                          class="bi bi-globe"></i></a>   
-                    </div>  
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#busavage">
-                <div class="name d-flex">
-                  <img src="img/i3/people/busavage.png" class="img-fluid rounded-1" width="100" alt="Lauren Busavage">
-                  <div style="margin-left:20px;">
-                  <h5 class="text-white"><span class="me-2">Lauren Busavage</span>
-                  </h5>
-                  <p class="mb-1">Student Web Developer</p>
-                  <div class="text-white" style="font-size:26px;">
-                    <a href="https://www.linkedin.com/in/lauren-busavage/" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                  </div> 
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="busavage" tabindex="-1" role="dialog"
-              aria-labelledby="Lauren Busavage"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <img src="img/i3/people/busavage.png" class="img-fluid rounded-1 mb-4" width="150" alt="Lauren Busavage">
-                    <h3 class="modal-title">Lauren Busavage</h3>
-                    <p><strong>Student Web Developer</strong></p>
-                    <div style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/lauren-busavage/" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#clarke">
-                <div class="name d-flex">
-                  <div>
-                  <h5 class="text-white"><span class="me-2">Kelis Clarke</span>
-                  </h5>
-                  <p class="mb-1">Student UI/UX Designer</p>
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="clarke" tabindex="-1" role="dialog"
-              aria-labelledby="Kelis Clarke"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <h3 class="modal-title">Kelis Clarke</h3>
-                    <p><strong>Student UI/UX Designer</strong></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#cohutt">
-                <div class="name d-flex">
-                  <div>
-                  <h5 class="text-white"><span class="me-2">Ryan Cohutt</span>
-                  </h5>
-                  <p class="mb-1">Student UI/UX Designer</p>
-                  <div class="text-white " style="font-size:26px;">
-                    <a href="https://www.linkedin.com/in/ryan-cohutt/" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                  </div> 
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="cohutt" tabindex="-1" role="dialog"
-              aria-labelledby="Ryan Cohutt"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <h3 class="modal-title">Ryan Cohutt</h3>
-                    <p><strong>Student UI/UX Designer</strong></p>
-                    <div style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/ryan-cohutt/" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#danielewicz">
-                <div class="name d-flex">
-                  <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1" width="100" alt="Maggie Danielewicz">
-                  <div style="margin-left:20px;">
-                    <h5 class="text-white"><span class="me-2">Maggie Danielewicz</span>
-                    </h5>
-                  <p class="mb-1">Student Web Developer</p>
-                  <div class="text-white " style="font-size:26px;">
-                    <a href="http://www.linkedin.com/in/magdalena-danielewicz" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                  </div>  
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="danielewicz" tabindex="-1" role="dialog"
-              aria-labelledby="Maggie Danielewicz"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Maggie Danielewicz">
-                    <h3 class="modal-title">Maggie Danielewicz</h3>
-                    <p><strong>Student Web Developer</strong></p>
-                    <p>Hey there! My name’s Maggie, and I’m a junior studying Computer Science and Analytics, diving into the world of data and development. As a Student Web Developer at UConn’s I3, I love turning ideas into functional, user-friendly web experiences. When I’m not behind a screen, you’ll find me exploring—hiking up mountains, snowboarding down some trails, or simply soaking up the outdoors. I thrive on a good challenge, whether it’s bringing a project to life or tackling a tough climb!
-                    </p>
-                    <div style="font-size:26px;">
-                      <a href="http://www.linkedin.com/in/magdalena-danielewicz" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#gonzalez">
-                <div class="name d-flex">
-                  <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1" width="100" alt="Luna Gonzalez">
-    
-                  <div style="margin-left:20px;">
-                  <h5 class="text-white">Luna Gonzalez
-                  </h5>
-                  <p class="mb-1">Student Illustrator</p>
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="gonzalez" tabindex="-1" role="dialog"
-              aria-labelledby="Luna Gonzalez"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Luna Gonzalez">
-                    <h3 class="modal-title">Luna Gonzalez</h3>
-                    <p><strong>Student Illustrator</strong></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#mark">
-                <div class="name d-flex">
-                  <div>
-                  <h5 class="text-white"><span class="me-2">Aaron Mark</span>
-                  </h5>
-                  <p class="mb-1">Student Web Developer</p>
-                  <div class="text-white" style="font-size:26px;">
-                    <a href="https://www.linkedin.com/in/aaronmark05" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                    <a href="https://aaron193.github.io/portfolio" class="text-white ms-2" target="_blank"><i
-                        class="bi bi-globe"></i></a>   
-                  </div> 
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="mark" tabindex="-1" role="dialog"
-              aria-labelledby="Aaron Mark"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <h3 class="modal-title">Aaron Mark</h3>
-                    <p><strong>Student Web Developer</strong></p>
-                    <p>I'm a Computer Science & Engineering student at UConn with a passion for programming and understanding how things work. I began coding by reverse engineering web applications and was drawn to the complex systems and the underlying code that drives them.</p>
-                    <div style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/aaronmark05" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                      <a href="https://aaron193.github.io/portfolio" class="ms-2" target="_blank"><i
-                          class="bi bi-globe"></i></a>   
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#medrek">
-                <div class="name d-flex">
-                  <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1" width="100" alt="Jack Medrek">
-                  <div style="margin-left:20px;">
-                  <h5 class="text-white"><span class="me-2">Jack Medrek</span>
-                  </h5>
-                  <p class="mb-1">Student Software Developer</p>
-                  <div class="text-white" style="font-size:26px;">
-                    <a href="https://www.linkedin.com/in/john-medrek-072a31212/" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                    <a href="http://johnmedrek.com" class="text-white ms-2" target="_blank"><i
-                        class="bi bi-globe"></i></a>   
-                  </div>  
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="medrek" tabindex="-1" role="dialog"
-              aria-labelledby="Jack Medrek"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Jack Medrek">
-                    <h3 class="modal-title">Jack Medrek</h3>
-                    <p><strong>Student Software Developer</strong></p>
-                    <div style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/john-medrek-072a31212/" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                      <a href="http://johnmedrek.com" class="ms-2" target="_blank"><i
-                          class="bi bi-globe"></i></a>   
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-
-              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#moore">
-                <div class="name d-flex">
-                  <img src="img/i3/people/moore.jpg" class="img-fluid rounded-1" width="100" alt="Kailey Moore">
-                  <div style="margin-left:20px;">
-                  <h5 class="text-white"><span class="me-2">Kailey Moore</span>
-                  </h5>
-                  <p class="mb-1">Student UI/UX Designer</p>
-                  <div class="text-white" style="font-size:26px;">
-                    <a href="https://www.linkedin.com/in/kailey-moore-53532a283/" class="text-white" target="_blank"><i
-                        class="bi bi-linkedin"></i></a>
-                  </div> 
-                </div>
-                </div>
-              </div>
-
-              <div class="modal fade p-0 text-dark" id="moore" tabindex="-1" role="dialog"
-              aria-labelledby="Kailey Moore"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <img src="img/i3/people/moore.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Kailey Moore">
-                    <h3 class="modal-title">Kailey Moore</h3>
-                    <p><strong>Student UI/UX Designer</strong></p>
-                    <p>Hi! I'm Kailey, a sophomore at UConn majoring in Digital Media & Design. I'm passionate about Web Design/Development, and I love bringing concepts to life through graphic design, typography, and logo creation. When I'm not designing, you can find me staying active with fitness, discovering new music, or experimenting with new recipes to cook. I'm always eager to take on exciting projects and bring a fresh, creative perspective to everything I do!</p>
-                    <div style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/kailey-moore-53532a283/" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#shostak">
-              <div class="name d-flex">
-                <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1" width="100" alt="William Shostak">
-                <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">William Shostak</span>
+        <div id="students" class="row pb-4">
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#adams">
+            <div class="name d-flex">
+              <img src="img/i3/people/adams.jpg" class="img-fluid rounded-1" width="100" alt="Emma Adams">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">Emma Adams</span>
                 </h5>
-                <p class="mb-1">Student Software Developer</p>
+                <p class="mb-1">Student Web Developer</p>
                 <div class="text-white" style="font-size:26px;">
-                  <a href="https://www.linkedin.com/in/willshostak/" class="text-white" target="_blank"><i
+                  <a href="https://www.linkedin.com/in/emma-adams-ct/" class="text-white" target="_blank"><i
                       class="bi bi-linkedin"></i></a>
-                </div>  
-              </div>
+                  <a href="https://emma-adams.replit.app/" class="text-white ms-2" target="_blank"><i
+                      class="bi bi-globe"></i></a>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div class="modal fade p-0 text-dark" id="shostak" tabindex="-1" role="dialog"
-            aria-labelledby="William Shostak"
+          <div class="modal fade p-0 text-dark" id="adams" tabindex="-1" role="dialog" aria-labelledby="Emma Adams"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2114,62 +1891,403 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                  <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="William Shostak">
+                  <img src="img/i3/people/adams.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Emma Adams">
+                  <h3 class="modal-title">Emma Adams</h3>
+                  <p><strong>Student Web Developer</strong></p>
+                  <p>Hi! My name is Emma and I am a junior Computer Science major at the University of Connecticut. I
+                    love building web applications and I am passionate about exploring how emerging technology can be
+                    used to promote community and social impact. Through my coursework and projects, I have developed
+                    skills in full-stack development, user experience design, and cloud computing. When I am not coding,
+                    I play basketball with friends, sew, and give tours to prospective UConn Engineering students!</p>
+                  <div class="text-white" style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/emma-adams-ct/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                    <a href="https://emma-adams.replit.app/" class="ms-2" target="_blank"><i
+                        class="bi bi-globe"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#busavage">
+            <div class="name d-flex">
+              <img src="img/i3/people/busavage.png" class="img-fluid rounded-1" width="100" alt="Lauren Busavage">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">Lauren Busavage</span>
+                </h5>
+                <p class="mb-1">Student Web Developer</p>
+                <div class="text-white" style="font-size:26px;">
+                  <a href="https://www.linkedin.com/in/lauren-busavage/" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="busavage" tabindex="-1" role="dialog"
+            aria-labelledby="Lauren Busavage" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/busavage.png" class="img-fluid rounded-1 mb-4" width="150"
+                    alt="Lauren Busavage">
+                  <h3 class="modal-title">Lauren Busavage</h3>
+                  <p><strong>Student Web Developer</strong></p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/lauren-busavage/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#clarke">
+            <div class="name d-flex">
+              <div>
+                <h5 class="text-white"><span class="me-2">Kelis Clarke</span>
+                </h5>
+                <p class="mb-1">Student UI/UX Designer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="clarke" tabindex="-1" role="dialog" aria-labelledby="Kelis Clarke"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <h3 class="modal-title">Kelis Clarke</h3>
+                  <p><strong>Student UI/UX Designer</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#cohutt">
+            <div class="name d-flex">
+              <div>
+                <h5 class="text-white"><span class="me-2">Ryan Cohutt</span>
+                </h5>
+                <p class="mb-1">Student UI/UX Designer</p>
+                <div class="text-white " style="font-size:26px;">
+                  <a href="https://www.linkedin.com/in/ryan-cohutt/" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="cohutt" tabindex="-1" role="dialog" aria-labelledby="Ryan Cohutt"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <h3 class="modal-title">Ryan Cohutt</h3>
+                  <p><strong>Student UI/UX Designer</strong></p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/ryan-cohutt/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal"
+            data-bs-target="#danielewicz">
+            <div class="name d-flex">
+              <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1" width="100" alt="Maggie Danielewicz">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">Maggie Danielewicz</span>
+                </h5>
+                <p class="mb-1">Student Web Developer</p>
+                <div class="text-white " style="font-size:26px;">
+                  <a href="http://www.linkedin.com/in/magdalena-danielewicz" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="danielewicz" tabindex="-1" role="dialog"
+            aria-labelledby="Maggie Danielewicz" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1 mb-4" width="150"
+                    alt="Maggie Danielewicz">
+                  <h3 class="modal-title">Maggie Danielewicz</h3>
+                  <p><strong>Student Web Developer</strong></p>
+                  <p>Hey there! My name’s Maggie, and I’m a junior studying Computer Science and Analytics, diving into
+                    the world of data and development. As a Student Web Developer at UConn’s I3, I love turning ideas
+                    into functional, user-friendly web experiences. When I’m not behind a screen, you’ll find me
+                    exploring—hiking up mountains, snowboarding down some trails, or simply soaking up the outdoors. I
+                    thrive on a good challenge, whether it’s bringing a project to life or tackling a tough climb!
+                  </p>
+                  <div style="font-size:26px;">
+                    <a href="http://www.linkedin.com/in/magdalena-danielewicz" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#gonzalez">
+            <div class="name d-flex">
+              <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1" width="100" alt="Luna Gonzalez">
+
+              <div style="margin-left:20px;">
+                <h5 class="text-white">Luna Gonzalez
+                </h5>
+                <p class="mb-1">Student Illustrator</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="gonzalez" tabindex="-1" role="dialog"
+            aria-labelledby="Luna Gonzalez" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Luna Gonzalez">
+                  <h3 class="modal-title">Luna Gonzalez</h3>
+                  <p><strong>Student Illustrator</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#mark">
+            <div class="name d-flex">
+              <div>
+                <h5 class="text-white"><span class="me-2">Aaron Mark</span>
+                </h5>
+                <p class="mb-1">Student Web Developer</p>
+                <div class="text-white" style="font-size:26px;">
+                  <a href="https://www.linkedin.com/in/aaronmark05" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                  <a href="https://aaron193.github.io/portfolio" class="text-white ms-2" target="_blank"><i
+                      class="bi bi-globe"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="mark" tabindex="-1" role="dialog" aria-labelledby="Aaron Mark"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <h3 class="modal-title">Aaron Mark</h3>
+                  <p><strong>Student Web Developer</strong></p>
+                  <p>I'm a Computer Science & Engineering student at UConn with a passion for programming and
+                    understanding how things work. I began coding by reverse engineering web applications and was drawn
+                    to the complex systems and the underlying code that drives them.</p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/aaronmark05" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://aaron193.github.io/portfolio" class="ms-2" target="_blank"><i
+                        class="bi bi-globe"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#medrek">
+            <div class="name d-flex">
+              <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1" width="100" alt="Jack Medrek">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">Jack Medrek</span>
+                </h5>
+                <p class="mb-1">Student Software Developer</p>
+                <div class="text-white" style="font-size:26px;">
+                  <a href="https://www.linkedin.com/in/john-medrek-072a31212/" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                  <a href="http://johnmedrek.com" class="text-white ms-2" target="_blank"><i
+                      class="bi bi-globe"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="medrek" tabindex="-1" role="dialog" aria-labelledby="Jack Medrek"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Jack Medrek">
+                  <h3 class="modal-title">Jack Medrek</h3>
+                  <p><strong>Student Software Developer</strong></p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/john-medrek-072a31212/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                    <a href="http://johnmedrek.com" class="ms-2" target="_blank"><i class="bi bi-globe"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#moore">
+            <div class="name d-flex">
+              <img src="img/i3/people/moore.jpg" class="img-fluid rounded-1" width="100" alt="Kailey Moore">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">Kailey Moore</span>
+                </h5>
+                <p class="mb-1">Student UI/UX Designer</p>
+                <div class="text-white" style="font-size:26px;">
+                  <a href="https://www.linkedin.com/in/kailey-moore-53532a283/" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="moore" tabindex="-1" role="dialog" aria-labelledby="Kailey Moore"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/moore.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Kailey Moore">
+                  <h3 class="modal-title">Kailey Moore</h3>
+                  <p><strong>Student UI/UX Designer</strong></p>
+                  <p>Hi! I'm Kailey, a sophomore at UConn majoring in Digital Media & Design. I'm passionate about Web
+                    Design/Development, and I love bringing concepts to life through graphic design, typography, and
+                    logo creation. When I'm not designing, you can find me staying active with fitness, discovering new
+                    music, or experimenting with new recipes to cook. I'm always eager to take on exciting projects and
+                    bring a fresh, creative perspective to everything I do!</p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/kailey-moore-53532a283/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#shostak">
+            <div class="name d-flex">
+              <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1" width="100" alt="William Shostak">
+              <div style="margin-left:20px;">
+                <h5 class="text-white"><span class="me-2">William Shostak</span>
+                </h5>
+                <p class="mb-1">Student Software Developer</p>
+                <div class="text-white" style="font-size:26px;">
+                  <a href="https://www.linkedin.com/in/willshostak/" class="text-white" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade p-0 text-dark" id="shostak" tabindex="-1" role="dialog"
+            aria-labelledby="William Shostak" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1 mb-4" width="150"
+                    alt="William Shostak">
                   <h3 class="modal-title">William Shostak</h3>
                   <p><strong>Student Software Developer</strong></p>
                   <div style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/willshostak/" target="_blank"><i
                         class="bi bi-linkedin"></i></a>
-                  </div> 
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#salmon">
-              <div class="name d-flex">
-                <div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#salmon">
+            <div class="name d-flex">
+              <div>
                 <h5 class="text-white"><span class="me-2">Emelia Salmon</span>
                 </h5>
                 <p class="mb-1">Student UI/UX Designer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" class="text-white" target="_blank"><i
                       class="bi bi-linkedin"></i></a>
-                  <a href="http://esalmon.com" class="text-white ms-2" target="_blank"><i
-                      class="bi bi-globe"></i></a>   
-                </div>  
+                  <a href="http://esalmon.com" class="text-white ms-2" target="_blank"><i class="bi bi-globe"></i></a>
+                </div>
               </div>
-              </div>
-              </div>
+            </div>
+          </div>
 
-              <div class="modal fade p-0 text-dark" id="salmon" tabindex="-1" role="dialog"
-              aria-labelledby="Emelia Salmon"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <!--Content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!--Body-->
-                  <div class="modal-body">
-                    <h3 class="modal-title">Emelia Salmon</h3>
-                    <p><strong>Student UI/UX Designer</strong></p>
-                    <div style="font-size:26px;">
-                      <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" target="_blank"><i
-                          class="bi bi-linkedin"></i></a>
-                      <a href="http://esalmon.com" class="ms-2" target="_blank"><i
-                          class="bi bi-globe"></i></a>   
-                    </div>
+          <div class="modal fade p-0 text-dark" id="salmon" tabindex="-1" role="dialog" aria-labelledby="Emelia Salmon"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <!--Content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <h3 class="modal-title">Emelia Salmon</h3>
+                  <p><strong>Student UI/UX Designer</strong></p>
+                  <div style="font-size:26px;">
+                    <a href="https://www.linkedin.com/in/emelia-salmon-561516232/" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                    <a href="http://esalmon.com" class="ms-2" target="_blank"><i class="bi bi-globe"></i></a>
                   </div>
                 </div>
               </div>
             </div>
-              
-          
+          </div>
+
+
         </div>
-        
-    </div>
+
+      </div>
     </div>
 
     <div class="style" style="border-top:2px solid var(--accent-2);height:2px;margin-top:20px;"></div>
@@ -2223,7 +2341,7 @@
     <script src="aos-master/dist/aos.js"></script>
 
     <script>
-      
+
       /*background color change*/
       $(window).scroll(function () {
 
@@ -2418,60 +2536,60 @@
         });
       })()
 
-  // Initialize AOS
-  AOS.init({
-    duration: 1000,  // Duration for fade-up animation
-    delay: 200,      // Delay before starting the fade-up animation
-    once: true,      // Only trigger once when it enters the viewport
-    disable: Boolean(window.innerWidth < 1024),  // Disable on small screens
-  });
-
-  // Wait for the DOM to load
-  document.addEventListener("DOMContentLoaded", () => {
-
-  // Function to animate counting
-  function counter(id, start, end, duration) {
-    let obj = document.getElementById(id),
-        current = start,
-        range = end - start,
-        increment = end > start ? 1 : -1,
-        step = Math.abs(Math.floor(duration / range)),
-        timer = setInterval(() => {
-          current += increment;
-          obj.textContent = current;
-          if (current == end) {
-            clearInterval(timer);
-          }
-        }, step);
-  }
-
-  // Intersection Observer to trigger number counter when in view
-  function observeCounter(id, start, end, duration) {
-    const element = document.getElementById(id);
-    const options = {
-      root: null, // viewport as root
-      rootMargin: '0px',
-      threshold: 0.5 // Trigger when 50% of the element is in the viewport
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          counter(id, start, end, duration);
-          observer.unobserve(entry.target); // Stop observing after it starts counting
-        }
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,  // Duration for fade-up animation
+        delay: 200,      // Delay before starting the fade-up animation
+        once: true,      // Only trigger once when it enters the viewport
+        disable: Boolean(window.innerWidth < 1024),  // Disable on small screens
       });
-    }, options);
 
-    observer.observe(element); // Start observing the element
-  }
+      // Wait for the DOM to load
+      document.addEventListener("DOMContentLoaded", () => {
 
-  // Call observeCounter for each number
-  observeCounter("count5", 0, 30, 2000);
-  observeCounter("count6", 0, 50, 2000); 
-  observeCounter("count7", 0, 15, 2000); 
-  observeCounter("count8", 0, 1, 2000); 
-  });
+        // Function to animate counting
+        function counter(id, start, end, duration) {
+          let obj = document.getElementById(id),
+            current = start,
+            range = end - start,
+            increment = end > start ? 1 : -1,
+            step = Math.abs(Math.floor(duration / range)),
+            timer = setInterval(() => {
+              current += increment;
+              obj.textContent = current;
+              if (current == end) {
+                clearInterval(timer);
+              }
+            }, step);
+        }
+
+        // Intersection Observer to trigger number counter when in view
+        function observeCounter(id, start, end, duration) {
+          const element = document.getElementById(id);
+          const options = {
+            root: null, // viewport as root
+            rootMargin: '0px',
+            threshold: 0.5 // Trigger when 50% of the element is in the viewport
+          };
+
+          const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                counter(id, start, end, duration);
+                observer.unobserve(entry.target); // Stop observing after it starts counting
+              }
+            });
+          }, options);
+
+          observer.observe(element); // Start observing the element
+        }
+
+        // Call observeCounter for each number
+        observeCounter("count5", 0, 30, 2000);
+        observeCounter("count6", 0, 50, 2000);
+        observeCounter("count7", 0, 15, 2000);
+        observeCounter("count8", 20, 1, 2000);
+      });
 
 
 
@@ -2491,16 +2609,18 @@
   <footer>
     <!--start light footer-->
     <div class="i3-footer i3-footer--light py-4">
-      <img src = "img/i3/i3-symbol-blue.svg" alt="i3 symbol"/>
-      <p>Powered by 
+      <img src="img/i3/i3-symbol-blue.svg" alt="i3 symbol" />
+      <p>Powered by
       </p>
       <a class="i3-footer-btn" href="https://i3.core.uconn.edu/"> i3 </a>
     </div>
     <!--end light footer-->
     <div class="bg-dark text-white py-5">
       <div class="container">
-        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center links-underline-on-hover text-small">
-          <a class="link-light pe-lg-5 mb-2" href="https://uconn.edu">&copy; <span id="year"></span> University of Connecticut</a>
+        <div
+          class="d-flex flex-column flex-lg-row align-items-center justify-content-center links-underline-on-hover text-small">
+          <a class="link-light pe-lg-5 mb-2" href="https://uconn.edu">&copy; <span id="year"></span> University of
+            Connecticut</a>
           <a class="link-light pe-lg-5 mb-2" href="https://provost.uconn.edu">Office of the Provost</a>
           <a class="link-light pe-lg-5 mb-2" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers,
             Privacy &amp; Copyright</a>
@@ -2510,24 +2630,45 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
   <script>
-      /*color filter slider*/
-      var tiles = document.querySelectorAll('nav,.hero,.about,.subunit,.filter-pills,.modal-header,.modal-body .badge,.modal-footer,.build,#contact,.footer-flair,footer,#team,.style');
-      var extiles = document.querySelectorAll('#team img, #contact iframe,.subunit img')
-      document.getElementById('filter-input').oninput = function() {
-        tiles.forEach((item) => {
-          var filter = 'hue-rotate(xdeg)'.replace('x', this.value);
-          item.style.filter = filter;
-          item.style.webkitFilter = filter;
-        })
-        extiles.forEach((item) => {
-          var filter2 = 'hue-rotate(xdeg)'.replace('x', 360-this.value);
-          item.style.filter = filter2;
-          item.style.webkitFilter = filter2;
-        })
-      }
-      document.getElementById("year").innerHTML = new Date().getFullYear();
+    /*color filter slider*/
+    var tiles = document.querySelectorAll('nav,.hero,.about,.subunit,.filter-pills,.modal-header,.modal-body .badge,.modal-footer,.build,#contact,.footer-flair,footer,#team,.style');
+    var extiles = document.querySelectorAll('#team img, #contact iframe,.subunit img')
+    document.getElementById('filter-input').oninput = function () {
+      tiles.forEach((item) => {
+        var filter = 'hue-rotate(xdeg)'.replace('x', this.value);
+        item.style.filter = filter;
+        item.style.webkitFilter = filter;
+      })
+      extiles.forEach((item) => {
+        var filter2 = 'hue-rotate(xdeg)'.replace('x', 360 - this.value);
+        item.style.filter = filter2;
+        item.style.webkitFilter = filter2;
+      })
+    }
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+
+    function filterDXG() {
+      var elements = document.querySelectorAll('.filter-pills .nav-link');
+      elements.forEach(function (element) {
+        if (element.getAttribute('data-filter') === 'research') {
+          element.click();
+        }
+      });
+    }
+
+    function filterCubedLabs() {
+      var elements = document.querySelectorAll('.filter-pills .nav-link');
+      elements.forEach(function (element) {
+        if (element.getAttribute('data-filter') === 'internal') {
+          element.click();
+        }
+      });
+    }
+
   </script>
 
 </body>
