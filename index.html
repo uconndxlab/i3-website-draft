@@ -203,7 +203,7 @@
         </ul>
 
         <div class="tab-content" id="whatWeDoTabsContent">
-          <div class="tab-pane fade show active" id="cubed-labs" role="tabpanel" aria-labelledby="cubed-labs-tab">
+          <div class="tab-pane fade show active" id="cubed-labs" role="tabpanel" aria-label="cubed-labs-tab">
             <p data-aos="fade-up" class="mb-4 d-none"><span class="badge bg-dark me-2">For UConn and Beyond</span> </p>
             <h3 data-aos="fade-up" class="display-header mb-4" style="color:var(--accent-3); font-size: 1.5rem;">Cubed
               Labs (❒ labs)</h3>
@@ -284,7 +284,7 @@
             </div>
           </div>
 
-          <div class="tab-pane fade" id="dxg" role="tabpanel" aria-labelledby="dxg-tab">
+          <div class="tab-pane fade" id="dxg" role="tabpanel" aria-label="dxg-tab">
             <p data-aos="fade-up" class="mb-4 d-none"><span class="badge bg-dark me-2">For Researchers</span> </p>
             <h3 data-aos="fade-up" class="display-header mb-4" style="color:var(--accent-3); font-size: 1.5rem;">Digital
               Experience Group</h3>
@@ -303,7 +303,7 @@
                       <li>Domain Name Management & Hosting</li>
                       <li>Grant-Friendly internal billing via KFS</li>
                     </ul>
-                  <div class="btn display-btn btn-arrow-slide"> <a data-bs-toggle="modal" data-bs-target="#feeModal"
+                  <div class="btn display-btn btn-arrow-slide"> <a id="feeModalButton" data-bs-toggle="modal" data-bs-target="#feeModal"
                       class="btn-arrow-slide-cont btn-arrow-slide-cont--blue" style="width:160px;margin-bottom:10px;"> <span
                         class="btn-arrow-slide-circle" aria-hidden="true"> <span
                           class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span> </span> <span
@@ -359,12 +359,12 @@
 
         <!-- Fees Modal -->
         <div class="modal fade p-0 text-dark" id="feeModal" tabindex="-1" role="dialog"
-        aria-labelledby="QuantumCT" aria-hidden="true">
+        aria-label="feeModalButton" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <!--Content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h3 class="modal-title">Fees</h3>
+              <h4 class="modal-title">Fees</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!--Body-->
@@ -410,7 +410,7 @@
         </div>
       </div>
 
-        <div class="row numbers pt-7" data-aos="fade-up">
+        <div class="row numbers pt-7" role="presentation" data-aos="fade-up">
           <div class="col-md-3 d-flex flex-column text-center">
             <h3 class="value"><span id="count5"></span>+</h3>
             <p>Grant-funded projects</p>
@@ -464,17 +464,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal19">
-                <h4 class="text-white">QuantumCT</h4>
+                <h3 class="text-white">QuantumCT</h3>
               </div>
               <img src="img/i3/work/quantum.png" data-aos-anchor="#our-work" alt="QuantumCT graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal19" tabindex="-1" role="dialog"
-              aria-labelledby="QuantumCT" aria-hidden="true">
+              aria-label="QuantumCT" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">QuantumCT</h3>
+                    <h4 class="modal-title">QuantumCT Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -503,17 +503,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal16">
-                <h4 class="text-white">Research Insights for Faculty</h4>
+                <h3 class="text-white">Research Insights for Faculty</h3>
               </div>
               <img src="img/i3/work/rif.png" data-aos-anchor="#our-work" alt="Research Insights Website graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal16" tabindex="-1" role="dialog"
-              aria-labelledby="Research Insights for Faculty" aria-hidden="true">
+              aria-label="Research Insights for Faculty" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Research Insights for Faculty</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -539,17 +539,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal33">
-                <h4 class="text-white">UConn Impact</h4>
+                <h3 class="text-white">UConn Impact</h3>
               </div>
               <img src="img/i3/work/impact.png" data-aos-anchor="#our-work" alt="UConn Impact Website graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal33" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Impact" aria-hidden="true">
+              aria-label="UConn Impact" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Impact</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -576,17 +576,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal4">
-                <h4 class="text-white">Sourcery</h4>
+                <h3 class="text-white">Sourcery</h3>
               </div>
               <img src="img/i3/work/sourcery.png" data-aos-anchor="#our-work" alt="Sourcery graphic">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal4" tabindex="-1" role="dialog" aria-labelledby="Sourcery"
+            <div class="modal fade p-0 text-dark" id="workModal4" tabindex="-1" role="dialog" aria-label="Sourcery"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Sourcery</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -616,17 +616,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal20">
-                <h4 class="text-white">Nexus</h4>
+                <h3 class="text-white">Nexus</h3>
               </div>
               <img src="img/i3/work/nexus.png" data-aos-anchor="#our-work" alt="Nexus Coming Soon graphic">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal20" tabindex="-1" role="dialog" aria-labelledby="Nexus"
+            <div class="modal fade p-0 text-dark" id="workModal20" tabindex="-1" role="dialog" aria-label="Nexus"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Nexus</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -653,17 +653,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal37">
-                <h4 class="text-white">WellSAT</h4>
+                <h3 class="text-white">WellSAT</h3>
               </div>
               <img src="img/i3/work/wellsat.png" data-aos-anchor="#our-work" alt="wellsat graphic">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal37" tabindex="-1" role="dialog" aria-labelledby="WellSAT"
+            <div class="modal fade p-0 text-dark" id="workModal37" tabindex="-1" role="dialog" aria-label="WellSAT"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">WellSAT</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -691,17 +691,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal34">
-                <h4 class="text-white">EJ TCTAC</h4>
+                <h3 class="text-white">EJ TCTAC</h3>
               </div>
               <img src="img/i3/work/ejtctac.png" data-aos-anchor="#our-work" alt="EJ TCTAC graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal34" tabindex="-1" role="dialog"
-              aria-labelledby="EJ TCTAC" aria-hidden="true">
+              aria-label="EJ TCTAC" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">EJ TCTAC</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -729,17 +729,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal35">
-                <h4 class="text-white">Innovation in Connecticut</h4>
+                <h3 class="text-white">Innovation in Connecticut</h3>
               </div>
               <img src="img/i3/work/innovation-in-ct.png" data-aos-anchor="#our-work" alt="innovation in ct poster">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal35" tabindex="-1" role="dialog"
-              aria-labelledby="Innovation in Connecticut" aria-hidden="true">
+              aria-label="Innovation in Connecticut" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Innovation in Connecticut</h3>
+                    <h4 class="modal-title">Innovation in Connecticut</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -769,17 +769,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal17">
-                <h4 class="text-white">POET</h4>
+                <h3 class="text-white">POET</h3>
               </div>
               <img src="img/i3/work/poet.png" alt="POET graphic" data-aos-anchor="#our-work">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal17" tabindex="-1" role="dialog"
-              aria-labelledby="Faculty Salary Lookup Tool" aria-hidden="true">
+              aria-label="Faculty Salary Lookup Tool" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">POET</h3>
+                    <h4 class="modal-title">POET</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -809,17 +809,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal22">
-                <h4 class="text-white">Werth Institute</h4>
+                <h3 class="text-white">Werth Institute</h3>
               </div>
               <img src="img/i3/work/werth.png" data-aos-anchor="#our-work" alt="Werth Institute graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal22" tabindex="-1" role="dialog"
-              aria-labelledby="Werth Institute for Entrepreneurship and Innovation" aria-hidden="true">
+              aria-label="Werth Institute for Entrepreneurship and Innovation" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Werth Institute for Entrepreneurship and Innovation</h3>
+                    <h4 class="modal-title">Werth Institute for Entrepreneurship and Innovation</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -845,17 +845,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal32">
-                <h4 class="text-white">UConn Research</h4>
+                <h3 class="text-white">UConn Research</h3>
               </div>
               <img src="img/i3/work/ovpr.jpg" data-aos-anchor="#our-work" alt="Hiring Maps graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal32" tabindex="-1" role="dialog"
-              aria-labelledby="OVPR Website" aria-hidden="true">
+              aria-label="OVPR Website" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Research</h3>
+                    <h4 class="modal-title">UConn Research</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -883,17 +883,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal2">
-                <h4 class="text-white">WellSCAN</h4>
+                <h3 class="text-white">WellSCAN</h3>
               </div>
               <img src="img/i3/work/wellscan.png" data-aos-anchor="#our-work" alt="WellSCAN graphic">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal2" tabindex="-1" role="dialog" aria-labelledby="WellSCAN"
+            <div class="modal fade p-0 text-dark" id="workModal2" tabindex="-1" role="dialog" aria-label="WellSCAN"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">WellSCAN</h3>
+                    <h4 class="modal-title">WellSCAN</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -925,18 +925,18 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal28">
-                <h4 class="text-white">CSMNH Shark Illustrations</h4>
+                <h3 class="text-white">CSMNH Shark Illustrations</h3>
               </div>
               <img src="img/i3/work/shark-illustration.jpg" data-aos-anchor="#our-work"
                 alt="Shark Illustrations for CSMNH">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal28" tabindex="-1" role="dialog"
-              aria-labelledby="Connecticut State Museum of Natural History Shark Illustrations" aria-hidden="true">
+              aria-label="Connecticut State Museum of Natural History Shark Illustrations" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Connecticut State Museum of Natural History Shark Illustrations</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -960,18 +960,18 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal0">
-                <h4 class="text-white">Stamford Data Science</h4>
+                <h3 class="text-white">Stamford Data Science</h3>
               </div>
               <img src="img/i3/work/sdsi.png" data-aos-anchor="#our-work"
                 alt="UConn Stamford Data Science Initiative graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal0" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Stamford Data Science Initiative" aria-hidden="true">
+              aria-label="UConn Stamford Data Science Initiative" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Stamford Data Science Initiative</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -999,20 +999,19 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal3">
-                <h4 class="text-white">UConn UCEDD</h4>
+                <h3 class="text-white">UConn UCEDD</h3>
               </div>
               <img src="img/i3/work/ucedd.png" data-aos-anchor="#our-work"
                 alt="UConn Center for Excellence in Developmental Disabilities Education, Research and Service graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal3" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Center for Excellence in Developmental Disabilities Education, Research and Service"
+              aria-label="UConn Center for Excellence in Developmental Disabilities Education, Research and Service"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Center for Excellence in Developmental Disabilities Education,
-                      Research and Service</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1043,18 +1042,18 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal5">
-                <h4 class="text-white">CFNI Calculator</h4>
+                <h3 class="text-white">CFNI Calculator</h3>
               </div>
               <img src="img/i3/work/cfni.png" data-aos-anchor="#our-work"
                 alt="Charitable Food Nutrition Index Calculator graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal5" tabindex="-1" role="dialog"
-              aria-labelledby="Charitable Food Nutrition Index Calculator" aria-hidden="true">
+              aria-label="Charitable Food Nutrition Index Calculator" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Charitable Food Nutrition Index Calculator</h3>
+                    <h4 class="modal-title">Charitable Food Nutrition Index Calculator</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1081,17 +1080,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal6">
-                <h4 class="text-white">Breadwinner Game</h4>
+                <h3 class="text-white">Breadwinner Game</h3>
               </div>
               <img src="img/i3/work/financial-game.png" data-aos-anchor="#our-work" alt="Financial Game graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal6" tabindex="-1" role="dialog"
-              aria-labelledby="Financial Game" aria-hidden="true">
+              aria-label="Financial Game" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Breadwinner Game</h3>
+                    <h4 class="modal-title">About the Project</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1125,18 +1124,18 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal7">
-                <h4 class="text-white">Voice Switch/Brain Switch</h4>
+                <h3 class="text-white">Voice Switch/Brain Switch</h3>
               </div>
               <img src="img/i3/work/brain-switch.png" data-aos-anchor="#our-work"
                 alt="Voice Switch/Brain Switch graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal7" tabindex="-1" role="dialog"
-              aria-labelledby="Voice Switch/Brain Switch" aria-hidden="true">
+              aria-label="Voice Switch/Brain Switch" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Voice Switch/Brain Switch</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1163,17 +1162,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal8">
-                <h4 class="text-white">Access2Ag</h4>
+                <h3 class="text-white">Access2Ag</h3>
               </div>
               <img src="img/i3/work/access2ag.png" data-aos-anchor="#our-work" alt="Access2Ag graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal8" tabindex="-1" role="dialog"
-              aria-labelledby="Access2Ag" aria-hidden="true">
+              aria-label="Access2Ag" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Access2Ag</h3>
+                    <h4 class="modal-title">Project Info</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1204,17 +1203,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal9">
-                <h4 class="text-white">UConn NRCA</h4>
+                <h3 class="text-white">UConn NRCA</h3>
               </div>
               <img src="img/i3/work/nrca.png" data-aos-anchor="#our-work" alt="UConn NRCA graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal9" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Natural Resources Conservation Academy" aria-hidden="true">
+              aria-label="UConn Natural Resources Conservation Academy" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Natural Resources Conservation Academy</h3>
+                    <h4 class="modal-title">UConn Natural Resources Conservation Academy</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1239,18 +1238,18 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal10">
-                <h4 class="text-white">Physiology &amp; Neurobiology</h4>
+                <h3 class="text-white">Physiology &amp; Neurobiology</h3>
               </div>
               <img src="img/i3/work/PNB.png" data-aos-anchor="#our-work"
                 alt="UConn Physiology and Neurobiology graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal10" tabindex="-1" role="dialog"
-              aria-labelledby="UConn Physiology and Neurobiology" aria-hidden="true">
+              aria-label="UConn Physiology and Neurobiology" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">UConn Physiology and Neurobiology</h3>
+                    <h4 class="modal-title">UConn Physiology and Neurobiology</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1276,18 +1275,18 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal11">
-                <h4 class="text-white">Covid Surveillance Testing</h4>
+                <h3 class="text-white">Covid Surveillance Testing</h3>
               </div>
               <img src="img/i3/work/covid-testing.png" data-aos-anchor="#our-work"
                 alt="Covid Surveillance Testing graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal11" tabindex="-1" role="dialog"
-              aria-labelledby="Covid Surveillance Testing" aria-hidden="true">
+              aria-label="Covid Surveillance Testing" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Covid Surveillance Testing</h3>
+                    <h4 class="modal-title">Covid Surveillance Testing</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1316,17 +1315,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal12">
-                <h4 class="text-white">CMOT</h4>
+                <h3 class="text-white">CMOT</h3>
               </div>
               <img src="img/i3/work/cmot.png" data-aos-anchor="#our-work" alt="CMOT graphic">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal12" tabindex="-1" role="dialog" aria-labelledby="CMOT"
+            <div class="modal fade p-0 text-dark" id="workModal12" tabindex="-1" role="dialog" aria-label="CMOT"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">CMOT</h3>
+                    <h4 class="modal-title">CMOT</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1352,17 +1351,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal13">
-                <h4 class="text-white">DMCT</h4>
+                <h3 class="text-white">DMCT</h3>
               </div>
               <img src="img/i3/work/dmct.png" data-aos-anchor="#our-work" alt="DMCT">
             </div>
-            <div class="modal fade p-0 text-dark" id="workModal13" tabindex="-1" role="dialog" aria-labelledby="DMCT"
+            <div class="modal fade p-0 text-dark" id="workModal13" tabindex="-1" role="dialog" aria-label="DMCT"
               aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">DMCT</h3>
+                    <h4 class="modal-title">DMCT</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1389,17 +1388,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal14">
-                <h4 class="text-white">Rain Garden</h4>
+                <h3 class="text-white">Rain Garden</h3>
               </div>
               <img src="img/i3/work/rain-garden.png" data-aos-anchor="#our-work" alt="Rain Garden App Graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal14" tabindex="-1" role="dialog"
-              aria-labelledby="Rain Garden" aria-hidden="true">
+              aria-label="Rain Garden" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Rain Garden</h3>
+                    <h4 class="modal-title">Rain Garden</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1430,17 +1429,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal15">
-                <h4 class="text-white">Turfgrass Application</h4>
+                <h3 class="text-white">Turfgrass Application</h3>
               </div>
               <img src="img/i3/work/turfgrass.png" data-aos-anchor="#our-work" alt="TurfGrass App graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal15" tabindex="-1" role="dialog"
-              aria-labelledby="TurfGrass / Athletic Field Assessment Tool" aria-hidden="true">
+              aria-label="TurfGrass / Athletic Field Assessment Tool" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">TurfGrass / Athletic Field Assessment Tool</h3>
+                    <h4 class="modal-title">TurfGrass / Athletic Field Assessment Tool</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1468,7 +1467,7 @@
               <img src="img/i3/work/travel-funds.png" data-aos-anchor="#our-work" alt="Travel Funds App Graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal18" tabindex="-1" role="dialog"
-              aria-labelledby="Faculty Travel Funding" aria-hidden="true">
+              aria-label="Faculty Travel Funding" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
@@ -1499,17 +1498,17 @@
               <div
                 class=" position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal21">
-                <h4 class="text-white">Syllabus</h4>
+                <h3 class="text-white">Syllabus</h3>
               </div>
               <img src="img/i3/plalceholder.png" data-aos-anchor="#our-work" alt="Syllabus Repository">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal21" tabindex="-1" role="dialog"
-              aria-labelledby="Syllabus Repository" aria-hidden="true">
+              aria-label="Syllabus Repository" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Syllabus Repository</h3>
+                    <h4 class="modal-title">Syllabus Repository</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1538,17 +1537,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal23">
-                <h4 class="text-white">Hiring Maps</h4>
+                <h3 class="text-white">Hiring Maps</h3>
               </div>
               <img src="img/i3/work/hiring-maps.png" data-aos-anchor="#our-work" alt="Hiring Maps Website graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal23" tabindex="-1" role="dialog"
-              aria-labelledby="Hiring Maps" aria-hidden="true">
+              aria-label="Hiring Maps" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Hiring Maps</h3>
+                    <h4 class="modal-title">Hiring Maps</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1575,17 +1574,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal24">
-                <h4 class="text-white">Extension Publications</h4>
+                <h3 class="text-white">Extension Publications</h3>
               </div>
               <img src="img/i3/work/extension.png" data-aos-anchor="#our-work" alt="Extension Publications">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal24" tabindex="-1" role="dialog"
-              aria-labelledby="CAHNR Extension Publications" aria-hidden="true">
+              aria-label="CAHNR Extension Publications" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">CAHNR Extension Publications</h3>
+                    <h4 class="modal-title">CAHNR Extension Publications</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1615,17 +1614,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal25">
-                <h4 class="text-white">Statistical Consulting</h4>
+                <h3 class="text-white">Statistical Consulting</h3>
               </div>
               <img src="img/i3/work/scs.png" data-aos-anchor="#our-work" alt="Statistical Consulting Website graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal25" tabindex="-1" role="dialog"
-              aria-labelledby="Stats Consulting Website" aria-hidden="true">
+              aria-label="Stats Consulting Website" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Stats Consulting Website</h3>
+                    <h4 class="modal-title">Stats Consulting Website</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1650,17 +1649,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal26">
-                <h4 class="text-white">COR2E Website</h4>
+                <h3 class="text-white">COR2E Website</h3>
               </div>
               <img src="img/i3/work/core.png" data-aos-anchor="#our-work" alt="Core Website graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal26" tabindex="-1" role="dialog"
-              aria-labelledby="Center for Open Research Resources and Equipment (COR²E)" aria-hidden="true">
+              aria-label="Center for Open Research Resources and Equipment (COR²E)" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Center for Open Research Resources and Equipment (COR²E)</h3>
+                    <h4 class="modal-title">Center for Open Research Resources and Equipment (COR²E)</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1685,17 +1684,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal27">
-                <h4 class="text-white">Ecoregions</h4>
+                <h3 class="text-white">Ecoregions</h3>
               </div>
               <img src="img/i3/work/ecoregions.png" data-aos-anchor="#our-work" alt="Ecoregions Website graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal27" tabindex="-1" role="dialog"
-              aria-labelledby="Ecoregions" aria-hidden="true">
+              aria-label="Ecoregions" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Ecoregions</h3>
+                    <h4 class="modal-title">Ecoregions</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1717,17 +1716,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal29">
-                <h4 class="text-white">Panademic Journaling Project</h4>
+                <h3 class="text-white">Panademic Journaling Project</h3>
               </div>
               <img src="img/i3/work/pandemic-journaling.png" data-aos-anchor="#our-work" alt="Pandemic Journaling">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal29" tabindex="-1" role="dialog"
-              aria-labelledby="Pandemic Journaling Project" aria-hidden="true">
+              aria-label="Pandemic Journaling Project" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">Pandemic Journaling Project</h3>
+                    <h4 class="modal-title">Pandemic Journaling Project</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1763,17 +1762,17 @@
               <div
                 class="position-absolute start-0 end-0 d-flex align-items-center justify-content-center work-item-overlay text-center w-100"
                 data-bs-toggle="modal" data-bs-target="#workModal36">
-                <h4 class="text-white">USDA RMA and FSA Crop Reporting Deadlines</h4>
+                <h3 class="text-white">USDA RMA and FSA Crop Reporting Deadlines</h3>
               </div>
               <img src="img/i3/work/crop-insurance.png" data-aos-anchor="#our-work" alt="crop insurance graphic">
             </div>
             <div class="modal fade p-0 text-dark" id="workModal36" tabindex="-1" role="dialog"
-              aria-labelledby="USDA RMA and FSA Crop Reporting Deadlines" aria-hidden="true">
+              aria-label="USDA RMA and FSA Crop Reporting Deadlines" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <!--Content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title">USDA RMA and FSA Crop Reporting Deadlines</h3>
+                    <h4 class="modal-title">USDA RMA and FSA Crop Reporting Deadlines</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <!--Body-->
@@ -1796,9 +1795,6 @@
               </div>
             </div>
 
-
-
-
           </div>
 
         </div>
@@ -1813,18 +1809,10 @@
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
     <div class="text-white py-15" id="team">
       <div class="container">
         <h2 class="text-white display-header mb-4" data-aos="fade-right">The Team</h2>
+        <h3 class="text-white mb-4" data-aos="fade-right">The I3 Team</h3>
         <div class="row mb-5">
           <div class="staff col-md-3 col-sm-6 mb-5" data-aos="fade-right">
             <div class="row">
@@ -1832,7 +1820,7 @@
                 <img src="img/i3/people/salisbury.jpg" width="200" class="img-fluid rounded-1" alt="Joel Salisbury">
               </div>
               <div class="row name">
-                <h5 class="text-white mt-4">Joel Salisbury</h5>
+                <h4 class="text-white mt-4">Joel Salisbury</h4>
                 <p>Director of Internal Insights & Innovation</p>
               </div>
             </div>
@@ -1843,7 +1831,7 @@
                 <img src="img/i3/people/kelleher.jpg" class="img-fluid rounded-1" width="200" alt="Brian Kelleher">
               </div>
               <div class="row name">
-                <h5 class="text-white mt-4">Brian Kelleher</h5>
+                <h4 class="text-white mt-4">Brian Kelleher</h4>
                 <p>Senior Applications Developer</p>
               </div>
             </div>
@@ -1854,7 +1842,7 @@
                 <img src="img/i3/people/lacroix.jpg" class="img-fluid rounded-1" width="200" alt="Natalie Lacroix">
               </div>
               <div class="row name">
-                <h5 class="text-white mt-4">Natalie Lacroix</h5>
+                <h4 class="text-white mt-4">Natalie Lacroix</h4>
                 <p>Senior UX Designer</p>
               </div>
             </div>
@@ -1865,7 +1853,7 @@
                 <img src="img/i3/people/winston.jpg" class="img-fluid rounded-1" width="200" alt="Jeff Winston">
               </div>
               <div class="row name">
-                <h5 class="text-white mt-4">Jeff Winston</h5>
+                <h4 class="text-white mt-4">Jeff Winston</h4>
                 <p>Director - Nexus Student Success Platform</p>
               </div>
             </div>
@@ -1880,7 +1868,7 @@
                 <img src="img/i3/people/daley.jpg" width="200" class="img-fluid rounded-1" alt="Brian Daley">
               </div>
               <div class="row name">
-                <h5 class="text-white  mt-4">Brian Daley</h5>
+                <h4 class="text-white  mt-4">Brian Daley</h4>
                 <p>Digital Media &amp; Design</p>
               </div>
             </div>
@@ -1891,7 +1879,7 @@
                 <img src="img/i3/people/vert.jpg" width="200" class="img-fluid rounded-1" alt="Michael Vertefeuille">
               </div>
               <div class="row name">
-                <h5 class="text-white  mt-4">Michael Vertefeuille</h5>
+                <h4 class="text-white  mt-4">Michael Vertefeuille</h4>
                 <p>Digital Media &amp; Design</p>
               </div>
             </div>
@@ -1907,8 +1895,8 @@
             <div class="name d-flex">
               <img src="img/i3/people/adams.jpg" class="img-fluid rounded-1" width="100" alt="Emma Adams">
               <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">Emma Adams</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Emma Adams</span>
+                </h4>
                 <p class="mb-1">Student Web Developer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="Emma Adams on LinkedIn" href="https://www.linkedin.com/in/emma-adams-ct/" class="text-white"
@@ -1920,7 +1908,7 @@
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="adams" tabindex="-1" role="dialog" aria-labelledby="Emma Adams"
+          <div class="modal fade p-0 text-dark" id="adams" tabindex="-1" role="dialog" aria-label="Emma Adams"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -1931,7 +1919,7 @@
                 <!--Body-->
                 <div class="modal-body">
                   <img src="img/i3/people/adams.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Emma Adams">
-                  <h3 class="modal-title">Emma Adams</h3>
+                  <h5 class="modal-title">Emma Adams</h5>
                   <p><strong>Student Web Developer</strong></p>
                   <p>Hi! My name is Emma and I am a junior Computer Science major at the University of Connecticut. I
                     love building web applications and I am passionate about exploring how emerging technology can be
@@ -1954,8 +1942,8 @@
             <div class="name d-flex">
               <img src="img/i3/people/busavage.png" class="img-fluid rounded-1" width="100" alt="Lauren Busavage">
               <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">Lauren Busavage</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Lauren Busavage</span>
+                </h4>
                 <p class="mb-1">Student Web Developer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="Linkedin for Lauren Busavage" href="https://www.linkedin.com/in/lauren-busavage/"
@@ -1966,7 +1954,7 @@
           </div>
 
           <div class="modal fade p-0 text-dark" id="busavage" tabindex="-1" role="dialog"
-            aria-labelledby="Lauren Busavage" aria-hidden="true">
+            aria-label="Lauren Busavage" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
               <div class="modal-content">
@@ -1977,7 +1965,7 @@
                 <div class="modal-body">
                   <img src="img/i3/people/busavage.png" class="img-fluid rounded-1 mb-4" width="150"
                     alt="Lauren Busavage">
-                  <h3 class="modal-title">Lauren Busavage</h3>
+                  <h5 class="modal-title">Lauren Busavage</h5>
                   <p><strong>Student Web Developer</strong></p>
                   <div style="font-size:26px;">
                     <a href="https://www.linkedin.com/in/lauren-busavage/" target="_blank"><i
@@ -1991,14 +1979,14 @@
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#clarke">
             <div class="name d-flex">
               <div>
-                <h5 class="text-white"><span class="me-2">Kelis Clarke</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Kelis Clarke</span>
+                </h4>
                 <p class="mb-1">Student UI/UX Designer</p>
               </div>
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="clarke" tabindex="-1" role="dialog" aria-labelledby="Kelis Clarke"
+          <div class="modal fade p-0 text-dark" id="clarke" tabindex="-1" role="dialog" aria-label="Kelis Clarke"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2008,7 +1996,7 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                  <h3 class="modal-title">Kelis Clarke</h3>
+                  <h5 class="modal-title">Kelis Clarke</h5>
                   <p><strong>Student UI/UX Designer</strong></p>
                 </div>
               </div>
@@ -2018,8 +2006,8 @@
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#cohutt">
             <div class="name d-flex">
               <div>
-                <h5 class="text-white"><span class="me-2">Ryan Cohutt</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Ryan Cohutt</span>
+                </h4>
                 <p class="mb-1">Student UI/UX Designer</p>
                 <div class="text-white " style="font-size:26px;">
                   <a title="Linkedin for Ryan Cohutt" href="https://www.linkedin.com/in/ryan-cohutt/" class="text-white"
@@ -2029,7 +2017,7 @@
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="cohutt" tabindex="-1" role="dialog" aria-labelledby="Ryan Cohutt"
+          <div class="modal fade p-0 text-dark" id="cohutt" tabindex="-1" role="dialog" aria-label="Ryan Cohutt"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2039,7 +2027,7 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                  <h3 class="modal-title">Ryan Cohutt</h3>
+                  <h5 class="modal-title">Ryan Cohutt</h5>
                   <p><strong>Student UI/UX Designer</strong></p>
                   <div style="font-size:26px;">
                     <a title="Linkedin for Ryan Cohutt" href="https://www.linkedin.com/in/ryan-cohutt/"
@@ -2055,8 +2043,8 @@
             <div class="name d-flex">
               <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1" width="100" alt="Maggie Danielewicz">
               <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">Maggie Danielewicz</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Maggie Danielewicz</span>
+                </h4>
                 <p class="mb-1">Student Web Developer</p>
                 <div class="text-white " style="font-size:26px;">
                   <a title="Linkedin for Maggie Danielewicz" href="http://www.linkedin.com/in/magdalena-danielewicz"
@@ -2067,7 +2055,7 @@
           </div>
 
           <div class="modal fade p-0 text-dark" id="danielewicz" tabindex="-1" role="dialog"
-            aria-labelledby="Maggie Danielewicz" aria-hidden="true">
+            aria-label="Maggie Danielewicz" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
               <div class="modal-content">
@@ -2078,7 +2066,7 @@
                 <div class="modal-body">
                   <img src="img/i3/people/danielewicz.jpg" class="img-fluid rounded-1 mb-4" width="150"
                     alt="Maggie Danielewicz">
-                  <h3 class="modal-title">Maggie Danielewicz</h3>
+                  <h5 class="modal-title">Maggie Danielewicz</h5>
                   <p><strong>Student Web Developer</strong></p>
                   <p>Hey there! My name’s Maggie, and I’m a junior studying Computer Science and Analytics, diving
                     into
@@ -2101,15 +2089,15 @@
               <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1" width="100" alt="Luna Gonzalez">
 
               <div style="margin-left:20px;">
-                <h5 class="text-white">Luna Gonzalez
-                </h5>
+                <h4 class="text-white">Luna Gonzalez
+                </h4>
                 <p class="mb-1">Student Illustrator</p>
               </div>
             </div>
           </div>
 
           <div class="modal fade p-0 text-dark" id="gonzalez" tabindex="-1" role="dialog"
-            aria-labelledby="Luna Gonzalez" aria-hidden="true">
+            aria-label="Luna Gonzalez" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
               <div class="modal-content">
@@ -2119,7 +2107,7 @@
                 <!--Body-->
                 <div class="modal-body">
                   <img src="img/i3/people/luna.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Luna Gonzalez">
-                  <h3 class="modal-title">Luna Gonzalez</h3>
+                  <h5 class="modal-title">Luna Gonzalez</h5>
                   <p><strong>Student Illustrator</strong></p>
                 </div>
               </div>
@@ -2129,8 +2117,8 @@
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#mark">
             <div class="name d-flex">
               <div>
-                <h5 class="text-white"><span class="me-2">Aaron Mark</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Aaron Mark</span>
+                </h4>
                 <p class="mb-1">Student Web Developer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="Linkedin for Aaron Mark" href="https://www.linkedin.com/in/aaronmark05" class="text-white"
@@ -2142,7 +2130,7 @@
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="mark" tabindex="-1" role="dialog" aria-labelledby="Aaron Mark"
+          <div class="modal fade p-0 text-dark" id="mark" tabindex="-1" role="dialog" aria-label="Aaron Mark"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2152,7 +2140,7 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                  <h3 class="modal-title">Aaron Mark</h3>
+                  <h5 class="modal-title">Aaron Mark</h5>
                   <p><strong>Student Web Developer</strong></p>
                   <p>I'm a Computer Science & Engineering student at UConn with a passion for programming and
                     understanding how things work. I began coding by reverse engineering web applications and was
@@ -2173,8 +2161,8 @@
             <div class="name d-flex">
               <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1" width="100" alt="Jack Medrek">
               <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">Jack Medrek</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Jack Medrek</span>
+                </h4>
                 <p class="mb-1">Student Software Developer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="Linkedin for Jack Medrek" href="https://www.linkedin.com/in/john-medrek-072a31212/"
@@ -2186,7 +2174,7 @@
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="medrek" tabindex="-1" role="dialog" aria-labelledby="Jack Medrek"
+          <div class="modal fade p-0 text-dark" id="medrek" tabindex="-1" role="dialog" aria-label="Jack Medrek"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2197,7 +2185,7 @@
                 <!--Body-->
                 <div class="modal-body">
                   <img src="img/i3/people/medrek.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Jack Medrek">
-                  <h3 class="modal-title">Jack Medrek</h3>
+                  <h5 class="modal-title">Jack Medrek</h5>
                   <p><strong>Student Software Developer</strong></p>
                   <div style="font-size:26px;">
                     <a title="Linkedin for Jack Medrek" href="https://www.linkedin.com/in/john-medrek-072a31212/"
@@ -2215,8 +2203,8 @@
             <div class="name d-flex">
               <img src="img/i3/people/moore.jpg" class="img-fluid rounded-1" width="100" alt="Kailey Moore">
               <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">Kailey Moore</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Kailey Moore</span>
+                </h4>
                 <p class="mb-1">Student UI/UX Designer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="Kailey Moore on LinkedIn" href="https://www.linkedin.com/in/kailey-moore-53532a283/"
@@ -2226,7 +2214,7 @@
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="moore" tabindex="-1" role="dialog" aria-labelledby="Kailey Moore"
+          <div class="modal fade p-0 text-dark" id="moore" tabindex="-1" role="dialog" aria-label="Kailey Moore"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2237,7 +2225,7 @@
                 <!--Body-->
                 <div class="modal-body">
                   <img src="img/i3/people/moore.jpg" class="img-fluid rounded-1 mb-4" width="150" alt="Kailey Moore">
-                  <h3 class="modal-title">Kailey Moore</h3>
+                  <h5 class="modal-title">Kailey Moore</h5>
                   <p><strong>Student UI/UX Designer</strong></p>
                   <p>Hi! I'm Kailey, a sophomore at UConn majoring in Digital Media & Design. I'm passionate about Web
                     Design/Development, and I love bringing concepts to life through graphic design, typography, and
@@ -2259,8 +2247,8 @@
             <div class="name d-flex">
               <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1" width="100" alt="William Shostak">
               <div style="margin-left:20px;">
-                <h5 class="text-white"><span class="me-2">William Shostak</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">William Shostak</span>
+                </h4>
                 <p class="mb-1">Student Software Developer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="William Shostak on LinkedIn" href="https://www.linkedin.com/in/willshostak/"
@@ -2271,7 +2259,7 @@
           </div>
 
           <div class="modal fade p-0 text-dark" id="shostak" tabindex="-1" role="dialog"
-            aria-labelledby="William Shostak" aria-hidden="true">
+            aria-label="William Shostak" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
               <div class="modal-content">
@@ -2282,7 +2270,7 @@
                 <div class="modal-body">
                   <img src="img/i3/people/shostak.jpg" class="img-fluid rounded-1 mb-4" width="150"
                     alt="William Shostak">
-                  <h3 class="modal-title">William Shostak</h3>
+                  <h5 class="modal-title">William Shostak</h5>
                   <p><strong>Student Software Developer</strong></p>
                   <div style="font-size:26px;">
                     <a title="William Shostak on LinkedIn" href="https://www.linkedin.com/in/willshostak/"
@@ -2296,8 +2284,8 @@
           <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-right" data-bs-toggle="modal" data-bs-target="#salmon">
             <div class="name d-flex">
               <div>
-                <h5 class="text-white"><span class="me-2">Emelia Salmon</span>
-                </h5>
+                <h4 class="text-white"><span class="me-2">Emelia Salmon</span>
+                </h4>
                 <p class="mb-1">Student UI/UX Designer</p>
                 <div class="text-white" style="font-size:26px;">
                   <a title="Emelia Salmon on LinkedIn" href="https://www.linkedin.com/in/emelia-salmon-561516232/"
@@ -2309,7 +2297,7 @@
             </div>
           </div>
 
-          <div class="modal fade p-0 text-dark" id="salmon" tabindex="-1" role="dialog" aria-labelledby="Emelia Salmon"
+          <div class="modal fade p-0 text-dark" id="salmon" tabindex="-1" role="dialog" aria-label="Emelia Salmon"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <!--Content-->
@@ -2319,7 +2307,7 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                  <h3 class="modal-title">Emelia Salmon</h3>
+                  <h5 class="modal-title">Emelia Salmon</h5>
                   <p><strong>Student UI/UX Designer</strong></p>
                   <div style="font-size:26px;">
                     <a title="Emelia Salmon on LinkedIn" href="https://www.linkedin.com/in/emelia-salmon-561516232/"
@@ -2677,6 +2665,16 @@
       </div>
     </div>
   </footer>
+
+  <script type='text/javascript' src='https://ucommobjectstorage.blob.core.windows.net/cookie-jar/cookie-notification.js'>
+  </script>
+  <noscript>
+      <p>Our websites may use cookies to personalize and enhance your experience. By continuing without changing your
+          cookie settings, you agree to this collection. For more information, please see our <a
+              href="https://privacy.uconn.edu/university-website-notice/" target="_blank">University Websites
+              Privacy Notice</a>.</p>
+  </noscript>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
