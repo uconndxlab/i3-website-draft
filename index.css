@@ -303,7 +303,6 @@ h6,
  * Top Bar & Navigation
  */
 header {
-  padding-top: 24px;
   padding-bottom: 12px;
 }
 
@@ -316,6 +315,13 @@ header nav ul:not(.dropdown-menu) {
   justify-content: flex-end;
   height: 100%;
   gap: 24px;
+}
+
+@media (max-width: 767px) {
+  header nav ul:not(.dropdown-menu) {
+    padding-top: 10px;
+    align-items: flex-start;
+  }
 }
 
 header nav ul:not(.dropdown-menu) li a {
