@@ -4333,8 +4333,8 @@ textarea.form-control-lg {
   --bs-nav-link-padding-x: 1rem;
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
-  --bs-nav-link-color: var(--bs-link-color);
-  --bs-nav-link-hover-color: var(--bs-link-hover-color);
+  --bs-nav-link-color: #f1f1f1;
+  --bs-nav-link-hover-color: #80B3FF;
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
   display: flex;
   flex-wrap: wrap;
@@ -4467,8 +4467,8 @@ textarea.form-control-lg {
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;
-  --bs-navbar-color: rgba(var(--bs-emphasis-color-rgb), 0.65);
-  --bs-navbar-hover-color: rgba(var(--bs-emphasis-color-rgb), 0.8);
+  --bs-navbar-color: rgba(241,241,241,0.65);
+  --bs-navbar-hover-color: rgba(241, 241, 241, 0.8);
   --bs-navbar-disabled-color: rgba(var(--bs-emphasis-color-rgb), 0.3);
   --bs-navbar-active-color: rgba(var(--bs-emphasis-color-rgb), 1);
   --bs-navbar-brand-padding-y: 0.3125rem;
@@ -4480,9 +4480,9 @@ textarea.form-control-lg {
   --bs-navbar-toggler-padding-y: 0.25rem;
   --bs-navbar-toggler-padding-x: 0.75rem;
   --bs-navbar-toggler-font-size: 1.25rem;
-  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-  --bs-navbar-toggler-border-color: rgba(var(--bs-emphasis-color-rgb), 0.15);
-  --bs-navbar-toggler-border-radius: 0;
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28241, 241, 241, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  --bs-navbar-toggler-border-color: rgba(241,241,241, 0.15);
+  --bs-navbar-toggler-border-radius: 10px;
   --bs-navbar-toggler-focus-width: 0.25rem;
   --bs-navbar-toggler-transition: box-shadow 0.15s ease-in-out;
   position: relative;
@@ -4521,8 +4521,8 @@ textarea.form-control-lg {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
-  --bs-nav-link-color: var(--bs-navbar-color);
-  --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
+  --bs-nav-link-color: #f1f1f1;
+  --bs-nav-link-hover-color: #80B3FF;
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
   display: flex;
   flex-direction: column;
@@ -15297,4 +15297,4 @@ textarea.form-control-lg {
     content: 'Search UConn Health'
 }
 
-.header-level-two{font-family:proxima-nova,sans-serif;font-size:13px!important;letter-spacing:1px;text-transform:uppercase;margin-bottom:0px;}.header-level-one{font-family:proxima-nova,sans-serif;font-size:24px;font-weight:500}.header-level-one a,.header-level-two a{color:#000e2f;text-decoration:none}.header-level-one a:hover,.header-level-two a:hover{text-decoration:underline}
+.header-level-two{font-family:proxima-nova,sans-serif;font-size:13px!important;letter-spacing:1px;text-transform:uppercase;margin-bottom:0px;}.header-level-one{font-family:proxima-nova,sans-serif;font-size:24px;font-weight:500}.header-level-one a,.header-level-two a{color:#f1f1f1;text-decoration:none}.header-level-one a:hover,.header-level-two a:hover{text-decoration:underline}
