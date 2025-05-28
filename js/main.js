@@ -223,10 +223,7 @@ let starFadeDecimal;
 function consistentScroll() {
   const scroll = window.scrollY;
   if (scroll < sections.story.top) {
-    if (updateWave) {
-      //if(!prevWaveScroll) {prevWaveScroll = scroll}
-      requestAnimationFrame(waveScroll(scroll));
-    }
+    if (updateWave) waveScroll(scroll);
     if (updateStarFade) starFadeScroll(scroll);
 
   } else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
@@ -284,8 +281,11 @@ waveTrack.addEventListener('animationiteration', () => {
 function waveScroll(scroll) {
   waveY = 75 - Math.min(scroll * .3, 75);
   // Set wave transforms
-  wave1.style.transform = `translateY(${waveY}%)`;
-  wave2.style.transform = `translateY(${waveY}%)`;
+  requestAnimationFrame(() => {
+    wave1.style.transform = `translateY(${waveY}%)`;
+    wave2.style.transform = `translateY(${waveY}%)`;
+  })
+
 
 }
 
