@@ -213,6 +213,7 @@ let updateCodeBG = false;
 let updateCodeBGFade = false;
 let codeBGLooping = false;
 
+let prevWaveScroll = null;
 let waveY = 75;
 
 const windowHeight = window.innerHeight;
@@ -222,7 +223,10 @@ let starFadeDecimal;
 function consistentScroll() {
   const scroll = window.scrollY;
   if (scroll < sections.story.top) {
-    if (updateWave) waveScroll(scroll);
+    if (updateWave) {
+      //if(!prevWaveScroll) {prevWaveScroll = scroll}
+      requestAnimationFrame(waveScroll(scroll));
+    }
     if (updateStarFade) starFadeScroll(scroll);
 
   } else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
@@ -260,8 +264,8 @@ function waveFallComplete() {
   wave1.removeEventListener('transitionend', waveFallComplete);
   waveTrack.classList.add('wave-flow');
   // Set wave scroll transitions
-  wave1.style.transition = 'transform .1s linear';
-  wave2.style.transition = 'transform .1s linear';
+  wave1.style.transition = 'transform .05s ease-in-out';
+  wave2.style.transition = 'transform .05s ease-in-out';
   updateWave = true;
 }
 
@@ -277,12 +281,12 @@ waveTrack.addEventListener('animationiteration', () => {
   document.documentElement.style.setProperty('--waveX50Percent', `${wave50Percent}px`);
   document.documentElement.style.setProperty('--waveX75Percent', `${wave75Percent}px`);
 });
-
 function waveScroll(scroll) {
   waveY = 75 - Math.min(scroll * .3, 75);
   // Set wave transforms
   wave1.style.transform = `translateY(${waveY}%)`;
   wave2.style.transform = `translateY(${waveY}%)`;
+
 }
 
 
@@ -560,11 +564,13 @@ function pauseRotateCode() {
   for(let i = 0; i < spans.length; i++) {
     spans[i].style.animationPlayState = 'paused';
   }
+  console.log('rotate paused')
 }
 function playRotateCode() {
   for(let i = 0; i < spans.length; i++) {
     spans[i].style.animationPlayState = 'running';
   }
+  console.log('rotate played')
 }
 
 /* ------------------- ANIMATION FRAME LOOP ------------------- */
