@@ -1,8 +1,165 @@
+
+const sections = {
+  hero: {
+    div: document.getElementById('hero'),
+    isOnScreen: false,
+    top: document.getElementById('hero').offsetTop,
+    height: document.getElementById('hero').offsetHeight,
+    bottom: document.getElementById('hero') + document.getElementById('hero').offsetHeight
+  },
+  story: {
+    div: document.getElementById('story'),
+    isOnScreen: false,
+    top: document.getElementById('story').offsetTop,
+    height: document.getElementById('story').offsetHeight,
+    bottom: document.getElementById('story') + document.getElementById('story').offsetHeight
+  },
+  projects: {
+    div: document.getElementById('projects'),
+    isOnScreen: false,
+    top: document.getElementById('projects').offsetTop,
+    height: document.getElementById('projects').offsetHeight,
+    bottom: document.getElementById('projects') + document.getElementById('projects').offsetHeight
+  },
+  team: {
+    div: document.getElementById('team'),
+    isOnScreen: false,
+    top: document.getElementById('team').offsetTop,
+    height: document.getElementById('team').offsetHeight,
+    bottom: document.getElementById('team') + document.getElementById('team').offsetHeight
+  }
+}
+
+
+/* ------------------- OBSERVERS ------------------- */
+
+// Element variables
+const starFade = document.querySelector('.star-canvas-fade');
+const codeBGFade = document.querySelector('.blueprint-fade');
+let statCircleOnScreen = false;
+const animatedElements = document.querySelectorAll('.animated');
+
+
+
+const body = document.querySelector('body');
+
+const statCircle = document.querySelector('.story-stat-wrapper')
+
+const waveTrack = document.querySelector('.wave-track');
+const wave1 = waveTrack?.firstElementChild;
+const wave2 = waveTrack?.lastElementChild;
+const wave = waveTrack;
+const waveRect = wave.getBoundingClientRect();
+
+function checkInitialIntersections() {
+  for(let key in sections) {
+    const section = sections[key];
+    const rect = section.div.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if(section === sections.hero) {
+      if(waveRect.top < window.innerHeight && waveRect.bottom > 0) {
+        waveTrack.style.animationPlayState = 'running';
+      }
+    } else if(section === sections.story) {
+      const circleRect = statCircle.getBoundingClientRect();
+      if(circleRect.top < window.innerHeight && circleRect.bottom > 0 && !statCircleOnScreen) {
+        statCircleOnScreen = true;
+        startStoryLoop();
+      }
+    } else if(section === sections.projects) {
+      if(inView && !codeBGLooping) {
+        codeBGLooping = true;
+        requestAnimationFrame(scrollCode)
+      }
+    }
+  }
+}
+
+
+const waveObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(!updateWave) updateWave = true;
+      console.log('wave running')
+      waveTrack.style.animationPlayState = 'running';
+    } else {
+      if(updateWave) updateWave = false;
+      console.log('wave paused')
+      waveTrack.style.animationPlayState = 'paused';
+    }
+  })
+}, {threshold: 0});
+waveObserver.observe(wave);
+
+const heroObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(!sections.hero.isOnScreen) {
+        sections.hero.isOnScreen = true;
+        if(!frameLooping) {
+          frameLooping = true;
+        }
+        if(bgAnimated) animateFrame()
+      }
+      if(!updateStarFade) updateStarFade = true;
+    } else {
+      if(sections.hero.isOnScreen) {
+        sections.hero.isOnScreen = false;
+        frameLooping = false;
+      }
+      if(updateStarFade) updateStarFade = false;
+    }
+  })
+}, {threshold: 0});
+heroObserver.observe(sections.hero.div);
+
+const statCircleObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      if(!statCircleOnScreen) {
+        statCircleOnScreen = true;
+        startStoryLoop();
+      }
+    } else {
+      if(statCircleOnScreen) {
+        statCircleOnScreen = false;
+        endStoryLoop();
+      }
+    }
+  });
+}, {threshold: .1});
+statCircleObserver.observe(statCircle);
+
+const projectsObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(!sections.projects.isOnScreen) {sections.projects.isOnScreen = true}
+      if(!codeBGLooping) {codeBGLooping = true; requestAnimationFrame(scrollCode)}
+      if(!updateCodeBGFade) {updateCodeBGFade = true;}
+      if(!rotateCodeRunning) {rotateCodeRunning = true; playRotateCode()}
+    } else {
+      if(sections.projects.isOnScreen) {
+        sections.projects.isOnScreen = false;
+      }
+      if(codeBGLooping) {codeBGLooping = false}
+      if(updateCodeBGFade) {updateCodeBGFade = false}
+      randomizeProjects();
+      if(rotateCodeRunning) {rotateCodeRunning = false; pauseRotateCode()}
+    }
+  });
+}, {threshold: 0});
+projectsObserver.observe(sections.projects.div);
+//const teamObserver = new IntersectionObserver();
+
+
+
+
 /* ------------------- BASE EVENT LISTENERS ------------------- */
 
 
 // Call star background creation on load after short delay
 window.addEventListener('load', () => {
+  setTimeout(checkInitialIntersections, 100);
   setCachedSectionSize()
   console.log(cachedStarSections, cachedStarSections[0].width)
   setTimeout(createStarBG, 500);
@@ -18,13 +175,12 @@ const mousePos = {x: 0, y: 0};
 
 // Get mouse position on mouse move (will be changed depending on how I change star pulling for optimization)
 window.addEventListener('mousemove', (event) => {
-  mousePos.x = event.clientX;
-  mousePos.y = event.clientY;
+  mousePos.x = event.pageX
+  mousePos.y = event.pageY;
 });
 
 // Pause animations when unfocused
 document.addEventListener('visibilitychange', () => {
-  const animatedElements = document.querySelectorAll('.animated');
   if(document.hidden) {
     animatedElements.forEach(element => {
       element.style.animationPlayState = 'paused';
@@ -38,22 +194,397 @@ document.addEventListener('visibilitychange', () => {
 });
 
 
+/* ------------------- SCROLL FUNCTIONS ------------------- */
+
+
+window.addEventListener('scroll', consistentScroll);
+const scrollBreakpoints = {
+  'heroEnd': sections.story.top,
+
+  'storyEnd': sections.projects.top
+}
+
+const maxScroll = window.innerHeight;
+
+let updateStars = false;
+let updateStarFade = false;
+let updateWave = false;
+let updateCodeBG = false;
+let updateCodeBGFade = false;
+let codeBGLooping = false;
+
+let waveY = 75;
+
+const windowHeight = window.innerHeight;
+
+let starFadeDecimal;
+
+function consistentScroll() {
+  const scroll = window.scrollY;
+  if (scroll < sections.story.top) {
+    if (updateWave) waveScroll(scroll);
+    if (updateStarFade) starFadeScroll(scroll);
+
+  } else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
+    body.style.backgroundColor = `rgb(${color2[0]}, ${color2[1]}, ${color2[2]})`;
+
+  } else {
+    if(updateCodeBGFade) fadeCodeBG(scroll);
+    projectScroll(scroll);
+  }
+}
+
+const color1 = [38, 38, 38];
+const color2 = [10, 22, 38];
+const color3 = [20, 20, 20];
+
+function changeBGColor(start, end, decimal) {
+  const r = Math.round(calcBGFade(start[0], end[0], decimal));
+  const g = Math.round(calcBGFade(start[1], end[1], decimal));
+  const b = Math.round(calcBGFade(start[2], end[2], decimal));
+  return [r, g, b]
+}
+function calcBGFade(start, end, decimal) {
+  return start + (end - start) * decimal;
+}
+
+
+function waveFall() {
+  wave1.style.transform = 'translateY(75%) scaleY(1)';
+  wave2.style.transform = 'translateY(75%) scaleY(1)';
+  wave1.addEventListener('transitionend', waveFallComplete);
+}
+
+
+function waveFallComplete() {
+  wave1.removeEventListener('transitionend', waveFallComplete);
+  waveTrack.classList.add('wave-flow');
+  // Set wave scroll transitions
+  wave1.style.transition = 'transform .1s linear';
+  wave2.style.transition = 'transform .1s linear';
+  updateWave = true;
+}
+
+
+
+// Adjust wave flow upon iteration
+waveTrack.addEventListener('animationiteration', () => {
+  // Set 25%, 50%, and 75% css variables with +/- 200
+  const wave25Percent = -(Math.floor(Math.random() * 200) + 650);
+  const wave50Percent = -(Math.floor(Math.random() * 200) + 1400);
+  const wave75Percent = -(Math.floor(Math.random() * 200) + 2150);
+  document.documentElement.style.setProperty('--waveX25Percent', `${wave25Percent}px`);
+  document.documentElement.style.setProperty('--waveX50Percent', `${wave50Percent}px`);
+  document.documentElement.style.setProperty('--waveX75Percent', `${wave75Percent}px`);
+});
+
+function waveScroll(scroll) {
+  waveY = 75 - Math.min(scroll * .3, 75);
+  // Set wave transforms
+  wave1.style.transform = `translateY(${waveY}%)`;
+  wave2.style.transform = `translateY(${waveY}%)`;
+}
+
+
+function starFadeScroll(scroll) {
+  if(scroll < sections.story.top) {
+    starFadeDecimal = Math.min(scroll / sections.story.top, 1);
+  } else if(scroll < maxScroll * 2) {
+    starFadeDecimal = 1 - Math.min((scroll - sections.story.top) / ((sections.story.top * 2) - sections.story.top), 1);
+  } else {
+    starFadeDecimal = 0;
+  }
+  const decimal = Math.min(scroll / sections.story.top, 1);
+  heroToStoryScroll(decimal, starFadeDecimal);
+}
+
+
+function heroToStoryScroll(decimal, starFadeDecimal) {
+  const bgColor = changeBGColor(color1, color2, decimal);
+  starFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
+  starFade.style.opacity = starFadeDecimal;
+  // Set previous scroll to current scroll
+  body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
+}
+
+
+function storyToProjectsScroll(scroll) {
+
+}
+const angle = -30 * (Math.PI / 180);
+
+const card1 = document.getElementById('project-card-1');
+const card2 = document.getElementById('project-card-2');
+const card3 = document.getElementById('project-card-3');
+
+const card1Dist = calcCardTranslations(card1, angle);
+const card2Dist = calcCardTranslations(card2, angle);
+const card3Dist = calcCardTranslations(card3, angle);
+
+const card1DistX = Math.cos(angle) * card1Dist;
+const card1DistY = Math.sin(angle) * card1Dist;
+
+const card2DistX = Math.cos(angle) * card2Dist;
+const card2DistY = Math.sin(angle) * card2Dist;
+
+const card3DistX = Math.cos(angle) * card3Dist;
+const card3DistY = Math.sin(angle) * card3Dist;
+
+function calcCardTranslations(card, angle) {
+
+  const cos = Math.abs(Math.cos(angle));
+  const sin = Math.abs(Math.sin(angle));
+
+  return (window.innerWidth + card.offsetWidth) * cos + (window.innerHeight + card.offsetHeight) * sin;
+}
+
+function calcMove(start, end, progress) {
+  return start + (end - start) * progress;
+}
+
+const scrollStart = sections.projects.top - (windowHeight * .5);
+const scrollEnd = sections.projects.top + windowHeight;
+const range = scrollEnd - scrollStart;
+
+let codeFadeDecimal = 0;
+
+function fadeCodeBG(scroll) {
+  const fadeStart = sections.projects.top + sections.projects.height * 0.75;
+  const fadeEnd = sections.team.top;
+
+  let codeFadeDecimal = (scroll - fadeStart) / (fadeEnd - fadeStart);
+  codeFadeDecimal = Math.min(Math.max(codeFadeDecimal, 0), 1);
+
+  codeBGFade.style.opacity = `${codeFadeDecimal}`;
+}
+
+function projectScroll(scroll) {
+  const fadeStart = sections.projects.top - windowHeight;
+  const decimal = Math.min((scroll - fadeStart) / windowHeight, 1);
+
+  const bgColor = changeBGColor(color2, color3, decimal);
+  body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
+
+  codeBGFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
+  codeBGFade.style.opacity = codeFadeDecimal;
+
+  const progress = Math.min(Math.max((scroll - scrollStart) / range, 0), 1);
+
+  console.log('scrolling cards')
+  card1.style.transform = `translate(${calcMove(-card1DistX, card1DistX, progress)}px, ${calcMove(-card1DistY, card1DistY, progress)}px) rotate(-30deg)`;
+  card2.style.transform = `translate(${calcMove(card2DistX, -card2DistX, progress)}px, ${calcMove(card2DistY, -card2DistY, progress)}px) rotate(-30deg)`;
+  card3.style.transform = `translate(${calcMove(-card3DistX, card3DistX, progress)}px, ${calcMove(-card3DistY, card3DistY, progress)}px) rotate(-30deg)`;
+}
+
+const featProjects = [
+  {
+    title: 'Research Insights for Faculty',
+    image: 'img/i3/work/rif.png',
+    link: 'unset',
+    abbreviation: 'RIF'
+  },
+  {
+    title: 'Nexus',
+    image: 'img/i3/work/nexus.png',
+    link: 'unset'
+  },
+  {
+    title: 'WellSCAN',
+    image: 'img/i3/work/wellscan.png',
+    link: 'unset'
+  },
+  {
+    title: 'Werth',
+    image: 'img/i3/work/werth.png',
+    link: 'unset'
+  },
+  {
+    title: 'QuantumCT',
+    image: 'img/i3/work/quantum.png',
+    link: 'unset'
+  },
+  {
+    title: 'Innovation in CT',
+    image: 'img/i3/work/innovation-in-ct.png',
+    link: 'unset',
+    abbreviation: 'Innovation'
+  },
+  {
+    title: 'HoneyCrisp (needs image)',
+    image: 'img/i3/work/rif.png',
+    link: 'unset'
+  }
+];
+
+const card1Title = document.getElementById('card-1-title');
+const card1Image = document.getElementById('card-1-image');
+const card1CTAText = document.getElementById('card-1-CTA-text');
+
+const card2Title = document.getElementById('card-2-title');
+const card2Image = document.getElementById('card-2-image');
+const card2CTAText = document.getElementById('card-2-CTA-text');
+
+const card3Title = document.getElementById('card-3-title');
+const card3Image = document.getElementById('card-3-image');
+const card3CTAText = document.getElementById('card-3-CTA-text');
+
+function randomizeProjects() {
+  let projects = [...featProjects];
+  let rand = Math.floor(Math.random() * projects.length)
+  const [project1] = projects.splice(rand, 1);
+  rand = Math.floor(Math.random() * projects.length);
+  const [project2] = projects.splice(rand, 1);
+  rand = Math.floor(Math.random() * projects.length);
+  const [project3] = projects.splice(rand, 1);
+  console.log(project1, project2, project3)
+
+  card1Title.innerText = `${project1.title}`;
+  card1Image.src = project1.image;
+  card1Image.alt = project1.title;
+  if(project1.abbreviation) {card1CTAText.innerText = `Visit ${project1.abbreviation}`}
+  else {card1CTAText.innerText = `Visit ${project1.title}`}
+
+  card2Title.innerText = project2.title;
+  card2Image.src = project2.image;
+  card2Image.alt = project2.title;
+  if(project2.abbreviation) {card2CTAText.innerText = `Visit ${project2.abbreviation}`}
+  else {card2CTAText.innerText = `Visit ${project2.title}`}
+
+  card3Title.innerText = project3.title;
+  card3Image.src = project3.image;
+  card2Image.alt = project3.title;
+  if(project3.abbreviation) {card3CTAText.innerText = `Visit ${project3.abbreviation}`}
+  else {card3CTAText.innerText = `Visit ${project3.title}`}
+}
+
+
+const codeCanvas = document.getElementById('codeCanvas');
+const codeCTX = codeCanvas.getContext('2d');
+codeCanvas.width = window.innerWidth;
+codeCanvas.height = window.innerHeight;
+
+const text1 = document.getElementById('rotating-text-1');
+const text2 = document.getElementById('rotating-text-2');
+
+let startOffset = 0;
+
+const codeSnippets = [
+  '<div class="container">',
+  '<section id="main-content">',
+  'body { background: #111; color: #eee; }',
+  'const fetchData = () => fetch("/api")',
+  '<?php echo "Hello, World!"; ?>',
+  'function updateDOM(data) { render(data); }',
+  '.grid { display: flex; gap: 2rem; }',
+  'let user = JSON.parse(localStorage.getItem("user"));',
+  'if ($valid) { saveToDB($entry); }',
+  'return view("dashboard", $data);',
+  'const animate = () => requestAnimationFrame(animate);'
+];
+
+const scrollLines = [];
+
+for (let i = 0; i < 55; i++) {
+  scrollLines.push({
+    x: Math.random() * codeCanvas.width,
+    y: Math.random() * codeCanvas.height,
+    text: codeSnippets[i % codeSnippets.length],
+    speed: 1.5 + Math.random() * 1.5
+  });
+}
+codeCTX.font = '14px monospace';
+codeCTX.fillStyle = 'rgba(0,255,200,0.2)';
+codeCTX.textAlign = 'center';
+
+function scrollCode() {
+  codeCTX.clearRect(0, 0, codeCanvas.width, codeCanvas.height);
+  scrollLines.forEach(line => {
+    codeCTX.save();
+    codeCTX.translate(line.x, line.y);
+    codeCTX.rotate(Math.PI / 2);
+    codeCTX.fillText(line.text, 0, 0);
+    codeCTX.restore();
+
+    line.y += line.speed;
+
+    if (line.y > codeCanvas.height + 200) {
+      line.y = -200;
+      line.x = Math.random() * codeCanvas.width;
+      line.text = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+    }
+  });
+  if(codeBGLooping) {requestAnimationFrame(scrollCode);}
+}
+
+let rotateCodeRunning = false;
+
+const rotateCodeText = "import json;   config = json.loads(raw_input);   names = [f.upper() for f in files if f.endswith('.txt')];"
+const rotateCode = document.querySelector('.rotating-code');
+let delay = 0;
+for(let i = rotateCodeText.length; i >= 0; i--) {
+  const span = document.createElement('span');
+  span.innerText = `${rotateCodeText.charAt(i)}`
+  span.style.opacity = '0';
+  rotateCode.appendChild(span);
+}
+const spans = rotateCode.querySelectorAll('span');
+for(let i = 0; i < spans.length; i++) {
+  spans[i].classList.add('rotating-code-char');
+  spans[i].style.animationDelay = `${delay}s`;
+  setTimeout(() => {spans[i].style.opacity = '1'}, delay*1000);
+  if(spans[i+1]) {
+    switch(spans[i+1].innerText) {
+      case 'm':
+      case 'w':
+        delay += .05;
+        break;
+      case 'i':
+      case 'l':
+      case 'f':
+      case '.':
+        delay -= .05;
+        break;
+    }
+  }
+
+  delay += .1;
+}
+
+spans[spans.length - 1].addEventListener('animationiteration', () => {
+  if(!sections.projects.isOnScreen) {
+    pauseRotateCode()
+  }
+}, {once:true})
+
+function pauseRotateCode() {
+  for(let i = 0; i < spans.length; i++) {
+    spans[i].style.animationPlayState = 'paused';
+  }
+}
+function playRotateCode() {
+  for(let i = 0; i < spans.length; i++) {
+    spans[i].style.animationPlayState = 'running';
+  }
+}
+
 /* ------------------- ANIMATION FRAME LOOP ------------------- */
 
 
 let lastTime = 0;
 const frameRate = 1000 / 60;
 let bgAnimated = false;
-
+let frameLooping = false;
 // Call animation frame
 function animateFrame(now) {
+  frameLooping = true;
+  console.log('frame')
   // Check framerate sync
   if(now - lastTime >= frameRate) {
     lastTime = now;
     if(!bgAnimated) animateStarBG();
     if(bgAnimated) animateStarPull();
   }
-  requestAnimationFrame(animateFrame)
+  if(sections.hero.isOnScreen || !bgAnimated) requestAnimationFrame(animateFrame)
 }
 
 
@@ -308,6 +839,7 @@ function animateStarBG() {
   // If animation complete set bgAnimated to true;
   if(!fadeInIncomplete) {
     bgAnimated = true;
+    setTimeout(waveFall, 0);
   }
   // Increment frame
   frame++
@@ -500,73 +1032,7 @@ function drawStarInitial(star) {
 }
 
 
-/* ------------------- WAVE SCROLL ------------------- */
 
-
-// Define wave element variables
-const waveTrack = document.querySelector('.wave-track');
-const wave1 = waveTrack.firstElementChild;
-const wave2 = waveTrack.lastElementChild;
-
-// Enable scroll after fall transition (will be changed)
-setTimeout(() => {
-  wave1.style.transform = 'translateY(75%) scaleY(1)';
-  wave2.style.transform = 'translateY(75%) scaleY(1)';
-  wave1.addEventListener('transitionend', enableScroll);
-});
-
-// Current scroll value
-let scroll = 0;
-
-// Previous scroll value
-let prevScroll = 0;
-
-// Wave y translate value
-let waveY = 75;
-
-// Enable scroll function
-function enableScroll() {
-  // Remove event listener on wave
-  wave1.removeEventListener('transitionend', enableScroll);
-  // Add wave-flow class to wave track
-  waveTrack.classList.add('wave-flow');
-  // Set wave scroll transitions
-  wave1.style.transition = 'transform .05s linear';
-  wave2.style.transition = 'transform .05s linear';
-
-  // Add scroll listener
-  window.addEventListener('scroll', () => {
-    // Set scroll to current scroll
-    scroll = window.scrollY;
-
-    // Check if scroll has changed from previous value
-    if(scroll !== prevScroll) {
-      // Set waveY minimum value of scrollY * .3 and 75
-      waveY = 75 - Math.min(scrollY * .3, 75);
-
-      // Set wave transforms
-      wave1.style.transform = `translateY(${waveY}%)`;
-      wave2.style.transform = `translateY(${waveY}%)`;
-
-      // Set previous scroll to current scroll
-      prevScroll = window.scrollY;
-    }
-  });
-}
-
-// Adjust wave flow upon iteration
-waveTrack.addEventListener('animationiteration', () => {
-  // Set 25%, 50%, and 75% css variables with +/- 200
-  const wave25Percent = -(Math.floor(Math.random() * 200) + 650);
-  const wave50Percent = -(Math.floor(Math.random() * 200) + 1400);
-  const wave75Percent = -(Math.floor(Math.random() * 200) + 2150);
-  document.documentElement.style.setProperty('--waveX25Percent', `${wave25Percent}px`);
-  document.documentElement.style.setProperty('--waveX50Percent', `${wave50Percent}px`);
-  document.documentElement.style.setProperty('--waveX75Percent', `${wave75Percent}px`);
-});
-
-
-/* ------------------- BASE EVENT LISTENERS ------------------- */
 
 
 // List of statistics
@@ -590,75 +1056,68 @@ const statList = [
 ]
 
 // Defining element variables
-const circle = document.querySelector('.about-stat-circle');
-const statTextWrapper = document.querySelector('.about-stat')
+const circle = document.querySelector('.svg-wrapper');
+const statTextWrapper = document.querySelector('.story-stat')
 const statHead = document.querySelector('#stat-head');
 const statSpan = document.querySelector('#stat-span');
-const aboutUs = document.querySelector('#about-us');
 
 // Defining animation variables
-let animationLooping = true;
+let animationLooping = false;
 let statNum = 1;
 let spinCount = 0
 let statTimeout = null;
 
-// Observer for about section
-const aboutObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      if(!animationLooping) {
-        // Reset animationLooping and spinCount to default
-        animationLooping = true;
-        spinCount = 0;
+function startStoryLoop() {
+  if(!animationLooping) {
+    // Reset animationLooping and spinCount to default
+    animationLooping = true;
+    spinCount = 0;
 
-        // Force circle and stat text to default transforms without transition
-        statTextWrapper.style.transition = 'none';
-        statTextWrapper.style.transform = `scale(1) rotate(0)`;
-        statTextWrapper.offsetHeight;
-        circle.style.transition = 'none';
-        circle.style.transform = 'rotate(0)';
-        circle.offsetHeight;
+    // Force circle and stat text to default transforms without transition
+    statTextWrapper.style.transition = 'none';
+    statTextWrapper.style.transform = `scale(1) rotate(0)`;
+    statTextWrapper.offsetHeight;
+    circle.style.transition = 'none';
+    circle.style.transform = 'rotate(0)';
+    circle.offsetHeight;
 
-        // Enable circle and stat text transitions
-        statTextWrapper.style.transition = 'transform .65s ease-in-out';
-        circle.style.transition = 'transform 1.5s ease-in-out';
+    // Enable circle and stat text transitions
+    statTextWrapper.style.transition = 'transform .65s ease-in-out';
+    circle.style.transition = 'transform 1.5s ease-in-out';
 
-        // Call animateStat with short delay
-        statTimeout = setTimeout(animateStat, 1000);
+    // Call animateStat with short delay
+    statTimeout = setTimeout(animateStat, 1000);
 
-      }
-    // If about section not on screen
-    } else {
-      // Animation looping to false
-      animationLooping = false;
+  }
+}
 
-      // Remove event listeners
-      statTextWrapper.removeEventListener('transitionend', changeStat);
-      circle.removeEventListener('transitionend', resetCircle);
+function endStoryLoop() {
+  // Animation looping to false
+  animationLooping = false;
 
-      // Clear statTimeout
-      if(statTimeout) {
-        clearTimeout(statTimeout);
-        statTimeout = null;
-      }
+  // Remove event listeners
+  statTextWrapper.removeEventListener('transitionend', changeStat);
+  circle.removeEventListener('transitionend', resetCircle);
 
-      // Force circle and stat text to default transforms without transition
-      circle.style.transition = 'none';
-      circle.style.transform = 'rotate(0deg)';
-      circle.offsetHeight;
-      statTextWrapper.style.transition = 'none';
-      statTextWrapper.style.transform = `scale(1) rotate(0)`;
-      statTextWrapper.offsetHeight;
+  // Clear statTimeout
+  if(statTimeout) {
+    clearTimeout(statTimeout);
+    statTimeout = null;
+  }
 
-      // Enable circle and stat text transitions
-      circle.style.transition = 'transform 1.5s ease-in-out';
-      statTextWrapper.style.transition = 'transform .65s ease-in-out';
-    }
-  });
-}, {threshold: 0.1});
+  // Force circle and stat text to default transforms without transition
+  circle.style.transition = 'none';
+  circle.style.transform = 'rotate(0deg)';
+  circle.offsetHeight;
+  statTextWrapper.style.transition = 'none';
+  statTextWrapper.style.transform = `scale(1) rotate(0)`;
+  statTextWrapper.offsetHeight;
 
-// Call observer to observe aboutUs
-aboutObserver.observe(aboutUs)
+  // Enable circle and stat text transitions
+  circle.style.transition = 'transform 1.5s ease-in-out';
+  statTextWrapper.style.transition = 'transform .65s ease-in-out';
+}
+
 
 // Reset circle
 function resetCircle() {
@@ -721,10 +1180,10 @@ const cardArrowSVG = '<svg class="card-arrow-btn" width="40" height="40" viewBox
   '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
   '</svg>'
 
-const arrowSVGElems = document.querySelectorAll('.arrow-btn-circle');
-for(let i = 0; i < arrowSVGElems.length; i++) {
-  arrowSVGElems[i].innerHTML = arrowSVG;
-}
+  const arrowSVGElems = document.querySelectorAll('.arrow-btn-circle');
+  for(let i = 0; i < arrowSVGElems.length; i++) {
+    arrowSVGElems[i].innerHTML = arrowSVG;
+  }
 
 
 const cardArrows = document.querySelectorAll('.card-link');

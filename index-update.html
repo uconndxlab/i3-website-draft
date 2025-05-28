@@ -9,26 +9,16 @@
   <meta name="description" content="custom software development, web design, and other digital services in support of improving UConn's business processes,
   academic operations, and research enterprise.">
   <link rel="icon" href="img/i3/i3-symbol-blue.svg">
-
-  <link rel="stylesheet" href="aos-master/dist/aos.css">
-
   <link rel="stylesheet" href="https://use.typekit.net/nct3yok.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/i3.css">
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://use.typekit.net/lmy8hrr.css">
   <link rel="stylesheet" href="https://use.typekit.net/nyu4feu.css">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQW17CJV2T"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-JQW17CJV2T');
-  </script>
 
 </head>
 <body>
@@ -91,7 +81,7 @@
 <!-- i3 header -->
 <header style="background-color:transparent; padding-top:15px; position:sticky; top:0;z-index:10;">
   <nav class="navbar navbar-expand-lg" style="padding:0px;">
-    <div class="container-fluid px-3 px-lg-5 px-xxl-10">
+    <div class="container-fluid px-4 px-lg-5 px-xxl-10">
       <div>
         <p class="header-level-two">
           <a href="https://provost.uconn.edu/" class="header-level-two link-offset-2">
@@ -131,27 +121,38 @@
 
 <!-- hero section -->
 <main>
-  <section id="hero">
-    <div id="hero-head" class="container-fluid px-0 px-md-3 px-lg-5 px-xxl-10">
+  <div class="star-canvas-fade"></div>
+  <canvas id="star-canvas"></canvas>
 
+  <section id="hero" class="pb-8">
+    <div id="hero-head" class="container-fluid px-0 px-xl-5 mt-xxl-8">
 
-      <div class="row m-auto px-6">
-        <div class="col-12 col-md-7 col-lg-8 align-items-center m-auto">
-          <h1 class="hero-h1 text-start text-md-start">INTERNAL INSIGHTS & INNOVATION</h1>
-          <div class="d-flex align-items-start ps-2">
+      <div class="row m-auto px-0 px-xxl-4">
+        <div class="hero-head-col col-12 col-xl-7 align-items-center mt-4 mt-sm-5 mb-10 mb-xl-5 px-0">
+          <h1 class="hero-h1 text-center text-xl-start mx-auto mx-xxl-0">INTERNAL INSIGHTS & INNOVATION</h1>
+          <div class="d-flex align-items-start justify-content-center justify-content-xl-start ps-2">
             <h2 class="typewrite-static-text" style="margin:0;;color:#f1f1f1">We <span
                 class="typewrite" data-period="2000"
                 data-type='[ "create websites", "build systems", "explore technology", "implement solutions","develop apps" ]'>develop
               apps</span><span class="type-cursor" id="typeCursor">|</span> for UConn.</h2>
           </div>
         </div>
-        <div class="col-12 col-md-5 col-lg-4 text-center">
+        <div class="col-12 col-xl-5 text-center align-content-center">
           <div class="hero-symbol-wrapper">
-            <img loading="lazy" class="hero-symbol" src="img/i3/i3-symbol-outline.svg" alt="i3-symbol-outline">
+            <svg class="hero-symbol" width="285" height="285" viewBox="0 0 285 285" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path style="fill:none;stroke:#f1f1f1;stroke-width:2px" d="M11.08,1h262.84c5.56,0,10.08,4.52,10.08,10.08v262.84c0,5.56-4.52,10.08-10.08,10.08H11.08c-5.56,0-10.08-4.52-10.08-10.08V11.08C1,5.52,5.52,1,11.08,1ZM78.17,244.72l-19.93,9.19-.58.27v14h21.93v-24.12l-1.42.65ZM203.35,23.76l.75.19c21.51,5.5,37.47,25.04,37.47,48.25s-15.96,42.75-37.47,48.25l-.75.19v17.11l.75.19c21.51,5.5,37.47,25.05,37.47,48.25s-15.96,42.75-37.47,48.25l-.75.19v33.54h64.83V16.81h-64.83v6.95ZM191.78,159.56c-4.45,0-8.66,1.09-12.34,3.04l-.73.4c-8.1,4.56-13.57,13.26-13.57,23.2s5.14,18.1,12.83,22.76l.75.44c3.86,2.2,8.33,3.44,13.07,3.44s9.22-1.24,13.08-3.44h0c8.1-4.57,13.58-13.26,13.58-23.2s-5.48-18.63-13.58-23.2h0c-3.86-2.2-8.33-3.44-13.08-3.44ZM91.16,100.5c-4.45,0-8.66,1.09-12.34,3.04l-.73.4c-8.1,4.56-13.58,13.26-13.58,23.2,0,9.63,5.14,18.1,12.83,22.76l.75.44c3.86,2.2,8.32,3.44,13.07,3.44s9.21-1.25,13.07-3.44h0c8.1-4.57,13.57-13.26,13.57-23.2s-5.13-18.09-12.82-22.76l-.75-.44c-3.87-2.19-8.32-3.44-13.07-3.44ZM191.78,45.56c-4.45,0-8.66,1.09-12.34,3.04l-.73.4c-8.1,4.56-13.57,13.26-13.57,23.2s5.14,18.1,12.83,22.76l.75.44c3.86,2.2,8.33,3.44,13.07,3.44,4.75,0,9.22-1.24,13.08-3.44h0c8.1-4.57,13.58-13.26,13.58-23.2s-5.48-18.63-13.58-23.2h0c-3.86-2.2-8.33-3.44-13.08-3.44ZM180.2,234.64l-.75-.19c-12.47-3.18-23.08-11.11-29.8-21.73l-.47-.74-.79.37-45.06,20.78-.58.27v34.8h77.46v-33.54ZM79.59,175.59l-.75-.19c-21.51-5.5-37.47-25.04-37.47-48.25,0-23.21,15.96-42.75,37.47-48.25l.75-.19V16.82H16.82v251.36h17.68v-21.41c0-4.38,2.46-8.37,6.35-10.33l.38-.18h0l37.77-17.42.58-.27v-42.97ZM180.2,120.66l-.75-.19c-21.51-5.5-37.47-25.06-37.47-48.26s15.9-42.68,37.35-48.22h.88v-7.17h-77.46v61.89l.75.19c21.5,5.5,37.46,25.04,37.46,48.25s-15.95,42.75-37.46,48.25l-.75.19v32.3l1.42-.66,37.31-17.2.61-.28-.03-.68c-.05-.96-.08-1.92-.08-2.87,0-23.21,15.96-42.76,37.47-48.25l.75-.19v-17.1Z"/>
+            </svg>
+<!--            <img loading="eager" class="hero-symbol" src="img/i3/i3-symbol-outline.svg" alt="i3-symbol-outline">-->
             <div class="hero-symbol-wave-wrapper hero-symbol">
               <div class="wave-track animated">
-                <img loading="lazy" style="transform: translateY(75%) scaleY(2.5)" class="hero-symbol-wave" src="img/i3/i3-symbol-wave.svg" alt="i3-symbol-wave">
-                <img loading="lazy" style="transform: translateY(75%) scaleY(2.5)" class="hero-symbol-wave" src="img/i3/i3-symbol-wave.svg" alt="i3-symbol-wave">
+                <svg class="hero-symbol-wave" width="3000" height="510" viewBox="0 0 3000 510" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path style="fill:#f1f1f1;opacity:.88" d="M66.12,113.1c52.08,5.38,64.66,10.91,95.72,10.3,23.38-.46,24.32-4.16,93.49-20.79,71.33-17.16,99.42-19.78,126.58-19.79,30.74-.02,47.26,3.8,60.31,8.73,29.26,11.06,27.37,22.54,49.04,31.42,44.37,18.2,72.99-21.4,137.85-12.23,27.39,3.87,39.89,4.47,64.9,5.66,9.75.46,17.6-.08,21.05-.38,2.51-.21,4.75-.46,6.68-.71,0,0,19.92-1.75,39.41-6.27,53.89-12.52,82.77-31.2,107.78-43.11,83.07-39.54,213.95-36.71,266.97-6.4,5.8,3.32,23.43,14.25,51.14,23.86,13.73,4.76,32.4,11.08,58.22,12.81,4.42.3,24.76,1.5,53.5-3.5,27.57-4.8,40.33-11.37,66.09-20.37,42.9-14.97,68.72-23.98,101.49-24.44,38.18-.53,54.45,12.38,92.05,23.28,82.73,23.98,166.16,6.6,200.62-.58,105.1-21.9,101.79-60.8,188.03-69.26,64.51-6.32,119.47,10.63,169.94,26.19,64.4,19.86,80.58,37.02,118.8,52.06,23.38,9.21,36.06,12.84,50.35,14.85,46.15,6.51,69.95-8.76,131.37-19.75,18.75-3.35,66.83-11.69,121.44-8.18,71.01,4.57,69.73,23.83,127.98,27.16,87.44,5.01,117.42-36.8,179.38-18.61,29.92,8.79,31.64,21.09,70.28,28.7,35.85,7.06,83.42,5.43,83.42,5.43v400.81H0V109.19c34.79-.02,52.33,2.49,66.12,3.92h0Z"/>
+                </svg>
+                <svg class="hero-symbol-wave" width="3000" height="510" viewBox="0 0 3000 510" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path style="fill:#f1f1f1;opacity:.88" d="M66.12,113.1c52.08,5.38,64.66,10.91,95.72,10.3,23.38-.46,24.32-4.16,93.49-20.79,71.33-17.16,99.42-19.78,126.58-19.79,30.74-.02,47.26,3.8,60.31,8.73,29.26,11.06,27.37,22.54,49.04,31.42,44.37,18.2,72.99-21.4,137.85-12.23,27.39,3.87,39.89,4.47,64.9,5.66,9.75.46,17.6-.08,21.05-.38,2.51-.21,4.75-.46,6.68-.71,0,0,19.92-1.75,39.41-6.27,53.89-12.52,82.77-31.2,107.78-43.11,83.07-39.54,213.95-36.71,266.97-6.4,5.8,3.32,23.43,14.25,51.14,23.86,13.73,4.76,32.4,11.08,58.22,12.81,4.42.3,24.76,1.5,53.5-3.5,27.57-4.8,40.33-11.37,66.09-20.37,42.9-14.97,68.72-23.98,101.49-24.44,38.18-.53,54.45,12.38,92.05,23.28,82.73,23.98,166.16,6.6,200.62-.58,105.1-21.9,101.79-60.8,188.03-69.26,64.51-6.32,119.47,10.63,169.94,26.19,64.4,19.86,80.58,37.02,118.8,52.06,23.38,9.21,36.06,12.84,50.35,14.85,46.15,6.51,69.95-8.76,131.37-19.75,18.75-3.35,66.83-11.69,121.44-8.18,71.01,4.57,69.73,23.83,127.98,27.16,87.44,5.01,117.42-36.8,179.38-18.61,29.92,8.79,31.64,21.09,70.28,28.7,35.85,7.06,83.42,5.43,83.42,5.43v400.81H0V109.19c34.79-.02,52.33,2.49,66.12,3.92h0Z"/>
+                </svg>
+<!--                <img loading="eager" class="hero-symbol-wave" src="img/i3/i3-symbol-wave.svg" alt="i3-symbol-wave">-->
+<!--                <img loading="eager" class="hero-symbol-wave" src="img/i3/i3-symbol-wave.svg" alt="i3-symbol-wave">-->
               </div>
             </div>
           </div>
@@ -159,26 +160,35 @@
       </div>
     </div>
   </section>
-  <section id="about-us">
-    <div class="container-xxl my-10 py-10">
+  <section id="story">
+    <div class="container-xxl align-content-center py-8 story-container">
       <div class="row">
-        <div class="col-5">
-          <div class="d-flex align-items-center p-10 justify-content-center text-center about-stat-wrapper">
-            <div class="about-stat" id="about-stat">
+        <div class="col-12 col-lg-5 my-10 my-lg-0">
+          <div class="d-flex align-items-center p-10 justify-content-center text-center story-stat-wrapper">
+            <div class="story-stat" id="story-stat">
               <h2 id="stat-head">30+</h2>
-              <span id="stat-span" class="text-large fw-bolder">Grant-funded Projects</span>
+              <span id="stat-span" class="text-xl-large fw-bolder">Grant-funded Projects</span>
             </div>
-            <img src="img/i3/about-stat-circle.svg" alt="statistic circle" class="about-stat-circle">
+            <div class="svg-wrapper">
+              <svg class="story-stat-circle" width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle style="fill:#f2f1f1" cx="35" cy="4.44" r="4.44"/>
+                <circle style="fill:none;stroke:#f2f1f1;stroke-miterlimit:10;stroke-width:1px" cx="35" cy="35" r="30.56"/>
+                <circle style="fill:none" cx="4.44" cy="35" r="4.44"/>
+                <circle style="fill:none" cx="35" cy="65.56" r="4.44"/>
+                <circle style="fill:none" cx="65.56" cy="35" r="4.44"/>
+              </svg>
+            </div>
+
+<!--            <img src="img/i3/about-stat-circle.svg" loading="lazy" alt="statistic circle" class="story-stat-circle">-->
           </div>
         </div>
-        <div class="col-1"></div>
-        <div class="col-6 about-body">
+        <div class="col-12 col-lg-6 story-body mt-4 mt-lg-0 mx-auto mx-lg-0">
           <h3 class="section-head"><span class="underline">WHAT</span> IS i3?</h3>
-          <span class="text-medium">The Internal Insights & Innovation (i3) team provides custom software development, web design,
+          <span class="story-body-text">The Internal Insights & Innovation (i3) team provides custom software development, web design,
             and other digital services in support of improving UConn's business processes, academic operations, and research enterprise.
           <br><br>
           </span>
-          <span class="text-medium">We're not trying to reinvent the wheel— sometimes, we just help our colleagues find the wheel and use it, making the most of
+          <span class="story-body-text">We're not trying to reinvent the wheel— sometimes, we just help our colleagues find the wheel and use it, making the most of
             the tools already available at UConn. But when the wheel doesn't fit the task, we step in with a lean, agile approach—building, testing,
             and refining solutions that adapt to the university's evolving needs.</span>
         </div>
@@ -186,61 +196,123 @@
     </div>
   </section>
 
-  <section id="design&development">
-    <div class="container-xxl my-10">
-      <h3 class="section-head mx-auto my-10"><span class="underline">Design</span> & <span class="underline">Development</span></h3>
-      <div class="row">
-        <div class="col-4 align-items-center">
-          <h4 class="service-title">Web</h4>
-          <div class="card-wrapper mx-auto">
-            <div class="service-card">
-              <img class="card-image" alt="Faculty Research Insights" src="img/i3/work/nexus.png" loading="lazy">
-              <h5 class="pt-3 px-4">Nexus</h5>
-              <p class="px-4 pt-2">Nexus, a University of Connecticut engagement and retention platform, places actionable data in the hands of the advising community to foster student success.
-                Tools include dashboards, appointment scheduling, note sharing, event registration, and more.</p>
-              <div class="card-link px-4 pb-2">Visit Nexus</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-4 align-items-center">
-          <h4 class="service-title">Mobile</h4>
-          <div class="card-wrapper mx-auto text-start">
-            <div class="service-card">
-              <img class="card-image" alt="Faculty Research Insights" src="img/i3/work/wellscan.png" loading="lazy">
-              <h5 class="pt-3 px-4">WellSCAN</h5>
-              <p class="px-4 pt-2">Built in collaboration with the UConn Rudd Center for Food Policy & Health, WellSCAN is a website and mobile-friendly
-                scanning application made to help food banks and food pantries better identify, rank, and log the nutritional quality of their inventory, based on the HER guidelines.</p>
-              <div class="card-link px-4 pb-2">Visit WellSCAN</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-4 align-items-center">
-          <h4 class="service-title">Software</h4>
-          <div class="card-wrapper mx-auto">
-            <div class="service-card">
-              <img class="card-image" alt="Faculty Research Insights" src="img/i3/work/rif.png" loading="lazy">
-              <h5 class="pt-3 px-4">Research Insights for Faculty</h5>
-              <p class="px-4 pt-2">RIF is a website that provides UConn faculty and staff with access to financial reports on their sponsored project accounts. Powered by the data from OVPR,
-                faculty and staff can view transactions, comment and review on monthly reports, and even project through the account's lifespan.</p>
-              <div class="card-link px-4 pb-2">Visit RIF</div>
-            </div>
-          </div>
+  <section id="projects">
+    <div class="projects-wrapper">
+      <div class="blueprint-fade"></div>
+      <canvas id="codeCanvas" class="code-canvas"></canvas>
+      <h3 class="section-head text-center mx-auto" id="projects-head">Our <span class="underline">Featured Projects</span></h3>
+
+      <div class="projects-CTA-wrapper">
+        <div class="arrow-btn-wrapper projects-CTA text-center justify-content-center align-content-center">
+          <div class="rotating-code"></div>
+
+          <h5 class="projects-CTA-text">View All Projects</h5>
+          <div class="arrow-btn-circle projects-CTA-btn mx-auto"></div>
         </div>
       </div>
-      <div class="d-flex flex-row gap-5 mt-5 mx-auto justify-content-center">
-        <div class="arrow-btn-wrapper gap-2 d-none d-xl-flex justify-content-center">
-          <h5>View Our Pricing</h5>
-          <div class="arrow-btn-circle"></div>
+
+
+
+      <div class="projects-container blueprint-grid">
+        <div class="card-1-row">
+          <div class="project-card-wrapper" id="project-card-1">
+            <div class="project-card">
+              <div class="project-card-overlay"></div>
+              <img class="card-image" id="card-1-image" alt="Faculty Research Insights" src="img/i3/work/rif.png" loading="lazy">
+              <h5 class="project-card-header" id="card-1-title">Research Insights for Faculty</h5>
+              <div class="arrow-btn-wrapper card-CTA">
+                <h5 class="card-CTA-text" id="card-1-CTA-text">Visit RIF</h5>
+                <div class="arrow-btn-circle card-CTA-btn"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="arrow-btn-wrapper gap-2 d-none d-xl-flex justify-content-center">
-          <h5>View All Projects</h5>
-          <div class="arrow-btn-circle" id="projects"></div>
+        <div class="card-2-row">
+          <div class="project-card-wrapper" id="project-card-2">
+            <div class="project-card">
+              <div class="project-card-overlay"></div>
+              <img class="card-image" id="card-2-image" alt="Nexus Image" src="img/i3/work/nexus.png" loading="lazy">
+              <h5 class="project-card-header" id="card-2-title">Nexus</h5>
+              <div class="arrow-btn-wrapper card-CTA">
+                <h5 class="card-CTA-text" id="card-2-CTA-text">Visit Nexus</h5>
+                <div class="arrow-btn-circle card-CTA-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-3-row">
+          <div class="project-card-wrapper" id="project-card-3">
+            <div class="project-card">
+              <div class="project-card-overlay"></div>
+              <img class="card-image" alt="WellSCAN Image" id="card-3-image" src="img/i3/work/wellscan.png" loading="lazy">
+              <h5 class="project-card-header" id="card-3-title">WellSCAN</h5>
+              <div class="arrow-btn-wrapper card-CTA">
+                <h5 class="card-CTA-text" id="card-3-CTA-text">Visit WellSCAN</h5>
+                <div class="arrow-btn-circle card-CTA-btn"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+
+    <!--<div class="projects-wrapper">
+      <div class="projects-container">
+        <h3 class="section-head text-center mx-auto" id="projects-head">Our <span class="underline">Featured Projects</span></h3>
+        <div class="arrow-btn-wrapper projects-CTA text-center justify-content-center">
+          <h5 class="projects-CTA-text">View All Projects</h5>
+          <div class="arrow-btn-circle projects-CTA-btn mx-auto"></div>
+        </div>
+        <div class="project-scroll-wrapper">
+          <div class="project-card-wrapper" id="project-card-1">
+            <div class="project-card">
+              <div class="project-card-overlay"></div>
+              <img class="card-image" id="card-1-image" alt="Faculty Research Insights" src="img/i3/work/rif.png" loading="lazy">
+              <h5 class="project-card-header" id="card-1-title">Research Insights for Faculty</h5>
+              <div class="arrow-btn-wrapper card-CTA">
+                <h5 class="card-CTA-text" id="card-1-CTA-text">Visit RIF</h5>
+                <div class="arrow-btn-circle card-CTA-btn"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card-wrapper" id="project-card-2">
+            <div class="project-card">
+              <div class="project-card-overlay"></div>
+              <img class="card-image" id="card-2-image" alt="Nexus Image" src="img/i3/work/nexus.png" loading="lazy">
+              <h5 class="project-card-header" id="card-2-title">Nexus</h5>
+              <div class="arrow-btn-wrapper card-CTA">
+                <h5 class="card-CTA-text" id="card-2-CTA-text">Visit Nexus</h5>
+                <div class="arrow-btn-circle card-CTA-btn"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card-wrapper" id="project-card-3">
+            <div class="project-card">
+              <div class="project-card-overlay"></div>
+              <img class="card-image" alt="WellSCAN Image" id="card-3-image" src="img/i3/work/wellscan.png" loading="lazy">
+              <h5 class="project-card-header" id="card-3-title">WellSCAN</h5>
+              <div class="arrow-btn-wrapper card-CTA">
+                <h5 class="card-CTA-text" id="card-3-CTA-text">Visit WellSCAN</h5>
+                <div class="arrow-btn-circle card-CTA-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+    <div class="projects-spacer"></div>-->
   </section>
 
-  <section id="other-services">
+  <!--<section id="other-services">
     <div class="container-xxl mt-20">
       <h3 class="section-head mx-auto my-10">Other <span class="underline">Digital Services</span></h3>
       <div class="row">
@@ -271,16 +343,13 @@
             </div>
           </div>
         </div>
-        <div class="arrow-btn-wrapper gap-2 mt-5 d-none d-xl-flex justify-content-center">
-          <h5>View All Services</h5>
-          <div class="arrow-btn-circle" id="services"></div>
-        </div>
+
 
       </div>
     </div>
-  </section>
-  <section id="i3-team-3d">
-    <div class="container-xxl">
+  </section>-->
+  <section id="team">
+    <div class="container-xxl h-100 align-content-center">
       <h3 class="section-head text-center mx-auto my-10">The <span class="underline">i3 Team</span></h3>
       <div class="carousel-wrapper mx-auto">
         <div class="team-card-wrapper" id="team-card-1" style="transform: translateX(-22rem) scale(.75)">
@@ -307,6 +376,7 @@
   </section>
 
 
+<!--
   <section id="i3-team">
     <div class="container-xxl mt-20">
       <h3 class="section-head text-center mx-auto my-10">The <span class="underline">i3 Team</span></h3>
@@ -332,12 +402,18 @@
       </div>
     </div>
   </section>
+-->
 
 </main>
 
-<canvas id="star-canvas"></canvas>
 
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
 
+  gtag('config', 'G-JQW17CJV2T');
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
