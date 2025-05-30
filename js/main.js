@@ -5,28 +5,28 @@ const sections = {
     isOnScreen: false,
     top: document.getElementById('hero').offsetTop,
     height: document.getElementById('hero').offsetHeight,
-    bottom: document.getElementById('hero') + document.getElementById('hero').offsetHeight
+    bottom: document.getElementById('hero').offsetTop + document.getElementById('hero').offsetHeight
   },
   story: {
     div: document.getElementById('story'),
     isOnScreen: false,
     top: document.getElementById('story').offsetTop,
     height: document.getElementById('story').offsetHeight,
-    bottom: document.getElementById('story') + document.getElementById('story').offsetHeight
+    bottom: document.getElementById('story').offsetTop + document.getElementById('story').offsetHeight
   },
   projects: {
     div: document.getElementById('projects'),
     isOnScreen: false,
     top: document.getElementById('projects').offsetTop,
     height: document.getElementById('projects').offsetHeight,
-    bottom: document.getElementById('projects') + document.getElementById('projects').offsetHeight
+    bottom: document.getElementById('projects').offsetTop + document.getElementById('projects').offsetHeight
   },
   team: {
     div: document.getElementById('team'),
     isOnScreen: false,
     top: document.getElementById('team').offsetTop,
     height: document.getElementById('team').offsetHeight,
-    bottom: document.getElementById('team') + document.getElementById('team').offsetHeight
+    bottom: document.getElementById('team').offsetHeight + document.getElementById('team').offsetTop
   }
 }
 
@@ -75,6 +75,7 @@ function checkInitialIntersections() {
   }
 }
 
+let waveFilled = false;
 
 const waveObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -243,7 +244,10 @@ function consistentScroll() {
     body.style.backgroundColor = `rgb(${color2[0]}, ${color2[1]}, ${color2[2]})`;
 
   } else {
-    if(updateCodeBGFade) fadeCodeBG(scroll);
+    /*if(scroll >= sections.story.bottom - (sections.story.height / 3) && scroll < sections.team.top + (sections.team.height / 3)) {
+      fadeCodeBG();
+    }*/
+    fadeCodeBG(scroll)
     projectScroll(scroll);
   }
 }
@@ -263,20 +267,20 @@ function calcBGFade(start, end, decimal) {
 }
 
 
-function waveFall() {
-  wave1.style.transform = 'translateY(75%) scaleY(1)';
-  wave2.style.transform = 'translateY(75%) scaleY(1)';
-  wave1.addEventListener('transitionend', waveFallComplete);
+function waveFill() {
+  wave1.style.transform = 'translateY(75%) translateX(-5%) scaleY(1)';
+  wave2.style.transform = 'translateY(75%) translateX(-5%) scaleY(1)';
+  wave1.addEventListener('transitionend', waveFillComplete);
 }
 
-
-function waveFallComplete() {
-  wave1.removeEventListener('transitionend', waveFallComplete);
+function waveFillComplete() {
+  wave1.removeEventListener('transitionend', waveFillComplete);
   waveTrack.classList.add('wave-flow');
   // Set wave scroll transitions
   wave1.style.transition = 'transform .05s ease-in-out';
   wave2.style.transition = 'transform .05s ease-in-out';
   updateWave = true;
+  waveFilled = true;
 }
 
 
@@ -292,6 +296,7 @@ waveTrack.addEventListener('animationiteration', () => {
   document.documentElement.style.setProperty('--waveX75Percent', `${wave75Percent}px`);
 });
 function waveScroll(scroll) {
+  if(!waveFilled) return;
   waveY = 75 - Math.min(scroll * .3, 75);
   // Set wave transforms
   requestAnimationFrame(() => {
@@ -322,6 +327,7 @@ function heroToStoryScroll(decimal, starFadeDecimal) {
   starFade.style.opacity = `${starFadeDecimal}`;
   console.log(starFadeDecimal)
   // Set previous scroll to current scroll
+  console.log(decimal)
   body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
 }
 
@@ -367,13 +373,21 @@ const range = scrollEnd - scrollStart;
 let codeFadeDecimal = 0;
 
 function fadeCodeBG(scroll) {
-  const fadeStart = sections.projects.top + sections.projects.height * 0.75;
-  const fadeEnd = sections.team.top;
-
-  let codeFadeDecimal = (scroll - fadeStart) / (fadeEnd - fadeStart);
-  codeFadeDecimal = Math.min(Math.max(codeFadeDecimal, 0), 1);
-
-  codeBGFade.style.opacity = `${codeFadeDecimal}`;
+  const fadeStart = sections.projects.top - windowHeight;
+  const decimal = Math.min((scroll - fadeStart) / windowHeight, 1);
+  console.log(scroll)
+  const color = changeBGColor(color2, color3, decimal);
+  codeBGFade.style.background = `linear-gradient(to bottom,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 1) 0%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.6) 10%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.4) 15%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 0) 25%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 0) 75%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.4) 85%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.6) 90%,
+          rgba(${color[0]}, ${color[1]}, ${color[2]}, 1) 100%
+  )`;
+  console.log('fadey')
 }
 
 function projectScroll(scroll) {
@@ -383,8 +397,8 @@ function projectScroll(scroll) {
   const bgColor = changeBGColor(color2, color3, decimal);
   body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
 
-  codeBGFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
-  codeBGFade.style.opacity = codeFadeDecimal;
+  //codeBGFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
+  //codeBGFade.style.opacity = codeFadeDecimal;
 
   const progress = Math.min(Math.max((scroll - scrollStart) / range, 0), 1);
 
@@ -479,7 +493,8 @@ function randomizeProjects() {
 const codeCanvas = document.getElementById('codeCanvas');
 const codeCTX = codeCanvas.getContext('2d');
 codeCanvas.width = window.innerWidth;
-codeCanvas.height = window.innerHeight;
+codeCanvas.height = Math.floor(window.innerHeight + (window.innerHeight * .2));
+console.log(window.innerHeight + (window.innerHeight * .2))
 
 const text1 = document.getElementById('rotating-text-1');
 const text2 = document.getElementById('rotating-text-2');
@@ -505,19 +520,37 @@ const scrollLines = [];
 for (let i = 0; i < 55; i++) {
   scrollLines.push({
     x: Math.random() * codeCanvas.width,
-    y: Math.random() * codeCanvas.height,
+    y: -(Math.random() * codeCanvas.height),
     text: codeSnippets[i % codeSnippets.length],
-    speed: 1.5 + Math.random() * 1.5
+    speed: 1.5 + Math.random() * 1.5,
+    opacity: 0
   });
 }
 codeCTX.font = '14px monospace';
-codeCTX.fillStyle = 'rgba(0,255,200,0.2)';
+codeCTX.fillStyle = 'rgba(77,179,255,0.2)';
 codeCTX.textAlign = 'center';
+
+const fadeInStart = 50;
+const fadeInEnd = 200;
+const fadeOutStart = codeCanvas.height - 200;
+const fadeOutEnd = codeCanvas.height - 50;
 
 function scrollCode() {
   codeCTX.clearRect(0, 0, codeCanvas.width, codeCanvas.height);
   scrollLines.forEach(line => {
+    if(line.y < fadeInStart) {
+      line.opacity = 0;
+    } else if(line.y < fadeInEnd) {
+      line.opacity = (line.y - fadeInStart) / (fadeInEnd - fadeInStart);
+    } else if(line.y < fadeOutStart) {
+      line.opacity = 1;
+    } else if(line.y < fadeOutEnd) {
+      line.opacity = 1 - (line.y - fadeOutStart) / (fadeOutEnd - fadeOutStart)
+    } else {
+      line.opacity = 0;
+    }
     codeCTX.save();
+    codeCTX.globalAlpha = line.opacity;
     codeCTX.translate(line.x, line.y);
     codeCTX.rotate(Math.PI / 2);
     codeCTX.fillText(line.text, 0, 0);
@@ -525,11 +558,14 @@ function scrollCode() {
 
     line.y += line.speed;
 
-    if (line.y > codeCanvas.height + 200) {
+    if(line.y > fadeOutEnd) {
       line.y = -200;
+      line.opacity = 0;
       line.x = Math.random() * codeCanvas.width;
       line.text = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
     }
+
+
   });
   if(codeBGLooping) {requestAnimationFrame(scrollCode);}
 }
@@ -592,12 +628,15 @@ function playRotateCode() {
 
 let lastTime = 0;
 const frameRate = 1000 / 60;
+let frameTest = 3000;
+let frameCount = 0;
 let bgAnimated = false;
 let frameLooping = false;
 // Call animation frame
 function animateFrame(now) {
-  frameLooping = true;
-  console.log('frame')
+  frameLooping = true
+  if(now >= frameTest) {console.log(`frameRate: ${frameCount / 3}fps`); frameCount = 0; frameTest = now + 3000}
+  frameCount++;
   // Check framerate sync
   if(now - lastTime >= frameRate) {
     lastTime = now;
@@ -661,7 +700,7 @@ function cacheStaticStars() {
     const [offsetX, offsetY] = cacheSectionOffsets[code];
 
     // Define star shadows
-    ctx.shadowColor = 'rgba(241, 241, 241, 0.4)';
+    ctx.shadowColor = 'rgba(241, 241, 241, 0.2)';
     ctx.shadowBlur = 4;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
@@ -674,8 +713,8 @@ function cacheStaticStars() {
       ctx.rotate(star.rotation);
       ctx.beginPath();
       ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgb(241,241,241)';
-      ctx.globalAlpha = 0.5;
+      ctx.fillStyle = 'rgb(77,179,255)';
+      ctx.globalAlpha = 0.15;
       ctx.fill();
       ctx.restore();
     })
@@ -818,7 +857,7 @@ function createStarBG() {
 function animateStarBG() {
   // Set star shadows
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.shadowColor = 'rgba(241, 241, 241, 0.4)';
+  ctx.shadowColor = 'rgba(241, 241, 241, 0.2)';
   ctx.shadowBlur = 4;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
@@ -842,8 +881,8 @@ function animateStarBG() {
         drawStarInitial(star);
 
         // If star alpha is smaller than .5 add .1
-        if (star.alpha < 0.5) {
-          star.alpha += 0.1;
+        if (star.alpha < 0.15) {
+          star.alpha += 0.01;
 
           // Set star animation incomplete true when star alpha < .5
           fadeInIncomplete = true;
@@ -859,7 +898,7 @@ function animateStarBG() {
   // If animation complete set bgAnimated to true;
   if(!fadeInIncomplete) {
     bgAnimated = true;
-    setTimeout(waveFall, 0);
+    setTimeout(waveFill, 0);
   }
   // Increment frame
   frame++
@@ -1016,14 +1055,18 @@ function drawStar(star) {
     || star.y < -buffer || star.y > window.innerHeight + buffer) {
     return
   }
+  ctx.shadowColor = 'rgba(241, 241, 241, 0.2)';
+  ctx.shadowBlur = 4;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
   // Draw star
   ctx.save();
   ctx.translate(star.x, star.y);
   ctx.rotate(star.rotation);
   ctx.beginPath();
   ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgb(241,241,241)';
-  ctx.globalAlpha = 0.5;
+  ctx.fillStyle = 'rgb(77,179,255)';
+  ctx.globalAlpha = 0.15;
   ctx.fill();
   ctx.restore();
 }
@@ -1038,14 +1081,17 @@ function drawStarInitial(star) {
     || star.y < -buffer || star.y > window.innerHeight + buffer) {
     return
   }
-
+  ctx.shadowColor = 'rgba(241, 241, 241, 0.2)';
+  ctx.shadowBlur = 4;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
   // Draw star
   ctx.save();
   ctx.translate(star.x, star.y);
   ctx.rotate(star.rotation);
   ctx.beginPath();
   ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgb(241,241,241)';
+  ctx.fillStyle = 'rgb(77,179,255)';
   ctx.globalAlpha = star.alpha;
   ctx.fill();
   ctx.restore();
