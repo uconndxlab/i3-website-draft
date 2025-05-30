@@ -149,8 +149,19 @@ const projectsObserver = new IntersectionObserver(entries => {
   });
 }, {threshold: 0});
 projectsObserver.observe(sections.projects.div);
-//const teamObserver = new IntersectionObserver();
 
+const teamObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(!sections.team.isOnScreen) sections.team.isOnScreen = true;
+      if(!teamLooping) { rotateCards(); teamLooping = true}
+    } else {
+      if(sections.team.isOnScreen) sections.team.isOnScreen = false;
+      if(teamLooping) teamLooping = false;
+    }
+  })
+}, {threshold: .1});
+teamObserver.observe(sections.team.div);
 
 
 
@@ -162,12 +173,14 @@ window.addEventListener('load', () => {
   setTimeout(checkInitialIntersections, 100);
   setCachedSectionSize()
   console.log(cachedStarSections, cachedStarSections[0].width)
+  if(window.innerWidth < 1200) resizeTeamCards();
   setTimeout(createStarBG, 500);
 });
 
 // Call resize star background function on window resize
 window.addEventListener('resize', () => {
   resizeStarBG();
+  if(window.innerWidth < 1200) resizeTeamCards();
 });
 
 // Initialize mouse position variable
@@ -224,7 +237,7 @@ function consistentScroll() {
   const scroll = window.scrollY;
   if (scroll < sections.story.top) {
     if (updateWave) waveScroll(scroll);
-    if (updateStarFade) starFadeScroll(scroll);
+    if (updateStarFade) { starFadeScroll(scroll); console.log(updateStarFade) }
 
   } else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
     body.style.backgroundColor = `rgb(${color2[0]}, ${color2[1]}, ${color2[2]})`;
@@ -306,7 +319,8 @@ function starFadeScroll(scroll) {
 function heroToStoryScroll(decimal, starFadeDecimal) {
   const bgColor = changeBGColor(color1, color2, decimal);
   starFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
-  starFade.style.opacity = starFadeDecimal;
+  starFade.style.opacity = `${starFadeDecimal}`;
+  console.log(starFadeDecimal)
   // Set previous scroll to current scroll
   body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
 }
@@ -1197,35 +1211,228 @@ for(let i = 0; i < cardArrows.length; i++) {
   cardArrows[i].innerHTML += cardArrowSVG;
 }
 
+const team = [
+  {
+    name: 'Joel Salisbury',
+    title: 'Director of i3',
+    img: 'img/i3/people/salisbury.jpg'
+  },
+  {
+    name: 'Brian Kelleher',
+    title: 'Senior Applications Developer',
+    img: 'img/i3/people/kelleher.jpg'
+  },
+  {
+    name: 'Natalie Lacroix',
+    title: 'Senior UX Designer',
+    img: 'img/i3/people/lacroix.jpg'
+  },
+  {
+    name: 'Jeff Winston',
+    title: 'Director: - Nexus',
+    img: 'img/i3/people/winston.jpg'
+  },
+  {
+    name: 'Brian Daley',
+    title: 'Faculty Advisor - DMD',
+    img: 'img/i3/people/daley.jpg'
+  },
+  {
+    name: 'Michael Vertefeuille',
+    title: 'Faculty Advisor - DMD',
+    img: 'img/i3/people/vert.jpg'
+  },
+  {
+    name: 'Emma Adams',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/adams.jpg'
+  },
+  {
+    name: 'Lauren Busavage',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/busavage.png'
+  },
+  {
+    name: 'Kelis Clarke',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/jonathan.jpg'
+  },
+  {
+    name: 'Ryan Cohutt',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/jonathan.jpg'
+  },
+  {
+    name: 'Maggie Danielewicz',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/danielewicz.jpg'
+  },
+  {
+    name: 'Luna Gonzalez',
+    title: 'Student Illustrator',
+    img: 'img/i3/people/luna.jpg'
+  },
+  {
+    name: 'Aaron Mark',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/jonathan.jpg'
+  },
+  {
+    name: 'Jack Medrek',
+    title: 'Student Software Developer',
+    img: 'img/i3/people/medrek.jpg'
+  },
+  {
+    name: 'Kailey Moore',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/moore.jpg'
+  },
+  {
+    name: 'William Shostak',
+    title: 'Student Software Developer',
+    img: 'img/i3/people/shostak.jpg'
+  },
+  {
+    name: 'Emelia Salmon',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/jonathan.jpg'
+  }
+]
 
-const card1Wrapper = document.getElementById('team-card-1');
-const card1Container = card1Wrapper.firstElementChild;
-const card2Wrapper = document.getElementById('team-card-2');
-const card2Container = card2Wrapper.firstElementChild;
-const card3Wrapper = document.getElementById('team-card-3');
-const card3Container = card3Wrapper.firstElementChild;
 
-let card1Pos = 'left';
-let card2Pos = 'center';
-let card3Pos = 'right';
+const cards = [
+  {
+    wrapper: document.getElementById('team-card-1'),
+    container: document.getElementById('team-card-1').querySelector('.team-card-container'),
+    front: document.getElementById('team-card-1').querySelector('.team-card-container').querySelector('.card-front'),
+    name: document.getElementById('team-card-1').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-name'),
+    title: document.getElementById('team-card-1').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-title'),
+    position: 'left',
+    id: 0
+  },
+  {
+    wrapper: document.getElementById('team-card-2'),
+    container: document.getElementById('team-card-2').querySelector('.team-card-container'),
+    front: document.getElementById('team-card-2').querySelector('.team-card-container').querySelector('.card-front'),
+    name: document.getElementById('team-card-2').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-name'),
+    title: document.getElementById('team-card-2').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-title'),
+    position: 'center',
+    id: 1
+  },
+  {
+    wrapper: document.getElementById('team-card-3'),
+    container: document.getElementById('team-card-3').querySelector('.team-card-container'),
+    front: document.getElementById('team-card-3').querySelector('.team-card-container').querySelector('.card-front'),
+    name: document.getElementById('team-card-3').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-name'),
+    title: document.getElementById('team-card-3').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-title'),
+    position: 'right',
+    id: 2
+  }
+];
 
-let leftRotate = 'rotateY(45deg) rotate(180deg)';
-let rightRotate = 'rotateY(-45deg) rotate(180deg)';
-let leftScale = 'scale(.75)';
-let rightScale = 'scale(.75)';
-let leftTranslate = '-22rem';
-let rightTranslate = '22rem';
+let cardYRotates = [60, 180, -60];
+let cardRotates = [-2, 0, 2];
+let leftRem = '-22rem';
+let rightRem = '22rem';
+
+cards[0].wrapper.addEventListener('animationend', () => {
+  cards.forEach(card => {
+    if(card.wrapper.classList.contains('left2center-arc')) {
+      card.wrapper.classList.remove('left2center-arc');
+      card.wrapper.style.transform = 'translateX(0rem) scale(1.3)';
+    }
+    else if(card.wrapper.classList.contains('center2right-arc')) {
+      card.wrapper.classList.remove('center2right-arc');
+      card.wrapper.style.transform = `translateX(${rightRem}) scale(0.5)`;
+    }
+    else if(card.wrapper.classList.contains('right2left-arc')) {
+      card.wrapper.classList.remove('right2left-arc')
+      card.wrapper.style.transform = `translateX(${leftRem}) scale(0.5)`;
+    }
+  })
+  randomTeam();
+  if(sections.team.isOnScreen) {
+    setTimeout(rotateCards, 2000)
+  } else {
+    cards.forEach(card => {
+      if(card.position === 'left') { card.wrapper.style.transform = `translateX(${leftRem}) scale(0.5)` }
+      else if(card.position === 'center') { card.wrapper.style.transform = `translateX(0) scale(1.3)` }
+      else if(card.position === 'right') { card.wrapper.style.transform = `translateX(${rightRem}) scale(0.5)`}
+    })
+  }
+})
+
+let teamLooping = false;
+let teamSelectable = [...team]
+let teamTimeout = [];
+let initialRandom = true;
+function randomTeam() {
+  cards.forEach(card => {
+    if(card.position === 'right' || initialRandom) {
+      const rand = Math.floor(Math.random() * teamSelectable.length)
+      card.front.style.background = `url("${teamSelectable[rand].img}") no-repeat center / cover`;
+      if(card.name === 'Maggie Danielewicz') {
+        if(window.innerWidth < 768 || (window.innerWidth > 992 && window.innerWidth < 1200)) {card.title.style.marginTop = '-20px'}
+        else {card.title.style.marginTop = '0'}
+      }
+      card.name.innerText = `${teamSelectable[rand].name}`;
+      card.title.innerText = `${teamSelectable[rand].title}`;
+      teamTimeout.push(teamSelectable[rand]);
+      teamSelectable.splice(rand, 1)
+      if(teamTimeout.length > 5) { teamSelectable.push(teamTimeout.splice(0, 1)[0]) }
+    }
+  });
+  initialRandom = false;
+}
+randomTeam()
 
 function rotateCards() {
-  card1Wrapper.style.transform = 'scale(1) translateX(0)';
-  card1Container.style.transform = 'rotateY(0) rotate(180deg)';
-  card2Wrapper.style.transform = 'scale(.75) translateX(22rem)';
-  card2Container.style.transform = 'rotateY(-45deg) rotate(180deg)';
-  card3Wrapper.style.transform = 'scale(.75) translateX(-22rem)';
-  card3Container.style.transform = 'rotateY(45deg) rotate(180deg)';
+  cardYRotates = cardYRotates.map(y => y + 120);
+  cardRotates = cardRotates.map(y => y <= 0 ? y + 2 : y - 4);
 
+
+
+  cards.forEach(card => {
+    card.wrapper.style.transform = 'none';
+    switch(card.position) {
+      case 'left':
+        card.wrapper.style.setProperty('--start-rem', leftRem);
+        card.wrapper.style.setProperty('--end-rem', '0rem');
+        card.wrapper.classList.add('left2center-arc');
+        setTimeout(() => {card.wrapper.style.zIndex = '4'}, 500);
+        card.position = 'center';
+        break;
+      case 'center':
+        card.wrapper.style.setProperty('--start-rem', '0rem');
+        card.wrapper.style.setProperty('--end-rem', rightRem)
+        card.wrapper.classList.add('center2right-arc');
+        setTimeout(() => {card.wrapper.style.zIndex = '2'}, 2000);
+        card.position = 'right';
+        break;
+      case 'right':
+        card.wrapper.style.setProperty('--start-rem', rightRem);
+        card.wrapper.style.setProperty('--end-rem', leftRem)
+        card.wrapper.classList.add('right2left-arc');
+        setTimeout(() => {card.wrapper.style.zIndex = '1'}, 450);
+        card.position = 'left';
+        break;
+    }
+    card.container.style.transform = `rotateY(${cardYRotates[card.id]}deg) rotate(${cardRotates[card.id]}deg) rotateX(-10deg)`;
+  })
 }
 
+function resizeTeamCards() {
+  if(window.innerWidth <= 768) {
+    leftRem = '-12rem';
+    rightRem = '12rem';
+  } else if(window.innerWidth <= 992) {
+    leftRem = '-14rem';
+    rightRem = '14rem';
+  } else if(window.innerWidth <= 1200) {
+    leftRem = '-16rem';
+    rightRem = '16rem'
+  }
+}
 
 /*typewriter*/
 const TxtType = function (el, toRotate, period) {
