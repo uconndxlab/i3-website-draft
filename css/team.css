@@ -1,0 +1,696 @@
+body {
+    color: #f1f1f1;
+    background-color: #262626;
+    font-family: "area-normal", sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    min-height: 3500px;
+    transition: background-color .01s linear;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+    font-family: "area-normal", "area-normal", sans-serif;
+    color: #023AC6;
+    font-weight: 900;
+}
+
+.text-small {
+    font-size: 0.875em;
+}
+
+.text-medium {
+    font-size: 1.25em;
+    line-height: 1.5;
+}
+
+.text-large {
+    font-size: 1.5em;
+}
+
+#hero {
+    height: 100vh;
+}
+
+.hero-h1 {
+    font-size: 2.5em;
+    line-height: 140%;
+    color: transparent;
+    -webkit-text-stroke: 1px #f1f1f1;
+    max-width: 85%;
+}
+
+.team-card {
+    width: 20rem;
+    height: 24rem;
+    border-radius: 25px;
+    position: relative;
+    background: url("../img/i3/people/jonathan.jpg") no-repeat center;
+    display: flex;
+    justify-content: start;
+}
+.team-card > h5, .team-card > h6 {
+    color: maroon;
+}
+
+#team-card-1 {
+    transform: translateX(-10rem) scale(.6);
+    z-index: 2;
+}
+#team-card-2 {
+    transform: translateX(0rem) scale(1);
+    z-index: 4;
+}
+#team-card-3 {
+    transform: translateX(10rem) scale(.6);
+    z-index: 1;
+}
+
+.team-overlay {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%);
+    color: white;
+    opacity: 1;
+    z-index: 10;
+}
+
+.carousel-wrapper {
+    display: flex;
+    margin-top: 20vh;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem
+}
+
+.team-card-wrapper {
+    perspective: 1200px;
+    perspective-origin: center;
+    transition: transform .5s ease-in-out;
+    transform-origin: 50% 75%   ;
+    position: absolute;
+    --start-rem: -17.3205rem;
+    --end-rem: 0rem;
+}
+.team-card-container {
+    height: 14rem;
+    width: 10rem;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 2s linear, width .5s ease-in-out, height .5s ease-in-out;
+    border-radius: 20px;
+}
+.team-card-container.flip {
+    transform: rotateX(180deg);
+}
+.team-card-container .card-face {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    backface-visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+.team-card-container .card-front {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: start;
+    padding: 7px 15px;
+    transform: rotateX(180deg);
+    background: url("../img/i3/people/jonathan.jpg") no-repeat center / cover;
+    box-shadow: inset rgb(170 170 170 / 65%) 0 0 10px 6px;
+
+}
+.team-card-container .card-back {
+    background: url("../img/i3/i3-symbol-fill.svg") center center / 75% no-repeat, #0034da;
+    box-shadow: inset rgba(241, 241, 241, 0.75) 0 0 5px 7px;
+}
+
+.team-text-wrapper {
+    position: absolute;
+    top: -66px;
+    right: 0;
+}
+
+.team-name {
+    rotate: 180deg;
+    color: white;
+    font-size: medium;
+    padding-left: 6px;
+}
+.team-title {
+    rotate: 180deg;
+    color: white;
+    font-size: small;
+    padding-left: 6px;
+}
+
+.team-track {
+    width: 32.5rem;
+    z-index: 3;
+    transform: translateY(-75px);
+    transition: width .5s ease-in-out, transform .5s ease-in-out;
+}
+
+.card-circle {
+    width: 5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateY(-83px) translateX(-50%)
+}
+
+
+.left2center-arc {
+    animation: left2center-arc 2s ease-in forwards;
+}
+
+@keyframes left2center-arc {
+    0%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0)) scale(0.6); }
+    1%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.01187)) scale(0.604); }
+    2%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.023302)) scale(0.608); }
+    3%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.034277)) scale(0.612); }
+    4%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.044802)) scale(0.616); }
+    5%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.054871)) scale(0.62); }
+    6%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.064479)) scale(0.624); }
+    7%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.073612)) scale(0.628); }
+    8%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.082278)) scale(0.632); }
+    9%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.090471)) scale(0.636); }
+    10%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.098184)) scale(0.64); }
+    11%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.105418)) scale(0.644); }
+    12%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.112168)) scale(0.648); }
+    13%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.118426)) scale(0.652); }
+    14%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.124194)) scale(0.656); }
+    15%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.129471)) scale(0.66); }
+    16%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.134246)) scale(0.664); }
+    17%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.138529)) scale(0.668); }
+    18%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.142311)) scale(0.672); }
+    19%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.145596)) scale(0.676); }
+    20%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.148373)) scale(0.68); }
+    21%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.150654)) scale(0.684); }
+    22%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.152421)) scale(0.688); }
+    23%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.153691)) scale(0.692); }
+    24%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.154447)) scale(0.696); }
+    25%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.154701)) scale(0.7); }
+    26%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.154447)) scale(0.704); }
+    27%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.153691)) scale(0.708); }
+    28%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.152421)) scale(0.712); }
+    29%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.150654)) scale(0.716); }
+    30%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.148373)) scale(0.72); }
+    31%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.145596)) scale(0.724); }
+    32%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.142311)) scale(0.728); }
+    33%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.138529)) scale(0.732); }
+    34%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.134246)) scale(0.736); }
+    35%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.129471)) scale(0.74); }
+    36%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.124194)) scale(0.744); }
+    37%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.118426)) scale(0.748); }
+    38%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.112168)) scale(0.752); }
+    39%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.105418)) scale(0.756); }
+    40%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.098184)) scale(0.76); }
+    41%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.090471)) scale(0.764); }
+    42%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.082278)) scale(0.768); }
+    43%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.073612)) scale(0.772); }
+    44%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.064479)) scale(0.776); }
+    45%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.054871)) scale(0.78); }
+    46%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.044802)) scale(0.784); }
+    47%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.034277)) scale(0.788); }
+    48%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.023302)) scale(0.792); }
+    49%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * -0.01187)) scale(0.796); }
+    50%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0)) scale(0.8); }
+    51%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.012309)) scale(0.804); }
+    52%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.025051)) scale(0.808); }
+    53%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.038226)) scale(0.812); }
+    54%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.051817)) scale(0.816); }
+    55%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.06583)) scale(0.820); }
+    56%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.080246)) scale(0.824); }
+    57%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.095067)) scale(0.828); }
+    58%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.110285)) scale(0.832); }
+    59%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.125897)) scale(0.836); }
+    60%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.14189)) scale(0.840); }
+    61%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.158258)) scale(0.844); }
+    62%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.174995)) scale(0.848); }
+    63%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.192096)) scale(0.852); }
+    64%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.209555)) scale(0.856); }
+    65%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.227355)) scale(0.860); }
+    66%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.245495)) scale(0.864); }
+    67%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.263965)) scale(0.868); }
+    68%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.282757)) scale(0.872); }
+    69%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.301868)) scale(0.876); }
+    70%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.321284)) scale(0.880); }
+    71%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.340995)) scale(0.884); }
+    72%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.361)) scale(0.888); }
+    73%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.381282)) scale(0.892); }
+    74%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.401836)) scale(0.896); }
+    75%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.422649)) scale(0.900); }
+    76%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.443717)) scale(0.904); }
+    77%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.465033)) scale(0.908); }
+    78%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.486579)) scale(0.912); }
+    79%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.508351)) scale(0.916); }
+    80%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.530343)) scale(0.920); }
+    81%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.552536)) scale(0.924); }
+    82%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.574926)) scale(0.928); }
+    83%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.597506)) scale(0.932); }
+    84%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.620259)) scale(0.936); }
+    85%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.64318)) scale(0.940); }
+    86%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.666257)) scale(0.944); }
+    87%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.689478)) scale(0.948); }
+    88%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.712837)) scale(0.952); }
+    89%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.736324)) scale(0.956); }
+    90%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.759926)) scale(0.960); }
+    91%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.783632)) scale(0.964); }
+    92%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.807431)) scale(0.968); }
+    93%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.831315)) scale(0.972); }
+    94%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.855276)) scale(0.976); }
+    95%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.879299)) scale(0.980); }
+    96%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.903375)) scale(0.984); }
+    97%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.927496)) scale(0.988); }
+    98%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.951647)) scale(0.992); }
+    99%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.975821)) scale(0.996); }
+    100% { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1)) scale(1.000); }
+}
+
+
+.center2right-arc {
+    animation: center2right-arc 2s ease-in forwards;
+}
+
+@keyframes center2right-arc {
+    0%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0)) scale(1.000); }
+    1%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.024179)) scale(0.996); }
+    2%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.048353)) scale(0.992); }
+    3%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.072504)) scale(0.988); }
+    4%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.096625)) scale(0.984); }
+    5%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.120701)) scale(0.980); }
+    6%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.144724)) scale(0.976); }
+    7%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.168685)) scale(0.972); }
+    8%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.192569)) scale(0.968); }
+    9%   { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.216368)) scale(0.964); }
+    10%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.240074)) scale(0.960); }
+    11%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.263676)) scale(0.956); }
+    12%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.287163)) scale(0.952); }
+    13%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.310522)) scale(0.948); }
+    14%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.333743)) scale(0.944); }
+    15%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.35682)) scale(0.940); }
+    16%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.379741)) scale(0.936); }
+    17%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.402494)) scale(0.932); }
+    18%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.425074)) scale(0.928); }
+    19%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.447464)) scale(0.924); }
+    20%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.469657)) scale(0.920); }
+    21%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.491649)) scale(0.916); }
+    22%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.513421)) scale(0.912); }
+    23%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.534967)) scale(0.908); }
+    24%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.556283)) scale(0.904); }
+    25%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.577351)) scale(0.900); }
+    26%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.598164)) scale(0.896); }
+    27%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.618718)) scale(0.892); }
+    28%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.639)) scale(0.888); }
+    29%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.659005)) scale(0.884); }
+    30%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.678716)) scale(0.880); }
+    31%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.698132)) scale(0.876); }
+    32%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.717243)) scale(0.872); }
+    33%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.736035)) scale(0.868); }
+    34%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.754505)) scale(0.864); }
+    35%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.772645)) scale(0.860); }
+    36%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.790445)) scale(0.856); }
+    37%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.807904)) scale(0.852); }
+    38%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.825005)) scale(0.848); }
+    39%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.841742)) scale(0.844); }
+    40%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.85811)) scale(0.840); }
+    41%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.874103)) scale(0.836); }
+    42%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.889715)) scale(0.832); }
+    43%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.904933)) scale(0.828); }
+    44%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.919754)) scale(0.824); }
+    45%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.93417)) scale(0.820); }
+    46%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.948183)) scale(0.816); }
+    47%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.961774)) scale(0.812); }
+    48%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.974949)) scale(0.808); }
+    49%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 0.987691)) scale(0.804); }
+    50%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1)) scale(0.800); }
+    51%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.01187)) scale(0.796); }
+    52%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.023302)) scale(0.792); }
+    53%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.034277)) scale(0.788); }
+    54%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.044802)) scale(0.784); }
+    55%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.054871)) scale(0.780); }
+    56%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.064479)) scale(0.776); }
+    57%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.073612)) scale(0.772); }
+    58%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.082278)) scale(0.768); }
+    59%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.090471)) scale(0.764); }
+    60%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.098184)) scale(0.760); }
+    61%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.105418)) scale(0.756); }
+    62%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.112168)) scale(0.752); }
+    63%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.118426)) scale(0.748); }
+    64%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.124194)) scale(0.744); }
+    65%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.129471)) scale(0.740); }
+    66%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.134246)) scale(0.736); }
+    67%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.138529)) scale(0.732); }
+    68%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.142311)) scale(0.728); }
+    69%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.145596)) scale(0.724); }
+    70%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.148373)) scale(0.720); }
+    71%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.150654)) scale(0.716); }
+    72%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.152421)) scale(0.712); }
+    73%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.153691)) scale(0.708); }
+    74%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.154447)) scale(0.704); }
+    75%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.154701)) scale(0.700); }
+    76%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.154447)) scale(0.696); }
+    77%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.153691)) scale(0.692); }
+    78%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.152421)) scale(0.688); }
+    79%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.150654)) scale(0.684); }
+    80%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.148373)) scale(0.680); }
+    81%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.145596)) scale(0.676); }
+    82%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.142311)) scale(0.672); }
+    83%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.138529)) scale(0.668); }
+    84%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.134246)) scale(0.664); }
+    85%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.129471)) scale(0.660); }
+    86%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.124194)) scale(0.656); }
+    87%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.118426)) scale(0.652); }
+    88%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.112168)) scale(0.648); }
+    89%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.105418)) scale(0.644); }
+    90%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.098184)) scale(0.640); }
+    91%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.090471)) scale(0.636); }
+    92%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.082278)) scale(0.632); }
+    93%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.073612)) scale(0.628); }
+    94%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.064479)) scale(0.624); }
+    95%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.054871)) scale(0.620); }
+    96%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.044802)) scale(0.616); }
+    97%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.034277)) scale(0.612); }
+    98%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.023302)) scale(0.608); }
+    99%  { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1.01187)) scale(0.604); }
+    100% { transform: translateX(calc(var(--start-rem) + (var(--end-rem) - var(--start-rem)) * 1)) scale(0.600); }
+}
+
+.right2left-arc {
+    animation: right2left-arc 2s ease-in forwards;
+}
+
+@keyframes right2left-arc {
+    0% { transform: translateX(var(--start-rem)) scale(0.6)}
+    25% { transform: translateX(calc(var(--start-rem) / 2)) scale(0.45)}
+    75% { transform: translateX(calc(var(--end-rem) / 2)) scale(0.45)}
+    100% { transform: translateX(var(--end-rem)) scale(0.6)}
+}
+
+.team-section-head {
+    font-size: xx-large;
+    text-align: center;
+    color: #f1f1f1;
+}
+.team-section-desc {
+    font-size: large;
+    text-align: center;
+    max-width: 700px;
+}
+
+.underline {
+    text-decoration: #4DB3FF 2px underline;
+    text-underline-offset: 10px;
+}
+
+
+#senior-devs {
+    height: 80vh;
+    background: linear-gradient(rgba(38,38,38,.75) 0%, rgba(0,40,57,.75) 33%, rgba(0,40,57,.75) 66%, rgba(38,38,38,.75) 100%);
+}
+
+#faculty-advisors {
+    height: 80vh;
+    background: linear-gradient(rgba(38,38,38,.75) 0%, rgba(0,40,57,.75) 33%, rgba(0,40,57,.75) 66%, rgba(38,38,38,.75) 100%);
+}
+
+#joel {
+    --gradient-start: rgba(7,51,51,.7);
+    --gradient-end: rgba(7,51,51,0);
+    --img-pos: right;
+}
+#brian {
+    --gradient-start: rgba(0,0,0,.7);
+    --gradient-end: rgba(0,0,0,0);
+    --img-pos: center;
+}
+#natalie {
+    --gradient-start: rgba(48,10,49,.7);
+    --gradient-end: rgba(48,10,49,0);
+    --img-pos: center;
+}
+#jeff {
+    --gradient-start: rgba(51,37,7,.7);
+    --gradient-end:  rgba(51,37,7,0);
+    --img-pos: center;
+}
+#brian-daley {
+    --gradient-start: rgba(7,14,51,.7);
+    --gradient-end: rgba(7,14,51,0);
+    --img-pos: center;
+}
+#vert {
+    --gradient-start: rgba(51,31,7,.7);
+    --gradient-end: rgba(51,31,7,0);
+    --img-pos: right
+}
+
+
+.team-card-main {
+    width: 20em;
+    height: 24rem;
+    position: relative;
+    padding: 0;
+}
+
+.team-card-main-gradient {
+    background: linear-gradient(to top, var(--gradient-start) 0%, var(--gradient-end) 70%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    border-radius: 25px;
+}
+
+
+
+
+.team-card-main-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-position: var(--img-pos);
+    display: block;
+    object-fit: cover;
+    transform: rotate(180deg);
+    border-radius: 25px;
+}
+
+.team-card-text-wrap {
+    position: absolute;
+    top: 78%;
+    left: 15px;
+    z-index: 3;
+}
+.team-title-main {
+    color: #f1f1f1;
+    font-weight: 600;
+}
+.team-name-main {
+    color: #f1f1f1;
+    font-weight: 600;
+}
+
+
+#students {
+    overflow: hidden;
+}
+
+.team-card-main-student {
+    width: 20rem;
+    height: 24rem;
+    position: relative;
+    min-width: 20rem;
+    padding: 0;
+}
+
+
+
+@media(min-width: 576px) {
+    /* TEAM */
+    .team-card-container {
+        width: 10rem;
+        height: 14rem;
+    }
+    .team-track {
+        width: 26rem;
+        transform: translateY(-67px);
+    }
+    #team-card-1 {
+        transform: translateX(-12rem) scale(.6);
+    }
+    #team-card-2 {
+        transform: translateX(0) scale(1);
+    }
+    #team-card-3 {
+        transform: translateX(12rem) scale(.6);
+    }
+    .team-name {
+        font-size: medium;
+        padding-left: 6px;
+    }
+    .team-title {
+        font-size: small;
+        padding-left: 6px;
+    }
+}
+
+
+@media(min-width: 768px) {
+    /* TYPEWRITER */
+    .typewrite-static-text {
+        font-size: 2rem;
+    }
+    .typewrite {
+        font-size: 2rem;
+    }
+    .type-cursor {
+        font-size: 2rem;
+    }
+
+    /* HERO */
+    .hero-h1 {
+        font-size: 3.5em;
+        -webkit-text-stroke: 2px #f1f1f1;
+    }
+
+    /* TEAM */
+    .team-card-container {
+        width: 12rem;
+        height: 16rem;
+    }
+    .team-track {
+        width: 30.5rem;
+        transform: translateY(-75px);
+    }
+    #team-card-1 {
+        transform: translateX(-14rem) scale(.6);
+    }
+    #team-card-2 {
+        transform: translateX(0) scale(1);
+    }
+    #team-card-3 {
+        transform: translateX(14rem) scale(.6);
+    }
+    .team-text-wrapper {
+        top: -56px;
+    }
+    .team-name {
+        font-size: large;
+        padding-left: 4px;
+    }
+    .team-title {
+        font-size: small;
+        padding-left: 5px;
+    }
+
+}
+@media(min-width: 992px) {
+    /* HERO */
+    .hero-h1 {
+        font-size: 4.5em;
+    }
+
+    /* TEAM */
+    .team-card-container {
+        width: 14rem;
+        height: 20rem;
+    }
+    .team-track {
+        width: 35rem;
+        transform: translateY(-80px);
+    }
+    #team-card-1 {
+        transform: translateX(-16rem) scale(.6);
+    }
+    #team-card-2 {
+        transform: translateX(0) scale(1);
+    }
+    #team-card-3 {
+        transform: translateX(16rem) scale(.6);
+    }
+    .team-text-wrapper {
+        top: -66px;
+    }
+    .team-name {
+        font-size: 22px;
+        padding-left: 4px;
+    }
+    .team-title {
+        font-size: 16px;
+        padding-left: 5px;
+    }
+}
+
+@media screen and (min-width: 1130px) {
+    .hero-header {
+        font-size: 100px;
+    }
+    .display-header {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* HERO */
+    .hero-h1 {
+        font-size: 5.5em;
+        max-width: 450px;
+    }
+
+    /* TEAM */
+    .team-card-container  {
+        width: 17rem;
+        height: 24rem;
+    }
+    .team-track {
+        width: 49rem;
+        transform: translateY(-85px);
+    }
+    #team-card-1 {
+        transform: translateX(-20rem) scale(.6);
+    }
+    #team-card-2 {
+        transform: translateX(0) scale(1);
+    }
+    #team-card-3 {
+        transform: translateX(20rem) scale(.6);
+    }
+    .team-name {
+        font-size: x-large;
+    }
+}
+
+
+@media(min-width: 1400px) {
+    .container-xxl {
+        max-width: 1475px;
+    }
+}
+
+@media(min-width: 1550px) {
+
+}
+
+@media(min-width: 1700px) {
+
+}

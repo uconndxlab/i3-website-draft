@@ -34,10 +34,11 @@ const sections = {
 /* ------------------- OBSERVERS ------------------- */
 
 // Element variables
-const starFade = document.querySelector('.star-canvas-fade');
+// const starFade = document.querySelector('.star-canvas-fade');
 const codeBGFade = document.querySelector('.blueprint-fade');
 let statCircleOnScreen = false;
 const animatedElements = document.querySelectorAll('.animated');
+const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
 
 
 
@@ -102,13 +103,13 @@ const heroObserver = new IntersectionObserver(entries => {
         }
         if(bgAnimated) animateFrame()
       }
-      if(!updateStarFade) updateStarFade = true;
+      // if(!updateStarFade) updateStarFade = true;
     } else {
       if(sections.hero.isOnScreen) {
         sections.hero.isOnScreen = false;
         frameLooping = false;
       }
-      if(updateStarFade) updateStarFade = false;
+      // if(updateStarFade) updateStarFade = false;
     }
   })
 }, {threshold: 0});
@@ -189,8 +190,8 @@ const mousePos = {x: 0, y: 0};
 
 // Get mouse position on mouse move (will be changed depending on how I change star pulling for optimization)
 window.addEventListener('mousemove', (event) => {
-  mousePos.x = event.pageX
-  mousePos.y = event.pageY;
+  mousePos.x = event.clientX
+  mousePos.y = event.clientY - ucHeaderRect.height;
 });
 
 // Pause animations when unfocused
@@ -236,10 +237,11 @@ let starFadeDecimal;
 
 function consistentScroll() {
   const scroll = window.scrollY;
+  fadeStarGridTransition(scroll)
   if (scroll < sections.story.top) {
     if (updateWave) waveScroll(scroll);
     if (updateStarFade) { starFadeScroll(scroll); console.log(updateStarFade) }
-
+    heroToStoryScroll(scroll)
   } else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
     body.style.backgroundColor = `rgb(${color2[0]}, ${color2[1]}, ${color2[2]})`;
 
@@ -247,9 +249,30 @@ function consistentScroll() {
     /*if(scroll >= sections.story.bottom - (sections.story.height / 3) && scroll < sections.team.top + (sections.team.height / 3)) {
       fadeCodeBG();
     }*/
-    fadeCodeBG(scroll)
+    //fadeCodeBG(scroll)
     projectScroll(scroll);
   }
+}
+function fadeStarGridTransition(scroll) {
+
+  let gridOpacity;
+  if (scroll < sections.story.top - (sections.story.top * .25)) {
+    gridOpacity = (scroll / sections.story.top);
+    gridOpacity = Math.min(Math.max(gridOpacity, 0), 1);
+  } else {
+    gridOpacity = 1;
+  }
+
+  let starOpacity;
+  if (scroll < sections.story.top) {
+    starOpacity = 1 - (scroll / sections.story.top);
+    starOpacity = Math.min(Math.max(starOpacity, 0), 1);
+  } else {
+    starOpacity = 0
+  }
+  // Set opacities
+  document.getElementById('star-canvas').style.opacity = `${starOpacity}`;
+  document.getElementById('blueprint').style.opacity = `${gridOpacity}`;
 }
 
 const color1 = [38, 38, 38];
@@ -308,26 +331,24 @@ function waveScroll(scroll) {
 }
 
 
+
 function starFadeScroll(scroll) {
-  if(scroll < sections.story.top) {
-    starFadeDecimal = Math.min(scroll / sections.story.top, 1);
-  } else if(scroll < maxScroll * 2) {
-    starFadeDecimal = 1 - Math.min((scroll - sections.story.top) / ((sections.story.top * 2) - sections.story.top), 1);
-  } else {
-    starFadeDecimal = 0;
-  }
+
   const decimal = Math.min(scroll / sections.story.top, 1);
   heroToStoryScroll(decimal, starFadeDecimal);
 }
 
 
-function heroToStoryScroll(decimal, starFadeDecimal) {
+function heroToStoryScroll(scroll) {
+  const decimal = Math.min(scroll / sections.story.top, 1);
+  //console.log(opacity)
+  console.log(scroll)
   const bgColor = changeBGColor(color1, color2, decimal);
-  starFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
-  starFade.style.opacity = `${starFadeDecimal}`;
-  console.log(starFadeDecimal)
+  // starFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
+  // starFade.style.opacity = `${starFadeDecimal}`;
+  // console.log(starFadeDecimal)
   // Set previous scroll to current scroll
-  console.log(decimal)
+  // console.log(decimal)
   body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
 }
 
@@ -390,6 +411,9 @@ function fadeCodeBG(scroll) {
   console.log('fadey')
 }
 
+const projectRow = document.querySelector('#row-1');
+const projectRow2 = document.querySelector('#row-2')
+
 function projectScroll(scroll) {
   const fadeStart = sections.projects.top - windowHeight;
   const decimal = Math.min((scroll - fadeStart) / windowHeight, 1);
@@ -403,9 +427,12 @@ function projectScroll(scroll) {
   const progress = Math.min(Math.max((scroll - scrollStart) / range, 0), 1);
 
   console.log('scrolling cards')
-  card1.style.transform = `translate(${calcMove(-card1DistX, card1DistX, progress)}px, ${calcMove(-card1DistY, card1DistY, progress)}px) rotate(-30deg)`;
+
+  projectRow.style.transform = `rotate(-20deg) translateX(${calcMove(-500, 500, progress)}px)`;
+  projectRow2.style.transform = `rotate(-20deg) translateX(${calcMove(500, -500, progress)}px`;
+/*  card1.style.transform = `translate(${calcMove(-card1DistX, card1DistX, progress)}px, ${calcMove(-card1DistY, card1DistY, progress)}px) rotate(-30deg)`;
   card2.style.transform = `translate(${calcMove(card2DistX, -card2DistX, progress)}px, ${calcMove(card2DistY, -card2DistY, progress)}px) rotate(-30deg)`;
-  card3.style.transform = `translate(${calcMove(-card3DistX, card3DistX, progress)}px, ${calcMove(-card3DistY, card3DistY, progress)}px) rotate(-30deg)`;
+  card3.style.transform = `translate(${calcMove(-card3DistX, card3DistX, progress)}px, ${calcMove(-card3DistY, card3DistY, progress)}px) rotate(-30deg)`;*/
 }
 
 const featProjects = [
@@ -623,6 +650,186 @@ function playRotateCode() {
   console.log('rotate played')
 }
 
+
+const phrases = [
+  "build systems",
+  "create websites",
+  "explore tech",
+  "implement solutions",
+  "develop apps"
+];
+
+const moveText = document.getElementById('move-text');
+const moveText2 = document.getElementById('move-text-2');
+const forUconn = document.getElementById('forUconn');
+const charWidth = 20;
+const maxPhraseLength = Math.max(...phrases.map(p => p.length));
+moveText.style.width = (maxPhraseLength * charWidth) + "px";
+moveText2.style.width = (maxPhraseLength * charWidth) + "px"; // For consistency
+let color = '#8dc1ff';
+let currPhrase = 0;
+forUconn.style.marginLeft = '8px';
+forUconn.style.transform = `translateX(${-(maxPhraseLength * charWidth) + phrases[currPhrase].length}px)`;
+buildPhrase1();
+
+function buildPhrase1() {
+  let direction = 1;
+  moveText.innerHTML = '';
+  for (let char of phrases[currPhrase]) {
+    let span = document.createElement('span');
+    span.classList.add('move-char');
+    span.style.display = 'inline-block';
+    span.style.opacity = '0';
+    span.style.position = 'relative';
+    span.style.color = `${color}`
+    span.style.transition = 'transform .54s cubic-bezier(.6,.2,.25,1), opacity .54s';
+    if(char === ' ') {
+      span.innerHTML = '&nbsp';
+      span.classList.add('space-char');
+      color = '#348fff';
+    } else {
+      span.innerText = char;
+    }
+    switch(direction) {
+      case 1: span.style.transform = 'translate(-50px, -45px)'; break;
+      case 2: span.style.transform = 'translate(50px, -45px)'; break;
+      case 3: span.style.transform = 'translate(50px, 45px)'; break;
+      case 4: span.style.transform = 'translate(-50px, 45px)'; break;
+    }
+    moveText.appendChild(span);
+    direction = (direction % 4) + 1;
+  }
+  setTimeout(phrase1In, 50)
+
+  color = '#8dc1ff';
+  currPhrase = (currPhrase + 1) % phrases.length;
+}
+
+function buildPhrase2() {
+  let direction = 1;
+  moveText2.innerHTML = '';
+  for (let char of phrases[currPhrase]) {
+    let span = document.createElement('span');
+    span.classList.add('move-char');
+    span.style.display = 'inline-block';
+    span.style.opacity = '0';
+    span.style.position = 'relative';
+    span.style.color = `${color}`
+    span.style.transition = 'transform .54s cubic-bezier(.6,.2,.25,1), opacity .54s';
+    if(char === ' ') {
+      span.innerHTML = '&nbsp';
+      span.classList.add('space-char');
+      color = '#348fff';
+    } else {
+      span.innerText = char;
+    }
+    switch(direction) {
+      case 1: span.style.transform = 'translate(-50px, -45px)'; break;
+      case 2: span.style.transform = 'translate(50px, -45px)'; break;
+      case 3: span.style.transform = 'translate(50px, 45px)'; break;
+      case 4: span.style.transform = 'translate(-50px, 45px)'; break;
+    }
+    moveText2.appendChild(span);
+    direction = (direction % 4) + 1;
+  }
+  setTimeout(phrase2In, 150);
+  color = '#8dc1ff';
+  currPhrase = (currPhrase + 1) % phrases.length;
+}
+
+function phrase1In() {
+  let delay = 0.08;
+  alignForUConn(moveText);
+  for(let char of moveText.children) {
+    char.style.transitionDelay = `${delay}s`;
+    char.style.transform = 'none';
+    char.style.opacity = '1';
+    delay += 0.06;
+  }
+  setTimeout(phrase1Out, getAnimationDuration(phrases[currPhrase].length));
+}
+
+function phrase2In() {
+  let delay = (0.06 * phrases[currPhrase].length) + .5;
+  alignForUConn(moveText2);
+  for(let char of moveText2.children) {
+    char.style.transitionDelay = `${delay}s`;
+    char.style.transform = 'none';
+    char.style.opacity = '1';
+    delay -= 0.06;
+  }
+  setTimeout(phrase2Out, getAnimationDuration(phrases[currPhrase].length));
+}
+
+function phrase1Out() {
+  let delay = 0.06 * moveText.children.length;
+  let direction = 1;
+  for (let char of moveText.children) {
+    char.style.transitionDelay = `${delay}s`;
+    switch (direction) {
+      case 1:
+        char.style.transform = 'translate(-50px, -45px)';
+        break;
+      case 2:
+        char.style.transform = 'translate(50px, -45px)';
+        break;
+      case 3:
+        char.style.transform = 'translate(50px, 45px)';
+        break;
+      case 4:
+        char.style.transform = 'translate(-50px, 45px)';
+        break;
+    }
+    char.style.opacity = '0';
+    direction = (direction % 4) + 1;
+    delay -= 0.06;
+  }
+  setTimeout(buildPhrase2, 100)
+}
+
+function phrase2Out() {
+  let delay = 0.08;
+  let direction = 1;
+  for (let char of moveText2.children) {
+    char.style.transitionDelay = `${delay}s`;
+    switch (direction) {
+      case 1:
+        char.style.transform = 'translate(-50px, -45px)';
+        break;
+      case 2:
+        char.style.transform = 'translate(50px, -45px)';
+        break;
+      case 3:
+        char.style.transform = 'translate(50px, 45px)';
+        break;
+      case 4:
+        char.style.transform = 'translate(-50px, 45px)';
+        break;
+    }
+    char.style.opacity = '0';
+    direction = (direction % 4) + 1;
+    delay += 0.06;
+  }
+  setTimeout(buildPhrase1, 100)
+}
+
+function getAnimationDuration(numLetters) {
+  const perLetterDelay = 0.06;
+  const baseDelay = 0.08;
+  const duration = 0.54;
+  const buffer = 1.25;
+  return (baseDelay + perLetterDelay * (numLetters - 1) + duration + buffer) * 1000;
+}
+
+function alignForUConn(wrapper) {
+  const charWidth = 20;
+  const textWidth = wrapper.children.length * charWidth;
+  forUconn.style.transition = 'transform 1.725s cubic-bezier(.5,.1,.3,1)';
+  forUconn.style.marginLeft = '8px';
+  forUconn.style.transform = `translateX(${-(maxPhraseLength * charWidth) + textWidth}px)`;
+
+}
+
 /* ------------------- ANIMATION FRAME LOOP ------------------- */
 
 
@@ -634,9 +841,6 @@ let bgAnimated = false;
 let frameLooping = false;
 // Call animation frame
 function animateFrame(now) {
-  frameLooping = true
-  if(now >= frameTest) {console.log(`frameRate: ${frameCount / 3}fps`); frameCount = 0; frameTest = now + 3000}
-  frameCount++;
   // Check framerate sync
   if(now - lastTime >= frameRate) {
     lastTime = now;
@@ -738,12 +942,17 @@ function getStarsByCode(code) {
 
 
 // Define canvas/ctx variables
-const canvas = document.querySelector('canvas');
+const canvas = document.getElementById('star-canvas');
 const ctx = canvas.getContext('2d');
 
-// Set space between stars
-const spacing = 50;
+canvas.style.top = `${ucHeaderRect.height}px`;
+document.getElementById('i3-head').style.top = `${ucHeaderRect.height}px`
 
+// Set space between stars
+const spacing = window.innerWidth / 30;
+const blueprintGrid = document.getElementById('blueprint');
+blueprintGrid.style.backgroundSize = `${spacing}px ${spacing}px`
+blueprintGrid.style.top = `${ucHeaderRect.height}px`;
 // Set section breakpoints
 const horizBreak = Math.floor(screen.height / 2);
 const leftVertBreak = Math.floor(screen.width / 3);
@@ -779,6 +988,12 @@ function resizeStarBG() {
     ctx.drawImage(cachedStarSections[code], Math.round(x), Math.round(y))
   }
 }
+blueprintGrid.style.transition = 'opacity .75s';
+canvas.style.transition = 'opacity 1s';
+function test() {
+  blueprintGrid.style.opacity = '1';
+  canvas.style.opacity = '0';
+}
 
 // Set frame number to 0
 let frame = 0;
@@ -810,17 +1025,17 @@ function createStarBG() {
       // Set x to col's spacing value +/- ~7 with offset by 10 for first col to ensure it is drawn onscreen
       if(col === 0) {
         // Set x to column's spacing value +/- ~7 with offset to ensure onscreen
-        x = (col*spacing) + (Math.random() * 14 - 7) + 10;
+        x = (col*spacing) + (Math.random() * 8 - 4) + 5;
       } else {
         // Set x to column's spacing value +/- ~7
-        x = (col * spacing) + (Math.random() * 14 - 7);
+        x = (col * spacing) + (Math.random() * 8 - 4);
       }
 
       // Set y to row's spacing value +/- ~7 with offset by 10 for first row to ensure it is drawn onscreen
       if(row === 0) {
-        y = (row * spacing) + (Math.random() * 14 - 7) + 10;
+        y = (row * spacing) + (Math.random() * 8 - 4) + 5;
       } else {
-        y = (row * spacing) + (Math.random() * 14 - 7);
+        y = (row * spacing) + (Math.random() * 8 - 4);
       }
 
       // Set delay based on row and column number
@@ -1257,228 +1472,7 @@ for(let i = 0; i < cardArrows.length; i++) {
   cardArrows[i].innerHTML += cardArrowSVG;
 }
 
-const team = [
-  {
-    name: 'Joel Salisbury',
-    title: 'Director of i3',
-    img: 'img/i3/people/salisbury.jpg'
-  },
-  {
-    name: 'Brian Kelleher',
-    title: 'Senior Applications Developer',
-    img: 'img/i3/people/kelleher.jpg'
-  },
-  {
-    name: 'Natalie Lacroix',
-    title: 'Senior UX Designer',
-    img: 'img/i3/people/lacroix.jpg'
-  },
-  {
-    name: 'Jeff Winston',
-    title: 'Director: - Nexus',
-    img: 'img/i3/people/winston.jpg'
-  },
-  {
-    name: 'Brian Daley',
-    title: 'Faculty Advisor - DMD',
-    img: 'img/i3/people/daley.jpg'
-  },
-  {
-    name: 'Michael Vertefeuille',
-    title: 'Faculty Advisor - DMD',
-    img: 'img/i3/people/vert.jpg'
-  },
-  {
-    name: 'Emma Adams',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/adams.jpg'
-  },
-  {
-    name: 'Lauren Busavage',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/busavage.png'
-  },
-  {
-    name: 'Kelis Clarke',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg'
-  },
-  {
-    name: 'Ryan Cohutt',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg'
-  },
-  {
-    name: 'Maggie Danielewicz',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/danielewicz.jpg'
-  },
-  {
-    name: 'Luna Gonzalez',
-    title: 'Student Illustrator',
-    img: 'img/i3/people/luna.jpg'
-  },
-  {
-    name: 'Aaron Mark',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/jonathan.jpg'
-  },
-  {
-    name: 'Jack Medrek',
-    title: 'Student Software Developer',
-    img: 'img/i3/people/medrek.jpg'
-  },
-  {
-    name: 'Kailey Moore',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/moore.jpg'
-  },
-  {
-    name: 'William Shostak',
-    title: 'Student Software Developer',
-    img: 'img/i3/people/shostak.jpg'
-  },
-  {
-    name: 'Emelia Salmon',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg'
-  }
-]
 
-
-const cards = [
-  {
-    wrapper: document.getElementById('team-card-1'),
-    container: document.getElementById('team-card-1').querySelector('.team-card-container'),
-    front: document.getElementById('team-card-1').querySelector('.team-card-container').querySelector('.card-front'),
-    name: document.getElementById('team-card-1').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-name'),
-    title: document.getElementById('team-card-1').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-title'),
-    position: 'left',
-    id: 0
-  },
-  {
-    wrapper: document.getElementById('team-card-2'),
-    container: document.getElementById('team-card-2').querySelector('.team-card-container'),
-    front: document.getElementById('team-card-2').querySelector('.team-card-container').querySelector('.card-front'),
-    name: document.getElementById('team-card-2').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-name'),
-    title: document.getElementById('team-card-2').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-title'),
-    position: 'center',
-    id: 1
-  },
-  {
-    wrapper: document.getElementById('team-card-3'),
-    container: document.getElementById('team-card-3').querySelector('.team-card-container'),
-    front: document.getElementById('team-card-3').querySelector('.team-card-container').querySelector('.card-front'),
-    name: document.getElementById('team-card-3').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-name'),
-    title: document.getElementById('team-card-3').querySelector('.team-card-container').querySelector('.card-front').querySelector('.team-title'),
-    position: 'right',
-    id: 2
-  }
-];
-
-let cardYRotates = [60, 180, -60];
-let cardRotates = [-2, 0, 2];
-let leftRem = '-22rem';
-let rightRem = '22rem';
-
-cards[0].wrapper.addEventListener('animationend', () => {
-  cards.forEach(card => {
-    if(card.wrapper.classList.contains('left2center-arc')) {
-      card.wrapper.classList.remove('left2center-arc');
-      card.wrapper.style.transform = 'translateX(0rem) scale(1.3)';
-    }
-    else if(card.wrapper.classList.contains('center2right-arc')) {
-      card.wrapper.classList.remove('center2right-arc');
-      card.wrapper.style.transform = `translateX(${rightRem}) scale(0.5)`;
-    }
-    else if(card.wrapper.classList.contains('right2left-arc')) {
-      card.wrapper.classList.remove('right2left-arc')
-      card.wrapper.style.transform = `translateX(${leftRem}) scale(0.5)`;
-    }
-  })
-  randomTeam();
-  if(sections.team.isOnScreen) {
-    setTimeout(rotateCards, 2000)
-  } else {
-    cards.forEach(card => {
-      if(card.position === 'left') { card.wrapper.style.transform = `translateX(${leftRem}) scale(0.5)` }
-      else if(card.position === 'center') { card.wrapper.style.transform = `translateX(0) scale(1.3)` }
-      else if(card.position === 'right') { card.wrapper.style.transform = `translateX(${rightRem}) scale(0.5)`}
-    })
-  }
-})
-
-let teamLooping = false;
-let teamSelectable = [...team]
-let teamTimeout = [];
-let initialRandom = true;
-function randomTeam() {
-  cards.forEach(card => {
-    if(card.position === 'right' || initialRandom) {
-      const rand = Math.floor(Math.random() * teamSelectable.length)
-      card.front.style.background = `url("${teamSelectable[rand].img}") no-repeat center / cover`;
-      if(card.name === 'Maggie Danielewicz') {
-        if(window.innerWidth < 768 || (window.innerWidth > 992 && window.innerWidth < 1200)) {card.title.style.marginTop = '-20px'}
-        else {card.title.style.marginTop = '0'}
-      }
-      card.name.innerText = `${teamSelectable[rand].name}`;
-      card.title.innerText = `${teamSelectable[rand].title}`;
-      teamTimeout.push(teamSelectable[rand]);
-      teamSelectable.splice(rand, 1)
-      if(teamTimeout.length > 5) { teamSelectable.push(teamTimeout.splice(0, 1)[0]) }
-    }
-  });
-  initialRandom = false;
-}
-randomTeam()
-
-function rotateCards() {
-  cardYRotates = cardYRotates.map(y => y + 120);
-  cardRotates = cardRotates.map(y => y <= 0 ? y + 2 : y - 4);
-
-
-
-  cards.forEach(card => {
-    card.wrapper.style.transform = 'none';
-    switch(card.position) {
-      case 'left':
-        card.wrapper.style.setProperty('--start-rem', leftRem);
-        card.wrapper.style.setProperty('--end-rem', '0rem');
-        card.wrapper.classList.add('left2center-arc');
-        setTimeout(() => {card.wrapper.style.zIndex = '4'}, 500);
-        card.position = 'center';
-        break;
-      case 'center':
-        card.wrapper.style.setProperty('--start-rem', '0rem');
-        card.wrapper.style.setProperty('--end-rem', rightRem)
-        card.wrapper.classList.add('center2right-arc');
-        setTimeout(() => {card.wrapper.style.zIndex = '2'}, 2000);
-        card.position = 'right';
-        break;
-      case 'right':
-        card.wrapper.style.setProperty('--start-rem', rightRem);
-        card.wrapper.style.setProperty('--end-rem', leftRem)
-        card.wrapper.classList.add('right2left-arc');
-        setTimeout(() => {card.wrapper.style.zIndex = '1'}, 450);
-        card.position = 'left';
-        break;
-    }
-    card.container.style.transform = `rotateY(${cardYRotates[card.id]}deg) rotate(${cardRotates[card.id]}deg) rotateX(-10deg)`;
-  })
-}
-
-function resizeTeamCards() {
-  if(window.innerWidth <= 768) {
-    leftRem = '-12rem';
-    rightRem = '12rem';
-  } else if(window.innerWidth <= 992) {
-    leftRem = '-14rem';
-    rightRem = '14rem';
-  } else if(window.innerWidth <= 1200) {
-    leftRem = '-16rem';
-    rightRem = '16rem'
-  }
-}
 
 /*typewriter*/
 const TxtType = function (el, toRotate, period) {
