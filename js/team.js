@@ -23,11 +23,15 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('load', () => {
-  setCardWidth();
-  setCardSpeed();
   resizeTeamCards();
-  rotateCards();
-  startAni();
+  setTimeout(initialStartAni, 2000)
+  console.log(
+    "width", window.innerWidth,
+    "height", window.innerHeight,
+    "dpr", window.devicePixelRatio,
+    "isTouch", 'ontouchstart' in window
+  );
+
 });
 
 document.addEventListener('visibilitychange', () => {
@@ -61,13 +65,26 @@ document.addEventListener('visibilitychange', () => {
       void card.offsetWidth;
     });
 
-    // Now start again
     startAni();
   }
 });
 
 let pageHidden = false;
-
+let heroOnScreen = false;
+let cardsRotating = false;
+let initialCardRotate = true;
+const heroObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(!heroOnScreen) heroOnScreen = true;
+      if(initialCardRotate) { setTimeout(() => {rotateCards(); initialCardRotate = false;}, 500) }
+      else if(!cardsRotating) rotateCards();
+    } else {
+      if(heroOnScreen) heroOnScreen = false;
+    }
+  })
+})
+heroObserver.observe(document.getElementById('carousel-wrap'));
 
 
 const team = [
@@ -209,7 +226,12 @@ cards[0].wrapper.addEventListener('animationend', () => {
     }
   })
   randomTeam();
-  setTimeout(rotateCards, 2000)
+  console.log(`onscreen: ${heroOnScreen}`)
+  if(heroOnScreen) {
+    setTimeout(rotateCards, 2000);
+  } else {
+    cardsRotating = false;
+  }
 /*  if(sections.team.isOnScreen) {
     setTimeout(rotateCards, 2000)
   } else {
@@ -246,6 +268,7 @@ function randomTeam() {
 randomTeam()
 
 function rotateCards() {
+  if(!cardsRotating) cardsRotating = true;
   cardYRotates = cardYRotates.map(y => y + 120);
   cardRotates = cardRotates.map(y => y <= 0 ? y + 2 : y - 4);
 
@@ -441,6 +464,7 @@ let row1Timeouts = [];
 let row2Timeouts = [];
 let speed;
 let delay;
+let dpr = window.devicePixelRatio;
 
 function getTimeoutState(timeoutData, currIndex, delay) {
   const now = Date.now();
@@ -457,13 +481,16 @@ function getTimeoutState(timeoutData, currIndex, delay) {
 }
 
 function setCardSpeed() {
+  dpr = window.devicePixelRatio;
+  let screenWidth = window.innerWidth * dpr;
+  console.log(`windowwidth ${window.innerWidth} dprwidth ${screenWidth}`)
   if(window.innerWidth < 568) {speed = window.innerWidth * 20; delay = (speed / 200 * 100)}
   else if(window.innerWidth < 768) {speed = window.innerWidth * 15; delay = (speed / 250) * 100}
   else if(window.innerWidth < 992) {speed = window.innerWidth * 12; delay = (speed / 375) * 100}
   else if(window.innerWidth < 1200) {speed = window.innerWidth * 9; delay = (speed / 425) * 100}
   else if(window.innerWidth < 1400) {speed = window.innerWidth * 8; delay = (speed / 450) * 100}
   else if(window.innerWidth < 1600) {speed = window.innerWidth * 7; delay = (speed / 500) * 100}
-  else {speed = window.innerWidth * 6.5; delay = (speed / 550) * 100}
+  else {speed = window.innerWidth * 7.5; delay = (speed / 600) * 100}
 }
 setCardSpeed();
 
@@ -513,6 +540,10 @@ let row2 = [];
 
     card.appendChild(gradient);
 
+    const hover = document.createElement('div');
+    hover.classList.add('team-card-main-hover');
+    card.appendChild(hover);
+
     const img = document.createElement('img');
     img.src = `${student.img}`;
     img.alt = `${student.name}`;
@@ -550,6 +581,10 @@ row2 = [
 row1.forEach((card, index) => {
   card.style.right = `-${cardWidth}px`;
   studentRow1.appendChild(card);
+  card.addEventListener('touchstart', () => {
+    cardTouchHover(card);
+    pauseCards();
+  });
   card.addEventListener('mouseenter', () => {
     cardHover(card);
     pauseCards();
@@ -563,6 +598,10 @@ row1.forEach((card, index) => {
 row2.forEach((card, index) => {
   card.style.left = `-${cardWidth}px`;
   studentRow2.appendChild(card);
+  card.addEventListener('touchstart', () => {
+    cardTouchHover(card);
+    pauseCards();
+  });
   card.addEventListener('mouseenter', () => {
     cardHover(card);
     pauseCards();
@@ -573,14 +612,40 @@ row2.forEach((card, index) => {
   });
 });
 
-function cardHover(card) {
+function cardTouchHover(card) {
   card.querySelector('.linked-in-wrap').style.opacity = '1';
+  card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
+  card.querySelector('.team-card-main-hover').style.opacity = '.5';
+  card.querySelector('.linked-in').style.opacity = '1';
+  card.querySelector('.team-name-main').style.color = 'dimgray';
+  card.querySelector('.team-title-main').style.color = 'dimgray';
+
+  card.addEventListener('touchstart', cardTouchDisableHover)
+  function cardTouchDisableHover() {
+    card.removeEventListener('touchstart', cardTouchDisableHover)
+    card.querySelector('.team-card-main-hover').style.opacity = '0';
+    card.querySelector('.linked-in-wrap').style.opacity = '0';
+    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
+    card.querySelector('.linked-in').style.opacity = '0';
+    card.querySelector('.team-name-main').style.color = '#f1f1f1';
+    card.querySelector('.team-title-main').style.color = '#f1f1f1';
+    playCards();
+  }
+
+}
+
+function cardHover(card) {
+  card.querySelector('.team-card-main-hover').style.opacity = '.5';
+  card.querySelector('.linked-in-wrap').style.opacity = '1';
+  card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
   card.querySelector('.linked-in').style.opacity = '1';
   card.querySelector('.team-name-main').style.color = 'dimgray';
   card.querySelector('.team-title-main').style.color = 'dimgray';
 }
 
 function disableHover(card) {
+  card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
+  card.querySelector('.team-card-main-hover').style.opacity = '0';
   card.querySelector('.linked-in-wrap').style.opacity = '0';
   card.querySelector('.linked-in').style.opacity = '0';
   card.querySelector('.team-name-main').style.color = '#f1f1f1';
@@ -650,10 +715,12 @@ function row1Ani(fromIndex = 0, initialDelay = 0) {
     row1TimeoutData.push({index: i, scheduled});
     let t = setTimeout(() => {
       if(pageHidden || cardsPaused) return;
+      void row1[i].offsetWidth;
 
-      row1[i].style.setProperty('--student-ani-dist', `-${window.innerWidth + cardWidth}px`);
+      row1[i].style.setProperty('--student-ani-dist', `-${window.innerWidth + cardWidth + (cardWidth/2)}px`);
       row1[i].style.setProperty('--student-ani-dur', `${speed}ms`);
       row1[i].classList.add('student-ani');
+      console.log(speed)
       row1[i].addEventListener('animationend', function row1AniEnd() {
         row1[i].removeEventListener('animationend', row1AniEnd);
         row1[i].classList.remove('student-ani');
@@ -664,6 +731,7 @@ function row1Ani(fromIndex = 0, initialDelay = 0) {
         row1CurrIndex = 0;
         row1Ani();
       }
+      console.log(delay)
 
     }, delayToNext);
     row1Timeouts.push(t);
@@ -679,9 +747,11 @@ function row2Ani(fromIndex = 0, initialDelay = 0) {
     row2TimeoutData.push({index: i, scheduled});
     let t = setTimeout(() => {
       if(pageHidden || cardsPaused) return;
-      row2[i].style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth}px`);
+      row2[i].offsetWidth;
+      row2[i].style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth + (cardWidth / 2)}px`);
       row2[i].style.setProperty('--student-ani-dur', `${speed}ms`);
       row2[i].classList.add('student-ani');
+      console.log(speed)
       row2[i].addEventListener('animationend', function row1AniEnd() {
         row2[i].removeEventListener('animationend', row1AniEnd);
         row2[i].classList.remove('student-ani');
@@ -691,7 +761,7 @@ function row2Ani(fromIndex = 0, initialDelay = 0) {
         row2CurrIndex = 0;
         row2Ani();
       }
-
+    console.log(delay)
     }, delayToNext);
     row2Timeouts.push(t);
     delayToNext += delay;
@@ -712,8 +782,17 @@ function startAni() {
 }*/
 
 function startAni() {
+
   row1Ani();
-  row2Ani()
+  row2Ani();
+}
+
+function initialStartAni() {
+  setCardWidth();
+  setCardSpeed();
+  void document.offsetWidth;
+  row1Ani();
+  row2Ani();
 }
 
 function restartRow1() {
@@ -863,3 +942,12 @@ function restartRow2() {
     }
   }
 //studentAni()*/
+
+const arrowSVG = '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
+  '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
+  '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+  '</svg>'
+const arrowSVGElems = document.querySelectorAll('.arrow-btn-circle');
+for(let i = 0; i < arrowSVGElems.length; i++) {
+  arrowSVGElems[i].innerHTML = arrowSVG;
+}

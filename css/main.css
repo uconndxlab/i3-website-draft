@@ -1,0 +1,172 @@
+
+
+
+
+
+
+
+
+
+
+
+/* FOOTER */
+.footer {
+    min-height: 75vh;
+}
+.form-wrap {
+    width: 50vw;
+
+}
+.name-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: start;
+    justify-content: start;
+}
+.input-wrap {
+    width: 100%;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    position: relative;
+
+}
+.input-wrap > label {
+    font-size: 16px;
+    color: #f1f1f1;
+    padding: 0 1px;
+    top: -10px;
+    left: 15px;
+    background: linear-gradient(to bottom, #262626, #232323);
+    position: absolute;
+    border-radius: 5px;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    transition: color 0.5s;
+    z-index: 4;
+}
+.form-input {
+    font-family: inherit;
+    font-size: 18px;
+    background: #232323;
+    color: #f1f1f1;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    box-shadow: rgba(241,241,241,.25) 0 0 4px 0px;
+    transition: box-shadow .5s ease-in-out;
+    width: 100%;
+}
+
+.input-text {
+
+}
+.form-input:focus {
+    box-shadow: #6bc0ff 0 0 4px 0px;
+    z-index: 5;
+}
+.form-input:focus + label {
+    color: #6bc0ff;
+}
+.arrow-btn-wrapper {
+    align-items: center;
+    gap: 3%;
+}
+.arrow-btn-circle {
+    width: 3.75rem;
+    height: 3.75rem;
+    background: none;
+    border: 2px rgba(241, 241, 241, 1) solid;
+    transition: border .5s ease, background-color .5s ease;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.arrow-btn {
+    transition: transform .5s ease;
+    transform: scale(1.1) rotate(0deg);
+}
+.arrow-btn > line, .arrow-btn > polyline {
+    transition: stroke-width .5s ease, stroke .5s ease;
+}
+
+.arrow-btn-circle:hover {
+    border: 2px rgba(241, 241, 241, .5) solid;
+    background-color: rgba(241, 241, 241, .75);
+    cursor: pointer;
+}
+
+.arrow-btn-circle:hover .arrow-btn {
+    transform: translateX(5px) scale(1.25, 1.15);
+}
+
+.arrow-btn-circle:hover .arrow-btn > line,
+.arrow-btn-circle:hover .arrow-btn > polyline {
+    stroke-width: 3px;
+    stroke: #262626;
+}
+
+#message {
+    min-height: 6rem;
+}
+
+.submit-wrap {
+    position: relative;
+    height: 100px;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.submit-wrap > h5 {
+    margin-bottom: 0;
+    color: #f1f1f1;
+}
+.footer-info {
+    background: rgb(27 34 43);
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+}
+.footer-link {
+    color: #f1f1f1;
+    font-size: large;
+}
+.maps {
+    height: 40vh;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;}
+.maps > h5 {
+    color: #f1f1f1;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+@media(min-width: 576px) {
+    .name-wrap {
+        flex-direction: row;
+        gap: 1rem;
+    }
+}
+@media(min-width: 992px) {
+    .maps {
+        height: 100%;
+        width: 100%;
+    }
+}
+@media(min-width: 1400px) {
+    .container-xxl {
+        max-width: 1475px;
+    }
+}
