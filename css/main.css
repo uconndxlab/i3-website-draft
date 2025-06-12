@@ -87,7 +87,7 @@
     align-items: center;
 }
 .arrow-btn {
-    transition: transform .5s ease;
+    transition: transform 1s ease-in-out;
     transform: scale(1.1) rotate(0deg);
 }
 .arrow-btn > line, .arrow-btn > polyline {
@@ -101,6 +101,7 @@
 }
 
 .arrow-btn-circle:hover .arrow-btn {
+    transition: transform 1s ease-in-out;
     transform: translateX(5px) scale(1.25, 1.15);
 }
 

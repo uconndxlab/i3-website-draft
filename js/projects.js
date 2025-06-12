@@ -577,7 +577,7 @@ const togglerCircle = document.querySelector('.toggler-circle');
 const sortWrap = document.querySelector('.project-sort-wrap');
 
 
-toggler.addEventListener('pointerdown', toggleSort)
+//toggler.addEventListener('pointerdown', toggleSort)
 
 
 let sort = false;
@@ -605,6 +605,15 @@ const arrowSVG = '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 
   '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
   '</svg>'
 const arrowSVGElems = document.querySelectorAll('.arrow-btn-circle');
-for(let i = 0; i < arrowSVGElems.length; i++) {
+/*for(let i = 0; i < arrowSVGElems.length; i++) {
   arrowSVGElems[i].innerHTML = arrowSVG;
+}*/
+
+const sidebar = document.querySelector('.sort-sidebar-inner');
+const sidebarToggle = document.querySelector('.sort-sidebar-toggle')
+const sidebarToggleBtn = sidebarToggle.querySelector('.sidebar-toggle-btn');
+function toggleSidebar() {
+  sidebar.classList.toggle('sidebar-open');
+  sidebarToggle.classList.toggle('sidebar-toggle-open');
+  sidebarToggleBtn.classList.toggle('sidebar-toggle-btn-rotate');
 }

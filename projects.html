@@ -127,8 +127,35 @@
         </div>
       </div>
     </section>
+
     <section id="project-list">
-      <div class="container-xxl">
+      <div class="sort-sidebar">
+        <div class="sort-sidebar-toggle">
+          <h5>Sort By Tags</h5>
+          <button class="arrow-btn-circle" onclick="toggleSidebar()">
+            '<svg class="sidebar-toggle-btn sidebar-toggle-btn-rotate" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
+            '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
+            '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+            '</svg>'
+          </button>
+        </div>
+        <div class="sort-sidebar-inner">
+
+          <button class="project-sort-select selected" onclick="toggleTag('webDev')" id="webDev">Web Development</button>
+          <button class="project-sort-select selected" onclick="toggleTag('mobilePWA')" id="mobilePWA">Mobile PWA</button>
+          <div class="sort-ui-ux-wrapper">
+            <button class="project-sort-select selected" onclick="toggleTag('uxDesign')" id="ux">UX Design</button>
+            <button class="project-sort-select selected" onclick="toggleTag('uiDesign')" id="ui">UI Design</button>
+          </div>
+          <button class="project-sort-select selected" onclick="toggleTag('illustration_poster')" id="illustration">Illustration/Poster Design</button>
+          <button class="project-sort-select selected" onclick="toggleTag('emailMarketing_notif')" id="emails">Email Marketing/Notifications</button>
+          <button class="project-sort-select selected" onclick="toggleTag('printProduction_work')" id="print">Print Production/Printwork</button>
+        </div>
+
+      </div>
+      <div class="container-xxl projects-container">
+
+<!--
         <h4 class="sort-head">Project View</h4>
         <div class="project-view-select">
           <h5 class="project-view-selector">All</h5>
@@ -160,6 +187,7 @@
             </div>
           </div>
         </div>
+  -->
         <div class="project-popups-wrapper" id="popups-wrap"></div>
 
 

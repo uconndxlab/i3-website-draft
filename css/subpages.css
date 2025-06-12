@@ -745,8 +745,11 @@ h6,
 /* PROJECT PAGE SPECIFIC STYLING */
 
 #project-list {
-    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     position: relative;
+    width: 100vw;
 }
 .sort-head {
     font-size: xx-large;
@@ -794,17 +797,26 @@ h6,
     margin: 1em 0;
 }
 .project-sort-select {
-    border-radius: 5px;
+    border-radius: .75rem;
     padding: .25rem 1rem;
     margin: 0;
+    background: #bdc8df;
     white-space: nowrap;
+    border: none;
+    outline: 1px solid grey;
+    box-shadow: #00000085 1px 3px 3px 1px;
+    font-weight: 600;
+    transition: outline-color .25s, background-color .25s, box-shadow .25s, color .25s;
 }
 
 .selected {
-    background-color: dimgray;
-    color: white;
+    background-color: #0236da;
+    color: #f1f1f1;
+    outline-color: darkblue;
+    box-shadow: inset #051d91 2px 2px 2px 0px;
 }
 .project-list {
+    flex: 1;
     border: gray 2px solid;
     display: flex;
     height: fit-content;
@@ -862,6 +874,133 @@ h6,
     transform: translateX(0);
     transition: transform .5s ease-in, fill .5s;
 }
+
+.projects-container {
+    display: flex;
+    height: 100%;
+    width: 90vw;
+    overflow-y: auto;
+
+    position: relative;
+    align-self: flex-start;
+}
+
+.sort-sidebar {
+    position: absolute;
+    top: 0;
+    flex-shrink: 0;
+    z-index: 2;
+    right: 0;
+    height: 100%;
+}
+
+.sort-sidebar-toggle {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition: transform .75s ease-in-out;
+    transform: translateX(11rem) translateY(8rem);
+    z-index: 5;
+    top: 9%;
+    width: fit-content;
+
+}
+.sort-sidebar-toggle > h5 {
+    color: #f1f1f1;
+    font-size: x-large;
+    font-weight: 700;
+}
+.sidebar-toggle-btn-rotate {
+    transform: rotateY(180deg) scale(1.1)  !important;
+}
+
+.sort-sidebar-inner {
+    position: sticky;
+    display: flex;
+    width: 24rem;
+    right: 0;
+    border: 2px grey solid;
+    padding-top: 6rem;
+    padding-bottom: 1rem;
+    padding-right: 1.25rem;
+    gap: 1rem;
+    border-radius: 1.5rem 0 0 1.5rem;
+    flex-direction: column;
+    box-shadow: inset rgba(241, 241, 241, .1) 0 4px 20px 0px, rgb(0 0 0 / 37%) 6px 10px 14px 5px;
+    top: 20%;
+    background: linear-gradient(to right, rgb(29 29 29 / 84%), #8f8f8f63);
+    align-items: flex-end;
+    transition: transform 1s ease-in-out;
+    transform: translateX(100%);
+}
+
+.sort-ui-ux-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.sidebar-toggle-btn-wrapper {
+    align-items: center;
+    gap: 3%;
+}
+.sidebar-toggle-btn-circle {
+    width: 3.75rem;
+    height: 3.75rem;
+    background: none;
+    border: 2px rgba(241, 241, 241, 1) solid;
+    transition: border .5s ease, background-color .5s ease;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sidebar-toggle-btn {
+    transition: transform 1s ease-in-out;
+    transform: scale(1.1) rotate(0deg);
+}
+.sidebar-toggle-btn > line, .sidebar-toggle-btn > polyline {
+    transition: stroke-width .5s ease, stroke .5s ease;
+}
+
+.arrow-btn-circle:hover {
+    border: 2px rgba(241, 241, 241, .5) solid;
+    background-color: rgba(241, 241, 241, .75);
+    cursor: pointer;
+}
+
+.arrow-btn-circle:hover .sidebar-toggle-btn {
+    transition: transform .5s ease-in;
+    transform: translateX(5px) scale(1.25, 1.15);
+}
+
+.arrow-btn-circle:hover .sidebar-toggle-btn-rotate {
+    transition: transform .5s ease-in !important;
+    transform: translateX(-5px) rotateY(180deg) scale(1.25, 1.15) !important;
+}
+
+.arrow-btn-circle:hover .sidebar-toggle-btn > line,
+.arrow-btn-circle:hover .sidebar-toggle-btn > polyline {
+    stroke-width: 3px;
+    stroke: #262626;
+}
+
+.sidebar-closed {
+
+}
+.sidebar-open {
+    transition: transform 1s ease-in-out !important;
+    transform: translateX(0) !important;
+}
+.sidebar-toggle-closed {
+
+}
+.sidebar-toggle-open {
+    transition: transform .75s ease-in-out !important;
+    transition-delay: .275s !important;
+    transform: translateX(1rem) translateY(8rem) !important;
+}
+
 
 
 /* PROJECT OBJECT STYLES */
