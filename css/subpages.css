@@ -1477,7 +1477,7 @@ h6,
         max-width: 90vw;
     }
     .sort-sidebar-toggle {
-        transform: translateX(14rem) translateY(8rem);
+        transform: translateX(12rem) translateY(8rem);
     }
 }
 
