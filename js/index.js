@@ -1,3 +1,8 @@
+import projects from './projectData.js';
+
+
+
+
 
 const sections = {
   hero: {
@@ -14,7 +19,7 @@ const sections = {
     height: document.getElementById('story').offsetHeight,
     bottom: document.getElementById('story').offsetTop + document.getElementById('story').offsetHeight
   },
-  projects: {
+/*  projects: {
     div: document.getElementById('projects'),
     isOnScreen: false,
     top: document.getElementById('projects').offsetTop,
@@ -27,7 +32,7 @@ const sections = {
     top: document.getElementById('team').offsetTop,
     height: document.getElementById('team').offsetHeight,
     bottom: document.getElementById('team').offsetHeight + document.getElementById('team').offsetTop
-  }
+  }*/
 }
 
 
@@ -132,6 +137,7 @@ const statCircleObserver = new IntersectionObserver(entries => {
 }, {threshold: .1});
 statCircleObserver.observe(statCircle);
 
+/*
 const projectsObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
@@ -165,6 +171,7 @@ const teamObserver = new IntersectionObserver(entries => {
 }, {threshold: .1});
 teamObserver.observe(sections.team.div);
 
+*/
 
 
 /* ------------------- BASE EVENT LISTENERS ------------------- */
@@ -213,11 +220,13 @@ document.addEventListener('visibilitychange', () => {
 
 
 window.addEventListener('scroll', consistentScroll);
+/*
 const scrollBreakpoints = {
   'heroEnd': sections.story.top,
 
   'storyEnd': sections.projects.top
 }
+*/
 
 const maxScroll = window.innerHeight;
 
@@ -239,19 +248,19 @@ function consistentScroll() {
   const scroll = window.scrollY;
   fadeStarGridTransition(scroll)
   if (scroll < sections.story.top) {
-    if (updateWave) waveScroll(scroll);
+    //if (updateWave) waveScroll(scroll);
     if (updateStarFade) { starFadeScroll(scroll); console.log(updateStarFade) }
     heroToStoryScroll(scroll)
-  } else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
+  } /*else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
     body.style.backgroundColor = `rgb(${color2[0]}, ${color2[1]}, ${color2[2]})`;
 
   } else {
-    /*if(scroll >= sections.story.bottom - (sections.story.height / 3) && scroll < sections.team.top + (sections.team.height / 3)) {
+    /!*if(scroll >= sections.story.bottom - (sections.story.height / 3) && scroll < sections.team.top + (sections.team.height / 3)) {
       fadeCodeBG();
-    }*/
+    }*!/
     //fadeCodeBG(scroll)
-    projectScroll(scroll);
-  }
+    //projectScroll(scroll);
+  }*/
 }
 function fadeStarGridTransition(scroll) {
 
@@ -356,15 +365,16 @@ function heroToStoryScroll(scroll) {
 function storyToProjectsScroll(scroll) {
 
 }
+/*
 const angle = -30 * (Math.PI / 180);
 
 const card1 = document.getElementById('project-card-1');
 const card2 = document.getElementById('project-card-2');
 const card3 = document.getElementById('project-card-3');
-
+/!*
 const card1Dist = calcCardTranslations(card1, angle);
 const card2Dist = calcCardTranslations(card2, angle);
-const card3Dist = calcCardTranslations(card3, angle);
+const card3Dist = calcCardTranslations(card3, angle);*!/
 
 const card1DistX = Math.cos(angle) * card1Dist;
 const card1DistY = Math.sin(angle) * card1Dist;
@@ -430,9 +440,9 @@ function projectScroll(scroll) {
 
   projectRow.style.transform = `rotate(-20deg) translateX(${calcMove(-500, 500, progress)}px)`;
   projectRow2.style.transform = `rotate(-20deg) translateX(${calcMove(500, -500, progress)}px`;
-/*  card1.style.transform = `translate(${calcMove(-card1DistX, card1DistX, progress)}px, ${calcMove(-card1DistY, card1DistY, progress)}px) rotate(-30deg)`;
+/!*  card1.style.transform = `translate(${calcMove(-card1DistX, card1DistX, progress)}px, ${calcMove(-card1DistY, card1DistY, progress)}px) rotate(-30deg)`;
   card2.style.transform = `translate(${calcMove(card2DistX, -card2DistX, progress)}px, ${calcMove(card2DistY, -card2DistY, progress)}px) rotate(-30deg)`;
-  card3.style.transform = `translate(${calcMove(-card3DistX, card3DistX, progress)}px, ${calcMove(-card3DistY, card3DistY, progress)}px) rotate(-30deg)`;*/
+  card3.style.transform = `translate(${calcMove(-card3DistX, card3DistX, progress)}px, ${calcMove(-card3DistY, card3DistY, progress)}px) rotate(-30deg)`;*!/
 }
 
 const featProjects = [
@@ -648,7 +658,254 @@ function playRotateCode() {
     spans[i].style.animationPlayState = 'running';
   }
   console.log('rotate played')
+}*/
+
+const projectsRow1 = document.querySelector('#row-1');
+const projectsRow2 = document.querySelector('#row-2');
+
+const projectDivs = [];
+
+projects.forEach(project => {
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('project-wrapper');
+  wrapper.style.background = `url('${project.img}') center center / cover no-repeat`;
+
+  const title = document.createElement('h5');
+  title.innerText = `${project.name}`;
+  title.classList.add('project-title');
+  wrapper.appendChild(title);
+
+  const overlay = document.createElement('div');
+  overlay.classList.add('project-overlay');
+  wrapper.appendChild(overlay);
+
+  wrapper.addEventListener('pointerenter', () => {
+    projectHover(wrapper);
+  });
+
+  const wrapperAbsolute = document.createElement('div');
+  wrapperAbsolute.classList.add('project-wrapper-abs');
+  wrapperAbsolute.appendChild(wrapper);
+  wrapperAbsolute.id = project.name;
+
+  projectDivs.push(wrapperAbsolute);
+
+})
+
+let cardWidth = 320;
+
+for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 2); i++, i2--) {
+  projectDivs[i].style.left = `-${cardWidth + (cardWidth / 2)}px`;
+  projectDivs[i2].style.right = `-${cardWidth + (cardWidth / 2)}px`;
+  projectsRow1.appendChild(projectDivs[i]);
+  projectsRow2.appendChild(projectDivs[i2]);
 }
+
+
+function projectHover(project) {
+
+}
+
+let row1Index = 0;
+let row2Index = 0;
+for(let card of projectsRow1.children) {
+  card.addEventListener('mouseenter', () => {
+    projectsHover(card);
+  });
+  card.addEventListener('mouseleave', projectsUnHover);
+  card.addEventListener('animationstart', function nextCard() {
+    row1Index = (row1Index + 1) % projectsRow1.children.length;
+    animateProjectCardRow1(projectsRow1.children[row1Index])
+  })
+  card.addEventListener('animationend', function resetCard() {
+    card.classList.remove('project-ani');
+  })
+}
+for(let card of projectsRow2.children) {
+  card.addEventListener('mouseenter', () => {
+    projectsHover(card)
+  });
+  card.addEventListener('mouseleave', projectsUnHover);
+  card.addEventListener('animationstart', function nextCard() {
+    row1Index = (row1Index + 1) % projectsRow2.children.length;
+    animateProjectCardRow2(projectsRow2.children[row1Index])
+  })
+  card.addEventListener('animationend', function resetCard() {
+    card.classList.remove('project-ani');
+  })
+}
+
+
+let cardsOnScreen = [];
+
+
+
+function projectsHover(card) {
+  cardsOnScreen = [];
+  for(let card of projectsRow1.children) {
+    const rect = card.getBoundingClientRect();
+    if(rect.x > 0 && rect.x < window.innerWidth) cardsOnScreen.push(card);
+    card.firstElementChild.style.transition = 'transform .5s ease-out';
+    card.firstElementChild.style.transform = 'translateX(50px)';
+    card.style.animationPlayState = 'paused';
+
+
+  }
+  for(let card of projectsRow2.children) {
+    const rect = card.getBoundingClientRect();
+    if(rect.x > 0 && rect.x < window.innerWidth) cardsOnScreen.push(card);
+    card.firstElementChild.style.transition = 'transform .5s ease-out';
+    card.firstElementChild.style.transform = 'translateX(-50px)';
+    card.style.animationPlayState = 'paused';
+  }
+  linkCards(card);
+}
+function projectsUnHover() {
+  cardsOnScreen = [];
+  for(let card of document.querySelectorAll('.project-card-hover')) {
+    card.classList.remove('project-card-hover');
+  }
+  for(let card of projectsRow1.children) {
+    card.firstElementChild.style.transform = 'none';
+    card.style.opacity = '1';
+    card.style.animationPlayState = 'running';
+  }
+  for(let card of projectsRow2.children) {
+    card.firstElementChild.style.transform = 'none';
+    card.style.opacity = '1';
+    card.style.animationPlayState = 'running';
+  }
+}
+
+function linkCards(hoveredCard) {
+  let linkedCards;
+  const hoveredProject = projects.find(p => p.name === hoveredCard.id);
+  const tags = hoveredProject.tags;
+  let selectedTags;
+  if(tags.includes('Illustration') || tags.includes('Poster Design')) {
+    selectedTags = ['Illustration', 'Poster Design'];
+  } else if(tags.includes('Email Marketing') || tags.includes('Email Notifications')) {
+    selectedTags = ['Email Marketing', 'Email Notifications'];
+  } else if(tags.includes('Print Production') || tags.includes('Printwork')) {
+    selectedTags = ['Print Production', 'Printwork'];
+  } else if(tags.includes('Mobile PWA')) {
+    selectedTags = ['Mobile PWA'];
+  } else if(tags.includes('UI Design')) {
+    selectedTags = ['UI Design'];
+  } else {
+    selectedTags = tags;
+  }
+
+  linkedCards = getLinks(selectedTags);
+
+  if(linkedCards.length < 2) {
+    linkedCards = getLinks(tags);
+  }
+
+  console.log(linkedCards.length);
+  let indices = getIndices(linkedCards.length);
+  let chosenLinks = [];
+  indices.forEach(i => {
+    chosenLinks.push(linkedCards[i]);
+  })
+  const unLinked = [
+    ...Array.from(projectsRow1.children),
+    ...Array.from(projectsRow2.children)
+  ]
+  unLinked.splice(unLinked.indexOf(hoveredCard), 1);
+  hoveredCard.firstElementChild.classList.add('project-card-hover')
+  cardsOnScreen.splice(cardsOnScreen.indexOf(hoveredCard), 1);
+  chosenLinks.forEach(card => {
+    unLinked.splice(unLinked.indexOf(card), 1);
+    card.firstElementChild.classList.add('project-card-hover');
+  })
+  unLinked.forEach(card => {
+    card.style.opacity = '0.15';
+  })
+}
+
+function getLinks(tags) {
+  let linkedCards = [];
+  cardsOnScreen.forEach(card => {
+    const project = projects.find(p => p.name === card.id);
+    tags.forEach(tag => {
+      if(project.tags.includes(tag) && !linkedCards.includes(card)) {
+        linkedCards.push(card);
+      }
+    })
+  });
+  return linkedCards;
+}
+
+function getIndices(linkedLength) {
+  const max = 2;
+  let indices = [];
+  if(linkedLength <= max) {
+    indices = Array.from({length: linkedLength}, (_, i) => i)
+  } else {
+    const indexPool = Array.from({length: linkedLength}, (_, i) => i);
+    for(let i = 0; i < max; i++) {
+      const rand = Math.floor(Math.random() * indexPool.length);
+      indices.push(indexPool.splice(rand, 1)[0]);
+    }
+
+  }
+  return indices;
+}
+
+animateProjectCardRow1(projectsRow1.children[row1Index])
+animateProjectCardRow2(projectsRow2.children[row2Index])
+let row1IndexRect = projectsRow1.children[row1Index].getBoundingClientRect();
+/*function row1Ani() {
+  if(!projectsRow1.children[row1Index].classList.contains('project-ani')) {
+    animateProjectCard(projectsRow1.children[row1Index]);
+  }
+  row1IndexRect = projectsRow1.children[row1Index].getBoundingClientRect();
+  if(row1IndexRect.left > 50) {
+    row1Index++;
+    animateProjectCard(projectsRow1.children[row1Index])
+  }
+  setTimeout(row1Ani, 50);
+
+}*/
+
+function animateProjectCardRow1(card) {
+  card.style.setProperty('--project-ani-del', '1.25s');
+  card.style.setProperty('--project-ani-dist', `${window.innerWidth + cardWidth * 2}px`);
+  card.style.setProperty('--project-ani-dur', `${8}s`);
+  card.classList.add('project-ani');
+}
+function animateProjectCardRow2(card) {
+  card.style.setProperty('--project-ani-del', '1.25s');
+  card.style.setProperty('--project-ani-dist', `-${window.innerWidth + cardWidth * 2}px`);
+  card.style.setProperty('--project-ani-dur', `${8}s`);
+  card.classList.add('project-ani');
+}
+
+
+
+function placeProjects() {
+  let cardSpace = 1;
+  const cardSize = projectsRow1.firstElementChild.getBoundingClientRect().width;
+  const totalWidth = window.innerWidth;
+  const totalCount = projectsRow1.children.length;
+
+  const countOnScreen = Math.max(1, Math.min(totalCount, Math.floor((totalWidth + cardSpace) / (cardSize + cardSpace)))) + 1;
+  const totalCardWidth = countOnScreen * cardSize;
+  const totalSpacing = totalWidth - totalCardWidth;
+  const space = totalSpacing / (countOnScreen + 1);
+  for(let i = 0; i < countOnScreen; i++) {
+    const translate = i * (cardSize + cardSpace);
+    projectsRow1.children[i].style.transform = `translateX(${translate}px)`;
+    projectsRow2.children[i].style.transform = `translateX(${translate - 100}px)`;
+  }
+  for(let i = countOnScreen; i <= totalCount - 1; i++) {
+    projectsRow1.children[i].style.transform = `translateX(-${cardSize + cardSpace}px)`;
+    projectsRow2.children[i].style.transform = `translateX(-${cardSize + cardSpace + 100}px)`;
+
+  }
+}
+//placeProjects();
 
 
 const phrases = [
@@ -918,7 +1175,7 @@ function cacheStaticStars() {
       ctx.beginPath();
       ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
       ctx.fillStyle = 'rgb(77,179,255)';
-      ctx.globalAlpha = 0.15;
+      ctx.globalAlpha = 0.25;
       ctx.fill();
       ctx.restore();
     })
@@ -1096,8 +1353,8 @@ function animateStarBG() {
         drawStarInitial(star);
 
         // If star alpha is smaller than .5 add .1
-        if (star.alpha < 0.15) {
-          star.alpha += 0.01;
+        if (star.alpha < 0.25) {
+          star.alpha += 0.05;
 
           // Set star animation incomplete true when star alpha < .5
           fadeInIncomplete = true;
@@ -1281,7 +1538,7 @@ function drawStar(star) {
   ctx.beginPath();
   ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
   ctx.fillStyle = 'rgb(77,179,255)';
-  ctx.globalAlpha = 0.15;
+  ctx.globalAlpha = 0.25;
   ctx.fill();
   ctx.restore();
 }

@@ -8,6 +8,9 @@
   --waveX25Percent: -750px;
   --waveX50Percent: -1500px;
   --waveX75Percent: -2250px;
+  --project-ani-dur: 0;
+  --project-ani-dist: 0;
+  --project-ani-del: 0;
 }
 
 body {
@@ -373,9 +376,7 @@ h6,
 #team {
   background: linear-gradient(rgb(20,20,20) 25%, #192b41 100%);
 }
-footer {
-  background: linear-gradient(#192b41 0%, rgb(30, 78, 131) 100%);
-}
+
 
 .section-head {
   color: #f1f1f1;
@@ -521,17 +522,136 @@ footer {
   stroke: #262626;
 }
 
+/* PROJECTS */
+
 #projects {
-  height: 150vh;
+  height: 100vh;
   width: 100vw;
 }
 
-.projects-wrapper {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  z-index: 1;
+.projects-row {
+  width: 100vw;
+  position: relative;
+  gap: 20px;
+  height: 15rem;
+  z-index: 2;
+  transform: rotate(-15deg);
 }
+
+
+.project-wrapper-abs {
+  width: min-content;
+  height: min-content;
+  transition: opacity .5s;
+  position: absolute;
+}
+
+.project-wrapper {
+  display: flex;
+  width: 20rem;
+  height: 12rem;
+  border-radius: 15px;
+  transition: transform .75s ease-out;
+  box-shadow: #37494b61 0 0 11px 3px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.project-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(150%);
+  color: #f1f1f1;
+  opacity: 0;
+  transition: opacity .5s ease-out, transform .75s ease-out;
+  width: fit-content;
+  text-align: center;
+
+  z-index: 2;
+  height: 3rem;
+}
+
+.project-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  z-index: 1;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(50%);
+  transition: transform .75s ease-out;
+  background-color: rgba(0,0,0,.5);
+}
+/*
+.project-wrapper:hover > .project-overlay {
+  transform: translateX(-50%) translateY(-50%);
+}
+.project-wrapper:hover > .project-title {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%);
+}
+*/
+
+.project-card-hover > .project-overlay {
+  transform: translateX(-50%) translateY(-50%);
+}
+.project-card-hover > .project-title {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+
+.project-ani {
+  animation-name: project-ani;
+  animation-duration: var(--project-ani-dur);
+  animation-delay: var(--project-ani-del);
+  animation-timing-function: linear;
+  animation-fill-mode: none;
+}
+@keyframes project-ani {
+  0%{transform: translateX(0)}
+  100%{transform: translateX(var(--project-ani-dist))}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .blueprint-fade {
   pointer-events: none;
@@ -771,15 +891,7 @@ footer {
   opacity: .35;
 }
 
-.project-overlay {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%);
-  color: white;
-  opacity: 1;
-  z-index: 10;
-}
+
 
 .card-1-row {
   display: flex;

@@ -12,6 +12,14 @@
 /* FOOTER */
 .footer {
     min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.footer-head {
+    font-size: xx-large;
+    text-align: center;
+    color: #f1f1f1;
 }
 .form-wrap {
     width: 50vw;
@@ -129,10 +137,10 @@
 }
 .footer-info {
     background: rgb(27 34 43);
-    height: 100px;
+    height: 17rem;
     display: flex;
-    flex-direction: row;
-    gap: 5rem;
+    flex-direction: column;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
 }
@@ -164,6 +172,11 @@
     .maps {
         height: 100%;
         width: 100%;
+    }
+    .footer-info {
+        height: 100px;
+        gap: 5rem;
+        flex-direction: row;
     }
 }
 @media(min-width: 1400px) {
