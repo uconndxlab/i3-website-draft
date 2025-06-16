@@ -1,6 +1,7 @@
 :root {
     --student-ani-dur: 0ms;
     --student-ani-dist: 0px;
+    --student-ani-del: 0;
     --student-row-margin: 30px;
     --student-ani-startX: 0px;
     --student-ani-Y: 0px;
@@ -581,8 +582,8 @@ h6,
 .linked-in {
     opacity: 0;
     transition: opacity .5s, transform .5s;
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -591,15 +592,14 @@ h6,
 }
 
 .linked-in-wrap {
-    width: 75px;
+    width: 50px;
     opacity: 0;
     transition: opacity .5s;
-    height: 75px;
+    height: 50px;
     position: absolute;
     z-index: 3;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 1rem;
+    right: 1rem;
     border-radius: 25px;
     background-color: rgba(0,0,0,.7);
     pointer-events: none;
@@ -611,6 +611,8 @@ h6,
     height: 22rem;
     position: relative;
     padding: 0;
+    box-shadow: rgba(241, 241, 241, .35) 0px 0px 9px;
+    border-radius: 25px;
 }
 .team-card-main:hover .team-card-main-hover {
     opacity: .5;
@@ -661,8 +663,8 @@ h6,
 .team-card-main-img {
     max-width: 100%;
     max-height: 100%;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
     object-position: var(--img-pos);
     display: block;
     object-fit: cover;
@@ -705,7 +707,10 @@ h6,
     width: min-content;
     height: min-content;
     position: absolute;
-    transition: opacity .5s;
+    transition: opacity .5s, transform .5s ease-in-out;
+    perspective: 1200px;
+    perspective-origin: center;
+    transform-origin: center;
 }
 
 
@@ -715,13 +720,62 @@ h6,
     height: 352px;
     position: relative;
     padding: 0;
+    transform-style: preserve-3d;
     transition: transform .75s ease-out;
+    transform: rotateX(-180deg);
 }
+.student-tag {
+    color: #f1f1f1;
+    font-weight: 600;
+    transition: color .5s;
+    padding: .35rem .75rem .25rem .75rem;
+    border-radius: 1rem;
+    border: 1px #f1f1f1 solid;
+    margin-bottom: 0;
+}
+.student-tag-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: .5rem;
+    margin-bottom: .75rem;
+    margin-top: .25rem;
+}
+
+.team-card-main-student .student-card-face {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    backface-visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+.team-card-main-student .student-card-front {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: start;
+    transform: rotateX(180deg);
+    box-shadow: rgba(241, 241, 241, .35) 0px 0px 9px;
+    border-radius: 25px;
+}
+.team-card-main-student .student-card-back {
+    box-shadow: inset rgba(241, 241, 241, 0.6) 0 0 10px 2px;
+    width: 100%;
+    height: 100%;
+}
+.team-card-bio {
+    margin-bottom: auto;
+    padding: 1.25rem;
+}
+
 
 .student-ani {
     animation-name: student-ani;
     animation-duration: var(--student-ani-dur);
     animation-timing-function: linear;
+    animation-delay: var(--student-ani-del);
     animation-fill-mode: none;
 }
 
@@ -816,18 +870,19 @@ h6,
     box-shadow: inset #051d91 2px 2px 2px 0px;
 }
 .project-list {
-    flex: 1;
     border: gray 2px solid;
     display: flex;
     height: fit-content;
     border-radius: 25px;
-    padding: 1.5rem;
+    padding: .75rem;
+    max-width: 97%;
+    gap: .75rem;
+    width: 100%;
     justify-content: center;
-    align-items: center ;
+    align-items: flex-start;
     box-shadow: inset rgba(241, 241, 241, .1) 0 4px 20px 0px;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 100vw;
     margin: auto;
     transition: height .5s;
     min-height: 300px;
@@ -903,7 +958,7 @@ h6,
     align-items: center;
     flex-direction: column;
     transition: transform .75s ease-in-out;
-    transform: translateX(8rem) translateY(0);
+    transform: translateX(14rem) translateY(0);
     z-index: 5;
     top: -8rem;
     pointer-events: all;
@@ -919,6 +974,17 @@ h6,
     transform: rotateY(180deg) scale(1.1)  !important;
 }
 
+.sort-sidebar-tags-wrap {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    align-items: flex-end;
+    flex-direction: column;
+
+}
+
 .sort-sidebar-inner {
     pointer-events: all;
     position: absolute;
@@ -926,10 +992,10 @@ h6,
     width: 19rem;
     right: 0;
     border: 2px grey solid;
-    padding-top: 6rem;
     padding-bottom: 1rem;
     padding-right: 1.25rem;
     gap: 1rem;
+    height: fit-content;
     border-radius: 1.5rem 0 0 1.5rem;
     flex-direction: column;
     box-shadow: inset rgba(241, 241, 241, .1) 0 4px 20px 0px, rgb(0 0 0 / 37%) 6px 10px 14px 5px;
@@ -939,6 +1005,14 @@ h6,
     transition: transform 1s ease-in-out;
     transform: translateX(100%);
 }
+.sort-sidebar-inner > h5 {
+    color: white;
+    font-size:x-large;
+    margin-bottom: auto;
+    font-weight: 700;
+    padding-top: 1.25rem;
+}
+
 
 .sort-ui-ux-wrapper {
     display: flex;
@@ -1002,7 +1076,7 @@ h6,
 }
 .sidebar-toggle-open {
     transition: transform .75s ease-in-out !important;
-    transition-delay: .275s !important;
+    transition-delay: .225s !important;
     transform: translateX(1rem) translateY(0) !important;
 }
 
@@ -1020,8 +1094,10 @@ h6,
     display: flex;
     transition: opacity .25s ease-out, transform .5s ease-in-out;
     width: 17rem;
-    height: 10.5rem;
-    margin: .25rem;
+    max-width: 17rem;
+    flex: 1 1 13rem;
+    height: 9.5rem;
+    margin: 0 !important;
     border-radius: 15px;
     box-shadow: #37494b61 0 0 11px 3px;
     position: relative;
@@ -1156,10 +1232,8 @@ h6,
 @media(min-width: 400px) {
     .project-wrapper {
         width: 20rem;
-        height: 12rem;
-    }
-    .project-list {
-        max-width: 100vw;
+        max-width: 1;
+        height: 9.5rem;
     }
     .sort-sidebar {
         width: 24rem;
@@ -1168,7 +1242,7 @@ h6,
         width: 24rem;
     }
     .sort-sidebar-toggle {
-        transform: translateX(14rem) translateY(0);
+        transform: translateX(18.75rem) translateY(0);
     }
 }
 
@@ -1293,12 +1367,20 @@ h6,
         height: 320px;
     }
     .project-wrapper {
-        margin: .75rem;
         width: 17rem;
         height: 10.5rem;
+        flex: 1 1 15rem;
+        max-width: 22rem;
     }
 
 }
+
+@media(min-width: 875px) {
+    .project-wrapper {
+        flex: 1 1 16rem;
+    }
+}
+
 @media(min-width: 992px) {
     /* HERO */
     .hero-h1 {
@@ -1356,13 +1438,10 @@ h6,
         height: 10.5rem;
         margin: .75rem;
     }
-    .project-list {
-        max-width: 67vw;
-    }
     .sort-sidebar-toggle {
         position: sticky;
         top: 9%;
-        transform: translateX(14rem) translateY(8rem);
+        transform: translateX(19.25rem) translateY(8rem) scale(.9);
     }
     .sidebar-toggle-open {
         transform: translateX(1rem) translateY(8rem) !important;
@@ -1387,12 +1466,11 @@ h6,
 }
 
 @media (min-width: 1175px) {
-    .project-list {
-        max-width: 72vw;
-    }
     .project-wrapper {
         width: 15rem;
+        flex: 1 1 15rem;
         height: 9rem;
+        max-width: 16rem;
     }
 }
 
@@ -1437,12 +1515,17 @@ h6,
 }
 
 @media(min-width: 1325px) {
-    .project-list {
-        max-width: 75vw;
-    }
     .project-wrapper {
+        flex: 1 1 17rem;
         width: 18rem;
         height: 11rem;
+        max-width: 18rem;
+    }
+    .project-list {
+        max-width: 100%;
+    }
+    .sort-sidebar-toggle {
+        transform: translateX(19.15rem) translateY(8rem) scale(.9);
     }
 }
 
@@ -1458,26 +1541,33 @@ h6,
     .project-popup {
         width: 40vw;
     }
+    .project-wrapper {
+        max-width: 20rem;
+    }
+    .sort-sidebar-toggle {
+        transform: translateX(18.75rem) translateY(8rem);
+    }
 }
 
-
+@media(min-width: 1550px) {
+    .project-wrapper {
+        max-width: 21rem;
+    }
+}
 
 @media(min-width: 1650px) {
-    .project-list {
-        max-width: 80vw;
-    }
+
     .project-wrapper {
         width: 18rem;
         height: 11rem;
+        flex: 1 1 18rem;
+        max-width: 22rem;
     }
 }
 
 @media(min-width: 1800px) {
-    .project-list {
-        max-width: 90vw;
-    }
     .sort-sidebar-toggle {
-        transform: translateX(12rem) translateY(8rem);
+        transform: translateX(16rem) translateY(8rem);
     }
 }
 

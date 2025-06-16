@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/i3.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="aos-master/dist/aos.css">
   <link rel="stylesheet" href="https://use.typekit.net/lmy8hrr.css">
   <link rel="stylesheet" href="https://use.typekit.net/nyu4feu.css">
 
@@ -97,16 +98,16 @@
       <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#what-we-do">What We Do</a>
+            <a class="nav-link" href="/contact.html">What We Do</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#our-work">Our Work</a>
+            <a class="nav-link" href="/index-update.html/projects.html">Our Work</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#team">Team</a>
+            <a class="nav-link" href="/index-update.html/team.html">Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="/alumni.html">Contact</a>
           </li>
 
         </ul>
@@ -119,7 +120,6 @@
 <main>
 <!--  <div class="star-canvas-fade"></div>-->
   <canvas id="star-canvas"></canvas>
-  <div class="blueprint-grid" id="blueprint" style="position: fixed"></div>
 
   <section id="hero">
     <div id="hero-head" class="container-fluid d-flex justify-content-center align-content-center">
@@ -159,8 +159,10 @@
     </div>
   </section>
   <section id="story">
-    <div class="container-fluid align-content-start pt-8 story-container">
-      <div class="row">
+    <div class="container-fluid align-content-center pt-8 story-container">
+      <h2 class="section-head-side" data-aos="slide-left" data-aos-delay="500" data-aos-duration="500">What We Do</h2>
+
+      <div class="row" id="story-row">
         <div class="col-12 col-lg-6 story-body mt-4 mt-lg-0 mx-auto mx-lg-0 ps-10">
           <h3 class="section-head"><span class="underline">What</span> We Do</h3>
           <span class="story-body-text">The Internal Insights & Innovation (i3) team provides custom software development, web design,
@@ -171,8 +173,8 @@
             the tools already available at UConn. But when the wheel doesn't fit the task, we step in with a lean, agile approach—building, testing,
             and refining solutions that adapt to the university's evolving needs.</span>
         </div>
-        <div class="col-12 col-lg-6 my-10 my-lg-0">
-          <div class="d-flex align-items-center p-10 justify-content-center text-center story-stat-wrapper">
+        <div class="col-12 col-lg-6 my-10 my-lg-0" id="story-stat-aos">
+          <div class="d-flex align-items-center p-10 justify-content-center text-center story-stat-wrapper" data-aos="fade-left" data-aos-duration="1250" data-aos-once="true">
             <div class="story-stat" id="story-stat">
               <h2 id="stat-head">30+</h2>
               <span id="stat-span" class="text-xl-large fw-bolder">Grant-funded Projects</span>
@@ -194,9 +196,22 @@
     </div>
   </section>
 
-  <section id="projects">
-    <div class="projects-row" id="row-1"></div>
-    <div class="projects-row" id="row-2"></div>
+  <section id="projects" class="d-flex flex-column justify-content-center">
+    <h2 class="projects-head" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="250">For The University</h2>
+    <div class="container-fluid project-container">
+      <div class="projects-row" id="row-1"></div>
+      <div class="projects-row" id="row-2"></div>
+      <div class="projects-btn">
+        <h4>View All Projects</h4>
+        <button class="arrow-btn-circle">
+          '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
+          '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
+          '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+          '</svg>'
+        </button>
+      </div>
+    </div>
+
   </section>
 <!--
   <section id="projects">
@@ -316,6 +331,22 @@
     </div>
   </section>-->
 
+  <section id="team">
+    <h2 class="team-head" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="250">By The University</h2>
+    <div class="container-fluid team-container">
+      <div class="team-row"></div>
+      <div class="team-btn">
+        <h4>View All Team Members</h4>
+        <button class="arrow-btn-circle">
+          '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
+          '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
+          '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+          '</svg>'
+        </button>
+      </div>
+    </div>
+  </section>
+
 
 </main>
 <footer class="footer mt-10">
@@ -376,5 +407,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module" src="./js/index.js"></script>
+<script src="aos-master/dist/aos.js"></script>
+<script>AOS.init()</script>
 </body>
 </html>

@@ -1,22 +1,15 @@
 window.addEventListener('resize', () => {
   resizeTeamCards();
-  row1CurrIndex = 0;
-  row2CurrIndex = 0;
-  row1Delay = 0;
-  row2Delay = 0;
-  clearCardTimeouts();
-  row1TimeoutData = [];
-  row2TimeoutData = [];
   setCardWidth();
   setCardSpeed();
   row1.forEach(card => {
     card.classList.remove('student-ani');
-    card.style.right = `-${cardWidth}px`;
+    card.style.right = `-${cardWidth + 10}px`;
     void card.offsetWidth;
   });
   row2.forEach(card => {
     card.classList.remove('student-ani');
-    card.style.left = `-${cardWidth}px`;
+    card.style.left = `-${cardWidth + 10}px`;
     void card.offsetWidth;
   });
   startAni();
@@ -24,20 +17,15 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('load', () => {
   resizeTeamCards();
-  setTimeout(initialStartAni, 2000)
-  console.log(
-    "width", window.innerWidth,
-    "height", window.innerHeight,
-    "dpr", window.devicePixelRatio,
-    "isTouch", 'ontouchstart' in window
-  );
+  setCardWidth();
+  setCardSpeed();
+  startAni();
 
 });
 
 document.addEventListener('visibilitychange', () => {
   if(document.hidden) {
     pageHidden = true;
-    clearCardTimeouts();
     for(let card of document.querySelectorAll('.student-ani')) {
       card.style.animationPlayState = 'paused';
     }
@@ -47,21 +35,14 @@ document.addEventListener('visibilitychange', () => {
       card.style.animationPlayState = 'running';
     }
 
-    row1CurrIndex = 0;
-    row2CurrIndex = 0;
-    row1Delay = 0;
-    row2Delay = 0;
-    row1TimeoutData = [];
-    row2TimeoutData = [];
-
     row1.forEach(card => {
       card.classList.remove('student-ani');
-      card.style.right = `-${cardWidth}px`;
+      card.style.right = `-${cardWidth + 10}px`;
       void card.offsetWidth;
     });
     row2.forEach(card => {
       card.classList.remove('student-ani');
-      card.style.left = `-${cardWidth}px`;
+      card.style.left = `-${cardWidth + 10}px`;
       void card.offsetWidth;
     });
 
@@ -232,15 +213,6 @@ cards[0].wrapper.addEventListener('animationend', () => {
   } else {
     cardsRotating = false;
   }
-/*  if(sections.team.isOnScreen) {
-    setTimeout(rotateCards, 2000)
-  } else {
-    cards.forEach(card => {
-      if(card.position === 'left') { card.wrapper.style.transform = `translateX(${leftRem}) scale(0.6)` }
-      else if(card.position === 'center') { card.wrapper.style.transform = `translateX(0) scale(1)` }
-      else if(card.position === 'right') { card.wrapper.style.transform = `translateX(${rightRem}) scale(0.6)`}
-    })
-  }*/
 })
 
 let teamLooping = false;
@@ -326,7 +298,11 @@ const students = [
     title: 'Student Web Developer',
     img: 'img/i3/people/adams.jpg',
     gradient: '7, 46, 51',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Laravel', 'Javascript'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Lauren Busavage',
@@ -334,7 +310,12 @@ const students = [
     title: 'Student Web Developer',
     img: 'img/i3/people/busavage.png',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Aurora', 'Sketches'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+
   },
   {
     name: 'Kelis Clarke',
@@ -342,7 +323,11 @@ const students = [
     title: 'Student UI/UX Designer',
     img: 'img/i3/people/jonathan.jpg',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Ryan Cohutt',
@@ -350,7 +335,11 @@ const students = [
     title: 'Student UI/UX Designer',
     img: 'img/i3/people/jonathan.jpg',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Maggie Danielewicz',
@@ -358,7 +347,11 @@ const students = [
     title: 'Student Web Developer',
     img: 'img/i3/people/danielewicz.jpg',
     gradient: '30, 50, 30',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Luna Gonzalez',
@@ -366,7 +359,11 @@ const students = [
     title: 'Student Illustrator',
     img: 'img/i3/people/luna.jpg',
     gradient: '30, 50, 30',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Aaron Mark',
@@ -374,7 +371,11 @@ const students = [
     title: 'Student Web Developer',
     img: 'img/i3/people/jonathan.jpg',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Jack Medrek',
@@ -382,7 +383,11 @@ const students = [
     title: 'Student Software Developer',
     img: 'img/i3/people/medrek.jpg',
     gradient: '1, 7, 41',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Kailey Moore',
@@ -390,7 +395,11 @@ const students = [
     title: 'Student UI/UX Designer',
     img: 'img/i3/people/moore.jpg',
     gradient: '38, 0, 76',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'William Shostak',
@@ -398,7 +407,11 @@ const students = [
     title: 'Student Software Developer',
     img: 'img/i3/people/shostak.jpg',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Emelia Salmon',
@@ -406,7 +419,11 @@ const students = [
     title: 'Student UI/UX Designer',
     img: 'img/i3/people/jonathan.jpg',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   },
   {
     name: 'Victoria Brey',
@@ -414,35 +431,21 @@ const students = [
     title: 'Student Web Developer',
     img: 'img/i3/people/jonathan.jpg',
     gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/'
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
   }
 ]
 
+let row1Index = 0;
+let row2Index = 0;
 
-
-function clearCardTimeouts() {
-  row1Timeouts.forEach(t => clearTimeout(t));
-  row1Timeouts = [];
-  row2Timeouts.forEach(t => clearTimeout(t))
-  row2Timeouts = [];
-}
 
 const studentRow1 = document.getElementById('students-row-1');
 const studentRow2 = document.getElementById('students-row-2')
-/*
-function calcStudentRow(cardWidth) {
-  const minGap = 25;
-  const rowWidth = window.innerWidth;
-  const minPeek = cardWidth / 2;
-  let cardsOnScreen = Math.floor((rowWidth - 2 * minPeek + minGap) / (cardWidth + minGap));
-  cardsOnScreen = Math.max(1, cardsOnScreen);
-  cardsOnScreen = Math.min(cardsOnScreen, students.length);
-  const gapNum = cardsOnScreen - 1;
-  const totalCardWidth = cardsOnScreen * cardWidth;
-  let gap = (rowWidth - 2 * minPeek - totalCardWidth) / gapNum;
-  if(gap < 25) gap = 25;
-  const
-}*/
+
 
 function setCardWidth() {
   if(window.innerWidth < 768) {cardWidth = 288}
@@ -452,49 +455,22 @@ function setCardWidth() {
   else {cardWidth = 320}
 }
 
-let row1CurrIndex = 0;
-let row2CurrIndex = 0;
-let row1NextTimeout = 0;
-let row2NextTimeout = 0;
-let row1TimeoutData = [];
-let row2TimeoutData = [];
-let row1Pause = null;
-let row2Pause = null;
-let row1Timeouts = [];
-let row2Timeouts = [];
+
 let speed;
 let delay;
-let dpr = window.devicePixelRatio;
 
-function getTimeoutState(timeoutData, currIndex, delay) {
-  const now = Date.now();
-  const next = timeoutData.find(data => data.index >= currIndex && data.scheduled > now);
-  let nextIndex;
-  let nextTimeout;
-  if(next) { nextIndex = next.index; nextTimeout = Math.max(0, next.scheduled - now) }
-  else {nextIndex = 0; nextTimeout = delay;
-}
-  return {
-    nextIndex,
-    nextTimeout
-  }
-}
+
 
 function setCardSpeed() {
-  dpr = window.devicePixelRatio;
-  let screenWidth = window.innerWidth * dpr;
-  console.log(`windowwidth ${window.innerWidth} dprwidth ${screenWidth}`)
-  if(window.innerWidth < 568) {speed = window.innerWidth * 20; delay = (speed / 200 * 100)}
-  else if(window.innerWidth < 768) {speed = window.innerWidth * 15; delay = (speed / 250) * 100}
-  else if(window.innerWidth < 992) {speed = window.innerWidth * 12; delay = (speed / 375) * 100}
-  else if(window.innerWidth < 1200) {speed = window.innerWidth * 9; delay = (speed / 425) * 100}
-  else if(window.innerWidth < 1400) {speed = window.innerWidth * 8; delay = (speed / 450) * 100}
-  else if(window.innerWidth < 1600) {speed = window.innerWidth * 7; delay = (speed / 500) * 100}
-  else {speed = window.innerWidth * 7.5; delay = (speed / 600) * 100}
+  if(window.innerWidth < 568) {speed = window.innerWidth * 21; delay = 3.75}
+  else if(window.innerWidth < 768) {speed = window.innerWidth * 16; delay = 3.25}
+  else if(window.innerWidth < 992) {speed = window.innerWidth * 13; delay = 2.75}
+  else if(window.innerWidth < 1200) {speed = window.innerWidth * 10; delay = 2.5}
+  else if(window.innerWidth < 1400) {speed = window.innerWidth * 8.5; delay = 2.35}
+  else if(window.innerWidth < 1600) {speed = window.innerWidth * 8; delay = 2.25}
+  else {speed = window.innerWidth * 8.5; delay = 2.5}
 }
-setCardSpeed();
 
-let baseSpeed = .05;
 
 let row1 = [];
 let row2 = [];
@@ -509,6 +485,12 @@ let row2 = [];
     card.classList.add('team-card-main-student');
     card.classList.add('d-flex');
 
+    const front = document.createElement('div');
+    front.classList.add('student-card-front', 'student-card-face');
+
+    const back = document.createElement('div');
+    back.classList.add('student-card-back', 'student-card-face');
+
     const link = document.createElement('a');
     link.href = `${student.linkedIn}`;
     link.classList.add('linked-in-wrap');
@@ -518,7 +500,7 @@ let row2 = [];
     icon.target = '_blank';
     icon.classList.add('linked-in');
     link.appendChild(icon);
-    card.appendChild(link);
+    back.appendChild(link);
 
     const textWrap = document.createElement('div');
     textWrap.classList.add('team-card-text-wrap');
@@ -528,21 +510,33 @@ let row2 = [];
     const title = document.createElement('h6');
     title.classList.add('team-title-main');
     title.innerText = `${student.title}`;
+    const tag1 = document.createElement('h6');
+    const tag2 = document.createElement('h6');
+    tag1.classList.add('student-tag');
+    tag2.classList.add('student-tag');
+    tag1.innerText = student.tags[0];
+    tag2.innerText = student.tags[1];
+    const tagWrapper = document.createElement('div');
+    tagWrapper.classList.add('student-tag-wrapper');
+    tagWrapper.appendChild(tag1);
+    tagWrapper.appendChild(tag2);
+
     textWrap.appendChild(name);
     textWrap.appendChild(title);
+    textWrap.appendChild(tagWrapper);
 
-    card.appendChild(textWrap);
+    front.appendChild(textWrap);
 
     card.style.setProperty('--gradient-start', `rgba(${student.gradient}, .7)`);
     card.style.setProperty('--gradient-end', `rgba(${student.gradient}, 0)`);
     const gradient = document.createElement('div');
     gradient.classList.add('team-card-main-gradient');
 
-    card.appendChild(gradient);
+    front.appendChild(gradient);
 
     const hover = document.createElement('div');
     hover.classList.add('team-card-main-hover');
-    card.appendChild(hover);
+    front.appendChild(hover);
 
     const img = document.createElement('img');
     img.src = `${student.img}`;
@@ -550,7 +544,16 @@ let row2 = [];
     img.classList.add('team-card-main-img');
     img.loading = 'lazy';
 
-    card.appendChild(img);
+    front.appendChild(img);
+
+    const bio = document.createElement('p');
+    bio.classList.add('team-card-bio');
+    bio.innerText = student.bio;
+
+    back.appendChild(bio);
+
+    card.appendChild(front);
+    card.appendChild(back);
 
     const cardWrap = document.createElement('div');
     cardWrap.classList.add('team-card-main-student-wrap');
@@ -578,39 +581,62 @@ row2 = [
 ]
 
 
+
 row1.forEach((card, index) => {
-  card.style.right = `-${cardWidth}px`;
+  card.style.right = `-${cardWidth + 10}px`;
   studentRow1.appendChild(card);
   card.addEventListener('touchstart', () => {
     cardTouchHover(card);
-    pauseCards();
   });
   card.addEventListener('mouseenter', () => {
     cardHover(card);
-    pauseCards();
   });
   card.addEventListener('mouseleave', () => {
     disableHover(card);
-    playCards();
   });
+  card.addEventListener('animationstart', function nextCard() {
+    row1Index = (row1Index + 1) % studentRow1.children.length;
+    animateTeamCardRow1(studentRow1.children[row1Index])
+  });
+  card.addEventListener('animationend', function resetCard() {
+    card.classList.remove('student-ani');
+  })
 });
 
 row2.forEach((card, index) => {
-  card.style.left = `-${cardWidth}px`;
+  card.style.left = `-${cardWidth + 10}px`;
   studentRow2.appendChild(card);
   card.addEventListener('touchstart', () => {
     cardTouchHover(card);
-    pauseCards();
   });
   card.addEventListener('mouseenter', () => {
     cardHover(card);
-    pauseCards();
   });
   card.addEventListener('mouseleave', () => {
     disableHover(card);
-    playCards();
   });
+  card.addEventListener('animationstart', function nextCard() {
+    row2Index = (row2Index + 1) % studentRow2.children.length;
+    animateTeamCardRow2(studentRow2.children[row2Index])
+  });
+  card.addEventListener('animationend', function resetCard() {
+    card.classList.remove('student-ani');
+  })
 });
+
+
+function animateTeamCardRow1(card) {
+  card.style.setProperty('--student-ani-dist', `-${window.innerWidth + cardWidth + (cardWidth/2)}px`);
+  card.style.setProperty('--student-ani-dur', `${speed}ms`);
+  card.style.setProperty('--student-ani-del', `${delay}s`);
+  card.classList.add('student-ani')
+}
+function animateTeamCardRow2(card) {
+  card.style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth + (cardWidth/2)}px`);
+  card.style.setProperty('--student-ani-dur', `${speed}ms`);
+  card.style.setProperty('--student-ani-del', `${delay}s`);
+  card.classList.add('student-ani')
+}
 
 function cardTouchHover(card) {
   card.querySelector('.linked-in-wrap').style.opacity = '1';
@@ -629,319 +655,58 @@ function cardTouchHover(card) {
     card.querySelector('.linked-in').style.opacity = '0';
     card.querySelector('.team-name-main').style.color = '#f1f1f1';
     card.querySelector('.team-title-main').style.color = '#f1f1f1';
-    playCards();
   }
 
 }
 
-function cardHover(card) {
-  card.querySelector('.team-card-main-hover').style.opacity = '.5';
-  card.querySelector('.linked-in-wrap').style.opacity = '1';
-  card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-  card.querySelector('.linked-in').style.opacity = '1';
-  card.querySelector('.team-name-main').style.color = 'dimgray';
-  card.querySelector('.team-title-main').style.color = 'dimgray';
+function cardHover(hoveredCard) {
+  cardsPaused = true;
+  for (let card of document.querySelectorAll('.student-ani')) {
+    const rect = card.getBoundingClientRect();
+    card.style.animationPlayState = 'paused';
+    if(rect.left < window.innerWidth - 25 && rect.right > 10) {
+      if (card.id.charAt(card.id.length - 1) === '1') {
+        if(card.id === hoveredCard.id) {
+          card.querySelector('.team-card-main-student').style.transform = 'translateX(-35px)'
+          card.querySelector('.linked-in-wrap').style.opacity = '1';
+          card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
+          card.querySelector('.linked-in').style.opacity = '1';
+
+        } else {
+          card.querySelector('.team-card-main-student').style.transform = 'translateX(-35px) rotateX(-180deg)';
+        }
+      } else {
+        if(card.id === hoveredCard.id) {
+          card.querySelector('.team-card-main-student').style.transform = 'translateX(35px)';
+          card.querySelector('.linked-in-wrap').style.opacity = '1';
+          card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
+          card.querySelector('.linked-in').style.opacity = '1';
+        } else {
+          card.querySelector('.team-card-main-student').style.transform = 'translateX(35px) rotateX(-180deg)'
+        }
+      }
+    }
+  }
 }
 
 function disableHover(card) {
-  card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
-  card.querySelector('.team-card-main-hover').style.opacity = '0';
-  card.querySelector('.linked-in-wrap').style.opacity = '0';
-  card.querySelector('.linked-in').style.opacity = '0';
-  card.querySelector('.team-name-main').style.color = '#f1f1f1';
-  card.querySelector('.team-title-main').style.color = '#f1f1f1';
+  cardsPaused = false;
+  for(let card of document.querySelectorAll('.student-ani')) {
+    card.style.animationPlayState = 'running';
+    card.querySelector('.team-card-main-student').style.transform = 'translateX(0) rotateX(-180deg)';
+    card.querySelector('.linked-in-wrap').style.opacity = '0';
+    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
+    card.querySelector('.linked-in').style.opacity = '0';
+  }
 }
 
 let cardsPaused = false;
 
-let row1PausedIndex = null
-let row2PausedIndex = null;
-let row1PausedTime = null;
-let row2PausedTime = null;
-
-function pauseCards() {
-  cardsPaused = true;
-  for(let card of document.querySelectorAll('.student-ani')) {
-    const rect = card.getBoundingClientRect();
-    card.style.animationPlayState = 'paused';
-
-    if(card.id.charAt(card.id.length - 1) === '1') {
-      card.querySelector('.team-card-main-student').style.transform = 'translateX(-35px)';
-    }
-    else {
-      card.querySelector('.team-card-main-student').style.transform = 'translateX(35px)'
-    }
-
-  }
-  const row1State = getTimeoutState(row1TimeoutData, row1CurrIndex, delay);
-  const row2State = getTimeoutState(row2TimeoutData, row2CurrIndex, delay);
-  row1PausedIndex = row1State.nextIndex;
-  row1PausedTime = row1State.nextTimeout;
-
-  row2PausedIndex = row2State.nextIndex;
-  row2PausedTime = row2State.nextTimeout;
-
-  clearCardTimeouts();
-}
-
-function playCards() {
-  cardsPaused = false;
-  for(let card of document.querySelectorAll('.student-ani')) {
-    card.style.animationPlayState = 'running';
-    card.querySelector('.team-card-main-student').style.transform = 'translateX(0)';
-  }
-
-  if(row1PausedIndex != null) {
-    row1Ani(row1PausedIndex, row1PausedTime);
-    row1PausedIndex = null;
-    row1PausedTime = null;
-  }
-  if(row2PausedIndex != null) {
-    row2Ani(row2PausedIndex, row2PausedTime);
-    row2PausedIndex = null;
-    row2PausedTime = null;
-  }
-}
-
-let row1Delay = 0;
-let row2Delay = 0;
-let row1LastCardStart = false;
-
-function row1Ani(fromIndex = 0, initialDelay = 0) {
-  let delayToNext = initialDelay;
-  row1TimeoutData = [];
-  for(let i = fromIndex; i < row1.length; i++) {
-    let scheduled = Date.now() + delayToNext;
-    row1TimeoutData.push({index: i, scheduled});
-    let t = setTimeout(() => {
-      if(pageHidden || cardsPaused) return;
-      void row1[i].offsetWidth;
-
-      row1[i].style.setProperty('--student-ani-dist', `-${window.innerWidth + cardWidth + (cardWidth/2)}px`);
-      row1[i].style.setProperty('--student-ani-dur', `${speed}ms`);
-      row1[i].classList.add('student-ani');
-      console.log(speed)
-      row1[i].addEventListener('animationend', function row1AniEnd() {
-        row1[i].removeEventListener('animationend', row1AniEnd);
-        row1[i].classList.remove('student-ani');
-      });
-
-      row1CurrIndex = i + 1;
-      if(i === row1.length - 1) {
-        row1CurrIndex = 0;
-        row1Ani();
-      }
-      console.log(delay)
-
-    }, delayToNext);
-    row1Timeouts.push(t);
-    delayToNext += delay;
-  }
-}
-
-function row2Ani(fromIndex = 0, initialDelay = 0) {
-  let delayToNext = initialDelay;
-  row2TimeoutData = [];
-  for(let i = fromIndex; i < row2.length; i++) {
-    let scheduled = Date.now() + delayToNext;
-    row2TimeoutData.push({index: i, scheduled});
-    let t = setTimeout(() => {
-      if(pageHidden || cardsPaused) return;
-      row2[i].offsetWidth;
-      row2[i].style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth + (cardWidth / 2)}px`);
-      row2[i].style.setProperty('--student-ani-dur', `${speed}ms`);
-      row2[i].classList.add('student-ani');
-      console.log(speed)
-      row2[i].addEventListener('animationend', function row1AniEnd() {
-        row2[i].removeEventListener('animationend', row1AniEnd);
-        row2[i].classList.remove('student-ani');
-      });
-      row2CurrIndex = i + 1;
-      if(i === row2.length - 1) {
-        row2CurrIndex = 0;
-        row2Ani();
-      }
-    console.log(delay)
-    }, delayToNext);
-    row2Timeouts.push(t);
-    delayToNext += delay;
-  }
-}
-/*
-function startAni() {
-  for(let i = 0; i < students.length - 1; i++) {
-    row1[i].style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth}px`);
-    row1[i].style.setProperty('--student-ani-dur', `${window.innerWidth + cardWidth * 10}ms`);
-    row2[i].style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth}px`);
-    row2[i].style.setProperty('--student-ani-dur', `${window.innerWidth + cardWidth * 10}ms`);
-    if(i === students.length - 1) restartAni();
-    setTimeout(() => {
-
-    })
-  }
-}*/
 
 function startAni() {
-
-  row1Ani();
-  row2Ani();
+  animateTeamCardRow1(studentRow1.children[row1Index]);
+  animateTeamCardRow2(studentRow2.children[row2Index]);
 }
-
-function initialStartAni() {
-  setCardWidth();
-  setCardSpeed();
-  void document.offsetWidth;
-  row1Ani();
-  row2Ani();
-}
-
-function restartRow1() {
-  clearCardTimeouts();
-  row1Delay = 0;
-  if(pageHidden) return;
-  row1.forEach((card, index) => {
-    let t = setTimeout(() => {
-      if(pageHidden) return;
-      card.classList.add('student-ani');
-      card.addEventListener('animationend', row1AniEnd)
-      if(index === row1.length - 1) restartRow1();
-    }, row1Delay)
-    row1Timeouts.push(t);
-    row1Delay += delay;
-    function row1AniEnd() {
-      card.removeEventListener('animationend', row1AniEnd);
-      card.classList.remove('student-ani');
-    }
-  })
-}
-
-function restartRow2() {
-  clearCardTimeouts();
-  row2Delay = 0;
-  if(pageHidden) return;
-  row2.forEach((card, index) => {
-    let t = setTimeout(() => {
-      if(pageHidden) return;
-      card.classList.add('student-ani');
-      card.addEventListener('animationend', row2AniEnd);
-      if(index === row1.length - 1) restartRow2();
-    }, row2Delay);
-    row2Timeouts.push(t);
-    function row2AniEnd() {
-      card.removeEventListener('animationend', row2AniEnd);
-      card.classList.remove('student-ani');
-    }
-    row2Delay += delay;
-  })
-}
-
-
- /* function studentAni() {
-    setCardWidth();
-    const row1 = students.filter(student => student.initRow === 1);
-    const row2 = students.filter(student => student.initRow === 2);
-
-    const visibleCards = Math.floor((window.innerWidth - cardWidth) / cardWidth) + 1
-    const totalCardsOnScreen = visibleCards + 1;
-    const totalCardsWidth = totalCardsOnScreen * cardWidth;
-    const minGap = 35;
-    let gap = Math.max(25, cardWidth * 0.18);
-    const baseTime = 3;
-    const speed = cardWidth / baseTime;
-    const delay = (cardWidth + gap) / speed;
-    const distance = window.innerWidth + cardWidth;
-    const duration = distance / speed;
-    const cardsPerRow = row1.length;
-
-
-    [row1, row2].forEach(row => {
-      row.forEach((student, index) => {
-        const cardDelay = index * delay;
-
-        const card = document.getElementById(student.id);
-        if(student.currRow === 1) {
-          student.dist = -distance;
-        } else {
-          student.dist = distance;
-        }
-        card.style.setProperty('--student-ani-dist', `${student.dist}px`);
-        card.style.setProperty('--student-ani-dur', `${duration}s`);
-        card.style.setProperty('--student-ani-delay', `${cardDelay}s`);
-        card.classList.remove('student-ani');
-        void card.offsetWidth;
-        card.classList.add('student-ani');
-
-        card.addEventListener('animationend', changeRow);
-        function changeRow() {
-          card.style.setProperty('--student-ani-delay', '0s');
-          card.removeEventListener('animationend', changeRow);
-          if(student.currRow === student.initRow) {
-            card.classList.replace('student-ani', 'student-ani-return');
-            if(student.currRow === 1) {
-              card.style.top = '55%';
-              student.currRow = 2;
-            } else {
-              card.style.top = '0%';
-              student.currRow = 1;
-            }
-          } else {
-            card.classList.replace('student-ani-return', 'student-ani');
-            if(student.currRow === student.initRow) {
-              if(student.currRow === 1) {
-                card.style.top = '55%';
-                student.currRow = 2;
-              } else {
-                card.style.top = '0%';
-                student.currRow = 1;
-              }
-            }
-          }
-          card.addEventListener('animationend', changeRow);
-        }
-
-      })
-    })
-  }
-
-
-
-  function addStudentAni(student) {
-    const card = document.getElementById(student.id);
-    const rect = card.getBoundingClientRect();
-    if(student.currRow === 1) {
-      student.dist = -(window.innerWidth + cardWidth)
-    } else {
-      student.dist = window.innerWidth + cardWidth
-    }
-    card.style.setProperty('--student-ani-dist', `${student.dist}px`);
-    card.style.setProperty('--student-ani-dur', `${Math.abs((window.innerWidth + cardWidth)* 6.25)}ms`);
-    card.classList.add('student-ani');
-    card.addEventListener('animationend', changeRow)
-    function changeRow() {
-      card.removeEventListener('animationend', changeRow);
-      if(student.currRow === student.initRow) {
-        card.classList.replace('student-ani', 'student-ani-return');
-        if(student.currRow === 1) {
-          card.style.top = '55%';
-          student.currRow = 2;
-        } else {
-          card.style.top = '0%';
-          student.currRow = 1;
-        }
-      } else {
-        card.classList.replace('student-ani-return', 'student-ani');
-        if(student.currRow === 1) {
-          card.style.top = '55%';
-          student.currRow = 2;
-        } else {
-          card.style.top = '0%';
-          student.currRow = 1;
-        }
-      }
-      card.addEventListener('animationend', changeRow)
-    }
-  }
-//studentAni()*/
 
 const arrowSVG = '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
   '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +

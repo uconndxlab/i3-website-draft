@@ -45,19 +45,23 @@ let statCircleOnScreen = false;
 const animatedElements = document.querySelectorAll('.animated');
 const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
 
+let starsFaded = false;
 
 
 const body = document.querySelector('body');
 
 const statCircle = document.querySelector('.story-stat-wrapper')
 
-const waveTrack = document.querySelector('.wave-track');
-const wave1 = waveTrack?.firstElementChild;
-const wave2 = waveTrack?.lastElementChild;
-const wave = waveTrack;
-const waveRect = wave.getBoundingClientRect();
+let bgColor = 0;
+const bgColors = [
+  'rgb(38,38,38)',
+  'rgb(10,22,38)',
+  'rgb(24,0,40)',
+  'rgb(38,38,38)'
+]
 
-function checkInitialIntersections() {
+
+/*function checkInitialIntersections() {
   for(let key in sections) {
     const section = sections[key];
     const rect = section.div.getBoundingClientRect();
@@ -79,28 +83,21 @@ function checkInitialIntersections() {
       }
     }
   }
-}
+}*/
 
-let waveFilled = false;
-
-const waveObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      if(!updateWave) updateWave = true;
-      console.log('wave running')
-      waveTrack.style.animationPlayState = 'running';
-    } else {
-      if(updateWave) updateWave = false;
-      console.log('wave paused')
-      waveTrack.style.animationPlayState = 'paused';
-    }
-  })
-}, {threshold: 0});
-waveObserver.observe(wave);
 
 const heroObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
+      if(starsFaded) {
+        canvas.style.display = 'block';
+        canvas.style.opacity = '1';
+        starsFaded = false;
+      }
+      if(bgColor !== 0) {
+        body.style.backgroundColor = `${bgColors[0]}`;
+        bgColor = 0;
+      }
       if(!sections.hero.isOnScreen) {
         sections.hero.isOnScreen = true;
         if(!frameLooping) {
@@ -118,11 +115,24 @@ const heroObserver = new IntersectionObserver(entries => {
     }
   })
 }, {threshold: 0});
-heroObserver.observe(sections.hero.div);
+heroObserver.observe(document.querySelector('.hero-h1'));
 
 const statCircleObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
+      if(bgColor !== 1) {
+        body.style.backgroundColor = `${bgColors[1]}`;
+        bgColor = 1;
+      }
+      if(!starsFaded) {
+        canvas.style.opacity = '0';
+        canvas.addEventListener('transitionend', function starsFadedOut() {
+          canvas.removeEventListener('transitionend', starsFadedOut);
+          starsFaded = true;
+          canvas.style.display = 'none';
+        })
+      }
+
       if(!statCircleOnScreen) {
         statCircleOnScreen = true;
         startStoryLoop();
@@ -134,9 +144,48 @@ const statCircleObserver = new IntersectionObserver(entries => {
       }
     }
   });
-}, {threshold: .1});
+}, {threshold: .25});
 statCircleObserver.observe(statCircle);
 
+const projectRow2Observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(bgColor !== 2) {
+        body.style.backgroundColor = `${bgColors[2]}`;
+        bgColor = 2;
+      }
+      if(!starsFaded) {
+        canvas.style.opacity = '0';
+        canvas.addEventListener('transitionend', function starsFadedOut() {
+          canvas.removeEventListener('transitionend', starsFadedOut);
+          starsFaded = true;
+          canvas.style.display = 'none';
+        })
+      }
+    }
+  })
+}, {threshold: .15});
+projectRow2Observer.observe(document.getElementById('row-2'));
+
+const teamRowObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(bgColor !== 3) {
+        body.style.backgroundColor = `${bgColors[3]}`;
+        bgColor = 3;
+      }
+      if(!starsFaded) {
+        canvas.style.opacity = '0';
+        canvas.addEventListener('transitionend', function starsFadedOut() {
+          canvas.removeEventListener('transitionend', starsFadedOut);
+          starsFaded = true;
+          canvas.style.display = 'none';
+        })
+      }
+    }
+  })
+}, {threshold: .15});
+teamRowObserver.observe(document.querySelector('.team-row'));
 /*
 const projectsObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -179,17 +228,28 @@ teamObserver.observe(sections.team.div);
 
 // Call star background creation on load after short delay
 window.addEventListener('load', () => {
-  setTimeout(checkInitialIntersections, 100);
   setCachedSectionSize()
   console.log(cachedStarSections, cachedStarSections[0].width)
   if(window.innerWidth < 1200) resizeTeamCards();
   setTimeout(createStarBG, 500);
+  if(window.innerWidth > 1800) {
+    document.documentElement.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
+    if(window.innerWidth < 2100) {
+      document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
+    } else {
+      document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
+    }
+  }
 });
 
 // Call resize star background function on window resize
 window.addEventListener('resize', () => {
   resizeStarBG();
   if(window.innerWidth < 1200) resizeTeamCards();
+  if(window.innerWidth > 1800) {
+    document.documentElement.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}`);
+    document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.65}`);
+  }
 });
 
 // Initialize mouse position variable
@@ -231,140 +291,22 @@ const scrollBreakpoints = {
 const maxScroll = window.innerHeight;
 
 let updateStars = false;
-let updateStarFade = false;
-let updateWave = false;
-let updateCodeBG = false;
-let updateCodeBGFade = false;
-let codeBGLooping = false;
-
-let prevWaveScroll = null;
-let waveY = 75;
 
 const windowHeight = window.innerHeight;
 
 let starFadeDecimal;
-
+const storyRow = document.getElementById('story-row');
+const storyRowRect = storyRow.getBoundingClientRect();
 function consistentScroll() {
   const scroll = window.scrollY;
-  fadeStarGridTransition(scroll)
-  if (scroll < sections.story.top) {
-    //if (updateWave) waveScroll(scroll);
-    if (updateStarFade) { starFadeScroll(scroll); console.log(updateStarFade) }
-    heroToStoryScroll(scroll)
-  } /*else if (scroll >= sections.story.top && scroll < sections.projects.top - windowHeight) {
-    body.style.backgroundColor = `rgb(${color2[0]}, ${color2[1]}, ${color2[2]})`;
-
-  } else {
-    /!*if(scroll >= sections.story.bottom - (sections.story.height / 3) && scroll < sections.team.top + (sections.team.height / 3)) {
-      fadeCodeBG();
-    }*!/
-    //fadeCodeBG(scroll)
-    //projectScroll(scroll);
-  }*/
-}
-function fadeStarGridTransition(scroll) {
-
-  let gridOpacity;
-  if (scroll < sections.story.top - (sections.story.top * .25)) {
-    gridOpacity = (scroll / sections.story.top);
-    gridOpacity = Math.min(Math.max(gridOpacity, 0), 1);
-  } else {
-    gridOpacity = 1;
+  if(linkCanvasActive) {
+    document.body.removeChild(document.getElementById('constellationCanvas'));
+    linkCanvasActive = false;
   }
-
-  let starOpacity;
-  if (scroll < sections.story.top) {
-    starOpacity = 1 - (scroll / sections.story.top);
-    starOpacity = Math.min(Math.max(starOpacity, 0), 1);
-  } else {
-    starOpacity = 0
-  }
-  // Set opacities
-  document.getElementById('star-canvas').style.opacity = `${starOpacity}`;
-  document.getElementById('blueprint').style.opacity = `${gridOpacity}`;
-}
-
-const color1 = [38, 38, 38];
-const color2 = [10, 22, 38];
-const color3 = [20, 20, 20];
-
-function changeBGColor(start, end, decimal) {
-  const r = Math.round(calcBGFade(start[0], end[0], decimal));
-  const g = Math.round(calcBGFade(start[1], end[1], decimal));
-  const b = Math.round(calcBGFade(start[2], end[2], decimal));
-  return [r, g, b]
-}
-function calcBGFade(start, end, decimal) {
-  return start + (end - start) * decimal;
-}
-
-
-function waveFill() {
-  wave1.style.transform = 'translateY(75%) translateX(-5%) scaleY(1)';
-  wave2.style.transform = 'translateY(75%) translateX(-5%) scaleY(1)';
-  wave1.addEventListener('transitionend', waveFillComplete);
-}
-
-function waveFillComplete() {
-  wave1.removeEventListener('transitionend', waveFillComplete);
-  waveTrack.classList.add('wave-flow');
-  // Set wave scroll transitions
-  wave1.style.transition = 'transform .05s ease-in-out';
-  wave2.style.transition = 'transform .05s ease-in-out';
-  updateWave = true;
-  waveFilled = true;
 }
 
 
 
-// Adjust wave flow upon iteration
-waveTrack.addEventListener('animationiteration', () => {
-  // Set 25%, 50%, and 75% css variables with +/- 200
-  const wave25Percent = -(Math.floor(Math.random() * 200) + 650);
-  const wave50Percent = -(Math.floor(Math.random() * 200) + 1400);
-  const wave75Percent = -(Math.floor(Math.random() * 200) + 2150);
-  document.documentElement.style.setProperty('--waveX25Percent', `${wave25Percent}px`);
-  document.documentElement.style.setProperty('--waveX50Percent', `${wave50Percent}px`);
-  document.documentElement.style.setProperty('--waveX75Percent', `${wave75Percent}px`);
-});
-function waveScroll(scroll) {
-  if(!waveFilled) return;
-  waveY = 75 - Math.min(scroll * .3, 75);
-  // Set wave transforms
-  requestAnimationFrame(() => {
-    wave1.style.transform = `translateY(${waveY}%)`;
-    wave2.style.transform = `translateY(${waveY}%)`;
-  })
-
-
-}
-
-
-
-function starFadeScroll(scroll) {
-
-  const decimal = Math.min(scroll / sections.story.top, 1);
-  heroToStoryScroll(decimal, starFadeDecimal);
-}
-
-
-function heroToStoryScroll(scroll) {
-  const decimal = Math.min(scroll / sections.story.top, 1);
-  //console.log(opacity)
-  console.log(scroll)
-  const bgColor = changeBGColor(color1, color2, decimal);
-  // starFade.style.background = `linear-gradient(to bottom, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 0) 40%, rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, 1) 50%)`
-  // starFade.style.opacity = `${starFadeDecimal}`;
-  // console.log(starFadeDecimal)
-  // Set previous scroll to current scroll
-  // console.log(decimal)
-  body.style.backgroundColor = `rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]})`;
-}
-
-
-function storyToProjectsScroll(scroll) {
-
-}
 /*
 const angle = -30 * (Math.PI / 180);
 
@@ -665,6 +607,8 @@ const projectsRow2 = document.querySelector('#row-2');
 
 const projectDivs = [];
 
+let linkCanvasActive = false;
+
 projects.forEach(project => {
   const wrapper = document.createElement('div');
   wrapper.classList.add('project-wrapper');
@@ -679,14 +623,14 @@ projects.forEach(project => {
   overlay.classList.add('project-overlay');
   wrapper.appendChild(overlay);
 
-  wrapper.addEventListener('pointerenter', () => {
-    projectHover(wrapper);
-  });
-
   const wrapperAbsolute = document.createElement('div');
   wrapperAbsolute.classList.add('project-wrapper-abs');
   wrapperAbsolute.appendChild(wrapper);
   wrapperAbsolute.id = project.name;
+
+  const wrapperBorder = document.createElement('div');
+  wrapperBorder.classList.add('project-wrapper-border');
+  wrapperAbsolute.appendChild(wrapperBorder);
 
   projectDivs.push(wrapperAbsolute);
 
@@ -702,9 +646,6 @@ for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 
 }
 
 
-function projectHover(project) {
-
-}
 
 let row1Index = 0;
 let row2Index = 0;
@@ -744,79 +685,98 @@ function projectsHover(card) {
   cardsOnScreen = [];
   for(let card of projectsRow1.children) {
     const rect = card.getBoundingClientRect();
-    if(rect.x > 0 && rect.x < window.innerWidth) cardsOnScreen.push(card);
-    card.firstElementChild.style.transition = 'transform .5s ease-out';
-    card.firstElementChild.style.transform = 'translateX(50px)';
+    if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
+    const border = card.querySelector('.project-wrapper-border');
+    const wrapper = card.querySelector('.project-wrapper');
+
+    border.style.transform = 'translateX(30px) translateY(-20px)';
+    wrapper.style.transform = 'translateX(50px)';
     card.style.animationPlayState = 'paused';
 
 
   }
   for(let card of projectsRow2.children) {
     const rect = card.getBoundingClientRect();
-    if(rect.x > 0 && rect.x < window.innerWidth) cardsOnScreen.push(card);
-    card.firstElementChild.style.transition = 'transform .5s ease-out';
-    card.firstElementChild.style.transform = 'translateX(-50px)';
+    if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
+    const border = card.querySelector('.project-wrapper-border');
+    const wrapper = card.querySelector('.project-wrapper');
+
+    border.style.transform = 'translateX(-70px) translateY(-20px)';
+    wrapper.style.transform = 'translateX(-50px)';
     card.style.animationPlayState = 'paused';
   }
   linkCards(card);
 }
 function projectsUnHover() {
+  if(linkCanvasActive) {
+    document.body.removeChild(document.getElementById('constellationCanvas'));
+    linkCanvasActive = false;
+  }
   cardsOnScreen = [];
   for(let card of document.querySelectorAll('.project-card-hover')) {
     card.classList.remove('project-card-hover');
+    card.style.opacity = '1';
   }
-  for(let card of projectsRow1.children) {
-    card.firstElementChild.style.transform = 'none';
+
+  for(let card of [...projectsRow1.children, ...projectsRow2.children]) {
+    const border = card.querySelector('.project-wrapper-border');
+    const wrapper = card.querySelector('.project-wrapper');
+    border.style.transform = '';
+    border.style.opacity = '1';
+    wrapper.style.transform = '';
     card.style.opacity = '1';
     card.style.animationPlayState = 'running';
   }
-  for(let card of projectsRow2.children) {
-    card.firstElementChild.style.transform = 'none';
-    card.style.opacity = '1';
-    card.style.animationPlayState = 'running';
-  }
+
 }
 
 function linkCards(hoveredCard) {
-  let linkedCards;
   const hoveredProject = projects.find(p => p.name === hoveredCard.id);
-  const tags = hoveredProject.tags;
-  let selectedTags;
-  if(tags.includes('Illustration') || tags.includes('Poster Design')) {
-    selectedTags = ['Illustration', 'Poster Design'];
-  } else if(tags.includes('Email Marketing') || tags.includes('Email Notifications')) {
-    selectedTags = ['Email Marketing', 'Email Notifications'];
-  } else if(tags.includes('Print Production') || tags.includes('Printwork')) {
-    selectedTags = ['Print Production', 'Printwork'];
-  } else if(tags.includes('Mobile PWA')) {
-    selectedTags = ['Mobile PWA'];
-  } else if(tags.includes('UI Design')) {
-    selectedTags = ['UI Design'];
-  } else {
-    selectedTags = tags;
+  const tagFreq = getTagFrequencies();
+  const sortedTags = sortTagFrequencies(hoveredProject.tags, tagFreq);
+
+  const linkLoop = getLinkLoop(hoveredCard);
+
+  const [card1, card2, card3, complete, tag1, tag2, tag3] = linkLoop;
+  const linkedCards = [card1].filter(Boolean);
+  if(card2) linkedCards.push(card2);
+  if(card3) linkedCards.push(card3);
+
+  const linkedTags = [tag1].filter(Boolean);
+  if(tag2) linkedTags.push(tag2);
+  if(Array.isArray(tag3)) {linkedTags.push(tag3[0])}
+  else if(tag3) {linkedTags.push(tag3)}
+
+
+  if(linkedCards.length > 1) {
+    getLinkCenters(linkedCards, linkedTags, complete);
   }
 
-  linkedCards = getLinks(selectedTags);
+  const linkedSet = new Set(linkedCards);
 
-  if(linkedCards.length < 2) {
-    linkedCards = getLinks(tags);
-  }
-
-  console.log(linkedCards.length);
-  let indices = getIndices(linkedCards.length);
-  let chosenLinks = [];
-  indices.forEach(i => {
-    chosenLinks.push(linkedCards[i]);
-  })
   const unLinked = [
     ...Array.from(projectsRow1.children),
     ...Array.from(projectsRow2.children)
-  ]
-  unLinked.splice(unLinked.indexOf(hoveredCard), 1);
-  hoveredCard.firstElementChild.classList.add('project-card-hover')
-  cardsOnScreen.splice(cardsOnScreen.indexOf(hoveredCard), 1);
-  chosenLinks.forEach(card => {
-    unLinked.splice(unLinked.indexOf(card), 1);
+  ].filter(card => !linkedSet.has(card));
+
+  const hoveredIndex = cardsOnScreen.indexOf(hoveredCard);
+  if (hoveredIndex !== -1) cardsOnScreen.splice(hoveredIndex, 1);
+
+
+
+  linkedCards.forEach(card => {
+    if(card.parentElement === projectsRow1) {
+      card.style.opacity = '.85';
+      card.firstElementChild.style.transform = 'translateX(50px) scale(1.1)';
+      card.lastElementChild.style.transform = 'translateX(50px) translateY(0)';
+      card.lastElementChild.style.opacity = '0';
+    } else {
+      card.style.opacity = '.85';
+      card.firstElementChild.style.transform = 'translateX(-50px) scale(1.1)';
+      card.lastElementChild.style.transform = 'translateX(-50px) translateY(0)';
+      card.lastElementChild.style.opacity = '0';
+    }
+
     card.firstElementChild.classList.add('project-card-hover');
   })
   unLinked.forEach(card => {
@@ -824,37 +784,571 @@ function linkCards(hoveredCard) {
   })
 }
 
-function getLinks(tags) {
-  let linkedCards = [];
+function getTagFrequencies() {
+  const freq = {};
   cardsOnScreen.forEach(card => {
     const project = projects.find(p => p.name === card.id);
-    tags.forEach(tag => {
-      if(project.tags.includes(tag) && !linkedCards.includes(card)) {
-        linkedCards.push(card);
-      }
-    })
+    project.tags.forEach(tag => {
+      if(freq[tag]) {freq[tag] += 1}
+      else {freq[tag] = 1}
+    });
   });
-  return linkedCards;
+  return freq;
 }
 
-function getIndices(linkedLength) {
-  const max = 2;
-  let indices = [];
-  if(linkedLength <= max) {
-    indices = Array.from({length: linkedLength}, (_, i) => i)
-  } else {
-    const indexPool = Array.from({length: linkedLength}, (_, i) => i);
-    for(let i = 0; i < max; i++) {
-      const rand = Math.floor(Math.random() * indexPool.length);
-      indices.push(indexPool.splice(rand, 1)[0]);
+function weightedShuffle(cards, targetTag) {
+  const weightedCards = cards.map(card => {
+    const project = projects.find(p => p.name === card.id);
+    const hasTargetTag = project.tags.includes(targetTag);
+    if(hasTargetTag) {
+      return {
+        card,
+        weight: 1
+      }
+    } else {
+      return {
+        card,
+        weight: .5
+      }
+    }
+  });
+
+  weightedCards.sort(() => Math.random() - 0.5);
+
+  weightedCards.sort((a, b) => b.weight - a.weight);
+
+  return weightedCards.map(entry => entry.card);
+}
+function hasTooManyInRow(rows) {
+  const amount = {};
+  for(let row of rows) {
+    if(amount[row]) {amount[row] += 1} else {amount[row] = 1}
+    if(amount[row] > 2) return true;
+  }
+  return false;
+
+}
+
+function getCardRow(card) {
+  return projectsRow1.contains(card) ? 'row1' : 'row2';
+}
+
+function sortTagFrequencies(projectTags, tagFreq) {
+  const tags = [...projectTags];
+  tags.sort((a,b) => {
+    const freqA = tagFreq[a] || 0;
+    const freqB = tagFreq[b] || 0;
+    return(freqA - freqB);
+  });
+  let filtered = tags.filter(tag => tagFreq[tag] >= 2);
+  if(filtered.length < 1) filtered = tags;
+  return filtered;
+}
+
+const tagPriority = [
+  'Mobile PWA',
+  'UI Design',
+  'Email Marketing',
+  'Print Production',
+  'UX Design',
+  'Web Development'
+]
+
+function getLinkLoop(hoveredCard, recall = false) {
+  const hoveredProject = projects.find(p => p.name === hoveredCard.id);
+
+  const hoveredTags = hoveredProject.tags.slice().sort((a, b) => {
+    let aIndex = tagPriority.indexOf(a);
+    let bIndex = tagPriority.indexOf(b);
+    if(aIndex === -1) aIndex = 999;
+    if(bIndex === -1) bIndex = 999;
+    return aIndex - bIndex;
+  });
+  const getProject = (card) => projects.find(p => p.name === card.id);
+
+  const cardPool = weightedShuffle(cardsOnScreen.filter(card => card !== hoveredCard));
+
+  let card2 = null;
+  let tag1 = null;
+  const row1 = getCardRow(hoveredCard);
+
+  for(let tag of hoveredTags) {
+    card2 = cardPool.find(card => {
+      const project = getProject(card);
+      return project.tags.includes(tag);
+    });
+    if(card2) {
+      tag1 = tag;
+      break;
+    }
+  }
+  if(!card2) {
+    return [hoveredCard, null, null, false, null, null, null];
+  }
+
+  const cardPool2 = weightedShuffle(cardPool.filter(card => card !== card2));
+  const card2Project = getProject(card2);
+  const row2 = getCardRow(card2);
+
+  let card3 = null;
+  let tag2 = null;
+
+  for(let tag of hoveredTags) {
+    if(tag === tag1) continue;
+    card3 = cardPool2.find(card => {
+      const project = getProject(card);
+      return project.tags.includes(tag) && card2Project.tags.includes(tag);
+    });
+    if(card3) {
+      tag2 = tag;
+      break;
+    }
+  }
+  if(!card3) {
+    card3 = cardPool2.find(card => {
+      const project = getProject(card);
+      return project.tags.includes(tag1) && card2Project.tags.includes(tag1);
+    });
+  }
+  if(card3 && !tag2) {
+    tag2 = tag1;
+  }
+  if(!card3) {
+    return [hoveredCard, card2, null, false, tag1, null, null];
+  }
+
+  const card3Project = getProject(card3);
+  const row3 = getCardRow(card3);
+
+  const backTag = hoveredProject.tags.filter(tag => card3Project.tags.includes(tag)) || null;
+
+  const loop = [hoveredCard, card2, card3];
+
+  const rows = loop.reduce((obj, card) => {
+    const row = getCardRow(card);
+    if(obj[row]) {obj[row] += 1} else {obj[row] = 1}
+    return obj;
+  }, {});
+
+  const tooManyInRow = Object.values(rows).some(count => count > 2);
+
+  if(tooManyInRow && !recall) {
+    return getLinkLoop(hoveredCard, true)
+  }
+
+  return [
+    hoveredCard,
+    card2,
+    card3,
+    !tooManyInRow && backTag.length > 0,
+    tag1,
+    tag2,
+    backTag.length > 0 ? backTag : null
+  ];
+}
+
+function getLinkCenters(linkedCards, tags, complete) {
+  if(linkedCards.length === 1) return;
+
+  const getCenter = (card) => {
+    const rect = card.getBoundingClientRect();
+    if(projectsRow1.contains(card)) {
+      return {
+        x: (rect.left + rect.width / 2) + 50,
+        y: rect.top + rect.height / 2
+      }
+    } else {
+      return {
+        x: (rect.left + rect.width / 2) - 50,
+        y: rect.top + rect.height / 2
+      }
     }
 
   }
-  return indices;
+
+  const centers = [getCenter(linkedCards[0]), getCenter(linkedCards[1])];
+  if(linkedCards.length > 2) {
+    centers.push(getCenter(linkedCards[2]));
+    if(complete) centers.push(getCenter(linkedCards[0]));
+  }
+  console.log('centers', centers)
+  animateLinks(centers, tags, complete);
+
 }
 
-animateProjectCardRow1(projectsRow1.children[row1Index])
-animateProjectCardRow2(projectsRow2.children[row2Index])
+function animateLinks(centers, tags, complete) {
+  linkCanvasActive = true;
+  const canvas = createCanvas();
+  const ctx = canvas.getContext('2d');
+
+  let speed = 0.025;
+  let progress = 0;
+  let circleFade = 0.1;
+
+  const tag1Text = tags[0];
+  console.log(tags[0])
+  ctx.font = '20px "area-normal", sans-serif';
+  const tag1Width = ctx.measureText(tag1Text).width;
+
+  const lineLength = Math.hypot(
+    centers[1].x - centers[0].x,
+    centers[1].y - centers[0].y
+  );
+
+  const tag1Start = (lineLength / 2) - (tag1Width / 2);
+  const tag1StartProg = tag1Start / lineLength;
+
+
+  const midX = (centers[0].x + centers[1].x) / 2;
+  const midY = (centers[0].y + centers[1].y) / 2;
+
+  function drawCircles() {
+    centers.forEach(center => {
+      ctx.beginPath();
+      ctx.arc(center.x, center.y, 6, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(138,205,255, ${circleFade})`;
+      ctx.fill();
+    });
+    circleFade = Math.min(circleFade + .1, 1);
+  }
+
+  function drawTag(start, end, mid, tag, tagStartProg, prog) {
+    const tagWidth = ctx.measureText(tag).width;
+    let tagAngle = Math.atan2(
+      end.y - start.y,
+      end.x - start.x
+    );
+
+    if(Math.abs(tagAngle) > Math.PI / 2) {
+      tagAngle += Math.PI;
+    }
+
+    const offset = 15;
+    const offsetX = Math.sin(tagAngle) * offset;
+    const offsetY = -Math.cos(tagAngle) * offset;
+
+    const visLetterCount = Math.min(
+      Math.floor((prog - tagStartProg) * 30),
+      tag.length);
+
+    ctx.save();
+    ctx.fillStyle = '#f1f1f1';
+    ctx.translate(mid.x, mid.y);
+    ctx.rotate(tagAngle);
+
+
+    let xOffset = -tagWidth / 2;
+    let displayText;
+    const isLeftward = start.x > end.x;
+
+    if (isLeftward) {
+      displayText = tag.split('').reverse().join('');
+      xOffset = tagWidth / 2;
+
+      for (let i = 0; i < visLetterCount; i++) {
+        const letter = displayText[i];
+        const charWidth = ctx.measureText(letter).width;
+        xOffset -= charWidth;
+        ctx.fillText(letter, xOffset, -10);
+      }
+
+    } else {
+      displayText = tag;
+
+      for (let i = 0; i < visLetterCount; i++) {
+        const letter = displayText[i];
+        const charWidth = ctx.measureText(letter).width;
+        ctx.fillText(letter, xOffset, -10);
+        xOffset += charWidth;
+      }
+    }
+
+
+
+
+    ctx.restore();
+  }
+
+  function drawStaticLine(start, end, tagText = null) {
+    ctx.strokeStyle = '#8acdff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    ctx.lineTo(end.x, end.y);
+    ctx.stroke();
+
+    if(tagText) {
+      const mid = {
+        x: (start.x + end.x) / 2,
+        y: (start.y + end.y) / 2
+      };
+      drawTag(start, end, mid, tagText, 0, 1);
+    }
+  }
+
+
+  console.log('animatingggggg');
+
+  function draw1Link() {
+    console.log('drawingggg 1 link')
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+
+    const start = centers[0];
+    const end = centers[1];
+
+    const aniX = start.x + (end.x - start.x) * progress;
+    const aniY = start.y + (end.y - start.y) * progress;
+
+
+    ctx.strokeStyle = '#8acdff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    ctx.lineTo(aniX, aniY);
+
+    ctx.stroke();
+
+    drawCircles();
+
+    if(progress >= tag1StartProg) drawTag(start, end, {x: midX,y:midY}, tag1Text, tag1StartProg, progress);
+
+    progress = Math.min(progress + speed, 1);
+
+
+    if(progress < 1) {
+      requestAnimationFrame(draw1Link);
+    } else {
+      drawStaticLine(start,end,tag1Text);
+    }
+  }
+
+  function draw2Links() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const [start, mid, end] = centers;
+    const tag1Text = tags[0];
+    const tag2Text = tags[1];
+    const tag1Width = ctx.measureText(tag1Text).width;
+    const tag2Width = ctx.measureText(tag2Text).width;
+    let localProg = 0;
+
+    const lineLength1 = Math.hypot(
+      mid.x - start.x,
+      mid.y - start.y
+    );
+    const lineLength2 = Math.hypot(
+      end.x - mid.x,
+      end.y - mid.y
+    )
+
+    const tag1Start = (lineLength1 / 2) - (tag1Width / 2);
+    const tag1StartProg = tag1Start / lineLength1;
+
+    const tag2Start = (lineLength2 / 2) - (tag2Width / 2);
+    const tag2StartProg = tag2Start / lineLength2;
+
+
+    function drawLine1() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const aniX = start.x + (mid.x - start.x) * localProg;
+      const aniY = start.y + (mid.y - start.y) * localProg;
+
+      ctx.strokeStyle = '#8acdff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.lineTo(aniX, aniY);
+      ctx.stroke();
+
+      drawCircles();
+
+      if(localProg >= tag1StartProg) {
+        const mid1 = {
+          x: (start.x + mid.x) / 2,
+          y: (start.y + mid.y) / 2
+        };
+        drawTag(start, mid, mid1, tag1Text, tag1StartProg, localProg);
+
+      }
+
+      localProg = Math.min(localProg + speed, 1);
+
+      if(localProg < 1) {
+        requestAnimationFrame(drawLine1);
+      } else {
+        drawStaticLine(start, mid, tag1Text);
+        localProg = 0;
+        requestAnimationFrame(drawLine2)
+      }
+
+    }
+
+    function drawLine2() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const aniX = mid.x + (end.x - mid.x) * localProg;
+      const aniY = mid.y + (end.y - mid.y) * localProg;
+
+      ctx.strokeStyle = '#8acdff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(mid.x, mid.y);
+      ctx.lineTo(aniX, aniY);
+      ctx.stroke();
+
+      drawStaticLine(start,mid,tag1Text);
+      drawCircles();
+
+      if(localProg >= tag2StartProg) {
+        const mid2 = {
+          x: (mid.x + end.x) / 2,
+          y: (mid.y + end.y) / 2
+        };
+        drawTag(mid, end, mid2, tag2Text, tag2StartProg, localProg);
+      }
+
+      localProg = Math.min(localProg + speed, 1);
+
+      if(localProg < 1) {
+        requestAnimationFrame(drawLine2);
+      } else {
+        drawStaticLine(mid,end,tag2Text);
+      }
+    }
+    drawLine1();
+  }
+
+  function drawLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const [start, mid, end, back] = centers;
+    const [tag1Text, tag2Text, tag3Text] = tags;
+
+    const tag1Width = ctx.measureText(tag1Text).width;
+    const tag2Width = ctx.measureText(tag2Text).width;
+    const tag3Width = ctx.measureText(tag3Text).width;
+
+    let localProg = 0;
+
+    const line1Length = Math.hypot(mid.x - start.x, mid.y - start.y);
+    const line2Length = Math.hypot(end.x - mid.x, end.y - mid.y);
+    const line3Length = Math.hypot(back.x - end.x, back.y - end.y);
+
+    const tag1StartProg = ((line1Length / 2) - (tag1Width / 2)) / line1Length;
+    const tag2StartProg = ((line2Length / 2) - (tag2Width / 2)) / line2Length;
+    const tag3StartProg = ((line3Length / 2) - (tag3Width / 2)) / line3Length;
+
+    function drawLine(startPoint, endPoint, tag, tagStartProg, prog) {
+      const aniX = startPoint.x + (endPoint.x - startPoint.x) * prog;
+      const aniY = startPoint.y + (endPoint.y - startPoint.y) * prog;
+
+      ctx.strokeStyle = '#8acdff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(startPoint.x, startPoint.y);
+      ctx.lineTo(aniX, aniY);
+      ctx.stroke();
+
+      const midPoint = {
+        x: (startPoint.x + endPoint.x) / 2,
+        y: (startPoint.y + endPoint.y) / 2
+      };
+
+      if(prog >= tagStartProg) {
+        drawTag(startPoint, endPoint, midPoint, tag, tagStartProg, prog);
+      }
+    }
+
+    function step1() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawLine(start, mid, tag1Text, tag1StartProg, localProg);
+      drawCircles();
+
+      localProg = Math.min(localProg + speed, 1);
+
+      if(localProg < 1) {
+        requestAnimationFrame(step1);
+      } else {
+        drawStaticLine(start,mid,tag1Text);
+        drawCircles();
+        localProg = 0;
+        requestAnimationFrame(step2);
+      }
+    }
+
+    function step2() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawStaticLine(start, mid, tag1Text);
+      drawLine(mid, end, tag2Text, tag2StartProg, localProg);
+      drawCircles();
+
+      localProg = Math.min(localProg + speed, 1);
+
+      if(localProg < 1) {
+        requestAnimationFrame(step2);
+      } else {
+        drawStaticLine(mid, end, tag2Text);
+        drawCircles();
+        localProg = 0;
+        requestAnimationFrame(step3);
+      }
+
+    }
+
+    function step3() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawStaticLine(start,mid,tag1Text);
+      drawStaticLine(mid,end,tag2Text);
+      drawLine(end, back, tag3Text, tag3StartProg, localProg);
+      drawCircles();
+
+      localProg = Math.min(localProg + speed, 1);
+      if(localProg < 1) {
+        requestAnimationFrame(step3);
+      } else {
+        drawStaticLine(end,back,tag3Text)
+        drawCircles();
+      }
+
+    }
+    requestAnimationFrame(step1);
+  }
+
+  if(centers.length === 2) {
+    draw1Link()
+  } else if(centers.length === 3) {
+    draw2Links()
+  } else if(centers.length === 4 && complete && tags.length === 3) {
+    drawLoop();
+  } else {
+    draw2Links()
+  }
+
+}
+
+function createCanvas() {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'constellationCanvas';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.width = `${window.innerWidth}px`;
+  canvas.style.height = `${window.innerHeight}px`;
+
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '200';
+
+
+  document.body.appendChild(canvas);
+  return canvas;
+}
+
 let row1IndexRect = projectsRow1.children[row1Index].getBoundingClientRect();
 /*function row1Ani() {
   if(!projectsRow1.children[row1Index].classList.contains('project-ani')) {
@@ -869,19 +1363,17 @@ let row1IndexRect = projectsRow1.children[row1Index].getBoundingClientRect();
 
 }*/
 
+animateProjectCardRow1(projectsRow1.children[row1Index])
+animateProjectCardRow2(projectsRow2.children[row2Index])
+
 function animateProjectCardRow1(card) {
-  card.style.setProperty('--project-ani-del', '1.25s');
   card.style.setProperty('--project-ani-dist', `${window.innerWidth + cardWidth * 2}px`);
-  card.style.setProperty('--project-ani-dur', `${8}s`);
   card.classList.add('project-ani');
 }
 function animateProjectCardRow2(card) {
-  card.style.setProperty('--project-ani-del', '1.25s');
   card.style.setProperty('--project-ani-dist', `-${window.innerWidth + cardWidth * 2}px`);
-  card.style.setProperty('--project-ani-dur', `${8}s`);
   card.classList.add('project-ani');
 }
-
 
 
 function placeProjects() {
@@ -906,6 +1398,336 @@ function placeProjects() {
   }
 }
 //placeProjects();
+
+const employees = [
+  {
+    name: 'Joel Salisbury',
+    id: 'joel-salis',
+    title: 'Director of Internal Insights and Innovation',
+    img: 'img/i3/people/salisbury.jpg',
+    gradient: '7, 51, 51',
+    linkedIn: 'https://www.linkedin.com/in/salisburyj/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Brian Kelleher',
+    id: 'brian-kell',
+    title: 'Senior Applications Developer',
+    img: 'img/i3/people/kelleher.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://www.linkedin.com/in/briankelleher1/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Natalie Lacroix',
+    id: 'natalie-lacr',
+    title: 'Senior UI/UX Designer',
+    img: 'img/i3/people/lacroix.jpg',
+    gradient: '48, 10, 49',
+    linkedIn: 'https://www.linkedin.com/in/natalie-lacroix-510a42188/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Jeff Winston',
+    id: 'jeff-winst',
+    title: 'Director of Nexus Student Success Platform',
+    img: 'img/i3/people/winston.jpg',
+    gradient: '51, 37, 7',
+    linkedIn: 'https://www.linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Brian Daley',
+    id: 'brian-daley',
+    title: 'DMD Faculty Advisor',
+    img: 'img/i3/people/daley.jpg',
+    gradient: '7, 14, 51',
+    linkedIn: 'https://www.linkedin.com/in/brianpdaley/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Michael Vertefeuille',
+    id: 'mike-vert',
+    title: 'DMD Faculty Advisor',
+    img: 'img/i3/people/vert.jpg',
+    gradient: '51, 31, 7',
+    linkedIn: 'https://www.linkedin.com/in/michaelvertefeuille/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Emma Adams',
+    id: 'emma-adams',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/adams.jpg',
+    gradient: '7, 46, 51',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Laravel', 'Javascript'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Lauren Busavage',
+    id: 'lauren-busav',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/busavage.png',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Aurora', 'Sketches'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+
+  },
+  {
+    name: 'Kelis Clarke',
+    id: 'kelis-clarke',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/jonathan.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Ryan Cohutt',
+    id: 'ryan-cohutt',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/jonathan.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Maggie Danielewicz',
+    id: 'maggie-daniel',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/danielewicz.jpg',
+    gradient: '30, 50, 30',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Luna Gonzalez',
+    id: 'luna-gonzal',
+    title: 'Student Illustrator',
+    img: 'img/i3/people/luna.jpg',
+    gradient: '30, 50, 30',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Aaron Mark',
+    id: 'aaron-mark',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/jonathan.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Jack Medrek',
+    id: 'jack-medrek',
+    title: 'Student Software Developer',
+    img: 'img/i3/people/medrek.jpg',
+    gradient: '1, 7, 41',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Kailey Moore',
+    id: 'kailey-moore',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/moore.jpg',
+    gradient: '38, 0, 76',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'William Shostak',
+    id: 'william-shostak',
+    title: 'Student Software Developer',
+    img: 'img/i3/people/shostak.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Emelia Salmon',
+    id: 'emelia-salmon',
+    title: 'Student UI/UX Designer',
+    img: 'img/i3/people/jonathan.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  },
+  {
+    name: 'Victoria Brey',
+    id: 'victoria-brey',
+    title: 'Student Web Developer',
+    img: 'img/i3/people/jonathan.jpg',
+    gradient: '0, 0, 0',
+    linkedIn: 'https://linkedin.com/',
+    tags: ['Tag 1', 'Tag 2'],
+    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
+      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
+      "Lots of cool stuff goin on over here like cool student work and stuff."
+  }
+]
+
+const teamRow = document.querySelector('.team-row');
+
+employees.forEach((employee, index) => {
+  const card = document.createElement('div');
+  card.classList.add('main-employee-card');
+  card.classList.add('d-flex');
+
+  const front = document.createElement('div');
+  front.classList.add('employee-card-front', 'employee-card-face');
+
+  const back = document.createElement('div');
+  back.classList.add('employee-card-back', 'employee-card-face');
+
+  const link = document.createElement('a');
+  link.href = `${employee.linkedIn}`;
+  link.classList.add('linked-in-wrap');
+  const icon = document.createElement('img');
+  icon.src = '/img/i3/linked-in.svg';
+  icon.alt = 'LinkedIn';
+  icon.target = '_blank';
+  icon.classList.add('linked-in');
+  link.appendChild(icon);
+  back.appendChild(link);
+
+  const textWrap = document.createElement('div');
+  textWrap.classList.add('employee-card-text-wrap');
+  const name = document.createElement('h4');
+  name.classList.add('employee-name-main');
+  name.innerText = `${employee.name}`;
+  const title = document.createElement('h6');
+  title.classList.add('employee-title-main');
+  title.innerText = `${employee.title}`;
+  const tag1 = document.createElement('h6');
+  const tag2 = document.createElement('h6');
+  tag1.classList.add('employee-tag');
+  tag2.classList.add('employee-tag');
+  tag1.innerText = employee.tags[0];
+  tag2.innerText = employee.tags[1];
+  const tagWrapper = document.createElement('div');
+  tagWrapper.classList.add('employee-tag-wrapper');
+  tagWrapper.appendChild(tag1);
+  tagWrapper.appendChild(tag2);
+
+  textWrap.appendChild(name);
+  textWrap.appendChild(title);
+  textWrap.appendChild(tagWrapper);
+
+  front.appendChild(textWrap);
+
+  card.style.setProperty('--gradient-start', `rgba(${employee.gradient}, .7)`);
+  card.style.setProperty('--gradient-end', `rgba(${employee.gradient}, 0)`);
+  const gradient = document.createElement('div');
+  gradient.classList.add('employee-card-gradient');
+
+  front.appendChild(gradient);
+
+  const hover = document.createElement('div');
+  hover.classList.add('employee-card-hover');
+  front.appendChild(hover);
+
+  const img = document.createElement('img');
+  img.src = `${employee.img}`;
+  img.alt = `${employee.name}`;
+  img.classList.add('employee-card-img');
+  img.loading = 'lazy';
+
+  front.appendChild(img);
+
+  const bio = document.createElement('p');
+  bio.classList.add('employee-card-bio');
+  bio.innerText = employee.bio;
+
+  back.appendChild(bio);
+
+  card.appendChild(front);
+  card.appendChild(back);
+
+  const cardWrap = document.createElement('div');
+  cardWrap.classList.add('employee-card-wrap');
+  cardWrap.appendChild(card);
+
+  cardWrap.id = `${employee.id}-card`;
+
+  teamRow.appendChild(cardWrap)
+
+});
+
+let empCardIndex = 0;
+let empCardWidth = 288;
+
+for(let card of teamRow.children) {
+  card.style.left = `-${empCardWidth + (empCardWidth / 2)}px`;
+  card.addEventListener('animationstart', function nextCard() {
+    empCardIndex = (empCardIndex + 1) % teamRow.children.length;
+    animateEmployeeCard(teamRow.children[empCardIndex])
+  })
+  card.addEventListener('animationend', function resetCard() {
+    card.classList.remove('employee-ani');
+  })
+}
+
+
+function animateEmployeeCard(card) {
+  card.style.setProperty('--employee-ani-dist', `${window.innerWidth + empCardWidth + (empCardWidth/2)}px`);
+  card.classList.add('employee-ani')
+}
+
+animateEmployeeCard(teamRow.children[empCardIndex])
+
 
 
 const phrases = [
@@ -1100,6 +1922,7 @@ let frameLooping = false;
 function animateFrame(now) {
   // Check framerate sync
   if(now - lastTime >= frameRate) {
+    console.log('frame')
     lastTime = now;
     if(!bgAnimated) animateStarBG();
     if(bgAnimated) animateStarPull();
@@ -1207,9 +2030,6 @@ document.getElementById('i3-head').style.top = `${ucHeaderRect.height}px`
 
 // Set space between stars
 const spacing = window.innerWidth / 30;
-const blueprintGrid = document.getElementById('blueprint');
-blueprintGrid.style.backgroundSize = `${spacing}px ${spacing}px`
-blueprintGrid.style.top = `${ucHeaderRect.height}px`;
 // Set section breakpoints
 const horizBreak = Math.floor(screen.height / 2);
 const leftVertBreak = Math.floor(screen.width / 3);
@@ -1245,12 +2065,7 @@ function resizeStarBG() {
     ctx.drawImage(cachedStarSections[code], Math.round(x), Math.round(y))
   }
 }
-blueprintGrid.style.transition = 'opacity .75s';
-canvas.style.transition = 'opacity 1s';
-function test() {
-  blueprintGrid.style.opacity = '1';
-  canvas.style.opacity = '0';
-}
+
 
 // Set frame number to 0
 let frame = 0;
@@ -1370,7 +2185,6 @@ function animateStarBG() {
   // If animation complete set bgAnimated to true;
   if(!fadeInIncomplete) {
     bgAnimated = true;
-    setTimeout(waveFill, 0);
   }
   // Increment frame
   frame++

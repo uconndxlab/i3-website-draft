@@ -10,6 +10,15 @@ const projects = [
     img: 'img/i3/work/quantum.png'
   },
   {
+    name: 'Sourcery',
+    tags: ['Web Development', 'UX Design', 'Mobile PWA'],
+    group: 'dxg',
+    desc: 'Sourcery emerged from the design process of Greenhouse Studios and from the project team\'s past work and ongoing interests in research software for the humanities.\n\n' +
+      'Working with Greenhouse Studios, we developed an application that gives researchers access to documents that can\'t be found online by paying other researchers to find them.',
+    link: 'https://sourceryapp.org/',
+    img: 'img/i3/work/sourcery.png'
+  },
+  {
     name: 'Research Insights for Faculty',
     tags: ['Web Development'],
     group: 'cubedLabs',
@@ -35,15 +44,6 @@ const projects = [
       'Nexus complements the university\'s student support services and enhances information sharing between students, staff, and faculty. Tools include dashboards, appointment scheduling, note sharing, event registration, and more.',
     link: 'https://nexus.uconn.edu/',
     img: 'img/i3/work/nexus.png'
-  },
-  {
-    name: 'Sourcery',
-    tags: ['Web Development', 'UX Design', 'Mobile PWA'],
-    group: 'dxg',
-    desc: 'Sourcery emerged from the design process of Greenhouse Studios and from the project team\'s past work and ongoing interests in research software for the humanities.\n\n' +
-      'Working with Greenhouse Studios, we developed an application that gives researchers access to documents that can\'t be found online by paying other researchers to find them.',
-    link: 'https://sourceryapp.org/',
-    img: 'img/i3/work/sourcery.png'
   },
   {
     name: 'WellSAT',
@@ -75,7 +75,7 @@ const projects = [
   },
   {
     name: 'Innovation in Connecticut',
-    tags: ['Poster Design', 'Printwork'],
+    tags: ['Poster Design', 'Print Production'],
     group: 'cubedLabs',
     desc: '"Innovation in Connecticut" is a feature documentary project delving into the rich tapestry of Connecticut\'s history of innovation, showcasing both established pioneers in ' +
       'various fields as well as emerging young innovators. I3 created the documentary poster for print and web marketing.',
@@ -100,6 +100,15 @@ const projects = [
     img: 'img/i3/work/werth.png',
     shortName: 'Werth',
     longName: 'Werth Institute for Entrepreneurship and Innovation'
+  },
+  {
+    name: 'Covid Surveillance Testing',
+    tags: ['Web Development', 'Mobile PWA', 'UX Design'],
+    group: 'cubedLabs',
+    desc: 'Along with the Institute for Systems Genomics, the DX Group received an award from UConn\'s COVID-19 Rapid Seed Funding (COVID-RSF) Program for creation of a website and dynamic dashboard to showcase the University\'s ' +
+      'response to COVID-19 titled "An Integrated Surveillance Program for Improved Detection, Containment and Mitigation of COVID-19."',
+    link: 'https://covid-testing.uconn.edu/',
+    img: 'img/i3/work/covid-testing.png'
   },
   {
     name: 'POET',
@@ -178,15 +187,6 @@ const projects = [
     img: 'img/i3/work/access2ag.png'
   },
   {
-    name: 'Covid Surveillance Testing',
-    tags: ['Web Development', 'Mobile PWA', 'UX Design'],
-    group: 'cubedLabs',
-    desc: 'Along with the Institute for Systems Genomics, the DX Group received an award from UConn\'s COVID-19 Rapid Seed Funding (COVID-RSF) Program for creation of a website and dynamic dashboard to showcase the University\'s ' +
-      'response to COVID-19 titled "An Integrated Surveillance Program for Improved Detection, Containment and Mitigation of COVID-19."',
-    link: 'https://covid-testing.uconn.edu/',
-    img: 'img/i3/work/covid-testing.png'
-  },
-  {
     name: 'Travel Funds',
     tags: ['Web Development'],
     group: 'cubedLabs',
@@ -245,15 +245,6 @@ const projects = [
     img: 'img/i3/work/dmct.png'
   },
   {
-    name: 'Rain Garden',
-    tags: ['Web Development', 'Mobile PWA', 'UX Design'],
-    group: 'dxg',
-    desc: 'During Fall \'20, we were approached by new friend David Dickson of the CT NEMO Program. CT NEMO maintains Rain Garden App, a FREE PWA (Progressive Web App). ' +
-      'Through video tutorials, diagrams, text, and tools, the App guides users through how to properly locate, size, install, plant, and maintain a rain garden to help protect local waterways.',
-    link: 'https://rgapp.nemo.uconn.edu/',
-    img: 'img/i3/work/rain-garden.png'
-  },
-  {
     name: 'TurfGrass Application',
     tags: ['Web Development', 'UX Design'],
     group: 'dxg',
@@ -288,6 +279,15 @@ const projects = [
     desc: 'Launching soon!',
     link: null,
     img: 'img/i3/work/ecoregions.png'
+  },
+  {
+    name: 'Rain Garden',
+    tags: ['Web Development', 'Mobile PWA', 'UX Design'],
+    group: 'dxg',
+    desc: 'During Fall \'20, we were approached by new friend David Dickson of the CT NEMO Program. CT NEMO maintains Rain Garden App, a FREE PWA (Progressive Web App). ' +
+      'Through video tutorials, diagrams, text, and tools, the App guides users through how to properly locate, size, install, plant, and maintain a rain garden to help protect local waterways.',
+    link: 'https://rgapp.nemo.uconn.edu/',
+    img: 'img/i3/work/rain-garden.png'
   },
   {
     name: 'Pandemic Journaling Project',
