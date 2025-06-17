@@ -13,20 +13,19 @@ const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect(
 // Track hero on screen
 let heroOnScreen = false;
 
-
 // Track stars faded
 let starsFaded = false;
 
-
 // Track story row on screen
 let storyRowOnScreen = false;
+
+let storyHeadAnimated = false;
 
 // Define story row
 const storyRow = document.querySelector('#story-row');
 
 // Track if story is looping
 let storyLooping = false;
-
 
 // Track projects on screen
 let projectsOnScreen = false;
@@ -37,7 +36,6 @@ const projectsRow2 = document.querySelector('#row-2');
 
 // Track if projects are animating
 let projectsAnimating = false;
-
 
 // Track team on screen
 let teamOnScreen = false;
@@ -51,7 +49,6 @@ let teamAnimating = false;
 
 // Define body element
 const body = document.querySelector('body');
-
 
 // Track background color
 let bgColor = 0;
@@ -204,6 +201,12 @@ const storyRowObserver = new IntersectionObserver(entries => {
           // Update story loop tracker
           storyLooping = true;
         }
+      }
+
+      // Check story head animated tracker
+      if(!storyHeadAnimated) {
+        document.querySelector('.section-head-side').classList.add('section-head-animated');
+        storyHeadAnimated = true;
       }
 
     // If story not on screen
@@ -450,7 +453,7 @@ function consistentScroll() {
 
 /* ------------------- WHAT WE DO ANI FUNCTIONS ------------------- */
 
-// Define phrases
+
 const phrases = [
   "build systems",
   "create websites",
@@ -463,28 +466,63 @@ const phrases = [
 const moveText = document.getElementById('move-text');
 const moveText2 = document.getElementById('move-text-2');
 
+let charWidth;
+
+let widths = [];
+let phraseLengths = [];
+let fontSize;
+let charDist;
+function setCharWidths() {
+  fontSize = window.getComputedStyle(moveText).getPropertyValue('--font-size');
+  if(fontSize === '1.6rem') {
+    spaceCharSize = 18;
+    charDist = 4;
+    widths = new Map([["a",15],["b",15],["c",13],["d",15],["e",15],["f",8],["g",15],["h",15],["i",6],["j",6],["k",13],["l",6],["m",22],["n",15],["o",15],["p",15],["q",15],["r",9],["s",13],["t",8],["u",15],["v",13],["w",19],["x",13],["y",13],["z",13],[" ",0]])
+  } else {
+    charDist = 2;
+    spaceCharSize = 13;
+    widths = new Map([["a",11],["b",11],["c",10],["d",11],["e",11],["f",6],["g",11],["h",11],["i",5],["j",5],["k",10],["l",5],["m",16],["n",11],["o",11],["p",11],["q",11],["r",7],["s",10],["t",6],["u",11],["v",10],["w",14],["x",10],["y",10],["z",10],[" ",0]])
+  }
+
+  phraseLengths = [];
+// Get length of longest phrase
+  phrases.forEach(phrase => {
+    let phraseLength = 0;
+    for(let i = 0; i < phrase.length; i++) {
+      const char = phrase[i];
+      if(char === ' ') {
+        phraseLength += spaceCharSize;
+      } else {
+        let charWidth = widths.get(char) ?? 0;
+        phraseLength += charWidth + charDist;
+      }
+    }
+    phraseLengths.push(phraseLength)
+  })
+
+  maxPhraseLength = Math.max(...phraseLengths);
+  moveText.style.width = `${maxPhraseLength + charDist}px`;
+  moveText2.style.width = `${maxPhraseLength + charDist}px`;
+}
+let maxPhraseLength = 0;
+let spaceCharSize = 0;
+setCharWidths();
+
 // Define forUConn span
 const forUconn = document.getElementById('forUconn');
 
 // Set character size (needs update)
-const charWidth = 20;
-
-// Get length of longest phrase
-const maxPhraseLength = Math.max(...phrases.map(p => p.length));
-
-// Set span widths to max length
-moveText.style.width = (maxPhraseLength * charWidth) + "px";
-moveText2.style.width = (maxPhraseLength * charWidth) + "px";
 
 // Set text color
 let color = '#8dc1ff';
 
 // Track which phrase
 let currPhrase = 0;
-
+let moveText1Phrase = 0;
+let moveText2Phrase = 0;
 // Set forUConn styles
 forUconn.style.marginLeft = '8px';
-forUconn.style.transform = `translateX(${-(maxPhraseLength * charWidth) + phrases[currPhrase].length}px)`;
+forUconn.style.transform = `translateX(${-(phraseLengths[currPhrase] + spaceCharSize)}px)`;
 
 // Call build function
 buildPhrase1();
@@ -496,6 +534,7 @@ function buildPhrase1() {
   // Reset innerHTML
   moveText.innerHTML = '';
   // For each character of current phrase
+  moveText1Phrase = currPhrase;
   for (let char of phrases[currPhrase]) {
     // Create character span
     let span = document.createElement('span');
@@ -513,11 +552,14 @@ function buildPhrase1() {
       span.innerHTML = '&nbsp';
       // Add space class
       span.classList.add('space-char');
+      span.style.width = `${spaceCharSize}px`;
       // Set color
       color = '#348fff';
     } else {
       // Set char span text to char
       span.innerText = char;
+      charWidth = widths.get(char) ?? 0;
+      span.style.width = `${charWidth + charDist}px`;
     }
     // Check direction/set position
     switch(direction) {
@@ -546,6 +588,7 @@ function buildPhrase2() {
   // Reset innerHTML
   moveText2.innerHTML = '';
   // For each character of phrase
+  moveText2Phrase = currPhrase;
   for (let char of phrases[currPhrase]) {
     // Create char span
     let span = document.createElement('span');
@@ -563,11 +606,14 @@ function buildPhrase2() {
       span.innerHTML = '&nbsp';
       // Add space class
       span.classList.add('space-char');
+      span.style.width = `${spaceCharSize}px`;
       // Set color
       color = '#348fff';
     } else {
       // Set char span text to char
       span.innerText = char;
+      charWidth = widths.get(char) ?? 0;
+      span.style.width = `${charWidth + charDist}px`;
     }
     // Check direction/set position
     switch(direction) {
@@ -719,16 +765,16 @@ function getAnimationDuration(numLetters) {
 
 // Align forUConn span
 function alignForUConn(wrapper) {
-  // Set character width
-  const charWidth = 20;
   // Get text width
-  const textWidth = wrapper.children.length * charWidth;
+  let textWidth;
+  if(wrapper === moveText) {textWidth = phraseLengths[moveText1Phrase]}
+  else {textWidth = phraseLengths[moveText2Phrase]}
   // Set transition
   forUconn.style.transition = 'transform 1.725s cubic-bezier(.5,.1,.3,1)';
   // Set forUConn margin
   forUconn.style.marginLeft = '8px';
   // Move forUConn span
-  forUconn.style.transform = `translateX(${-(maxPhraseLength * charWidth) + textWidth}px)`;
+  forUconn.style.transform = `translateX(${-(maxPhraseLength) + textWidth + spaceCharSize}px)`;
 }
 
 
@@ -863,8 +909,13 @@ const ctx = canvas.getContext('2d');
 canvas.style.top = `${ucHeaderRect.height}px`;
 document.getElementById('i3-head').style.top = `${ucHeaderRect.height}px`
 
+const dpr = window.devicePixelRatio;
+let windowWidth = window.innerWidth;
 // Set space between stars
-const spacing = window.innerWidth / 35;
+
+if(window.innerWidth * dpr < 1000) windowWidth *= 1.5;
+
+const spacing = (windowWidth * dpr) / 35;
 // Set section breakpoints
 const horizBreak = Math.floor(screen.height / 2);
 const leftVertBreak = Math.floor(screen.width / 3);
@@ -2560,6 +2611,10 @@ function buildEmployeeCards() {
     bio.innerText = employee.bio;
     back.appendChild(bio);
 
+    const border = document.createElement('div');
+    border.classList.add('employee-card-border');
+    front.appendChild(border);
+
     // Append front & back to card
     card.appendChild(front);
     card.appendChild(back);
@@ -2592,10 +2647,73 @@ function setEmpCardStyles() {
     card.addEventListener('animationend', function resetCard() {
       card.classList.remove('employee-ani');
     })
+    card.addEventListener('touchstart', () => {
+      cardTouchHover(card);
+    });
+    card.addEventListener('mouseenter', () => {
+      cardHover(card);
+    });
+    card.addEventListener('mouseleave', () => {
+      disableHover();
+    });
   }
   // Initial card animation
   animateEmployeeCard(teamRow.children[empCardIndex])
 }
+
+function cardTouchHover(card) {
+  card.querySelector('.linked-in-wrap').style.opacity = '1';
+  card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
+  card.querySelector('.employee-card-hover').style.opacity = '.5';
+  card.querySelector('.linked-in').style.opacity = '1';
+  card.querySelector('.employee-name-main').style.color = 'dimgray';
+  card.querySelector('.employee-title-main').style.color = 'dimgray';
+
+  card.addEventListener('touchstart', cardTouchDisableHover)
+  function cardTouchDisableHover() {
+    card.removeEventListener('touchstart', cardTouchDisableHover)
+    card.querySelector('.employee-card-hover').style.opacity = '0';
+    card.querySelector('.linked-in-wrap').style.opacity = '0';
+    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
+    card.querySelector('.linked-in').style.opacity = '0';
+    card.querySelector('.employee-name-main').style.color = '#f1f1f1';
+    card.querySelector('.employee-title-main').style.color = '#f1f1f1';
+  }
+
+}
+
+function cardHover(hoveredCard) {
+  cardsPaused = true;
+  for (let card of document.querySelectorAll('.employee-ani')) {
+    const rect = card.getBoundingClientRect();
+    card.style.animationPlayState = 'paused';
+    if(rect.left < window.innerWidth - 25 && rect.right > 10) {
+      if(card.id === hoveredCard.id) {
+        card.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
+        card.querySelector('.linked-in-wrap').style.opacity = '1';
+        card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
+        card.querySelector('.linked-in').style.opacity = '1';
+      } else {
+        card.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg)'
+      }
+    }
+  }
+}
+
+function disableHover() {
+  cardsPaused = false;
+  for(let card of document.querySelectorAll('.employee-ani')) {
+    card.style.animationPlayState = 'running';
+    card.querySelector('.main-employee-card').style.transform = 'translateX(0) rotateX(-180deg)';
+    card.querySelector('.linked-in-wrap').style.opacity = '0';
+    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
+    card.querySelector('.linked-in').style.opacity = '0';
+  }
+}
+
+let cardsPaused = false;
+
+
 
 // Animation function / set distance / add animation class
 function animateEmployeeCard(card) {

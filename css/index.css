@@ -12,8 +12,8 @@
   --project-ani-dist: 0;
   --project-ani-del: 2.75s;
   --employee-ani-dist: 0;
-  --employee-ani-dur: 13s;
-  --employee-ani-del: 2.25s;
+  --employee-ani-dur: 20s;
+  --employee-ani-del: 3s;
 }
 
 html {
@@ -27,7 +27,6 @@ body {
   margin: 0;
   width: 100vw;
   padding: 0;
-  overflow-x: hidden !important;
   box-sizing: border-box;
   min-height: 3500px;
   transition: background-color .5s ease-out;
@@ -154,11 +153,14 @@ h6,
 
 
 #move-text {
-  font-size: 1.6rem;
+  --font-size: 1.2rem;
+  font-size: var(--font-size);
   display: inline-block;
+  transform: translateX(10px);
+
 }
 #forUconn {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 800;
   display: inline-block;
 }
@@ -177,10 +179,11 @@ h6,
   position: absolute;
   top: 50%;
   left: 50px;
-  font-size: 1.6rem;
+  --font-size: 1.2rem;
+  font-size: var(--font-size);
   display: inline-block;
   font-weight: 800;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(10px);
 }
 #move-text-2 .move-char {
   width: 20px;
@@ -328,15 +331,17 @@ h6,
 
 #story {
   width: 100vw;
-  height: 120vh;
+  height: 200vh;
   position: relative;
 }
 
 .story-container {
   width: 100vw;
   overflow-x: hidden;
-  height: 100%;
-  position: relative;
+  height: 100vh;
+  top: 0;
+  z-index: 999;
+  position: sticky;
 }
 
 .story-container > [data-aos="slide-left"] {
@@ -351,17 +356,23 @@ h6,
 
 .section-head-side {
   position: absolute;
-  transition: opacity .5s;
+  transition-delay: .5s !important;
+  transition: opacity .5s, transform .5s;
   writing-mode: vertical-rl;
   right: 0;
   margin: 0 2rem 0 0;
   font-size: 6rem;
   height: max-content;
   color: transparent;
-  opacity: 25% !important;
+  opacity: 0;
   top: 55%;
   -webkit-text-stroke: 1px #f1f1f1;
-  transform: translateY(-50%);
+  transform: translateX(100px) translateY(-50%);
+}
+
+.section-head-animated {
+  transform: translateY(-50%) !important;
+  opacity: .25 !important;
 }
 
 .story-stat-wrapper {
@@ -520,8 +531,16 @@ h6,
 /* PROJECTS */
 
 #projects {
-  height: 120vh;
+  height: 200vh;
   width: 100vw;
+  position: relative;
+  margin-top: 10rem;
+}
+
+.project-row-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
 }
 
 #story-stat-aos > [data-aos="fade-left"] {
@@ -666,7 +685,12 @@ h6,
 }
 
 .team-container {
-  margin-top: 2rem;
+  position: sticky;
+  height: 100vh;
+  display: flex;
+  top: 0;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .team-btn {
@@ -745,6 +769,7 @@ h6,
   perspective: 1200px;
   perspective-origin: center;
   transform-origin: center;
+  opacity: 0;
 }
 
 
@@ -757,6 +782,17 @@ h6,
   transform-style: preserve-3d;
   transition: transform .75s ease-out;
   transform: rotateX(-180deg);
+}
+.employee-card-border {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid #f1f1f1;
+  border-radius: 25px;
+  z-index: -2;
+  transform: translateX(-20px) translateY(-20px);
 }
 .employee-tag {
   color: #f1f1f1;
@@ -791,7 +827,6 @@ h6,
   flex-direction: column;
   text-align: start;
   transform: rotateX(180deg);
-  box-shadow: rgba(241, 241, 241, .35) 0px 0px 9px;
   border-radius: 25px;
 }
 .main-employee-card .employee-card-back {
@@ -811,11 +846,16 @@ h6,
   animation-timing-function: linear;
   animation-delay: var(--employee-ani-del);
   animation-fill-mode: none;
+  transform-origin: bottom;
 }
 
 @keyframes employee-ani {
-  0%{transform: translateX(0)}
-  100%{transform: translateX(var(--employee-ani-dist))}
+  0%{transform: translateX(0) scale(.85); opacity: 0}
+  10%{transform: translateX(calc(var(--employee-ani-dist) * .1)) scale(.85); opacity: 0}
+  40%{transform: translateX(calc(var(--employee-ani-dist) * .4)) scale(1); opacity: 1}
+  60%{transform: translateX(calc(var(--employee-ani-dist) * .6)) scale(1); opacity: 1}
+  90%{transform: translateX(calc(var(--employee-ani-dist) * .9)) scale(.85); opacity: 0}
+  100%{transform: translateX(var(--employee-ani-dist)); opacity: 0}
 }
 
 
@@ -924,7 +964,6 @@ h6,
 
 .projects-btn {
   display: flex;
-  margin-top: 2.5rem;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -1167,12 +1206,14 @@ h6,
 }
 
 .project-container {
-  height: fit-content;
+  height: 100vh;
   width: 100vw;
-  margin-top: 8rem;
+  top: 0;
+  padding: 2rem 0;
+  position: sticky;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
 }
 
 .projects-head {
@@ -1317,12 +1358,10 @@ h6,
 /* ------------------------------------ TEAM SECTION  ------------------------------------ */
 
 #team {
-  height: 120vh;
+  height: 200vh;
   width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3rem;
+  position: relative;
+  margin-top: 10rem;
 }
 .team-row {
   width: 100vw;
@@ -1453,6 +1492,17 @@ h6,
   }
   :root {
     --waveDuration: 12.5s;
+  }
+  #move-text {
+    --font-size: 1.6rem;
+    font-size: var(--font-size);
+  }
+  #move-text-2 {
+    --font-size: 1.6rem;
+    font-size: var(--font-size);
+  }
+  #forUconn {
+    font-size: 1.6rem
   }
 
   /* STORY */
@@ -2005,18 +2055,6 @@ header nav ul:not(.dropdown-menu) li a:hover {
 /*parallax*/
 @media (min-width: 768px) {
 
-  .parallax {
-    /* The image used */
-    background-image: url("img/i3/CORE\ Logos\ \(White\ Vector\).svg");
-
-    /* Full height */
-    height: 100%;
-
-    /* Create the parallax scrolling effect */
-    background-position: right top;
-    background-repeat: no-repeat;
-    background-size: 200px;
-  }
 
   #about-logo {
     display: none;
@@ -2164,7 +2202,6 @@ header nav ul:not(.dropdown-menu) li a:hover {
   line-height: 1.1;
   font-size: 16px;
   text-align: center;
-  width: -moz-max-content;
   width: max-content;
   margin-left: 60px;
 }
@@ -2259,48 +2296,7 @@ header nav ul:not(.dropdown-menu) li a:hover {
   height: min-content;
 }
 
-.i3-footer img {
-  width: 38px;
-  margin: 0px 5px;
-}
 
-.i3-footer-btn {
-  --corner: 10px;
-  /* the size on the corner */
-  --thickness: 2px;
-  /* the thickness of the border */
-  --gap: 6px;
-  /* the gap between the border and image */
-
-  padding: 8px 12px;
-  outline-offset: calc(-1*var(--thickness));
-  -webkit-mask:
-    conic-gradient(at var(--corner) var(--corner), #0000 75%, #000 0) 0 0/calc(100% - var(--corner)) calc(100% - var(--corner)),
-    linear-gradient(#000 0 0) content-box;
-  transition: .2s;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  height: 20px;
-  align-items: center;
-  width: fit-content;
-  margin: 0px 5px;
-}
-
-.i3-footer-btn:hover {
-  outline-offset: calc(var(--gap)/-1);
-}
-
-/* light footer styles */
-
-.i3-footer--light a {
-  color: #0034DA;
-}
-
-.i3-footer--light .i3-footer-btn {
-  outline: var(--thickness) solid #4DB3FF;
-  /* the corner color */
-}
 
 /**
  * Animations
