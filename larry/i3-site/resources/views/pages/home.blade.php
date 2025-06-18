@@ -39,7 +39,7 @@
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h2 class="fw-bold mb-3 border-bottom pb-2 border-primary d-inline-block">Web design, digital tools, app
+                    <h2 class="mb-3 border-bottom pb-2 border-primary d-inline-block">Web design, digital tools, app
                         development and more...</h2>
                     <p class="text-secondary">
                         The Internal Insights & Innovation (i3) team provides custom software development, web design,
@@ -109,7 +109,8 @@
         </div>
     </section>
     <section id="featured-work" class="bg-dark text-light d-flex flex-column align-items-center">
-        <h2 class="fw-bold my-5 border-bottom pb-2 border-primary d-inline-block">...for the university...</h2>        <div class="featured-collage" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="my-5 border-bottom pb-2 border-primary d-inline-block">...for the university...</h2>        
+        <div class="featured-collage" data-aos="fade-up" data-aos-duration="1000">
             @foreach ($featuredWork as $item)
                 <div class="collage-tile" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
                     <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
@@ -144,19 +145,20 @@
 
 
     {{-- Team --}}
-    <section id="team" class="bg-deep text-light py-5">
+    <section id="team" class="bg-deep text-light py-5 d-flex flex-column align-items-center">
+        <h2 class=" my-5 border-bottom pb-2 border-primary d-inline-block">...by the university.</h2>
+    
         <div class="container">
-            <h2 class="fw-bold mb-3 border-bottom pb-2 border-primary d-inline-block">...by the university.</h2>
-            <div class="team-carousel d-flex overflow-auto gap-3 px-3 pb-3" data-aos="fade-up" data-aos-delay="200">
-                @foreach ($teamMembers as $member)
+            <div class="team-carousel d-flex overflow-auto gap-4 px-3 pb-4" data-aos="fade-up">
+                @foreach ($teamMembers as $index => $member)
                     <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow"
-                        style="width: 220px; height: 300px;">
+                         style="width: 220px; height: 300px;" style="--wiggle-index: {{ $index }}">
                         @if ($member->photo)
                             <img src="{{ asset('storage/' . $member->photo) }}" class="w-100 h-100 object-fit-cover">
                         @endif
-
-                        <div class="overlay position-absolute bottom-0 start-0 w-100 text-light px-3 py-2">
-                            <h6 class="fw-bold mb-0">{{ $member->name }}</h6>
+    
+                        <div class="overlay px-3 py-2">
+                            <h6 class="mb-0">{{ $member->name }}</h6>
                             <p class="small text-white-50 mb-1">{{ $member->role }}</p>
                             <div class="d-flex flex-wrap gap-1">
                                 @foreach ($member->tags ?? [] as $tag)
@@ -166,25 +168,27 @@
                         </div>
                     </div>
                 @endforeach
-
-                <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow border border-light d-flex justify-content-center align-items-center"
-                    style="width: 220px; height: 300px;">
-                    <a href="#team" class="text-white px-4 d-inline-flex align-items-center gap-2">
-                        <span>View Full Team ({{$totalTeamMembers}})</span>
-                        <i class="bi bi-arrow-right"></i>
+    
+                {{-- CTA Tile --}}
+                <div class="team-tile cta-tile d-flex flex-column justify-content-center align-items-center text-center flex-shrink-0 rounded-4 shadow border border-light"
+                     style="width: 220px; height: 300px;">
+                    <a href="{{ route('team') }}" class="text-white text-decoration-none px-3 py-2">
+                        <h6 class="mb-2">View Full Team</h6>
+                        <span class="badge bg-light text-dark">{{ $totalTeamMembers }} Members</span>
+                        <div class="mt-2 text-primary small"><i class="bi bi-arrow-right-circle text-light"></i></div>
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
+    
 
 
     {{-- Contact --}}
     <section id="contact" class="bg-dark text-light py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold border-bottom pb-2 border-primary d-inline-block">Connect with Us</h2>
+                <h2 class="border-bottom pb-2 border-primary d-inline-block">Connect with Us</h2>
                 <p class="text-secondary mt-3" data-aos="fade-up" data-aos-delay="100">
                     Have questions or want to collaborate? Reach out to us using the form below.
                 </p>
