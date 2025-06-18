@@ -1,3 +1,5 @@
+import employees from "./employeeData.js";
+
 window.addEventListener('resize', () => {
   resizeTeamCards();
   setCardWidth();
@@ -216,7 +218,7 @@ cards[0].wrapper.addEventListener('animationend', () => {
 })
 
 let teamLooping = false;
-let teamSelectable = [...team]
+let teamSelectable = [...employees]
 let teamTimeout = [];
 let initialRandom = true;
 function randomTeam() {
@@ -291,153 +293,8 @@ function resizeTeamCards() {
   }
 }
 
-const students = [
-  {
-    name: 'Emma Adams',
-    id: 'emma-adams',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/adams.jpg',
-    gradient: '7, 46, 51',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Laravel', 'Javascript'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Lauren Busavage',
-    id: 'lauren-busav',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/busavage.png',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Aurora', 'Sketches'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-
-  },
-  {
-    name: 'Kelis Clarke',
-    id: 'kelis-clarke',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Ryan Cohutt',
-    id: 'ryan-cohutt',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Maggie Danielewicz',
-    id: 'maggie-daniel',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/danielewicz.jpg',
-    gradient: '30, 50, 30',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Luna Gonzalez',
-    id: 'luna-gonzal',
-    title: 'Student Illustrator',
-    img: 'img/i3/people/luna.jpg',
-    gradient: '30, 50, 30',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Aaron Mark',
-    id: 'aaron-mark',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Jack Medrek',
-    id: 'jack-medrek',
-    title: 'Student Software Developer',
-    img: 'img/i3/people/medrek.jpg',
-    gradient: '1, 7, 41',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Kailey Moore',
-    id: 'kailey-moore',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/moore.jpg',
-    gradient: '38, 0, 76',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'William Shostak',
-    id: 'william-shostak',
-    title: 'Student Software Developer',
-    img: 'img/i3/people/shostak.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Emelia Salmon',
-    id: 'emelia-salmon',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Victoria Brey',
-    id: 'victoria-brey',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  }
-]
+const students = employees.filter(emp => emp.isStudent);
+console.log(students);
 
 let row1Index = 0;
 let row2Index = 0;

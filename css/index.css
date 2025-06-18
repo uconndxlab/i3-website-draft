@@ -8,17 +8,16 @@
   --waveX25Percent: -750px;
   --waveX50Percent: -1500px;
   --waveX75Percent: -2250px;
-  --project-ani-dur: 12s;
+  --project-card-width: 320px;
+  --project-ani-dur: 12000ms;
   --project-ani-dist: 0;
-  --project-ani-del: 2.75s;
+  --project-ani-del: 2750ms;
   --employee-ani-dist: 0;
-  --employee-ani-dur: 20s;
+  --employee-ani-dur: 20000ms;
   --employee-ani-del: 3s;
 }
 
-html {
-  overflow-x: hidden;
-}
+
 
 body {
   color: #f1f1f1;
@@ -26,6 +25,7 @@ body {
   font-family: "area-normal", sans-serif;
   margin: 0;
   width: 100vw;
+  overflow-x: hidden !important;
   padding: 0;
   box-sizing: border-box;
   min-height: 3500px;
@@ -331,7 +331,7 @@ h6,
 
 #story {
   width: 100vw;
-  height: 200vh;
+  height: 100vh;
   position: relative;
 }
 
@@ -531,7 +531,7 @@ h6,
 /* PROJECTS */
 
 #projects {
-  height: 200vh;
+  height: 100vh;
   width: 100vw;
   position: relative;
   margin-top: 10rem;
@@ -575,7 +575,7 @@ h6,
   height: 9rem;
   border-radius: 15px;
   transform-origin: bottom;
-  transition: transform .5s ease-out, opacity .5s;
+  transition: transform .75s ease-out, opacity .5s;
   box-shadow: #37494b61 0 0 11px 3px;
   position: relative;
   overflow: hidden;
@@ -642,6 +642,17 @@ h6,
   100%{transform: translateX(var(--project-ani-dist))}
 }
 
+.project-ani-start {
+  animation-name: project-ani-start;
+  animation-duration: var(--project-ani-dur);
+  animation-delay: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: none;
+}
+@keyframes project-ani-start {
+  0%{transform: translateX(0)}
+  100%{transform: translateX(var(--project-ani-dist))}
+}
 
 
 .linked-in {
@@ -857,6 +868,25 @@ h6,
   90%{transform: translateX(calc(var(--employee-ani-dist) * .9)) scale(.85); opacity: 0}
   100%{transform: translateX(var(--employee-ani-dist)); opacity: 0}
 }
+
+.employee-ani-start {
+  animation-name: employee-ani-start;
+  animation-duration: var(--employee-ani-dur);
+  animation-timing-function: linear;
+  animation-delay: .25s;
+  animation-fill-mode: none;
+  transform-origin: bottom;
+}
+
+@keyframes employee-ani-start {
+  0%{transform: translateX(0) scale(.85); opacity: 0}
+  10%{transform: translateX(calc(var(--employee-ani-dist) * .1)) scale(.85); opacity: 0}
+  40%{transform: translateX(calc(var(--employee-ani-dist) * .4)) scale(1); opacity: 1}
+  60%{transform: translateX(calc(var(--employee-ani-dist) * .6)) scale(1); opacity: 1}
+  90%{transform: translateX(calc(var(--employee-ani-dist) * .9)) scale(.85); opacity: 0}
+  100%{transform: translateX(var(--employee-ani-dist)); opacity: 0}
+}
+
 
 
 
@@ -1185,7 +1215,7 @@ h6,
   left: 0;
   top: 0;
   transform: translateX(-20px) translateY(-20px);
-  transition: opacity .5s ease, transform .5s ease-out;
+  transition: opacity .5s ease, transform .75s ease-out;
   opacity: 1;
   position: absolute;
   border: 2px solid #f1f1f1;
@@ -1358,7 +1388,7 @@ h6,
 /* ------------------------------------ TEAM SECTION  ------------------------------------ */
 
 #team {
-  height: 200vh;
+  height: vh;
   width: 100vw;
   position: relative;
   margin-top: 10rem;
@@ -1600,8 +1630,8 @@ h6,
     height: 11rem;
   }
   :root {
-    --project-ani-dur: 13s;
-    --project-ani-del: 2.65s;
+    --project-ani-dur: 13000ms;
+    --project-ani-del: 2650ms;
   }
 
   /* TEAM */
@@ -1708,8 +1738,8 @@ h6,
     height: 12rem;
   }
   :root {
-    --project-ani-dur: 13s;
-    --project-ani-del: 2.5s;
+    --project-ani-dur: 13000ms;
+    --project-ani-del: 2500ms;
   }
 }
 
@@ -1754,8 +1784,8 @@ h6,
     height: 13rem;
   }
   :root {
-    --project-ani-dur: 14s;
-    --project-ani-del: 2.5s;
+    --project-ani-dur: 14000ms;
+    --project-ani-del: 2500ms;
   }
 }
 

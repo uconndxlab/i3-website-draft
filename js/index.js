@@ -1,6 +1,8 @@
 // Import dynamic data
 import projects from './projectData.js';
+import employees from './employeeData.js';
 
+console.log('window', window.gsap)
 
 /* ------------------- OBSERVERS ------------------- */
 
@@ -10,6 +12,10 @@ const animatedElements = document.querySelectorAll('.animated');
 // Define UConn header rect
 const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
 
+const sections = document.querySelectorAll('.section');
+
+let scrolling = false;
+let scrollStopTimeout;
 // Track hero on screen
 let heroOnScreen = false;
 
@@ -36,9 +42,11 @@ const projectsRow2 = document.querySelector('#row-2');
 
 // Track if projects are animating
 let projectsAnimating = false;
+let projectsStarted = false;
 
 // Track team on screen
 let teamOnScreen = false;
+let teamStarted = false;
 
 // Define team row
 const teamRow = document.querySelector('.team-row');
@@ -150,8 +158,46 @@ const heroObserver = new IntersectionObserver(entries => {
 // Observe hero h1
 heroObserver.observe(document.querySelector('.hero-h1'));
 
+let gsapScrolling = false;
 
-// Observe story
+window.gsap.utils.toArray('.section').forEach(section => {
+  window.ScrollTrigger.create({
+    trigger: section,
+    start: "center center",
+    end: "+=500vh", // Pin for 120% of the viewport height
+    pin: true,
+    pinSpacing: true, // adds spacing so the page doesn't collapse
+    markers: true // set to true for debug
+  });
+});
+
+
+
+
+
+for(let section of sections) {
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !gsapScrolling) {
+        gsapScrolling = true;
+        window.gsap.to(window, {
+          duration: .75,
+          scrollTo: {y: section},
+          ease: 'linear',
+          onComplete: () => {
+            gsapScrolling = false;
+          }
+        })
+      }
+    })
+  }, {threshold: .50});
+  sectionObserver.observe(section);
+}
+
+
+
+
+// Observe story row
 const storyRowObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
 
@@ -244,7 +290,7 @@ const projectRow2Observer = new IntersectionObserver(entries => {
     if(entry.isIntersecting) {
 
       // If background color not project color
-      if(bgColor !== 2) {
+      if (bgColor !== 2) {
 
         // Set background color to color 2
         body.style.backgroundColor = `${bgColors[2]}`;
@@ -252,7 +298,7 @@ const projectRow2Observer = new IntersectionObserver(entries => {
       }
 
       // Check star fade tracker
-      if(!starsFaded) {
+      if (!starsFaded) {
 
         // Fade out stars
         canvas.style.opacity = '0';
@@ -272,39 +318,30 @@ const projectRow2Observer = new IntersectionObserver(entries => {
       }
 
       // Check project visibility tracker
-      if(!projectsOnScreen) {
-
+      if (!projectsOnScreen) {
         // Update project visibility tracker
         projectsOnScreen = true;
 
-        // Check project animation tracker
-        if(!projectsAnimating) {
-
-          // Update project animation tracker
-          projectsAnimating = true;
-
+        if (!projectsAnimating) {
           // Play project animation
           playProjects();
+          console.log('projects played')
         }
-      }
+        // If projects not on screen
+      } else {
 
-    // If projects not on screen
-    } else {
+        // Check project visibility tracker
+        if (projectsOnScreen) {
 
-      // Check project visibility tracker
-      if(projectsOnScreen) {
+          // Update project visibility tracker
+          projectsOnScreen = false;
 
-        // Update project visibility tracker
-        projectsOnScreen = false;
-
-        // Check project animation tracker
-        if(projectsAnimating) {
-
-          // Update project animation tracker
-          projectsAnimating = false;
-
-          // Pause project animation
-          pauseProjects();
+          // Check project animation tracker
+          if (projectsAnimating && projectsStarted) {
+            // Pause project animation
+            pauseProjects();
+            console.log('projects paused')
+          }
         }
       }
     }
@@ -343,9 +380,16 @@ const teamRowObserver = new IntersectionObserver(entries => {
       // Check/update team visibility + animation trackers
       if(!teamOnScreen) {
         teamOnScreen = true;
-        if(!teamAnimating) {
+        if(!teamAnimating && !teamStarted) {
+          // Initial card animation
+          teamAnimating = true;
+          teamStarted = true;
+          console.log('team started')
+          animateEmployeeCard(teamRow.children[empCardIndex])
+        } else if(!teamAnimating) {
           teamAnimating = true;
           playTeam()
+          console.log('team played')
         }
       }
 
@@ -358,6 +402,7 @@ const teamRowObserver = new IntersectionObserver(entries => {
         if(teamAnimating) {
           teamAnimating = false;
           pauseTeam();
+          console.log('team paused')
         }
       }
     }
@@ -372,6 +417,22 @@ teamRowObserver.observe(document.querySelector('.team-row'));
 
 // After content loaded
 window.addEventListener('DOMContentLoaded', () => {
+  window.gsap.registerPlugin(ScrollSmoother, ScrollToPlugin, ScrollTrigger, Observer);
+  const smoother = window.ScrollSmoother.create({
+    wrapper: '#gsap-wrapper',
+    content: '#gsap-content',
+    smooth: 1.5,
+    effects: true,
+    onUpdate: () => {
+      if(!scrolling) scrolling = true;
+      clearTimeout(scrollStopTimeout);
+      scrollStopTimeout = setTimeout(() => {
+        scrolling = false;
+      }, 75);
+    },
+
+  })
+
 
   // Set star cache sizes
   setCachedSectionSize()
@@ -379,20 +440,39 @@ window.addEventListener('DOMContentLoaded', () => {
   //Create star background after 500ms
   setTimeout(createStarBG, 500);
 
-  // If window width larger than 1800 set project animation to adapt based on screen size
-  if(window.innerWidth > 1800) {
-    document.documentElement.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
-    if(window.innerWidth < 2100) {
-      document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
+
+  if (window.innerWidth > 1800) {
+    document.body.style.setProperty('--project-ani-dur', `${Math.floor(window.innerWidth * 8.5)}ms`);
+    if (window.innerWidth < 2100) {
+      document.body.style.setProperty('--project-ani-del', `${Math.floor(window.innerWidth * 1.5)}ms`);
     } else {
-      document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
+      document.body.style.setProperty('--project-ani-del', `${Math.floor(window.innerWidth * 1.2)}ms`);
     }
   }
 
-  // Call employee card building
-  buildEmployeeCards();
-})
+  let duration = parseInt(window.getComputedStyle(body).getPropertyValue('--project-ani-dur').slice(0, -2));
+  setTimeout(() => {
+    projectsStarted = true;
+    if(!projectsOnScreen) pauseProjects();
+    console.log('project start finish')
+  }, duration * .9)
 
+  animateProjectCardRow1(projectsRow1.children[0], true)
+  animateProjectCardRow2(projectsRow2.children[0], true)
+  body.offsetHeight;
+  setProjectListeners()
+  projectsAnimating = true;
+  buildEmployeeCards();
+
+  let empDuration = parseInt(window.getComputedStyle(body).getPropertyValue('--employee-ani-dur').slice(0,-2));
+  setTimeout(() => {
+    teamStarted = true;
+    if(!teamOnScreen) pauseTeam();
+  }, empDuration * .9);
+
+  animateEmployeeCard(teamRow.children[0], true);
+  body.offsetHeight;
+});
 
 // On window resize
 window.addEventListener('resize', () => {
@@ -402,11 +482,11 @@ window.addEventListener('resize', () => {
 
   // If window width larger than 1800 set project animation to adapt based on screen size
   if(window.innerWidth > 1800) {
-    document.documentElement.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
+    document.body.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
     if(window.innerWidth < 2100) {
-      document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
+      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
     } else {
-      document.documentElement.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
+      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
     }
   }
 });
@@ -437,14 +517,44 @@ document.addEventListener('visibilitychange', () => {
 // Scroll listener
 window.addEventListener('scroll', consistentScroll);
 
+
+/* ------------------- BASE EVENT LISTENERS ------------------- */
+
+
+let scrollSnapTimeout;
 // Scroll function
 function consistentScroll() {
-  const scroll = window.scrollY;
+/*  clearTimeout(scrollSnapTimeout);
+  scrollSnapTimeout = setTimeout(() => {
+    let scrollMid = window.scrollY + window.innerHeight / 2;
+    let closest, closestDist = Infinity;
+
+    for(let section of sections) {
+      const rect = section.getBoundingClientRect();
+      let sectionMid = rect.top + window.scrollY + rect.height / 2;
+      let dist = Math.abs(scrollMid - sectionMid);
+      if(dist < closestDist) {
+        closestDist = dist;
+        closest = section;
+      }
+    }
+    if(closest) {
+
+    }
+  }, 50)*/
+
 
   // Check project link canvas state
   if (linkCanvasActive) {
+
     // Remove canvas
-    document.body.removeChild(document.getElementById('constellationCanvas'));
+    const linkCanvas = document.getElementById('constellationCanvas');
+    linkCanvas.style.transition = 'opacity .25s';
+    linkCanvas.addEventListener('transitionend', function linkFadedOut() {
+      linkCanvas.removeEventListener('transitionend', linkFadedOut);
+      document.body.removeChild(linkCanvas);
+    })
+    linkCanvas.style.opacity = '0';
     // Update tracker
     linkCanvasActive = false;
   }
@@ -786,7 +896,7 @@ function alignForUConn(wrapper) {
 let frameTest = 3000;
 // Count rendered frames
 let frameCount = 0;
-
+let lastLogTime = 0;
 /* -- FRAME LOOP -- */
 
 // Set last time
@@ -800,16 +910,25 @@ let frameLooping = false;
 // Call animation frame
 function animateFrame(now) {
   // Check framerate sync
-  if(now - lastTime >= frameRate) {
     // Set lastTime to now
     lastTime = now;
+/*    frameCount++;
+    if(now - lastLogTime >= 1000) {
+      console.log('frames:', frameCount);
+      frameCount = 0;
+      lastLogTime = now;
+    }*/
+
     // If stars not animated in call star animate in
     if(!bgAnimated) animateStarBG();
     // If stars animated in call gravity function
     if(bgAnimated) animateStarPull();
-  }
+
   // If hero on screen or stars not animated in loop animation frame (needs update for initial animation)
-  if(heroOnScreen || !bgAnimated) requestAnimationFrame(animateFrame)
+  if(heroOnScreen || !bgAnimated) {
+    console.log(scrolling)
+    requestAnimationFrame(animateFrame)
+  }
 }
 
 
@@ -915,7 +1034,11 @@ let windowWidth = window.innerWidth;
 
 if(window.innerWidth * dpr < 1000) windowWidth *= 1.5;
 
-const spacing = (windowWidth * dpr) / 35;
+let spacing = 50;
+if(window.innerWidth > 2000) {
+  spacing = window.innerWidth / 40;
+}
+console.log(spacing)
 // Set section breakpoints
 const horizBreak = Math.floor(screen.height / 2);
 const leftVertBreak = Math.floor(screen.width / 3);
@@ -1459,8 +1582,8 @@ let cardWidth = 320;
 
 // Add first half of project divs to row 1, second half to row 2
 for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 2); i++, i2--) {
-  projectDivs[i].style.left = `-${cardWidth + (cardWidth / 2)}px`;
-  projectDivs[i2].style.right = `-${cardWidth + (cardWidth / 2)}px`;
+  projectDivs[i].style.left = 'calc(-1.5 * var(--project-card-width))';
+  projectDivs[i2].style.right = 'calc(-1.5 * var(--project-card-width))';
   projectsRow1.appendChild(projectDivs[i]);
   projectsRow2.appendChild(projectDivs[i2]);
 }
@@ -1469,50 +1592,111 @@ for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 
 let row1Index = 0;
 let row2Index = 0;
 
-// For each card div in row 1
-for(let card of projectsRow1.children) {
-  // Add hover listener / call hover function
-  card.addEventListener('mouseenter', () => {
-    projectsHover(card);
-  });
-  // Add unhover listener / call unhover function
-  card.addEventListener('mouseleave', projectsUnHover);
-  // Add animation start listener / update row 1 index / call animation for next card
-  card.addEventListener('animationstart', function nextCard() {
-    row1Index = (row1Index + 1) % projectsRow1.children.length;
-    animateProjectCardRow1(projectsRow1.children[row1Index])
-  })
-  // Add animation end listener / remove animation class
-  card.addEventListener('animationend', function resetCard() {
-    card.classList.remove('project-ani');
-  })
+function waitForScrollEnd(timeout, card) {
+  if(waitingForScroll) {
+    if(scrolling) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        waitForScrollEnd(timeout, card);
+      }, 100);
+    } else {
+      waitingForScroll = false;
+      clearTimeout(timeout);
+      projectsHover(card);
+    }
+  }
 }
 
-// For each card div in row 2
-for(let card of projectsRow2.children) {
-  // Add hover listener / call hover function
-  card.addEventListener('mouseenter', () => {
-    projectsHover(card)
-  });
-  // Add unhover listener / call unhover function
-  card.addEventListener('mouseleave', projectsUnHover);
-  // Add animation start listener / update row 2 index / call animation for next card
-  card.addEventListener('animationstart', function nextCard() {
-    row2Index = (row2Index + 1) % projectsRow2.children.length;
-    animateProjectCardRow2(projectsRow2.children[row2Index])
-  })
-  // Add animation end listener / remove animation class
-  card.addEventListener('animationend', function resetCard() {
-    card.classList.remove('project-ani');
-  })
+let scrollTimeout;
+let waitingForScroll = false;
+// For each card div in row 1
+function setProjectListeners() {
+  for(let card of projectsRow1.children) {
+    // Add hover listener / call hover function
+    card.addEventListener('mouseenter', () => {
+      console.log(scrolling)
+      if(scrolling) {
+        waitingForScroll = true;
+        scrollTimeout = setTimeout(() => {
+          waitForScrollEnd(scrollTimeout, card);
+        }, 100);
+      } else {
+        projectsHover(card);
+      }
+    });
+    // Add unhover listener / call unhover function
+    card.addEventListener('mouseleave', () => {
+      projectsUnHover();
+      if(waitingForScroll) {
+        waitingForScroll = false;
+      }
+    });
+    // Add animation start listener / update row 1 index / call animation for next card
+    card.addEventListener('animationstart', function nextCard() {
+      row1Index = (row1Index + 1) % projectsRow1.children.length;
+      animateProjectCardRow1(projectsRow1.children[row1Index])
+    })
+    // Add animation end listener / remove animation class
+    card.addEventListener('animationend', function resetCard() {
+      if(card.classList.contains('project-ani-start')) {
+        card.classList.remove('project-ani-start');
+      } else {
+        card.classList.remove('project-ani');
+      }
+    });
+  }
+
+  // For each card div in row 2
+  for(let card of projectsRow2.children) {
+      // Add hover listener / call hover function
+      card.addEventListener('mouseenter', () => {
+        if(scrolling) {
+          waitingForScroll = true;
+          scrollTimeout = setTimeout(() => {
+            waitForScrollEnd(scrollTimeout, card);
+          }, 100);
+        } else {
+          projectsHover(card);
+        }  });
+      // Add unhover listener / call unhover function
+      card.addEventListener('mouseleave', () => {
+        projectsUnHover();
+        if(waitingForScroll) {
+          waitingForScroll = false;
+        }
+      });
+      // Add animation start listener / update row 2 index / call animation for next card
+      card.addEventListener('animationstart', function nextCard() {
+        row2Index = (row2Index + 1) % projectsRow2.children.length;
+        animateProjectCardRow2(projectsRow2.children[row2Index])
+      })
+
+
+      // Add animation end listener / remove animation class
+      card.addEventListener('animationend', function resetCard() {
+        if(card.classList.contains('project-ani-start')) {
+          card.classList.remove('project-ani-start');
+        } else {
+          card.classList.remove('project-ani');
+        }
+      });
+
+
+
+  }
+
 }
 
 // Initialize array of cards on screen
 let cardsOnScreen = [];
 
-// Card hover function
-function projectsHover(card) {
-  // Reset cardsOnScreen
+function placeProjects() {
+
+}
+
+
+function pauseProjects() {
+  projectsAnimating = false;
   cardsOnScreen = [];
   // For each card in row 1
   for(let card of projectsRow1.children) {
@@ -1544,27 +1728,10 @@ function projectsHover(card) {
     wrapper.style.transform = 'translateX(-50px)';
     card.style.animationPlayState = 'paused';
   }
-  // Card card linking function
-  linkCards(card);
 }
 
-// Projects unHover function
-function projectsUnHover() {
-  // Check link canvas tracker
-  if(linkCanvasActive) {
-    // Remove canvas
-    document.body.removeChild(document.getElementById('constellationCanvas'));
-    // Update link canvas tracker
-    linkCanvasActive = false;
-  }
-  // Reset cardsOnscreen
-  cardsOnScreen = [];
-  // Remove hover class from each hovered + linked card / set opacity to 1
-  for(let card of document.querySelectorAll('.project-card-hover')) {
-    card.classList.remove('project-card-hover');
-    card.style.opacity = '1';
-  }
-
+function playProjects() {
+  projectsAnimating = true;
   // For each card in both row1 and row2
   for(let card of [...projectsRow1.children, ...projectsRow2.children]) {
     // Initialize border / wrapper element variables
@@ -1576,6 +1743,38 @@ function projectsUnHover() {
     wrapper.style.transform = '';
     card.style.opacity = '1';
     card.style.animationPlayState = 'running';
+  }
+}
+
+// Card hover function
+function projectsHover(card) {
+  pauseProjects();
+  // Call card linking function
+  linkCards(card);
+}
+
+// Projects unHover function
+function projectsUnHover() {
+  // Check link canvas tracker
+  if(linkCanvasActive) {
+    // Remove canvas
+    const linkCanvas = document.getElementById('constellationCanvas');
+    linkCanvas.style.transition = 'opacity .25s';
+    linkCanvas.addEventListener('transitionend', function linkFadedOut() {
+      linkCanvas.removeEventListener('transitionend', linkFadedOut);
+      document.body.removeChild(linkCanvas);
+    })
+    linkCanvas.style.opacity = '0';
+    // Update tracker
+    linkCanvasActive = false;
+  }
+  playProjects();
+  // Reset cardsOnscreen
+  cardsOnScreen = [];
+  // Remove hover class from each hovered + linked card / set opacity to 1
+  for(let card of document.querySelectorAll('.project-card-hover')) {
+    card.classList.remove('project-card-hover');
+    card.style.opacity = '1';
   }
 }
 
@@ -2286,243 +2485,26 @@ function createCanvas() {
   return canvas;
 }
 
-// Call initial project animations (will be changed)
-animateProjectCardRow1(projectsRow1.children[row1Index])
-animateProjectCardRow2(projectsRow2.children[row2Index])
-
 // Project animation functions / set distance / add animation class
-function animateProjectCardRow1(card) {
+
+function animateProjectCardRow1(card, start = false) {
   card.style.setProperty('--project-ani-dist', `${window.innerWidth + cardWidth * 2}px`);
-  card.classList.add('project-ani');
+  if(start) {
+    card.classList.add('project-ani-start')
+  } else {
+    card.classList.add('project-ani');
+  }
 }
-function animateProjectCardRow2(card) {
+function animateProjectCardRow2(card, start = false) {
   card.style.setProperty('--project-ani-dist', `-${window.innerWidth + cardWidth * 2}px`);
-  card.classList.add('project-ani');
-}
+  if(start) {
+    card.classList.add('project-ani-start')
+  } else {
+    card.classList.add('project-ani');
+  }}
 
 
 /* ------------------- TEAM FUNCTIONS ------------------- */
-
-// Needs to be moved to imported file
-const employees = [
-  {
-    name: 'Joel Salisbury',
-    id: 'joel-salis',
-    title: 'Director of Internal Insights and Innovation',
-    img: 'img/i3/people/salisbury.jpg',
-    gradient: '7, 51, 51',
-    linkedIn: 'https://www.linkedin.com/in/salisburyj/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Brian Kelleher',
-    id: 'brian-kell',
-    title: 'Senior Applications Developer',
-    img: 'img/i3/people/kelleher.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://www.linkedin.com/in/briankelleher1/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Natalie Lacroix',
-    id: 'natalie-lacr',
-    title: 'Senior UI/UX Designer',
-    img: 'img/i3/people/lacroix.jpg',
-    gradient: '48, 10, 49',
-    linkedIn: 'https://www.linkedin.com/in/natalie-lacroix-510a42188/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Jeff Winston',
-    id: 'jeff-winst',
-    title: 'Director of Nexus Student Success Platform',
-    img: 'img/i3/people/winston.jpg',
-    gradient: '51, 37, 7',
-    linkedIn: 'https://www.linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Brian Daley',
-    id: 'brian-daley',
-    title: 'DMD Faculty Advisor',
-    img: 'img/i3/people/daley.jpg',
-    gradient: '7, 14, 51',
-    linkedIn: 'https://www.linkedin.com/in/brianpdaley/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Michael Vertefeuille',
-    id: 'mike-vert',
-    title: 'DMD Faculty Advisor',
-    img: 'img/i3/people/vert.jpg',
-    gradient: '51, 31, 7',
-    linkedIn: 'https://www.linkedin.com/in/michaelvertefeuille/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Emma Adams',
-    id: 'emma-adams',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/adams.jpg',
-    gradient: '7, 46, 51',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Laravel', 'Javascript'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Lauren Busavage',
-    id: 'lauren-busav',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/busavage.png',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Aurora', 'Sketches'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-
-  },
-  {
-    name: 'Kelis Clarke',
-    id: 'kelis-clarke',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Ryan Cohutt',
-    id: 'ryan-cohutt',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Maggie Danielewicz',
-    id: 'maggie-daniel',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/danielewicz.jpg',
-    gradient: '30, 50, 30',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Luna Gonzalez',
-    id: 'luna-gonzal',
-    title: 'Student Illustrator',
-    img: 'img/i3/people/luna.jpg',
-    gradient: '30, 50, 30',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Aaron Mark',
-    id: 'aaron-mark',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Jack Medrek',
-    id: 'jack-medrek',
-    title: 'Student Software Developer',
-    img: 'img/i3/people/medrek.jpg',
-    gradient: '1, 7, 41',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Kailey Moore',
-    id: 'kailey-moore',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/moore.jpg',
-    gradient: '38, 0, 76',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'William Shostak',
-    id: 'william-shostak',
-    title: 'Student Software Developer',
-    img: 'img/i3/people/shostak.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Emelia Salmon',
-    id: 'emelia-salmon',
-    title: 'Student UI/UX Designer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  },
-  {
-    name: 'Victoria Brey',
-    id: 'victoria-brey',
-    title: 'Student Web Developer',
-    img: 'img/i3/people/jonathan.jpg',
-    gradient: '0, 0, 0',
-    linkedIn: 'https://linkedin.com/',
-    tags: ['Tag 1', 'Tag 2'],
-    bio: "Whoah this person is so cool they like do design stuff and they're a student and like they're talented and probably have hobbies that's wild. " +
-      "I wonder if any of the students have pets that'd be cool. I bet they've got some interesting stuff to put in their bio I should probably get those bios huh. " +
-      "Lots of cool stuff goin on over here like cool student work and stuff."
-  }
-]
 
 // Build employee cards
 function buildEmployeeCards() {
@@ -2645,7 +2627,11 @@ function setEmpCardStyles() {
       animateEmployeeCard(teamRow.children[empCardIndex])
     })
     card.addEventListener('animationend', function resetCard() {
-      card.classList.remove('employee-ani');
+      if(card.classList.contains('employee-ani-start')) {
+        card.classList.remove('employee-ani-start')
+      } else {
+        card.classList.remove('employee-ani');
+      }
     })
     card.addEventListener('touchstart', () => {
       cardTouchHover(card);
@@ -2657,8 +2643,6 @@ function setEmpCardStyles() {
       disableHover();
     });
   }
-  // Initial card animation
-  animateEmployeeCard(teamRow.children[empCardIndex])
 }
 
 function cardTouchHover(card) {
@@ -2683,24 +2667,24 @@ function cardTouchHover(card) {
 }
 
 function cardHover(hoveredCard) {
+  pauseTeam();
+  hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
+  hoveredCard.querySelector('.linked-in-wrap').style.opacity = '1';
+  hoveredCard.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
+  hoveredCard.querySelector('.linked-in').style.opacity = '1';
+}
+
+function pauseTeam() {
   cardsPaused = true;
   for (let card of document.querySelectorAll('.employee-ani')) {
     const rect = card.getBoundingClientRect();
     card.style.animationPlayState = 'paused';
-    if(rect.left < window.innerWidth - 25 && rect.right > 10) {
-      if(card.id === hoveredCard.id) {
-        card.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
-        card.querySelector('.linked-in-wrap').style.opacity = '1';
-        card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-        card.querySelector('.linked-in').style.opacity = '1';
-      } else {
-        card.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg)'
-      }
+    if (rect.left < window.innerWidth - 25 && rect.right > 10) {
+      card.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg)'
     }
   }
 }
-
-function disableHover() {
+function playTeam() {
   cardsPaused = false;
   for(let card of document.querySelectorAll('.employee-ani')) {
     card.style.animationPlayState = 'running';
@@ -2711,12 +2695,21 @@ function disableHover() {
   }
 }
 
+function disableHover() {
+  playTeam();
+}
+
 let cardsPaused = false;
 
 
 
 // Animation function / set distance / add animation class
-function animateEmployeeCard(card) {
+function animateEmployeeCard(card, start = false) {
   card.style.setProperty('--employee-ani-dist', `${window.innerWidth + empCardWidth + (empCardWidth/2)}px`);
-  card.classList.add('employee-ani')
+  if(start) {
+    card.classList.add('employee-ani-start');
+  } else {
+    card.classList.add('employee-ani')
+  }
+
 }
