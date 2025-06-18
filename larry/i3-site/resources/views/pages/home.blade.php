@@ -4,33 +4,43 @@
 @section('content')
 
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center justify-content-center text-light position-relative"
-        style="min-height: 100vh;">
-        <div class="container text-center position-relative z-2">
-            <h1 class="display-1 fw-bold text-outline mb-0" data-aos="fade-up" data-aos-duration="1200">
-                INTERNAL<br>
-                INSIGHTS &<br>
-                INNOVATION
-            </h1>
+    <section class="hero-section d-flex align-items-center position-relative text-light" style="min-height: 100vh;">
+        <div class="container z-2">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-title mb-4">
+                    INTERNAL<br>
+                    INSIGHTS &<br>
+                    INNOVATION
+                </h1>
 
-            <div class="mt-4">
+                <p class="hero-subtext fs-5">
+                    We <span class="text-accent">develop</span>
+                    <span class="text-accent-light">apps</span> for
+                    <span class="fw-bold">UConn.</span>
+                </p>
+
                 <a href="#what-we-do"
-                    class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2"
+                    class="scroll-btn btn btn-outline-light btn-lg rounded-pill px-4 mt-4 d-inline-flex align-items-center gap-2"
                     data-aos="fade-up" data-aos-delay="300">
-                    What we Do
+                    <span>Can you be more specific?</span>
                     <i class="bi bi-arrow-down"></i>
                 </a>
             </div>
         </div>
-        <div class="starfield position-absolute top-0 start-0 w-100 h-100 z-1"></div>
+
+        {{-- Background dots --}}
+        <div class="starfield position-absolute top-0 start-0 w-100 h-100 z-0"></div>
     </section>
+
+
 
     {{-- What We Do --}}
     <section id="what-we-do" class="bg-deep text-light d-flex align-items-center" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h2 class="fw-bold mb-3 border-bottom pb-2 border-primary d-inline-block">What We Do</h2>
+                    <h2 class="fw-bold mb-3 border-bottom pb-2 border-primary d-inline-block">Web design, digital tools, app
+                        development and more...</h2>
                     <p class="text-secondary">
                         The Internal Insights & Innovation (i3) team provides custom software development, web design,
                         and other digital services in support of improving UConn’s business processes, academic operations,
@@ -51,32 +61,21 @@
                         but also anticipate the challenges of tomorrow.
                     </p>
 
+                    @php
+                        $directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
+                    @endphp
+
                     <div class="d-flex flex-wrap gap-3 mt-4">
-                        <div class="service-badge bg-primary text-light px-3 py-2 rounded-pill shadow-sm" data-aos="fade-up"
-                            data-aos-duration="800" data-aos-delay="{{ rand(100, 500) }}">
-                            <i class="bi bi-laptop me-2"></i> Web Design
-                        </div>
-                        <div class="service-badge bg-success text-light px-3 py-2 rounded-pill shadow-sm" data-aos="fade-up"
-                            data-aos-duration="800" data-aos-delay="{{ rand(100, 500) }}">
-                            <i class="bi bi-pencil me-2"></i> UX Design
-                        </div>
-                        <div class="service-badge bg-warning text-dark px-3 py-2 rounded-pill shadow-sm" data-aos="fade-up"
-                            data-aos-duration="800" data-aos-delay="{{ rand(100, 500) }}">
-                            <i class="bi bi-phone me-2"></i> App Development
-                        </div>
-                        <div class="service-badge bg-info text-light px-3 py-2 rounded-pill shadow-sm" data-aos="fade-up"
-                            data-aos-duration="800" data-aos-delay="{{ rand(100, 500) }}">
-                            <i class="bi bi-beaker me-2"></i> Technology Support for Sponsored Research
-                        </div>
-                        <div class="service-badge bg-danger text-light px-3 py-2 rounded-pill shadow-sm" data-aos="fade-up"
-                            data-aos-duration="800" data-aos-delay="{{ rand(100, 500) }}">
-                            <i class="bi bi-chat-dots me-2"></i> Digital Consulting
-                        </div>
-                        <div class="service-badge bg-secondary text-light px-3 py-2 rounded-pill shadow-sm"
-                            data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ rand(100, 500) }}">
-                            <i class="bi bi-tools me-2"></i> Custom Technology Solutions
-                        </div>
+                        @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'color' => 'primary'], ['label' => 'UX Design', 'icon' => 'pencil', 'color' => 'success'], ['label' => 'App Development', 'icon' => 'phone', 'color' => 'warning'], ['label' => 'Tech Support for Sponsored Research', 'icon' => 'beaker', 'color' => 'info'], ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'color' => 'danger'], ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'color' => 'secondary']] as $badge)
+                            <div class="service-badge bg-{{ $badge['color'] }} text-{{ $badge['color'] === 'warning' ? 'dark' : 'light' }} px-3 py-2 rounded-pill shadow-sm
+                            {{ $directions[rand(0, 3)] }}"
+                                data-aos="fade" data-aos-duration="1200" data-aos-delay="{{ rand(100, 500) }}"
+                                data-aos-easing="ease-out-back" data-aos-once="true">
+                                <i class="bi bi-{{ $badge['icon'] }} me-2"></i> {{ $badge['label'] }}
+                            </div>
+                        @endforeach
                     </div>
+
 
 
 
@@ -97,9 +96,11 @@
 
                 </div>
 
-                <div class="col-12 text-center mt-5" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#featured-work" class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2">
-                        View Our Work
+                <div class="text-center mt-5">
+                    <a href="#featured-work"
+                        class="scroll-btn btn btn-outline-light btn-lg rounded-pill px-4 d-inline-flex align-items-center gap-2"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <span>Prove it!</span>
                         <i class="bi bi-arrow-down"></i>
                     </a>
                 </div>
@@ -107,106 +108,139 @@
             </div>
         </div>
     </section>
+    <section id="featured-work" class="bg-dark text-light d-flex flex-column align-items-center">
+        <h2 class="fw-bold my-5 border-bottom pb-2 border-primary d-inline-block">...for the university...</h2>        <div class="featured-collage" data-aos="fade-up" data-aos-duration="1000">
+            @foreach ($featuredWork as $item)
+                <div class="collage-tile" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
+                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
 
-    {{-- Featured Work --}}
-    <section id="featured-work" class="bg-dark text-light d-flex align-items-center" style="min-height: 100vh;">
-        <div class="container">
-            <h2 class="fw-bold text-center mb-5" data-aos="fade-up">For the University...</h2>
-
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" data-aos="fade-up" data-aos-delay="100">
-                @forelse($featuredWork as $item)
-                    <div class="col">
-                        <div class="card bg-secondary text-light h-100 shadow-sm border-0">
-                            @if ($item->thumbnail)
-                                <img src="{{ asset('storage/' . $item->thumbnail) }}" class="card-img-top"
-                                    alt="{{ $item->title }}">
-                            @endif
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold">{{ $item->title }}</h5>
-                                <p class="card-text small text-muted">{{ Str::limit($item->excerpt, 100) }}</p>
-                                <a href="{{ route('work.show', $item) }}" class="mt-auto btn btn-outline-light btn-sm">View
-                                    Project</a>
-                            </div>
+                    <div class="tile-overlay">
+                        <div class="tile-card">
+                            <h5 class="tile-title">{{ $item->title }}</h5>
+                            <a href="{{ route('work.show', $item) }}" class="btn btn-sm btn-outline-light mt-2">
+                                View Project
+                            </a>
                         </div>
                     </div>
-                @empty
-                    <p class="text-center">No work items found.</p>
-                @endforelse
-
-                <div class="col">
-                    <div class="d-flex align-items-center justify-content-center bg-transparent border border-light rounded-4 h-100 shadow-sm text-light hover-bg-white"
-                        style="min-height: 200px;">
-                        <a href="#" class="text-light text-decoration-none fw-bold fs-5 d-flex align-items-center gap-2 hover-text-dark">
-                            View All Work
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
                 </div>
+            @endforeach
+        </div>
 
-            </div>
-
-            <div class="text-center mt-5">
-                <a href="#team" class="btn btn-outline-light btn-lg d-flex align-items-center justify-content-center gap-2">
-                    Meet Our Team
-                    <i class="bi bi-arrow-down"></i>
-                </a>
-            </div>
-
+        <div class="d-flex gap-3 my-3">
+            <a href="#featured-work"
+                class="btn btn-outline-light btn-lg rounded-pill px-4 d-inline-flex align-items-center gap-2">
+                <span>See More Work</span>
+                <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="#team" class="btn btn-outline-light btn-lg rounded-pill px-4 d-inline-flex align-items-center gap-2">
+                <span>Meet Our Team</span>
+                <i class="bi bi-arrow-down"></i>
+            </a>
         </div>
     </section>
 
+
+
+
+
     {{-- Team --}}
-    <section id="team" class="bg-deep text-light d-flex align-items-center position-relative" style="min-height: 100vh;">
+    <section id="team" class="bg-deep text-light py-5">
         <div class="container">
-            <h2 class="fw-bold text-center mb-4" data-aos="zoom-in">By the University</h2>
-            <div class="text-center mb-5" data-aos="zoom-in" data-aos-delay="100">
-                <a href="{{ route('team') }}" class="btn btn-outline-light">Our Team</a>
-            </div>
-
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="fw-bold mb-3 border-bottom pb-2 border-primary d-inline-block">...by the university.</h2>
+            <div class="team-carousel d-flex overflow-auto gap-3 px-3 pb-3" data-aos="fade-up" data-aos-delay="200">
                 @foreach ($teamMembers as $member)
-                    <div class="col">
-                        <div class="team-card bg-secondary rounded-4 shadow text-white position-relative h-100">
-                            <div class="team-card-inner position-relative w-100 h-100">
-                                @if ($member->photo)
-                                    <img src="{{ asset('storage/' . $member->photo) }}"
-                                        class="img-fluid w-100 h-100 rounded-4" style="object-fit: cover;">
-                                @endif
-                                <div class="p-3 text-center">
-                                    <h6 class="fw-bold mb-1">{{ $member->name }}</h6>
-                                    <p class="small text-muted mb-0">{{ $member->role }}</p>
-                                    <button class="btn btn-outline-light btn-sm mt-2" data-bs-toggle="modal"
-                                        data-bs-target="#memberModal{{ $member->id }}">Learn More</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow"
+                        style="width: 220px; height: 300px;">
+                        @if ($member->photo)
+                            <img src="{{ asset('storage/' . $member->photo) }}" class="w-100 h-100 object-fit-cover">
+                        @endif
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="memberModal{{ $member->id }}" tabindex="-1"
-                        aria-labelledby="memberModalLabel{{ $member->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content bg-secondary text-light">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="memberModalLabel{{ $member->id }}">{{ $member->name }}
-                                    </h5>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><strong>Role:</strong> {{ $member->role }}</p>
-                                    <p>{{ $member->bio }}</p>
-                                    <div class="d-flex flex-wrap gap-1">
-                                        @foreach ($member->tags ?? [] as $tag)
-                                            <span class="badge bg-primary">{{ $tag }}</span>
-                                        @endforeach
-                                    </div>
-                                </div>
+                        <div class="overlay position-absolute bottom-0 start-0 w-100 text-light px-3 py-2">
+                            <h6 class="fw-bold mb-0">{{ $member->name }}</h6>
+                            <p class="small text-white-50 mb-1">{{ $member->role }}</p>
+                            <div class="d-flex flex-wrap gap-1">
+                                @foreach ($member->tags ?? [] as $tag)
+                                    <span class="badge bg-primary text-uppercase small">{{ $tag }}</span>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 @endforeach
+
+                <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow border border-light d-flex justify-content-center align-items-center"
+                    style="width: 220px; height: 300px;">
+                    <a href="#team" class="text-white px-4 d-inline-flex align-items-center gap-2">
+                        <span>View Full Team ({{$totalTeamMembers}})</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
+
+
+    {{-- Contact --}}
+    <section id="contact" class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold border-bottom pb-2 border-primary d-inline-block">Connect with Us</h2>
+                <p class="text-secondary mt-3" data-aos="fade-up" data-aos-delay="100">
+                    Have questions or want to collaborate? Reach out to us using the form below.
+                </p>
+            </div>
+
+            <div class="row g-5 align-items-center" data-aos="fade-up" data-aos-delay="200">
+                {{-- Form --}}
+                <div class="col-lg-6">
+                    <form method="POST" action="#" class="contact-form">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" name="first_name" class="form-control form-field"
+                                    placeholder="First Name">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" name="last_name" class="form-control form-field"
+                                    placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control form-field"
+                                placeholder="Email Address">
+                        </div>
+                        <div class="mb-4">
+                            <textarea name="message" class="form-control form-field" rows="4" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-outline-light rounded-pill px-4 d-inline-flex align-items-center gap-2">
+                            <i class="bi bi-send"></i>
+                            <strong>Send Message</strong>
+                        </button>
+                    </form>
+                </div>
+
+                {{-- Map --}}
+                <div class="col-lg-6">
+                    <div class="map-wrapper rounded-4 overflow-hidden shadow">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.9302728446855!2d-72.2535986234634!3d41.8078870712384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e653a1816b64c1%3A0x27a96c91bc2cc02e!2sUConn%20Rowe%20Center%20for%20Undergraduate%20Education!5e0!3m2!1sen!2sus!4v1718737693127!5m2!1sen!2sus"
+                            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                            <div class="social-links d-flex justify-content-center gap-3 mt-4">
+                                <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank" class="text-light fs-4">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
+                                <a href="https://www.instagram.com/UConn" target="_blank" class="text-light fs-4">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 @endsection

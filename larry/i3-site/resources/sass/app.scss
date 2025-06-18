@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://use.typekit.net/nct3yok.css');
+
+
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
+
 // Theme overrides
-$font-family-sans-serif: 'Inter', system-ui, sans-serif;
+$font-family-sans-serif: 'area-normal', courier, 'Courier New', monospace;
 $body-bg: #1f1f1f;
 $body-color: #dddddd;
 
@@ -85,6 +88,11 @@ h1, .display-1, .hero-heading {
     text-transform: uppercase;
     color: #fff;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    font-size: 2.5em;
+    color: transparent;
+    -webkit-text-stroke: 1px #f1f1f1;
+    max-width: 85%;
+
 }
 
 h2 {
@@ -94,6 +102,7 @@ h2 {
     line-height: 1.2;
     margin-bottom: 1.5rem;
     color: #eee;
+    
 }
 
 h3 {
@@ -116,3 +125,288 @@ h2.border-accent,
     color: #2da8ff;
     text-shadow: 0 0 5px #2da8ff, 0 0 10px #2da8ff, 0 0 20px #2da8ff;
 }
+
+
+.team-carousel {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.team-tile {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: wiggle 4s infinite ease-in-out;
+    animation-play-state: running;
+    animation-delay: calc(var(--wiggle-index, 0) * 0.2s); // Add delay based on index
+    transition: transform 0.4s ease;
+    cursor: pointer;
+
+    &:hover {
+        animation-play-state: paused;
+        transform: translateY(-2px) rotate(0deg);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        z-index: 2;
+        color: #fff;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 70%);
+        z-index: 1;
+    }
+
+    .overlay > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    .badge {
+        font-size: 0.65rem;
+        padding: 0.3em 0.5em;
+        border-radius: 0.5rem;
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotate(-2deg);
+    }
+    50% {
+        transform: rotate(2deg);
+    }
+}
+
+
+.hero-section {
+    background-color: #111;
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    text-stroke: 2px white;
+    margin-bottom: 1rem;
+}
+
+.hero-subtext {
+    color: #ccc;
+    font-weight: 300;
+
+    .text-accent {
+        color: #2da8ff;
+        font-weight: 600;
+    }
+
+    .text-accent-light {
+        color: #5dcaff;
+        font-weight: 600;
+    }
+}
+
+.starfield {
+    background-image: radial-gradient(#2d2d2d 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.2;
+}
+
+
+.scroll-btn {
+    font-weight: 600;
+    border-width: 2px;
+    transition: all 0.25s ease;
+
+    &:hover {
+        background: white;
+        color: #000;
+    }
+
+    i {
+        font-size: 1.25rem;
+    }
+}
+
+h6 {
+    font-weight: 600;
+    font-size: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+p.small {
+    font-size: 0.75rem;
+    letter-spacing: 0.01em;
+}
+
+.contact-form {
+    .form-field {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: #2da8ff;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    }
+
+    button {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+}
+
+.map-wrapper {
+    background-color: #1f1f1f;
+    padding: 1rem;
+}
+
+
+.collage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    grid-auto-rows: 160px;
+
+    @media (min-width: 768px) {
+        grid-auto-rows: 180px;
+    }
+
+    @media (min-width: 992px) {
+        grid-auto-rows: 200px;
+    }
+}
+
+#featured-work {
+    height: 100vh;
+
+    .featured-collage {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+    }
+
+    .collage-tile {
+        flex: 1 0 calc(100% / 4);
+        aspect-ratio: 4 / 3;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 2s ease;
+            animation: ken-burns 18s ease-in-out infinite alternate;
+        }
+
+        &:hover img {
+            transform: scale(1.02);
+        }
+
+        .tile-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 800px;
+            width:100%;
+        }
+
+        .tile-card {
+            transform: rotateY(90deg);
+            transform-style: preserve-3d;
+            opacity: 0;
+            transition: all 0.4s ease;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 0px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width:100%;
+            height:100%;
+        }
+
+        &:hover .tile-card {
+            transform: rotateY(0deg);
+            opacity: 1;
+        }
+
+        .tile-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            color: #fff;
+        }
+    }
+}
+
+@keyframes ken-burns {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.03);
+    }
+}
+
+.service-badge {
+    opacity: 0;
+    transform: translate(0, 0);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+
+    &.aos-animate {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    &.from-left {
+        transform: translateX(-80px);
+    }
+    &.from-right {
+        transform: translateX(80px);
+    }
+    &.from-top {
+        transform: translateY(-80px);
+    }
+    &.from-bottom {
+        transform: translateY(80px);
+    }
+}
+

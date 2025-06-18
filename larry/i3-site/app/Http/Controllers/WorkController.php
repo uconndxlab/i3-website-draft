@@ -13,7 +13,7 @@ class WorkController extends Controller
      */
     public function index()
     {
-        $items = WorkItem::with('tags')->latest()->paginate(9);
+        $items = WorkItem::with('tags')->latest()->paginate(18);
         return view('pages.work.index', compact('items'));
     }
 
