@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+// Theme overrides
+$font-family-sans-serif: 'Inter', system-ui, sans-serif;
+$body-bg: #1f1f1f;
+$body-color: #dddddd;
+
+$primary: #2da8ff;
+$secondary: #999999;
+$light: #ffffff;
+$dark: #000000;
+
+// Optional: tweak heading sizes or weight
+$headings-font-weight: 700;
+$headings-color: $light;
+
+@import 'bootstrap/scss/bootstrap';
+
+
+// Bootstrap includes
+@import 'bootstrap/scss/bootstrap';
+
+
+.project-card-bg {
+    background: repeating-linear-gradient(
+        120deg,
+        #111 0px,
+        #111 20px,
+        #222 20px,
+        #222 40px
+    );
+    opacity: 0.1;
+    transform: rotate(-6deg) scale(1.1);
+    pointer-events: none;
+}
+
+.team-carousel {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.team-card {
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    img {
+        object-fit: cover;
+        height: 200px;
+        width: 100%;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.4em 0.6em;
+        border-radius: 0.5rem;
+    }
+}
+
+
+.card-img-top {
+    object-fit: cover;
+    height: 260px;
+}
+.card-title {
+    font-size: 1.1rem;
+}
