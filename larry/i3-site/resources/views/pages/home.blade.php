@@ -87,22 +87,40 @@
             <a href="{{ route('team') }}" class="btn btn-outline-light">Our Team</a>
         </div>
 
-        <div class="team-carousel d-flex overflow-auto pb-4 px-2 gap-3">
-            @foreach(range(1, 5) as $i)
-                <div class="team-card flex-shrink-0 bg-secondary rounded-4 shadow text-white position-relative" style="width: 200px;">
-                    <img src="https://via.placeholder.com/200x200?text=Person+{{ $i }}" class="img-fluid rounded-top-4" alt="Person {{ $i }}">
-                    <div class="p-3">
-                        <h6 class="fw-bold mb-1">Name {{ $i }}</h6>
-                        <p class="small text-muted mb-2">Student Web Developer</p>
-                        <div class="d-flex flex-wrap gap-1">
-                            <span class="badge bg-primary">Laravel</span>
-                            <span class="badge bg-light text-dark">UI</span>
+        <div class="position-relative">
+            {{-- Left/Right Buttons --}}
+            <button class="carousel-btn start-0" onclick="scrollCarousel(-1)">
+                ‹
+            </button>
+            <button class="carousel-btn end-0" onclick="scrollCarousel(1)">
+                ›
+            </button>
+
+            {{-- Carousel --}}
+            <div id="teamCarousel" class="team-carousel d-flex overflow-auto gap-3 px-3 pb-3">
+                @foreach($teamMembers as $member)
+                    <div class="team-card flex-shrink-0 bg-secondary rounded-4 shadow text-white position-relative"
+                         style="width: 240px; scroll-snap-align: start;">
+                        @if ($member->photo)
+                            <img src="{{ asset('storage/' . $member->photo) }}"
+                                 class="img-fluid rounded-top-4"
+                                 style="object-fit: cover; height: 240px; width: 100%;">
+                        @endif
+                        <div class="p-3">
+                            <h6 class="fw-bold mb-1">{{ $member->name }}</h6>
+                            <p class="small text-muted mb-2">{{ $member->role }}</p>
+                            <div class="d-flex flex-wrap gap-1">
+                                @foreach($member->tags ?? [] as $tag)
+                                    <span class="badge bg-primary">{{ $tag }}</span>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 </section>
+
 
 @endsection

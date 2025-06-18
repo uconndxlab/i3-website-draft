@@ -16,4 +16,6 @@ Route::resource('work', WorkController::class)->only(['index', 'show']);
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('work', \App\Http\Controllers\Admin\WorkItemController::class);
+    Route::resource('team', \App\Http\Controllers\Admin\TeamMemberController::class);
+
 });
