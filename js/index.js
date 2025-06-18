@@ -553,6 +553,7 @@ function consistentScroll() {
     linkCanvas.addEventListener('transitionend', function linkFadedOut() {
       linkCanvas.removeEventListener('transitionend', linkFadedOut);
       document.body.removeChild(linkCanvas);
+      projectHoverEnabled = true;
     })
     linkCanvas.style.opacity = '0';
     // Update tracker
@@ -1606,7 +1607,7 @@ function waitForScrollEnd(timeout, card) {
     }
   }
 }
-
+let projectHoverEnabled = true;
 let scrollTimeout;
 let waitingForScroll = false;
 // For each card div in row 1
@@ -1621,7 +1622,9 @@ function setProjectListeners() {
           waitForScrollEnd(scrollTimeout, card);
         }, 100);
       } else {
-        projectsHover(card);
+        if(projectHoverEnabled) {
+          projectsHover(card);
+        }
       }
     });
     // Add unhover listener / call unhover function
@@ -1649,14 +1652,16 @@ function setProjectListeners() {
   // For each card div in row 2
   for(let card of projectsRow2.children) {
       // Add hover listener / call hover function
-      card.addEventListener('mouseenter', () => {
+      card.addEventListener('mouseenter', function hover() {
         if(scrolling) {
           waitingForScroll = true;
           scrollTimeout = setTimeout(() => {
             waitForScrollEnd(scrollTimeout, card);
           }, 100);
         } else {
-          projectsHover(card);
+          if(projectHoverEnabled) {
+            projectsHover(card);
+          }
         }  });
       // Add unhover listener / call unhover function
       card.addEventListener('mouseleave', () => {
@@ -1749,6 +1754,7 @@ function playProjects() {
 // Card hover function
 function projectsHover(card) {
   pauseProjects();
+  projectHoverEnabled = false;
   // Call card linking function
   linkCards(card);
 }
@@ -1763,10 +1769,14 @@ function projectsUnHover() {
     linkCanvas.addEventListener('transitionend', function linkFadedOut() {
       linkCanvas.removeEventListener('transitionend', linkFadedOut);
       document.body.removeChild(linkCanvas);
+      projectHoverEnabled = true;
     })
     linkCanvas.style.opacity = '0';
     // Update tracker
     linkCanvasActive = false;
+
+  } else {
+    projectHoverEnabled = true;
   }
   playProjects();
   // Reset cardsOnscreen
