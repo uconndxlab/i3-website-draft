@@ -39,7 +39,7 @@ let projectsOnScreen = false;
 // Define project rows
 const projectsRow1 = document.querySelector('#row-1');
 const projectsRow2 = document.querySelector('#row-2');
-
+let projectsRow3;
 // Track if projects are animating
 let projectsAnimating = false;
 let projectsStarted = false;
@@ -70,353 +70,418 @@ const bgColors = [
 ];
 
 
-/*function checkInitialIntersections() {
-  for(let key in sections) {
-    const section = sections[key];
-    const rect = section.div.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight && rect.bottom > 0;
-    if(section === sections.hero) {
-      if(waveRect.top < window.innerHeight && waveRect.bottom > 0) {
-        waveTrack.style.animationPlayState = 'running';
-      }
-    } else if(section === sections.story) {
-      const circleRect = statCircle.getBoundingClientRect();
-      if(circleRect.top < window.innerHeight && circleRect.bottom > 0 && !statCircleOnScreen) {
-        statCircleOnScreen = true;
-        startStoryLoop();
-      }
-    } else if(section === sections.projects) {
-      if(inView && !codeBGLooping) {
-        codeBGLooping = true;
-        requestAnimationFrame(scrollCode)
-      }
+
+/* ------------------- BASE EVENT LISTENERS ------------------- */
+
+let isMobile = false;
+
+// After content loaded
+window.addEventListener('load', () => {
+
+  isMobile = window.matchMedia('(max-width: 768px)').matches;
+  console.log('mobile', isMobile);
+  if(!isMobile) {
+    loadPC();
+  } else {
+    loadMobile();
+  }
+});
+
+let aniResizeTimer= null;
+
+// On window resize
+window.addEventListener('resize', () => {
+
+  // Call star background resize
+  //resizeStarBG();
+
+  // If window width larger than 1800 set project animation to adapt based on screen size
+  if(window.innerWidth > 1800) {
+    document.body.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
+    if(window.innerWidth < 2100) {
+      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
+    } else {
+      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
     }
   }
-}*/
 
-// Observe hero
-const heroObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
 
-    // If hero is on screen
-    if(entry.isIntersecting) {
 
-      // Check star fade tracker
-      if(starsFaded) {
+  if(!isMobile) {
+    getProjectWidth();
+    getEmpWidth();
+    if(projectsAnimating) projectsAnimating = false;
+    if(teamAnimating) teamAnimating = false;
+    clearTimeout(aniResizeTimer);
+    aniResizeTimer = null;
+    aniResizeTimer = setTimeout(() => {
+      console.log('reset');
+      resetRows()
+    }, 1000);
 
-        // Display star canvas
-        canvas.style.display = 'block';
+  }
 
-        // Fade stars in
-        canvas.style.opacity = '1';
 
-        // Update star fade tracker
-        starsFaded = false;
-      }
-
-      // If background color is not hero color
-      if(bgColor !== 0) {
-
-        // Set background color to color 0
-        body.style.backgroundColor = `${bgColors[0]}`;
-        bgColor = 0;
-      }
-
-      // Check hero visibility tracker
-      if(!heroOnScreen) {
-
-        // Update hero visibility tracker
-        heroOnScreen = true;
-
-        // Check frame loop tracker
-        if(!frameLooping) {
-
-          // Update frame loop tracker
-          frameLooping = true;
-        }
-
-        // Check if star bg animated in, call gravity animation
-        if(bgAnimated) animateFrame();
-      }
-
-    // If hero not on screen
-    } else {
-
-      // Check hero visibility tracker
-      if(heroOnScreen) {
-
-        // Update hero visibility tracker
-        heroOnScreen = false;
-
-        // Update frame loop tracker
-        frameLooping = false;
-      }
-    }
-  })
-}, {threshold: 0});
-
-// Observe hero h1
-heroObserver.observe(document.querySelector('.hero-h1'));
-
-let gsapScrolling = false;
-
-window.gsap.utils.toArray('.section').forEach(section => {
-  window.ScrollTrigger.create({
-    trigger: section,
-    start: "center center",
-    end: "+=500vh", // Pin for 120% of the viewport height
-    pin: true,
-    pinSpacing: true, // adds spacing so the page doesn't collapse
-    markers: true // set to true for debug
-  });
 });
 
 
 
+// Initialize mouse position variable
+const mousePos = {x: 0, y: 0};
+
+// Get mouse position on mouse move
+window.addEventListener('mousemove', (event) => {
+  mousePos.x = event.clientX
+  mousePos.y = event.clientY
+});
+
+// Pause animations when unfocused
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden) {
+    animatedElements.forEach(element => {
+      element.style.animationPlayState = 'paused';
+    });
+    if(teamAnimating) pauseTeam();
+    if(projectsAnimating) pauseProjects();
+    if(storyLooping) {
+      endStoryLoop();
+      storyLooping = false;
+    }
+  // Play animated elements when refocused
+  } else {
+    animatedElements.forEach(element => {
+      element.style.animationPlayState = 'running';
+    });
+    if(teamOnScreen) playTeam();
+    if(projectsOnScreen) playProjects();
+    if(storyRowOnScreen) {
+      startStoryLoop();
+      storyLooping = true;
+    }
+  }
+});
+
+// Scroll listener
+window.addEventListener('scroll', consistentScroll);
 
 
-for(let section of sections) {
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting && !gsapScrolling) {
-        gsapScrolling = true;
-        window.gsap.to(window, {
-          duration: .75,
-          scrollTo: {y: section},
-          ease: 'linear',
-          onComplete: () => {
-            gsapScrolling = false;
-          }
-        })
-      }
-    })
-  }, {threshold: .50});
-  sectionObserver.observe(section);
+function checkInitialIntersections() {
+  let sectionNum = 0;
+  const scrollY = window.scrollY + window.innerHeight / 2;
+  const sections = [...document.querySelectorAll('.section')];
+  for (let i = 0; i < sections.length; i++) {
+    const top = sections[i].offsetTop;
+    const height = sections[i].offsetHeight;
+    const mid = top + height / 2;
+    if (scrollY >= mid) {
+      sectionNum = i;
+    } else {
+      break;
+    }
+  }
+  return sectionNum;
 }
 
+function setIntersection() {
+  const initialSection = checkInitialIntersections();
+  switch(initialSection) {
+    case 0:
+      heroOnScreen = true;
+      break;
+    case 1:
+      storyRowOnScreen = true;
+      break;
+    case 2:
+      projectsOnScreen = true;
+      playProjects();
+      break;
+    case 3:
+      teamOnScreen = true;
+      break;
+  }
+  console.log('section',initialSection)
+}
+setIntersection();
 
+function loadMobile() {
+  // Observe hero
+  const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
 
+      // If hero is on screen
+      if(entry.isIntersecting) {
 
-// Observe story row
-const storyRowObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
+        // Check star fade tracker
+        if(starsFaded) {
 
-    // If story row on screen
-    if (entry.isIntersecting) {
+          // Display star canvas
+          canvas.style.display = 'block';
 
-      // If background color is not story color
-      if(bgColor !== 1) {
-
-        // Set background color to color 1
-        body.style.backgroundColor = `${bgColors[1]}`;
-        bgColor = 1;
-      }
-
-      // Check star fade tracker
-      if(!starsFaded) {
-
-        // Fade stars out
-        canvas.style.opacity = '0';
-
-        // After faded out listener
-        canvas.addEventListener('transitionend', function starsFadedOut() {
-
-          // Remove listener
-          canvas.removeEventListener('transitionend', starsFadedOut);
-
-          // Update star fade tracker
-          starsFaded = true;
-
-          // Set canvas display
-          canvas.style.display = 'none';
-        })
-      }
-
-      // Check story visibility tracker
-      if(!storyRowOnScreen) {
-
-        // Update story visibility tracker
-        storyRowOnScreen = true;
-
-        // Check story loop tracker
-        if(!storyLooping) {
-
-          // Start story loop
-          startStoryLoop();
-
-          // Update story loop tracker
-          storyLooping = true;
-        }
-      }
-
-      // Check story head animated tracker
-      if(!storyHeadAnimated) {
-        document.querySelector('.section-head-side').classList.add('section-head-animated');
-        storyHeadAnimated = true;
-      }
-
-    // If story not on screen
-    } else {
-
-      // Check story visibility tracker
-      if(storyRowOnScreen) {
-
-        // Update story visibility tracker
-        storyRowOnScreen = false;
-
-        // Check story loop tracker
-        if(storyLooping) {
-
-          // End story loop
-          endStoryLoop();
-
-          // Update story loop tracker
-          storyLooping = false;
-        }
-      }
-    }
-  });
-}, {threshold: .25});
-
-// Observe story row
-storyRowObserver.observe(storyRow);
-
-
-// Observe projects
-const projectRow2Observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-
-    // If projects on screen
-    if(entry.isIntersecting) {
-
-      // If background color not project color
-      if (bgColor !== 2) {
-
-        // Set background color to color 2
-        body.style.backgroundColor = `${bgColors[2]}`;
-        bgColor = 2;
-      }
-
-      // Check star fade tracker
-      if (!starsFaded) {
-
-        // Fade out stars
-        canvas.style.opacity = '0';
-
-        // After faded out listener
-        canvas.addEventListener('transitionend', function starsFadedOut() {
-
-          // Remove listener
-          canvas.removeEventListener('transitionend', starsFadedOut);
+          // Fade stars in
+          canvas.style.opacity = '1';
 
           // Update star fade tracker
-          starsFaded = true;
-
-          // Update canvas display
-          canvas.style.display = 'none';
-        });
-      }
-
-      // Check project visibility tracker
-      if (!projectsOnScreen) {
-        // Update project visibility tracker
-        projectsOnScreen = true;
-
-        if (!projectsAnimating) {
-          // Play project animation
-          playProjects();
-          console.log('projects played')
+          starsFaded = false;
         }
-        // If projects not on screen
+
+        // If background color is not hero color
+        if(bgColor !== 0) {
+
+          // Set background color to color 0
+          body.style.backgroundColor = `${bgColors[0]}`;
+          bgColor = 0;
+        }
+
+        // Check hero visibility tracker
+        if(!heroOnScreen) {
+
+          // Update hero visibility tracker
+          heroOnScreen = true;
+
+
+          // Check if star bg animated in, call gravity animation
+        }
+
+        // If hero not on screen
       } else {
 
-        // Check project visibility tracker
-        if (projectsOnScreen) {
+        // Check hero visibility tracker
+        if(heroOnScreen) {
 
-          // Update project visibility tracker
-          projectsOnScreen = false;
+          // Update hero visibility tracker
+          heroOnScreen = false;
 
-          // Check project animation tracker
-          if (projectsAnimating && projectsStarted) {
-            // Pause project animation
-            pauseProjects();
-            console.log('projects paused')
+        }
+      }
+    })
+  }, {threshold: 0});
+
+// Observe hero h1
+  heroObserver.observe(document.querySelector('.hero-h1'));
+
+  // Observe story row
+  const storyRowObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      // If story row on screen
+      if (entry.isIntersecting) {
+
+        // If background color is not story color
+        if(bgColor !== 1) {
+
+          // Set background color to color 1
+          body.style.backgroundColor = `${bgColors[1]}`;
+          bgColor = 1;
+        }
+
+        // Check star fade tracker
+        if(!starsFaded) {
+
+          // Fade stars out
+          canvas.style.opacity = '0';
+
+          // After faded out listener
+          canvas.addEventListener('transitionend', function starsFadedOut() {
+
+            // Remove listener
+            canvas.removeEventListener('transitionend', starsFadedOut);
+
+            // Update star fade tracker
+            starsFaded = true;
+
+            // Set canvas display
+            canvas.style.display = 'none';
+          })
+        }
+
+        // Check story visibility tracker
+        if(!storyRowOnScreen) {
+
+          // Update story visibility tracker
+          storyRowOnScreen = true;
+
+          // Check story loop tracker
+          if(!storyLooping) {
+
+            // Start story loop
+            startStoryLoop();
+
+            // Update story loop tracker
+            storyLooping = true;
+          }
+        }
+
+        // Check story head animated tracker
+        if(!storyHeadAnimated && window.innerWidth > 576) {
+          document.querySelector('.section-head-side').classList.add('section-head-animated');
+          storyHeadAnimated = true;
+        }
+
+        // If story not on screen
+      } else {
+
+        // Check story visibility tracker
+        if(storyRowOnScreen) {
+
+          // Update story visibility tracker
+          storyRowOnScreen = false;
+
+          // Check story loop tracker
+          if(storyLooping) {
+
+            // End story loop
+            endStoryLoop();
+
+            // Update story loop tracker
+            storyLooping = false;
           }
         }
       }
-    }
-  })
-}, {threshold: .15});
+    });
+  }, {threshold: .25});
+
+// Observe story row
+  storyRowObserver.observe(storyRow);
+
+// Observe projects
+  const projectRow2Observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      // If projects on screen
+      if(entry.isIntersecting) {
+
+        // If background color not project color
+        if (bgColor !== 2) {
+
+          // Set background color to color 2
+          body.style.backgroundColor = `${bgColors[2]}`;
+          bgColor = 2;
+        }
+
+        // Check star fade tracker
+        if (!starsFaded) {
+
+          // Fade out stars
+          canvas.style.opacity = '0';
+
+          // After faded out listener
+          canvas.addEventListener('transitionend', function starsFadedOut() {
+
+            // Remove listener
+            canvas.removeEventListener('transitionend', starsFadedOut);
+
+            // Update star fade tracker
+            starsFaded = true;
+
+            // Update canvas display
+            canvas.style.display = 'none';
+          });
+        }
+
+        // Check project visibility tracker
+        if (!projectsOnScreen) {
+          // Update project visibility tracker
+          projectsOnScreen = true;
+
+          if (!projectsAnimating) {
+            // Play project animation
+            playProjects();
+            console.log('projects played')
+          }
+          // If projects not on screen
+        } else {
+
+          // Check project visibility tracker
+          if (projectsOnScreen) {
+
+            // Update project visibility tracker
+            projectsOnScreen = false;
+
+            // Check project animation tracker
+            if (projectsAnimating) {
+              // Pause project animation
+              pauseProjects();
+              console.log('projects paused')
+            }
+          }
+        }
+      }
+    })
+  }, {threshold: 0});
 
 // Observe project row 2
-projectRow2Observer.observe(projectsRow2);
-
+  projectRow2Observer.observe(projectsRow2);
 
 // Team observer
-const teamRowObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
+  const teamRowObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
 
-    // If team on screen
-    if(entry.isIntersecting) {
+      // If team on screen
+      if(entry.isIntersecting) {
 
-      // If background color not team color
-      if(bgColor !== 3) {
+        // If background color not team color
+        if(bgColor !== 3) {
 
-        // Set background color to color 3
-        body.style.backgroundColor = `${bgColors[3]}`;
-        bgColor = 3;
-      }
+          // Set background color to color 3
+          body.style.backgroundColor = `${bgColors[3]}`;
+          bgColor = 3;
+        }
 
-      // Check/update star fade
-      if(!starsFaded) {
-        canvas.style.opacity = '0';
-        canvas.addEventListener('transitionend', function starsFadedOut() {
-          canvas.removeEventListener('transitionend', starsFadedOut);
-          starsFaded = true;
-          canvas.style.display = 'none';
-        })
-      }
+        // Check/update star fade
+        if(!starsFaded) {
+          canvas.style.opacity = '0';
+          canvas.addEventListener('transitionend', function starsFadedOut() {
+            canvas.removeEventListener('transitionend', starsFadedOut);
+            starsFaded = true;
+            canvas.style.display = 'none';
+          })
+        }
 
-      // Check/update team visibility + animation trackers
-      if(!teamOnScreen) {
-        teamOnScreen = true;
-        if(!teamAnimating && !teamStarted) {
-          // Initial card animation
-          teamAnimating = true;
-          teamStarted = true;
-          console.log('team started')
-          animateEmployeeCard(teamRow.children[empCardIndex])
-        } else if(!teamAnimating) {
-          teamAnimating = true;
-          playTeam()
-          console.log('team played')
+        // Check/update team visibility + animation trackers
+        if(!teamOnScreen) {
+          teamOnScreen = true;
+          if(!teamAnimating) {
+            playTeam();
+            console.log('team playing')
+          }
+        }
+
+        // If team not on screen
+      } else {
+
+        // Check/update team visibility + animation trackers
+        if(teamOnScreen) {
+          teamOnScreen = false;
+          if(teamAnimating) {
+            pauseTeam();
+            console.log('team paused')
+          }
         }
       }
-
-    // If team not on screen
-    } else {
-
-      // Check/update team visibility + animation trackers
-      if(teamOnScreen) {
-        teamOnScreen = false;
-        if(teamAnimating) {
-          teamAnimating = false;
-          pauseTeam();
-          console.log('team paused')
-        }
-      }
-    }
-  })
-}, {threshold: .15});
+    })
+  }, {threshold: .15});
 
 // Observe team row
-teamRowObserver.observe(document.querySelector('.team-row'));
+  teamRowObserver.observe(document.querySelector('.team-row'));
 
 
-/* ------------------- BASE EVENT LISTENERS ------------------- */
 
-// After content loaded
-window.addEventListener('DOMContentLoaded', () => {
+  createStarBG();
+
+  buildPhrase1();
+
+
+  projectsRow3 = document.querySelector('#row-3');
+  buildProjects();
+
+  buildEmpCards();
+
+}
+
+function loadPC() {
+
+  createProgressSlider();
+
   window.gsap.registerPlugin(ScrollSmoother, ScrollToPlugin, ScrollTrigger, Observer);
   const smoother = window.ScrollSmoother.create({
     wrapper: '#gsap-wrapper',
@@ -433,12 +498,348 @@ window.addEventListener('DOMContentLoaded', () => {
 
   })
 
+  // Observe hero
+  const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      // If hero is on screen
+      if(entry.isIntersecting) {
+
+        // Check star fade tracker
+        if(starsFaded) {
+
+          // Display star canvas
+          canvas.style.display = 'block';
+
+          // Fade stars in
+          canvas.style.opacity = '1';
+
+          // Update star fade tracker
+          starsFaded = false;
+        }
+
+        // If background color is not hero color
+        if(bgColor !== 0) {
+
+          // Set background color to color 0
+          body.style.backgroundColor = `${bgColors[0]}`;
+          bgColor = 0;
+        }
+        if(sliderPos !== 0) {
+          changeProgSlider(0);
+        }
+
+        // Check hero visibility tracker
+        if(!heroOnScreen) {
+
+          // Update hero visibility tracker
+          heroOnScreen = true;
+
+          // Check frame loop tracker
+          if(!frameLooping && frameTestPass) {
+
+            // Update frame loop tracker
+            frameLooping = true;
+            requestAnimationFrame(animateFrame)
+          }
+
+          // Check if star bg animated in, call gravity animation
+        }
+
+        // If hero not on screen
+      } else {
+
+        // Check hero visibility tracker
+        if(heroOnScreen) {
+
+          // Update hero visibility tracker
+          heroOnScreen = false;
+
+          // Update frame loop tracker
+          frameLooping = false;
+        }
+      }
+    })
+  }, {threshold: 0});
+
+// Observe hero h1
+  heroObserver.observe(document.querySelector('.hero-h1'));
+
+  let gsapScrolling = false;
+
+  let gsapPin = '+=500vh';
+
+  if(window.innerWidth < 1200) {
+    gsapPin = '+=300vh';
+  } else if(window.innerWidth < 1500) {
+    gsapPin = '+=400vh';
+  }
+
+  window.gsap.utils.toArray('.section').forEach(section => {
+    window.ScrollTrigger.create({
+      trigger: section,
+      start: "center center",
+      end: gsapPin,
+      pin: true,
+      pinSpacing: true,
+      markers: true
+    });
+  });
+
+
+
+  for(let section of sections) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && !gsapScrolling) {
+          gsapScrolling = true;
+          window.gsap.to(window, {
+            duration: .75,
+            scrollTo: {y: section},
+            ease: 'linear',
+            onComplete: () => {
+              gsapScrolling = false;
+            }
+          })
+        }
+      })
+    }, {threshold: .50});
+    sectionObserver.observe(section);
+  }
+
+
+
+
+// Observe story row
+  const storyRowObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      // If story row on screen
+      if (entry.isIntersecting) {
+
+        // If background color is not story color
+        if(bgColor !== 1) {
+
+          // Set background color to color 1
+          body.style.backgroundColor = `${bgColors[1]}`;
+          bgColor = 1;
+        }
+        if(sliderPos !== 1) {
+          changeProgSlider(1);
+        }
+
+        // Check star fade tracker
+        if(!starsFaded) {
+
+          // Fade stars out
+          canvas.style.opacity = '0';
+
+          // After faded out listener
+          canvas.addEventListener('transitionend', function starsFadedOut() {
+
+            // Remove listener
+            canvas.removeEventListener('transitionend', starsFadedOut);
+
+            // Update star fade tracker
+            starsFaded = true;
+
+            // Set canvas display
+            canvas.style.display = 'none';
+          })
+        }
+
+        // Check story visibility tracker
+        if(!storyRowOnScreen) {
+
+          // Update story visibility tracker
+          storyRowOnScreen = true;
+
+          // Check story loop tracker
+          if(!storyLooping) {
+
+            // Start story loop
+            startStoryLoop();
+
+            // Update story loop tracker
+            storyLooping = true;
+          }
+        }
+
+        // Check story head animated tracker
+        if(!storyHeadAnimated) {
+          document.querySelector('.section-head-side').classList.add('section-head-animated');
+          storyHeadAnimated = true;
+        }
+
+        // If story not on screen
+      } else {
+
+        // Check story visibility tracker
+        if(storyRowOnScreen) {
+
+          // Update story visibility tracker
+          storyRowOnScreen = false;
+
+          // Check story loop tracker
+          if(storyLooping) {
+
+            // End story loop
+            endStoryLoop();
+
+            // Update story loop tracker
+            storyLooping = false;
+          }
+        }
+      }
+    });
+  }, {threshold: .25});
+
+// Observe story row
+  storyRowObserver.observe(storyRow);
+
+
+// Observe projects
+  const projectRow2Observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      // If projects on screen
+      if(entry.isIntersecting) {
+
+        // If background color not project color
+        if (bgColor !== 2) {
+
+          // Set background color to color 2
+          body.style.backgroundColor = `${bgColors[2]}`;
+          bgColor = 2;
+        }
+        if(sliderPos !== 2) {
+          changeProgSlider(2);
+        }
+
+        // Check star fade tracker
+        if (!starsFaded) {
+
+          // Fade out stars
+          canvas.style.opacity = '0';
+
+          // After faded out listener
+          canvas.addEventListener('transitionend', function starsFadedOut() {
+
+            // Remove listener
+            canvas.removeEventListener('transitionend', starsFadedOut);
+
+            // Update star fade tracker
+            starsFaded = true;
+
+            // Update canvas display
+            canvas.style.display = 'none';
+          });
+        }
+
+        // Check project visibility tracker
+        if (!projectsOnScreen) {
+          // Update project visibility tracker
+          projectsOnScreen = true;
+
+          if (!projectsAnimating) {
+            // Play project animation
+            playProjects();
+            console.log('projects played')
+          }
+          // If projects not on screen
+        } else {
+
+          // Check project visibility tracker
+          if (projectsOnScreen) {
+
+            // Update project visibility tracker
+            projectsOnScreen = false;
+
+            // Check project animation tracker
+            if (projectsAnimating) {
+              // Pause project animation
+              pauseProjects();
+              console.log('projects paused')
+            }
+          }
+        }
+      }
+    })
+  }, {threshold: .05});
+
+// Observe project row 2
+  projectRow2Observer.observe(projectsRow2);
+
+  let empCardsPaused = true;
+
+
+// Team observer
+  const teamRowObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      // If team on screen
+      if(entry.isIntersecting) {
+
+        // If background color not team color
+        if(bgColor !== 3) {
+
+          // Set background color to color 3
+          body.style.backgroundColor = `${bgColors[3]}`;
+          bgColor = 3;
+        }
+        if(sliderPos !== 3) {
+          changeProgSlider(3);
+        }
+
+        // Check/update star fade
+        if(!starsFaded) {
+          canvas.style.opacity = '0';
+          canvas.addEventListener('transitionend', function starsFadedOut() {
+            canvas.removeEventListener('transitionend', starsFadedOut);
+            starsFaded = true;
+            canvas.style.display = 'none';
+          })
+        }
+
+        // Check/update team visibility + animation trackers
+        if(!teamOnScreen) {
+          teamOnScreen = true;
+          if(!teamAnimating) {
+            playTeam();
+            console.log('team playing')
+          }
+        }
+
+        // If team not on screen
+      } else {
+
+        // Check/update team visibility + animation trackers
+        if(teamOnScreen) {
+          teamOnScreen = false;
+          if(teamAnimating) {
+            pauseTeam();
+            console.log('team paused')
+          }
+        }
+      }
+    })
+  }, {threshold: .15});
+
+// Observe team row
+  teamRowObserver.observe(document.querySelector('.team-row'));
+
+
+
+
 
   // Set star cache sizes
   setCachedSectionSize()
 
-  //Create star background after 500ms
-  setTimeout(createStarBG, 500);
+  //Create star background
+  createStarBG();
+
+
+  //buildPhrase1();
 
 
   if (window.innerWidth > 1800) {
@@ -450,72 +851,15 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  let duration = parseInt(window.getComputedStyle(body).getPropertyValue('--project-ani-dur').slice(0, -2));
-  setTimeout(() => {
-    projectsStarted = true;
-    if(!projectsOnScreen) pauseProjects();
-    console.log('project start finish')
-  }, duration * .9)
 
-  animateProjectCardRow1(projectsRow1.children[0], true)
-  animateProjectCardRow2(projectsRow2.children[0], true)
-  body.offsetHeight;
-  setProjectListeners()
-  projectsAnimating = true;
-  buildEmployeeCards();
+  buildProjects();
+  buildEmpCards();
 
-  let empDuration = parseInt(window.getComputedStyle(body).getPropertyValue('--employee-ani-dur').slice(0,-2));
-  setTimeout(() => {
-    teamStarted = true;
-    if(!teamOnScreen) pauseTeam();
-  }, empDuration * .9);
+  getProjectWidth();
+  getEmpWidth();
 
-  animateEmployeeCard(teamRow.children[0], true);
-  body.offsetHeight;
-});
+}
 
-// On window resize
-window.addEventListener('resize', () => {
-
-  // Call star background resize
-  resizeStarBG();
-
-  // If window width larger than 1800 set project animation to adapt based on screen size
-  if(window.innerWidth > 1800) {
-    document.body.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
-    if(window.innerWidth < 2100) {
-      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
-    } else {
-      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
-    }
-  }
-});
-
-// Initialize mouse position variable
-const mousePos = {x: 0, y: 0};
-
-// Get mouse position on mouse move
-window.addEventListener('mousemove', (event) => {
-  mousePos.x = event.clientX
-  mousePos.y = event.clientY - ucHeaderRect.height;
-});
-
-// Pause animations when unfocused
-document.addEventListener('visibilitychange', () => {
-  if(document.hidden) {
-    animatedElements.forEach(element => {
-      element.style.animationPlayState = 'paused';
-    });
-  // Play animated elements when refocused
-  } else {
-    animatedElements.forEach(element => {
-      element.style.animationPlayState = 'running';
-    });
-  }
-});
-
-// Scroll listener
-window.addEventListener('scroll', consistentScroll);
 
 
 /* ------------------- BASE EVENT LISTENERS ------------------- */
@@ -561,6 +905,87 @@ function consistentScroll() {
   }
 }
 
+const slider = document.querySelector('#progress-slider');
+let sliderPos = 0;
+slider.height = slider.offsetHeight;
+slider.width = slider.offsetWidth;
+const sliderCTX = slider.getContext('2d');
+function createProgressSlider() {
+  const radius = 10;
+  const circleSpace = slider.height / 4;
+  const centerX = slider.width / 2;
+  sliderCTX.clearRect(0,0,slider.width,slider.height);
+  sliderCTX.fillStyle = '#f1f1f1';
+  sliderCTX.strokeStyle = '#f1f1f1';
+  sliderCTX.lineWidth = 2;
+
+  for(let i = 0; i < 3; i++) {
+    const y1 = i * circleSpace + radius * 2;
+    const y2 = (i + 1) * circleSpace ;
+    sliderCTX.beginPath();
+    sliderCTX.moveTo(centerX, y1);
+    sliderCTX.lineTo(centerX, y2);
+    sliderCTX.stroke();
+  }
+
+  for(let i = 0; i < 4; i++) {
+    const y = i * circleSpace + radius;
+    sliderCTX.beginPath();
+    sliderCTX.arc(centerX, y,radius, 0, Math.PI * 2);
+    if(i === 0) {
+      sliderCTX.fill();
+    } else {
+      sliderCTX.fillStyle = 'transparent';
+      sliderCTX.fill();
+      sliderCTX.stroke();
+    }
+  }
+}
+let circleOpacity = 0;
+
+function changeProgSlider(newPos) {
+  const radius = 10;
+  const circleSpace = slider.height / 4;
+  const centerX = slider.width / 2;
+  sliderCTX.clearRect(0,0,slider.width,slider.height);
+  sliderCTX.fillStyle = '#f1f1f1';
+  sliderCTX.strokeStyle = '#f1f1f1';
+  sliderCTX.lineWidth = 2;
+
+
+  for(let i = 0; i < 3; i++) {
+    const y1 = i * circleSpace + radius * 3;
+    const y2 = (i + 1) * circleSpace + radius;
+    sliderCTX.beginPath();
+    sliderCTX.moveTo(centerX, y1);
+    sliderCTX.lineTo(centerX, y2);
+    sliderCTX.stroke();
+  }
+
+  for(let i = 0; i < 4; i++) {
+    const y = i * circleSpace + radius*2;
+    sliderCTX.beginPath();
+    sliderCTX.arc(centerX, y, radius, 0, Math.PI * 2);
+    if(i === newPos) {
+      sliderCTX.fillStyle = `rgba(241,241,241,${circleOpacity}`;
+      sliderCTX.fill();
+      sliderCTX.stroke();
+    } else {
+      sliderCTX.fillStyle = 'transparent';
+      sliderCTX.fill();
+      sliderCTX.stroke();
+    }
+  }
+  circleOpacity = Math.min(circleOpacity + .05, 1);
+  if(circleOpacity < 1) {
+    requestAnimationFrame(() => {
+      changeProgSlider(newPos);
+    })
+  } else {
+    sliderPos = newPos;
+    circleOpacity = 0;
+  }
+}
 
 /* ------------------- WHAT WE DO ANI FUNCTIONS ------------------- */
 
@@ -585,14 +1010,23 @@ let fontSize;
 let charDist;
 function setCharWidths() {
   fontSize = window.getComputedStyle(moveText).getPropertyValue('--font-size');
-  if(fontSize === '1.6rem') {
+  if (fontSize === '1.6rem') {
     spaceCharSize = 18;
     charDist = 4;
-    widths = new Map([["a",15],["b",15],["c",13],["d",15],["e",15],["f",8],["g",15],["h",15],["i",6],["j",6],["k",13],["l",6],["m",22],["n",15],["o",15],["p",15],["q",15],["r",9],["s",13],["t",8],["u",15],["v",13],["w",19],["x",13],["y",13],["z",13],[" ",0]])
-  } else {
+    widths = new Map([["a", 15], ["b", 15], ["c", 13], ["d", 15], ["e", 15], ["f", 8], ["g", 15], ["h", 15], ["i", 6], ["j", 6], ["k", 13], ["l", 6], ["m", 22], ["n", 15], ["o", 15], ["p", 15], ["q", 15], ["r", 9], ["s", 13], ["t", 8], ["u", 15], ["v", 13], ["w", 19], ["x", 13], ["y", 13], ["z", 13], [" ", 0]])
+  } else if (fontSize === '1.2rem') {
     charDist = 2;
     spaceCharSize = 13;
-    widths = new Map([["a",11],["b",11],["c",10],["d",11],["e",11],["f",6],["g",11],["h",11],["i",5],["j",5],["k",10],["l",5],["m",16],["n",11],["o",11],["p",11],["q",11],["r",7],["s",10],["t",6],["u",11],["v",10],["w",14],["x",10],["y",10],["z",10],[" ",0]])
+    widths = new Map([["a", 11], ["b", 11], ["c", 10], ["d", 11], ["e", 11], ["f", 6], ["g", 11], ["h", 11], ["i", 5], ["j", 5], ["k", 10], ["l", 5], ["m", 16], ["n", 11], ["o", 11], ["p", 11], ["q", 11], ["r", 7], ["s", 10], ["t", 6], ["u", 11], ["v", 10], ["w", 14], ["x", 10], ["y", 10], ["z", 10], [" ", 0]])
+  } else if(fontSize === '1rem') {
+    charDist = 2;
+    spaceCharSize = 8
+    widths = new Map([["a",9],["b",9],["c",8],["d",9],["e",9],["f",5],["g",9],["h",9],["i",4],["j",4],["k",8],["l",4],["m",14],["n",9],["o",9],["p",9],["q",9],["r",6],["s",8],["t",5],["u",9],["v",8],["w",12],["x",8],["y",8],["z",8],[" ",0]])
+
+  } else {
+    charDist = 2;
+    spaceCharSize = 7;
+    widths = new Map([["a",8],["b",8],["c",7],["d",8],["e",8],["f",4],["g",8],["h",8],["i",3],["j",3],["k",7],["l",3],["m",11],["n",8],["o",8],["p",8],["q",8],["r",5],["s",7],["t",4],["u",8],["v",7],["w",10],["x",7],["y",7],["z",7],[" ",0]])
   }
 
   phraseLengths = [];
@@ -635,8 +1069,6 @@ let moveText2Phrase = 0;
 forUconn.style.marginLeft = '8px';
 forUconn.style.transform = `translateX(${-(phraseLengths[currPhrase] + spaceCharSize)}px)`;
 
-// Call build function
-buildPhrase1();
 
 // Build phrase 1
 function buildPhrase1() {
@@ -883,7 +1315,7 @@ function alignForUConn(wrapper) {
   // Set transition
   forUconn.style.transition = 'transform 1.725s cubic-bezier(.5,.1,.3,1)';
   // Set forUConn margin
-  forUconn.style.marginLeft = '8px';
+  forUconn.style.marginLeft = '6px';
   // Move forUConn span
   forUconn.style.transform = `translateX(${-(maxPhraseLength) + textWidth + spaceCharSize}px)`;
 }
@@ -894,11 +1326,53 @@ function alignForUConn(wrapper) {
 /* -- PERFORMANCE TEST -- */
 
 // Set frame test duration
-let frameTest = 3000;
+let frameTest = 4000;
+let testBuffer = 2000;
+let bufferComplete = false;
+let frameTestComplete = false;
+let frameTestPass = null;
+let totalFrames = 0;
 // Count rendered frames
 let frameCount = 0;
 let lastLogTime = 0;
+let testStart;
+let testMouse = {x: 0, y: 0};
 /* -- FRAME LOOP -- */
+function performanceTest(now) {
+  if(now - lastLogTime >= 1000 && bufferComplete) {
+    console.log('frames:', frameCount);
+    frameCount = 0;
+    lastLogTime = now;
+  }
+
+  if(now >= testBuffer && !bufferComplete) {
+    bufferComplete = true;
+    lastLogTime = now;
+    testStart = now;
+    frameCount = 0;
+    totalFrames = 0;
+    console.log('testing');
+  }
+  testStarPull();
+  totalFrames++;
+  frameCount++;
+  if(now >= frameTest + testStart) {
+    frameTestComplete = true;
+    body.removeChild(performCanvas);
+    const avgFPS = totalFrames / ((now - testStart) / 1000);
+    console.log(avgFPS)
+    if(avgFPS > 55) {
+      frameTestPass = true;
+      requestAnimationFrame(animateFrame)
+    } else {
+      frameTestPass = false;
+    }
+    console.log('frameTest', frameTestPass)
+  }
+  testMouse.x = Math.min(testMouse.x + 4, performCanvas.width)
+  testMouse.y = Math.min(testMouse.y + 4, performCanvas.height);
+  if(!frameTestComplete) requestAnimationFrame(performanceTest);
+}
 
 // Set last time
 let lastTime = 0;
@@ -912,21 +1386,13 @@ let frameLooping = false;
 function animateFrame(now) {
   // Check framerate sync
     // Set lastTime to now
-    lastTime = now;
-/*    frameCount++;
-    if(now - lastLogTime >= 1000) {
-      console.log('frames:', frameCount);
-      frameCount = 0;
-      lastLogTime = now;
-    }*/
 
     // If stars not animated in call star animate in
-    if(!bgAnimated) animateStarBG();
     // If stars animated in call gravity function
-    if(bgAnimated) animateStarPull();
+    animateStarPull();
 
   // If hero on screen or stars not animated in loop animation frame (needs update for initial animation)
-  if(heroOnScreen || !bgAnimated) {
+  if(heroOnScreen) {
     console.log(scrolling)
     requestAnimationFrame(animateFrame)
   }
@@ -968,10 +1434,10 @@ function setCachedSectionSize() {
   // For each section set it's size + canvas
   for(let code = 0; code <= 5; code++) {
     if(cachedStarSections[code]) delete cachedStarSections[code];
-    const canvas = document.createElement('canvas');
-    canvas.width = sectionWidth;
-    canvas.height = sectionHeight + spacing;
-    cachedStarSections[code] = canvas;
+    const cacheCanvas = document.createElement('canvas');
+    cacheCanvas.width = sectionWidth;
+    cacheCanvas.height = sectionHeight + spacing;
+    cachedStarSections[code] = cacheCanvas;
   }
 }
 
@@ -981,7 +1447,7 @@ function cacheStaticStars() {
   for(let code = 0; code <= 5; code++) {
     // Get section stars/offsets
     const sectionStars = getStarsByCode(code);
-    const ctx = cachedStarSections[code].getContext('2d');
+    const cacheCTX = cachedStarSections[code].getContext('2d');
     const [offsetX, offsetY] = cacheSectionOffsets[code];
 
     // Define star shadows
@@ -991,17 +1457,17 @@ function cacheStaticStars() {
     ctx.shadowOffsetY = 0;
 
     // Draw star on canvas
-    ctx.clearRect(0, 0, sectionWidth, sectionHeight)
+    cacheCTX.clearRect(0, 0, sectionWidth, sectionHeight)
     sectionStars.forEach(star => {
-      ctx.save();
-      ctx.translate(star.x - offsetX, star.y - offsetY);
-      ctx.rotate(star.rotation);
-      ctx.beginPath();
-      ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgb(77,179,255)';
-      ctx.globalAlpha = 0.25;
-      ctx.fill();
-      ctx.restore();
+      cacheCTX.save();
+      cacheCTX.translate(star.x - offsetX, star.y - offsetY);
+      cacheCTX.rotate(star.rotation);
+      cacheCTX.beginPath();
+      cacheCTX.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
+      cacheCTX.fillStyle = 'rgb(77,179,255)';
+      cacheCTX.globalAlpha = 0.25;
+      cacheCTX.fill();
+      cacheCTX.restore();
     })
   }
 }
@@ -1025,8 +1491,9 @@ function getStarsByCode(code) {
 // Define canvas/ctx variables
 const canvas = document.getElementById('star-canvas');
 const ctx = canvas.getContext('2d');
+const performCanvas = document.getElementById('star-canvas-perform');
+const performCTX = performCanvas.getContext('2d');
 
-canvas.style.top = `${ucHeaderRect.height}px`;
 document.getElementById('i3-head').style.top = `${ucHeaderRect.height}px`
 
 const dpr = window.devicePixelRatio;
@@ -1038,6 +1505,8 @@ if(window.innerWidth * dpr < 1000) windowWidth *= 1.5;
 let spacing = 50;
 if(window.innerWidth > 2000) {
   spacing = window.innerWidth / 40;
+} else if(window.innerWidth < 500) {
+  spacing = window.innerWidth * dpr / 40;
 }
 console.log(spacing)
 // Set section breakpoints
@@ -1086,15 +1555,22 @@ function createStarBG() {
   // Set canvas width/height to window width/height
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
+  performCanvas.width = window.innerWidth;
+  performCanvas.height = window.innerHeight;
   // Set canvas style to viewport height/width
   canvas.style.width = '100vw';
   canvas.style.height = '100vh';
-
+  performCanvas.style.width = '100vw';
+  performCanvas.style.height = '100vh';
   // Calculate rows/columns needed depending on screen's resolution
-  const rows = Math.floor((screen.height) / spacing);
+  let rows = Math.floor((screen.height) / spacing);
   const cols = Math.floor(screen.width / spacing);
 
+
+  if(isMobile) {
+    canvas.width = canvas.width * 1.25;
+    canvas.style.width = '135vw';
+  }
   // Initialize x/y variables
   let x;
   let y;
@@ -1144,11 +1620,50 @@ function createStarBG() {
       }
     }
   }
-  // Call cache function
-  cacheStaticStars();
+  if(!isMobile) {
+    // Call cache function
+    cacheStaticStars();
+    // Begin animation frame loop
+    requestAnimationFrame(drawStarCanvas);
 
-  // Begin animation frame loop
-  requestAnimationFrame(animateFrame)
+  } else {
+    requestAnimationFrame(drawStarCanvas);
+  }
+
+}
+
+function drawStarCanvas() {
+  for(const key in allStars) {
+    // Get section
+    const section = allStars[key];
+
+    // For each star in section
+    for (let i = 0; i < section.length; i++) {
+      // Get star
+      const star = section[i];
+      drawStar(star);
+      if(!isMobile) testDrawStar(star);
+    }
+  }
+  if(heroOnScreen) {
+    canvas.style.opacity = '1';
+    canvas.style.transform = 'none';
+    canvas.addEventListener('transitionend', (event) => {
+      canvas.style.transition = 'opacity .5s ease-out';
+    }, {once:true})
+  } else {
+    starsFaded = true;
+    canvas.style.transition = 'opacity .5s ease-out';
+    canvas.style.transform = 'none';
+
+  }
+
+  if(!isMobile) {
+    requestAnimationFrame(performanceTest);
+    setTimeout(() => {
+      buildPhrase1();
+    }, 750)
+  }
 }
 
 // Animate stars fading in
@@ -1395,6 +1910,178 @@ function drawStarInitial(star) {
 }
 
 
+/* ------------------- STAR PERFORMANCE TEST ------------------- */
+// Animate star gravitational pull
+function testStarPull() {
+  // Clear canvas
+  performCTX.clearRect(0, 0, performCanvas.width, performCanvas.height);
+
+  // Check active star sections
+  const activeSections = testCheckSection();
+
+  // For each section
+  for(let code = 0; code <= 5; code++) {
+    // If section is active
+    if(activeSections.includes(code)) {
+      // Set moving variable
+      let sectionMoving = false;
+
+      // For each star in section
+      getStarsByCode(code).forEach(star => {
+        // Set moving to pullStar's stillMoving return value
+        const moving = testPull(star);
+
+        // If stars are moving set sectionMoving to true
+        if(moving) sectionMoving = true;
+      });
+      // Set section's static cache to false
+      sectionStatic[code] = false;
+
+      // If section is animating
+    } else if(!sectionStatic[code]) {
+      // Default all stars in section are static
+      let allStarsStatic = true;
+
+      // Get all stars in section
+      getStarsByCode(code).forEach(star => {
+        const moving = testPull(star);
+
+        // If star is moving set allStarsStatic to false
+        if(moving) allStarsStatic = false;
+      });
+      // If all stars are not moving set section to static
+      if(allStarsStatic) {
+        sectionStatic[code] = true;
+      }
+      // If section is not active
+    } else {
+      // Get section offset
+      const [offsetX, offsetY] = cacheSectionOffsets[code];
+
+      // Draw cached stars
+      performCTX.drawImage(cachedStarSections[code], Math.round(offsetX), Math.round(offsetY));
+    }
+  }
+}
+
+// Pull star function
+function testPull(star) {
+  // Calculate distance from mouse
+  const distX = testMouse.x - star.originX;
+  const distY = testMouse.y - star.originY;
+  const dist = (distX * distX) + (distY * distY)
+
+  // Set pull radius
+  const pullRadius = 100;
+
+  // Default still moving to false
+  let stillMoving = false;
+
+  // If distance is larger than pull radius (hypotenuse without Math.hypot() for optimization
+  if(dist < (pullRadius * pullRadius)) {
+    // Lerp star closer to mouse
+    star.x += (testMouse.x - star.x) * 0.15;
+    star.y += (testMouse.y - star.y) * 0.15;
+
+    // Set still moving to true
+    stillMoving = true;
+
+    // If distance is smaller than pull radius
+  } else {
+    // Calculate distance between star's current position and origin
+    const distXOrigin = star.originX - star.x;
+    const distYOrigin = star.originY - star.y;
+
+    // If distance is larger than .5
+    if(Math.abs(distXOrigin) > .5 || Math.abs(distYOrigin) > .5) {
+      // Lerp star towards origin
+      star.x += distXOrigin * 0.1;
+      star.y += distYOrigin * 0.1;
+
+      // Set still moving to true
+      stillMoving = true;
+
+      // If star is close enough to origin lock it to origin
+    } else {
+      star.x = star.originX;
+      star.y = star.originY;
+    }
+  }
+  // Draw star
+  testDrawStar(star);
+
+  // Return if any stars are moving
+  return stillMoving;
+}
+
+// Check section of star
+function testCheckSection() {
+  // Check vertical section
+  let section = testCheckSectionVert();
+
+  // Active section code array
+  let sectionCodes = [];
+
+  // Check horizontal sections with given vertical values, return number codes for active sections
+  if(testMouse.x <= leftVertBreak - spacing) {
+    section.forEach(vert => sectionCodes.push(vert === 'bottom' ? 0 : 1));
+
+  } else if(testMouse.x > leftVertBreak - spacing && testMouse.x <= leftVertBreak + spacing) {
+    section.forEach(vert => {
+      if(vert === 'bottom') {sectionCodes.push(0, 2)} else {sectionCodes.push(1, 3)}
+    });
+
+  } else if(testMouse.x > leftVertBreak + spacing && testMouse.x <= rightVertBreak - spacing) {
+    section.forEach(vert => sectionCodes.push(vert === 'bottom' ? 2 : 3));
+
+  } else if(testMouse.x > rightVertBreak - spacing && testMouse.x <= rightVertBreak + spacing) {
+    section.forEach(vert => {
+      if(vert === 'bottom') {sectionCodes.push(2, 4)} else {sectionCodes.push(3,5)}
+    });
+
+  } else {
+    section.forEach(vert => sectionCodes.push(vert === 'bottom' ? 4 : 5));
+  }
+  return sectionCodes;
+}
+
+// Check vertical section
+function testCheckSectionVert() {
+  if(testMouse.y <= horizBreak - spacing) {return ['top']}
+  else if(testMouse.y > horizBreak - spacing && testMouse.y <= horizBreak + spacing) {return  ['bottom','top']}
+  else {return ['bottom']}
+}
+
+// Basic draw star function
+function testDrawStar(star) {
+  // Buffer to only draw stars on screen
+  const buffer = 25;
+
+  // Check star x/y with buffer
+  if(star.x < -buffer || star.x > window.innerWidth + buffer
+    || star.y < -buffer || star.y > window.innerHeight + buffer) {
+    return
+  }
+  performCTX.shadowColor = 'rgba(241, 241, 241, 0.2)';
+  performCTX.shadowBlur = 4;
+  performCTX.shadowOffsetX = 0;
+  performCTX.shadowOffsetY = 0;
+  // Draw star
+  performCTX.save();
+  performCTX.translate(star.x, star.y);
+  performCTX.rotate(star.rotation);
+  performCTX.beginPath();
+  performCTX.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
+  performCTX.fillStyle = 'rgb(77,179,255)';
+  performCTX.globalAlpha = 0.25;
+  performCTX.fill();
+  performCTX.restore();
+}
+
+
+
+
+
 /* ------------------- STORY FUNCTIONS ------------------- */
 
 
@@ -1541,53 +2228,95 @@ function changeStat() {
 // Initialize project div array
 const projectDivs = [];
 
+
+function resetRows() {
+  [...projectsRow1.children, ...projectsRow2.children, ...(isMobile ? [...projectsRow3.children] : [])]
+    .forEach(card => card.classList.remove('project-ani'));
+  [...teamRow.children].forEach(card => card.classList.remove('employee-ani'));
+  startProjectAni();
+  startEmpAni();
+}
+
+
 // Initialize link canvas tracker
 let linkCanvasActive = false;
+function buildProjects() {
+  // For each project
+  projects.forEach(project => {
+    // Create wrapper div / add class / set background to project image
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('project-wrapper');
+    wrapper.style.background = `url('${project.img}') center center / cover no-repeat`;
 
-// For each project
-projects.forEach(project => {
-  // Create wrapper div / add class / set background to project image
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('project-wrapper');
-  wrapper.style.background = `url('${project.img}') center center / cover no-repeat`;
+    // Create title h5 / add class / set innerText to name / append to wrapper
+    const title = document.createElement('h5');
+    title.innerText = `${project.name}`;
+    title.classList.add('project-title');
+    wrapper.appendChild(title);
 
-  // Create title h5 / add class / set innerText to name / append to wrapper
-  const title = document.createElement('h5');
-  title.innerText = `${project.name}`;
-  title.classList.add('project-title');
-  wrapper.appendChild(title);
+    // Create overlay div / add class / append to wrapper
+    const overlay = document.createElement('div');
+    overlay.classList.add('project-overlay');
+    wrapper.appendChild(overlay);
 
-  // Create overlay div / add class / append to wrapper
-  const overlay = document.createElement('div');
-  overlay.classList.add('project-overlay');
-  wrapper.appendChild(overlay);
+    // Create absolutely positioned wrapper / add class / append wrapper to absolute wrap / set id to project name
+    const wrapperAbsolute = document.createElement('div');
+    wrapperAbsolute.classList.add('project-wrapper-abs');
+    wrapperAbsolute.appendChild(wrapper);
+    wrapperAbsolute.id = project.name;
 
-  // Create absolutely positioned wrapper / add class / append wrapper to absolute wrap / set id to project name
-  const wrapperAbsolute = document.createElement('div');
-  wrapperAbsolute.classList.add('project-wrapper-abs');
-  wrapperAbsolute.appendChild(wrapper);
-  wrapperAbsolute.id = project.name;
+    // Create wrapper border div / add class / append to absolute wrapper
+    const wrapperBorder = document.createElement('div');
+    wrapperBorder.classList.add('project-wrapper-border');
+    wrapperAbsolute.appendChild(wrapperBorder);
 
-  // Create wrapper border div / add class / append to absolute wrapper
-  const wrapperBorder = document.createElement('div');
-  wrapperBorder.classList.add('project-wrapper-border');
-  wrapperAbsolute.appendChild(wrapperBorder);
+    // Push absolute wrapper to div array
+    projectDivs.push(wrapperAbsolute);
 
-  // Push absolute wrapper to div array
-  projectDivs.push(wrapperAbsolute);
+  })
+  if(!isMobile) {
+    for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 2); i++, i2--) {
+      projectDivs[i].style.left = 'calc(-1.5 * var(--project-card-width))';
+      projectDivs[i2].style.right = 'calc(-1.5 * var(--project-card-width))';
+      projectDivs[i].classList.remove('project-ani');
+      projectDivs[i2].classList.remove('project-ani');
+      projectsRow1.appendChild(projectDivs[i]);
+      projectsRow2.appendChild(projectDivs[i2]);
+    }
+  } else {
+    const length = projectDivs.length;
+    const splitArr = [];
+    let start = 0;
+    for(let i = 0; i < 3; i++) {
+      const end = start + Math.ceil((length - start) / (3 - i));
+      splitArr.push(projectDivs.slice(start,end));
+      start = end;
+    }
+    splitArr[0].forEach(div => {
+      div.style.left = 'calc(-1.5 * var(--project-card-width))';
+      projectsRow1.appendChild(div);
+    })
+    splitArr[1].forEach(div => {
+      div.style.right = 'calc(-1.5 * var(--project-card-width))';
+      projectsRow2.appendChild(div);
+    })
+    splitArr[2].forEach(div => {
+      div.style.left = 'calc(-1.5 * var(--project-card-width))';
+      projectsRow3.appendChild(div);
+    })
+  }
+  setTimeout(startProjectAni, 500)
+}
 
-})
 
-// set card width (needs update)
-let cardWidth = 320;
+
+function getProjectWidth() {
+  projectCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--project-card-width').slice(0,-2));
+}
+
+let projectCardWidth = 352;
 
 // Add first half of project divs to row 1, second half to row 2
-for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 2); i++, i2--) {
-  projectDivs[i].style.left = 'calc(-1.5 * var(--project-card-width))';
-  projectDivs[i2].style.right = 'calc(-1.5 * var(--project-card-width))';
-  projectsRow1.appendChild(projectDivs[i]);
-  projectsRow2.appendChild(projectDivs[i2]);
-}
 
 // Initialize each row index tracker
 let row1Index = 0;
@@ -1612,92 +2341,245 @@ let scrollTimeout;
 let waitingForScroll = false;
 // For each card div in row 1
 function setProjectListeners() {
-  for(let card of projectsRow1.children) {
-    // Add hover listener / call hover function
-    card.addEventListener('mouseenter', () => {
-      console.log(scrolling)
-      if(scrolling) {
-        waitingForScroll = true;
-        scrollTimeout = setTimeout(() => {
-          waitForScrollEnd(scrollTimeout, card);
-        }, 100);
-      } else {
-        if(projectHoverEnabled) {
-          projectsHover(card);
-        }
-      }
-    });
-    // Add unhover listener / call unhover function
-    card.addEventListener('mouseleave', () => {
-      projectsUnHover();
-      if(waitingForScroll) {
-        waitingForScroll = false;
-      }
-    });
-    // Add animation start listener / update row 1 index / call animation for next card
-    card.addEventListener('animationstart', function nextCard() {
-      row1Index = (row1Index + 1) % projectsRow1.children.length;
-      animateProjectCardRow1(projectsRow1.children[row1Index])
-    })
-    // Add animation end listener / remove animation class
-    card.addEventListener('animationend', function resetCard() {
-      if(card.classList.contains('project-ani-start')) {
-        card.classList.remove('project-ani-start');
-      } else {
-        card.classList.remove('project-ani');
-      }
-    });
-  }
-
-  // For each card div in row 2
-  for(let card of projectsRow2.children) {
+  const delay = getComputedStyle(body).getPropertyValue('--project-ani-del')
+  if (!isMobile) {
+    for (let card of projectsRow1.children) {
       // Add hover listener / call hover function
-      card.addEventListener('mouseenter', function hover() {
-        if(scrolling) {
+      card.addEventListener('mouseenter', () => {
+        console.log(scrolling)
+        if (scrolling) {
           waitingForScroll = true;
           scrollTimeout = setTimeout(() => {
             waitForScrollEnd(scrollTimeout, card);
           }, 100);
         } else {
-          if(projectHoverEnabled) {
+          if (projectHoverEnabled) {
             projectsHover(card);
           }
-        }  });
+        }
+      });
       // Add unhover listener / call unhover function
       card.addEventListener('mouseleave', () => {
         projectsUnHover();
-        if(waitingForScroll) {
+        if (waitingForScroll) {
+          waitingForScroll = false;
+        }
+      });
+      // Add animation start listener / update row 1 index / call animation for next card
+      card.addEventListener('animationstart', function nextCard() {
+        let next = card.nextElementSibling;
+        if (!next) next = projectsRow1.firstElementChild;
+        next.style.animationDelay = delay;
+
+        animateProjectCardRow1(next)
+      })
+      // Add animation end listener / remove animation class
+      card.addEventListener('animationend', function resetCard() {
+        card.classList.remove('project-ani');
+      });
+    }
+
+    // For each card div in row 2
+    for (let card of projectsRow2.children) {
+      // Add hover listener / call hover function
+      card.addEventListener('mouseenter', function hover() {
+        if (scrolling) {
+          waitingForScroll = true;
+          scrollTimeout = setTimeout(() => {
+            waitForScrollEnd(scrollTimeout, card, isMobile);
+          }, 100);
+        } else {
+          if (projectHoverEnabled) {
+            projectsHover(card);
+          }
+        }
+      });
+      // Add unhover listener / call unhover function
+      card.addEventListener('mouseleave', () => {
+        projectsUnHover();
+        if (waitingForScroll) {
           waitingForScroll = false;
         }
       });
       // Add animation start listener / update row 2 index / call animation for next card
       card.addEventListener('animationstart', function nextCard() {
-        row2Index = (row2Index + 1) % projectsRow2.children.length;
-        animateProjectCardRow2(projectsRow2.children[row2Index])
+        let next = card.nextElementSibling;
+        if (!next) {
+          next = projectsRow2.firstElementChild;
+        }
+        next.style.animationDelay = delay;
+        animateProjectCardRow2(next)
       })
 
 
       // Add animation end listener / remove animation class
       card.addEventListener('animationend', function resetCard() {
-        if(card.classList.contains('project-ani-start')) {
-          card.classList.remove('project-ani-start');
-        } else {
-          card.classList.remove('project-ani');
-        }
+        card.classList.remove('project-ani');
       });
 
+    }
+  } else {
+    for (let card of projectsRow1.children) {
+      // Add hover listener / call hover function
+      card.addEventListener('touchend', (event) => {
+        event.stopPropagation();
+        projectsHoverMobile(card);
+      }, {once:true});
+      // Add animation start listener / update row 1 index / call animation for next card
+      card.addEventListener('animationstart', function nextCard() {
+        let next = card.nextElementSibling;
+        if (!next) next = projectsRow1.firstElementChild;
+        next.style.animationDelay = delay;
 
+        animateProjectCardRow1(next)
+      })
+      // Add animation end listener / remove animation class
+      card.addEventListener('animationend', function resetCard() {
+        card.classList.remove('project-ani');
+      });
+    }
+
+    // For each card div in row 2
+    for (let card of projectsRow2.children) {
+      // Add hover listener / call hover function
+      card.addEventListener('touchend', function hover(event) {
+        event.stopPropagation();
+        projectsHoverMobile(card);
+      }, {once:true});
+      // Add animation start listener / update row 2 index / call animation for next card
+      card.addEventListener('animationstart', function nextCard() {
+        let next = card.nextElementSibling;
+        if (!next) {
+          next = projectsRow2.firstElementChild;
+        }
+        next.style.animationDelay = delay;
+        animateProjectCardRow2(next)
+      })
+
+
+      // Add animation end listener / remove animation class
+      card.addEventListener('animationend', function resetCard() {
+        card.classList.remove('project-ani');
+      });
+    }
+    for(let card of projectsRow3.children) {
+      card.addEventListener('touchend', function hover(event) {
+        event.stopPropagation();
+        projectsHoverMobile(card)
+      }, {once:true});
+      // Add animation start listener / update row 2 index / call animation for next card
+      card.addEventListener('animationstart', function nextCard() {
+        let next = card.nextElementSibling;
+        if (!next) {
+          next = projectsRow3.firstElementChild;
+        }
+        next.style.animationDelay = delay;
+        animateProjectCardRow3(next)
+      })
+
+
+      // Add animation end listener / remove animation class
+      card.addEventListener('animationend', function resetCard() {
+        card.classList.remove('project-ani');
+      });
+    }
 
   }
+}
 
+let mobileProjHovers = [];
+function projectsHoverMobile(card) {
+  pauseProjects();
+  mobileProjHovers.push(card);
+  card.firstElementChild.classList.add('project-card-hover');
+  card.addEventListener('touchend', (event) => {
+    event.stopPropagation();
+    mobileProjHovers.splice(mobileProjHovers.indexOf(card), 1);
+    if(mobileProjHovers.length === 0) playProjects();
+    card.addEventListener('touchend', (event) => {
+      event.stopPropagation();
+      projectsHoverMobile(card);
+    }, {once:true})
+    card.firstElementChild.classList.remove('project-card-hover');
+  }, {once:true})
+}
+
+
+function startProjectAni() {
+  const delay = parseInt(getComputedStyle(body).getPropertyValue('--project-ani-del').slice(0, -2));
+  const duration = parseInt(getComputedStyle(body).getPropertyValue('--project-ani-dur').slice(0, -2));
+  const cards = [
+    [...projectsRow1.querySelectorAll('.project-wrapper-abs')],
+    [...projectsRow2.querySelectorAll('.project-wrapper-abs')]
+  ];
+  if(isMobile) cards.push([...projectsRow3.querySelectorAll('.project-wrapper-abs')])
+  let chainStart = false;
+  console.log(cards)
+  const preload = duration;
+  if(!projectsStarted) {
+    cards[0][0].addEventListener('animationend', () => {
+      cards[0][0].classList.remove('project-ani');
+    })
+    cards[1][0].addEventListener('animationend', () => {
+      cards[1][0].classList.remove('project-ani');
+    })
+    if(isMobile) {
+      cards[2][0].addEventListener('animationend', () => {
+        cards[2][0].classList.remove('project-ani')
+      })
+    }
+  }
+
+  cards[0].forEach((card, i) => {
+    const startTime = i * delay;
+    if(startTime < preload) {
+      const offset = preload - startTime;
+      cards[1][i].style.animationDelay = `-${offset}ms`;
+      card.style.animationDelay = `-${offset}ms`;
+      animateProjectCardRow1(card);
+      animateProjectCardRow2(cards[1][i]);
+      if(isMobile) {
+        cards[2][i].style.animationDelay = `-${offset}ms`;
+        animateProjectCardRow3(cards[2][i]);
+      }
+
+    } else if(!chainStart) {
+      chainStart = true;
+      const initialDelay = delay - (preload % delay);
+      card.style.animationDelay = `${initialDelay}ms`;
+      cards[1][i].style.animationDelay = `${initialDelay}ms`;
+      if(isMobile) cards[2][i].style.animationDelay = `${initialDelay}ms`;
+      if(!projectsStarted) {
+        card.addEventListener('animationstart', () => {
+          let next = card.nextElementSibling;
+          if(!next) next = projectsRow2.firstElementChild;
+          animateProjectCardRow1(next)
+          setTimeout(setProjectListeners, 100);
+
+        }, {once:true})
+        cards[1][i].addEventListener('animationstart', () => {
+          let next = cards[1][i].nextElementSibling;
+          if(!next) next = projectsRow2.firstElementChild;
+          animateProjectCardRow2(next)
+        }, {once:true})
+        if(isMobile) cards[2][i].addEventListener('animationstart', () => {
+          let next = cards[2][i].nextElementSibling;
+          if(!next) next = projectsRow3.firstElementChild;
+          animateProjectCardRow3(next);
+        }, {once:true})
+      }
+      animateProjectCardRow1(card);
+      animateProjectCardRow2(cards[1][i]);
+      if(isMobile) animateProjectCardRow3(cards[2][i]);
+    }
+  });
+  if(projectsOnScreen) playProjects();
+  if(!projectsStarted) projectsStarted = true;
 }
 
 // Initialize array of cards on screen
 let cardsOnScreen = [];
 
-function placeProjects() {
-
-}
 
 
 function pauseProjects() {
@@ -1733,6 +2615,22 @@ function pauseProjects() {
     wrapper.style.transform = 'translateX(-50px)';
     card.style.animationPlayState = 'paused';
   }
+  if(isMobile) {
+    for(let card of projectsRow3.children) {
+      // Get card rect
+      const rect = card.getBoundingClientRect();
+      // If rect on screen (25px buffer) add to cardOnScreen
+      if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
+      // Initialize border / wrapper element variables
+      const border = card.querySelector('.project-wrapper-border');
+      const wrapper = card.querySelector('.project-wrapper');
+
+      // Add border slow to stop / wrapper slow to stop / pause cards
+      border.style.transform = 'translateX(30px) translateY(-20px)';
+      wrapper.style.transform = 'translateX(50px)';
+      card.style.animationPlayState = 'paused';
+    }
+  }
 }
 
 function playProjects() {
@@ -1748,6 +2646,19 @@ function playProjects() {
     wrapper.style.transform = '';
     card.style.opacity = '1';
     card.style.animationPlayState = 'running';
+  }
+  if(isMobile) {
+    for(let card of projectsRow3.children) {
+      // Initialize border / wrapper element variables
+      const border = card.querySelector('.project-wrapper-border');
+      const wrapper = card.querySelector('.project-wrapper');
+      // Reset border / wrapper / card position + opacity / play card animation
+      border.style.transform = '';
+      border.style.opacity = '1';
+      wrapper.style.transform = '';
+      card.style.opacity = '1';
+      card.style.animationPlayState = 'running';
+    }
   }
 }
 
@@ -2447,7 +3358,7 @@ function animateLinks(centers, tags, complete) {
       drawStaticLine(start,mid,tag1Text);
       drawStaticLine(mid,end,tag2Text);
       drawLine(end, back, tag3Text, tag3StartProg, localProg);
-      drawCircles();
+      drawCircles(); 
 
       localProg = Math.min(localProg + speed, 1);
       if(localProg < 1) {
@@ -2495,30 +3406,36 @@ function createCanvas() {
   return canvas;
 }
 
+
 // Project animation functions / set distance / add animation class
 
-function animateProjectCardRow1(card, start = false) {
-  card.style.setProperty('--project-ani-dist', `${window.innerWidth + cardWidth * 2}px`);
-  if(start) {
-    card.classList.add('project-ani-start')
-  } else {
-    card.classList.add('project-ani');
-  }
+function animateProjectCardRow1(card) {
+  card.style.setProperty('--project-ani-dist', `${window.innerWidth + projectCardWidth * 2}px`);
+  card.classList.add('project-ani');
 }
-function animateProjectCardRow2(card, start = false) {
-  card.style.setProperty('--project-ani-dist', `-${window.innerWidth + cardWidth * 2}px`);
-  if(start) {
-    card.classList.add('project-ani-start')
-  } else {
-    card.classList.add('project-ani');
-  }}
+function animateProjectCardRow2(card) {
+  card.style.setProperty('--project-ani-dist', `-${window.innerWidth + projectCardWidth * 2}px`);
+  card.classList.add('project-ani');
+}
+function animateProjectCardRow3(card) {
+  card.style.setProperty('--project-ani-dist', `${window.innerWidth + projectCardWidth * 2}px`);
+  card.classList.add('project-ani');
+}
+
 
 
 /* ------------------- TEAM FUNCTIONS ------------------- */
 
-// Build employee cards
-function buildEmployeeCards() {
-  // For each employee
+function getEmpWidth() {
+  empCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--employee-card-width').slice(0,-2));
+}
+
+// Initialize card index / card width
+let empCardIndex = 0;
+let empCardWidth = 288;
+
+function buildEmpCards() {
+  // Build employee cards
   employees.forEach((employee, index) => {
     // Create card div / add classes
     const card = document.createElement('div');
@@ -2618,61 +3535,120 @@ function buildEmployeeCards() {
     cardWrap.id = `${employee.id}-card`;
     teamRow.appendChild(cardWrap)
 
+    cardWrap.style.left = 'calc(-1.5 * var(--employee-card-width))';
+
   });
-  // Call set style function
-  setEmpCardStyles();
+  setTimeout(startEmpAni, 250);
 }
 
-// Initialize card index / card width
-let empCardIndex = 0;
-let empCardWidth = 288;
+let empChainStart = 0;
+
+function startEmpAni() {
+  [...teamRow.children].forEach(card => card.classList.remove('employee-ani'));
+  const delay = parseInt(getComputedStyle(body).getPropertyValue('--employee-ani-del').slice(0, -2));
+  const duration = parseInt(getComputedStyle(body).getPropertyValue('--employee-ani-dur').slice(0, -2));
+  const cards = [...teamRow.querySelectorAll('.employee-card-wrap')];
+  let chainStart = false;
+  const preload = duration - delay;
+  if(!teamStarted) {
+    cards[0].addEventListener('animationend', () => {
+      cards[0].classList.remove('employee-ani');
+    })
+  }
+
+
+  cards.forEach((card, i) => {
+    const startTime = i * delay;
+    if(startTime < preload) {
+
+      const offset = preload - startTime;
+      card.style.animationDelay = `-${offset}ms`;
+      animateEmployeeCard(card);
+    } else if(!chainStart) {
+      chainStart = true;
+      const initialDelay = delay - (preload % delay);
+      if(!teamStarted) {
+        card.addEventListener('animationstart', () => {
+          let next = card.nextElementSibling;
+          if(!next) next = teamRow.firstElementChild;
+          animateEmployeeCard(next);
+          setEmpCardListeners();
+        }, {once:true});
+      }
+      if(window.innerWidth < 1400) {
+        card.style.animationDelay = `${initialDelay}ms`;
+      } else {
+        card.style.animationDelay = `5ms`;
+      }
+
+      animateEmployeeCard(card);
+    }
+  });
+  if(teamOnScreen) playTeam();
+  if(!teamStarted) teamStarted = true;
+}
 
 // Set card styles function
-function setEmpCardStyles() {
-  // For each card in row set left to width + half of width / add animation start listener / add animation end listener
-  for(let card of teamRow.children) {
-    card.style.left = `-${empCardWidth + (empCardWidth / 2)}px`;
-    card.addEventListener('animationstart', function nextCard() {
-      empCardIndex = (empCardIndex + 1) % teamRow.children.length;
-      animateEmployeeCard(teamRow.children[empCardIndex])
-    })
-    card.addEventListener('animationend', function resetCard() {
-      if(card.classList.contains('employee-ani-start')) {
-        card.classList.remove('employee-ani-start')
-      } else {
+function setEmpCardListeners() {
+  const delay = getComputedStyle(body).getPropertyValue('--employee-ani-del');
+  if(!isMobile) {
+    for(let card of teamRow.children) {
+      card.addEventListener('animationstart', function nextCard() {
+        let next = card.nextElementSibling;
+        if(!next) next = teamRow.firstElementChild;
+        //next.style.animationDelay = delay;
+        animateEmployeeCard(next);
+      })
+      card.addEventListener('animationend', function resetCard() {
         card.classList.remove('employee-ani');
-      }
-    })
-    card.addEventListener('touchstart', () => {
-      cardTouchHover(card);
-    });
-    card.addEventListener('mouseenter', () => {
-      cardHover(card);
-    });
-    card.addEventListener('mouseleave', () => {
-      disableHover();
-    });
+      })
+      card.addEventListener('mouseenter', () => {
+        cardHover(card);
+      });
+      card.addEventListener('mouseleave', () => {
+        disableHover();
+      });
+    }
+  } else {
+    for(let card of teamRow.children) {
+      card.addEventListener('animationstart', function nextCard() {
+        let next = card.nextElementSibling;
+        if(!next) next = teamRow.firstElementChild;
+        next.style.animationDelay = delay;
+        animateEmployeeCard(next);
+      })
+      card.addEventListener('animationend', function resetCard() {
+        card.classList.remove('employee-ani');
+      })
+      card.addEventListener('touchend', (event) => {
+        event.stopPropagation();
+        cardTouchHover(card);
+      }, {once:true});
+    }
   }
 }
 
+let teamMobileHovers = [];
+let teamMobileHover = false;
+
 function cardTouchHover(card) {
+  teamMobileHovers.push(card);
+  pauseTeam();
+  card.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
   card.querySelector('.linked-in-wrap').style.opacity = '1';
   card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-  card.querySelector('.employee-card-hover').style.opacity = '.5';
   card.querySelector('.linked-in').style.opacity = '1';
-  card.querySelector('.employee-name-main').style.color = 'dimgray';
-  card.querySelector('.employee-title-main').style.color = 'dimgray';
 
-  card.addEventListener('touchstart', cardTouchDisableHover)
-  function cardTouchDisableHover() {
-    card.removeEventListener('touchstart', cardTouchDisableHover)
-    card.querySelector('.employee-card-hover').style.opacity = '0';
-    card.querySelector('.linked-in-wrap').style.opacity = '0';
-    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
-    card.querySelector('.linked-in').style.opacity = '0';
-    card.querySelector('.employee-name-main').style.color = '#f1f1f1';
-    card.querySelector('.employee-title-main').style.color = '#f1f1f1';
-  }
+  card.addEventListener('touchend', (event) => {
+    event.stopPropagation();
+    teamMobileHovers.splice(teamMobileHovers.indexOf(card), 1);
+    playTeam();
+
+    card.addEventListener('touchend', (event) => {
+      event.stopPropagation();
+      cardTouchHover(card);
+    }, {once:true})
+  }, {once:true})
 
 }
 
@@ -2685,8 +3661,8 @@ function cardHover(hoveredCard) {
 }
 
 function pauseTeam() {
-  cardsPaused = true;
-  for (let card of document.querySelectorAll('.employee-ani')) {
+  teamAnimating = false;
+  for (let card of teamRow.children) {
     const rect = card.getBoundingClientRect();
     card.style.animationPlayState = 'paused';
     if (rect.left < window.innerWidth - 25 && rect.right > 10) {
@@ -2695,8 +3671,8 @@ function pauseTeam() {
   }
 }
 function playTeam() {
-  cardsPaused = false;
-  for(let card of document.querySelectorAll('.employee-ani')) {
+  teamAnimating = true;
+  for(let card of teamRow.children) {
     card.style.animationPlayState = 'running';
     card.querySelector('.main-employee-card').style.transform = 'translateX(0) rotateX(-180deg)';
     card.querySelector('.linked-in-wrap').style.opacity = '0';
@@ -2709,17 +3685,11 @@ function disableHover() {
   playTeam();
 }
 
-let cardsPaused = false;
 
 
 
 // Animation function / set distance / add animation class
 function animateEmployeeCard(card, start = false) {
   card.style.setProperty('--employee-ani-dist', `${window.innerWidth + empCardWidth + (empCardWidth/2)}px`);
-  if(start) {
-    card.classList.add('employee-ani-start');
-  } else {
-    card.classList.add('employee-ani')
-  }
-
+  card.classList.add('employee-ani');
 }

@@ -80,7 +80,7 @@ const projects = [
     desc: '"Innovation in Connecticut" is a feature documentary project delving into the rich tapestry of Connecticut\'s history of innovation, showcasing both established pioneers in ' +
       'various fields as well as emerging young innovators. I3 created the documentary poster for print and web marketing.',
     link: 'https://www.imdb.com/title/tt33371819/',
-    img: 'img/i3/work/quantum.png',
+    img: 'img/i3/work/innovation-in-ct.png',
     shortName: 'Innovation in CT'
   },
   {
