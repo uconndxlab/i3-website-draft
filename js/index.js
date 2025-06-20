@@ -70,31 +70,6 @@ const bgColors = [
 ];
 
 
-/*function checkInitialIntersections() {
-  for(let key in sections) {
-    const section = sections[key];
-    const rect = section.div.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight && rect.bottom > 0;
-    if(section === sections.hero) {
-      if(waveRect.top < window.innerHeight && waveRect.bottom > 0) {
-        waveTrack.style.animationPlayState = 'running';
-      }
-    } else if(section === sections.story) {
-      const circleRect = statCircle.getBoundingClientRect();
-      if(circleRect.top < window.innerHeight && circleRect.bottom > 0 && !statCircleOnScreen) {
-        statCircleOnScreen = true;
-        startStoryLoop();
-      }
-    } else if(section === sections.projects) {
-      if(inView && !codeBGLooping) {
-        codeBGLooping = true;
-        requestAnimationFrame(scrollCode)
-      }
-    }
-  }
-}*/
-
-
 
 /* ------------------- BASE EVENT LISTENERS ------------------- */
 
@@ -149,6 +124,8 @@ window.addEventListener('resize', () => {
 
 });
 
+
+
 // Initialize mouse position variable
 const mousePos = {x: 0, y: 0};
 
@@ -188,8 +165,45 @@ document.addEventListener('visibilitychange', () => {
 window.addEventListener('scroll', consistentScroll);
 
 
-function loadMobile() {
+function checkInitialIntersections() {
+  let sectionNum = 0;
+  const scrollY = window.scrollY + window.innerHeight / 2;
+  const sections = [...document.querySelectorAll('.section')];
+  for (let i = 0; i < sections.length; i++) {
+    const top = sections[i].offsetTop;
+    const height = sections[i].offsetHeight;
+    const mid = top + height / 2;
+    if (scrollY >= mid) {
+      sectionNum = i;
+    } else {
+      break;
+    }
+  }
+  return sectionNum;
+}
 
+function setIntersection() {
+  const initialSection = checkInitialIntersections();
+  switch(initialSection) {
+    case 0:
+      heroOnScreen = true;
+      break;
+    case 1:
+      storyRowOnScreen = true;
+      break;
+    case 2:
+      projectsOnScreen = true;
+      playProjects();
+      break;
+    case 3:
+      teamOnScreen = true;
+      break;
+  }
+  console.log('section',initialSection)
+}
+setIntersection();
+
+function loadMobile() {
   // Observe hero
   const heroObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -1631,11 +1645,19 @@ function drawStarCanvas() {
       if(!isMobile) testDrawStar(star);
     }
   }
-  canvas.style.opacity = '1';
-  canvas.style.transform = 'none';
-  canvas.addEventListener('transitionend', (event) => {
+  if(heroOnScreen) {
+    canvas.style.opacity = '1';
+    canvas.style.transform = 'none';
+    canvas.addEventListener('transitionend', (event) => {
+      canvas.style.transition = 'opacity .5s ease-out';
+    }, {once:true})
+  } else {
+    starsFaded = true;
     canvas.style.transition = 'opacity .5s ease-out';
-  }, {once:true})
+    canvas.style.transform = 'none';
+
+  }
+
   if(!isMobile) {
     requestAnimationFrame(performanceTest);
     setTimeout(() => {
