@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function home()
     {
-        $featuredWork = WorkItem::latest()->take(12)->get();
+        $featuredWork = WorkItem::latest()->take(8)->get();
         $teamMembers = TeamMember::inRandomOrder()->take(4)->get();
         $totalTeamMembers = TeamMember::count();
         return view('pages.home', compact('featuredWork', 'teamMembers', 'totalTeamMembers'));

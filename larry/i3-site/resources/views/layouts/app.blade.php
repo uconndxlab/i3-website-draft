@@ -7,7 +7,7 @@
     @vite('resources/js/app.js')
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 py-3">
         @yield('content')
     </main>
 </body>

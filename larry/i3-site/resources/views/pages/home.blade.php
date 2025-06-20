@@ -13,30 +13,30 @@
                     INNOVATION
                 </h1>
 
-                <p class="hero-subtext fs-5">
-                    We <span class="text-accent">develop</span>
-                    <span class="text-accent-light">apps</span> for
-                    <span class="fw-bold">UConn.</span>
-                </p>
-
-                <a href="#what-we-do"
-                    class="scroll-btn btn btn-outline-light btn-lg rounded-pill px-4 mt-4 d-inline-flex align-items-center gap-2"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <span>Can you be more specific?</span>
-                    <i class="bi bi-arrow-down"></i>
-                </a>
+                <div id="move-text-wrap">
+                    <span class="move-text">We</span>
+                    <span id="move-text"></span>
+                    <span id="move-text-2"></span>
+                    <span id="forUconn" class="move-text">for UConn.</span>
+                </div>
             </div>
         </div>
 
-        {{-- Background dots --}}
-        <div class="starfield position-absolute top-0 start-0 w-100 h-100 z-0"></div>
+        <div class="text-center cta-wrap">
+            <a href="#what-we-do" class="cta-button">
+                Learn More
+                <span class="icon-circle"><i class="bi bi-arrow-right"></i></span>
+            </a>
+        </div>
+
+        
     </section>
 
 
 
     {{-- What We Do --}}
-    <section id="what-we-do" class="bg-deep text-light d-flex align-items-center" style="min-height: 100vh;">
-        <div class="container">
+    <section id="what-we-do" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+        <div class="container-fluid">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6" data-aos="fade-right">
                     <h2 class="mb-3 border-bottom pb-2 border-primary d-inline-block">Web design, digital tools, app
@@ -55,10 +55,7 @@
                     </p>
 
                     <p class="text-secondary">
-                        Our work is driven by a commitment to collaboration, innovation, and the pursuit of excellence in
-                        everything we do.
-                        We believe that by working together, we can create solutions that not only meet the needs of today
-                        but also anticipate the challenges of tomorrow.
+                        We work side-by-side with our campus partners: asking questions, diving right in, and building things that actually solve problems. Sometimes it’s quick wins, other times it's deep infrastructure. But it’s always collaborative, always iterative, and always focused on what moves the university forward.
                     </p>
 
                     @php
@@ -75,10 +72,6 @@
                             </div>
                         @endforeach
                     </div>
-
-
-
-
                 </div>
 
                 <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-left">
@@ -91,30 +84,24 @@
                         <div class="position-absolute top-0 start-50 translate-middle bg-light rounded-circle"
                             style="width: 20px; height: 20px;"></div>
                     </div>
-
-
-
                 </div>
-
                 <div class="text-center mt-5">
                     <a href="#featured-work"
-                        class="scroll-btn btn btn-outline-light btn-lg rounded-pill px-4 d-inline-flex align-items-center gap-2"
+                        class="cta-button"
                         data-aos="fade-up" data-aos-delay="300">
-                        <span>Prove it!</span>
-                        <i class="bi bi-arrow-down"></i>
+                        <span>Show me more!</span>
+                        <span class="icon-circle"><i class="bi bi-arrow-down"></i></span>
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
-    <section id="featured-work" class="bg-dark text-light d-flex flex-column align-items-center">
-        <h2 class="my-5 border-bottom pb-2 border-primary d-inline-block">...for the university...</h2>        
+    <section id="featured-work" class=" text-light d-flex flex-column align-items-center">
+        <h2 class="my-5 border-bottom pb-2 border-primary d-inline-block">...for the university...</h2>
         <div class="featured-collage" data-aos="fade-up" data-aos-duration="1000">
             @foreach ($featuredWork as $item)
-                <div class="collage-tile" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
+                <div class="collage-tile" data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
-
                     <div class="tile-overlay">
                         <div class="tile-card">
                             <h5 class="tile-title">{{ $item->title }}</h5>
@@ -128,14 +115,9 @@
         </div>
 
         <div class="d-flex gap-3 my-3">
-            <a href="#featured-work"
-                class="btn btn-outline-light btn-lg rounded-pill px-4 d-inline-flex align-items-center gap-2">
-                <span>See More Work</span>
-                <i class="bi bi-arrow-right"></i>
-            </a>
-            <a href="#team" class="btn btn-outline-light btn-lg rounded-pill px-4 d-inline-flex align-items-center gap-2">
+            <a href="#team" class="cta-button" data-aos="fade-up" data-aos-delay="300">
                 <span>Meet Our Team</span>
-                <i class="bi bi-arrow-down"></i>
+                <span class="icon-circle"><i class="bi bi-arrow-down"></i></span>
             </a>
         </div>
     </section>
@@ -147,41 +129,74 @@
     {{-- Team --}}
     <section id="team" class="bg-deep text-light py-5 d-flex flex-column align-items-center">
         <h2 class=" my-5 border-bottom pb-2 border-primary d-inline-block">...by the university.</h2>
-    
+
         <div class="container">
-            <div class="team-carousel d-flex overflow-auto gap-4 px-3 pb-4" data-aos="fade-up">
-                @foreach ($teamMembers as $index => $member)
-                    <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow"
-                         style="width: 220px; height: 300px;" style="--wiggle-index: {{ $index }}">
-                        @if ($member->photo)
-                            <img src="{{ asset('storage/' . $member->photo) }}" class="w-100 h-100 object-fit-cover">
-                        @endif
-    
-                        <div class="overlay px-3 py-2">
-                            <h6 class="mb-0">{{ $member->name }}</h6>
-                            <p class="small text-white-50 mb-1">{{ $member->role }}</p>
-                            <div class="d-flex flex-wrap gap-1">
-                                @foreach ($member->tags ?? [] as $tag)
-                                    <span class="badge bg-primary text-uppercase small">{{ $tag }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-    
-                {{-- CTA Tile --}}
-                <div class="team-tile cta-tile d-flex flex-column justify-content-center align-items-center text-center flex-shrink-0 rounded-4 shadow border border-light"
-                     style="width: 220px; height: 300px;">
-                    <a href="{{ route('team') }}" class="text-white text-decoration-none px-3 py-2">
-                        <h6 class="mb-2">View Full Team</h6>
-                        <span class="badge bg-light text-dark">{{ $totalTeamMembers }} Members</span>
-                        <div class="mt-2 text-primary small"><i class="bi bi-arrow-right-circle text-light"></i></div>
-                    </a>
+
+            <div class="row justify-content-center">
+
+                <div class="col-8">
+                    <p class="text-secondary" data-aos="fade-up" data-aos-delay="100">
+                        Our team runs on the talent and drive of UConn students. They're some of the brightest minds around, and they bring serious skill, creativity, and hustle to everything we build.
+                    </p>
+                    <p class="text-secondary" data-aos="fade-up" data-aos-delay="200">
+                        We pair that student energy with professional oversight to deliver real, production-grade work. It’s not just busy work. It’s impact, and it’s powering the university every day.
+                    </p>
+                    <p class="text-secondary" data-aos="fade-up" data-aos-delay="300">
+                        Like UConn itself, we thrive on pride, collaboration, and doing work that matters. When you work with us, you’re getting a team that’s smart, capable, and 100% all in.
+                    </p>
+                    
+                    
                 </div>
             </div>
-        </div>
+
+            <div class="row py-4">
+                <div class="team-carousel d-flex overflow-auto gap-4 px-3 pb-4" data-aos="fade-up">
+                    @foreach ($teamMembers as $index => $member)
+                        <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow"
+                            style="width: 220px; height: 300px;" style="--wiggle-index: {{ $index }}">
+                            @if ($member->photo)
+                                <img src="{{ asset('storage/' . $member->photo) }}" class="w-100 h-100 object-fit-cover">
+                            @endif
+
+                            <div class="overlay px-3 py-2">
+                                <h6 class="mb-0">{{ $member->name }}</h6>
+                                <p class="small text-white-50 mb-1">{{ $member->role }}</p>
+                                <div class="d-flex flex-wrap gap-1">
+                                    @foreach ($member->tags ?? [] as $tag)
+                                        <span class="badge bg-primary text-uppercase small">{{ $tag }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    {{-- CTA Tile --}}
+                    <div class="team-tile cta-tile d-flex flex-column justify-content-center align-items-center text-center flex-shrink-0 rounded-4 shadow border border-light"
+                        style="width: 220px; height: 300px;">
+                        <a href="{{ route('team') }}" class="text-white text-decoration-none px-3 py-2">
+                            <h6 class="mb-2">View Full Team</h6>
+                            <span class="badge bg-light text-dark">{{ $totalTeamMembers }} Members</span>
+                            <div class="mt-2 text-primary small"><i class="bi bi-arrow-right-circle text-light"></i></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+
+
+                <div class="text-center mt-5">
+                    <a href="#contact"
+                        class="cta-button"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <span>I'm ready to learn more</span>
+                        <span class="icon-circle"><i class="bi bi-arrow-down"></i></span>
+                    </a>
+                </div>
+
+            </div>
     </section>
-    
+
 
 
     {{-- Contact --}}
@@ -216,11 +231,12 @@
                         <div class="mb-4">
                             <textarea name="message" class="form-control form-field" rows="4" placeholder="Message"></textarea>
                         </div>
-                        <button type="submit"
-                            class="btn btn-outline-light rounded-pill px-4 d-inline-flex align-items-center gap-2">
-                            <i class="bi bi-send"></i>
-                            <strong>Send Message</strong>
-                        </button>
+                        <div class="text-center">
+                            <button type="submit" class="cta-button">
+                                Send Message
+                                <span class="icon-circle"><i class="bi bi-send"></i></span>
+                            </button>
+                        </div>
                     </form>
                 </div>
 
@@ -232,14 +248,15 @@
                             width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-                            <div class="social-links d-flex justify-content-center gap-3 mt-4">
-                                <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank" class="text-light fs-4">
-                                    <i class="bi bi-linkedin"></i>
-                                </a>
-                                <a href="https://www.instagram.com/UConn" target="_blank" class="text-light fs-4">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                            </div>
+                        <div class="social-links d-flex justify-content-center gap-3 mt-4">
+                            <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank"
+                                class="text-light fs-4">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/UConn" target="_blank" class="text-light fs-4">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
