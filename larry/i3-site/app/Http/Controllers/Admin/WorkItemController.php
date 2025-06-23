@@ -81,6 +81,8 @@ class WorkItemController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('work_thumbnails', 'public');
+        } else {
+            unset($data['thumbnail']);
         }
 
         $data['slug'] = Str::slug($data['title']);
@@ -92,9 +94,10 @@ class WorkItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(WorkItem $workItem)
-    {
-        $workItem->delete();
+    public function destroy(WorkItem $work)
+    {   
+        
+        $work->delete();
         return redirect()->route('admin.work.index')->with('success', 'Work item deleted.');
     }
 }

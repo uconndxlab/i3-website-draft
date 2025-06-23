@@ -63,6 +63,8 @@ class WorkController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $workItem = WorkItem::findOrFail($id);
+        $workItem->delete();
+        return redirect()->route('work.index')->with('success', 'Work item deleted successfully.');
     }
 }

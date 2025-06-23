@@ -3,6 +3,20 @@
 
 @section('content')
 <div class="container">
+    
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
     <h1 class="mb-4">Work Items</h1>
 
     <a href="{{ route('admin.work.create') }}" class="btn btn-primary mb-3">New Work Item</a>
