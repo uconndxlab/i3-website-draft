@@ -60,7 +60,7 @@ const heroObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
       if(!heroOnScreen) heroOnScreen = true;
-      if(initialCardRotate) { setTimeout(() => {rotateCards(); initialCardRotate = false;}, 500) }
+      if(initialCardRotate) { setTimeout(() => {rotateCards(); initialCardRotate = false;}, 3000) }
       else if(!cardsRotating) rotateCards();
     } else {
       if(heroOnScreen) heroOnScreen = false;
@@ -190,8 +190,8 @@ const cards = [
 
 let cardYRotates = [60, 180, -60];
 let cardRotates = [-2, 0, 2];
-let leftRem = '-20rem';
-let rightRem = '20rem';
+let leftRem = '-16rem';
+let rightRem = '16rem';
 
 cards[0].wrapper.addEventListener('animationend', () => {
   cards.forEach(card => {
@@ -255,6 +255,7 @@ function rotateCards() {
         card.wrapper.style.setProperty('--start-rem', leftRem);
         card.wrapper.style.setProperty('--end-rem', '0rem');
         card.wrapper.classList.add('left2center-arc');
+        setTimeout(() => card.front.querySelector('.team-text-wrapper').classList.remove('rotate-text-hidden'),1000)
         setTimeout(() => {card.wrapper.style.zIndex = '4'}, 500);
         card.position = 'center';
         break;
@@ -262,6 +263,7 @@ function rotateCards() {
         card.wrapper.style.setProperty('--start-rem', '0rem');
         card.wrapper.style.setProperty('--end-rem', rightRem)
         card.wrapper.classList.add('center2right-arc');
+        card.front.querySelector('.team-text-wrapper').classList.add('rotate-text-hidden');
         setTimeout(() => {card.wrapper.style.zIndex = '2'}, 2000);
         card.position = 'right';
         break;
@@ -269,6 +271,7 @@ function rotateCards() {
         card.wrapper.style.setProperty('--start-rem', rightRem);
         card.wrapper.style.setProperty('--end-rem', leftRem)
         card.wrapper.classList.add('right2left-arc');
+        card.front.querySelector('.team-text-wrapper').classList.add('rotate-text-hidden');
         setTimeout(() => {card.wrapper.style.zIndex = '1'}, 450);
         card.position = 'left';
         break;
@@ -278,7 +281,10 @@ function rotateCards() {
 }
 
 function resizeTeamCards() {
-  if(window.innerWidth <= 576) {
+  if(window.innerWidth <= 400) {
+    leftRem = '-8rem';
+    rightRem = '8rem';
+  } else if(window.innerWidth <= 576) {
     leftRem = '-10rem';
     rightRem = '10rem';
   } else if(window.innerWidth <= 768) {
@@ -339,14 +345,14 @@ let row2 = [];
 
   students.forEach((student, index) => {
     const card = document.createElement('div');
-    card.classList.add('team-card-main-student');
+    card.classList.add('team-card-main');
     card.classList.add('d-flex');
 
     const front = document.createElement('div');
-    front.classList.add('student-card-front', 'student-card-face');
+    front.classList.add('team-card-main-front', 'team-card-main-face');
 
     const back = document.createElement('div');
-    back.classList.add('student-card-back', 'student-card-face');
+    back.classList.add('team-card-main-back', 'team-card-main-face');
 
     const link = document.createElement('a');
     link.href = `${student.linkedIn}`;
@@ -413,7 +419,7 @@ let row2 = [];
     card.appendChild(back);
 
     const cardWrap = document.createElement('div');
-    cardWrap.classList.add('team-card-main-student-wrap');
+    cardWrap.classList.add('team-card-main-wrap');
     cardWrap.appendChild(card);
 
     const row2CardWrap = cardWrap.cloneNode(true);
@@ -524,22 +530,22 @@ function cardHover(hoveredCard) {
     if(rect.left < window.innerWidth - 25 && rect.right > 10) {
       if (card.id.charAt(card.id.length - 1) === '1') {
         if(card.id === hoveredCard.id) {
-          card.querySelector('.team-card-main-student').style.transform = 'translateX(-35px)'
+          card.querySelector('.team-card-main').style.transform = 'translateX(-35px)'
           card.querySelector('.linked-in-wrap').style.opacity = '1';
           card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
           card.querySelector('.linked-in').style.opacity = '1';
 
         } else {
-          card.querySelector('.team-card-main-student').style.transform = 'translateX(-35px) rotateX(-180deg)';
+          card.querySelector('.team-card-main').style.transform = 'translateX(-35px) rotateX(-180deg)';
         }
       } else {
         if(card.id === hoveredCard.id) {
-          card.querySelector('.team-card-main-student').style.transform = 'translateX(35px)';
+          card.querySelector('.team-card-main').style.transform = 'translateX(35px)';
           card.querySelector('.linked-in-wrap').style.opacity = '1';
           card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
           card.querySelector('.linked-in').style.opacity = '1';
         } else {
-          card.querySelector('.team-card-main-student').style.transform = 'translateX(35px) rotateX(-180deg)'
+          card.querySelector('.team-card-main').style.transform = 'translateX(35px) rotateX(-180deg)'
         }
       }
     }
@@ -550,7 +556,7 @@ function disableHover(card) {
   cardsPaused = false;
   for(let card of document.querySelectorAll('.student-ani')) {
     card.style.animationPlayState = 'running';
-    card.querySelector('.team-card-main-student').style.transform = 'translateX(0) rotateX(-180deg)';
+    card.querySelector('.team-card-main').style.transform = 'translateX(0) rotateX(-180deg)';
     card.querySelector('.linked-in-wrap').style.opacity = '0';
     card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
     card.querySelector('.linked-in').style.opacity = '0';
@@ -573,3 +579,13 @@ const arrowSVGElems = document.querySelectorAll('.arrow-btn-circle');
 for(let i = 0; i < arrowSVGElems.length; i++) {
   arrowSVGElems[i].innerHTML = arrowSVG;
 }
+
+const nonStudents = [...document.querySelectorAll('.dev')];
+nonStudents.forEach(card => {
+  card.addEventListener('mouseover', () => {
+    card.firstElementChild.style.transform = 'rotateX(0)';
+  })
+  card.addEventListener('mouseleave', () => {
+    card.firstElementChild.style.transform = 'rotateX(-180deg)';
+  })
+})

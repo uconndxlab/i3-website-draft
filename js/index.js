@@ -11,7 +11,6 @@ const animatedElements = document.querySelectorAll('.animated');
 
 // Define UConn header rect
 const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
-
 const sections = document.querySelectorAll('.section');
 
 let scrolling = false;
@@ -41,10 +40,12 @@ const projectsRow1 = document.querySelector('#row-1');
 const projectsRow2 = document.querySelector('#row-2');
 let projectsRow3;
 // Track if projects are animating
+let projectHeadAnimated = false;
 let projectsAnimating = false;
 let projectsStarted = false;
 
 // Track team on screen
+let teamHeadAnimated = false;
 let teamOnScreen = false;
 let teamStarted = false;
 
@@ -54,6 +55,9 @@ const teamRow = document.querySelector('.team-row');
 // Track if team is animating
 let teamAnimating = false;
 
+const footer = document.querySelector('footer');
+let footerOnScreen = false;
+let footerAnimated = false;
 
 // Define body element
 const body = document.querySelector('body');
@@ -74,7 +78,7 @@ const bgColors = [
 /* ------------------- BASE EVENT LISTENERS ------------------- */
 
 let isMobile = false;
-
+let windowWidth = window.innerWidth;
 // After content loaded
 window.addEventListener('load', () => {
 
@@ -88,12 +92,13 @@ window.addEventListener('load', () => {
 });
 
 let aniResizeTimer= null;
-
+let resizedLarger = false;
 // On window resize
 window.addEventListener('resize', () => {
-
   // Call star background resize
-  //resizeStarBG();
+  resizeStarBG(windowWidth);
+
+  windowWidth = window.innerWidth;
 
   // If window width larger than 1800 set project animation to adapt based on screen size
   if(window.innerWidth > 1800) {
@@ -132,7 +137,7 @@ const mousePos = {x: 0, y: 0};
 // Get mouse position on mouse move
 window.addEventListener('mousemove', (event) => {
   mousePos.x = event.clientX
-  mousePos.y = event.clientY
+  mousePos.y = event.clientY - (ucHeaderRect.height / 2)
 });
 
 // Pause animations when unfocused
@@ -377,6 +382,10 @@ function loadMobile() {
             canvas.style.display = 'none';
           });
         }
+        if(!projectHeadAnimated) {
+          document.querySelector('#projects-head').classList.add('section-head-ani');
+          projectHeadAnimated = true;
+        }
 
         // Check project visibility tracker
         if (!projectsOnScreen) {
@@ -437,6 +446,11 @@ function loadMobile() {
           })
         }
 
+        if(!teamHeadAnimated) {
+          document.querySelector('#team-head').classList.add('section-head-ani');
+          teamHeadAnimated = true;
+        }
+
         // Check/update team visibility + animation trackers
         if(!teamOnScreen) {
           teamOnScreen = true;
@@ -464,6 +478,29 @@ function loadMobile() {
 // Observe team row
   teamRowObserver.observe(document.querySelector('.team-row'));
 
+
+  const footerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        if(!footerOnScreen) {
+          footerOnScreen = true;
+        }
+        if(bgColor !== 3) {
+          body.style.backgroundColor = `${bgColors[3]}`;
+          bgColor = 3;
+        }
+        if(!footerAnimated) {
+          footer.classList.add('footer-ani');
+          footerAnimated = true;
+        }
+      } else {
+        if(footerOnScreen) {
+          footerOnScreen = false;
+        }
+      }
+    });
+  }, {threshold: .15});
+  footerObserver.observe(footer);
 
 
   createStarBG();
@@ -736,6 +773,11 @@ function loadPC() {
           });
         }
 
+        if(!projectHeadAnimated) {
+          document.querySelector('#projects-head').classList.add('section-head-ani');
+          projectHeadAnimated = true;
+        }
+
         // Check project visibility tracker
         if (!projectsOnScreen) {
           // Update project visibility tracker
@@ -801,6 +843,11 @@ function loadPC() {
           })
         }
 
+        if(!teamHeadAnimated) {
+          document.querySelector('#team-head').classList.add('section-head-ani');
+          teamHeadAnimated = true;
+        }
+
         // Check/update team visibility + animation trackers
         if(!teamOnScreen) {
           teamOnScreen = true;
@@ -828,8 +875,28 @@ function loadPC() {
 // Observe team row
   teamRowObserver.observe(document.querySelector('.team-row'));
 
-
-
+const footerObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      if(!footerOnScreen) {
+        footerOnScreen = true;
+      }
+      if(bgColor !== 3) {
+        body.style.backgroundColor = `${bgColors[3]}`;
+        bgColor = 3;
+      }
+      if(!footerAnimated) {
+        footer.classList.add('footer-ani');
+        footerAnimated = true;
+      }
+    } else {
+      if(footerOnScreen) {
+        footerOnScreen = false;
+      }
+    }
+  });
+}, {threshold: .15});
+footerObserver.observe(footer);
 
 
   // Set star cache sizes
@@ -1393,7 +1460,6 @@ function animateFrame(now) {
 
   // If hero on screen or stars not animated in loop animation frame (needs update for initial animation)
   if(heroOnScreen) {
-    console.log(scrolling)
     requestAnimationFrame(animateFrame)
   }
 }
@@ -1401,6 +1467,12 @@ function animateFrame(now) {
 
 /* ------------------- STAR CACHING ------------------- */
 
+let spacing = 50;
+if(window.innerWidth > 2000) {
+  spacing = window.innerWidth / 40;
+} else if(window.innerWidth < 500) {
+  spacing = window.innerWidth * dpr / 40;
+}
 
 // Define section sizes
 let sectionWidth = Math.ceil(window.innerWidth / 3);
@@ -1415,8 +1487,20 @@ const cacheSectionOffsets = {
   1: [0, 0],
   2: [sectionWidth, sectionHeight],
   3: [sectionWidth, 0],
-  4: [sectionWidth * 2, sectionHeight],
-  5: [sectionWidth * 2, 0]
+  4: [(sectionWidth * 2), sectionHeight],
+  5: [(sectionWidth * 2), 0]
+}
+
+function updateCacheSectionOffsets() {
+  sectionWidth = Math.ceil(window.innerWidth / 3);
+  sectionHeight = Math.ceil(window.innerHeight / 2);
+
+  cacheSectionOffsets[0] = [0, horizBreak];
+  cacheSectionOffsets[1] = [0, 0];
+  cacheSectionOffsets[2] = [leftVertBreak, horizBreak];
+  cacheSectionOffsets[3] = [leftVertBreak, 0];
+  cacheSectionOffsets[4] = [rightVertBreak, horizBreak];
+  cacheSectionOffsets[5] = [rightVertBreak, 0];
 }
 
 // Track sections live vs static (cached)
@@ -1436,7 +1520,7 @@ function setCachedSectionSize() {
     if(cachedStarSections[code]) delete cachedStarSections[code];
     const cacheCanvas = document.createElement('canvas');
     cacheCanvas.width = sectionWidth;
-    cacheCanvas.height = sectionHeight + spacing;
+    cacheCanvas.height = sectionHeight;
     cachedStarSections[code] = cacheCanvas;
   }
 }
@@ -1487,7 +1571,8 @@ function getStarsByCode(code) {
 
 /* ------------------- STAR CREATION ------------------- */
 
-
+let updateWidth = window.innerWidth;
+let updateHeight = window.innerHeight;
 // Define canvas/ctx variables
 const canvas = document.getElementById('star-canvas');
 const ctx = canvas.getContext('2d');
@@ -1495,24 +1580,17 @@ const performCanvas = document.getElementById('star-canvas-perform');
 const performCTX = performCanvas.getContext('2d');
 
 document.getElementById('i3-head').style.top = `${ucHeaderRect.height}px`
-
+canvas.style.top = `${ucHeaderRect.height / 2}px`
 const dpr = window.devicePixelRatio;
-let windowWidth = window.innerWidth;
 // Set space between stars
 
 if(window.innerWidth * dpr < 1000) windowWidth *= 1.5;
 
-let spacing = 50;
-if(window.innerWidth > 2000) {
-  spacing = window.innerWidth / 40;
-} else if(window.innerWidth < 500) {
-  spacing = window.innerWidth * dpr / 40;
-}
 console.log(spacing)
 // Set section breakpoints
-const horizBreak = Math.floor(screen.height / 2);
-const leftVertBreak = Math.floor(screen.width / 3);
-const rightVertBreak = Math.floor((screen.width / 3) * 2);
+let horizBreak = Math.floor(window.innerHeight / 2);
+let leftVertBreak = Math.floor(window.innerWidth / 3);
+let rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
 
 // Track fade in status
 let fadeInIncomplete = false;
@@ -1534,15 +1612,147 @@ const allStars = {
 };
 
 // Resize star background (needs work)
-function resizeStarBG() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function resizeStarBG(prevWidth) {
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const growing = window.innerWidth > prevWidth;
+  if(!growing) { resizeSmaller() } else { resizeLarger() }
+  function resizeSmaller() {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  for(let code = 0; code <= 5; code++) {
-    let [x, y] = cacheSectionOffsets[code];
-    ctx.drawImage(cachedStarSections[code], Math.round(x), Math.round(y))
+    sectionWidth = Math.ceil(window.innerWidth / 3);
+    sectionHeight = Math.ceil(window.innerHeight / 2);
+    horizBreak = Math.floor(window.innerHeight / 2);
+    leftVertBreak = Math.floor(window.innerWidth / 3);
+    rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
+
+    const flatStars = Object.values(allStars).flat();
+
+    for(const key in allStars) allStars[key] = [];
+
+    flatStars.forEach(star => {
+      if(
+        star.x >= 0 && star.x < window.innerWidth &&
+        star.y >= 0 && star.y < window.innerHeight
+      ) {
+        if(star.x <= leftVertBreak) {
+          if(star.y <= horizBreak) { allStars.starsTopLeft.push(star) }
+          else { allStars.starsBotLeft.push(star) }
+        } else if(star.x > leftVertBreak && star.x <= rightVertBreak) {
+          if(star.y <= horizBreak) { allStars.starsTopMid.push(star) }
+          else { allStars.starsBotMid.push(star) }
+        } else {
+          if(star.y <= horizBreak) { allStars.starsTopRight.push(star) }
+          else { allStars.starsBotRight.push(star) }
+        }
+
+        drawStar(star);
+      }
+    })
+
+    updateCacheSectionOffsets();
+    setCachedSectionSize();
+    cacheStaticStars();
+    updateStarSpeed();
+    console.log("Updated speed:", starGravitateSpeed, starReturnSpeed);
+
+    updateWidth = window.innerWidth;
+    updateHeight = window.innerHeight;
+  }
+
+  function resizeLarger() {
+    updateStarSpeed();
+    console.log("Updated speed:", starGravitateSpeed, starReturnSpeed);
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //updateCacheSectionOffsets();
+
+    sectionWidth = Math.ceil(window.innerWidth / 3);
+    sectionHeight = Math.ceil(window.innerHeight / 2);
+    horizBreak = Math.floor(window.innerHeight / 2);
+    leftVertBreak = Math.floor(window.innerWidth / 3);
+    rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
+
+    const newCols = Math.floor((window.innerWidth - updateWidth) / spacing);
+    const newRows = Math.floor((window.innerHeight - updateHeight) / spacing);
+
+    const newStars = [];
+    const existingStars = Object.values(allStars).flat();
+
+    if(newCols <= 0 && newRows <= 0) return;
+    for(let i = 0; i < newCols; i++) {
+      const x = updateWidth + i * spacing + (Math.random() * 8 - 4);
+      for(let y = 0; y < window.innerHeight; y += spacing) {
+        const jitterY = y + (Math.random() * 8 - 4);
+        const rx = Math.random() * 0.75 + 1.25;
+        const ry = rx * (Math.random() * 0.3 + 1.1);
+        const rotation = Math.random() * Math.PI * 2;
+        newStars.push({
+          x,
+          y: jitterY,
+          originX: x,
+          originY: jitterY,
+          rx,
+          ry,
+          rotation,
+          alpha: 0.25,
+          delay: 0
+        });
+      }
+    }
+    for(let i = 0; i < newRows; i++) {
+      const y = updateHeight + i * spacing + (Math.random() * 8 - 4);
+      for(let x = 0; x < window.innerWidth; x++) {
+        const jitterX = x + (Math.random() * 8 - 4);
+        const rx = Math.random() * 0.75 + 1.25;
+        const ry = rx * (Math.random() * 0.3 + 1.1);
+        const rotation = Math.random() * Math.PI * 2;
+        newStars.push({
+          x: jitterX,
+          y,
+          originX: jitterX,
+          originY: y,
+          rx,
+          ry,
+          rotation,
+          alpha: 0.25,
+          delay: 0
+        });
+      }
+    }
+
+    updateCacheSectionOffsets();
+    setCachedSectionSize();
+    updateWidth = window.innerWidth;
+    updateHeight = window.innerHeight;
+
+    for(const key in allStars) allStars[key] = [];
+
+    const flatStars = [...existingStars, ...newStars];
+    flatStars.forEach(star => {
+      if (star.x < leftVertBreak) {
+        if (star.y < horizBreak) allStars.starsTopLeft.push(star);
+        else allStars.starsBotLeft.push(star);
+      } else if (star.x < rightVertBreak) {
+        if (star.y < horizBreak) allStars.starsTopMid.push(star);
+        else allStars.starsBotMid.push(star);
+      } else {
+        if (star.y < horizBreak) allStars.starsTopRight.push(star);
+        else allStars.starsBotRight.push(star);
+      }
+    });
+    cacheStaticStars();
+
+    for (let code = 0; code <= 5; code++) {
+      const [offsetX, offsetY] = cacheSectionOffsets[code];
+      ctx.strokeStyle = 'red';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(offsetX, offsetY, sectionWidth, sectionHeight);
+    }
+
   }
 }
 
@@ -1563,8 +1773,8 @@ function createStarBG() {
   performCanvas.style.width = '100vw';
   performCanvas.style.height = '100vh';
   // Calculate rows/columns needed depending on screen's resolution
-  let rows = Math.floor((screen.height) / spacing);
-  const cols = Math.floor(screen.width / spacing);
+  let rows = Math.floor(window.innerHeight / spacing);
+  const cols = Math.floor(window.innerWidth / spacing);
 
 
   if(isMobile) {
@@ -1716,10 +1926,21 @@ function animateStarBG() {
   frame++
 }
 
+function updateStarSpeed() {
+  const baseWidth = 1920;
+  const scale = Math.min(window.innerWidth / baseWidth, 1);
+  starGravitateSpeed = window.innerWidth * 0.00002
+  starReturnSpeed = window.innerWidth * 0.00001
+}
+
+let starGravitateSpeed = 0.12;
+let starReturnSpeed = 0.07;
+
 // Animate star gravitational pull
 function animateStarPull() {
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 
   // Check active star sections
   const activeSections = checkStarSection();
@@ -1785,9 +2006,9 @@ function pullStar(star) {
   // If distance is larger than pull radius (hypotenuse without Math.hypot() for optimization
   if(dist < (pullRadius * pullRadius)) {
     // Lerp star closer to mouse
-    star.x += (mousePos.x - star.x) * 0.15;
-    star.y += (mousePos.y - star.y) * 0.15;
-
+    star.x += (mousePos.x - star.x) * starGravitateSpeed;
+    star.y += (mousePos.y - star.y) * starGravitateSpeed;
+    console.log(starGravitateSpeed)
     // Set still moving to true
     stillMoving = true;
 
@@ -1800,8 +2021,8 @@ function pullStar(star) {
     // If distance is larger than .5
     if(Math.abs(distXOrigin) > .5 || Math.abs(distYOrigin) > .5) {
       // Lerp star towards origin
-      star.x += distXOrigin * 0.1;
-      star.y += distYOrigin * 0.1;
+      star.x += distXOrigin * starReturnSpeed;
+      star.y += distYOrigin * starReturnSpeed;
 
       // Set still moving to true
       stillMoving = true;
@@ -2680,11 +2901,14 @@ function projectsUnHover() {
     linkCanvas.addEventListener('transitionend', function linkFadedOut() {
       linkCanvas.removeEventListener('transitionend', linkFadedOut);
       document.body.removeChild(linkCanvas);
-      projectHoverEnabled = true;
+      setTimeout(() => {
+        projectHoverEnabled = true;
+        linkCanvasActive = false;
+
+      }, 100);
     })
     linkCanvas.style.opacity = '0';
     // Update tracker
-    linkCanvasActive = false;
 
   } else {
     projectHoverEnabled = true;
@@ -3358,7 +3582,7 @@ function animateLinks(centers, tags, complete) {
       drawStaticLine(start,mid,tag1Text);
       drawStaticLine(mid,end,tag2Text);
       drawLine(end, back, tag3Text, tag3StartProg, localProg);
-      drawCircles(); 
+      drawCircles();
 
       localProg = Math.min(localProg + speed, 1);
       if(localProg < 1) {
@@ -3514,15 +3738,10 @@ function buildEmpCards() {
     img.loading = 'lazy';
     front.appendChild(img);
 
-    // Create bio / add class / set text / append to back
-    const bio = document.createElement('p');
-    bio.classList.add('employee-card-bio');
-    bio.innerText = employee.bio;
-    back.appendChild(bio);
-
     const border = document.createElement('div');
     border.classList.add('employee-card-border');
     front.appendChild(border);
+
 
     // Append front & back to card
     card.appendChild(front);
@@ -3635,6 +3854,7 @@ function cardTouchHover(card) {
   teamMobileHovers.push(card);
   pauseTeam();
   card.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
+  card.querySelector('.employee-card-border').style.transform = 'none';
   card.querySelector('.linked-in-wrap').style.opacity = '1';
   card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
   card.querySelector('.linked-in').style.opacity = '1';
@@ -3655,6 +3875,7 @@ function cardTouchHover(card) {
 function cardHover(hoveredCard) {
   pauseTeam();
   hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
+  hoveredCard.querySelector('.employee-card-border').style.transform = 'none';
   hoveredCard.querySelector('.linked-in-wrap').style.opacity = '1';
   hoveredCard.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
   hoveredCard.querySelector('.linked-in').style.opacity = '1';
@@ -3675,6 +3896,7 @@ function playTeam() {
   for(let card of teamRow.children) {
     card.style.animationPlayState = 'running';
     card.querySelector('.main-employee-card').style.transform = 'translateX(0) rotateX(-180deg)';
+    card.querySelector('.employee-card-border').style.transform = 'translateX(-20px) translateY(-20px)';
     card.querySelector('.linked-in-wrap').style.opacity = '0';
     card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
     card.querySelector('.linked-in').style.opacity = '0';
