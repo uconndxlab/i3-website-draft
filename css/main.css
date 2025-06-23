@@ -18,10 +18,15 @@ html {
     flex-direction: column;
     justify-content: flex-end;
 }
+.footer-ani {
+    transform: none !important;
+    opacity: 1 !important;
+}
 .footer-head {
-    font-size: xx-large;
+    font-size: 3.5rem;
+    color: transparent;
+    -webkit-text-stroke: 1px #f1f1f1;
     text-align: center;
-    color: #f1f1f1;
 }
 .form-wrap {
     width: 50vw;
@@ -170,6 +175,12 @@ html {
         gap: 1rem;
     }
 }
+@media(min-width: 768px) {
+    .footer-head {
+        font-size: 4.5rem;
+    }
+}
+
 @media(min-width: 992px) {
     .maps {
         height: 100%;
