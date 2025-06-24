@@ -9,13 +9,13 @@
   --waveX50Percent: -1500px;
   --waveX75Percent: -2250px;
   --project-card-width: 224px;
-  --project-ani-dur: 12000ms;
+  --project-ani-dur: 22000ms;
   --project-ani-dist: 0;
-  --project-ani-del: 2750ms;
+  --project-ani-del: 5000ms;
   --employee-card-width: 160px;
   --employee-ani-dist: 0;
-  --employee-ani-dur: 21000ms;
-  --employee-ani-del: 6000ms;
+  --employee-ani-dur: 24000ms;
+  --employee-ani-del: 6250ms;
 }
 
 html {
@@ -254,7 +254,7 @@ h6,
   right: 5%;
   z-index: 100;
   width: 35px;
-  height: 200px;
+  height: 250px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -1595,7 +1595,8 @@ h6,
     font-size: small;
   }
   :root {
-    --employee-ani-del: 4500ms;
+    --employee-ani-del: 5050ms;
+    --project-ani-del: 4100ms;
   }
 }
 
@@ -1681,7 +1682,7 @@ h6,
   :root {
     --project-card-width: 256px;
     --employee-card-width: 192px;
-    --employee-ani-del: 4250ms;
+    --employee-ani-del: 4750ms;
   }
 
   /* TEAM */
@@ -1776,11 +1777,11 @@ h6,
   }
   :root {
     --project-card-width: 288px;
-    --project-ani-dur: 13000ms;
-    --project-ani-del: 2650ms;
+    --project-ani-dur: 20000ms;
+    --project-ani-del: 4050ms;
     --employee-card-width: 224px;
-    --employee-ani-dur: 18000ms;
-    --employee-ani-del: 3250ms;
+    --employee-ani-dur: 21000ms;
+    --employee-ani-del: 4000ms;
   }
   .main-employee-card {
     width: 14rem;
@@ -1862,7 +1863,7 @@ h6,
   }
 
   :root {
-    --employee-ani-del: 2950ms;
+    --employee-ani-del: 4000ms;
     --employee-card-width: 256px;
   }
 
@@ -1914,10 +1915,10 @@ h6,
   }
   :root {
     --project-card-width: 320px;
-    --project-ani-dur: 13000ms;
-    --project-ani-del: 2500ms;
-    --employee-ani-dur: 18000ms;
-    --employee-ani-del: 3250ms;
+    --project-ani-dur: 24000ms;
+    --project-ani-del: 4250ms;
+    --employee-ani-dur: 22500ms;
+    --employee-ani-del: 4100ms;
   }
 }
 
@@ -1972,10 +1973,10 @@ h6,
   }
   :root {
     --project-card-width: 352px;
-    --project-ani-dur: 14000ms;
-    --project-ani-del: 2500ms;
-    --employee-ani-dur: 20000ms;
-    --employee-ani-del: 3400ms;
+    --project-ani-dur: 27000ms;
+    --project-ani-del: 4550ms;
+    --employee-ani-dur: 26000ms;
+    --employee-ani-del: 4250ms;
   }
 }
 

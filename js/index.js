@@ -100,15 +100,7 @@ window.addEventListener('resize', () => {
 
   windowWidth = window.innerWidth;
 
-  // If window width larger than 1800 set project animation to adapt based on screen size
-  if(window.innerWidth > 1800) {
-    document.body.style.setProperty('--project-ani-dur', `${window.innerWidth * 8.5}ms`);
-    if(window.innerWidth < 2100) {
-      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.5}ms`);
-    } else {
-      document.body.style.setProperty('--project-ani-del', `${window.innerWidth * 1.2}ms`);
-    }
-  }
+
 
 
 
@@ -517,8 +509,6 @@ function loadMobile() {
 
 function loadPC() {
 
-  createProgressSlider();
-
   window.gsap.registerPlugin(ScrollSmoother, ScrollToPlugin, ScrollTrigger, Observer);
   const smoother = window.ScrollSmoother.create({
     wrapper: '#gsap-wrapper',
@@ -526,7 +516,7 @@ function loadPC() {
     smooth: 1.5,
     effects: true,
     onUpdate: () => {
-      if(!scrolling) scrolling = true;
+      if (!scrolling) scrolling = true;
       clearTimeout(scrollStopTimeout);
       scrollStopTimeout = setTimeout(() => {
         scrolling = false;
@@ -540,10 +530,10 @@ function loadPC() {
     entries.forEach(entry => {
 
       // If hero is on screen
-      if(entry.isIntersecting) {
+      if (entry.isIntersecting) {
 
         // Check star fade tracker
-        if(starsFaded) {
+        if (starsFaded) {
 
           // Display star canvas
           canvas.style.display = 'block';
@@ -556,24 +546,24 @@ function loadPC() {
         }
 
         // If background color is not hero color
-        if(bgColor !== 0) {
+        if (bgColor !== 0) {
 
           // Set background color to color 0
           body.style.backgroundColor = `${bgColors[0]}`;
           bgColor = 0;
         }
-        if(sliderPos !== 0) {
+        if (sliderPos !== 0 && !sliderScrolling) {
           changeProgSlider(0);
         }
 
         // Check hero visibility tracker
-        if(!heroOnScreen) {
+        if (!heroOnScreen) {
 
           // Update hero visibility tracker
           heroOnScreen = true;
 
           // Check frame loop tracker
-          if(!frameLooping && frameTestPass) {
+          if (!frameLooping && frameTestPass) {
 
             // Update frame loop tracker
             frameLooping = true;
@@ -587,7 +577,7 @@ function loadPC() {
       } else {
 
         // Check hero visibility tracker
-        if(heroOnScreen) {
+        if (heroOnScreen) {
 
           // Update hero visibility tracker
           heroOnScreen = false;
@@ -606,9 +596,9 @@ function loadPC() {
 
   let gsapPin = '+=500vh';
 
-  if(window.innerWidth < 1200) {
+  if (window.innerWidth < 1200) {
     gsapPin = '+=300vh';
-  } else if(window.innerWidth < 1500) {
+  } else if (window.innerWidth < 1500) {
     gsapPin = '+=400vh';
   }
 
@@ -624,11 +614,10 @@ function loadPC() {
   });
 
 
-
-  for(let section of sections) {
+  for (let section of sections) {
     const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if(entry.isIntersecting && !gsapScrolling) {
+        if (entry.isIntersecting && !gsapScrolling && !sliderScrolling) {
           gsapScrolling = true;
           window.gsap.to(window, {
             duration: .75,
@@ -645,8 +634,6 @@ function loadPC() {
   }
 
 
-
-
 // Observe story row
   const storyRowObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -655,18 +642,18 @@ function loadPC() {
       if (entry.isIntersecting) {
 
         // If background color is not story color
-        if(bgColor !== 1) {
+        if (bgColor !== 1) {
 
           // Set background color to color 1
           body.style.backgroundColor = `${bgColors[1]}`;
           bgColor = 1;
         }
-        if(sliderPos !== 1) {
+        if (sliderPos !== 1 && !sliderScrolling) {
           changeProgSlider(1);
         }
 
         // Check star fade tracker
-        if(!starsFaded) {
+        if (!starsFaded) {
 
           // Fade stars out
           canvas.style.opacity = '0';
@@ -686,13 +673,13 @@ function loadPC() {
         }
 
         // Check story visibility tracker
-        if(!storyRowOnScreen) {
+        if (!storyRowOnScreen) {
 
           // Update story visibility tracker
           storyRowOnScreen = true;
 
           // Check story loop tracker
-          if(!storyLooping) {
+          if (!storyLooping) {
 
             // Start story loop
             startStoryLoop();
@@ -703,7 +690,7 @@ function loadPC() {
         }
 
         // Check story head animated tracker
-        if(!storyHeadAnimated) {
+        if (!storyHeadAnimated) {
           document.querySelector('.section-head-side').classList.add('section-head-animated');
           storyHeadAnimated = true;
         }
@@ -712,13 +699,13 @@ function loadPC() {
       } else {
 
         // Check story visibility tracker
-        if(storyRowOnScreen) {
+        if (storyRowOnScreen) {
 
           // Update story visibility tracker
           storyRowOnScreen = false;
 
           // Check story loop tracker
-          if(storyLooping) {
+          if (storyLooping) {
 
             // End story loop
             endStoryLoop();
@@ -740,7 +727,7 @@ function loadPC() {
     entries.forEach(entry => {
 
       // If projects on screen
-      if(entry.isIntersecting) {
+      if (entry.isIntersecting) {
 
         // If background color not project color
         if (bgColor !== 2) {
@@ -749,7 +736,7 @@ function loadPC() {
           body.style.backgroundColor = `${bgColors[2]}`;
           bgColor = 2;
         }
-        if(sliderPos !== 2) {
+        if (sliderPos !== 2 && !sliderScrolling) {
           changeProgSlider(2);
         }
 
@@ -773,7 +760,7 @@ function loadPC() {
           });
         }
 
-        if(!projectHeadAnimated) {
+        if (!projectHeadAnimated) {
           document.querySelector('#projects-head').classList.add('section-head-ani');
           projectHeadAnimated = true;
         }
@@ -820,21 +807,21 @@ function loadPC() {
     entries.forEach(entry => {
 
       // If team on screen
-      if(entry.isIntersecting) {
+      if (entry.isIntersecting) {
 
         // If background color not team color
-        if(bgColor !== 3) {
+        if (bgColor !== 3) {
 
           // Set background color to color 3
           body.style.backgroundColor = `${bgColors[3]}`;
           bgColor = 3;
         }
-        if(sliderPos !== 3) {
+        if (sliderPos !== 3 && !sliderScrolling) {
           changeProgSlider(3);
         }
 
         // Check/update star fade
-        if(!starsFaded) {
+        if (!starsFaded) {
           canvas.style.opacity = '0';
           canvas.addEventListener('transitionend', function starsFadedOut() {
             canvas.removeEventListener('transitionend', starsFadedOut);
@@ -843,15 +830,15 @@ function loadPC() {
           })
         }
 
-        if(!teamHeadAnimated) {
+        if (!teamHeadAnimated) {
           document.querySelector('#team-head').classList.add('section-head-ani');
           teamHeadAnimated = true;
         }
 
         // Check/update team visibility + animation trackers
-        if(!teamOnScreen) {
+        if (!teamOnScreen) {
           teamOnScreen = true;
-          if(!teamAnimating) {
+          if (!teamAnimating) {
             playTeam();
             console.log('team playing')
           }
@@ -861,9 +848,9 @@ function loadPC() {
       } else {
 
         // Check/update team visibility + animation trackers
-        if(teamOnScreen) {
+        if (teamOnScreen) {
           teamOnScreen = false;
-          if(teamAnimating) {
+          if (teamAnimating) {
             pauseTeam();
             console.log('team paused')
           }
@@ -875,28 +862,31 @@ function loadPC() {
 // Observe team row
   teamRowObserver.observe(document.querySelector('.team-row'));
 
-const footerObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      if(!footerOnScreen) {
-        footerOnScreen = true;
+  const footerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!footerOnScreen) {
+          footerOnScreen = true;
+        }
+        if (bgColor !== 3) {
+          body.style.backgroundColor = `${bgColors[3]}`;
+          bgColor = 3;
+        }
+        if(sliderPos !== 4 && !sliderScrolling) {
+          changeProgSlider(4);
+        }
+        if (!footerAnimated) {
+          footer.classList.add('footer-ani');
+          footerAnimated = true;
+        }
+      } else {
+        if (footerOnScreen) {
+          footerOnScreen = false;
+        }
       }
-      if(bgColor !== 3) {
-        body.style.backgroundColor = `${bgColors[3]}`;
-        bgColor = 3;
-      }
-      if(!footerAnimated) {
-        footer.classList.add('footer-ani');
-        footerAnimated = true;
-      }
-    } else {
-      if(footerOnScreen) {
-        footerOnScreen = false;
-      }
-    }
-  });
-}, {threshold: .15});
-footerObserver.observe(footer);
+    });
+  }, {threshold: .15});
+  footerObserver.observe(footer);
 
 
   // Set star cache sizes
@@ -909,14 +899,228 @@ footerObserver.observe(footer);
   //buildPhrase1();
 
 
-  if (window.innerWidth > 1800) {
-    document.body.style.setProperty('--project-ani-dur', `${Math.floor(window.innerWidth * 8.5)}ms`);
-    if (window.innerWidth < 2100) {
-      document.body.style.setProperty('--project-ani-del', `${Math.floor(window.innerWidth * 1.5)}ms`);
-    } else {
-      document.body.style.setProperty('--project-ani-del', `${Math.floor(window.innerWidth * 1.2)}ms`);
+
+  const slider = document.querySelector('#progress-slider');
+  let sliderPos = 0;
+  let sliderScrolling = false;
+
+  slider.height = slider.offsetHeight;
+  slider.width = slider.offsetWidth;
+  const sliderCTX = slider.getContext('2d');
+  let sliderHovered = false;
+  let circleHover = null;
+  let hoverAnimating = false;
+  let hoverRadius = [10, 10, 10, 10, 10]
+
+  let radius = 10;
+  let hoverMax = 15;
+  const circleCount = 5;
+  const circleSpace = slider.height / circleCount;
+  const centerX = slider.width / 2;
+
+  sliderCTX.fillStyle = '#f1f1f1';
+  sliderCTX.strokeStyle = '#f1f1f1';
+  sliderCTX.lineWidth = 2;
+
+  let circleOpacity = 0;
+
+
+  function createProgressSlider() {
+    sliderCTX.clearRect(0, 0, slider.width, slider.height);
+
+    for (let i = 0; i < circleCount - 1; i++) {
+      const y1 = (i + 0.5) * circleSpace;
+      const y2 = (i + 1 + 0.5) * circleSpace;
+
+      const r1 = hoverRadius[i]
+      const r2 = hoverRadius[i + 1];
+
+      sliderCTX.beginPath();
+      sliderCTX.moveTo(centerX, y1 + r1);
+      sliderCTX.lineTo(centerX, y2 - r2);
+      sliderCTX.stroke();
+    }
+
+    for (let i = 0; i < circleCount; i++) {
+      let y = (i + 0.5) * circleSpace;
+      sliderCTX.beginPath();
+      sliderCTX.arc(centerX, y, hoverRadius[i], 0, Math.PI * 2);
+      if (i === sliderPos) {
+        sliderCTX.fillStyle = 'rgba(241,241,241,1)';
+        sliderCTX.fill();
+        sliderCTX.stroke();
+      } else {
+        sliderCTX.fillStyle = 'transparent';
+        sliderCTX.fill();
+        sliderCTX.stroke();
+      }
+
     }
   }
+
+  function changeProgSlider(newPos) {
+    sliderPos = newPos;
+    circleOpacity = 0;
+
+    function animate() {
+      sliderCTX.clearRect(0, 0, slider.width, slider.height);
+
+      for (let i = 0; i < circleCount - 1; i++) {
+        const y1 = (i + 0.5) * circleSpace;
+        const y2 = (i + 1 + 0.5) * circleSpace;
+
+        const r1 = hoverRadius[i]
+        const r2 = hoverRadius[i + 1];
+
+        sliderCTX.beginPath();
+        sliderCTX.moveTo(centerX, y1 + r1);
+        sliderCTX.lineTo(centerX, y2 - r2);
+        sliderCTX.stroke();
+      }
+
+      for (let i = 0; i < circleCount; i++) {
+        let y = (i + 0.5) * circleSpace;
+        sliderCTX.beginPath();
+        sliderCTX.arc(centerX, y, hoverRadius[i], 0, Math.PI * 2);
+        if (i === sliderPos) {
+          sliderCTX.fillStyle = `rgba(241,241,241,${circleOpacity})`;
+          sliderCTX.fill();
+          sliderCTX.stroke();
+        } else {
+          sliderCTX.fillStyle = 'transparent';
+          sliderCTX.fill();
+          sliderCTX.stroke();
+        }
+      }
+      circleOpacity = Math.min(circleOpacity + .05, 1);
+      if (circleOpacity < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+
+    animate();
+
+  }
+
+  let sliderMousePos = {x: 0, y: 0}
+
+  slider.addEventListener('mouseenter', () => {
+    slider.addEventListener('mousemove', getSliderMousePos);
+    slider.addEventListener('click', sliderClick);
+    if (!sliderHovered) sliderHovered = true;
+    progSliderHover();
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    slider.removeEventListener('mousemove', getSliderMousePos);
+    slider.removeEventListener('click', sliderClick);
+    if (sliderHovered) sliderHovered = false;
+  })
+
+  function getSliderMousePos(event) {
+    const rect = slider.getBoundingClientRect();
+
+    sliderMousePos.x = event.clientX - rect.left;
+    sliderMousePos.y = event.clientY - rect.top;
+  }
+
+  function progSliderHover() {
+    sliderCTX.clearRect(0, 0, slider.width, slider.height);
+
+
+    for (let i = 0; i < circleCount - 1; i++) {
+      const y1 = (i + 0.5) * circleSpace;
+      const y2 = (i + 1 + 0.5) * circleSpace;
+
+      const r1 = hoverRadius[i]
+      const r2 = hoverRadius[i + 1];
+
+      sliderCTX.beginPath();
+      sliderCTX.moveTo(centerX, y1 + r1);
+      sliderCTX.lineTo(centerX, y2 - r2);
+      sliderCTX.stroke();
+    }
+
+    circleHover = null;
+    for (let i = 0; i < circleCount; i++) {
+      let y = (i + 0.5) * circleSpace;
+      let dx = sliderMousePos.x - centerX;
+      let dy = sliderMousePos.y - y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < hoverMax) {
+        circleHover = i;
+      }
+    }
+
+    for (let i = 0; i < circleCount; i++) {
+      if (i === circleHover) {
+        hoverRadius[i] += 0.5;
+        if (hoverRadius[i] > hoverMax) hoverRadius[i] = hoverMax;
+      } else {
+        if (hoverRadius[i] > radius) {
+          hoverRadius[i] = Math.max(hoverRadius[i] - 0.5, 10);
+        }
+      }
+    }
+
+    for (let i = 0; i < circleCount; i++) {
+      let y = (i + 0.5) * circleSpace;
+      sliderCTX.beginPath();
+      sliderCTX.arc(centerX, y, hoverRadius[i], 0, Math.PI * 2);
+      if (i === sliderPos) {
+        sliderCTX.fillStyle = 'rgba(241,241,241,1)';
+        sliderCTX.fill();
+        sliderCTX.stroke();
+      } else {
+        sliderCTX.fillStyle = 'transparent';
+        sliderCTX.fill();
+        sliderCTX.stroke();
+      }
+
+    }
+    hoverAnimating = hoverRadius.filter(radius => radius > 10).length !== 0;
+    if (sliderHovered || hoverAnimating) requestAnimationFrame(progSliderHover);
+  }
+
+  function sliderClick() {
+    for (let i = 0; i < circleCount; i++) {
+      let y = (i + 0.5) * circleSpace;
+      let dx = sliderMousePos.x - centerX;
+      let dy = sliderMousePos.y - y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < hoverMax) {
+        let scrollTo;
+        if(i === 4) {
+          scrollTo = body.offsetHeight;
+        } else {
+          scrollTo = sections[i];
+        }
+        let dur = Math.max(0.3, Math.min(Math.abs(sliderPos - scrollTo) * 0.5, 2.5));
+        gsapScrolling = true;
+        sliderScrolling = true;
+        window.gsap.to(window, {
+          duration: 1,
+          scrollTo: {y: scrollTo},
+          ease: 'linear',
+          onComplete: () => {
+            gsapScrolling = false;
+            sliderScrolling = false;
+          }
+        })
+        sliderPos = i;
+        changeProgSlider(sliderPos);
+      }
+    }
+  }
+
+  document.addEventListener('keypress', (keyEvent) => {
+    if(keyEvent.key === 'Tab') {
+      keyEvent.preventDefault();
+    }
+  })
+
+
+  createProgressSlider();
 
 
   buildProjects();
@@ -924,6 +1128,7 @@ footerObserver.observe(footer);
 
   getProjectWidth();
   getEmpWidth();
+
 
 }
 
@@ -972,87 +1177,6 @@ function consistentScroll() {
   }
 }
 
-const slider = document.querySelector('#progress-slider');
-let sliderPos = 0;
-slider.height = slider.offsetHeight;
-slider.width = slider.offsetWidth;
-const sliderCTX = slider.getContext('2d');
-function createProgressSlider() {
-  const radius = 10;
-  const circleSpace = slider.height / 4;
-  const centerX = slider.width / 2;
-  sliderCTX.clearRect(0,0,slider.width,slider.height);
-  sliderCTX.fillStyle = '#f1f1f1';
-  sliderCTX.strokeStyle = '#f1f1f1';
-  sliderCTX.lineWidth = 2;
-
-  for(let i = 0; i < 3; i++) {
-    const y1 = i * circleSpace + radius * 2;
-    const y2 = (i + 1) * circleSpace ;
-    sliderCTX.beginPath();
-    sliderCTX.moveTo(centerX, y1);
-    sliderCTX.lineTo(centerX, y2);
-    sliderCTX.stroke();
-  }
-
-  for(let i = 0; i < 4; i++) {
-    const y = i * circleSpace + radius;
-    sliderCTX.beginPath();
-    sliderCTX.arc(centerX, y,radius, 0, Math.PI * 2);
-    if(i === 0) {
-      sliderCTX.fill();
-    } else {
-      sliderCTX.fillStyle = 'transparent';
-      sliderCTX.fill();
-      sliderCTX.stroke();
-    }
-  }
-}
-let circleOpacity = 0;
-
-function changeProgSlider(newPos) {
-  const radius = 10;
-  const circleSpace = slider.height / 4;
-  const centerX = slider.width / 2;
-  sliderCTX.clearRect(0,0,slider.width,slider.height);
-  sliderCTX.fillStyle = '#f1f1f1';
-  sliderCTX.strokeStyle = '#f1f1f1';
-  sliderCTX.lineWidth = 2;
-
-
-  for(let i = 0; i < 3; i++) {
-    const y1 = i * circleSpace + radius * 3;
-    const y2 = (i + 1) * circleSpace + radius;
-    sliderCTX.beginPath();
-    sliderCTX.moveTo(centerX, y1);
-    sliderCTX.lineTo(centerX, y2);
-    sliderCTX.stroke();
-  }
-
-  for(let i = 0; i < 4; i++) {
-    const y = i * circleSpace + radius*2;
-    sliderCTX.beginPath();
-    sliderCTX.arc(centerX, y, radius, 0, Math.PI * 2);
-    if(i === newPos) {
-      sliderCTX.fillStyle = `rgba(241,241,241,${circleOpacity}`;
-      sliderCTX.fill();
-      sliderCTX.stroke();
-    } else {
-      sliderCTX.fillStyle = 'transparent';
-      sliderCTX.fill();
-      sliderCTX.stroke();
-    }
-  }
-  circleOpacity = Math.min(circleOpacity + .05, 1);
-  if(circleOpacity < 1) {
-    requestAnimationFrame(() => {
-      changeProgSlider(newPos);
-    })
-  } else {
-    sliderPos = newPos;
-    circleOpacity = 0;
-  }
-}
 
 /* ------------------- WHAT WE DO ANI FUNCTIONS ------------------- */
 
@@ -1466,7 +1590,7 @@ function animateFrame(now) {
 
 
 /* ------------------- STAR CACHING ------------------- */
-
+const dpr = window.devicePixelRatio;
 let spacing = 50;
 if(window.innerWidth > 2000) {
   spacing = window.innerWidth / 40;
@@ -1581,12 +1705,10 @@ const performCTX = performCanvas.getContext('2d');
 
 document.getElementById('i3-head').style.top = `${ucHeaderRect.height}px`
 canvas.style.top = `${ucHeaderRect.height / 2}px`
-const dpr = window.devicePixelRatio;
 // Set space between stars
 
 if(window.innerWidth * dpr < 1000) windowWidth *= 1.5;
 
-console.log(spacing)
 // Set section breakpoints
 let horizBreak = Math.floor(window.innerHeight / 2);
 let leftVertBreak = Math.floor(window.innerWidth / 3);
@@ -1655,7 +1777,6 @@ function resizeStarBG(prevWidth) {
     setCachedSectionSize();
     cacheStaticStars();
     updateStarSpeed();
-    console.log("Updated speed:", starGravitateSpeed, starReturnSpeed);
 
     updateWidth = window.innerWidth;
     updateHeight = window.innerHeight;
@@ -1663,7 +1784,6 @@ function resizeStarBG(prevWidth) {
 
   function resizeLarger() {
     updateStarSpeed();
-    console.log("Updated speed:", starGravitateSpeed, starReturnSpeed);
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -1745,13 +1865,6 @@ function resizeStarBG(prevWidth) {
       }
     });
     cacheStaticStars();
-
-    for (let code = 0; code <= 5; code++) {
-      const [offsetX, offsetY] = cacheSectionOffsets[code];
-      ctx.strokeStyle = 'red';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(offsetX, offsetY, sectionWidth, sectionHeight);
-    }
 
   }
 }
@@ -2008,7 +2121,6 @@ function pullStar(star) {
     // Lerp star closer to mouse
     star.x += (mousePos.x - star.x) * starGravitateSpeed;
     star.y += (mousePos.y - star.y) * starGravitateSpeed;
-    console.log(starGravitateSpeed)
     // Set still moving to true
     stillMoving = true;
 
@@ -3794,11 +3906,8 @@ function startEmpAni() {
           setEmpCardListeners();
         }, {once:true});
       }
-      if(window.innerWidth < 1400) {
-        card.style.animationDelay = `${initialDelay}ms`;
-      } else {
-        card.style.animationDelay = `5ms`;
-      }
+      card.style.animationDelay = `${initialDelay}ms`;
+
 
       animateEmployeeCard(card);
     }

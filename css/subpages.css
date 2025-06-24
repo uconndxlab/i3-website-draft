@@ -1,11 +1,11 @@
 :root {
-    --student-ani-dur: 0ms;
+    --student-ani-dur: 23000ms;
     --student-ani-dist: 0px;
-    --student-ani-del: 0;
+    --student-ani-del: 10000ms;
     --student-row-margin: 30px;
     --student-ani-startX: 0px;
-    --student-ani-Y: 0px;
-    --student-ani-delay: 0s;
+    --project-card-width: 17rem;
+    --project-card-height: 9.5rem;
 }
 
 body {
@@ -163,9 +163,13 @@ h6,
     padding: 7px 15px;
     transform: rotateX(180deg);
     background: url("../img/i3/people/jonathan.jpg") no-repeat center / cover;
-    box-shadow: inset rgb(170 170 170 / 65%) 0 0 10px 6px;
-
+    transition: box-shadow .5s;
 }
+
+.team-card-container .card-front:hover {
+    box-shadow: inset rgb(170 170 170 / 65%) 0 0 10px 6px;
+}
+
 .team-card-container .card-back {
     box-shadow: inset rgba(241, 241, 241, 0.6) 0 0 10px 2px;
     background: url("../img/i3/i3-symbol-fill.svg") no-repeat center 40%;
@@ -619,7 +623,6 @@ h6,
     height: 22rem;
     position: relative;
     padding: 0;
-    box-shadow: rgba(241, 241, 241, .35) 0px 0px 9px;
     border-radius: 25px;
 }
 .team-card-main:hover .team-card-main-hover {
@@ -765,11 +768,12 @@ h6,
     flex-direction: column;
     text-align: start;
     transform: rotateX(180deg);
-    box-shadow: rgba(241, 241, 241, .35) 0px 0px 9px;
     border-radius: 25px;
 }
 .team-card-main .team-card-main-back {
-    box-shadow: inset rgba(241, 241, 241, 0.6) 0 0 10px 2px;
+    box-shadow: inset rgba(241, 241, 241, 0.6) 0 0 10px 2px,
+    rgba(241, 241, 241, .35) 0px 0px 9px;
+
     width: 100%;
     height: 100%;
 }
@@ -894,7 +898,12 @@ h6,
     flex-wrap: wrap;
     margin: auto;
     transition: height .5s;
-    min-height: 300px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.project-list::-webkit-scrollbar {
+    display: none;
 }
 
 .project-view-select {
@@ -939,6 +948,12 @@ h6,
     transform: translateX(0);
     transition: transform .5s ease-in, fill .5s;
 }
+.project-ghost {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+    background: none !important;
+}
 
 .projects-container {
     display: flex;
@@ -948,6 +963,11 @@ h6,
 
     position: relative;
     align-self: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.projects-container::-webkit-scrollbar {
+    display: none;
 }
 
 .sort-sidebar {
@@ -1102,10 +1122,10 @@ h6,
 .project-wrapper {
     display: flex;
     transition: opacity .25s ease-out, transform .5s ease-in-out;
-    width: 17rem;
+    width: var(--project-card-width);
     max-width: 17rem;
     flex: 1 1 13rem;
-    height: 9.5rem;
+    height: var(--project-card-height);
     margin: 0 !important;
     border-radius: 15px;
     box-shadow: #37494b61 0 0 11px 3px;
@@ -1249,11 +1269,13 @@ h6,
         transform: translateX(10rem) scale(.6);
     }
 
-
-    .project-wrapper {
-        width: 20rem;
-        height: 9.5rem;
+    :root {
+        --student-ani-dur: 24000ms;
+        --student-ani-del: 9000ms;
+        --project-card-width: 20rem;
+        --project-card-height: 9.5rem;
     }
+
     .sort-sidebar {
         width: 24rem;
     }
@@ -1297,6 +1319,11 @@ h6,
         transform: translateY(-115px);
     }
 
+    :root {
+        --student-ani-dur: 25000ms;
+        --student-ani-del: 6500ms;
+    }
+
     .team-card-main {
         width: 14rem;
         height: 18rem;
@@ -1314,9 +1341,9 @@ h6,
 }
 
 @media(min-width: 600px) {
-    .project-wrapper {
-        width: 16rem;
-        height: 9.75rem;
+    :root {
+        --project-card-width: 16rem;
+        --project-card-height: 9.75rem;
     }
 }
 
@@ -1336,6 +1363,11 @@ h6,
     .hero-h1 {
         font-size: 3.5em;
         -webkit-text-stroke: 2px #f1f1f1;
+    }
+
+    :root {
+        --student-ani-dur: 24000ms;
+        --student-ani-del: 6000ms;
     }
 
     /* TEAM */
@@ -1385,9 +1417,11 @@ h6,
         width: 256px;
         height: 320px;
     }
+    :root {
+        --project-card-width: 17rem;
+        --project-card-height: 10.5rem;
+    }
     .project-wrapper {
-        width: 17rem;
-        height: 10.5rem;
         flex: 1 1 15rem;
         max-width: 22rem;
     }
@@ -1404,6 +1438,11 @@ h6,
     /* HERO */
     .hero-h1 {
         font-size: 4.5em;
+    }
+
+    :root {
+        --student-ani-dur: 24000ms;
+        --student-ani-del: 5550ms;
     }
 
     /* TEAM */
@@ -1452,10 +1491,9 @@ h6,
     .projects-container {
         width: 90vw;
     }
-    .project-wrapper {
-        width: 17rem;
-        height: 10.5rem;
-        margin: .75rem;
+    :root {
+        --project-card-width: 17rem;
+        --project-card-height: 10.5rem;
     }
     .sort-sidebar-toggle {
         position: sticky;
@@ -1485,10 +1523,12 @@ h6,
 }
 
 @media (min-width: 1175px) {
+    :root {
+        --project-card-width: 15rem;
+        --project-card-height: 9rem;
+    }
     .project-wrapper {
-        width: 15rem;
         flex: 1 1 15rem;
-        height: 9rem;
         max-width: 16rem;
     }
 }
@@ -1498,6 +1538,11 @@ h6,
     .hero-h1 {
         font-size: 5.5em;
         max-width: 450px;
+    }
+
+    :root {
+        --student-ani-dur: 25000ms;
+        --student-ani-del: 5000ms;
     }
 
     /* TEAM */
@@ -1534,10 +1579,12 @@ h6,
 }
 
 @media(min-width: 1325px) {
+    :root {
+        --project-card-width: 18rem;
+        --project-card-height: 11rem;
+    }
     .project-wrapper {
         flex: 1 1 17rem;
-        width: 18rem;
-        height: 11rem;
         max-width: 18rem;
     }
     .project-list {
@@ -1549,6 +1596,12 @@ h6,
 }
 
 @media(min-width: 1400px) {
+
+    :root {
+        --student-ani-dur: 26000ms;
+        --student-ani-del: 5500ms;
+    }
+
     .team-card-main {
         width: 20rem;
         height: 24rem;
@@ -1576,15 +1629,25 @@ h6,
 
 @media(min-width: 1650px) {
 
+    :root {
+        --student-ani-dur: 26500ms;
+        --student-ani-del: 5000ms;
+        --project-card-width: 18rem;
+        --project-card-height: 11rem;
+    }
+
     .project-wrapper {
-        width: 18rem;
-        height: 11rem;
         flex: 1 1 18rem;
         max-width: 22rem;
     }
 }
 
 @media(min-width: 1800px) {
+    :root {
+        --student-ani-dur: 27000ms;
+        --student-ani-del: 4600ms;
+    }
+
     .sort-sidebar-toggle {
         transform: translateX(16rem) translateY(8rem);
     }
