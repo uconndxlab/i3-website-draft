@@ -3,7 +3,7 @@ import employees from "./employeeData.js";
 window.addEventListener('resize', () => {
   resizeTeamCards();
   setCardWidth();
-  setCardSpeed();
+  setCardDelay();
   row1.forEach(card => {
     card.classList.remove('student-ani');
     card.style.right = `-${cardWidth + 10}px`;
@@ -14,15 +14,14 @@ window.addEventListener('resize', () => {
     card.style.left = `-${cardWidth + 10}px`;
     void card.offsetWidth;
   });
-  startAni();
+  startStudentAni();
 });
 
 window.addEventListener('load', () => {
   resizeTeamCards();
   setCardWidth();
-  setCardSpeed();
-  startAni();
-
+  setCardDelay();
+  buildStudents();
 });
 
 document.addEventListener('visibilitychange', () => {
@@ -36,19 +35,6 @@ document.addEventListener('visibilitychange', () => {
     for(let card of document.querySelectorAll('.student-ani')) {
       card.style.animationPlayState = 'running';
     }
-
-    row1.forEach(card => {
-      card.classList.remove('student-ani');
-      card.style.right = `-${cardWidth + 10}px`;
-      void card.offsetWidth;
-    });
-    row2.forEach(card => {
-      card.classList.remove('student-ani');
-      card.style.left = `-${cardWidth + 10}px`;
-      void card.offsetWidth;
-    });
-
-    startAni();
   }
 });
 
@@ -321,17 +307,12 @@ function setCardWidth() {
 
 let speed;
 let delay;
+const body = document.querySelector('body');
 
 
 
-function setCardSpeed() {
-  if(window.innerWidth < 568) {speed = window.innerWidth * 21; delay = 3.75}
-  else if(window.innerWidth < 768) {speed = window.innerWidth * 16; delay = 3.25}
-  else if(window.innerWidth < 992) {speed = window.innerWidth * 13; delay = 2.75}
-  else if(window.innerWidth < 1200) {speed = window.innerWidth * 10; delay = 2.5}
-  else if(window.innerWidth < 1400) {speed = window.innerWidth * 8.5; delay = 2.35}
-  else if(window.innerWidth < 1600) {speed = window.innerWidth * 8; delay = 2.25}
-  else {speed = window.innerWidth * 8.5; delay = 2.5}
+function setCardDelay() {
+  delay = getComputedStyle(body).getPropertyValue('--student-ani-del');
 }
 
 
@@ -343,6 +324,7 @@ let row2 = [];
   let studentsArray1 = [];
   let studentsArray2 = [];
 
+function buildStudents() {
   students.forEach((student, index) => {
     const card = document.createElement('div');
     card.classList.add('team-card-main');
@@ -433,71 +415,83 @@ let row2 = [];
     }
   })
 
-row1 = [
-  ...studentsArray1.map(pair => pair[0]),
-  ...studentsArray2.map(pair => pair[0])
-]
+  row1 = [
+    ...studentsArray1.map(pair => pair[0]),
+    ...studentsArray2.map(pair => pair[0])
+  ]
 
-row2 = [
-  ...studentsArray2.map(pair => pair[1]),
-  ...studentsArray1.map(pair => pair[1])
-]
-
-
-
-row1.forEach((card, index) => {
-  card.style.right = `-${cardWidth + 10}px`;
-  studentRow1.appendChild(card);
-  card.addEventListener('touchstart', () => {
-    cardTouchHover(card);
-  });
-  card.addEventListener('mouseenter', () => {
-    cardHover(card);
-  });
-  card.addEventListener('mouseleave', () => {
-    disableHover(card);
-  });
-  card.addEventListener('animationstart', function nextCard() {
-    row1Index = (row1Index + 1) % studentRow1.children.length;
-    animateTeamCardRow1(studentRow1.children[row1Index])
-  });
-  card.addEventListener('animationend', function resetCard() {
-    card.classList.remove('student-ani');
+  row2 = [
+    ...studentsArray2.map(pair => pair[1]),
+    ...studentsArray1.map(pair => pair[1])
+  ]
+  row1.forEach(card => {
+    card.style.right = `-${cardWidth + 10}px`;
+    studentRow1.appendChild(card);
   })
-});
-
-row2.forEach((card, index) => {
-  card.style.left = `-${cardWidth + 10}px`;
-  studentRow2.appendChild(card);
-  card.addEventListener('touchstart', () => {
-    cardTouchHover(card);
-  });
-  card.addEventListener('mouseenter', () => {
-    cardHover(card);
-  });
-  card.addEventListener('mouseleave', () => {
-    disableHover(card);
-  });
-  card.addEventListener('animationstart', function nextCard() {
-    row2Index = (row2Index + 1) % studentRow2.children.length;
-    animateTeamCardRow2(studentRow2.children[row2Index])
-  });
-  card.addEventListener('animationend', function resetCard() {
-    card.classList.remove('student-ani');
+  row2.forEach(card => {
+    card.style.left = `-${cardWidth + 10}px`;
+    studentRow2.appendChild(card);
   })
-});
+
+  setTimeout(startStudentAni, 300)
+
+}
+
+
+
+function setStudentListeners() {
+  row1.forEach((card, index) => {
+    card.addEventListener('touchstart', () => {
+      cardTouchHover(card);
+    });
+    card.addEventListener('mouseenter', () => {
+      cardHover(card);
+    });
+    card.addEventListener('mouseleave', () => {
+      disableHover(card);
+    });
+    card.addEventListener('animationstart', function nextCard() {
+      let next = card.nextElementSibling;
+      if(!next) next = studentRow1.firstElementChild;
+      next.style.animationDelay = delay;
+      animateTeamCardRow1(next)
+    });
+    card.addEventListener('animationend', function resetCard() {
+      card.classList.remove('student-ani');
+    })
+  });
+
+  row2.forEach((card, index) => {
+    card.addEventListener('touchstart', () => {
+      cardTouchHover(card);
+    });
+    card.addEventListener('mouseenter', () => {
+      cardHover(card);
+    });
+    card.addEventListener('mouseleave', () => {
+      disableHover(card);
+    });
+    card.addEventListener('animationstart', function nextCard() {
+      let next = card.nextElementSibling;
+      if(!next) next = studentRow2.firstElementChild;
+      next.style.animationDelay = delay;
+      animateTeamCardRow2(next)
+    });
+    card.addEventListener('animationend', function resetCard() {
+      card.classList.remove('student-ani');
+    })
+  });
+}
+
+
 
 
 function animateTeamCardRow1(card) {
   card.style.setProperty('--student-ani-dist', `-${window.innerWidth + cardWidth + (cardWidth/2)}px`);
-  card.style.setProperty('--student-ani-dur', `${speed}ms`);
-  card.style.setProperty('--student-ani-del', `${delay}s`);
   card.classList.add('student-ani')
 }
 function animateTeamCardRow2(card) {
   card.style.setProperty('--student-ani-dist', `${window.innerWidth + cardWidth + (cardWidth/2)}px`);
-  card.style.setProperty('--student-ani-dur', `${speed}ms`);
-  card.style.setProperty('--student-ani-del', `${delay}s`);
   card.classList.add('student-ani')
 }
 
@@ -589,3 +583,58 @@ nonStudents.forEach(card => {
     card.firstElementChild.style.transform = 'rotateX(-180deg)';
   })
 })
+
+
+
+function startStudentAni() {
+  const delay = parseInt(getComputedStyle(body).getPropertyValue('--student-ani-del').slice(0, -2));
+  const duration = parseInt(getComputedStyle(body).getPropertyValue('--student-ani-dur').slice(0, -2));
+  const cards = [
+    [...studentRow1.children],
+    [...studentRow2.children]
+  ];
+  let chainStart = false;
+  const preload = duration - delay;
+  cards[0][0].addEventListener('animationend', () => {
+    cards[0][0].style.animationDelay = `${delay}ms`;
+    cards[0][0].classList.remove('student-ani');
+  });
+  cards[1][0].addEventListener('animationend', () => {
+    cards[1][0].style.animationDelay = `${delay}ms`;
+    cards[1][0].classList.remove('student-ani');
+  });
+
+  cards[0].forEach((card, i) => {
+    const startTime = i * delay;
+    if(startTime < preload) {
+      const offset = preload - startTime;
+      cards[1][i].style.animationDelay = `-${offset}ms`;
+      card.style.animationDelay = `-${offset}ms`;
+      animateTeamCardRow1(card);
+      animateTeamCardRow2(cards[1][i]);
+    } else if(!chainStart) {
+      chainStart = true;
+      const initialDelay = delay - (preload % delay);
+      card.style.animationDelay = `${initialDelay}ms`;
+      cards[1][i].style.animationDelay = `${initialDelay}ms`;
+        card.addEventListener('animationstart', () => {
+          let next = card.nextElementSibling;
+          if(!next) next = studentRow1.firstElementChild;
+          animateTeamCardRow1(next)
+          setTimeout(setStudentListeners, 100);
+
+        })
+        cards[1][i].addEventListener('animationstart', () => {
+          let next = cards[1][i].nextElementSibling;
+          if(!next) next = studentRow2.firstElementChild;
+          animateTeamCardRow2(next)
+        })
+
+
+      animateTeamCardRow1(card);
+      animateTeamCardRow2(cards[1][i]);
+    }
+  });
+
+}
+
