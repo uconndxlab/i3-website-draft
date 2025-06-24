@@ -27,19 +27,27 @@
 <canvas id="progress-slider"></canvas>
 <canvas id="star-canvas"></canvas>
 <canvas id="star-canvas-perform"></canvas>
+<div class="consistent-overlay"></div>
+<div class="project-row-wrapper">
+  <div class="projects-row" id="row-1"></div>
+  <div class="projects-row" id="row-2"></div>
+  <div class="projects-row" id="row-3"></div>
+</div>
 <!--banner-->
-<div id="gasp-wrapper">
+<div id="gasp-wrapper" style="z-index: 4; position: relative">
+
   <div id="gsap-content">
+
     <div id="uc-header" style="width: 100vw">
       <div id="uconn-banner" class="alternative">
         <div id="uconn-header-container" class="white">
           <div class="row-container container-fluid px-0 px-md-3 px-lg-5 px-xxl-10">
             <div class="row-fluid">
               <div id="home-link-container">
-                <a id="home-link" href="https://uconn.edu/">
+                <a id="home-link" href="https://uconn.edu/" tabindex="1">
                   <span id="wordmark" aria-hidden="false">UConn</span>
                 </a>
-                <a id="home-link" href="https://uconn.edu/">
+                <a id="home-link" href="https://uconn.edu/" tabindex="1">
                   <span class="no-css">University of Connecticut school of</span>
                   <span id="university-of-connecticut">University of Connecticut</span>
                 </a>
@@ -47,7 +55,7 @@
 
               <div id="button-container">
                 <div class="icon-container" id="icon-container-search">
-                  <a id="uconn-search" class="btn" href="https://uconn.edu/search">
+                  <a id="uconn-search" class="btn" href="https://uconn.edu/search" tabindex="1">
                     <span class="no-css">Search University of Connecticut</span>
 
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -63,7 +71,7 @@
 
                 <div class="icon-container" id="icon-container-az">
                   <a class="btn" id="uconn-az" href="https://uconn.edu/az"
-                     aria-haspopup="true" aria-controls="a-z-popup" aria-expanded="false">
+                     aria-haspopup="true" aria-controls="a-z-popup" aria-expanded="false" tabindex="1">
                     <span class="no-css">A to Z Index</span>
 
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -91,7 +99,7 @@
         <div class="container-fluid px-4 px-lg-5 px-xxl-10">
           <div>
             <h1 class="header-level-one">
-              <a href="/" class="link-offset-1">
+              <a href="/" class="link-offset-1" tabindex="2">
                 Internal Insights & Innovation
               </a>
             </h1>
@@ -102,16 +110,16 @@
           </button>
           <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+              <li class="nav-item" tabindex="2">
                 <a class="nav-link" href="/contact.html">What We Do</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" tabindex="2">
                 <a class="nav-link" href="/index.html/projects.html">Our Work</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" tabindex="2">
                 <a class="nav-link" href="/index.html/team.html">Team</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" tabindex="2">
                 <a class="nav-link" href="/alumni.html">Contact</a>
               </li>
 
@@ -123,6 +131,7 @@
 
     <!-- hero section -->
     <main>
+
       <section id="hero" class="section">
         <div id="hero-head" class="container-fluid d-flex justify-content-center align-content-center">
 
@@ -139,11 +148,14 @@
           </div>
         </div>
       </section>
+
       <section id="story" class="section">
+
         <div class="container-fluid align-content-center story-container">
           <h2 class="section-head-side">What We Do</h2>
 
           <div class="row" id="story-row">
+
             <div class="col-12 col-lg-6 story-body mt-4 mt-lg-0 mx-auto mx-lg-0 ps-lg-10">
               <h3 class="section-head-underline"><span class="underline">What<br class="mobile-break"></span> We Do</h3>
               <span class="story-body-text">The Internal Insights & Innovation (i3) team provides custom software development, web design,
@@ -178,11 +190,12 @@
       <section id="projects" class="section">
         <div class="container-fluid project-container">
           <h2 class="section-head" id="projects-head">For The University</h2>
-          <div class="project-row-wrapper">
+<!--          <div class="project-row-wrapper">
             <div class="projects-row" id="row-1"></div>
             <div class="projects-row" id="row-2"></div>
             <div class="projects-row" id="row-3"></div>
-          </div>
+          </div>-->
+          <p style="font-size: 2rem; text-align: center; background: rgba(241,241,241,.5)">wow this is like content so much contetnt all the content wow content contenttttttt content content content</p>
           <div class="projects-btn">
             <h4 class="cta-btn-text">View All Projects</h4>
             <button class="arrow-btn-circle">

@@ -13,13 +13,18 @@ const animatedElements = document.querySelectorAll('.animated');
 const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
 const sections = document.querySelectorAll('.section');
 
+let keyboardNavigating = false;
+
 let scrolling = false;
 let scrollStopTimeout;
 // Track hero on screen
 let heroOnScreen = false;
+let gsapScrolling = false;
 
 // Track stars faded
 let starsFaded = false;
+
+let projectDelay = 0;
 
 // Track story row on screen
 let storyRowOnScreen = false;
@@ -49,6 +54,8 @@ let teamHeadAnimated = false;
 let teamOnScreen = false;
 let teamStarted = false;
 
+let sliderPos = 0;
+
 // Define team row
 const teamRow = document.querySelector('.team-row');
 
@@ -62,18 +69,24 @@ let footerAnimated = false;
 // Define body element
 const body = document.querySelector('body');
 
+let storyFwooped = false;
+const consistentOverlay = document.querySelector('.consistent-overlay');
+const projectRowWrap = document.querySelector('.project-row-wrapper');
+const storyContainer = document.querySelector('.story-container');
 // Track background color
 let bgColor = 0;
 
 // Define background colors
 const bgColors = [
   'rgb(38,38,38)',
-  'rgb(10,22,38)',
+  'rgba(10,22,38,.25)',
   'rgb(24,0,40)',
   'rgb(38,38,38)'
 ];
 
-
+function getProjDelay() {
+  projectDelay = getComputedStyle(body).getPropertyValue('--project-ani-del');
+}
 
 /* ------------------- BASE EVENT LISTENERS ------------------- */
 
@@ -107,15 +120,22 @@ window.addEventListener('resize', () => {
   if(!isMobile) {
     getProjectWidth();
     getEmpWidth();
-    if(projectsAnimating) projectsAnimating = false;
-    if(teamAnimating) teamAnimating = false;
-    clearTimeout(aniResizeTimer);
-    aniResizeTimer = null;
-    aniResizeTimer = setTimeout(() => {
-      console.log('reset');
-      resetRows()
-    }, 1000);
+    getProjDelay();
+    [...projectsRow1.children].forEach(card => {
+      card.style.animationPlayState = 'paused';
+      card.classList.remove('project-ani');
+      card.style.left = 'calc(-1.5 * var(--project-card-width))';
+      void card.offsetWidth;
+    });
+    [...projectsRow2.children].forEach(card => {
+      card.style.animationPlayState = 'paused';
+      card.classList.remove('project-ani');
+      card.style.right = 'calc(-1.5 * var(--project-card-width))'
+      void card.offsetWidth;
+    })
 
+
+    startProjectAni();
   }
 
 
@@ -129,7 +149,7 @@ const mousePos = {x: 0, y: 0};
 // Get mouse position on mouse move
 window.addEventListener('mousemove', (event) => {
   mousePos.x = event.clientX
-  mousePos.y = event.clientY - (ucHeaderRect.height / 2)
+  mousePos.y = event.clientY - (ucHeaderRect.height / 2);
 });
 
 // Pause animations when unfocused
@@ -159,7 +179,9 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // Scroll listener
-window.addEventListener('scroll', consistentScroll);
+window.addEventListener('wheel', (event) => {
+  consistentScroll(event);
+});
 
 
 function checkInitialIntersections() {
@@ -190,7 +212,7 @@ function setIntersection() {
       break;
     case 2:
       projectsOnScreen = true;
-      playProjects();
+      //playProjects();
       break;
     case 3:
       teamOnScreen = true;
@@ -338,7 +360,7 @@ function loadMobile() {
   }, {threshold: .25});
 
 // Observe story row
-  storyRowObserver.observe(storyRow);
+  storyRowObserver.observe(storyContainer);
 
 // Observe projects
   const projectRow2Observer = new IntersectionObserver(entries => {
@@ -386,7 +408,7 @@ function loadMobile() {
 
           if (!projectsAnimating) {
             // Play project animation
-            playProjects();
+            //playProjects();
             console.log('projects played')
           }
           // If projects not on screen
@@ -505,6 +527,7 @@ function loadMobile() {
 
   buildEmpCards();
 
+  playProjects();
 }
 
 function loadPC() {
@@ -590,9 +613,8 @@ function loadPC() {
   }, {threshold: 0});
 
 // Observe hero h1
-  heroObserver.observe(document.querySelector('.hero-h1'));
+  //heroObserver.observe(document.querySelector('.hero-h1'));
 
-  let gsapScrolling = false;
 
   let gsapPin = '+=500vh';
 
@@ -617,29 +639,209 @@ function loadPC() {
   for (let section of sections) {
     const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !gsapScrolling && !sliderScrolling) {
-          gsapScrolling = true;
-          window.gsap.to(window, {
-            duration: .75,
-            scrollTo: {y: section},
-            ease: 'linear',
-            onComplete: () => {
-              gsapScrolling = false;
-            }
-          })
+        if (entry.isIntersecting) {
+          if(section === sections[0]) {
+            heroObserve();
+          } else if(section === sections[1]) {
+            storyObserve();
+          } else if(section === sections[2]) {
+            projectObserve();
+          } else if(section === sections[3]) {
+            teamObserve();
+          }
+
+
+
+          setTimeout(() => {
+            gsapScrolling = true;
+            window.gsap.to(window, {
+              duration: 1,
+              scrollTo: {y: section},
+              ease: 'linear',
+              onComplete: () => {
+                gsapScrolling = false;
+              }
+            })
+          }, 500);
+
+
+        } else if(!entry.isIntersecting) {
+          if(section === sections[0]) {
+            heroUnobserve();
+          } else if(section === sections[1]) {
+            storyUnobserve();
+          }
         }
       })
-    }, {threshold: .50});
+    }, {threshold: .15});
     sectionObserver.observe(section);
   }
 
+  function heroObserve() {
+
+    // Check star fade tracker
+    if (starsFaded) {
+
+      // Display star canvas
+      canvas.style.display = 'block';
+
+      // Fade stars in
+      canvas.style.opacity = '1';
+
+      // Update star fade tracker
+      starsFaded = false;
+    }
+
+    // If background color is not hero color
+    consistentOverlay.style.opacity = '0';
+    //playProjects();
+    projectRowWrap.style.transform = 'translateY(50%)';
+    projectRowWrap.style.opacity = '1';
+
+    if (sliderPos !== 0 && !sliderScrolling) {
+      changeProgSlider(0);
+    }
+    if(!projectsAnimating) {
+      playProjects();
+    }
+
+    // Check hero visibility tracker
+    if (!heroOnScreen) {
+
+      // Update hero visibility tracker
+      heroOnScreen = true;
+
+      // Check frame loop tracker
+      if (!frameLooping && frameTestPass) {
+
+        // Update frame loop tracker
+        frameLooping = true;
+        requestAnimationFrame(animateFrame)
+      }
+
+      // Check if star bg animated in, call gravity animation
+    }
+
+  }
+
+  function heroUnobserve() {
+    if (heroOnScreen) {
+
+      // Update hero visibility tracker
+      heroOnScreen = false;
+
+      // Update frame loop tracker
+      frameLooping = false;
+    }
+  }
+
+  function storyObserve() {
+    console.log('intersecting')
+
+    if (sliderPos !== 1 && !sliderScrolling) {
+      changeProgSlider(1);
+    }
+
+    // Check star fade tracker
+    if (!starsFaded) {
+
+      // Fade stars out
+      canvas.style.opacity = '0';
+
+      // After faded out listener
+      canvas.addEventListener('transitionend', function starsFadedOut() {
+
+        // Remove listener
+        canvas.removeEventListener('transitionend', starsFadedOut);
+
+        // Update star fade tracker
+        starsFaded = true;
+
+        // Set canvas display
+        canvas.style.display = 'none';
+      })
+    }
+
+    // Check story visibility tracker
+    if (!storyRowOnScreen) {
+
+      // Update story visibility tracker
+      storyRowOnScreen = true;
+
+      // Check story loop tracker
+      if (!storyLooping) {
+
+        // Start story loop
+        startStoryLoop();
+
+        // Update story loop tracker
+        storyLooping = true;
+      }
+    }
+    // If story not on screen
+    consistentOverlay.style.backgroundColor = 'rgb(10,22,38)';
+    consistentOverlay.style.opacity = '.65';
+    projectRowWrap.style.transform = 'translateY(-43%)';
+    projectRowWrap.style.opacity = '.2';
+    storyRow.style.transform = 'translateY(-50%)';
+
+    // Check story head animated tracker
+    if (!storyHeadAnimated) {
+      document.querySelector('.section-head-side').classList.add('section-head-animated');
+      storyHeadAnimated = true;
+    }
+
+    console.log('story observe')
+
+
+
+  }
+
+  function storyUnobserve() {
+    // Check story visibility tracker
+    if (storyRowOnScreen) {
+
+      // Update story visibility tracker
+      storyRowOnScreen = false;
+
+      // Check story loop tracker
+      if (storyLooping) {
+
+        // End story loop
+        endStoryLoop();
+
+        // Update story loop tracker
+        storyLooping = false;
+      }
+    }
+  }
+  function projectObserve() {
+    console.log('project obsere fired')
+    consistentOverlay.style.backgroundColor = 'rgb(24,0,40)';
+    consistentOverlay.style.opacity = '.65';
+    setTimeout(pauseProjects, 2000)
+    if(getComputedStyle(projectRowWrap).opacity === '0') {
+      projectRowWrap.style.transform = 'translateY(-43%)';
+      projectRowWrap.style.opacity = '.2';
+    }
+  }
+
+  function teamObserve() {
+    if(!teamAnimating) {
+      playTeam();
+    }
+    projectRowWrap.style.transform = 'translateY(-125%)';
+    projectRowWrap.style.opacity = '0';
+    consistentOverlay.style.opacity = '0';
+  }
 
 // Observe story row
-  const storyRowObserver = new IntersectionObserver(entries => {
+  /*const storyRowObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-
+    console.log('observer fired')
       // If story row on screen
       if (entry.isIntersecting) {
+        console.log('intersecting')
 
         // If background color is not story color
         if (bgColor !== 1) {
@@ -695,6 +897,7 @@ function loadPC() {
           storyHeadAnimated = true;
         }
 
+
         // If story not on screen
       } else {
 
@@ -716,88 +919,14 @@ function loadPC() {
         }
       }
     });
-  }, {threshold: .25});
+  }, {threshold: .75});
 
 // Observe story row
-  storyRowObserver.observe(storyRow);
-
+  storyRowObserver.observe(storyContainer);
+*/
 
 // Observe projects
-  const projectRow2Observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
 
-      // If projects on screen
-      if (entry.isIntersecting) {
-
-        // If background color not project color
-        if (bgColor !== 2) {
-
-          // Set background color to color 2
-          body.style.backgroundColor = `${bgColors[2]}`;
-          bgColor = 2;
-        }
-        if (sliderPos !== 2 && !sliderScrolling) {
-          changeProgSlider(2);
-        }
-
-        // Check star fade tracker
-        if (!starsFaded) {
-
-          // Fade out stars
-          canvas.style.opacity = '0';
-
-          // After faded out listener
-          canvas.addEventListener('transitionend', function starsFadedOut() {
-
-            // Remove listener
-            canvas.removeEventListener('transitionend', starsFadedOut);
-
-            // Update star fade tracker
-            starsFaded = true;
-
-            // Update canvas display
-            canvas.style.display = 'none';
-          });
-        }
-
-        if (!projectHeadAnimated) {
-          document.querySelector('#projects-head').classList.add('section-head-ani');
-          projectHeadAnimated = true;
-        }
-
-        // Check project visibility tracker
-        if (!projectsOnScreen) {
-          // Update project visibility tracker
-          projectsOnScreen = true;
-
-          if (!projectsAnimating) {
-            // Play project animation
-            playProjects();
-            console.log('projects played')
-          }
-          // If projects not on screen
-        } else {
-
-          // Check project visibility tracker
-          if (projectsOnScreen) {
-
-            // Update project visibility tracker
-            projectsOnScreen = false;
-
-            // Check project animation tracker
-            if (projectsAnimating) {
-              // Pause project animation
-              pauseProjects();
-              console.log('projects paused')
-            }
-          }
-        }
-      }
-    })
-  }, {threshold: .05});
-
-// Observe project row 2
-  projectRow2Observer.observe(projectsRow2);
 
   let empCardsPaused = true;
 
@@ -838,7 +967,7 @@ function loadPC() {
         // Check/update team visibility + animation trackers
         if (!teamOnScreen) {
           teamOnScreen = true;
-          if (!teamAnimating) {
+          if (!teamAnimating && !keyboardNavigating) {
             playTeam();
             console.log('team playing')
           }
@@ -869,7 +998,7 @@ function loadPC() {
           footerOnScreen = true;
         }
         if (bgColor !== 3) {
-          body.style.backgroundColor = `${bgColors[3]}`;
+          consistentOverlay.style.opacity = '0';
           bgColor = 3;
         }
         if(sliderPos !== 4 && !sliderScrolling) {
@@ -901,7 +1030,6 @@ function loadPC() {
 
 
   const slider = document.querySelector('#progress-slider');
-  let sliderPos = 0;
   let sliderScrolling = false;
 
   slider.height = slider.offsetHeight;
@@ -1098,6 +1226,14 @@ function loadPC() {
         let dur = Math.max(0.3, Math.min(Math.abs(sliderPos - scrollTo) * 0.5, 2.5));
         gsapScrolling = true;
         sliderScrolling = true;
+        switch(i) {
+          case 0:
+            heroObserve();
+            break;
+          case 1:
+            storyObserve();
+            break;
+        }
         window.gsap.to(window, {
           duration: 1,
           scrollTo: {y: scrollTo},
@@ -1113,9 +1249,10 @@ function loadPC() {
     }
   }
 
-  document.addEventListener('keypress', (keyEvent) => {
-    if(keyEvent.key === 'Tab') {
-      keyEvent.preventDefault();
+  window.addEventListener('keydown', (keyEvent) => {
+    if(keyEvent.key === 'Tab'){
+      console.log('tab')
+      keyboardNavigate();
     }
   })
 
@@ -1139,7 +1276,7 @@ function loadPC() {
 
 let scrollSnapTimeout;
 // Scroll function
-function consistentScroll() {
+function consistentScroll(event) {
 /*  clearTimeout(scrollSnapTimeout);
   scrollSnapTimeout = setTimeout(() => {
     let scrollMid = window.scrollY + window.innerHeight / 2;
@@ -1159,6 +1296,32 @@ function consistentScroll() {
     }
   }, 50)*/
 
+  if(sliderPos === 0 && event.deltaY > 0) {
+    const matrix = new WebKitCSSMatrix(getComputedStyle(projectRowWrap).transform);
+    const currTransform = matrix.f;
+    const newTransform = matrix.f - 10;
+    projectRowWrap.style.transform = `translateY(-43%)`;
+    console.log(matrix);
+    setTimeout(pauseProjects, 2000)
+
+  } else if(sliderPos === 0 && event.deltaY < 10) {
+    projectRowWrap.style.transform = 'translateY(50%)';
+  } else if(event.deltaY < 25 && !gsapScrolling) {
+    projectRowWrap.style.transform = 'translateY(-43%)'
+  } else if(sliderPos === 1 && event.deltaY > 10) {
+    playProjects();
+    setTimeout(pauseProjects, 2000)
+  } else if(sliderPos === 2 && event.deltaY < 10) {
+    if(!projectsAnimating) {
+      playProjects();
+      setTimeout(pauseProjects, 2000);
+    }
+  } else if(sliderPos === 2 && event.deltaY > 10) {
+    if(!projectsAnimating) {
+      playProjects();
+      setTimeout(pauseProjects, 2000);
+    }
+  }
 
   // Check project link canvas state
   if (linkCanvasActive) {
@@ -1175,6 +1338,25 @@ function consistentScroll() {
     // Update tracker
     linkCanvasActive = false;
   }
+}
+
+function keyboardNavigate() {
+  console.log('keyboard')
+  keyboardNavigating = true;
+  pauseProjects();
+  pauseTeam();
+
+  [...projectsRow1.children].forEach(project => {
+    project.firstElementChild.addEventListener('focus', (event) => {
+      project.firstElementChild.classList.add('project-card-hover');
+      project.firstElementChild.style.transform = 'translateX(50px) scale(1.1)';
+      const border = project.querySelector('.project-wrapper-border');
+      border.style.transform = 'translateX(50px) translateY(0)';
+      border.style.opacity = '0';
+    });
+    project
+  })
+
 }
 
 
@@ -2575,12 +2757,12 @@ function resetRows() {
 let linkCanvasActive = false;
 function buildProjects() {
   // For each project
-  projects.forEach(project => {
+  projects.forEach((project, i) => {
     // Create wrapper div / add class / set background to project image
     const wrapper = document.createElement('div');
     wrapper.classList.add('project-wrapper');
     wrapper.style.background = `url('${project.img}') center center / cover no-repeat`;
-
+    wrapper.tabIndex = 3;
     // Create title h5 / add class / set innerText to name / append to wrapper
     const title = document.createElement('h5');
     title.innerText = `${project.name}`;
@@ -2678,7 +2860,7 @@ function setProjectListeners() {
   if (!isMobile) {
     for (let card of projectsRow1.children) {
       // Add hover listener / call hover function
-      card.addEventListener('mouseenter', () => {
+/*      card.addEventListener('mouseenter', () => {
         console.log(scrolling)
         if (scrolling) {
           waitingForScroll = true;
@@ -2690,14 +2872,14 @@ function setProjectListeners() {
             projectsHover(card);
           }
         }
-      });
+      });*/
       // Add unhover listener / call unhover function
-      card.addEventListener('mouseleave', () => {
+/*      card.addEventListener('mouseleave', () => {
         projectsUnHover();
         if (waitingForScroll) {
           waitingForScroll = false;
         }
-      });
+      });*/
       // Add animation start listener / update row 1 index / call animation for next card
       card.addEventListener('animationstart', function nextCard() {
         let next = card.nextElementSibling;
@@ -2715,7 +2897,7 @@ function setProjectListeners() {
     // For each card div in row 2
     for (let card of projectsRow2.children) {
       // Add hover listener / call hover function
-      card.addEventListener('mouseenter', function hover() {
+/*      card.addEventListener('mouseenter', function hover() {
         if (scrolling) {
           waitingForScroll = true;
           scrollTimeout = setTimeout(() => {
@@ -2733,7 +2915,7 @@ function setProjectListeners() {
         if (waitingForScroll) {
           waitingForScroll = false;
         }
-      });
+      });*/
       // Add animation start listener / update row 2 index / call animation for next card
       card.addEventListener('animationstart', function nextCard() {
         let next = card.nextElementSibling;
@@ -2754,10 +2936,10 @@ function setProjectListeners() {
   } else {
     for (let card of projectsRow1.children) {
       // Add hover listener / call hover function
-      card.addEventListener('touchend', (event) => {
+/*      card.addEventListener('touchend', (event) => {
         event.stopPropagation();
         projectsHoverMobile(card);
-      }, {once:true});
+      }, {once:true});*/
       // Add animation start listener / update row 1 index / call animation for next card
       card.addEventListener('animationstart', function nextCard() {
         let next = card.nextElementSibling;
@@ -2775,10 +2957,10 @@ function setProjectListeners() {
     // For each card div in row 2
     for (let card of projectsRow2.children) {
       // Add hover listener / call hover function
-      card.addEventListener('touchend', function hover(event) {
+/*      card.addEventListener('touchend', function hover(event) {
         event.stopPropagation();
         projectsHoverMobile(card);
-      }, {once:true});
+      }, {once:true});*/
       // Add animation start listener / update row 2 index / call animation for next card
       card.addEventListener('animationstart', function nextCard() {
         let next = card.nextElementSibling;
@@ -2796,10 +2978,10 @@ function setProjectListeners() {
       });
     }
     for(let card of projectsRow3.children) {
-      card.addEventListener('touchend', function hover(event) {
+/*      card.addEventListener('touchend', function hover(event) {
         event.stopPropagation();
         projectsHoverMobile(card)
-      }, {once:true});
+      }, {once:true});*/
       // Add animation start listener / update row 2 index / call animation for next card
       card.addEventListener('animationstart', function nextCard() {
         let next = card.nextElementSibling;
@@ -2848,12 +3030,13 @@ function startProjectAni() {
   if(isMobile) cards.push([...projectsRow3.querySelectorAll('.project-wrapper-abs')])
   let chainStart = false;
   console.log(cards)
-  const preload = duration;
-  if(!projectsStarted) {
+  const preload = duration - delay;
     cards[0][0].addEventListener('animationend', () => {
+      cards[0][0].style.animationDelay = `${delay}ms`;
       cards[0][0].classList.remove('project-ani');
     })
     cards[1][0].addEventListener('animationend', () => {
+      cards[1][0].style.animationDelay = `${delay}ms`;
       cards[1][0].classList.remove('project-ani');
     })
     if(isMobile) {
@@ -2861,7 +3044,7 @@ function startProjectAni() {
         cards[2][0].classList.remove('project-ani')
       })
     }
-  }
+
 
   cards[0].forEach((card, i) => {
     const startTime = i * delay;
@@ -2882,32 +3065,31 @@ function startProjectAni() {
       card.style.animationDelay = `${initialDelay}ms`;
       cards[1][i].style.animationDelay = `${initialDelay}ms`;
       if(isMobile) cards[2][i].style.animationDelay = `${initialDelay}ms`;
-      if(!projectsStarted) {
         card.addEventListener('animationstart', () => {
           let next = card.nextElementSibling;
           if(!next) next = projectsRow2.firstElementChild;
           animateProjectCardRow1(next)
           setTimeout(setProjectListeners, 100);
 
-        }, {once:true})
+        })
         cards[1][i].addEventListener('animationstart', () => {
           let next = cards[1][i].nextElementSibling;
           if(!next) next = projectsRow2.firstElementChild;
+          next.style.animationDelay = `${projectDelay}`
+          void next.offsetWidth;
           animateProjectCardRow2(next)
-        }, {once:true})
+        })
         if(isMobile) cards[2][i].addEventListener('animationstart', () => {
           let next = cards[2][i].nextElementSibling;
           if(!next) next = projectsRow3.firstElementChild;
           animateProjectCardRow3(next);
         }, {once:true})
-      }
+
       animateProjectCardRow1(card);
       animateProjectCardRow2(cards[1][i]);
       if(isMobile) animateProjectCardRow3(cards[2][i]);
     }
   });
-  if(projectsOnScreen) playProjects();
-  if(!projectsStarted) projectsStarted = true;
 }
 
 // Initialize array of cards on screen
@@ -3025,7 +3207,7 @@ function projectsUnHover() {
   } else {
     projectHoverEnabled = true;
   }
-  playProjects();
+  //playProjects();
   // Reset cardsOnscreen
   cardsOnScreen = [];
   // Remove hover class from each hovered + linked card / set opacity to 1
@@ -3798,7 +3980,7 @@ function buildEmpCards() {
     icon.classList.add('linked-in');
     // Append icon to link / append link to back
     link.appendChild(icon);
-    back.appendChild(link);
+    front.appendChild(link);
 
     // Create textWrap / add class
     const textWrap = document.createElement('div');
@@ -3812,22 +3994,10 @@ function buildEmpCards() {
     title.classList.add('employee-title-main');
     title.innerText = `${employee.title}`;
     // Create tags / add class / set text
-    const tag1 = document.createElement('h6');
-    const tag2 = document.createElement('h6');
-    tag1.classList.add('employee-tag');
-    tag2.classList.add('employee-tag');
-    tag1.innerText = employee.tags[0];
-    tag2.innerText = employee.tags[1];
-    // Create tag wrapper / add class / append tags
-    const tagWrapper = document.createElement('div');
-    tagWrapper.classList.add('employee-tag-wrapper');
-    tagWrapper.appendChild(tag1);
-    tagWrapper.appendChild(tag2);
 
     // Append name, title, tagWrapper to textWrap / append textWrap to front
     textWrap.appendChild(name);
     textWrap.appendChild(title);
-    textWrap.appendChild(tagWrapper);
     front.appendChild(textWrap);
 
     // Set gradient / create gradient / add class / append to front
@@ -3983,11 +4153,14 @@ function cardTouchHover(card) {
 
 function cardHover(hoveredCard) {
   pauseTeam();
-  hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
+  //hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
   hoveredCard.querySelector('.employee-card-border').style.transform = 'none';
   hoveredCard.querySelector('.linked-in-wrap').style.opacity = '1';
   hoveredCard.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
   hoveredCard.querySelector('.linked-in').style.opacity = '1';
+  hoveredCard.querySelector('.employee-card-text-wrap').style.opacity = '.5';
+  hoveredCard.querySelector('.employee-card-hover').style.opacity = '.65';
+  hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg) scale(1.1)'
 }
 
 function pauseTeam() {
@@ -4007,6 +4180,8 @@ function playTeam() {
     card.querySelector('.main-employee-card').style.transform = 'translateX(0) rotateX(-180deg)';
     card.querySelector('.employee-card-border').style.transform = 'translateX(-20px) translateY(-20px)';
     card.querySelector('.linked-in-wrap').style.opacity = '0';
+    card.querySelector('.employee-card-hover').style.opacity = '0';
+    card.querySelector('.employee-card-text-wrap').style.opacity = '1';
     card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
     card.querySelector('.linked-in').style.opacity = '0';
   }
