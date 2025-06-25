@@ -8,9 +8,9 @@
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="hero-title mb-4">
-                    INTERNAL<br>
-                    INSIGHTS &<br>
-                    INNOVATION
+                    Internal<br>
+                    Insights &<br>
+                    Innovation
                 </h1>
 
                 <div id="move-text-wrap">
@@ -61,7 +61,7 @@
                         $directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
                     @endphp
 
-                    <div class="d-flex flex-wrap gap-3 mt-4">
+                    <div class="d-flex flex-wrap gap-3">
                         @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'class' => 'web-design-color'],
                                 ['label' => 'UX Design', 'icon' => 'pencil', 'class' => 'ux-design-color'],
                                 ['label' => 'App Development', 'icon' => 'phone', 'class' => 'app-development-color'],
@@ -81,7 +81,7 @@
             </div>
         </div>
     </section>
-    <section id="featured-work" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+    <section id="for-uconn" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-right">
@@ -121,26 +121,11 @@
     </section>
 
     {{-- Team --}}
-    <section id="team" class="bg-deep text-light py-5 d-flex flex-column align-items-center">
-        <h2 class=" my-5 border-bottom pb-2 border-primary d-inline-block">...by the university.</h2>
-
+    <section id="team" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
-
-            <div class="row justify-content-center">
-
-                <div class="col-8">
-                    <p class="text-secondary" data-aos="fade-up" data-aos-delay="100">
-                        Our team runs on the talent and drive of UConn students. They're some of the brightest minds around, and they bring serious skill, creativity, and hustle to everything we build.
-                    </p>
-                    <p class="text-secondary" data-aos="fade-up" data-aos-delay="200">
-                        We pair that student energy with professional oversight to deliver real, production-grade work. It’s not just busy work. It’s impact, and it’s powering the university every day.
-                    </p>
-                    <p class="text-secondary" data-aos="fade-up" data-aos-delay="300">
-                        Like UConn itself, we thrive on pride, collaboration, and doing work that matters. When you work with us, you’re getting a team that’s smart, capable, and 100% all in.
-                    </p>
-                    
-                    
-                </div>
+            <div class="row align-items-center justify-content-center">
+                <h2 class="mb-0 d-inline-block pb-3 text-center" data-aos="fade-down">BY THE UNIVERSITY</h2>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
             </div>
 
             <div class="row py-4">
@@ -174,72 +159,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-
-
-    {{-- Contact --}}
-    <section id="contact" class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="border-bottom pb-2 border-primary d-inline-block">Connect with Us</h2>
-                <p class="text-secondary mt-3" data-aos="fade-up" data-aos-delay="100">
-                    Have questions or want to collaborate? Reach out to us using the form below.
-                </p>
-            </div>
-
-            <div class="row g-5 align-items-center" data-aos="fade-up" data-aos-delay="200">
-                {{-- Form --}}
-                <div class="col-lg-6">
-                    <form method="POST" action="#" class="contact-form">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="first_name" class="form-control form-field"
-                                    placeholder="First Name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" name="last_name" class="form-control form-field"
-                                    placeholder="Last Name">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <input type="email" name="email" class="form-control form-field"
-                                placeholder="Email Address">
-                        </div>
-                        <div class="mb-4">
-                            <textarea name="message" class="form-control form-field" rows="4" placeholder="Message"></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="cta-button">
-                                Send Message
-                                <span class="icon-circle"><i class="bi bi-send"></i></span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                {{-- Map --}}
-                <div class="col-lg-6">
-                    <div class="map-wrapper rounded-4 overflow-hidden shadow">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.9302728446855!2d-72.2535986234634!3d41.8078870712384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e653a1816b64c1%3A0x27a96c91bc2cc02e!2sUConn%20Rowe%20Center%20for%20Undergraduate%20Education!5e0!3m2!1sen!2sus!4v1718737693127!5m2!1sen!2sus"
-                            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-                        <div class="social-links d-flex justify-content-center gap-3 mt-4">
-                            <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank"
-                                class="text-light fs-4">
-                                <i class="bi bi-linkedin"></i>
-                            </a>
-                            <a href="https://www.instagram.com/UConn" target="_blank" class="text-light fs-4">
-                                <i class="bi bi-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

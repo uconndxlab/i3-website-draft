@@ -28,11 +28,12 @@ $deep: #232323 !default; // Define deep color as a fallback
 :root{
     --light-blue:#4DB3FF;
     --white:#FFF;
-    --black:#272727;
+    --black:#111;
 }
 
 body, html {
     overflow-x:hidden;
+    background:#111;
 }
 
 p {
@@ -99,6 +100,9 @@ p {
     }
 }
 
+#team{
+    background-color: #160021;
+}
 
 .team-carousel {
     scroll-snap-type: x mandatory;
@@ -288,7 +292,6 @@ h2.border-accent,
     font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 900;
     line-height: 1.1;
-    text-transform: uppercase;
     color: transparent;
     -webkit-text-stroke: 2px white;
     text-stroke: 2px white;
@@ -400,9 +403,9 @@ p.small {
     }
 }
 
-#featured-work {
+#for-uconn {
     min-height: 100vh;
-    background-color: #160021;
+    background-color: #0c1320;
 
     .featured-collage {
         display: flex;
@@ -516,15 +519,14 @@ p.small {
 
 
 #what-we-do {
-    background-color: #0c1320; // dark navy tone
+    background-color: #111;
     color: #e5e5e5;
     min-height: 100vh;
     display: flex;
     align-items: center;
-
-    
-
 }
+
+
 
 /*UCONN BANNER*/
 #wordmark,
@@ -1427,6 +1429,11 @@ p.small {
 .nav-link:hover{color:var(--light-blue)!important}
 
 /*END OF NAV*/
+/*FOOTER*/
+.footer-link{color:#fff!important;padding:0px 20px;}
+.footer-link:hover{color:var(--light-blue)!important}
+
+/*END OF FOOTER*/
 /*button*/
 .btn-arrow-slide{
     padding:0px;
