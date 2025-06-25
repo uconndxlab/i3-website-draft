@@ -2764,7 +2764,6 @@ let startIndex2 = 0;
 let cardDivs1 = [];
 let cardDivs2 = [];
 
-// Assume projectsRow1 and projectsRow2 exist and are DOM elements
 function buildProjects(start1 = 0, start2 = 0) {
   projectsRow1.innerHTML = '';
   projectsRow2.innerHTML = '';
@@ -2803,27 +2802,22 @@ function buildProjects(start1 = 0, start2 = 0) {
   }
 }
 
-// INITIAL BUILD
 buildProjects();
 
-// Virtualization Animation Loop
 
 function animateProjects() {
   offset1 -= speed;
   offset2 += speed;
 
-  // Move all cards
   for (let i = 0; i < totalRendered; i++) {
     cardDivs1[i].style.transform = `translateX(${(i * (projectCardWidth + (projectCardWidth * .25))) + offset1}px)`;
     cardDivs2[i].style.transform = `translateX(${(i * (projectCardWidth + (projectCardWidth * .25))) + offset2}px)`;
   }
 
-  // Row 1: If leftmost card is offscreen left, cycle to end
   if (offset1 <= -projectCardWidth) {
     offset1 += projectCardWidth + (projectCardWidth * .25);
     startIndex1 = (startIndex1 + 1) % row1Projects.length;
 
-    // Re-use first card div, update image/id, move to end
     let recycled = cardDivs1.shift();
     let newIdx = (startIndex1 + totalRendered - 1) % row1Projects.length;
     recycled.style.background = `url('${row1Projects[newIdx].img}') center center / cover no-repeat`;
@@ -2831,12 +2825,10 @@ function animateProjects() {
     cardDivs1.push(recycled);
   }
 
-  // Row 2: If leftmost card is offscreen right (scrolls right), cycle to end
   if (offset2 >= projectCardWidth) {
     offset2 -= projectCardWidth + (projectCardWidth * .25);
     startIndex2 = (startIndex2 - 1 + row2Projects.length) % row2Projects.length;
 
-    // Re-use last card div, update image/id, move to front
     let recycled = cardDivs2.pop();
     let newIdx = startIndex2;
     recycled.style.background = `url('${row2Projects[newIdx].img}') center center / cover no-repeat`;
@@ -2962,9 +2954,7 @@ function animateProj() {
 
 
 
-// Add first half of project divs to row 1, second half to row 2
 
-// Initialize each row index tracker
 let row1Index = 0;
 let row2Index = 0;
 
