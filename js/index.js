@@ -494,11 +494,8 @@ function loadMobile() {
 
 
   projectsRow3 = document.querySelector('#row-3');
-  buildProjects();
 
-  buildEmpCards();
 
-  playProjects();
 }
 
 function loadPC() {
@@ -1056,11 +1053,9 @@ function loadPC() {
   createProgressSlider();
 
 
-  buildProjects();
-  buildEmpCards();
 
   getProjectWidth();
-  getEmpWidth();
+  getTeamWidth();
 
 
 }
@@ -1070,6 +1065,7 @@ function loadPC() {
 /* ------------------- BASE EVENT LISTENERS ------------------- */
 
 
+/*
 function keyboardNavigate() {
   console.log('keyboard')
   keyboardNavigating = true;
@@ -1088,6 +1084,7 @@ function keyboardNavigate() {
   })
 
 }
+*/
 
 
 /* ------------------- WHAT WE DO ANI FUNCTIONS ------------------- */
@@ -2503,43 +2500,41 @@ function animateProjects() {
 
 /* ------------------- TEAM FUNCTIONS ------------------- */
 
-function getEmpWidth() {
-  empCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--employee-card-width').slice(0,-2));
+
+
+
+
+
+
+// Initialize project div array
+
+let teamCardWidth = 352;
+
+function getTeamWidth() {
+  teamCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--employee-card-width').slice(0,-2));
 }
 
-// Initialize card index / card width
-let empCardIndex = 0;
-let empCardWidth = 288;
+// Initialize link canvas tracker
+let teamVisCount = 6;
+let teamBuffer = 4;
+let teamTotalRender = teamVisCount + teamBuffer;
+getTeamWidth();
+let teamSpeed = 2;
+let teamOffset = -teamBuffer * (teamCardWidth + (teamCardWidth * .25));
+let teamStartIdx = 0;
+let teamDivs = [];
 
-function buildEmpCards() {
-  // Build employee cards
-  employees.forEach((employee, index) => {
-    // Create card div / add classes
+
+function buildTeam(start = 0) {
+  teamRow.innerHTML = '';
+  teamDivs = []
+
+  for (let i = 0; i < teamTotalRender; i++) {
+    let index = (start + i) % employees.length;
+
     const card = document.createElement('div');
     card.classList.add('main-employee-card');
     card.classList.add('d-flex');
-
-    // Create front / add classes
-    const front = document.createElement('div');
-    front.classList.add('employee-card-front', 'employee-card-face');
-
-    // Create back / add classes
-    const back = document.createElement('div');
-    back.classList.add('employee-card-back', 'employee-card-face');
-
-    // Create link / set href / add class
-    const link = document.createElement('a');
-    link.href = `${employee.linkedIn}`;
-    link.classList.add('linked-in-wrap');
-    // Create icon / set src / set alt / set target / add classes
-    const icon = document.createElement('img');
-    icon.src = '/img/i3/linked-in.svg';
-    icon.alt = 'LinkedIn';
-    icon.target = '_blank';
-    icon.classList.add('linked-in');
-    // Append icon to link / append link to back
-    link.appendChild(icon);
-    front.appendChild(link);
 
     // Create textWrap / add class
     const textWrap = document.createElement('div');
@@ -2547,210 +2542,74 @@ function buildEmpCards() {
     // Create name / add class / set text
     const name = document.createElement('h4');
     name.classList.add('employee-name-main');
-    name.innerText = `${employee.name}`;
+    name.innerText = `${employees[index].name}`;
     // Create title / add class / set text
     const title = document.createElement('h6');
     title.classList.add('employee-title-main');
-    title.innerText = `${employee.title}`;
+    title.innerText = `${employees[index].title}`;
     // Create tags / add class / set text
 
     // Append name, title, tagWrapper to textWrap / append textWrap to front
     textWrap.appendChild(name);
     textWrap.appendChild(title);
-    front.appendChild(textWrap);
+    card.appendChild(textWrap);
 
     // Set gradient / create gradient / add class / append to front
-    card.style.setProperty('--gradient-start', `rgba(${employee.gradient}, .7)`);
-    card.style.setProperty('--gradient-end', `rgba(${employee.gradient}, 0)`);
+    card.style.setProperty('--gradient-start', `rgba(${employees[index].gradient}, .7)`);
+    card.style.setProperty('--gradient-end', `rgba(${employees[index].gradient}, 0)`);
     const gradient = document.createElement('div');
     gradient.classList.add('employee-card-gradient');
-    front.appendChild(gradient);
-
-    // Create hover / add class / append to front
-    const hover = document.createElement('div');
-    hover.classList.add('employee-card-hover');
-    front.appendChild(hover);
+    card.appendChild(gradient);
 
     // Create img / set src, alt, & loading / add class / append to front
     const img = document.createElement('img');
-    img.src = `${employee.img}`;
-    img.alt = `${employee.name}`;
+    img.src = `${employees[index].img}`;
+    img.alt = `${employees[index].name}`;
     img.classList.add('employee-card-img');
     img.loading = 'lazy';
-    front.appendChild(img);
+    card.appendChild(img);
 
-
-
-    // Append front & back to card
-    card.appendChild(front);
-    card.appendChild(back);
 
     // Create cardWrap / add class / append card to wrap / set wrap id / append wrap to row
     const cardWrap = document.createElement('div');
     cardWrap.classList.add('employee-card-wrap');
     cardWrap.appendChild(card);
-    cardWrap.id = `${employee.id}-card`;
-    teamRow.appendChild(cardWrap)
-
-    cardWrap.style.left = 'calc(-1.5 * var(--employee-card-width))';
-
-  });
-  setTimeout(startEmpAni, 250);
-}
-
-let empChainStart = 0;
-
-function startEmpAni() {
-  [...teamRow.children].forEach(card => card.classList.remove('employee-ani'));
-  const delay = parseInt(getComputedStyle(body).getPropertyValue('--employee-ani-del').slice(0, -2));
-  const duration = parseInt(getComputedStyle(body).getPropertyValue('--employee-ani-dur').slice(0, -2));
-  const cards = [...teamRow.querySelectorAll('.employee-card-wrap')];
-  let chainStart = false;
-  const preload = duration - delay;
-  if(!teamStarted) {
-    cards[0].addEventListener('animationend', () => {
-      cards[0].classList.remove('employee-ani');
-    })
-  }
-
-
-  cards.forEach((card, i) => {
-    const startTime = i * delay;
-    if(startTime < preload) {
-
-      const offset = preload - startTime;
-      card.style.animationDelay = `-${offset}ms`;
-      animateEmployeeCard(card);
-    } else if(!chainStart) {
-      chainStart = true;
-      const initialDelay = delay - (preload % delay);
-      if(!teamStarted) {
-        card.addEventListener('animationstart', () => {
-          let next = card.nextElementSibling;
-          if(!next) next = teamRow.firstElementChild;
-          animateEmployeeCard(next);
-          setEmpCardListeners();
-        }, {once:true});
-      }
-      card.style.animationDelay = `${initialDelay}ms`;
-
-
-      animateEmployeeCard(card);
-    }
-  });
-  if(teamOnScreen) playTeam();
-  if(!teamStarted) teamStarted = true;
-}
-
-// Set card styles function
-function setEmpCardListeners() {
-  const delay = getComputedStyle(body).getPropertyValue('--employee-ani-del');
-  if(!isMobile) {
-    for(let card of teamRow.children) {
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if(!next) next = teamRow.firstElementChild;
-        //next.style.animationDelay = delay;
-        animateEmployeeCard(next);
-      })
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('employee-ani');
-      })
-      card.addEventListener('mouseenter', () => {
-        cardHover(card);
-      });
-      card.addEventListener('mouseleave', () => {
-        disableHover();
-      });
-    }
-  } else {
-    for(let card of teamRow.children) {
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if(!next) next = teamRow.firstElementChild;
-        next.style.animationDelay = delay;
-        animateEmployeeCard(next);
-      })
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('employee-ani');
-      })
-      card.addEventListener('touchend', (event) => {
-        event.stopPropagation();
-        cardTouchHover(card);
-      }, {once:true});
-    }
+    cardWrap.id = `${employees[index].id}-card`;
+    teamRow.appendChild(cardWrap);
+    teamDivs.push(cardWrap);
   }
 }
 
-let teamMobileHovers = [];
-let teamMobileHover = false;
+buildTeam();
 
-function cardTouchHover(card) {
-  teamMobileHovers.push(card);
-  pauseTeam();
-  card.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
-  card.querySelector('.employee-card-border').style.transform = 'none';
-  card.querySelector('.linked-in-wrap').style.opacity = '1';
-  card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-  card.querySelector('.linked-in').style.opacity = '1';
+let updateTeam = true;
+function animateTeam() {
+  if(!teamAnimating) teamAnimating = true;
+  teamOffset += teamSpeed;
 
-  card.addEventListener('touchend', (event) => {
-    event.stopPropagation();
-    teamMobileHovers.splice(teamMobileHovers.indexOf(card), 1);
-    playTeam();
-
-    card.addEventListener('touchend', (event) => {
-      event.stopPropagation();
-      cardTouchHover(card);
-    }, {once:true})
-  }, {once:true})
-
-}
-
-function cardHover(hoveredCard) {
-  pauseTeam();
-  //hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
-  hoveredCard.querySelector('.employee-card-border').style.transform = 'none';
-  hoveredCard.querySelector('.linked-in-wrap').style.opacity = '1';
-  hoveredCard.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-  hoveredCard.querySelector('.linked-in').style.opacity = '1';
-  hoveredCard.querySelector('.employee-card-text-wrap').style.opacity = '.5';
-  hoveredCard.querySelector('.employee-card-hover').style.opacity = '.65';
-  hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg) scale(1.1)'
-}
-
-function pauseTeam() {
-  teamAnimating = false;
-  for (let card of teamRow.children) {
-    const rect = card.getBoundingClientRect();
-    card.style.animationPlayState = 'paused';
-    if (rect.left < window.innerWidth - 25 && rect.right > 10) {
-      card.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg)'
-    }
+  for (let i = 0; i < teamTotalRender; i++) {
+    teamDivs[i].style.transform = `translateX(${(i * (teamCardWidth + (teamCardWidth * .25))) + teamOffset}px)`;
   }
-}
-function playTeam() {
-  teamAnimating = true;
-  for(let card of teamRow.children) {
-    card.style.animationPlayState = 'running';
-    card.querySelector('.main-employee-card').style.transform = 'translateX(0) rotateX(-180deg)';
-    card.querySelector('.linked-in-wrap').style.opacity = '0';
-    card.querySelector('.employee-card-hover').style.opacity = '0';
-    card.querySelector('.employee-card-text-wrap').style.opacity = '1';
-    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
-    card.querySelector('.linked-in').style.opacity = '0';
+
+  if (teamOffset >= teamCardWidth + (teamCardWidth * .25)) {
+    teamOffset -= teamCardWidth + (teamCardWidth * .25);
+    teamStartIdx = (teamStartIdx + teamTotalRender - 1) % employees.length;
+
+    let recycled = teamDivs.shift();
+    let newIdx = teamStartIdx;
+    let recycledImg = recycled.querySelector('.employee-card-img');
+    let recycledName = recycled.querySelector('.employee-name-main');
+    let recycledTitle = recycled.querySelector('.employee-title-main');
+    recycledName.innerText = `${employees[newIdx].name}`;
+    recycledTitle.innerText = `${employees[newIdx].title}`;
+    recycledImg.src = `${employees[newIdx].img}`;
+    recycledImg.alt = `${employees[newIdx].name}`
+    recycled.id = `${employees[newIdx].id}-card`;
+    teamDivs.push(recycled);
   }
+
+  if(updateTeam) requestAnimationFrame(animateTeam);
 }
-
-function disableHover() {
-  playTeam();
-}
+animateTeam();
 
 
-
-
-// Animation function / set distance / add animation class
-function animateEmployeeCard(card, start = false) {
-  card.style.setProperty('--employee-ani-dist', `${window.innerWidth + empCardWidth + (empCardWidth/2)}px`);
-  card.classList.add('employee-ani');
-}
