@@ -107,17 +107,16 @@ window.addEventListener('load', () => {
 let aniResizeTimer= null;
 let resizedLarger = false;
 // On window resize
+let projStartTimer = null;
 window.addEventListener('resize', () => {
   // Call star background resize
   resizeStarBG(windowWidth);
 
   windowWidth = window.innerWidth;
+  getProjectWidth();
 
 
-
-
-
-  if(!isMobile) {
+/*  if(!isMobile) {
     getProjectWidth();
     getEmpWidth();
     getProjDelay();
@@ -132,11 +131,9 @@ window.addEventListener('resize', () => {
       card.classList.remove('project-ani');
       card.style.right = 'calc(-1.5 * var(--project-card-width))'
       void card.offsetWidth;
-    })
+    })*/
 
 
-    startProjectAni();
-  }
 
 
 });
@@ -159,7 +156,7 @@ document.addEventListener('visibilitychange', () => {
       element.style.animationPlayState = 'paused';
     });
     if(teamAnimating) pauseTeam();
-    if(projectsAnimating) pauseProjects();
+    //if(projectsAnimating) pauseProjects();
     if(storyLooping) {
       endStoryLoop();
       storyLooping = false;
@@ -169,8 +166,8 @@ document.addEventListener('visibilitychange', () => {
     animatedElements.forEach(element => {
       element.style.animationPlayState = 'running';
     });
-    if(teamOnScreen) playTeam();
-    if(projectsOnScreen) playProjects();
+    //if(teamOnScreen) playTeam();
+    //if(projectsOnScreen) playProjects();
     if(storyRowOnScreen) {
       startStoryLoop();
       storyLooping = true;
@@ -179,8 +176,14 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // Scroll listener
-window.addEventListener('wheel', (event) => {
-  consistentScroll(event);
+window.addEventListener('scroll', (event) => {
+  if(!gsapScrolling) {
+    //if(!storyRowOnScreen) playProjects();
+  } else {
+    //if(!heroOnScreen) pauseProjects();
+    //if(storyRowOnScreen && !projectsAnimating) playProjects();
+  }
+
 });
 
 
@@ -469,7 +472,7 @@ function loadMobile() {
         if(!teamOnScreen) {
           teamOnScreen = true;
           if(!teamAnimating) {
-            playTeam();
+            //playTeam();
             console.log('team playing')
           }
         }
@@ -481,7 +484,7 @@ function loadMobile() {
         if(teamOnScreen) {
           teamOnScreen = false;
           if(teamAnimating) {
-            pauseTeam();
+            //pauseTeam();
             console.log('team paused')
           }
         }
@@ -530,7 +533,11 @@ function loadMobile() {
   playProjects();
 }
 
+let projectPauseTimeout = false;
+let projStarted = false;
 function loadPC() {
+
+
 
   window.gsap.registerPlugin(ScrollSmoother, ScrollToPlugin, ScrollTrigger, Observer);
   const smoother = window.ScrollSmoother.create({
@@ -538,82 +545,11 @@ function loadPC() {
     content: '#gsap-content',
     smooth: 1.5,
     effects: true,
-    onUpdate: () => {
-      if (!scrolling) scrolling = true;
-      clearTimeout(scrollStopTimeout);
-      scrollStopTimeout = setTimeout(() => {
-        scrolling = false;
-      }, 75);
-    },
+
 
   })
 
   // Observe hero
-  const heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-
-      // If hero is on screen
-      if (entry.isIntersecting) {
-
-        // Check star fade tracker
-        if (starsFaded) {
-
-          // Display star canvas
-          canvas.style.display = 'block';
-
-          // Fade stars in
-          canvas.style.opacity = '1';
-
-          // Update star fade tracker
-          starsFaded = false;
-        }
-
-        // If background color is not hero color
-        if (bgColor !== 0) {
-
-          // Set background color to color 0
-          body.style.backgroundColor = `${bgColors[0]}`;
-          bgColor = 0;
-        }
-        if (sliderPos !== 0 && !sliderScrolling) {
-          changeProgSlider(0);
-        }
-
-        // Check hero visibility tracker
-        if (!heroOnScreen) {
-
-          // Update hero visibility tracker
-          heroOnScreen = true;
-
-          // Check frame loop tracker
-          if (!frameLooping && frameTestPass) {
-
-            // Update frame loop tracker
-            frameLooping = true;
-            requestAnimationFrame(animateFrame)
-          }
-
-          // Check if star bg animated in, call gravity animation
-        }
-
-        // If hero not on screen
-      } else {
-
-        // Check hero visibility tracker
-        if (heroOnScreen) {
-
-          // Update hero visibility tracker
-          heroOnScreen = false;
-
-          // Update frame loop tracker
-          frameLooping = false;
-        }
-      }
-    })
-  }, {threshold: 0});
-
-// Observe hero h1
-  //heroObserver.observe(document.querySelector('.hero-h1'));
 
 
   let gsapPin = '+=500vh';
@@ -635,47 +571,105 @@ function loadPC() {
     });
   });
 
+  const sectionConts = document.querySelectorAll('.section-content');
 
-  for (let section of sections) {
+  for (let section of sectionConts) {
     const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          if(section === sections[0]) {
+          if(section === sectionConts[0]) {
             heroObserve();
-          } else if(section === sections[1]) {
+            if(sliderPos !== 0) changeProgSlider(0);
+          } else if(section === sectionConts[1]) {
+            if(sliderPos !== 1) changeProgSlider(1);
+            if(heroOnScreen) heroOnScreen = false;
             storyObserve();
-          } else if(section === sections[2]) {
+          } else if(section === sectionConts[2]) {
+            if(sliderPos !== 2) changeProgSlider(2)
+            if(teamOnScreen) {
+              teamOnScreen = false;
+              projectRowWrap.style.transition = 'transform 1s ease-in, opacity 1s';
+              projectRowWrap.style.opacity = '.2';
+              projectRowWrap.style.transform = 'translateY(-45%) rotate(-15deg)';
+              projectRowWrap.addEventListener('transitionend', () => {
+                projectRowWrap.style.transition = ''
+              }, {once:true})
+              consistentOverlay.style.opacity = '.65';
+            }
             projectObserve();
-          } else if(section === sections[3]) {
+          } else if(section === sectionConts[3]) {
+            if(sliderPos !== 3) changeProgSlider(3)
+            teamOnScreen = true;
             teamObserve();
           }
 
 
 
-          setTimeout(() => {
+          if(!sliderScrolling) {
             gsapScrolling = true;
+
             window.gsap.to(window, {
               duration: 1,
               scrollTo: {y: section},
-              ease: 'linear',
+              ease: 'power2.inOut',
               onComplete: () => {
+
+
+
                 gsapScrolling = false;
+                //if(projectsAnimating && section !== sections[0] && !scrolling) setTimeout(pauseProjects, 1000);
               }
             })
-          }, 500);
+          }
 
 
-        } else if(!entry.isIntersecting) {
+
+ /*       } else if(!entry.isIntersecting) {
           if(section === sections[0]) {
             heroUnobserve();
           } else if(section === sections[1]) {
             storyUnobserve();
-          }
+          }*/
+        } else {
         }
       })
     }, {threshold: .15});
     sectionObserver.observe(section);
   }
+
+  window.gsap.fromTo(projectRowWrap,
+    {yPercent: 50, opacity: 1, rotate: -15},
+    {
+      yPercent: -45,
+      rotate: -15,
+      opacity: 0.2,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sections[0],
+        start: 'bottom bottom',
+        endTrigger: sections[1],
+        end: 'top top',
+        scrub: true,
+      }
+
+    }
+  )
+
+  window.gsap.fromTo(storyRow,
+    {yPercent: 50},
+    {
+      yPercent: -50,
+      ease: 'power3.in',
+      scrollTrigger: {
+        trigger: sections[0],
+        start: 'bottom bottom',
+        endTrigger: sections[1],
+        end: 'bottom bottom',
+        scrub: true
+      }
+    }
+
+    )
 
   function heroObserve() {
 
@@ -695,14 +689,10 @@ function loadPC() {
     // If background color is not hero color
     consistentOverlay.style.opacity = '0';
     //playProjects();
-    projectRowWrap.style.transform = 'translateY(50%)';
-    projectRowWrap.style.opacity = '1';
+
 
     if (sliderPos !== 0 && !sliderScrolling) {
       changeProgSlider(0);
-    }
-    if(!projectsAnimating) {
-      playProjects();
     }
 
     // Check hero visibility tracker
@@ -721,6 +711,7 @@ function loadPC() {
 
       // Check if star bg animated in, call gravity animation
     }
+    if(storyFwooped) storyFwooped = false;
 
   }
 
@@ -738,9 +729,9 @@ function loadPC() {
   function storyObserve() {
     console.log('intersecting')
 
-    if (sliderPos !== 1 && !sliderScrolling) {
+/*    if (sliderPos !== 1 && !sliderScrolling) {
       changeProgSlider(1);
-    }
+    }*/
 
     // Check star fade tracker
     if (!starsFaded) {
@@ -781,16 +772,10 @@ function loadPC() {
     // If story not on screen
     consistentOverlay.style.backgroundColor = 'rgb(10,22,38)';
     consistentOverlay.style.opacity = '.65';
-    projectRowWrap.style.transform = 'translateY(-43%)';
-    projectRowWrap.style.opacity = '.2';
-    storyRow.style.transform = 'translateY(-50%)';
 
     // Check story head animated tracker
-    if (!storyHeadAnimated) {
-      document.querySelector('.section-head-side').classList.add('section-head-animated');
-      storyHeadAnimated = true;
-    }
 
+    if(!storyFwooped) storyFwooped = true;
     console.log('story observe')
 
 
@@ -819,19 +804,18 @@ function loadPC() {
     console.log('project obsere fired')
     consistentOverlay.style.backgroundColor = 'rgb(24,0,40)';
     consistentOverlay.style.opacity = '.65';
-    setTimeout(pauseProjects, 2000)
-    if(getComputedStyle(projectRowWrap).opacity === '0') {
-      projectRowWrap.style.transform = 'translateY(-43%)';
-      projectRowWrap.style.opacity = '.2';
-    }
   }
 
   function teamObserve() {
     if(!teamAnimating) {
-      playTeam();
+      //playTeam();
     }
-    projectRowWrap.style.transform = 'translateY(-125%)';
+    projectRowWrap.style.transition = 'transform .5s ease-in, opacity .5s';
     projectRowWrap.style.opacity = '0';
+    projectRowWrap.style.transform = 'translateY(-125%)';
+    projectRowWrap.addEventListener('transitionend', () => {
+      projectRowWrap.style.transition = ''
+    }, {once:true})
     consistentOverlay.style.opacity = '0';
   }
 
@@ -989,7 +973,7 @@ function loadPC() {
   }, {threshold: .15});
 
 // Observe team row
-  teamRowObserver.observe(document.querySelector('.team-row'));
+  //teamRowObserver.observe(document.querySelector('.team-row'));
 
   const footerObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -1296,6 +1280,9 @@ function consistentScroll(event) {
     }
   }, 50)*/
 
+
+/*
+
   if(sliderPos === 0 && event.deltaY > 0) {
     const matrix = new WebKitCSSMatrix(getComputedStyle(projectRowWrap).transform);
     const currTransform = matrix.f;
@@ -1303,8 +1290,9 @@ function consistentScroll(event) {
     projectRowWrap.style.transform = `translateY(-43%)`;
     console.log(matrix);
     setTimeout(pauseProjects, 2000)
+*/
 
-  } else if(sliderPos === 0 && event.deltaY < 10) {
+/*  } else if(sliderPos === 0 && event.deltaY < 10) {
     projectRowWrap.style.transform = 'translateY(50%)';
   } else if(event.deltaY < 25 && !gsapScrolling) {
     projectRowWrap.style.transform = 'translateY(-43%)'
@@ -1321,7 +1309,7 @@ function consistentScroll(event) {
       playProjects();
       setTimeout(pauseProjects, 2000);
     }
-  }
+  }*/
 
   // Check project link canvas state
   if (linkCanvasActive) {
@@ -1734,7 +1722,7 @@ function performanceTest(now) {
     body.removeChild(performCanvas);
     const avgFPS = totalFrames / ((now - testStart) / 1000);
     console.log(avgFPS)
-    if(avgFPS > 55) {
+    if(avgFPS > 50) {
       frameTestPass = true;
       requestAnimationFrame(animateFrame)
     } else {
@@ -1766,6 +1754,7 @@ function animateFrame(now) {
 
   // If hero on screen or stars not animated in loop animation frame (needs update for initial animation)
   if(heroOnScreen) {
+    console.log('frame')
     requestAnimationFrame(animateFrame)
   }
 }
@@ -2743,6 +2732,11 @@ function changeStat() {
 // Initialize project div array
 const projectDivs = [];
 
+let projectCardWidth = 352;
+
+function getProjectWidth() {
+  projectCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--project-card-width').slice(0,-2));
+}
 
 function resetRows() {
   [...projectsRow1.children, ...projectsRow2.children, ...(isMobile ? [...projectsRow3.children] : [])]
@@ -2751,85 +2745,222 @@ function resetRows() {
   startProjectAni();
   startEmpAni();
 }
-
+const projMid = Math.ceil(projects.length / 2);
+const row1Projects = projects.slice(0, projMid);
+const row2Projects = projects.slice(projMid)
 
 // Initialize link canvas tracker
 let linkCanvasActive = false;
-function buildProjects() {
-  // For each project
-  projects.forEach((project, i) => {
-    // Create wrapper div / add class / set background to project image
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('project-wrapper');
-    wrapper.style.background = `url('${project.img}') center center / cover no-repeat`;
-    wrapper.tabIndex = 3;
-    // Create title h5 / add class / set innerText to name / append to wrapper
-    const title = document.createElement('h5');
-    title.innerText = `${project.name}`;
-    title.classList.add('project-title');
-    wrapper.appendChild(title);
+let visibleCount = 6;
+let buffer = 4;
+let totalRendered = visibleCount + buffer;
+getProjectWidth();
+let speed = 2;
+let offset1 = 0;
+let offset2 = 0;
+let startIndex1 = 0;
+let startIndex2 = 0;
 
-    // Create overlay div / add class / append to wrapper
-    const overlay = document.createElement('div');
-    overlay.classList.add('project-overlay');
-    wrapper.appendChild(overlay);
+let cardDivs1 = [];
+let cardDivs2 = [];
 
-    // Create absolutely positioned wrapper / add class / append wrapper to absolute wrap / set id to project name
-    const wrapperAbsolute = document.createElement('div');
-    wrapperAbsolute.classList.add('project-wrapper-abs');
-    wrapperAbsolute.appendChild(wrapper);
-    wrapperAbsolute.id = project.name;
+// Assume projectsRow1 and projectsRow2 exist and are DOM elements
+function buildProjects(start1 = 0, start2 = 0) {
+  projectsRow1.innerHTML = '';
+  projectsRow2.innerHTML = '';
+  cardDivs1 = [];
+  cardDivs2 = [];
 
-    // Create wrapper border div / add class / append to absolute wrapper
-    const wrapperBorder = document.createElement('div');
-    wrapperBorder.classList.add('project-wrapper-border');
-    wrapperAbsolute.appendChild(wrapperBorder);
+  for (let i = 0; i < totalRendered; i++) {
+    let idx1 = (start1 + i) % row1Projects.length;
+    let idx2 = (start2 - i + row2Projects.length) % row2Projects.length;
 
-    // Push absolute wrapper to div array
-    projectDivs.push(wrapperAbsolute);
+    let card1Wrap = document.createElement('div');
+    card1Wrap.className = 'project-wrapper-abs';
+    let card1 = document.createElement('div');
+    card1.className = 'project-wrapper';
+    card1.style.background = `url('${row1Projects[idx1].img}') center center / cover no-repeat`;
+    card1Wrap.id = row1Projects[idx1].name;
+    card1Wrap.appendChild(card1);
+    const card1Border = document.createElement('div');
+    card1Border.className = 'project-wrapper-border';
+    card1.appendChild(card1Border);
+    projectsRow1.appendChild(card1Wrap);
+    cardDivs1.push(card1Wrap)
 
-  })
-  if(!isMobile) {
-    for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 2); i++, i2--) {
-      projectDivs[i].style.left = 'calc(-1.5 * var(--project-card-width))';
-      projectDivs[i2].style.right = 'calc(-1.5 * var(--project-card-width))';
-      projectDivs[i].classList.remove('project-ani');
-      projectDivs[i2].classList.remove('project-ani');
-      projectsRow1.appendChild(projectDivs[i]);
-      projectsRow2.appendChild(projectDivs[i2]);
-    }
-  } else {
-    const length = projectDivs.length;
-    const splitArr = [];
-    let start = 0;
-    for(let i = 0; i < 3; i++) {
-      const end = start + Math.ceil((length - start) / (3 - i));
-      splitArr.push(projectDivs.slice(start,end));
-      start = end;
-    }
-    splitArr[0].forEach(div => {
-      div.style.left = 'calc(-1.5 * var(--project-card-width))';
-      projectsRow1.appendChild(div);
-    })
-    splitArr[1].forEach(div => {
-      div.style.right = 'calc(-1.5 * var(--project-card-width))';
-      projectsRow2.appendChild(div);
-    })
-    splitArr[2].forEach(div => {
-      div.style.left = 'calc(-1.5 * var(--project-card-width))';
-      projectsRow3.appendChild(div);
-    })
+    let card2Wrap = document.createElement('div');
+    card2Wrap.className = 'project-wrapper-abs';
+    let card2 = document.createElement('div');
+    card2.className = 'project-wrapper';
+    card2.style.background = `url('${row2Projects[idx2].img}') center center / cover no-repeat`;
+    card2Wrap.id = row2Projects[idx2].name;
+    const card2Border = document.createElement('div');
+    card2Border.className = 'project-wrapper-border';
+    card2.appendChild(card2Border);
+    card2Wrap.appendChild(card2)
+    projectsRow2.appendChild(card2Wrap);
+    cardDivs2.push(card2Wrap);
   }
-  setTimeout(startProjectAni, 500)
+}
+
+// INITIAL BUILD
+buildProjects();
+
+// Virtualization Animation Loop
+
+function animateProjects() {
+  offset1 -= speed;
+  offset2 += speed;
+
+  // Move all cards
+  for (let i = 0; i < totalRendered; i++) {
+    cardDivs1[i].style.transform = `translateX(${(i * (projectCardWidth + (projectCardWidth * .25))) + offset1}px)`;
+    cardDivs2[i].style.transform = `translateX(${(i * (projectCardWidth + (projectCardWidth * .25))) + offset2}px)`;
+  }
+
+  // Row 1: If leftmost card is offscreen left, cycle to end
+  if (offset1 <= -projectCardWidth) {
+    offset1 += projectCardWidth + (projectCardWidth * .25);
+    startIndex1 = (startIndex1 + 1) % row1Projects.length;
+
+    // Re-use first card div, update image/id, move to end
+    let recycled = cardDivs1.shift();
+    let newIdx = (startIndex1 + totalRendered - 1) % row1Projects.length;
+    recycled.style.background = `url('${row1Projects[newIdx].img}') center center / cover no-repeat`;
+    recycled.id = row1Projects[newIdx].name;
+    cardDivs1.push(recycled);
+  }
+
+  // Row 2: If leftmost card is offscreen right (scrolls right), cycle to end
+  if (offset2 >= projectCardWidth) {
+    offset2 -= projectCardWidth + (projectCardWidth * .25);
+    startIndex2 = (startIndex2 - 1 + row2Projects.length) % row2Projects.length;
+
+    // Re-use last card div, update image/id, move to front
+    let recycled = cardDivs2.pop();
+    let newIdx = startIndex2;
+    recycled.style.background = `url('${row2Projects[newIdx].img}') center center / cover no-repeat`;
+    recycled.id = row2Projects[newIdx].name;
+    cardDivs2.unshift(recycled);
+  }
+
+  requestAnimationFrame(animateProjects);
+}
+
+animateProjects();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function buildProjects(startIndex1 = 0, startIndex2 = 0) {
+  // For each project
+  const visibleCount = 5;
+  const buffer = 4;
+  const count = visibleCount + buffer;
+
+  projectsRow1.innerHTML = '';
+  projectsRow2.innerHTML = '';
+
+  for(let i = 0; i < count; i++) {
+    const index1 = (startIndex1 + i) % row1Projects.length;
+    const index2 = (startIndex2 + i) % row2Projects.length;
+    const wrapper1 = document.createElement('div');
+    wrapper1.classList.add('project-wrapper');
+    wrapper1.style.background = `url('${row1Projects[index1].img}') center center / cover no-repeat`;
+    // Create title h5 / add class / set innerText to name / append to wrapper
+    // Create absolutely positioned wrapper / add class / append wrapper to absolute wrap / set id to project name
+
+    wrapper1.id = row1Projects[index1].name;
+    // Create wrapper border div / add class / append to absolute wrapper
+    const wrapperBorder1 = document.createElement('div');
+    wrapperBorder1.classList.add('project-wrapper-border');
+    wrapper1.appendChild(wrapperBorder1);
+
+    projectsRow1.appendChild(wrapper1)
+
+    const wrapper2 = document.createElement('div');
+    wrapper2.classList.add('project-wrapper');
+    wrapper2.style.background = `url('${row2Projects[index2].img}') center center / cover no-repeat`;
+    // Create title h5 / add class / set innerText to name / append to wrapper
+    // Create absolutely positioned wrapper / add class / append wrapper to absolute wrap / set id to project name
+
+    wrapper2.id = row2Projects[index2].name;
+    // Create wrapper border div / add class / append to absolute wrapper
+    const wrapperBorder2 = document.createElement('div');
+    wrapperBorder2.classList.add('project-wrapper-border');
+    wrapper2.appendChild(wrapperBorder2);
+
+    projectsRow2.appendChild(wrapper2);
+  }
+}
+let startIndex1 = 0;
+let startIndex2 = 0;
+let scrollOffset = 0;
+let speed = 2;
+
+
+
+
+function animateProjects() {
+  scrollOffset -= speed;
+  projectsRow1.style.transform = `translateX(${scrollOffset}px)`;
+  projectsRow2.style.transform = `translateX(-${scrollOffset}px)`;
+
+  if(Math.abs(scrollOffset) >= projectCardWidth) {
+    scrollOffset += (scrollOffset > 0 ? -1 : 1) * projectCardWidth;
+    startIndex1 = (startIndex1 + 1) % row1Projects.length;
+    startIndex2 = (startIndex2 + 1) % row2Projects.length;
+
+    shiftProjects();
+  }
+  requestAnimationFrame(animateProjects)
+
+}
+
+function shiftProjects() {
+  const row1First = projectsRow1.firstElementChild;
+  projectsRow1
+}
+*/
+
+let projRow1Width;
+let projRow2Width;
+
+let projRow1x = 0;
+let projSpeed = 3;
+let projRow2x = 0;
+console.log(projRow1Width)
+function animateProj() {
+  projRow1x -= projSpeed;
+  if (Math.abs(projRow1x) >= projRow1Width) projRow1x = 0;
+  projectsRow1.style.transform = `translateX(${projRow1x}px)`;
+
+  projRow2x += projSpeed;
+  if (projRow2x >= 0) projRow2x = -projRow2Width;
+  projectsRow2.style.transform = `translateX(${projRow2x}px)`;
+
+
+
+
+  requestAnimationFrame(animateProj);
 }
 
 
 
-function getProjectWidth() {
-  projectCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--project-card-width').slice(0,-2));
-}
 
-let projectCardWidth = 352;
+
+
 
 // Add first half of project divs to row 1, second half to row 2
 
@@ -3018,6 +3149,38 @@ function projectsHoverMobile(card) {
     card.firstElementChild.classList.remove('project-card-hover');
   }, {once:true})
 }
+let projRest = 0;
+function resizeProjAni() {
+  const delay = parseInt(getComputedStyle(body).getPropertyValue('--project-ani-del').slice(0, -2));
+  const duration = parseInt(getComputedStyle(body).getPropertyValue('--project-ani-dur').slice(0, -2));
+  const cards = [
+    [...projectsRow1.querySelectorAll('.project-wrapper-abs')],
+    [...projectsRow2.querySelectorAll('.project-wrapper-abs')]
+  ];
+  if(projRest === 0) {
+    cards[0].forEach(card => {
+      card.classList.replace('project-ani', 'project-ani-start');
+    })
+    cards[1].forEach(card => {
+      card.classList.replace('project-ani', 'project-ani-start');
+    })
+  }
+  const preload = duration - delay;
+  let chainStart = false;
+  cards[0].forEach((card, i) => {
+    const startTime = i * delay;
+    if(startTime < preload) {
+      const offset = preload - startTime;
+      cards[1][i].style.animationDelay = `-${offset}ms`;
+      card.style.animationDelay = `-${offset}ms`;
+    } else if(!chainStart) {
+      chainStart = true;
+      const initialDelay = delay - (preload % delay);
+      card.style.animationDelay = `${initialDelay}ms`;
+      cards[1][i].style.animationDelay = `${initialDelay}ms`;
+    }
+  })
+}
 
 
 function startProjectAni() {
@@ -3098,36 +3261,29 @@ let cardsOnScreen = [];
 
 
 function pauseProjects() {
-  projectsAnimating = false;
   cardsOnScreen = [];
   // For each card in row 1
   for(let card of projectsRow1.children) {
-    // Get card rect
-    const rect = card.getBoundingClientRect();
-    // If rect on screen (25px buffer) add to cardOnScreen
-    if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
+/*    // Get card rect
     // Initialize border / wrapper element variables
     const border = card.querySelector('.project-wrapper-border');
     const wrapper = card.querySelector('.project-wrapper');
 
     // Add border slow to stop / wrapper slow to stop / pause cards
     border.style.transform = 'translateX(30px) translateY(-20px)';
-    wrapper.style.transform = 'translateX(50px)';
+    wrapper.style.transform = 'translateX(50px)';*/
     card.style.animationPlayState = 'paused';
   }
   // for each card in row 2
   for(let card of projectsRow2.children) {
-    // Get card rect
-    const rect = card.getBoundingClientRect();
-    // If rect on screen (25px buffer) add to cardOnScreen
-    if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
+/*    // Get card rect
     // Initialize border / wrapper element variables
     const border = card.querySelector('.project-wrapper-border');
     const wrapper = card.querySelector('.project-wrapper');
 
     // Add border slow to stop / wrapper slow to stop / pause cards
     border.style.transform = 'translateX(-70px) translateY(-20px)';
-    wrapper.style.transform = 'translateX(-50px)';
+    wrapper.style.transform = 'translateX(-50px)';*/
     card.style.animationPlayState = 'paused';
   }
   if(isMobile) {
@@ -3149,17 +3305,8 @@ function pauseProjects() {
 }
 
 function playProjects() {
-  projectsAnimating = true;
   // For each card in both row1 and row2
   for(let card of [...projectsRow1.children, ...projectsRow2.children]) {
-    // Initialize border / wrapper element variables
-    const border = card.querySelector('.project-wrapper-border');
-    const wrapper = card.querySelector('.project-wrapper');
-    // Reset border / wrapper / card position + opacity / play card animation
-    border.style.transform = '';
-    border.style.opacity = '1';
-    wrapper.style.transform = '';
-    card.style.opacity = '1';
     card.style.animationPlayState = 'running';
   }
   if(isMobile) {
@@ -4020,9 +4167,6 @@ function buildEmpCards() {
     img.loading = 'lazy';
     front.appendChild(img);
 
-    const border = document.createElement('div');
-    border.classList.add('employee-card-border');
-    front.appendChild(border);
 
 
     // Append front & back to card
@@ -4082,7 +4226,7 @@ function startEmpAni() {
       animateEmployeeCard(card);
     }
   });
-  if(teamOnScreen) playTeam();
+  //if(teamOnScreen) playTeam();
   if(!teamStarted) teamStarted = true;
 }
 

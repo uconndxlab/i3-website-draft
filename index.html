@@ -29,9 +29,10 @@
 <canvas id="star-canvas-perform"></canvas>
 <div class="consistent-overlay"></div>
 <div class="project-row-wrapper">
-  <div class="projects-row" id="row-1"></div>
-  <div class="projects-row" id="row-2"></div>
-  <div class="projects-row" id="row-3"></div>
+
+    <div class="projects-row" id="row-1"></div>
+    <div class="projects-row" id="row-2"></div>
+
 </div>
 <!--banner-->
 <div id="gasp-wrapper" style="z-index: 4; position: relative">
@@ -132,7 +133,7 @@
     <!-- hero section -->
     <main>
 
-      <section id="hero" class="section">
+      <section id="hero" class="section section-content">
         <div id="hero-head" class="container-fluid d-flex justify-content-center align-content-center">
 
           <div class="row m-auto px-0 px-xxl-4 w-100">
@@ -151,22 +152,100 @@
 
       <section id="story" class="section">
 
-        <div class="container-fluid align-content-center story-container">
-          <h2 class="section-head-side">What We Do</h2>
+        <div class="container-fluid align-content-center story-container section-content">
 
           <div class="row" id="story-row">
 
             <div class="col-12 col-lg-6 story-body mt-4 mt-lg-0 mx-auto mx-lg-0 ps-lg-10">
               <h3 class="section-head-underline"><span class="underline">What<br class="mobile-break"></span> We Do</h3>
               <span class="story-body-text">The Internal Insights & Innovation (i3) team provides custom software development, web design,
-          and other digital services in support of improving UConn's business processes, academic operations, and research enterprise.
-        <br><br>
-        </span>
+              and other digital services in support of improving UConn's business processes, academic operations, and research enterprise.
+              <br><br>
+              </span>
               <span class="story-body-text">We're not trying to reinvent the wheel— sometimes, we just help our colleagues find the wheel and use it, making the most of
-          the tools already available at UConn. But when the wheel doesn't fit the task, we step in with a lean, agile approach—building, testing,
-          and refining solutions that adapt to the university's evolving needs.</span>
+              the tools already available at UConn. But when the wheel doesn't fit the task, we step in with a lean, agile approach—building, testing,
+              and refining solutions that adapt to the university's evolving needs.</span>
+              <div class="projects-btn">
+                <button class="arrow-btn-circle">
+                  '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
+                  '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
+                  '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+                  '</svg>'
+                </button>
+                <h4 class="cta-btn-text">Our Projects</h4>
+
+              </div>
             </div>
-            <div class="col-12 col-lg-6 my-10 my-lg-0" id="story-stat-aos">
+            <div class="col-12 col-lg-6 align-content-center">
+              <div class="col-6=">
+                <div class="service-wrap m-auto">
+                  <div class="service-col">
+                    <div class="service" style="background-color: #4DB3FF40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.9004 4.77094C16.1801 4.77114 16.4003 4.99115 16.4004 5.27094L13.96 18.1508L13.9502 18.1811C13.7602 19.091 12.9501 19.7708 11.9902 19.7709C10.8803 19.7709 9.9805 18.8711 9.98047 17.7612C9.98047 17.4112 10.0802 17.0912 10.2402 16.8012L15.4199 5.15082L15.4902 5.00141C15.5802 4.86141 15.7304 4.77094 15.9004 4.77094ZM12.3096 9.89105L11.0303 12.7709C9.56031 12.9809 8.12999 13.641 7 14.7709L5 12.7709C7.00988 10.7611 9.67975 9.81117 12.3096 9.89105ZM16.3398 10.8813C17.2998 11.3513 18.2 11.971 19 12.7709L17 14.7709C16.62 14.391 16.21 14.0712 15.79 13.8012L16.3398 10.8813ZM1 8.77094C4.73993 5.04107 9.88984 3.61124 14.7197 4.47113L13.5303 7.15082C9.79031 6.69082 5.87999 7.891 3 10.7709L1 8.77094ZM17.4102 5.20063C19.4501 5.95061 21.36 7.13098 23 8.77094L21 10.7709C19.78 9.55098 18.3798 8.64092 16.8799 8.02094L17.4102 5.20063Z" fill="#4DB3FF"/>
+                      </svg>
+                      <h6>Web Development</h6>
+                    </div>
+                    <div class="service" style="background-color: #4DFFAC40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.9004 4.77094C16.1801 4.77114 16.4003 4.99115 16.4004 5.27094L13.96 18.1508L13.9502 18.1811C13.7602 19.091 12.9501 19.7708 11.9902 19.7709C10.8803 19.7709 9.9805 18.8711 9.98047 17.7612C9.98047 17.4112 10.0802 17.0912 10.2402 16.8012L15.4199 5.15082L15.4902 5.00141C15.5802 4.86141 15.7304 4.77094 15.9004 4.77094ZM12.3096 9.89105L11.0303 12.7709C9.56031 12.9809 8.12999 13.641 7 14.7709L5 12.7709C7.00988 10.7611 9.67975 9.81117 12.3096 9.89105ZM16.3398 10.8813C17.2998 11.3513 18.2 11.971 19 12.7709L17 14.7709C16.62 14.391 16.21 14.0712 15.79 13.8012L16.3398 10.8813ZM1 8.77094C4.73993 5.04107 9.88984 3.61124 14.7197 4.47113L13.5303 7.15082C9.79031 6.69082 5.87999 7.891 3 10.7709L1 8.77094ZM17.4102 5.20063C19.4501 5.95061 21.36 7.13098 23 8.77094L21 10.7709C19.78 9.55098 18.3798 8.64092 16.8799 8.02094L17.4102 5.20063Z" fill="#4DFFAC"/>
+                      </svg>
+                      <h6>App Development</h6>
+                    </div>
+                    <div class="service" style="background-color: #FFBB4D40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.9004 4.77094C16.1801 4.77114 16.4003 4.99115 16.4004 5.27094L13.96 18.1508L13.9502 18.1811C13.7602 19.091 12.9501 19.7708 11.9902 19.7709C10.8803 19.7709 9.9805 18.8711 9.98047 17.7612C9.98047 17.4112 10.0802 17.0912 10.2402 16.8012L15.4199 5.15082L15.4902 5.00141C15.5802 4.86141 15.7304 4.77094 15.9004 4.77094ZM12.3096 9.89105L11.0303 12.7709C9.56031 12.9809 8.12999 13.641 7 14.7709L5 12.7709C7.00988 10.7611 9.67975 9.81117 12.3096 9.89105ZM16.3398 10.8813C17.2998 11.3513 18.2 11.971 19 12.7709L17 14.7709C16.62 14.391 16.21 14.0712 15.79 13.8012L16.3398 10.8813ZM1 8.77094C4.73993 5.04107 9.88984 3.61124 14.7197 4.47113L13.5303 7.15082C9.79031 6.69082 5.87999 7.891 3 10.7709L1 8.77094ZM17.4102 5.20063C19.4501 5.95061 21.36 7.13098 23 8.77094L21 10.7709C19.78 9.55098 18.3798 8.64092 16.8799 8.02094L17.4102 5.20063Z" fill="#FFBB4D"/>
+                      </svg>
+                      <h6>Aurora Theming</h6>
+                    </div>
+                    <div class="service" style="background-color: #FF624D40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.9004 4.77094C16.1801 4.77114 16.4003 4.99115 16.4004 5.27094L13.96 18.1508L13.9502 18.1811C13.7602 19.091 12.9501 19.7708 11.9902 19.7709C10.8803 19.7709 9.9805 18.8711 9.98047 17.7612C9.98047 17.4112 10.0802 17.0912 10.2402 16.8012L15.4199 5.15082L15.4902 5.00141C15.5802 4.86141 15.7304 4.77094 15.9004 4.77094ZM12.3096 9.89105L11.0303 12.7709C9.56031 12.9809 8.12999 13.641 7 14.7709L5 12.7709C7.00988 10.7611 9.67975 9.81117 12.3096 9.89105ZM16.3398 10.8813C17.2998 11.3513 18.2 11.971 19 12.7709L17 14.7709C16.62 14.391 16.21 14.0712 15.79 13.8012L16.3398 10.8813ZM1 8.77094C4.73993 5.04107 9.88984 3.61124 14.7197 4.47113L13.5303 7.15082C9.79031 6.69082 5.87999 7.891 3 10.7709L1 8.77094ZM17.4102 5.20063C19.4501 5.95061 21.36 7.13098 23 8.77094L21 10.7709C19.78 9.55098 18.3798 8.64092 16.8799 8.02094L17.4102 5.20063Z" fill="#FF624D"/>
+                      </svg>
+                      <h6>Custom Tech Solutions</h6>
+                    </div>
+
+
+
+                  </div>
+                  <div class="service-col">
+                    <div class="service" style="background-color: #4D50FF40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.5 13.5C20.88 13.5 22 14.62 22 16V16.5C22.55 16.5 23 16.95 23 17.5V21.5C23 22.05 22.55 22.5 22 22.5H17C16.45 22.5 16 22.05 16 21.5V17.5C16 16.95 16.45 16.5 17 16.5V16C17 14.62 18.12 13.5 19.5 13.5ZM20 11.5498C19.83 11.5298 19.67 11.5 19.5 11.5C18.97 11.5 18.47 11.5998 18 11.7598V6.33008L5.83008 18.5H14V20.5H1L20 1.5V11.5498ZM19.5 14.5C18.67 14.5 18 15.17 18 16V16.5H21V16C21 15.17 20.33 14.5 19.5 14.5Z" fill="#4D50FF"/>
+                      </svg>
+                      <h6>UX Design</h6>
+                    </div>
+                    <div class="service" style="background-color: #A34DFF40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.5 13.5C20.88 13.5 22 14.62 22 16V16.5C22.55 16.5 23 16.95 23 17.5V21.5C23 22.05 22.55 22.5 22 22.5H17C16.45 22.5 16 22.05 16 21.5V17.5C16 16.95 16.45 16.5 17 16.5V16C17 14.62 18.12 13.5 19.5 13.5ZM20 11.5498C19.83 11.5298 19.67 11.5 19.5 11.5C18.97 11.5 18.47 11.5998 18 11.7598V6.33008L5.83008 18.5H14V20.5H1L20 1.5V11.5498ZM19.5 14.5C18.67 14.5 18 15.17 18 16V16.5H21V16C21 15.17 20.33 14.5 19.5 14.5Z" fill="#A34DFF"/>
+                      </svg>
+                      <h6>UI Design</h6>
+                    </div>
+                    <div class="service" style="background-color: #FF4DCA40">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.5 13.5C20.88 13.5 22 14.62 22 16V16.5C22.55 16.5 23 16.95 23 17.5V21.5C23 22.05 22.55 22.5 22 22.5H17C16.45 22.5 16 22.05 16 21.5V17.5C16 16.95 16.45 16.5 17 16.5V16C17 14.62 18.12 13.5 19.5 13.5ZM20 11.5498C19.83 11.5298 19.67 11.5 19.5 11.5C18.97 11.5 18.47 11.5998 18 11.7598V6.33008L5.83008 18.5H14V20.5H1L20 1.5V11.5498ZM19.5 14.5C18.67 14.5 18 15.17 18 16V16.5H21V16C21 15.17 20.33 14.5 19.5 14.5Z" fill="#FF4DCA"/>
+                      </svg>
+                      <h6>User Research</h6>
+                    </div>
+                    <div class="service" style="background-color: #4DFF8840">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.5 13.5C20.88 13.5 22 14.62 22 16V16.5C22.55 16.5 23 16.95 23 17.5V21.5C23 22.05 22.55 22.5 22 22.5H17C16.45 22.5 16 22.05 16 21.5V17.5C16 16.95 16.45 16.5 17 16.5V16C17 14.62 18.12 13.5 19.5 13.5ZM20 11.5498C19.83 11.5298 19.67 11.5 19.5 11.5C18.97 11.5 18.47 11.5998 18 11.7598V6.33008L5.83008 18.5H14V20.5H1L20 1.5V11.5498ZM19.5 14.5C18.67 14.5 18 15.17 18 16V16.5H21V16C21 15.17 20.33 14.5 19.5 14.5Z" fill="#4DFF88"/>
+                      </svg>
+                      <h6>Digital Consulting</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="container-xxl project-container section-content">
+          <div class="row">
+            <div class="col-12 col-lg-5 my-10 my-lg-0" id="story-stat-aos">
               <div class="d-flex align-items-center p-10 justify-content-center text-center story-stat-wrapper" data-aos="fade-left" data-aos-duration="1250" data-aos-once="true">
                 <div class="story-stat" id="story-stat">
                   <h2 id="stat-head">30+</h2>
@@ -183,34 +262,35 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+            <div class="col-12 col-lg-7 story-body mt-4 mt-lg-0 mx-auto mx-lg-0 pe-lg-10">
+              <h3 class="section-head-underline"><span class="underline">For<br class="mobile-break"></span> The University</h3>
+              <span class="story-body-text">We work directly with faculty, staff, and researchers to understand real needs and build tools that solve real problems.
+                Sometimes that means shipping quick fixes. Other times it means digging into legacy systems or designing something from scratch.
+                Either way, we stay close to the work, iterate fast, and make sure what we deliver actually helps.
+                <br><br>
+              </span>
+              <span class="story-body-text">We're here to help UConn work smarter. That means replacing expensive vendor tools when we can, streamlining operations,
+                and applying custom technology to reduce friction and improve outcomes. Whether it's administrative processes or research infrastructure,
+                we build with the goal of making the university stronger.</span>
+              <div class="projects-btn">
+                <button class="arrow-btn-circle">
+                  '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
+                  '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
+                  '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+                  '</svg>'
+                </button>
+                <h4 class="cta-btn-text">Our Story</h4>
 
-      <section id="projects" class="section">
-        <div class="container-fluid project-container">
-          <h2 class="section-head" id="projects-head">For The University</h2>
-<!--          <div class="project-row-wrapper">
-            <div class="projects-row" id="row-1"></div>
-            <div class="projects-row" id="row-2"></div>
-            <div class="projects-row" id="row-3"></div>
-          </div>-->
-          <p style="font-size: 2rem; text-align: center; background: rgba(241,241,241,.5)">wow this is like content so much contetnt all the content wow content contenttttttt content content content</p>
-          <div class="projects-btn">
-            <h4 class="cta-btn-text">View All Projects</h4>
-            <button class="arrow-btn-circle">
-              '<svg class="arrow-btn" width="40" height="40" viewBox="0 0 32 32" fill="none">' +
-              '<line x1="9" y1="16" x2="24" y2="16" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round"/>' +
-              '<polyline points="17,10 24,16 17,22" stroke="#f1f1f1" stroke-width="2" fill="none" stroke-linecap="round"/>' +
-              '</svg>'
-            </button>
+              </div>
+            </div>
           </div>
+
         </div>
 
       </section>
 
       <section id="team" class="section">
-        <div class="container-fluid team-container">
+        <div class="container-fluid team-container section-content">
           <h2 class="section-head" id="team-head">By The University</h2>
           <div class="team-row"></div>
           <div class="team-btn">
