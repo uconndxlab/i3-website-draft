@@ -22,13 +22,6 @@
             </div>
         </div>
 
-        <div class="text-center cta-wrap">
-            <a href="#what-we-do" class="cta-button">
-                Learn More
-                <span class="icon-circle"><i class="bi bi-arrow-right"></i></span>
-            </a>
-        </div>
-
         
     </section>
 
@@ -36,11 +29,10 @@
 
     {{-- What We Do --}}
     <section id="what-we-do" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
-        <div class="container-fluid">
-            <div class="row align-items-center g-5">
+        <div class="container">
+            <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">WHAT</span> WE DO</h2>
+            <div class="row align-items-top g-5">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h2 class="mb-3 border-bottom pb-2 border-primary d-inline-block">Web design, digital tools, app
-                        development and more...</h2>
                     <p class="text-secondary">
                         The Internal Insights & Innovation (i3) team provides custom software development, web design,
                         and other digital services in support of improving UConn’s business processes, academic operations,
@@ -54,17 +46,30 @@
                         university’s evolving needs.
                     </p>
 
-                    <p class="text-secondary">
-                        We work side-by-side with our campus partners: asking questions, diving right in, and building things that actually solve problems. Sometimes it’s quick wins, other times it's deep infrastructure. But it’s always collaborative, always iterative, and always focused on what moves the university forward.
-                    </p>
+                    <div class="btn display-btn btn-arrow-slide">
+                      <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:190px">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                          <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> Our Projects </span>
+                      </a>
+                    </div>
+                </div>
 
+                <div class="col-lg-6" data-aos="fade-left">
                     @php
                         $directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
                     @endphp
 
                     <div class="d-flex flex-wrap gap-3 mt-4">
-                        @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'color' => 'primary'], ['label' => 'UX Design', 'icon' => 'pencil', 'color' => 'success'], ['label' => 'App Development', 'icon' => 'phone', 'color' => 'warning'], ['label' => 'Tech Support for Sponsored Research', 'icon' => 'beaker', 'color' => 'info'], ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'color' => 'danger'], ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'color' => 'secondary']] as $badge)
-                            <div class="service-badge bg-{{ $badge['color'] }} text-{{ $badge['color'] === 'warning' ? 'dark' : 'light' }} px-3 py-2 rounded-pill shadow-sm
+                        @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'class' => 'web-design-color'],
+                                ['label' => 'UX Design', 'icon' => 'pencil', 'class' => 'ux-design-color'],
+                                ['label' => 'App Development', 'icon' => 'phone', 'class' => 'app-development-color'],
+                                ['label' => 'Tech Support for Sponsored Research', 'icon' => 'beaker', 'class' => 'tech-support-color'],
+                                ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'class' => 'digital-consulting-color'],
+                                ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'class' => 'custom-tech-solutions-color']
+                                ] as $badge)
+                            <div class="service-badge text-light px-3 py-2 rounded-pill shadow-sm {{ $badge['class'] }}
                             {{ $directions[rand(0, 3)] }}"
                                 data-aos="fade" data-aos-duration="1200" data-aos-delay="{{ rand(100, 500) }}"
                                 data-aos-easing="ease-out-back" data-aos-once="true">
@@ -73,8 +78,13 @@
                         @endforeach
                     </div>
                 </div>
-
-                <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-left">
+            </div>
+        </div>
+    </section>
+    <section id="featured-work" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-right">
                     <div class="position-relative text-center" style="width: 240px; height: 240px;">
                         <div
                             class="rounded-circle border border-2 border-light w-100 h-100 d-flex flex-column justify-content-center align-items-center">
@@ -85,46 +95,30 @@
                             style="width: 20px; height: 20px;"></div>
                     </div>
                 </div>
-                <div class="text-center mt-5">
-                    <a href="#featured-work"
-                        class="cta-button"
-                        data-aos="fade-up" data-aos-delay="300">
-                        <span>Show me more!</span>
-                        <span class="icon-circle"><i class="bi bi-arrow-down"></i></span>
-                    </a>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                                <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">FOR</span> THE UNIVERSITY</h2>
+
+                    <p class="text-secondary">
+                        We work directly with faculty, staff, and researchers to understand real needs and build tools that solve real problems. Sometimes that means shipping quick fixes. Other times it means digging into legacy systems or designing something from scratch. Either way, we stay close to the work, iterate fast, and make sure what we deliver actually helps.                    </p>
+                    <p class="text-secondary">
+                        We're here to help UConn work smarter. That means replacing expensive vendor tools when we can, streamlining operations, and applying custom technology to reduce friction and improve outcomes. Whether it's administrative processes or research infrastructure, we build with the goal of making the university stronger.
+                    </p>
+
+                    <div class="btn display-btn btn-arrow-slide">
+                      <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:170px">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                          <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> Our Story </span>
+                      </a>
+                    </div>
                 </div>
+
+                
             </div>
         </div>
     </section>
-    <section id="featured-work" class=" text-light d-flex flex-column align-items-center">
-        <h2 class="my-5 border-bottom pb-2 border-primary d-inline-block">...for the university...</h2>
-        <div class="featured-collage" data-aos="fade-up" data-aos-duration="1000">
-            @foreach ($featuredWork as $item)
-                <div class="collage-tile" data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
-                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
-                    <div class="tile-overlay">
-                        <div class="tile-card">
-                            <h5 class="tile-title">{{ $item->title }}</h5>
-                            <a href="{{ route('work.show', $item) }}" class="btn btn-sm btn-outline-light mt-2">
-                                View Project
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <div class="d-flex gap-3 my-3">
-            <a href="#team" class="cta-button" data-aos="fade-up" data-aos-delay="300">
-                <span>Meet Our Team</span>
-                <span class="icon-circle"><i class="bi bi-arrow-down"></i></span>
-            </a>
-        </div>
-    </section>
-
-
-
-
 
     {{-- Team --}}
     <section id="team" class="bg-deep text-light py-5 d-flex flex-column align-items-center">
@@ -181,20 +175,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="mt-4">
-
-
-                <div class="text-center mt-5">
-                    <a href="#contact"
-                        class="cta-button"
-                        data-aos="fade-up" data-aos-delay="400">
-                        <span>I'm ready to learn more</span>
-                        <span class="icon-circle"><i class="bi bi-arrow-down"></i></span>
-                    </a>
-                </div>
-
-            </div>
+        </div>
     </section>
 
 
