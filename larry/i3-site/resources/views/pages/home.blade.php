@@ -4,7 +4,7 @@
 @section('content')
 
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center position-relative text-light" style="min-height: 100vh;">
+    <section class="hero-section d-flex align-items-center position-relative text-light" style="min-height: 80vh;">
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="hero-title mb-4">
@@ -15,14 +15,12 @@
 
                 <div id="move-text-wrap">
                     <span class="move-text">We</span>
-                    <span id="move-text"></span>
-                    <span id="move-text-2"></span>
+                    <span id="move-text">Do Nerd</span>
+                    <span id="move-text-2">Stuff</span>
                     <span id="forUconn" class="move-text">for UConn.</span>
                 </div>
             </div>
         </div>
-
-        
     </section>
 
 
@@ -30,7 +28,7 @@
     {{-- What We Do --}}
     <section id="what-we-do" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
-            <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">WHAT</span> WE DO</h2>
+            <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-1 border-primary">What</span> We Do</h2>
             <div class="row align-items-top g-5">
                 <div class="col-lg-6" data-aos="fade-right">
                     <p class="text-secondary">
@@ -97,7 +95,7 @@
                 </div>
 
                 <div class="col-lg-6" data-aos="fade-left">
-                                <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">FOR</span> THE UNIVERSITY</h2>
+                <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">FOR</span> THE UNIVERSITY</h2>
 
                     <p class="text-secondary">
                         We work directly with faculty, staff, and researchers to understand real needs and build tools that solve real problems. Sometimes that means shipping quick fixes. Other times it means digging into legacy systems or designing something from scratch. Either way, we stay close to the work, iterate fast, and make sure what we deliver actually helps.                    </p>
