@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Mobile Apps, Web Apps, UX Design, Web Development, and Web Design')
 
 @section('content')
 
@@ -23,20 +23,18 @@
         </div>
     </section>
 
-
-
     {{-- What We Do --}}
     <section id="what-we-do" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
-            <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-1 border-primary">What</span> We Do</h2>
+            <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">What</span> We Do</h2>
             <div class="row align-items-top g-5">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <p class="text-secondary">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <p class="text-light">
                         The Internal Insights & Innovation (i3) team provides custom software development, web design,
                         and other digital services in support of improving UConn’s business processes, academic operations,
                         and research enterprise.
                     </p>
-                    <p class="text-secondary">
+                    <p class="text-light">
                         We’re not trying to reinvent the wheel—sometimes, we just help our colleagues find the wheel and use
                         it,
                         making the most of the tools already available at UConn. But when the wheel doesn’t fit the task,
@@ -54,24 +52,25 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6" data-aos="fade-left">
+                <div class="col-lg-5" data-aos="fade-left">
                     @php
                         $directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
                     @endphp
 
-                    <div class="d-flex flex-wrap gap-3">
+                    <div class="row">
                         @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'class' => 'web-design-color'],
                                 ['label' => 'UX Design', 'icon' => 'pencil', 'class' => 'ux-design-color'],
                                 ['label' => 'App Development', 'icon' => 'phone', 'class' => 'app-development-color'],
-                                ['label' => 'Tech Support for Sponsored Research', 'icon' => 'beaker', 'class' => 'tech-support-color'],
+                                ['label' => 'Digital Services for Research', 'icon' => 'beaker', 'class' => 'tech-support-color'],
                                 ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'class' => 'digital-consulting-color'],
                                 ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'class' => 'custom-tech-solutions-color']
                                 ] as $badge)
-                            <div class="service-badge text-light px-3 py-2 rounded-pill shadow-sm {{ $badge['class'] }}
-                            {{ $directions[rand(0, 3)] }}"
-                                data-aos="fade" data-aos-duration="1200" data-aos-delay="{{ rand(100, 500) }}"
-                                data-aos-easing="ease-out-back" data-aos-once="true">
-                                <i class="bi bi-{{ $badge['icon'] }} me-2"></i> {{ $badge['label'] }}
+                            <div class="col-md-6 mb-3">
+                                <div class="service-badge text-light px-3 py-2 rounded-pill shadow-sm {{ $badge['class'] }}"
+                                    data-aos="fade" data-aos-duration="1200" data-aos-delay="{{ rand(100, 500) }}"
+                                    data-aos-easing="ease-out-back" data-aos-once="true">
+                                    <i class="bi bi-{{ $badge['icon'] }} me-2"></i> {{ $badge['label'] }}
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -79,7 +78,7 @@
             </div>
         </div>
     </section>
-    <section id="for-uconn" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+    <section id="for-uconn" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-right">
@@ -117,48 +116,35 @@
             </div>
         </div>
     </section>
-
     {{-- Team --}}
-    <section id="team" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+    <section id="team" class="bg-teal text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center" data-aos="fade-down">BY THE UNIVERSITY</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
             </div>
 
-            <div class="row py-4">
-                <div class="team-carousel d-flex overflow-auto gap-4 px-3 pb-4" data-aos="fade-up">
-                    @foreach ($teamMembers as $index => $member)
-                        <div class="team-tile position-relative flex-shrink-0 rounded-4 overflow-hidden shadow"
-                            style="width: 220px; height: 300px;" style="--wiggle-index: {{ $index }}">
-                            @if ($member->photo)
-                                <img src="{{ asset('storage/' . $member->photo) }}" class="w-100 h-100 object-fit-cover">
-                            @endif
+            <div class="row py-4 text-center">
+                <div class="col-lg-6 offset-3" data-aos="fade-up">
+                    <p class="text-light">
+                        Our team runs on the talent and drive of UConn students. They're some of the brightest minds around, and they bring serious skill, creativity, and hustle to everything we build.
+                    </p>
+                    <p class="text-light">
+                        We pair that student energy with professional oversight to deliver real, production-grade work. It’s not just busy work. It’s impact, and it’s powering the university every day.
+                    </p>
+                    <p class="text-light">
+                        Like UConn itself, we thrive on pride, collaboration, and doing work that matters. When you work with us, you’re getting a team that’s smart, capable, and 100% all in.
+                    </p>
 
-                            <div class="overlay px-3 py-2">
-                                <h6 class="mb-0">{{ $member->name }}</h6>
-                                <p class="small text-white-50 mb-1">{{ $member->role }}</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    @foreach ($member->tags ?? [] as $tag)
-                                        <span class="badge bg-primary text-uppercase small">{{ $tag }}</span>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
-                    {{-- CTA Tile --}}
-                    <div class="team-tile cta-tile d-flex flex-column justify-content-center align-items-center text-center flex-shrink-0 rounded-4 shadow border border-light"
-                        style="width: 220px; height: 300px;">
-                        <a href="{{ route('team') }}" class="text-white text-decoration-none px-3 py-2">
-                            <h6 class="mb-2">View Full Team</h6>
-                            <span class="badge bg-light text-dark">{{ $totalTeamMembers }} Members</span>
-                            <div class="mt-2 text-primary small"><i class="bi bi-arrow-right-circle text-light"></i></div>
+                    <div class="btn display-btn btn-arrow-slide">
+                        <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:200px">
+                            <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                            </span>
+                            <span class="btn-arrow-slide-text"> View Our Team </span>
                         </a>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     </section>

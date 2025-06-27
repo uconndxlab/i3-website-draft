@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'i3')</title>
+    <title>@yield('title', 'i3') | Internal Insights & Innovation | UConn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -23,49 +23,48 @@
         </main>
     </div>
 </body>
-<section id="contact" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+<section id="contact" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
     <div class="container">
         <h2 class="mb-4 d-inline-block pb-3" data-aos="fade-down"><span
                 class="border-bottom border-2 pb-3 border-primary">CONTACT</span> US</h2>
         <div class="row align-items-top g-5" data-aos-delay="200">
             {{-- Form --}}
             <div class="col-lg-6" data-aos="fade-right">
-                <form method="POST" action="#" class="contact-form">
+                <form method="POST" action="#" class="contact-form text-light">
                     @csrf
                     <div class="row mb-4">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="type" class="form-control" id="floatingInputGrid" placeholder="Lorem">
-                                <label for="floatingInputGrid">First Name</label>
+                                <input type="text" class="form-control bg-dark text-light" id="firstName" placeholder="Lorem">
+                                <label for="firstName">First Name</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="type" class="form-control" id="floatingInputGrid" placeholder="Ipsum">
-                                <label for="floatingInputGrid">Last Name</label>
+                                <input type="text" class="form-control bg-dark text-light" id="lastName" placeholder="Ipsum">
+                                <label for="lastName">Last Name</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input type="email" class="form-control" id="floatingInputGrid"
-                            placeholder="name@example.com">
-                        <label for="floatingInputGrid">Email address</label>
+                        <input type="email" class="form-control bg-dark text-light" id="email" placeholder="name@example.com">
+                        <label for="email">Email address</label>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="floatingTextarea2">Message</label>
+                        <textarea class="form-control bg-dark text-light" placeholder="Leave a comment here" id="message" style="height: 100px"></textarea>
+                        <label for="message">Message</label>
                     </div>
-
                     <div class="btn display-btn btn-arrow-slide">
-                        <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:205px">
+                        <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:200px">
                             <span class="btn-arrow-slide-circle" aria-hidden="true">
                                 <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                             </span>
                             <span class="btn-arrow-slide-text"> Send Message </span>
                         </a>
                     </div>
+                    
                 </form>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
@@ -89,7 +88,7 @@
         </div>
     </div>
 </section>
-<footer class="footer footer-index py-4" style="background:#030303;">
+<footer class="footer footer-index py-4 bg-dark text-light">
     <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center">
         <a class="footer-link" href="https://uconn.edu">© 2025 University of Connecticut</a>
         <a class="footer-link" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy &amp;

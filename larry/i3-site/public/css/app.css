@@ -1,9 +1,21 @@
 @import url('https://use.typekit.net/nct3yok.css');
 
-:root{
-    --light-blue:#4DB3FF;
-    --white:#FFF;
-    --black:#111;
+@import url('vars.css');
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.bg-deep {
+    background-color: var(--deep);
+}
+
+.bg-dark {
+    background-color: var(--dark);
+}
+
+.bg-teal {
+    background-color: var(--teal);
 }
 
 body, html {
@@ -29,20 +41,6 @@ p {
     pointer-events: none;
 }
 
-
-
-#team{
-    background-color: #160021;
-}
-
-.team-carousel {
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-}
-
-
-
-
 .card-img-top {
     object-fit: cover;
     height: 260px;
@@ -51,7 +49,6 @@ p {
 .card-title {
     font-size: 1.1rem;
 }
-
 
 .display-1,
 .hero-heading {
@@ -68,13 +65,9 @@ p {
     max-width: 85%;
 }
 
-.move-text-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    position: relative;
+#move-text-wrap {
+    font-size:34px;
+    font-weight: 600;
 }
 
 h2 {
@@ -107,8 +100,6 @@ h2.border-accent,
     position: absolute;
     bottom:40px;
 }
-
-
 
 .hero-section {
     background-color: #111;
@@ -148,8 +139,7 @@ p.small {
 }
 
 #what-we-do {
-    background-color: #111;
-    color: #e5e5e5;
+    color: #fff!important;
     min-height: 100vh;
     display: flex;
     align-items: center;
