@@ -4,76 +4,86 @@ import employees from './employeeData.js';
 
 console.log('window', window.gsap)
 
-/* ------------------- OBSERVERS ------------------- */
-
-// Define initial animated elements
-const animatedElements = document.querySelectorAll('.animated');
-
-// Define UConn header rect
-const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
-const sections = document.querySelectorAll('.section');
-
-let scrolling = false;
-let scrollStopTimeout;
-// Track hero on screen
-let heroOnScreen = false;
-
-// Track stars faded
-let starsFaded = false;
-
-// Track story row on screen
-let storyRowOnScreen = false;
-
-let storyHeadAnimated = false;
-
-// Define story row
-const storyRow = document.querySelector('#story-row');
-
-// Track if story is looping
-let storyLooping = false;
-
-// Track projects on screen
-let projectsOnScreen = false;
-
-// Define project rows
-const projectsRow1 = document.querySelector('#row-1');
-const projectsRow2 = document.querySelector('#row-2');
-let projectsRow3;
-// Track if projects are animating
-let projectHeadAnimated = false;
-let projectsAnimating = false;
-let projectsStarted = false;
-
-// Track team on screen
-let teamHeadAnimated = false;
-let teamOnScreen = false;
-let teamStarted = false;
-
-// Define team row
-const teamRow = document.querySelector('.team-row');
-
-// Track if team is animating
-let teamAnimating = false;
-
-const footer = document.querySelector('footer');
-let footerOnScreen = false;
-let footerAnimated = false;
+/* ------------------- ESSENTIAL ELEMENT VARIABLE INITIALIZATION ------------------- */
 
 // Define body element
 const body = document.querySelector('body');
 
-// Track background color
+const consistentOverlay = document.querySelector('.consistent-overlay');
+const storyContainer = document.querySelector('.story-container');
+
+// Define UConn header rect
+const ucHeaderRect = document.getElementById('uc-header').getBoundingClientRect();
+
+// Define list of sections / section content
+const sections = document.querySelectorAll('.section');
+const sectionConts = document.querySelectorAll('.section-content');
+
+// Define 'what we do' row
+const whatWeDoRow = document.querySelector('#what-we-do-row');
+
+// Define project rows
+const projectRowWrap = document.querySelector('.project-row-wrapper');
+const projectsRow1 = document.querySelector('#row-1');
+const projectsRow2 = document.querySelector('#row-2');
+let projectsRow3;
+
+// Define team columns
+const teamColWrap = document.querySelector('.team-col-wrapper-fixed');
+const teamColLeft = document.getElementById('col-left');
+const teamColRight = document.getElementById('col-right');
+
+const footer = document.querySelector('footer');
+
+
+/* ------------------- TRACKER INITIALIZATION ------------------- */
+
+// Initialize slider position tracker
+let sliderPos = 0;
+
+// Initialize scrolling boolean / scroll timeout trackers
+let scrolling = false;
+let scrollStopTimeout;
+let gsapScrolling = false;
+let sliderScrolling = false;
+
+// Track if starBG is faded
+let starsFaded = false;
+
+// Initialize sectionOnScreen trackers
+let heroOnScreen = false;
+let forUniOnScreen = false;
+let byUniOnScreen = false;
+let footerOnScreen = false;
+
+// Initialize animationOnScreen trackers
+let projectsOnScreen = true;
+let teamAniOnScreen = false;
+
+// Initialize active animation trackers / animation update trackers
+let forUniLooping = false;
+
+let projectsAnimating = false;
+let updateProjects = true;
+
+let teamAnimating = false;
+let updateTeam = false;
+
+let footerAnimated = false;
+
+
+
+
+// TEMPORARY BACKGROUND COLOR EFFECT ON MOBILE ONLY, WILL BE CHANGED TO USE OVERLAY
 let bgColor = 0;
 
 // Define background colors
 const bgColors = [
   'rgb(38,38,38)',
-  'rgb(10,22,38)',
+  'rgba(10,22,38,.25)',
   'rgb(24,0,40)',
   'rgb(38,38,38)'
 ];
-
-
 
 /* ------------------- BASE EVENT LISTENERS ------------------- */
 
@@ -91,33 +101,13 @@ window.addEventListener('load', () => {
   }
 });
 
-let aniResizeTimer= null;
-let resizedLarger = false;
-// On window resize
 window.addEventListener('resize', () => {
   // Call star background resize
   resizeStarBG(windowWidth);
 
   windowWidth = window.innerWidth;
-
-
-
-
-
-  if(!isMobile) {
-    getProjectWidth();
-    getEmpWidth();
-    if(projectsAnimating) projectsAnimating = false;
-    if(teamAnimating) teamAnimating = false;
-    clearTimeout(aniResizeTimer);
-    aniResizeTimer = null;
-    aniResizeTimer = setTimeout(() => {
-      console.log('reset');
-      resetRows()
-    }, 1000);
-
-  }
-
+  getProjectWidth();
+  getTeamCardSize();
 
 });
 
@@ -129,77 +119,41 @@ const mousePos = {x: 0, y: 0};
 // Get mouse position on mouse move
 window.addEventListener('mousemove', (event) => {
   mousePos.x = event.clientX
-  mousePos.y = event.clientY - (ucHeaderRect.height / 2)
+  mousePos.y = event.clientY - (ucHeaderRect.height / 2);
 });
 
 // Pause animations when unfocused
 document.addEventListener('visibilitychange', () => {
   if(document.hidden) {
-    animatedElements.forEach(element => {
-      element.style.animationPlayState = 'paused';
-    });
+
     if(teamAnimating) pauseTeam();
     if(projectsAnimating) pauseProjects();
-    if(storyLooping) {
-      endStoryLoop();
-      storyLooping = false;
+    if(forUniLooping) {
+      endForUniLoop();
+      forUniLooping = false;
     }
   // Play animated elements when refocused
   } else {
-    animatedElements.forEach(element => {
-      element.style.animationPlayState = 'running';
-    });
-    if(teamOnScreen) playTeam();
+    if(teamAniOnScreen) playTeam();
     if(projectsOnScreen) playProjects();
-    if(storyRowOnScreen) {
-      startStoryLoop();
-      storyLooping = true;
+    if(forUniOnScreen) {
+      startForUniLoop();
+      forUniLooping = true;
     }
   }
 });
 
-// Scroll listener
-window.addEventListener('scroll', consistentScroll);
+// Scroll listener (REPLACED WITH GSAP ON PC, WILL BE USED FOR MOBILE)
+window.addEventListener('scroll', (event) => {
+
+});
 
 
-function checkInitialIntersections() {
-  let sectionNum = 0;
-  const scrollY = window.scrollY + window.innerHeight / 2;
-  const sections = [...document.querySelectorAll('.section')];
-  for (let i = 0; i < sections.length; i++) {
-    const top = sections[i].offsetTop;
-    const height = sections[i].offsetHeight;
-    const mid = top + height / 2;
-    if (scrollY >= mid) {
-      sectionNum = i;
-    } else {
-      break;
-    }
-  }
-  return sectionNum;
-}
+/* ------------------- INITIAL LOAD FUNCTIONS ------------------- */
+// LOAD FUNCTIONS WILL BE ADJUSTED TO ADAPT TO SCREEN BREAKPOINT POST-LARAVEL IMPLEMENTATION
+// MOBILE LOAD NEEDS ADJUSTMENT
 
-function setIntersection() {
-  const initialSection = checkInitialIntersections();
-  switch(initialSection) {
-    case 0:
-      heroOnScreen = true;
-      break;
-    case 1:
-      storyRowOnScreen = true;
-      break;
-    case 2:
-      projectsOnScreen = true;
-      playProjects();
-      break;
-    case 3:
-      teamOnScreen = true;
-      break;
-  }
-  console.log('section',initialSection)
-}
-setIntersection();
-
+// Mobile load
 function loadMobile() {
   // Observe hero
   const heroObserver = new IntersectionObserver(entries => {
@@ -257,6 +211,7 @@ function loadMobile() {
   heroObserver.observe(document.querySelector('.hero-h1'));
 
   // Observe story row
+/*
   const storyRowObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
 
@@ -292,45 +247,42 @@ function loadMobile() {
         }
 
         // Check story visibility tracker
-        if(!storyRowOnScreen) {
+        if(!forUniOnScreen) {
 
           // Update story visibility tracker
-          storyRowOnScreen = true;
+          forUniOnScreen = true;
 
           // Check story loop tracker
-          if(!storyLooping) {
+          if(!forUniLooping) {
 
             // Start story loop
-            startStoryLoop();
+            startForUniLoop();
 
             // Update story loop tracker
-            storyLooping = true;
+            forUniLooping = true;
           }
         }
 
         // Check story head animated tracker
-        if(!storyHeadAnimated && window.innerWidth > 576) {
-          document.querySelector('.section-head-side').classList.add('section-head-animated');
-          storyHeadAnimated = true;
-        }
+
 
         // If story not on screen
       } else {
 
         // Check story visibility tracker
-        if(storyRowOnScreen) {
+        if(forUniOnScreen) {
 
           // Update story visibility tracker
-          storyRowOnScreen = false;
+          forUniOnScreen = false;
 
           // Check story loop tracker
-          if(storyLooping) {
+          if(forUniLooping) {
 
             // End story loop
-            endStoryLoop();
+            endForUniLoop();
 
             // Update story loop tracker
-            storyLooping = false;
+            forUniLooping = false;
           }
         }
       }
@@ -338,7 +290,8 @@ function loadMobile() {
   }, {threshold: .25});
 
 // Observe story row
-  storyRowObserver.observe(storyRow);
+  storyRowObserver.observe(storyContainer);
+*/
 
 // Observe projects
   const projectRow2Observer = new IntersectionObserver(entries => {
@@ -374,10 +327,6 @@ function loadMobile() {
             canvas.style.display = 'none';
           });
         }
-        if(!projectHeadAnimated) {
-          document.querySelector('#projects-head').classList.add('section-head-ani');
-          projectHeadAnimated = true;
-        }
 
         // Check project visibility tracker
         if (!projectsOnScreen) {
@@ -386,7 +335,7 @@ function loadMobile() {
 
           if (!projectsAnimating) {
             // Play project animation
-            playProjects();
+            //playProjects();
             console.log('projects played')
           }
           // If projects not on screen
@@ -401,7 +350,6 @@ function loadMobile() {
             // Check project animation tracker
             if (projectsAnimating) {
               // Pause project animation
-              pauseProjects();
               console.log('projects paused')
             }
           }
@@ -438,16 +386,13 @@ function loadMobile() {
           })
         }
 
-        if(!teamHeadAnimated) {
-          document.querySelector('#team-head').classList.add('section-head-ani');
-          teamHeadAnimated = true;
-        }
+
 
         // Check/update team visibility + animation trackers
-        if(!teamOnScreen) {
-          teamOnScreen = true;
+        if(!byUniOnScreen) {
+          byUniOnScreen = true;
           if(!teamAnimating) {
-            playTeam();
+            //playTeam();
             console.log('team playing')
           }
         }
@@ -456,10 +401,10 @@ function loadMobile() {
       } else {
 
         // Check/update team visibility + animation trackers
-        if(teamOnScreen) {
-          teamOnScreen = false;
+        if(byUniOnScreen) {
+          byUniOnScreen = false;
           if(teamAnimating) {
-            pauseTeam();
+            //pauseTeam();
             console.log('team paused')
           }
         }
@@ -501,14 +446,16 @@ function loadMobile() {
 
 
   projectsRow3 = document.querySelector('#row-3');
-  buildProjects();
 
-  buildEmpCards();
 
 }
 
+
+// PC LOAD
 function loadPC() {
 
+
+  // Register GSAP plugins
   window.gsap.registerPlugin(ScrollSmoother, ScrollToPlugin, ScrollTrigger, Observer);
   const smoother = window.ScrollSmoother.create({
     wrapper: '#gsap-wrapper',
@@ -516,84 +463,34 @@ function loadPC() {
     smooth: 1.5,
     effects: true,
     onUpdate: () => {
+      // Track scrolling / play animations on scroll if on screen
       if (!scrolling) scrolling = true;
+      if(projectsOnScreen) {
+        playProjects();
+      } else {
+        pauseProjects();
+      }
+      if(teamAniOnScreen) {
+        playTeam();
+      } else {
+        pauseTeam();
+      }
+      // Stop animations after scroll end (short timeout buffer)
       clearTimeout(scrollStopTimeout);
       scrollStopTimeout = setTimeout(() => {
+        if(heroOnScreen) {
+          playProjects();
+        } else {
+          pauseProjects();
+        }
+        pauseTeam();
         scrolling = false;
-      }, 75);
-    },
+      }, 100);
+    }
 
   })
 
-  // Observe hero
-  const heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-
-      // If hero is on screen
-      if (entry.isIntersecting) {
-
-        // Check star fade tracker
-        if (starsFaded) {
-
-          // Display star canvas
-          canvas.style.display = 'block';
-
-          // Fade stars in
-          canvas.style.opacity = '1';
-
-          // Update star fade tracker
-          starsFaded = false;
-        }
-
-        // If background color is not hero color
-        if (bgColor !== 0) {
-
-          // Set background color to color 0
-          body.style.backgroundColor = `${bgColors[0]}`;
-          bgColor = 0;
-        }
-        if (sliderPos !== 0 && !sliderScrolling) {
-          changeProgSlider(0);
-        }
-
-        // Check hero visibility tracker
-        if (!heroOnScreen) {
-
-          // Update hero visibility tracker
-          heroOnScreen = true;
-
-          // Check frame loop tracker
-          if (!frameLooping && frameTestPass) {
-
-            // Update frame loop tracker
-            frameLooping = true;
-            requestAnimationFrame(animateFrame)
-          }
-
-          // Check if star bg animated in, call gravity animation
-        }
-
-        // If hero not on screen
-      } else {
-
-        // Check hero visibility tracker
-        if (heroOnScreen) {
-
-          // Update hero visibility tracker
-          heroOnScreen = false;
-
-          // Update frame loop tracker
-          frameLooping = false;
-        }
-      }
-    })
-  }, {threshold: 0});
-
-// Observe hero h1
-  heroObserver.observe(document.querySelector('.hero-h1'));
-
-  let gsapScrolling = false;
-
+  // Set GSAP pin sizes
   let gsapPin = '+=500vh';
 
   if (window.innerWidth < 1200) {
@@ -602,6 +499,7 @@ function loadPC() {
     gsapPin = '+=400vh';
   }
 
+  // Set each section as a GSAP pin
   window.gsap.utils.toArray('.section').forEach(section => {
     window.ScrollTrigger.create({
       trigger: section,
@@ -609,280 +507,311 @@ function loadPC() {
       end: gsapPin,
       pin: true,
       pinSpacing: true,
-      markers: true
+      markers: false
     });
   });
 
 
-  for (let section of sections) {
+  // Observe section content
+  for (let section of sectionConts) {
     const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !gsapScrolling && !sliderScrolling) {
-          gsapScrolling = true;
-          window.gsap.to(window, {
-            duration: .75,
-            scrollTo: {y: section},
-            ease: 'linear',
-            onComplete: () => {
-              gsapScrolling = false;
-            }
-          })
+        if (entry.isIntersecting) {
+          if(section === sectionConts[0]) {
+            heroObserve();
+            if(sliderPos !== 0) changeProgSlider(0);
+          } else if(section === sectionConts[1]) {
+            if(sliderPos !== 1) changeProgSlider(1);
+            if(heroOnScreen) heroOnScreen = false;
+            whatWeDoObserve();
+          } else if(section === sectionConts[2]) {
+            if(sliderPos !== 2) changeProgSlider(2)
+            forUniObserve();
+          } else if(section === sectionConts[3]) {
+            if(sliderPos !== 3) changeProgSlider(3)
+            teamObserve();
+          }
+
+
+          // GSAP scroll to section upon enter
+          if(!sliderScrolling) {
+            gsapScrolling = true;
+
+            window.gsap.to(window, {
+              duration: 1,
+              scrollTo: {y: section},
+              ease: 'power2.inOut',
+              onComplete: () => {
+                gsapScrolling = false;
+              }
+            })
+          }
         }
       })
-    }, {threshold: .50});
+    }, {threshold: .15});
     sectionObserver.observe(section);
   }
 
-
-// Observe story row
-  const storyRowObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-
-      // If story row on screen
-      if (entry.isIntersecting) {
-
-        // If background color is not story color
-        if (bgColor !== 1) {
-
-          // Set background color to color 1
-          body.style.backgroundColor = `${bgColors[1]}`;
-          bgColor = 1;
-        }
-        if (sliderPos !== 1 && !sliderScrolling) {
-          changeProgSlider(1);
-        }
-
-        // Check star fade tracker
-        if (!starsFaded) {
-
-          // Fade stars out
-          canvas.style.opacity = '0';
-
-          // After faded out listener
-          canvas.addEventListener('transitionend', function starsFadedOut() {
-
-            // Remove listener
-            canvas.removeEventListener('transitionend', starsFadedOut);
-
-            // Update star fade tracker
-            starsFaded = true;
-
-            // Set canvas display
-            canvas.style.display = 'none';
-          })
-        }
-
-        // Check story visibility tracker
-        if (!storyRowOnScreen) {
-
-          // Update story visibility tracker
-          storyRowOnScreen = true;
-
-          // Check story loop tracker
-          if (!storyLooping) {
-
-            // Start story loop
-            startStoryLoop();
-
-            // Update story loop tracker
-            storyLooping = true;
-          }
-        }
-
-        // Check story head animated tracker
-        if (!storyHeadAnimated) {
-          document.querySelector('.section-head-side').classList.add('section-head-animated');
-          storyHeadAnimated = true;
-        }
-
-        // If story not on screen
-      } else {
-
-        // Check story visibility tracker
-        if (storyRowOnScreen) {
-
-          // Update story visibility tracker
-          storyRowOnScreen = false;
-
-          // Check story loop tracker
-          if (storyLooping) {
-
-            // End story loop
-            endStoryLoop();
-
-            // Update story loop tracker
-            storyLooping = false;
-          }
-        }
+  // Move project row with scroll
+  window.gsap.fromTo(projectRowWrap,
+    {yPercent: 50, opacity: 1, rotate: -15},
+    {
+      yPercent: -45,
+      rotate: -15,
+      opacity: 0.2,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sections[0],
+        start: 'bottom bottom',
+        endTrigger: sections[1],
+        end: 'top top',
+        scrub: true,
       }
-    });
-  }, {threshold: .25});
 
-// Observe story row
-  storyRowObserver.observe(storyRow);
+    }
+  )
 
-
-// Observe projects
-  const projectRow2Observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-
-      // If projects on screen
-      if (entry.isIntersecting) {
-
-        // If background color not project color
-        if (bgColor !== 2) {
-
-          // Set background color to color 2
-          body.style.backgroundColor = `${bgColors[2]}`;
-          bgColor = 2;
-        }
-        if (sliderPos !== 2 && !sliderScrolling) {
-          changeProgSlider(2);
-        }
-
-        // Check star fade tracker
-        if (!starsFaded) {
-
-          // Fade out stars
-          canvas.style.opacity = '0';
-
-          // After faded out listener
-          canvas.addEventListener('transitionend', function starsFadedOut() {
-
-            // Remove listener
-            canvas.removeEventListener('transitionend', starsFadedOut);
-
-            // Update star fade tracker
-            starsFaded = true;
-
-            // Update canvas display
-            canvas.style.display = 'none';
-          });
-        }
-
-        if (!projectHeadAnimated) {
-          document.querySelector('#projects-head').classList.add('section-head-ani');
-          projectHeadAnimated = true;
-        }
-
-        // Check project visibility tracker
-        if (!projectsOnScreen) {
-          // Update project visibility tracker
-          projectsOnScreen = true;
-
-          if (!projectsAnimating) {
-            // Play project animation
-            playProjects();
-            console.log('projects played')
-          }
-          // If projects not on screen
-        } else {
-
-          // Check project visibility tracker
-          if (projectsOnScreen) {
-
-            // Update project visibility tracker
-            projectsOnScreen = false;
-
-            // Check project animation tracker
-            if (projectsAnimating) {
-              // Pause project animation
-              pauseProjects();
-              console.log('projects paused')
-            }
-          }
-        }
+  // FWOOP "What We Do" content
+  window.gsap.fromTo(whatWeDoRow,
+    {yPercent: 50},
+    {
+      yPercent: -60,
+      ease: 'power3.in',
+      scrollTrigger: {
+        trigger: sections[0],
+        start: 'bottom bottom',
+        endTrigger: sections[1],
+        end: 'bottom bottom',
+        scrub: true
       }
-    })
-  }, {threshold: .05});
-
-// Observe project row 2
-  projectRow2Observer.observe(projectsRow2);
-
-  let empCardsPaused = true;
+    }
+    );
 
 
-// Team observer
-  const teamRowObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
+  function heroObserve() {
 
-      // If team on screen
-      if (entry.isIntersecting) {
+    // Check star fade tracker
+    if (starsFaded) {
 
-        // If background color not team color
-        if (bgColor !== 3) {
+      // Display star canvas
+      canvas.style.display = 'block';
 
-          // Set background color to color 3
-          body.style.backgroundColor = `${bgColors[3]}`;
-          bgColor = 3;
-        }
-        if (sliderPos !== 3 && !sliderScrolling) {
-          changeProgSlider(3);
-        }
+      // Fade stars in
+      canvas.style.opacity = '1';
 
-        // Check/update star fade
-        if (!starsFaded) {
-          canvas.style.opacity = '0';
-          canvas.addEventListener('transitionend', function starsFadedOut() {
-            canvas.removeEventListener('transitionend', starsFadedOut);
-            starsFaded = true;
-            canvas.style.display = 'none';
-          })
-        }
+      // Update star fade tracker
+      starsFaded = false;
+    }
 
-        if (!teamHeadAnimated) {
-          document.querySelector('#team-head').classList.add('section-head-ani');
-          teamHeadAnimated = true;
-        }
 
-        // Check/update team visibility + animation trackers
-        if (!teamOnScreen) {
-          teamOnScreen = true;
-          if (!teamAnimating) {
-            playTeam();
-            console.log('team playing')
-          }
-        }
+    // If background color is not hero color
+    consistentOverlay.style.opacity = '0';
 
-        // If team not on screen
-      } else {
+    // Check slider position / call slider change
+    if (sliderPos !== 0 && !sliderScrolling) {
+      changeProgSlider(0);
+    }
 
-        // Check/update team visibility + animation trackers
-        if (teamOnScreen) {
-          teamOnScreen = false;
-          if (teamAnimating) {
-            pauseTeam();
-            console.log('team paused')
-          }
-        }
+    // Check hero visibility tracker
+    if (!heroOnScreen) {
+
+      // Update hero visibility tracker
+      heroOnScreen = true;
+    }
+    // Check frame loop tracker
+    if (!frameLooping && frameTestPass) {
+
+      // Update frame loop tracker
+      frameLooping = true;
+      requestAnimationFrame(animateFrame)
+    }
+
+      // Check if star bg animated in, call gravity animation
+    if(!projectsOnScreen) projectsOnScreen = true;
+    playProjects();
+
+  }
+
+  function whatWeDoObserve() {
+    if (!starsFaded) {
+
+      // Fade stars out
+      canvas.style.opacity = '0';
+
+      // After faded out listener
+      canvas.addEventListener('transitionend', function starsFadedOut() {
+
+        // Remove listener
+        canvas.removeEventListener('transitionend', starsFadedOut);
+
+        // Update star fade tracker
+        starsFaded = true;
+
+        if(frameLooping) frameLooping = false;
+
+        // Set canvas display
+        canvas.style.display = 'none';
+      })
+    }
+
+    // Change overlay color / opacity
+    consistentOverlay.style.backgroundColor = 'rgb(38,38,38)';
+    consistentOverlay.style.opacity = '.8';
+
+    // Check teamAni visibility / fade out
+    if(teamAniOnScreen) {
+      teamAniOnScreen = false;
+      teamColWrap.style.opacity = '0';
+    }
+
+  }
+
+  function forUniObserve() {
+
+
+    // Check star fade tracker
+    if (!starsFaded) {
+
+      // Fade stars out
+      canvas.style.opacity = '0';
+
+      // After faded out listener
+      canvas.addEventListener('transitionend', function starsFadedOut() {
+
+        // Remove listener
+        canvas.removeEventListener('transitionend', starsFadedOut);
+
+        if(frameLooping) frameLooping = false;
+
+
+        // Update star fade tracker
+        starsFaded = true;
+
+        // Set canvas display
+        canvas.style.display = 'none';
+      })
+    }
+
+    // Check if scrolling up from byUni
+    if(byUniOnScreen) {
+      byUniOnScreen = false;
+      projectsOnScreen = true;
+
+      // Fade / FWOOP project rows down
+      projectRowWrap.style.transition = 'transform .75s ease-in, opacity 1s';
+      projectRowWrap.style.opacity = '.2';
+      projectRowWrap.style.transform = 'translateY(-45%) rotate(-15deg)';
+      projectRowWrap.addEventListener('transitionend', () => {
+        playProjects();
+        projectRowWrap.style.transition = ''
+      }, {once:true});
+
+      // Peek team columns at bottom of section
+      teamColWrap.style.transform = 'translateY(85%)'
+
+      // Change overlay color / ensure visibility
+      consistentOverlay.style.opacity = '.8';
+      consistentOverlay.style.backgroundColor = '#0A1626'
+    }
+
+    // Check story visibility tracker
+    if (!forUniOnScreen) {
+
+      // Update story visibility tracker
+      forUniOnScreen = true;
+
+      // Check story loop tracker
+      if (!forUniLooping) {
+
+        // Start story loop
+        startForUniLoop();
+
+        // Update story loop tracker
+        forUniLooping = true;
       }
-    })
-  }, {threshold: .15});
+    }
 
-// Observe team row
-  teamRowObserver.observe(document.querySelector('.team-row'));
+    // Ensure projects playing
+    if(!projectsOnScreen) projectsOnScreen = true;
+    playProjects();
+    
+    // Ensure teamAni playing + visible
+    if(!teamAniOnScreen) {
+      teamAniOnScreen = true;
+      teamColWrap.style.opacity = '1';
+    }
+    playTeam();
 
+    // Change overlay color / ensure visiblity
+    consistentOverlay.style.backgroundColor = '#0A1626';
+    consistentOverlay.style.opacity = '.8';
+
+
+
+  }
+
+  function teamObserve() {
+    if(!byUniOnScreen) byUniOnScreen = true;
+    if(!teamAniOnScreen) teamAniOnScreen = true;
+
+    // FWOOP team columns down / up from footer + ensure visibility
+    teamColWrap.style.transform = 'translateY(-50%)';
+    teamColWrap.style.opacity = '1';
+    playTeam();
+
+    // FWOOP project rows up / fade
+    projectRowWrap.style.transition = 'transform .75s ease-in, opacity 1s';
+    projectRowWrap.style.opacity = '0';
+    projectRowWrap.style.transform = 'translateY(-125%)';
+    projectRowWrap.addEventListener('transitionend', () => {
+      pauseProjects();
+      projectRowWrap.style.transition = ''
+    }, {once:true})
+
+    // Change overlay color / ensure visibility
+    consistentOverlay.style.backgroundColor = '#180028'
+    consistentOverlay.style.opacity = '.8';
+  }
+
+  // Dedicated footer observer
   const footerObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!footerOnScreen) {
           footerOnScreen = true;
         }
-        if (bgColor !== 3) {
-          body.style.backgroundColor = `${bgColors[3]}`;
-          bgColor = 3;
+
+        if(projectsOnScreen) {
+          projectRowWrap.style.opacity = '0';
+          projectsOnScreen = false;
         }
+
         if(sliderPos !== 4 && !sliderScrolling) {
           changeProgSlider(4);
         }
+
+        // Animate footer up if not yet
         if (!footerAnimated) {
           footer.classList.add('footer-ani');
           footerAnimated = true;
         }
+
+        // FWOOP team animation out
+        if(teamAniOnScreen) teamAniOnScreen = false;
+        if(byUniOnScreen) {
+          byUniOnScreen = false;
+          teamColWrap.style.transform = 'translateY(-100%)';
+          teamColWrap.style.opacity = '0';
+        }
+        pauseTeam();
+
+        // Fade overlay
+        consistentOverlay.style.opacity = '0';
       } else {
         if (footerOnScreen) {
           footerOnScreen = false;
         }
+
       }
     });
   }, {threshold: .15});
@@ -896,55 +825,75 @@ function loadPC() {
   createStarBG();
 
 
-  //buildPhrase1();
+  playProjects();
 
 
-
+  // SLIDER ELEMENT / TRACKER / VARIABLE INITIALIZATION
   const slider = document.querySelector('#progress-slider');
-  let sliderPos = 0;
   let sliderScrolling = false;
 
+  // Set slider canvas height
   slider.height = slider.offsetHeight;
   slider.width = slider.offsetWidth;
+
+  // Get CTX
   const sliderCTX = slider.getContext('2d');
+
+  // Track hover boolean / current hovered circle / hover animating
   let sliderHovered = false;
   let circleHover = null;
   let hoverAnimating = false;
+
+  // Track radii of circles
   let hoverRadius = [10, 10, 10, 10, 10]
 
+  // Set circle default / hovered radii
   let radius = 10;
   let hoverMax = 15;
+
+  // Set circle count / space / center position
   const circleCount = 5;
   const circleSpace = slider.height / circleCount;
   const centerX = slider.width / 2;
 
+  // Set CTX styles
   sliderCTX.fillStyle = '#f1f1f1';
   sliderCTX.strokeStyle = '#f1f1f1';
   sliderCTX.lineWidth = 2;
 
+  // Track circle opacity
   let circleOpacity = 0;
 
-
+  // CREATE SLIDER
   function createProgressSlider() {
     sliderCTX.clearRect(0, 0, slider.width, slider.height);
 
+    // Draw lines between circles
     for (let i = 0; i < circleCount - 1; i++) {
+      // Get top / bottom of each circle
       const y1 = (i + 0.5) * circleSpace;
       const y2 = (i + 1 + 0.5) * circleSpace;
 
+      // Get radius of each circle
       const r1 = hoverRadius[i]
       const r2 = hoverRadius[i + 1];
 
+      // Draw line between circles
       sliderCTX.beginPath();
       sliderCTX.moveTo(centerX, y1 + r1);
       sliderCTX.lineTo(centerX, y2 - r2);
       sliderCTX.stroke();
     }
 
+    // Draw circles
     for (let i = 0; i < circleCount; i++) {
+      // Get y position
       let y = (i + 0.5) * circleSpace;
+
+      // Draw circle with radius
       sliderCTX.beginPath();
       sliderCTX.arc(centerX, y, hoverRadius[i], 0, Math.PI * 2);
+      // Set fill based on sliderPos
       if (i === sliderPos) {
         sliderCTX.fillStyle = 'rgba(241,241,241,1)';
         sliderCTX.fill();
@@ -954,17 +903,20 @@ function loadPC() {
         sliderCTX.fill();
         sliderCTX.stroke();
       }
-
     }
   }
 
+  // CHANGE SLIDER POSITION
   function changeProgSlider(newPos) {
+    // Set sliderPos / reset circle opacity
     sliderPos = newPos;
     circleOpacity = 0;
 
+    // Animate function
     function animate() {
       sliderCTX.clearRect(0, 0, slider.width, slider.height);
 
+      // Draw lines
       for (let i = 0; i < circleCount - 1; i++) {
         const y1 = (i + 0.5) * circleSpace;
         const y2 = (i + 1 + 0.5) * circleSpace;
@@ -978,6 +930,7 @@ function loadPC() {
         sliderCTX.stroke();
       }
 
+      // Draw circles
       for (let i = 0; i < circleCount; i++) {
         let y = (i + 0.5) * circleSpace;
         sliderCTX.beginPath();
@@ -992,18 +945,24 @@ function loadPC() {
           sliderCTX.stroke();
         }
       }
+      // Update circle opacity
       circleOpacity = Math.min(circleOpacity + .05, 1);
+
+      // Continue animating until circle filled
       if (circleOpacity < 1) {
         requestAnimationFrame(animate)
       }
     }
 
+    // Call animate
     animate();
 
   }
 
+  // Initialize slider specific mouse position
   let sliderMousePos = {x: 0, y: 0}
 
+  // Add slider hover listeners / update sliderHover tracker / call sliderHover function
   slider.addEventListener('mouseenter', () => {
     slider.addEventListener('mousemove', getSliderMousePos);
     slider.addEventListener('click', sliderClick);
@@ -1011,12 +970,16 @@ function loadPC() {
     progSliderHover();
   });
 
+  // Remove slider hover listeners / reset mouse position
   slider.addEventListener('mouseleave', () => {
     slider.removeEventListener('mousemove', getSliderMousePos);
+    sliderMousePos.x = 0;
+    sliderMousePos.y = 0;
     slider.removeEventListener('click', sliderClick);
-    if (sliderHovered) sliderHovered = false;
+
   })
 
+  // GET SLIDER MOUSE POS
   function getSliderMousePos(event) {
     const rect = slider.getBoundingClientRect();
 
@@ -1024,10 +987,11 @@ function loadPC() {
     sliderMousePos.y = event.clientY - rect.top;
   }
 
+  // SLIDER HOVER FUNCTION
   function progSliderHover() {
     sliderCTX.clearRect(0, 0, slider.width, slider.height);
 
-
+    // Draw lines
     for (let i = 0; i < circleCount - 1; i++) {
       const y1 = (i + 0.5) * circleSpace;
       const y2 = (i + 1 + 0.5) * circleSpace;
@@ -1041,28 +1005,39 @@ function loadPC() {
       sliderCTX.stroke();
     }
 
+    // Reset circle hover
     circleHover = null;
+
+    // Check if mouse over circle
     for (let i = 0; i < circleCount; i++) {
+      // Get circle y
       let y = (i + 0.5) * circleSpace;
+
+      // Get distance from circle to mouse
       let dx = sliderMousePos.x - centerX;
       let dy = sliderMousePos.y - y;
       let dist = Math.sqrt(dx * dx + dy * dy);
+      // If distance under max radius set circleHover to current circle
       if (dist < hoverMax) {
         circleHover = i;
       }
     }
 
+    // Set circle radii
     for (let i = 0; i < circleCount; i++) {
+      // If circle hovered grow radius
       if (i === circleHover) {
-        hoverRadius[i] += 0.5;
+        hoverRadius[i] += 0.075;
         if (hoverRadius[i] > hoverMax) hoverRadius[i] = hoverMax;
       } else {
+        // If not hovered and circle radius larger than default shrink radius
         if (hoverRadius[i] > radius) {
-          hoverRadius[i] = Math.max(hoverRadius[i] - 0.5, 10);
+          hoverRadius[i] = Math.max(hoverRadius[i] - 0.075, 10);
         }
       }
     }
 
+    // Draw circles
     for (let i = 0; i < circleCount; i++) {
       let y = (i + 0.5) * circleSpace;
       sliderCTX.beginPath();
@@ -1078,11 +1053,16 @@ function loadPC() {
       }
 
     }
+    // Check if any circles larger than default radius
     hoverAnimating = hoverRadius.filter(radius => radius > 10).length !== 0;
+
+    // If currently hovered or any circles still shrinking loop frame
     if (sliderHovered || hoverAnimating) requestAnimationFrame(progSliderHover);
   }
 
+  // SLIDER CLICK FUNCTION
   function sliderClick() {
+    // Check mouse position for over circle
     for (let i = 0; i < circleCount; i++) {
       let y = (i + 0.5) * circleSpace;
       let dx = sliderMousePos.x - centerX;
@@ -1090,14 +1070,30 @@ function loadPC() {
       let dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < hoverMax) {
         let scrollTo;
+        // If section is 4 (footer) scroll to end of page otherwise scroll to section
         if(i === 4) {
           scrollTo = body.offsetHeight;
         } else {
           scrollTo = sections[i];
         }
-        let dur = Math.max(0.3, Math.min(Math.abs(sliderPos - scrollTo) * 0.5, 2.5));
+
+        // Update scroll trackers
         gsapScrolling = true;
         sliderScrolling = true;
+
+        // Call corresponding observe functions
+        switch(i) {
+          case 0:
+            heroObserve();
+            break;
+          case 1:
+            whatWeDoObserve();
+            break;
+          case 2:
+            forUniObserve();
+        }
+
+
         window.gsap.to(window, {
           duration: 1,
           scrollTo: {y: scrollTo},
@@ -1105,77 +1101,61 @@ function loadPC() {
           onComplete: () => {
             gsapScrolling = false;
             sliderScrolling = false;
+            if(projectsOnScreen) playProjects();
+            if(teamAniOnScreen) playTeam();
           }
         })
-        sliderPos = i;
+
+        // Set sliderPos / call change function
         changeProgSlider(sliderPos);
       }
     }
   }
 
-  document.addEventListener('keypress', (keyEvent) => {
-    if(keyEvent.key === 'Tab') {
-      keyEvent.preventDefault();
+  // INCOMPLETE KEYBOARD ACCESSIBILITY
+/*  window.addEventListener('keydown', (keyEvent) => {
+    if(keyEvent.key === 'Tab'){
+      console.log('tab')
+      keyboardNavigate();
     }
-  })
+  })*/
 
 
+  // Call slider creation
   createProgressSlider();
 
 
-  buildProjects();
-  buildEmpCards();
-
+  // Get project / team card sizes
   getProjectWidth();
-  getEmpWidth();
+  getTeamCardSize();
 
 
 }
 
 
 
-/* ------------------- BASE EVENT LISTENERS ------------------- */
 
 
-let scrollSnapTimeout;
-// Scroll function
-function consistentScroll() {
-/*  clearTimeout(scrollSnapTimeout);
-  scrollSnapTimeout = setTimeout(() => {
-    let scrollMid = window.scrollY + window.innerHeight / 2;
-    let closest, closestDist = Infinity;
+/*
+function keyboardNavigate() {
+  console.log('keyboard')
+  keyboardNavigating = true;
+  pauseProjects();
+  pauseTeam();
 
-    for(let section of sections) {
-      const rect = section.getBoundingClientRect();
-      let sectionMid = rect.top + window.scrollY + rect.height / 2;
-      let dist = Math.abs(scrollMid - sectionMid);
-      if(dist < closestDist) {
-        closestDist = dist;
-        closest = section;
-      }
-    }
-    if(closest) {
+  [...projectsRow1.children].forEach(project => {
+    project.firstElementChild.addEventListener('focus', (event) => {
+      project.firstElementChild.classList.add('project-card-hover');
+      project.firstElementChild.style.transform = 'translateX(50px) scale(1.1)';
+      const border = project.querySelector('.project-wrapper-border');
+      border.style.transform = 'translateX(50px) translateY(0)';
+      border.style.opacity = '0';
+    });
 
-    }
-  }, 50)*/
+  })
 
-
-  // Check project link canvas state
-  if (linkCanvasActive) {
-
-    // Remove canvas
-    const linkCanvas = document.getElementById('constellationCanvas');
-    linkCanvas.style.transition = 'opacity .25s';
-    linkCanvas.addEventListener('transitionend', function linkFadedOut() {
-      linkCanvas.removeEventListener('transitionend', linkFadedOut);
-      document.body.removeChild(linkCanvas);
-      projectHoverEnabled = true;
-    })
-    linkCanvas.style.opacity = '0';
-    // Update tracker
-    linkCanvasActive = false;
-  }
 }
+*/
 
 
 /* ------------------- WHAT WE DO ANI FUNCTIONS ------------------- */
@@ -1193,12 +1173,37 @@ const phrases = [
 const moveText = document.getElementById('move-text');
 const moveText2 = document.getElementById('move-text-2');
 
-let charWidth;
 
+// Define forUConn span
+const forUconn = document.getElementById('forUconn');
+
+
+
+
+// Initialize dynamic variables
+let charWidth;
 let widths = [];
 let phraseLengths = [];
 let fontSize;
 let charDist;
+let maxPhraseLength = 0;
+let spaceCharSize = 0;
+
+// Track which phrase
+let currPhrase = 0;
+let moveText1Phrase = 0;
+let moveText2Phrase = 0;
+
+// Set text color
+let color = '#8dc1ff';
+
+// Set forUConn styles
+forUconn.style.marginLeft = '8px';
+forUconn.style.transform = `translateX(${-(phraseLengths[currPhrase] + spaceCharSize)}px)`;
+
+
+setCharWidths();
+// Get character widths / phrase lengths
 function setCharWidths() {
   fontSize = window.getComputedStyle(moveText).getPropertyValue('--font-size');
   if (fontSize === '1.6rem') {
@@ -1220,7 +1225,9 @@ function setCharWidths() {
     widths = new Map([["a",8],["b",8],["c",7],["d",8],["e",8],["f",4],["g",8],["h",8],["i",3],["j",3],["k",7],["l",3],["m",11],["n",8],["o",8],["p",8],["q",8],["r",5],["s",7],["t",4],["u",8],["v",7],["w",10],["x",7],["y",7],["z",7],[" ",0]])
   }
 
+  // Reset phrase lengths
   phraseLengths = [];
+
 // Get length of longest phrase
   phrases.forEach(phrase => {
     let phraseLength = 0;
@@ -1236,29 +1243,12 @@ function setCharWidths() {
     phraseLengths.push(phraseLength)
   })
 
+  // moveText1 + 2 to largest phrase width
   maxPhraseLength = Math.max(...phraseLengths);
   moveText.style.width = `${maxPhraseLength + charDist}px`;
   moveText2.style.width = `${maxPhraseLength + charDist}px`;
 }
-let maxPhraseLength = 0;
-let spaceCharSize = 0;
-setCharWidths();
 
-// Define forUConn span
-const forUconn = document.getElementById('forUconn');
-
-// Set character size (needs update)
-
-// Set text color
-let color = '#8dc1ff';
-
-// Track which phrase
-let currPhrase = 0;
-let moveText1Phrase = 0;
-let moveText2Phrase = 0;
-// Set forUConn styles
-forUconn.style.marginLeft = '8px';
-forUconn.style.transform = `translateX(${-(phraseLengths[currPhrase] + spaceCharSize)}px)`;
 
 
 // Build phrase 1
@@ -1530,12 +1520,14 @@ let testStart;
 let testMouse = {x: 0, y: 0};
 /* -- FRAME LOOP -- */
 function performanceTest(now) {
+  // Reset frame count after 1 second
   if(now - lastLogTime >= 1000 && bufferComplete) {
     console.log('frames:', frameCount);
     frameCount = 0;
     lastLogTime = now;
   }
 
+  // If past buffer start tracking frames
   if(now >= testBuffer && !bufferComplete) {
     bufferComplete = true;
     lastLogTime = now;
@@ -1544,15 +1536,24 @@ function performanceTest(now) {
     totalFrames = 0;
     console.log('testing');
   }
+
+  // Call test star interaction function
   testStarPull();
+
+  // Increment frameCount / totalFrames
   totalFrames++;
   frameCount++;
+
+  // If frame test over
   if(now >= frameTest + testStart) {
     frameTestComplete = true;
+    // Remove test canvas
     body.removeChild(performCanvas);
+    // Get average FPS
     const avgFPS = totalFrames / ((now - testStart) / 1000);
     console.log(avgFPS)
-    if(avgFPS > 55) {
+    // If average FPS larger than 50 test has passed
+    if(avgFPS > 50) {
       frameTestPass = true;
       requestAnimationFrame(animateFrame)
     } else {
@@ -1560,29 +1561,23 @@ function performanceTest(now) {
     }
     console.log('frameTest', frameTestPass)
   }
+  // Update test mouse position
   testMouse.x = Math.min(testMouse.x + 4, performCanvas.width)
   testMouse.y = Math.min(testMouse.y + 4, performCanvas.height);
+
+  // Loop frame if not complete
   if(!frameTestComplete) requestAnimationFrame(performanceTest);
 }
 
-// Set last time
-let lastTime = 0;
-// Set target frame rate
-const frameRate = 1000 / 60;
-// Track stars animated in
-let bgAnimated = false;
+
 // Track frame looping
 let frameLooping = false;
 // Call animation frame
 function animateFrame(now) {
-  // Check framerate sync
-    // Set lastTime to now
 
-    // If stars not animated in call star animate in
-    // If stars animated in call gravity function
     animateStarPull();
 
-  // If hero on screen or stars not animated in loop animation frame (needs update for initial animation)
+  // If hero on screen loop frame
   if(heroOnScreen) {
     requestAnimationFrame(animateFrame)
   }
@@ -1733,7 +1728,7 @@ const allStars = {
   starsTopRight: [],
 };
 
-// Resize star background (needs work)
+// Resize star background (NEED TO ADJUST GROWING RESIZE)
 function resizeStarBG(prevWidth) {
 
   const growing = window.innerWidth > prevWidth;
@@ -1743,16 +1738,20 @@ function resizeStarBG(prevWidth) {
     canvas.width = window.innerWidth;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Update section sizes
     sectionWidth = Math.ceil(window.innerWidth / 3);
     sectionHeight = Math.ceil(window.innerHeight / 2);
     horizBreak = Math.floor(window.innerHeight / 2);
     leftVertBreak = Math.floor(window.innerWidth / 3);
     rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
 
+    // Get flat array of all stars
     const flatStars = Object.values(allStars).flat();
 
+    // Reset all stars
     for(const key in allStars) allStars[key] = [];
 
+    // Check stars in window / star section position
     flatStars.forEach(star => {
       if(
         star.x >= 0 && star.x < window.innerWidth &&
@@ -1769,10 +1768,12 @@ function resizeStarBG(prevWidth) {
           else { allStars.starsBotRight.push(star) }
         }
 
+        // Draw star
         drawStar(star);
       }
     })
 
+    // Update cache offsets / section size / cache updated stars / update speed
     updateCacheSectionOffsets();
     setCachedSectionSize();
     cacheStaticStars();
@@ -1782,13 +1783,13 @@ function resizeStarBG(prevWidth) {
     updateHeight = window.innerHeight;
   }
 
+  // A LITTLE BUGGY (NEEDS TO PULL STARS FROM A TOTAL SCREEN SIZE STAR ARRAY RATHER THAN CREATE DYNAMICALLY)
   function resizeLarger() {
     updateStarSpeed();
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //updateCacheSectionOffsets();
 
     sectionWidth = Math.ceil(window.innerWidth / 3);
     sectionHeight = Math.ceil(window.innerHeight / 2);
@@ -1887,7 +1888,7 @@ function createStarBG() {
   performCanvas.style.height = '100vh';
   // Calculate rows/columns needed depending on screen's resolution
   let rows = Math.floor(window.innerHeight / spacing);
-  const cols = Math.floor(window.innerWidth / spacing);
+  const cols = Math.floor(window.innerWidth / spacing) + 1;
 
 
   if(isMobile) {
@@ -1989,55 +1990,6 @@ function drawStarCanvas() {
   }
 }
 
-// Animate stars fading in
-function animateStarBG() {
-  // Set star shadows
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.shadowColor = 'rgba(241, 241, 241, 0.2)';
-  ctx.shadowBlur = 4;
-  ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 0;
-
-  // Set animation end checker to false
-  fadeInIncomplete = false;
-
-  // For each section array
-  for(const key in allStars) {
-    // Get section
-    const section = allStars[key];
-
-    // For each star in section
-    for(let i = 0; i < section.length; i++) {
-      // Get star
-      const star = section[i];
-
-      // If frame (star fade-in frame) larger than delay
-      if (frame > star.delay) {
-        // Draw star
-        drawStarInitial(star);
-
-        // If star alpha is smaller than .5 add .1
-        if (star.alpha < 0.25) {
-          star.alpha += 0.05;
-
-          // Set star animation incomplete true when star alpha < .5
-          fadeInIncomplete = true;
-        }
-      }
-      else {
-        // Set animation incomplete to true when frame < delay
-        fadeInIncomplete = true;
-      }
-
-    }
-  }
-  // If animation complete set bgAnimated to true;
-  if(!fadeInIncomplete) {
-    bgAnimated = true;
-  }
-  // Increment frame
-  frame++
-}
 
 function updateStarSpeed() {
   const baseWidth = 1920;
@@ -2216,32 +2168,6 @@ function drawStar(star) {
   ctx.restore();
 }
 
-// Initial draw star function
-function drawStarInitial(star) {
-  // Buffer to only draw stars on screen
-  const buffer = 25;
-
-  // Check star x/y with buffer
-  if(star.x < -buffer || star.x > window.innerWidth + buffer
-    || star.y < -buffer || star.y > window.innerHeight + buffer) {
-    return
-  }
-  ctx.shadowColor = 'rgba(241, 241, 241, 0.2)';
-  ctx.shadowBlur = 4;
-  ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 0;
-  // Draw star
-  ctx.save();
-  ctx.translate(star.x, star.y);
-  ctx.rotate(star.rotation);
-  ctx.beginPath();
-  ctx.ellipse(0, 0, star.rx, star.ry, 0, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgb(77,179,255)';
-  ctx.globalAlpha = star.alpha;
-  ctx.fill();
-  ctx.restore();
-}
-
 
 /* ------------------- STAR PERFORMANCE TEST ------------------- */
 // Animate star gravitational pull
@@ -2415,7 +2341,7 @@ function testDrawStar(star) {
 
 
 
-/* ------------------- STORY FUNCTIONS ------------------- */
+/* ------------------- FOR THE UNIVERSITY ANIMATION ------------------- */
 
 
 
@@ -2441,7 +2367,7 @@ const statList = [
 
 // Defining element variables
 const circle = document.querySelector('.svg-wrapper');
-const statTextWrapper = document.querySelector('.story-stat')
+const statTextWrapper = document.querySelector('.for-uni-stat')
 const statHead = document.querySelector('#stat-head');
 const statSpan = document.querySelector('#stat-span');
 
@@ -2451,7 +2377,7 @@ let statNum = 1;
 let spinCount = 0
 let statTimeout = null;
 
-function startStoryLoop() {
+function startForUniLoop() {
   if(!animationLooping) {
     // Reset animationLooping and spinCount to default
     animationLooping = true;
@@ -2475,7 +2401,7 @@ function startStoryLoop() {
   }
 }
 
-function endStoryLoop() {
+function endForUniLoop() {
   // Animation looping to false
   animationLooping = false;
 
@@ -2556,1471 +2482,312 @@ function changeStat() {
 
 
 
-/* ------------------- PROJECTS FUNCTIONS ------------------- */
+/* ------------------- PROJECTS ANIMATION  ------------------- */
 
-// Initialize project div array
-const projectDivs = [];
+// Initialize project card width variable
+let projectCardWidth = 352;
 
-
-function resetRows() {
-  [...projectsRow1.children, ...projectsRow2.children, ...(isMobile ? [...projectsRow3.children] : [])]
-    .forEach(card => card.classList.remove('project-ani'));
-  [...teamRow.children].forEach(card => card.classList.remove('employee-ani'));
-  startProjectAni();
-  startEmpAni();
-}
-
-
-// Initialize link canvas tracker
-let linkCanvasActive = false;
-function buildProjects() {
-  // For each project
-  projects.forEach(project => {
-    // Create wrapper div / add class / set background to project image
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('project-wrapper');
-    wrapper.style.background = `url('${project.img}') center center / cover no-repeat`;
-
-    // Create title h5 / add class / set innerText to name / append to wrapper
-    const title = document.createElement('h5');
-    title.innerText = `${project.name}`;
-    title.classList.add('project-title');
-    wrapper.appendChild(title);
-
-    // Create overlay div / add class / append to wrapper
-    const overlay = document.createElement('div');
-    overlay.classList.add('project-overlay');
-    wrapper.appendChild(overlay);
-
-    // Create absolutely positioned wrapper / add class / append wrapper to absolute wrap / set id to project name
-    const wrapperAbsolute = document.createElement('div');
-    wrapperAbsolute.classList.add('project-wrapper-abs');
-    wrapperAbsolute.appendChild(wrapper);
-    wrapperAbsolute.id = project.name;
-
-    // Create wrapper border div / add class / append to absolute wrapper
-    const wrapperBorder = document.createElement('div');
-    wrapperBorder.classList.add('project-wrapper-border');
-    wrapperAbsolute.appendChild(wrapperBorder);
-
-    // Push absolute wrapper to div array
-    projectDivs.push(wrapperAbsolute);
-
-  })
-  if(!isMobile) {
-    for(let i = 0, i2 = projectDivs.length - 1; i < Math.floor(projectDivs.length / 2); i++, i2--) {
-      projectDivs[i].style.left = 'calc(-1.5 * var(--project-card-width))';
-      projectDivs[i2].style.right = 'calc(-1.5 * var(--project-card-width))';
-      projectDivs[i].classList.remove('project-ani');
-      projectDivs[i2].classList.remove('project-ani');
-      projectsRow1.appendChild(projectDivs[i]);
-      projectsRow2.appendChild(projectDivs[i2]);
-    }
-  } else {
-    const length = projectDivs.length;
-    const splitArr = [];
-    let start = 0;
-    for(let i = 0; i < 3; i++) {
-      const end = start + Math.ceil((length - start) / (3 - i));
-      splitArr.push(projectDivs.slice(start,end));
-      start = end;
-    }
-    splitArr[0].forEach(div => {
-      div.style.left = 'calc(-1.5 * var(--project-card-width))';
-      projectsRow1.appendChild(div);
-    })
-    splitArr[1].forEach(div => {
-      div.style.right = 'calc(-1.5 * var(--project-card-width))';
-      projectsRow2.appendChild(div);
-    })
-    splitArr[2].forEach(div => {
-      div.style.left = 'calc(-1.5 * var(--project-card-width))';
-      projectsRow3.appendChild(div);
-    })
-  }
-  setTimeout(startProjectAni, 500)
-}
-
-
-
+// Get width from css variable
 function getProjectWidth() {
   projectCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--project-card-width').slice(0,-2));
 }
-
-let projectCardWidth = 352;
-
-// Add first half of project divs to row 1, second half to row 2
-
-// Initialize each row index tracker
-let row1Index = 0;
-let row2Index = 0;
-
-function waitForScrollEnd(timeout, card) {
-  if(waitingForScroll) {
-    if(scrolling) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        waitForScrollEnd(timeout, card);
-      }, 100);
-    } else {
-      waitingForScroll = false;
-      clearTimeout(timeout);
-      projectsHover(card);
-    }
-  }
-}
-let projectHoverEnabled = true;
-let scrollTimeout;
-let waitingForScroll = false;
-// For each card div in row 1
-function setProjectListeners() {
-  const delay = getComputedStyle(body).getPropertyValue('--project-ani-del')
-  if (!isMobile) {
-    for (let card of projectsRow1.children) {
-      // Add hover listener / call hover function
-      card.addEventListener('mouseenter', () => {
-        console.log(scrolling)
-        if (scrolling) {
-          waitingForScroll = true;
-          scrollTimeout = setTimeout(() => {
-            waitForScrollEnd(scrollTimeout, card);
-          }, 100);
-        } else {
-          if (projectHoverEnabled) {
-            projectsHover(card);
-          }
-        }
-      });
-      // Add unhover listener / call unhover function
-      card.addEventListener('mouseleave', () => {
-        projectsUnHover();
-        if (waitingForScroll) {
-          waitingForScroll = false;
-        }
-      });
-      // Add animation start listener / update row 1 index / call animation for next card
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if (!next) next = projectsRow1.firstElementChild;
-        next.style.animationDelay = delay;
-
-        animateProjectCardRow1(next)
-      })
-      // Add animation end listener / remove animation class
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('project-ani');
-      });
-    }
-
-    // For each card div in row 2
-    for (let card of projectsRow2.children) {
-      // Add hover listener / call hover function
-      card.addEventListener('mouseenter', function hover() {
-        if (scrolling) {
-          waitingForScroll = true;
-          scrollTimeout = setTimeout(() => {
-            waitForScrollEnd(scrollTimeout, card, isMobile);
-          }, 100);
-        } else {
-          if (projectHoverEnabled) {
-            projectsHover(card);
-          }
-        }
-      });
-      // Add unhover listener / call unhover function
-      card.addEventListener('mouseleave', () => {
-        projectsUnHover();
-        if (waitingForScroll) {
-          waitingForScroll = false;
-        }
-      });
-      // Add animation start listener / update row 2 index / call animation for next card
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if (!next) {
-          next = projectsRow2.firstElementChild;
-        }
-        next.style.animationDelay = delay;
-        animateProjectCardRow2(next)
-      })
+getProjectWidth();
 
 
-      // Add animation end listener / remove animation class
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('project-ani');
-      });
+// Get middle of project array
+const projMid = Math.ceil(projects.length / 2);
 
-    }
-  } else {
-    for (let card of projectsRow1.children) {
-      // Add hover listener / call hover function
-      card.addEventListener('touchend', (event) => {
-        event.stopPropagation();
-        projectsHoverMobile(card);
-      }, {once:true});
-      // Add animation start listener / update row 1 index / call animation for next card
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if (!next) next = projectsRow1.firstElementChild;
-        next.style.animationDelay = delay;
+// Split into 2 arrays
+const row1Projects = projects.slice(0, projMid);
+const row2Projects = projects.slice(projMid)
 
-        animateProjectCardRow1(next)
-      })
-      // Add animation end listener / remove animation class
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('project-ani');
-      });
-    }
+// Set desired visible cards on screen / buffer offscreen / total cards to render
+let visibleCount = 6;
+let buffer = 4;
+let totalRendered = visibleCount + buffer;
 
-    // For each card div in row 2
-    for (let card of projectsRow2.children) {
-      // Add hover listener / call hover function
-      card.addEventListener('touchend', function hover(event) {
-        event.stopPropagation();
-        projectsHoverMobile(card);
-      }, {once:true});
-      // Add animation start listener / update row 2 index / call animation for next card
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if (!next) {
-          next = projectsRow2.firstElementChild;
-        }
-        next.style.animationDelay = delay;
-        animateProjectCardRow2(next)
-      })
+// Set speed / initial offsets / starting indexes / gap
+let speed = 1.25;
+let offset1 = 0;
+let offset2 = 0;
+let startIndex1 = 0;
+let startIndex2 = 0;
+let projGap = projectCardWidth * .25
+// Initialize div arrays
+let cardDivs1 = [];
+let cardDivs2 = [];
 
 
-      // Add animation end listener / remove animation class
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('project-ani');
-      });
-    }
-    for(let card of projectsRow3.children) {
-      card.addEventListener('touchend', function hover(event) {
-        event.stopPropagation();
-        projectsHoverMobile(card)
-      }, {once:true});
-      // Add animation start listener / update row 2 index / call animation for next card
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if (!next) {
-          next = projectsRow3.firstElementChild;
-        }
-        next.style.animationDelay = delay;
-        animateProjectCardRow3(next)
-      })
+// JAVASCRIPT ELEMENT CREATION
+function buildProjects(start1 = 0, start2 = 0) {
+  projectsRow1.innerHTML = '';
+  projectsRow2.innerHTML = '';
+  cardDivs1 = [];
+  cardDivs2 = [];
 
+  for (let i = 0; i < totalRendered; i++) {
+    let idx1 = (start1 + i) % row1Projects.length;
+    let idx2 = (start2 - i + row2Projects.length) % row2Projects.length;
 
-      // Add animation end listener / remove animation class
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('project-ani');
-      });
-    }
+    let card1Wrap = document.createElement('div');
+    card1Wrap.className = 'project-wrapper-abs';
+    let card1 = document.createElement('div');
+    card1.className = 'project-wrapper';
+    card1.style.background = `url('${row1Projects[idx1].img}') center center / cover no-repeat`;
+    card1Wrap.id = row1Projects[idx1].name;
+    card1Wrap.appendChild(card1);
+    const card1Border = document.createElement('div');
+    card1Border.className = 'project-wrapper-border';
+    card1.appendChild(card1Border);
+    projectsRow1.appendChild(card1Wrap);
+    cardDivs1.push(card1Wrap)
 
+    let card2Wrap = document.createElement('div');
+    card2Wrap.className = 'project-wrapper-abs';
+    let card2 = document.createElement('div');
+    card2.className = 'project-wrapper';
+    card2.style.background = `url('${row2Projects[idx2].img}') center center / cover no-repeat`;
+    card2Wrap.id = row2Projects[idx2].name;
+    const card2Border = document.createElement('div');
+    card2Border.className = 'project-wrapper-border';
+    card2.appendChild(card2Border);
+    card2Wrap.appendChild(card2)
+    projectsRow2.appendChild(card2Wrap);
+    cardDivs2.push(card2Wrap);
   }
 }
 
-let mobileProjHovers = [];
-function projectsHoverMobile(card) {
-  pauseProjects();
-  mobileProjHovers.push(card);
-  card.firstElementChild.classList.add('project-card-hover');
-  card.addEventListener('touchend', (event) => {
-    event.stopPropagation();
-    mobileProjHovers.splice(mobileProjHovers.indexOf(card), 1);
-    if(mobileProjHovers.length === 0) playProjects();
-    card.addEventListener('touchend', (event) => {
-      event.stopPropagation();
-      projectsHoverMobile(card);
-    }, {once:true})
-    card.firstElementChild.classList.remove('project-card-hover');
-  }, {once:true})
-}
+buildProjects();
 
-
-function startProjectAni() {
-  const delay = parseInt(getComputedStyle(body).getPropertyValue('--project-ani-del').slice(0, -2));
-  const duration = parseInt(getComputedStyle(body).getPropertyValue('--project-ani-dur').slice(0, -2));
-  const cards = [
-    [...projectsRow1.querySelectorAll('.project-wrapper-abs')],
-    [...projectsRow2.querySelectorAll('.project-wrapper-abs')]
-  ];
-  if(isMobile) cards.push([...projectsRow3.querySelectorAll('.project-wrapper-abs')])
-  let chainStart = false;
-  console.log(cards)
-  const preload = duration;
-  if(!projectsStarted) {
-    cards[0][0].addEventListener('animationend', () => {
-      cards[0][0].classList.remove('project-ani');
-    })
-    cards[1][0].addEventListener('animationend', () => {
-      cards[1][0].classList.remove('project-ani');
-    })
-    if(isMobile) {
-      cards[2][0].addEventListener('animationend', () => {
-        cards[2][0].classList.remove('project-ani')
-      })
-    }
+// Animate projects function
+// (ASSUMES PROJECT ELEMENTS CREATED ACCORDING TO TOTAL RENDERED VIA LARAVEL)
+function animateProjects() {
+  // Return if projects don't need to update
+  if(!updateProjects) {
+    projectsAnimating = false;
+    return;
   }
-
-  cards[0].forEach((card, i) => {
-    const startTime = i * delay;
-    if(startTime < preload) {
-      const offset = preload - startTime;
-      cards[1][i].style.animationDelay = `-${offset}ms`;
-      card.style.animationDelay = `-${offset}ms`;
-      animateProjectCardRow1(card);
-      animateProjectCardRow2(cards[1][i]);
-      if(isMobile) {
-        cards[2][i].style.animationDelay = `-${offset}ms`;
-        animateProjectCardRow3(cards[2][i]);
-      }
-
-    } else if(!chainStart) {
-      chainStart = true;
-      const initialDelay = delay - (preload % delay);
-      card.style.animationDelay = `${initialDelay}ms`;
-      cards[1][i].style.animationDelay = `${initialDelay}ms`;
-      if(isMobile) cards[2][i].style.animationDelay = `${initialDelay}ms`;
-      if(!projectsStarted) {
-        card.addEventListener('animationstart', () => {
-          let next = card.nextElementSibling;
-          if(!next) next = projectsRow2.firstElementChild;
-          animateProjectCardRow1(next)
-          setTimeout(setProjectListeners, 100);
-
-        }, {once:true})
-        cards[1][i].addEventListener('animationstart', () => {
-          let next = cards[1][i].nextElementSibling;
-          if(!next) next = projectsRow2.firstElementChild;
-          animateProjectCardRow2(next)
-        }, {once:true})
-        if(isMobile) cards[2][i].addEventListener('animationstart', () => {
-          let next = cards[2][i].nextElementSibling;
-          if(!next) next = projectsRow3.firstElementChild;
-          animateProjectCardRow3(next);
-        }, {once:true})
-      }
-      animateProjectCardRow1(card);
-      animateProjectCardRow2(cards[1][i]);
-      if(isMobile) animateProjectCardRow3(cards[2][i]);
-    }
-  });
-  if(projectsOnScreen) playProjects();
-  if(!projectsStarted) projectsStarted = true;
-}
-
-// Initialize array of cards on screen
-let cardsOnScreen = [];
-
-
-
-function pauseProjects() {
-  projectsAnimating = false;
-  cardsOnScreen = [];
-  // For each card in row 1
-  for(let card of projectsRow1.children) {
-    // Get card rect
-    const rect = card.getBoundingClientRect();
-    // If rect on screen (25px buffer) add to cardOnScreen
-    if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
-    // Initialize border / wrapper element variables
-    const border = card.querySelector('.project-wrapper-border');
-    const wrapper = card.querySelector('.project-wrapper');
-
-    // Add border slow to stop / wrapper slow to stop / pause cards
-    border.style.transform = 'translateX(30px) translateY(-20px)';
-    wrapper.style.transform = 'translateX(50px)';
-    card.style.animationPlayState = 'paused';
-  }
-  // for each card in row 2
-  for(let card of projectsRow2.children) {
-    // Get card rect
-    const rect = card.getBoundingClientRect();
-    // If rect on screen (25px buffer) add to cardOnScreen
-    if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
-    // Initialize border / wrapper element variables
-    const border = card.querySelector('.project-wrapper-border');
-    const wrapper = card.querySelector('.project-wrapper');
-
-    // Add border slow to stop / wrapper slow to stop / pause cards
-    border.style.transform = 'translateX(-70px) translateY(-20px)';
-    wrapper.style.transform = 'translateX(-50px)';
-    card.style.animationPlayState = 'paused';
-  }
-  if(isMobile) {
-    for(let card of projectsRow3.children) {
-      // Get card rect
-      const rect = card.getBoundingClientRect();
-      // If rect on screen (25px buffer) add to cardOnScreen
-      if(rect.x > 25 && rect.x < window.innerWidth - 25) cardsOnScreen.push(card);
-      // Initialize border / wrapper element variables
-      const border = card.querySelector('.project-wrapper-border');
-      const wrapper = card.querySelector('.project-wrapper');
-
-      // Add border slow to stop / wrapper slow to stop / pause cards
-      border.style.transform = 'translateX(30px) translateY(-20px)';
-      wrapper.style.transform = 'translateX(50px)';
-      card.style.animationPlayState = 'paused';
-    }
-  }
-}
-
-function playProjects() {
+  // Set animating tracker to true
   projectsAnimating = true;
-  // For each card in both row1 and row2
-  for(let card of [...projectsRow1.children, ...projectsRow2.children]) {
-    // Initialize border / wrapper element variables
-    const border = card.querySelector('.project-wrapper-border');
-    const wrapper = card.querySelector('.project-wrapper');
-    // Reset border / wrapper / card position + opacity / play card animation
-    border.style.transform = '';
-    border.style.opacity = '1';
-    wrapper.style.transform = '';
-    card.style.opacity = '1';
-    card.style.animationPlayState = 'running';
+
+  // Increment / decrement offsets by speed
+  offset1 -= speed;
+  offset2 += speed;
+
+  // For each div set transform based on offset + index
+  for (let i = 0; i < totalRendered; i++) {
+    cardDivs1[i].style.transform = `translateX(${(i * (projectCardWidth + projGap)) + offset1}px)`;
+    cardDivs2[i].style.transform = `translateX(${(i * (projectCardWidth + projGap)) + offset2}px)`;
   }
-  if(isMobile) {
-    for(let card of projectsRow3.children) {
-      // Initialize border / wrapper element variables
-      const border = card.querySelector('.project-wrapper-border');
-      const wrapper = card.querySelector('.project-wrapper');
-      // Reset border / wrapper / card position + opacity / play card animation
-      border.style.transform = '';
-      border.style.opacity = '1';
-      wrapper.style.transform = '';
-      card.style.opacity = '1';
-      card.style.animationPlayState = 'running';
-    }
+
+  // If offset 1 smaller than project width
+  if (offset1 <= -projectCardWidth) {
+    // Increment offset by card width + gap
+    offset1 += projectCardWidth + projGap;
+    // Increment index / loop to start
+    startIndex1 = (startIndex1 + 1) % row1Projects.length;
+
+    // Recycle first card in div array
+    let recycled = cardDivs1.shift();
+    // Set new index to next card in array after total rendered
+    let newIdx = (startIndex1 + totalRendered - 1) % row1Projects.length;
+    // Update background of card
+    recycled.style.background = `url('${row1Projects[newIdx].img}') center center / cover no-repeat`;
+    // Push recycled card to end of div array
+    cardDivs1.push(recycled);
+  }
+
+  // If offset2 larger than width recycle card
+  if (offset2 >= projectCardWidth) {
+    offset2 -= projectCardWidth + projGap;
+    startIndex2 = (startIndex2 - 1 + row2Projects.length) % row2Projects.length;
+
+    let recycled = cardDivs2.pop();
+    let newIdx = startIndex2;
+    recycled.style.background = `url('${row2Projects[newIdx].img}') center center / cover no-repeat`;
+    cardDivs2.unshift(recycled);
+  }
+  // Loop frame animation
+  requestAnimationFrame(animateProjects);
+}
+// Initialize animation to place projects
+animateProjects()
+
+
+// Play projects if not playing
+function playProjects() {
+  if(!updateProjects) {
+    updateProjects = true;
+    if(!projectsAnimating) animateProjects();
   }
 }
-
-// Card hover function
-function projectsHover(card) {
-  pauseProjects();
-  projectHoverEnabled = false;
-  // Call card linking function
-  linkCards(card);
-}
-
-// Projects unHover function
-function projectsUnHover() {
-  // Check link canvas tracker
-  if(linkCanvasActive) {
-    // Remove canvas
-    const linkCanvas = document.getElementById('constellationCanvas');
-    linkCanvas.style.transition = 'opacity .25s';
-    linkCanvas.addEventListener('transitionend', function linkFadedOut() {
-      linkCanvas.removeEventListener('transitionend', linkFadedOut);
-      document.body.removeChild(linkCanvas);
-      setTimeout(() => {
-        projectHoverEnabled = true;
-        linkCanvasActive = false;
-
-      }, 100);
-    })
-    linkCanvas.style.opacity = '0';
-    // Update tracker
-
-  } else {
-    projectHoverEnabled = true;
-  }
-  playProjects();
-  // Reset cardsOnscreen
-  cardsOnScreen = [];
-  // Remove hover class from each hovered + linked card / set opacity to 1
-  for(let card of document.querySelectorAll('.project-card-hover')) {
-    card.classList.remove('project-card-hover');
-    card.style.opacity = '1';
-  }
-}
-
-// Link cards function
-function linkCards(hoveredCard) {
-  // Get link loop / possible links
-  const linkLoop = getLinkLoop(hoveredCard);
-
-  // Get card variables, complete loop boolean, and tags from linkLoop
-  const [card1, card2, card3, complete, tag1, tag2, tag3] = linkLoop;
-  // Ensure card1 exists
-  const linkedCards = [card1].filter(Boolean);
-  // If card2 / card3 exists add to linkedCards
-  if(card2) linkedCards.push(card2);
-  if(card3) linkedCards.push(card3);
-
-  // Ensure tag1 exists
-  const linkedTags = [tag1].filter(Boolean);
-  // If tag2 exists add to linkedTags
-  if(tag2) linkedTags.push(tag2);
-  // Check if tag3 is array / if it exists then push to linkedTags
-  if(Array.isArray(tag3)) {linkedTags.push(tag3[0])}
-  else if(tag3) {linkedTags.push(tag3)}
-
-  // If there are links call getLinkCenters function with cards, tags, and complete boolean
-  if(linkedCards.length > 1) {
-    getLinkCenters(linkedCards, linkedTags, complete);
-  }
-
-  // Create set of linked cards
-  const linkedSet = new Set(linkedCards);
-
-  // Define unlinked array
-  const unLinked = [
-    ...Array.from(projectsRow1.children),
-    ...Array.from(projectsRow2.children)
-  ].filter(card => !linkedSet.has(card));
-
-  // Ensure hoveredCard exists in cardsOnScreen / remove from cardsOnScreen
-  const hoveredIndex = cardsOnScreen.indexOf(hoveredCard);
-  if (hoveredIndex !== -1) cardsOnScreen.splice(hoveredIndex, 1);
-
-  // For each linked card
-  linkedCards.forEach(card => {
-    // If in row 1 set row1 styles, if row 2 set row2 styles
-    if(card.parentElement === projectsRow1) {
-      card.style.opacity = '.85';
-      card.firstElementChild.style.transform = 'translateX(50px) scale(1.1)';
-      card.lastElementChild.style.transform = 'translateX(50px) translateY(0)';
-      card.lastElementChild.style.opacity = '0';
-    } else {
-      card.style.opacity = '.85';
-      card.firstElementChild.style.transform = 'translateX(-50px) scale(1.1)';
-      card.lastElementChild.style.transform = 'translateX(-50px) translateY(0)';
-      card.lastElementChild.style.opacity = '0';
-    }
-    // Add hover class
-    card.firstElementChild.classList.add('project-card-hover');
-  })
-  // For each unlinked card lower opacity
-  unLinked.forEach(card => {
-    card.style.opacity = '0.15';
-  })
-}
-
-// Shuffle cards with tag weights (prioritize less common tags)
-function weightedShuffle(cards, targetTag) {
-  // Set weighted cards to map of cards
-  const weightedCards = cards.map(card => {
-    // Get card project
-    const project = projects.find(p => p.name === card.id);
-    // Check if project has prioritized tag / return card + weight
-    const hasTargetTag = project.tags.includes(targetTag);
-    if(hasTargetTag) {
-      return {
-        card,
-        weight: 1
-      }
-    } else {
-      return {
-        card,
-        weight: .5
-      }
-    }
-  });
-
-  // Shuffle weighted cards
-  weightedCards.sort(() => Math.random() - 0.5);
-
-  // Sort weighted cards by maintaining slight randomization
-  weightedCards.sort((a, b) => b.weight - a.weight);
-
-  // Return weighted cards
-  return weightedCards.map(entry => entry.card);
-}
-
-// Get row of card
-function getCardRow(card) {
-  return projectsRow1.contains(card) ? 'row1' : 'row2';
-}
-
-// Set priority of tags
-const tagPriority = [
-  'Mobile PWA',
-  'Email Marketing',
-  'Print Production',
-  'UI Design',
-  'UX Design',
-  'Web Development'
-];
-
-// Get link loop function with hoveredCard, false recall if not given parameter
-function getLinkLoop(hoveredCard, recall = false) {
-  // Get hoveredCard project
-  const hoveredProject = projects.find(p => p.name === hoveredCard.id);
-
-  // Get hovered tags
-  const hoveredTags = hoveredProject.tags.slice().sort((a, b) => {
-    // Get index of tags in tagPriority
-    let aIndex = tagPriority.indexOf(a);
-    let bIndex = tagPriority.indexOf(b);
-    // If not in tagPriority give fake index
-    if(aIndex === -1) aIndex = 999;
-    if(bIndex === -1) bIndex = 999;
-    // Return earliest in priority
-    return aIndex - bIndex;
-  });
-
-  // Get card project helper
-  const getProject = (card) => projects.find(p => p.name === card.id);
-
-  // Get weighted card pool of cardsOnScreen without hoveredCard
-  const cardPool = weightedShuffle(cardsOnScreen.filter(card => card !== hoveredCard));
-
-  // Initialize card2 / tag1
-  let card2 = null;
-  let tag1 = null;
-
-  // For each tag of hoveredTags
-  for(let tag of hoveredTags) {
-    // Find card2 in cardPool
-    card2 = cardPool.find(card => {
-      // Get project of card
-      const project = getProject(card);
-      // Return if includes tag
-      return project.tags.includes(tag);
-    });
-    // If card2 exists set tag1 to tag / break loop
-    if(card2) {
-      tag1 = tag;
-      break;
-    }
-  }
-  // // If card2 doesn't exist return hoveredCard / null cards and tags / false complete
-  if(!card2) {
-    return [hoveredCard, null, null, false, null, null, null];
-  }
-
-  // Get weighted cardPool without card2 + hoveredCard
-  const cardPool2 = weightedShuffle(cardPool.filter(card => card !== card2));
-  // Get card2 project
-  const card2Project = getProject(card2);
-
-  // Initialize card3 / tag2
-  let card3 = null;
-  let tag2 = null;
-
-  // For each tag in hoveredTags
-  for(let tag of hoveredTags) {
-    // If tag is same as tag1 continue
-    if(tag === tag1) continue;
-    // Check if card3 has tag
-    card3 = cardPool2.find(card => {
-      const project = getProject(card);
-      return project.tags.includes(tag) && card2Project.tags.includes(tag);
-    });
-    // If card3 exists set tag2 to tag / break loop
-    if(card3) {
-      tag2 = tag;
-      break;
-    }
-  }
-  // If card3 doesn't exist check tags again including tag1
-  if(!card3) {
-    card3 = cardPool2.find(card => {
-      const project = getProject(card);
-      return project.tags.includes(tag1) && card2Project.tags.includes(tag1);
-    });
-  }
-  // If card3 exists and tag2 does not set tag2 to tag1
-  if(card3 && !tag2) {
-    tag2 = tag1;
-  }
-  // If card3 doesn't exist return hoveredCard / card2 / null card3 / false complete loop / tag1 / null tag2 / null tag3
-  if(!card3) {
-    return [hoveredCard, card2, null, false, tag1, null, null];
-  }
-
-  // Get card3 project
-  const card3Project = getProject(card3);
-
-  // Get tag from card3 back to card 1 / set to null if can't link to card1
-  const backTag = hoveredProject.tags.filter(tag => card3Project.tags.includes(tag)) || null;
-
-  // Set loop path
-  const loop = [hoveredCard, card2, card3];
-
-  // Get rows of each card
-  const rows = loop.reduce((obj, card) => {
-    // Get row
-    const row = getCardRow(card);
-    // If row exists in object increment row amount / set to 1 otherwise
-    if(obj[row]) {obj[row] += 1} else {obj[row] = 1}
-    // Return object
-    return obj;
-  // Initialize empty object
-  }, {});
-
-  // Get boolean for too many in 1 row if count of either row in object larger than 2
-  const tooManyInRow = Object.values(rows).some(count => count > 2);
-
-  // If tooManyInRow and hasn't recalled yet retry finding loop / set recall to true
-  if(tooManyInRow && !recall) {
-    return getLinkLoop(hoveredCard, true)
-  }
-
-  // Return hoveredCard / card2 / card3 / complete loop boolean / tag1 / tag2 / backTag if exists otherwise null
-  return [
-    hoveredCard,
-    card2,
-    card3,
-    !tooManyInRow && backTag.length > 0,
-    tag1,
-    tag2,
-    backTag.length > 0 ? backTag : null
-  ];
-}
-
-// Get link centers function with linkedCards, linkedTags, complete loop boolean
-function getLinkCenters(linkedCards, tags, complete) {
-  // If only 1 link return
-  if(linkedCards.length === 1) return;
-
-  // Get center helper
-  const getCenter = (card) => {
-    // Get card rect
-    const rect = card.getBoundingClientRect();
-    // If in row1 account for pause slowdown / account row2 pause slowdown if row 2
-    if(projectsRow1.contains(card)) {
-      return {
-        x: (rect.left + rect.width / 2) + 50,
-        y: rect.top + rect.height / 2
-      }
-    } else {
-      return {
-        x: (rect.left + rect.width / 2) - 50,
-        y: rect.top + rect.height / 2
-      }
-    }
-  }
-
-  // Initialize centers array
-  const centers = [getCenter(linkedCards[0]), getCenter(linkedCards[1])];
-  // If more than 2 cards linked push card3 center / if complete loop re-push card1 center
-  if(linkedCards.length > 2) {
-    centers.push(getCenter(linkedCards[2]));
-    if(complete) centers.push(getCenter(linkedCards[0]));
-  }
-  // Call link animation function with centers, tags, complete loop boolean
-  animateLinks(centers, tags, complete);
-}
-
-// Link animation function
-function animateLinks(centers, tags, complete) {
-  // Update link canvas tracker
-  linkCanvasActive = true;
-  // Create / get canvas
-  const canvas = createCanvas();
-  // Create ctx
-  const ctx = canvas.getContext('2d');
-
-  // Set speed / progress / circle fade
-  let speed = 0.025;
-  let progress = 0;
-  let circleFade = 0.1;
-
-  // Set tag1 text to first tag
-  const tag1Text = tags[0];
-  // Set font style
-  ctx.font = '20px "area-normal", sans-serif';
-  // Get width of tag1
-  const tag1Width = ctx.measureText(tag1Text).width;
-
-  // Get length of link line
-  const lineLength = Math.hypot(
-    centers[1].x - centers[0].x,
-    centers[1].y - centers[0].y
-  );
-
-  // Get tag1 start position / tag1 start progress in line
-  const tag1Start = (lineLength / 2) - (tag1Width / 2);
-  const tag1StartProg = tag1Start / lineLength;
-
-  // Get midpoints of line
-  const midX = (centers[0].x + centers[1].x) / 2;
-  const midY = (centers[0].y + centers[1].y) / 2;
-
-  // Draw circle helper
-  function drawCircles() {
-    // For each center draw circle with circleFade opacity / update circleFade
-    centers.forEach(center => {
-      ctx.beginPath();
-      ctx.arc(center.x, center.y, 6, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(138,205,255, ${circleFade})`;
-      ctx.fill();
-    });
-    circleFade = Math.min(circleFade + .1, 1);
-  }
-
-  // Draw tag helper
-  function drawTag(start, end, mid, tag, tagStartProg, prog) {
-    // Get tagWidth
-    const tagWidth = ctx.measureText(tag).width;
-    // Get angle of line
-    let tagAngle = Math.atan2(
-      end.y - start.y,
-      end.x - start.x
-    );
-
-    // Flip tag if backwards
-    if(Math.abs(tagAngle) > Math.PI / 2) {
-      tagAngle += Math.PI;
-    }
-
-    // Get count of visible letters by progress and tag length
-    const visLetterCount = Math.min(
-      Math.floor((prog - tagStartProg) * 30),
-      tag.length);
-
-    // Set draw color / position / rotation
-    ctx.save();
-    ctx.fillStyle = '#f1f1f1';
-    ctx.translate(mid.x, mid.y);
-    ctx.rotate(tagAngle);
-
-    // Set xOffset to negative half of tag width
-    let xOffset = -tagWidth / 2;
-    // Initialize display text
-    let displayText;
-    // Check if line is drawing left
-    const isLeftward = start.x > end.x;
-
-    // If drawing left
-    if (isLeftward) {
-      // Reverse text
-      displayText = tag.split('').reverse().join('');
-      // Set xOffset to positive
-      xOffset = tagWidth / 2;
-      // For each visible letter
-      for (let i = 0; i < visLetterCount; i++) {
-        // Get letter
-        const letter = displayText[i];
-        // Get width of character
-        const charWidth = ctx.measureText(letter).width;
-        // Decrement offset by charWidth
-        xOffset -= charWidth;
-        // Draw letter with xOffset, -10 y offset
-        ctx.fillText(letter, xOffset, -10);
-      }
-    // If drawing right
-    } else {
-      // Set display text to tag
-      displayText = tag;
-
-      // For each visible letter draw with positive xOffset / increment offset
-      for (let i = 0; i < visLetterCount; i++) {
-        const letter = displayText[i];
-        const charWidth = ctx.measureText(letter).width;
-        ctx.fillText(letter, xOffset, -10);
-        xOffset += charWidth;
-      }
-    }
-    ctx.restore();
-  }
-
-  // Draw static line helper
-  function drawStaticLine(start, end, tagText = null) {
-    // Set line styles / position / length
-    ctx.strokeStyle = '#8acdff';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(start.x, start.y);
-    ctx.lineTo(end.x, end.y);
-    ctx.stroke();
-
-    // If tag exists get line middle / call drawTag helper
-    if(tagText) {
-      const mid = {
-        x: (start.x + end.x) / 2,
-        y: (start.y + end.y) / 2
-      };
-      drawTag(start, end, mid, tagText, 0, 1);
-    }
-  }
-
-  // Draw 1 link function
-  function draw1Link() {
-    // Clear canvas
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-
-    // Get start point / end point
-    const start = centers[0];
-    const end = centers[1];
-
-    // Interpolate line length
-    const aniX = start.x + (end.x - start.x) * progress;
-    const aniY = start.y + (end.y - start.y) * progress;
-
-    // Set line style / position / length
-    ctx.strokeStyle = '#8acdff';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(start.x, start.y);
-    ctx.lineTo(aniX, aniY);
-    ctx.stroke();
-
-    // Call drawCircle helper
-    drawCircles();
-
-    // If progress larger than or equal to tag1 start progress call drawTag helper
-    if(progress >= tag1StartProg) drawTag(start, end, {x: midX,y:midY}, tag1Text, tag1StartProg, progress);
-
-    // Increment progress by speed accounting for odd floating point value
-    progress = Math.min(progress + speed, 1);
-
-    // If progress not complete loop draw1Link with frame / otherwise call drawStaticLine helper
-    if(progress < 1) {
-      requestAnimationFrame(draw1Link);
-    } else {
-      drawStaticLine(start,end,tag1Text);
-    }
-  }
-
-  // Draw 2 links function
-  function draw2Links() {
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Get start center / middle center / end center
-    const [start, mid, end] = centers;
-    // Set tag texts
-    const tag1Text = tags[0];
-    const tag2Text = tags[1];
-    // Get tag widths
-    const tag1Width = ctx.measureText(tag1Text).width;
-    const tag2Width = ctx.measureText(tag2Text).width;
-    // Set local progress
-    let localProg = 0;
-
-    // Get length of line 1 / line 2
-    const lineLength1 = Math.hypot(
-      mid.x - start.x,
-      mid.y - start.y
-    );
-    const lineLength2 = Math.hypot(
-      end.x - mid.x,
-      end.y - mid.y
-    )
-
-    // Get tag1 / tag2 start progress
-    const tag1Start = (lineLength1 / 2) - (tag1Width / 2);
-    const tag1StartProg = tag1Start / lineLength1;
-    const tag2Start = (lineLength2 / 2) - (tag2Width / 2);
-    const tag2StartProg = tag2Start / lineLength2;
-
-    // Draw line 1 function
-    function drawLine1() {
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Interpolate line length
-      const aniX = start.x + (mid.x - start.x) * localProg;
-      const aniY = start.y + (mid.y - start.y) * localProg;
-
-      // Set line styles / position / length
-      ctx.strokeStyle = '#8acdff';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(start.x, start.y);
-      ctx.lineTo(aniX, aniY);
-      ctx.stroke();
-
-      // Call drawCircle helper
-      drawCircles();
-
-      // If localProg larger than or equal to tag1StartProg get middle / call drawTag helper
-      if(localProg >= tag1StartProg) {
-        const mid1 = {
-          x: (start.x + mid.x) / 2,
-          y: (start.y + mid.y) / 2
-        };
-        drawTag(start, mid, mid1, tag1Text, tag1StartProg, localProg);
-
-      }
-
-      // Increment localProg
-      localProg = Math.min(localProg + speed, 1);
-
-      // If localProg incomplete loop drawLine1 / else call drawStaticLine helper for line 1 / reset localProg / call drawLine2 function
-      if(localProg < 1) {
-        requestAnimationFrame(drawLine1);
-      } else {
-        drawStaticLine(start, mid, tag1Text);
-        localProg = 0;
-        requestAnimationFrame(drawLine2)
-      }
-    }
-
-    // Draw line 2 function
-    function drawLine2() {
-      // Clear canvas / interpolate / set styles, position, length / draw static line1 / draw circles / check tag2 progress + draw
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const aniX = mid.x + (end.x - mid.x) * localProg;
-      const aniY = mid.y + (end.y - mid.y) * localProg;
-
-      ctx.strokeStyle = '#8acdff';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(mid.x, mid.y);
-      ctx.lineTo(aniX, aniY);
-      ctx.stroke();
-
-      drawStaticLine(start,mid,tag1Text);
-      drawCircles();
-
-      if(localProg >= tag2StartProg) {
-        const mid2 = {
-          x: (mid.x + end.x) / 2,
-          y: (mid.y + end.y) / 2
-        };
-        drawTag(mid, end, mid2, tag2Text, tag2StartProg, localProg);
-      }
-
-      // Increment localProg
-      localProg = Math.min(localProg + speed, 1);
-
-      // If localProg incomplete loop drawLine2 / otherwise drawStaticLine for line 2
-      if(localProg < 1) {
-        requestAnimationFrame(drawLine2);
-      } else {
-        drawStaticLine(mid,end,tag2Text);
-      }
-    }
-    // Initial line1 call
-    drawLine1();
-  }
-
-  // Draw loop function
-  function drawLoop() {
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Get start / middle / end / back centers
-    const [start, mid, end, back] = centers;
-    // Get tag1 / tag2 / tag3
-    const [tag1Text, tag2Text, tag3Text] = tags;
-
-    // Get tag widths
-    const tag1Width = ctx.measureText(tag1Text).width;
-    const tag2Width = ctx.measureText(tag2Text).width;
-    const tag3Width = ctx.measureText(tag3Text).width;
-
-    // Set localProg
-    let localProg = 0;
-
-    // Get line lengths
-    const line1Length = Math.hypot(mid.x - start.x, mid.y - start.y);
-    const line2Length = Math.hypot(end.x - mid.x, end.y - mid.y);
-    const line3Length = Math.hypot(back.x - end.x, back.y - end.y);
-
-    // Get tag start progress
-    const tag1StartProg = ((line1Length / 2) - (tag1Width / 2)) / line1Length;
-    const tag2StartProg = ((line2Length / 2) - (tag2Width / 2)) / line2Length;
-    const tag3StartProg = ((line3Length / 2) - (tag3Width / 2)) / line3Length;
-
-    // Draw line function
-    function drawLine(startPoint, endPoint, tag, tagStartProg, prog) {
-      // Interpolate line length
-      const aniX = startPoint.x + (endPoint.x - startPoint.x) * prog;
-      const aniY = startPoint.y + (endPoint.y - startPoint.y) * prog;
-
-      // Set line styles / position / length
-      ctx.strokeStyle = '#8acdff';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(startPoint.x, startPoint.y);
-      ctx.lineTo(aniX, aniY);
-      ctx.stroke();
-
-      // Get midpoint
-      const midPoint = {
-        x: (startPoint.x + endPoint.x) / 2,
-        y: (startPoint.y + endPoint.y) / 2
-      };
-
-      // If prog larger than or equal to tagStartProg call drawTag helper
-      if(prog >= tagStartProg) {
-        drawTag(startPoint, endPoint, midPoint, tag, tagStartProg, prog);
-      }
-    }
-
-    // Step 1 function
-    function step1() {
-      // Clear canvas / draw line1 / draw circles / increment localProg / check localProg / loop step1 or call helpers & step2
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      drawLine(start, mid, tag1Text, tag1StartProg, localProg);
-      drawCircles();
-
-      localProg = Math.min(localProg + speed, 1);
-
-      if(localProg < 1) {
-        requestAnimationFrame(step1);
-      } else {
-        drawStaticLine(start,mid,tag1Text);
-        drawCircles();
-        localProg = 0;
-        requestAnimationFrame(step2);
-      }
-    }
-
-    // Step 2 function
-    function step2() {
-      // Clear canvas / draw line1 / draw line2 / draw circles / increment localProg / check localProg / loop step2 or call step 3 * helpers
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      drawStaticLine(start, mid, tag1Text);
-      drawLine(mid, end, tag2Text, tag2StartProg, localProg);
-      drawCircles();
-
-      localProg = Math.min(localProg + speed, 1);
-
-      if(localProg < 1) {
-        requestAnimationFrame(step2);
-      } else {
-        drawStaticLine(mid, end, tag2Text);
-        drawCircles();
-        localProg = 0;
-        requestAnimationFrame(step3);
-      }
-
-    }
-
-    // Step 3 function
-    function step3() {
-      // Clear canvas / draw line1 + line2 + line3 / draw circles / increment localProg / check localProg / loop step3 or helper functions
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      drawStaticLine(start,mid,tag1Text);
-      drawStaticLine(mid,end,tag2Text);
-      drawLine(end, back, tag3Text, tag3StartProg, localProg);
-      drawCircles();
-
-      localProg = Math.min(localProg + speed, 1);
-      if(localProg < 1) {
-        requestAnimationFrame(step3);
-      } else {
-        drawStaticLine(end,back,tag3Text)
-        drawCircles();
-      }
-
-    }
-    // Initial step1 call
-    requestAnimationFrame(step1);
-  }
-
-  // Check linked length / call proper draw function
-  if(centers.length === 2) {
-    draw1Link()
-  } else if(centers.length === 3) {
-    draw2Links()
-  } else if(centers.length === 4 && complete && tags.length === 3) {
-    drawLoop();
-  } else {
-    draw2Links()
-  }
-}
-
-// Create canvas function
-function createCanvas() {
-  // Create canvas / set id / set styles / append to body / return canvas
-  const canvas = document.createElement('canvas');
-  canvas.id = 'constellationCanvas';
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  canvas.style.width = `${window.innerWidth}px`;
-  canvas.style.height = `${window.innerHeight}px`;
-
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '200';
-
-
-  document.body.appendChild(canvas);
-  return canvas;
-}
-
-
-// Project animation functions / set distance / add animation class
-
-function animateProjectCardRow1(card) {
-  card.style.setProperty('--project-ani-dist', `${window.innerWidth + projectCardWidth * 2}px`);
-  card.classList.add('project-ani');
-}
-function animateProjectCardRow2(card) {
-  card.style.setProperty('--project-ani-dist', `-${window.innerWidth + projectCardWidth * 2}px`);
-  card.classList.add('project-ani');
-}
-function animateProjectCardRow3(card) {
-  card.style.setProperty('--project-ani-dist', `${window.innerWidth + projectCardWidth * 2}px`);
-  card.classList.add('project-ani');
+// Pause projects
+function pauseProjects() {
+  updateProjects = false;
 }
 
 
 
-/* ------------------- TEAM FUNCTIONS ------------------- */
+/* ------------------- TEAM ANIMATION ------------------- */
 
-function getEmpWidth() {
-  empCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--employee-card-width').slice(0,-2));
+// Initialize card size variables
+
+let teamCardWidth = 288;
+let teamCardHeight = 384;
+
+// Get card sizes from css variables
+function getTeamCardSize() {
+  teamCardWidth = parseInt(getComputedStyle(body).getPropertyValue('--employee-card-width').slice(0, -2));
+  teamCardHeight = parseInt(getComputedStyle(body).getPropertyValue('--employee-card-height').slice(0, -2));
 }
+getTeamCardSize();
 
-// Initialize card index / card width
-let empCardIndex = 0;
-let empCardWidth = 288;
+// Set visible count / buffer / total to render / speed / indexes / div arrays / gap
+let teamVisCount = 3;
+let teamBuffer = 2;
+let teamTotalRender = teamVisCount + teamBuffer;
+let teamSpeed = 2;
 
-function buildEmpCards() {
-  // Build employee cards
-  employees.forEach((employee, index) => {
-    // Create card div / add classes
-    const card = document.createElement('div');
-    card.classList.add('main-employee-card');
-    card.classList.add('d-flex');
+let startIdxL = 0;
+let startIdxR = 0;
+let teamDivsLeft = [];
+let teamDivsRight = [];
+const teamGap = teamCardHeight * 0.2;
 
-    // Create front / add classes
-    const front = document.createElement('div');
-    front.classList.add('employee-card-front', 'employee-card-face');
+// Split employee array
+const teamMid = Math.ceil(employees.length / 2);
+const teamLeftObjects = employees.slice(0, teamMid);
+const teamRightObjects = employees.slice(teamMid)
 
-    // Create back / add classes
-    const back = document.createElement('div');
-    back.classList.add('employee-card-back', 'employee-card-face');
+// JAVASCRIPT ELEMENT CREATION
+function buildTeam(start = 0) {
+  teamDivsRight = []
+  teamDivsLeft = [];
 
-    // Create link / set href / add class
-    const link = document.createElement('a');
-    link.href = `${employee.linkedIn}`;
-    link.classList.add('linked-in-wrap');
-    // Create icon / set src / set alt / set target / add classes
-    const icon = document.createElement('img');
-    icon.src = '/img/i3/linked-in.svg';
-    icon.alt = 'LinkedIn';
-    icon.target = '_blank';
-    icon.classList.add('linked-in');
-    // Append icon to link / append link to back
-    link.appendChild(icon);
-    back.appendChild(link);
+  for (let i = 0; i < teamTotalRender; i++) {
+    let indexL = (start + i) % teamLeftObjects.length;
+    let indexR = (start + i) % teamRightObjects.length
 
-    // Create textWrap / add class
-    const textWrap = document.createElement('div');
-    textWrap.classList.add('employee-card-text-wrap');
-    // Create name / add class / set text
-    const name = document.createElement('h4');
-    name.classList.add('employee-name-main');
-    name.innerText = `${employee.name}`;
-    // Create title / add class / set text
-    const title = document.createElement('h6');
-    title.classList.add('employee-title-main');
-    title.innerText = `${employee.title}`;
-    // Create tags / add class / set text
-    const tag1 = document.createElement('h6');
-    const tag2 = document.createElement('h6');
-    tag1.classList.add('employee-tag');
-    tag2.classList.add('employee-tag');
-    tag1.innerText = employee.tags[0];
-    tag2.innerText = employee.tags[1];
-    // Create tag wrapper / add class / append tags
-    const tagWrapper = document.createElement('div');
-    tagWrapper.classList.add('employee-tag-wrapper');
-    tagWrapper.appendChild(tag1);
-    tagWrapper.appendChild(tag2);
+    // Left card (default rotated 180deg due to default image rotation to accommodate 3d perspective cards on team page)
+    const cardLWrap = document.createElement('div');
+    cardLWrap.classList.add('employee-card-wrap');
+    cardLWrap.id = `${teamLeftObjects[indexL].id}-card`;
 
-    // Append name, title, tagWrapper to textWrap / append textWrap to front
-    textWrap.appendChild(name);
-    textWrap.appendChild(title);
-    textWrap.appendChild(tagWrapper);
-    front.appendChild(textWrap);
+    const cardL = document.createElement('div');
+    cardL.classList.add('main-employee-card');
+    cardL.style.background = `url(${teamLeftObjects[indexL].img}) center center / cover no-repeat`
+    cardLWrap.appendChild(cardL)
 
-    // Set gradient / create gradient / add class / append to front
-    card.style.setProperty('--gradient-start', `rgba(${employee.gradient}, .7)`);
-    card.style.setProperty('--gradient-end', `rgba(${employee.gradient}, 0)`);
-    const gradient = document.createElement('div');
-    gradient.classList.add('employee-card-gradient');
-    front.appendChild(gradient);
+    const cardLBorder = document.createElement('div');
+    cardLBorder.className = 'employee-card-border';
+    cardLWrap.appendChild(cardLBorder);
+    teamColLeft.appendChild(cardLWrap);
+    teamDivsLeft.push(cardLWrap);
 
-    // Create hover / add class / append to front
-    const hover = document.createElement('div');
-    hover.classList.add('employee-card-hover');
-    front.appendChild(hover);
+    // Right card (No rotation due to whole column being rotated)
+    const cardRWrap = document.createElement('div');
+    cardRWrap.classList.add('employee-card-wrap');
+    cardRWrap.id = `${teamRightObjects[indexR].id}-card`;
 
-    // Create img / set src, alt, & loading / add class / append to front
-    const img = document.createElement('img');
-    img.src = `${employee.img}`;
-    img.alt = `${employee.name}`;
-    img.classList.add('employee-card-img');
-    img.loading = 'lazy';
-    front.appendChild(img);
+    const cardR = document.createElement('div');
+    cardR.classList.add('main-employee-card');
+    cardR.style.background = `url(${teamRightObjects[indexR].img}) center center / cover no-repeat`;
+    cardR.style.rotate = 'none';
+    cardRWrap.appendChild(cardR)
+    const cardRBorder = document.createElement('div');
+    cardRBorder.className = 'employee-card-border';
+    // Opposite border offset due to column rotation
+    cardRBorder.style.transform = 'translateX(20px) translateY(20px)'
+    cardRWrap.appendChild(cardRBorder);
+    teamColRight.appendChild(cardRWrap);
+    teamDivsRight.push(cardRWrap);
 
-    const border = document.createElement('div');
-    border.classList.add('employee-card-border');
-    front.appendChild(border);
-
-
-    // Append front & back to card
-    card.appendChild(front);
-    card.appendChild(back);
-
-    // Create cardWrap / add class / append card to wrap / set wrap id / append wrap to row
-    const cardWrap = document.createElement('div');
-    cardWrap.classList.add('employee-card-wrap');
-    cardWrap.appendChild(card);
-    cardWrap.id = `${employee.id}-card`;
-    teamRow.appendChild(cardWrap)
-
-    cardWrap.style.left = 'calc(-1.5 * var(--employee-card-width))';
-
-  });
-  setTimeout(startEmpAni, 250);
-}
-
-let empChainStart = 0;
-
-function startEmpAni() {
-  [...teamRow.children].forEach(card => card.classList.remove('employee-ani'));
-  const delay = parseInt(getComputedStyle(body).getPropertyValue('--employee-ani-del').slice(0, -2));
-  const duration = parseInt(getComputedStyle(body).getPropertyValue('--employee-ani-dur').slice(0, -2));
-  const cards = [...teamRow.querySelectorAll('.employee-card-wrap')];
-  let chainStart = false;
-  const preload = duration - delay;
-  if(!teamStarted) {
-    cards[0].addEventListener('animationend', () => {
-      cards[0].classList.remove('employee-ani');
-    })
-  }
-
-
-  cards.forEach((card, i) => {
-    const startTime = i * delay;
-    if(startTime < preload) {
-
-      const offset = preload - startTime;
-      card.style.animationDelay = `-${offset}ms`;
-      animateEmployeeCard(card);
-    } else if(!chainStart) {
-      chainStart = true;
-      const initialDelay = delay - (preload % delay);
-      if(!teamStarted) {
-        card.addEventListener('animationstart', () => {
-          let next = card.nextElementSibling;
-          if(!next) next = teamRow.firstElementChild;
-          animateEmployeeCard(next);
-          setEmpCardListeners();
-        }, {once:true});
-      }
-      card.style.animationDelay = `${initialDelay}ms`;
-
-
-      animateEmployeeCard(card);
-    }
-  });
-  if(teamOnScreen) playTeam();
-  if(!teamStarted) teamStarted = true;
-}
-
-// Set card styles function
-function setEmpCardListeners() {
-  const delay = getComputedStyle(body).getPropertyValue('--employee-ani-del');
-  if(!isMobile) {
-    for(let card of teamRow.children) {
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if(!next) next = teamRow.firstElementChild;
-        //next.style.animationDelay = delay;
-        animateEmployeeCard(next);
-      })
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('employee-ani');
-      })
-      card.addEventListener('mouseenter', () => {
-        cardHover(card);
-      });
-      card.addEventListener('mouseleave', () => {
-        disableHover();
-      });
-    }
-  } else {
-    for(let card of teamRow.children) {
-      card.addEventListener('animationstart', function nextCard() {
-        let next = card.nextElementSibling;
-        if(!next) next = teamRow.firstElementChild;
-        next.style.animationDelay = delay;
-        animateEmployeeCard(next);
-      })
-      card.addEventListener('animationend', function resetCard() {
-        card.classList.remove('employee-ani');
-      })
-      card.addEventListener('touchend', (event) => {
-        event.stopPropagation();
-        cardTouchHover(card);
-      }, {once:true});
-    }
   }
 }
+buildTeam();
 
-let teamMobileHovers = [];
-let teamMobileHover = false;
 
-function cardTouchHover(card) {
-  teamMobileHovers.push(card);
-  pauseTeam();
-  card.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
-  card.querySelector('.employee-card-border').style.transform = 'none';
-  card.querySelector('.linked-in-wrap').style.opacity = '1';
-  card.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-  card.querySelector('.linked-in').style.opacity = '1';
 
-  card.addEventListener('touchend', (event) => {
-    event.stopPropagation();
-    teamMobileHovers.splice(teamMobileHovers.indexOf(card), 1);
-    playTeam();
 
-    card.addEventListener('touchend', (event) => {
-      event.stopPropagation();
-      cardTouchHover(card);
-    }, {once:true})
-  }, {once:true})
 
-}
+// Center cards in wrapper
+let teamOffset = -1;
 
-function cardHover(hoveredCard) {
-  pauseTeam();
-  hoveredCard.querySelector('.main-employee-card').style.transform = 'translateX(35px)';
-  hoveredCard.querySelector('.employee-card-border').style.transform = 'none';
-  hoveredCard.querySelector('.linked-in-wrap').style.opacity = '1';
-  hoveredCard.querySelector('.linked-in-wrap').style.pointerEvents = 'all';
-  hoveredCard.querySelector('.linked-in').style.opacity = '1';
-}
-
-function pauseTeam() {
-  teamAnimating = false;
-  for (let card of teamRow.children) {
-    const rect = card.getBoundingClientRect();
-    card.style.animationPlayState = 'paused';
-    if (rect.left < window.innerWidth - 25 && rect.right > 10) {
-      card.querySelector('.main-employee-card').style.transform = 'translateX(35px) rotateX(-180deg)'
-    }
+// Animate team function
+// ASSUMES TEAM CARDS CREATED ACCORDING TO TOTAL TO RENDER VIA LARAVEL
+function animateTeam() {
+  // Return if animation doesn't need update
+  if (!updateTeam) {
+    teamAnimating = false;
+    return;
   }
-}
-function playTeam() {
+  // Set animating to true
   teamAnimating = true;
-  for(let card of teamRow.children) {
-    card.style.animationPlayState = 'running';
-    card.querySelector('.main-employee-card').style.transform = 'translateX(0) rotateX(-180deg)';
-    card.querySelector('.employee-card-border').style.transform = 'translateX(-20px) translateY(-20px)';
-    card.querySelector('.linked-in-wrap').style.opacity = '0';
-    card.querySelector('.linked-in-wrap').style.pointerEvents = 'none';
-    card.querySelector('.linked-in').style.opacity = '0';
+  // Increment offset by speed
+  teamOffset += teamSpeed;
+
+  // Set transform for each rendered card on left and right
+  for (let i = 0; i < teamTotalRender; i++) {
+    let y = (i * (teamCardHeight + teamGap)) + teamOffset;
+    teamDivsLeft[i].style.transform  = `translateX(-50%) translateY(${y}px)`;
+    teamDivsRight[i].style.transform = `translateX(-50%) translateY(${y}px)`;
+  }
+
+  // Begin fading cards out if cycle 90* complete
+  if(teamOffset >= -(teamCardHeight + teamGap) * .1) {
+    teamDivsLeft[teamDivsLeft.length - 1].style.opacity = '0';
+    teamDivsRight[teamDivsRight.length - 1].style.opacity = '0';
+  }
+
+  // If offset larger than 0
+  if (teamOffset >= 0) {
+    // Decrement offset by card height + gap
+    teamOffset -= teamCardHeight + teamGap;
+
+    // Update each index
+    startIdxL = (startIdxL - 1 + teamLeftObjects.length) % teamLeftObjects.length;
+    startIdxR = (startIdxR - 1 + teamRightObjects.length) % teamRightObjects.length;
+
+    // Get recycled cards from end of arrays
+    let recycledL = teamDivsLeft.pop();
+    let recycledR = teamDivsRight.pop();
+
+    // Update recycled card backgrounds
+    recycledL.firstElementChild.style.background =
+      `url(${teamLeftObjects[startIdxL].img}) center center / cover no-repeat`;
+    recycledR.firstElementChild.style.background =
+      `url(${teamRightObjects[startIdxR].img}) center center / cover no-repeat`;
+
+    // Set recycled cards opacity to 0 before unshift
+    recycledL.style.opacity = '0';
+    recycledR.style.opacity = '0';
+
+    // Unshift recycled cards to beginning of div arrays
+    teamDivsLeft.unshift(recycledL);
+    teamDivsRight.unshift(recycledR);
+
+    // Force reflow so DOM recognizes opacity
+    void recycledL.offsetWidth;
+    void recycledR.offsetWidth;
+
+    // Set opacity to transition
+    recycledL.style.opacity = '1';
+    recycledR.style.opacity = '1';
+  }
+
+  // Loop animation
+  requestAnimationFrame(animateTeam);
+}
+
+// Play team animation
+function playTeam() {
+  if(!updateTeam) {
+    updateTeam = true;
+    if(!teamAnimating) animateTeam();
   }
 }
 
-function disableHover() {
-  playTeam();
-}
-
-
-
-
-// Animation function / set distance / add animation class
-function animateEmployeeCard(card, start = false) {
-  card.style.setProperty('--employee-ani-dist', `${window.innerWidth + empCardWidth + (empCardWidth/2)}px`);
-  card.classList.add('employee-ani');
+// Pause team animation
+function pauseTeam() {
+  updateTeam = false;
 }

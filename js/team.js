@@ -5,11 +5,13 @@ window.addEventListener('resize', () => {
   setCardWidth();
   setCardDelay();
   row1.forEach(card => {
+    card.style.animationPlayState = 'paused';
     card.classList.remove('student-ani');
     card.style.right = `-${cardWidth + 10}px`;
     void card.offsetWidth;
   });
   row2.forEach(card => {
+    card.style.animationPlayState = 'paused'
     card.classList.remove('student-ani');
     card.style.left = `-${cardWidth + 10}px`;
     void card.offsetWidth;
