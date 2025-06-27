@@ -65,9 +65,32 @@ p {
     max-width: 85%;
 }
 
-#move-text-wrap {
-    font-size:34px;
-    font-weight: 600;
+
+/**
+ * Phrase Animator Styles
+ */
+.phrase-animator-container {
+    font-size: 2rem;
+  /* font-family: monospace; */
+  font-weight: bold;
+  white-space: nowrap;
+}
+.phrase-animator {
+  display: inline-block;
+  position: relative;
+  min-width: 4ch; /* prevents jitter */
+  vertical-align: baseline;
+}
+.phrase-animator-letter {
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+}
+.phrase-animator-word-0 {
+  color: #4fc3f7; /* light blue */
+}
+.phrase-animator-word-1 {
+  color: #0d47a1; /* dark blue */
 }
 
 h2 {

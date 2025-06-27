@@ -13,6 +13,7 @@
     <!-- Your own styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite('resources/js/app.js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 
 <body>

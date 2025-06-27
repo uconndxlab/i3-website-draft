@@ -13,12 +13,12 @@
                     Innovation
                 </h1>
 
-                <div id="move-text-wrap">
-                    <span class="move-text">We</span>
-                    <span id="move-text">Do Nerd</span>
-                    <span id="move-text-2">Stuff</span>
-                    <span id="forUconn" class="move-text">for UConn.</span>
+                <div class="phrase-animator-container text-white">
+                    <span class="d-block d-md-inline">We</span>
+                    <div id="phrase-animator-uconn" class="phrase-animator"></div>
+                    <span class="d-block d-md-inline">for UConn.</span>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -84,7 +84,7 @@
                 <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-right">
                     <div class="position-relative text-center" style="width: 240px; height: 240px;">
                         <div
-                            class="rounded-circle border border-2 border-light w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+                            class="rounded-circle border-2 border-light w-100 h-100 d-flex flex-column justify-content-center align-items-center">
                             <div class="fs-2 fw-bold text-accent">30+</div>
                             <div class="text-secondary small">Grant-funded projects</div>
                         </div>
@@ -149,5 +149,13 @@
         </div>
     </section>
 
-
+@vite('resources/js/explodingPhrases.js')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.startPhraseAnimator({
+        phrases: ["build systems", "create websites", "explore tech", "implement solutions", "develop apps"],
+        selector: "#phrase-animator-uconn",
+    })
+});
+</script>
 @endsection
