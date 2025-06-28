@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Team Member</h1>
+    <h1 class="text-light">Edit Team Member</h1>
     <form method="POST" action="{{ route('admin.team.update', ['team' => $team]) }}" enctype="multipart/form-data">
         @method('PUT')
         @include('admin.team._form')

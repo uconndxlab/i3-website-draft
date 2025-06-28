@@ -15,13 +15,14 @@ class PageController extends Controller
         $totalTeamMembers = TeamMember::count();
         return view('pages.home', compact('featuredWork', 'teamMembers', 'totalTeamMembers'));
     }
-    public function about()
+    public function story()
     {
-        return view('pages.about');
+        return view('pages.story');
     }
     public function team()
     {
-        return view('pages.team');
+        $people = TeamMember::all();
+        return view('pages.people', compact('people'));
     }
     public function contact()
     {
