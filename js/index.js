@@ -606,6 +606,7 @@ function loadPC() {
 
     // If background color is not hero color
     consistentOverlay.style.opacity = '0';
+    body.style.backgroundColor = 'rgb(38,38,38)';
 
     // Check slider position / call slider change
     if (sliderPos !== 0 && !sliderScrolling) {
@@ -655,8 +656,9 @@ function loadPC() {
     }
 
     // Change overlay color / opacity
-    consistentOverlay.style.backgroundColor = 'rgb(38,38,38)';
-    consistentOverlay.style.opacity = '.8';
+    body.style.backgroundColor = 'rgb(0,0,63)';
+    consistentOverlay.style.backgroundColor = 'rgb(0, 0, 63)';
+    consistentOverlay.style.opacity = '.6';
 
     // Check teamAni visibility / fade out
     if(teamAniOnScreen) {
@@ -708,9 +710,12 @@ function loadPC() {
 
       // Peek team columns at bottom of section
       teamColWrap.style.transform = 'translateY(85%)'
+      teamColRight.style.transform = 'rotate(180deg)';
+      teamColLeft.style.transform = 'rotate(0)';
 
       // Change overlay color / ensure visibility
-      consistentOverlay.style.opacity = '.8';
+      consistentOverlay.style.opacity = '.6';
+      body.style.backgroundColor = '#0A1626';
       consistentOverlay.style.backgroundColor = '#0A1626'
     }
 
@@ -743,8 +748,9 @@ function loadPC() {
     playTeam();
 
     // Change overlay color / ensure visiblity
-    consistentOverlay.style.backgroundColor = '#0A1626';
-    consistentOverlay.style.opacity = '.8';
+    consistentOverlay.style.backgroundColor = '#180028';
+    consistentOverlay.style.opacity = '.6';
+    body.style.backgroundColor = '#180028';
 
 
 
@@ -757,6 +763,8 @@ function loadPC() {
     // FWOOP team columns down / up from footer + ensure visibility
     teamColWrap.style.transform = 'translateY(-50%)';
     teamColWrap.style.opacity = '1';
+    teamColRight.style.transform = 'rotate(190deg)';
+    teamColLeft.style.transform = 'rotate(-10deg)';
     playTeam();
 
     // FWOOP project rows up / fade
@@ -769,8 +777,9 @@ function loadPC() {
     }, {once:true})
 
     // Change overlay color / ensure visibility
-    consistentOverlay.style.backgroundColor = '#180028'
-    consistentOverlay.style.opacity = '.8';
+    consistentOverlay.style.backgroundColor = 'rgb(25 59 66)';
+    body.style.backgroundColor = 'rgb(25 59 66)';
+    consistentOverlay.style.opacity = '.6';
   }
 
   // Dedicated footer observer
@@ -806,6 +815,7 @@ function loadPC() {
         pauseTeam();
 
         // Fade overlay
+        body.style.backgroundColor = 'rgb(38,38,38)';
         consistentOverlay.style.opacity = '0';
       } else {
         if (footerOnScreen) {
