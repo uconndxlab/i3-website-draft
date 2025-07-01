@@ -1688,12 +1688,12 @@ function cacheStaticStars() {
 // Get all stars in each section
 function getStarsByCode(code) {
   switch(code) {
-    case 0: return allStars.starsBotLeft;
-    case 1: return allStars.starsTopLeft;
-    case 2: return allStars.starsBotMid;
-    case 3: return allStars.starsTopMid;
-    case 4: return allStars.starsBotRight;
-    case 5: return allStars.starsTopRight;
+    case 0: return currStars.starsBotLeft;
+    case 1: return currStars.starsTopLeft;
+    case 2: return currStars.starsBotMid;
+    case 3: return currStars.starsTopMid;
+    case 4: return currStars.starsBotRight;
+    case 5: return currStars.starsTopRight;
   }
 }
 
@@ -1723,7 +1723,9 @@ let rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
 let fadeInIncomplete = false;
 
 // Initialize stars array
-const allStars = {
+const allStars = [];
+
+const currStars = {
   // Number code: 0
   starsBotLeft: [],
   // Number code: 1
@@ -1736,7 +1738,8 @@ const allStars = {
   starsBotRight: [],
   // Number code: 5
   starsTopRight: [],
-};
+}
+
 
 // Resize star background (NEED TO ADJUST GROWING RESIZE)
 function resizeStarBG(prevWidth) {
@@ -1756,26 +1759,25 @@ function resizeStarBG(prevWidth) {
     rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
 
     // Get flat array of all stars
-    const flatStars = Object.values(allStars).flat();
 
     // Reset all stars
-    for(const key in allStars) allStars[key] = [];
+    for(const key in currStars) currStars[key] = [];
 
     // Check stars in window / star section position
-    flatStars.forEach(star => {
+    allStars.forEach(star => {
       if(
         star.x >= 0 && star.x < window.innerWidth &&
         star.y >= 0 && star.y < window.innerHeight
       ) {
         if(star.x <= leftVertBreak) {
-          if(star.y <= horizBreak) { allStars.starsTopLeft.push(star) }
-          else { allStars.starsBotLeft.push(star) }
+          if(star.y <= horizBreak) { currStars.starsTopLeft.push(star) }
+          else { currStars.starsBotLeft.push(star) }
         } else if(star.x > leftVertBreak && star.x <= rightVertBreak) {
-          if(star.y <= horizBreak) { allStars.starsTopMid.push(star) }
-          else { allStars.starsBotMid.push(star) }
+          if(star.y <= horizBreak) { currStars.starsTopMid.push(star) }
+          else { currStars.starsBotMid.push(star) }
         } else {
-          if(star.y <= horizBreak) { allStars.starsTopRight.push(star) }
-          else { allStars.starsBotRight.push(star) }
+          if(star.y <= horizBreak) { currStars.starsTopRight.push(star) }
+          else { currStars.starsBotRight.push(star) }
         }
 
         // Draw star
@@ -1807,75 +1809,39 @@ function resizeStarBG(prevWidth) {
     leftVertBreak = Math.floor(window.innerWidth / 3);
     rightVertBreak = Math.floor((window.innerWidth / 3) * 2);
 
-    const newCols = Math.floor((window.innerWidth - updateWidth) / spacing);
-    const newRows = Math.floor((window.innerHeight - updateHeight) / spacing);
 
-    const newStars = [];
-    const existingStars = Object.values(allStars).flat();
+    // Reset all stars
+    for(const key in currStars) currStars[key] = [];
 
-    if(newCols <= 0 && newRows <= 0) return;
-    for(let i = 0; i < newCols; i++) {
-      const x = updateWidth + i * spacing + (Math.random() * 8 - 4);
-      for(let y = 0; y < window.innerHeight; y += spacing) {
-        const jitterY = y + (Math.random() * 8 - 4);
-        const rx = Math.random() * 0.75 + 1.25;
-        const ry = rx * (Math.random() * 0.3 + 1.1);
-        const rotation = Math.random() * Math.PI * 2;
-        newStars.push({
-          x,
-          y: jitterY,
-          originX: x,
-          originY: jitterY,
-          rx,
-          ry,
-          rotation,
-          alpha: 0.25,
-          delay: 0
-        });
+    // Check stars in window / star section position
+    allStars.forEach(star => {
+      if(
+        star.x >= 0 && star.x < window.innerWidth &&
+        star.y >= 0 && star.y < window.innerHeight
+      ) {
+        if(star.x <= leftVertBreak) {
+          if(star.y <= horizBreak) { currStars.starsTopLeft.push(star) }
+          else { currStars.starsBotLeft.push(star) }
+        } else if(star.x > leftVertBreak && star.x <= rightVertBreak) {
+          if(star.y <= horizBreak) { currStars.starsTopMid.push(star) }
+          else { currStars.starsBotMid.push(star) }
+        } else {
+          if(star.y <= horizBreak) { currStars.starsTopRight.push(star) }
+          else { currStars.starsBotRight.push(star) }
+        }
+
+        // Draw star
+        drawStar(star);
       }
-    }
-    for(let i = 0; i < newRows; i++) {
-      const y = updateHeight + i * spacing + (Math.random() * 8 - 4);
-      for(let x = 0; x < window.innerWidth; x++) {
-        const jitterX = x + (Math.random() * 8 - 4);
-        const rx = Math.random() * 0.75 + 1.25;
-        const ry = rx * (Math.random() * 0.3 + 1.1);
-        const rotation = Math.random() * Math.PI * 2;
-        newStars.push({
-          x: jitterX,
-          y,
-          originX: jitterX,
-          originY: y,
-          rx,
-          ry,
-          rotation,
-          alpha: 0.25,
-          delay: 0
-        });
-      }
-    }
-
+    })
     updateCacheSectionOffsets();
     setCachedSectionSize();
+    cacheStaticStars();
+    updateStarSpeed();
+
     updateWidth = window.innerWidth;
     updateHeight = window.innerHeight;
 
-    for(const key in allStars) allStars[key] = [];
-
-    const flatStars = [...existingStars, ...newStars];
-    flatStars.forEach(star => {
-      if (star.x < leftVertBreak) {
-        if (star.y < horizBreak) allStars.starsTopLeft.push(star);
-        else allStars.starsBotLeft.push(star);
-      } else if (star.x < rightVertBreak) {
-        if (star.y < horizBreak) allStars.starsTopMid.push(star);
-        else allStars.starsBotMid.push(star);
-      } else {
-        if (star.y < horizBreak) allStars.starsTopRight.push(star);
-        else allStars.starsBotRight.push(star);
-      }
-    });
-    cacheStaticStars();
 
   }
 }
@@ -1889,6 +1855,10 @@ function createStarBG() {
   // Set canvas width/height to window width/height
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  const totalWidth = window.screen.availWidth;
+  const totalHeight = window.screen.availHeight;
+
   performCanvas.width = window.innerWidth;
   performCanvas.height = window.innerHeight;
   // Set canvas style to viewport height/width
@@ -1897,8 +1867,8 @@ function createStarBG() {
   performCanvas.style.width = '100vw';
   performCanvas.style.height = '100vh';
   // Calculate rows/columns needed depending on screen's resolution
-  let rows = Math.floor(window.innerHeight / spacing);
-  const cols = Math.floor(window.innerWidth / spacing) + 1;
+  let rows = Math.floor(totalHeight / spacing);
+  const cols = Math.floor(totalWidth / spacing) + 1;
 
 
   if(isMobile) {
@@ -1939,18 +1909,20 @@ function createStarBG() {
       const ry = rx * (Math.random() * 0.3 + 1.1);
       const rotation = Math.random() * Math.PI * 2;
 
+      allStars.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})
+
       // Check which section created star is in, add to corresponding array
       if(x <= leftVertBreak) {
-        if(y <= horizBreak) {allStars.starsTopLeft.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
-        else {allStars.starsBotLeft.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
+        if(y <= horizBreak) {currStars.starsTopLeft.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
+        else {currStars.starsBotLeft.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
       }
       else if(x > leftVertBreak && x <= rightVertBreak) {
-        if(y <= horizBreak) {allStars.starsTopMid.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
-        else {allStars.starsBotMid.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
+        if(y <= horizBreak) {currStars.starsTopMid.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
+        else {currStars.starsBotMid.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
       }
       else {
-        if(y <= horizBreak) {allStars.starsTopRight.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
-        else {allStars.starsBotRight.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
+        if(y <= horizBreak) {currStars.starsTopRight.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
+        else {currStars.starsBotRight.push({x, y, originX: x, originY: y, rx, ry, rotation, alpha: 0, delay})}
       }
     }
   }
@@ -1967,9 +1939,9 @@ function createStarBG() {
 }
 
 function drawStarCanvas() {
-  for(const key in allStars) {
+  for(const key in currStars) {
     // Get section
-    const section = allStars[key];
+    const section = currStars[key];
 
     // For each star in section
     for (let i = 0; i < section.length; i++) {
