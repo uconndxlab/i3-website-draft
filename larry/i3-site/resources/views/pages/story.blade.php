@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center">
                     <p class="text-light">
-                        i3 is formed
+                        Internal Insights & Innovation (i3) launches as a strategic development team under the Vice Provost for Academic Operations (hey, remember him?!). Built on the foundation of DXG and Squared Labs, i3 extends its mission beyond research support—partnering with administrative and academic units to design and build custom tools that improve how the university works.
                     </p>
                 </div>
             </div>
@@ -74,7 +74,10 @@
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
-                    <h2 class="mb-4 text-dark"">Create value as soon as possible.</h2>
+                    <h2 class="mb-4 text-dark"">Our Approach</h2>
+                    <blockquote class="blockquote text-dark" style="font-size: 1.5rem; font-style: italic; border-left: 5px solid #333; padding-left: 15px;">
+                        Create value as soon as possible.
+                    </blockquote>
                     <p class="text-dark">That's what we try to do. There's more than one way to do that, and there's no one-size-fits-all solution, but here's what works for us:</p>
                     <h5>Embrace the <acronym title="Minimum Viable Product">MVP</acronym> mindset.</h5>
                     <p class="text-dark">

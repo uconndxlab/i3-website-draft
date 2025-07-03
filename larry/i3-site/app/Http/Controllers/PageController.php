@@ -22,7 +22,19 @@ class PageController extends Controller
     public function team()
     {
         $people = TeamMember::all();
-        return view('pages.people', compact('people'));
+        $senior_staff = $people->filter(function ($person) {
+            return in_array('senior-staff', $person->tags);
+        });
+
+        $student_staff = $people->filter(function ($person) {
+            return in_array('student-staff', $person->tags);
+        });
+
+        $faculty_advisors = $people->filter(function ($person) {
+            return in_array('faculty-advisor', $person->tags);
+        });
+
+        return view('pages.people', compact('people', 'senior_staff', 'student_staff', 'faculty_advisors'));
     }
     public function connect()
     {

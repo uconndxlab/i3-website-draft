@@ -46,7 +46,6 @@
                             <div id="uconn-az-tooltip" style="z-index: 99999 !important"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
