@@ -76,11 +76,30 @@ p {
     text-transform: uppercase;
     font-size: 108px;
     mix-blend-mode: difference;
-    z-index: 9999;
+    z-index: 998;
 
     /* Optional: prevent text from wrapping or shrinking weirdly */
     white-space: nowrap;
 }
+
+.card-outline {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 0.75rem;
+    z-index: 0;
+}
+
+.card-content {
+    background-color: #204950; /* your card bg */
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
 
 
 /**

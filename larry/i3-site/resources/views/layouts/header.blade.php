@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-  <header style="background-color:transparent; padding-top:15px;">
+  <header class="position-sticky top-0 z-3 py-3">
     <nav class="navbar navbar-expand-lg" style="padding:0px;">
       <div class="container">
         <div>
