@@ -2,20 +2,7 @@
 @section('title', 'Our Web Design, Web Development, and UX Design Projects')
 
 @section('content')
-    <style>
-        .page-h1 {
-            position: fixed;
-            text-transform: uppercase;
-            transform-origin: center;
-            transform: rotate(-90deg);
-            position: fixed;
-            left: -50px;
-            bottom: 50%;
-            font-size: 88px;
-            mix-blend-mode: difference;
-            z-index: 9999;
-        }
-    </style>
+
     <h1 class="page-h1 display-1">Story</h1>
 
 

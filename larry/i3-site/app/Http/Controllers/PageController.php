@@ -24,8 +24,8 @@ class PageController extends Controller
         $people = TeamMember::all();
         return view('pages.people', compact('people'));
     }
-    public function contact()
+    public function connect()
     {
-        return view('pages.contact');
+        return view('pages.connect');
     }
 }

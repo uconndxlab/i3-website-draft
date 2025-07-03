@@ -69,18 +69,18 @@
         <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">People</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Story</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Connect with Us</a>
-            </li>
+              <a class="nav-link" href="{{ route('team') }}">People</a>
 
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('projects.index')}}">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('story')}}">Story</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('connect')}}">Connect with Us</a>
+            </li>
           </ul>
         </div>
       </div>

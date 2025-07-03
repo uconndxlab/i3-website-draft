@@ -3,31 +3,56 @@
 
 @section('content')
 
-    <style>
-        .page-h1 {
 
-            position: fixed;
-            text-transform: uppercase;
-            transform-origin: center;
-            transform: rotate(-90deg);
-            position: fixed;
-            left: -88px;
-            bottom: 50%;
-            font-size:88px;
-            mix-blend-mode: difference;
-            z-index: 9999;
-        }
-    </style>
+<h1 class="page-h1 display-1">Projects</h1>
 
-    <h1 class="page-h1 display-1">Projects</h1>
     <section id="completed-projects" class=" d-flex align-items-center px-5" style="min-height: 80vh;">
 
         <div class="container my-5">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
                     class="border-bottom border-2 pb-3 border-primary">Completed</span> Projects</h2>
-            <div class="d-flex mb-3">
+            <div class="d-flex mb-3 justify-content-between align-items-center">
+                <div>
                 <a class="btn btn-outline-primary me-3 bg-white" href="#">For Research</a>
                 <a class="btn btn-dark" href="#">For UConn</a>
+                </div>
+                <!-- Filter Modal Trigger -->
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    Filter Projects
+                </button>
+
+                <!-- Filter Modal -->
+                <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="filterModalLabel">Filter Projects</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="filterForm">
+                                    <div class="mb-3">
+                                        <label for="categoryFilter" class="form-label">Category</label>
+                                        <select class="form-select" id="categoryFilter" name="category">
+                                            <option value="">All Categories</option>
+                                            <option value="web-design">Web Design</option>
+                                            <option value="web-development">Web Development</option>
+                                            <option value="ux-design">UX Design</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dateFilter" class="form-label">Date</label>
+                                        <input type="date" class="form-control" id="dateFilter" name="date">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="row">
