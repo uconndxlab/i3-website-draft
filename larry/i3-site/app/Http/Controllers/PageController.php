@@ -21,7 +21,10 @@ class PageController extends Controller
     }
     public function team()
     {
-        $people = TeamMember::all();
+        $people = TeamMember::all()->sortBy(function ($person) {
+            $nameParts = explode(' ', $person->name);
+            return end($nameParts); // Sort by the last part of the name
+        });
         $senior_staff = $people->filter(function ($person) {
             return in_array('senior-staff', $person->tags);
         });

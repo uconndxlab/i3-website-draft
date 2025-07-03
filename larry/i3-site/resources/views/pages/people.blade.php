@@ -66,8 +66,16 @@
     <section id="people" class=" d-flex align-items-center px-5" style="min-height: 80vh;">
 
         <div class="container my-5">
-            <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
-                    class="border-bottom border-2 pb-3 border-primary">Our</span> People</h2>
+            <div class="row align-items-center justify-content-center mb-3">
+                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Leadership</h2>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
+
+            </div>
+            <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                <p>
+                    Meet the minds steering i3, turning ideas into action and innovation into impact.
+                </p>
+            </div>
             <div class="row">
                 @foreach ($senior_staff as $person)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
@@ -86,9 +94,20 @@
                 @endforeach
             </div>
 
-            <h2 class="mt-5 mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
-                    class="border-bottom border-2 pb-3 border-primary">Faculty</span> Advisors</h2>
-            <div class="row">
+
+            <div class="row py-3">
+                <div class="col-md-12 text-center">
+                    <div class="row align-items-center justify-content-center mb-3">
+                        <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Faculty Advisors</h2>
+                        <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
+                    </div>
+
+                    <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                        <p>
+                            Faculty advisors play a pivotal role in our journey. They help us recruit talent, provide invaluable mentorship, and connect us with their esteemed colleagues, fostering growth and collaboration.
+                        </p>
+                    </div>
+                </div>
                 @foreach ($faculty_advisors as $advisor)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="position-relative person-card rounded-3">
@@ -106,9 +125,23 @@
                 @endforeach
             </div>
 
-            <h2 class="mt-5 mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
-                    class="border-bottom border-2 pb-3 border-primary">Student</span> Staff</h2>
+
             <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <div class="row align-items-center justify-content-center mb-3">
+                        <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Student Staff</h2>
+                        <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
+                    </div>
+
+                    <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                        <p>
+                            Our student staff are the heart of i3. They bring fresh perspectives, technical skills, and a passion for innovation that drives our projects forward. From app development to research support, they make it happen.
+                        </p>
+                    </div>
+
+                </div>
+
                 @foreach ($student_staff as $student)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="position-relative person-card rounded-3">
@@ -129,7 +162,7 @@
         </div>
     </section>
 
-    
+
 
 
 
