@@ -2,9 +2,11 @@
 @section('title', 'Manage Team')
 
 @section('content')
-<h1 class="text-light">Team Members</h1>
 
-<div class="container">
+<div class="container text-light">
+
+    <h1 class="text-light">Team Members</h1>
+
     <a href="{{ route('admin.team.create') }}" class="btn btn-primary mb-3">Add Member</a>
 
     <table class="table table-dark table-striped">

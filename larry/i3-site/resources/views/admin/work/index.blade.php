@@ -2,7 +2,8 @@
 @section('title', 'Manage Work Items')
 
 @section('content')
-<div class="container">
+<div class="container text-light">
+    {{-- Display success or error messages --}}
     
     @if (session('success'))
         <div class="alert alert-success">

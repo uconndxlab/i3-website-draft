@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\WorkItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Tag;
 
 class WorkItemController extends Controller
 {
@@ -23,8 +24,10 @@ class WorkItemController extends Controller
      */
     public function create()
     {
-        return view('admin.work.create');
 
+        $tags = Tag::all();
+        
+        return view('admin.work.create', compact('tags'));
     }
 
     /**
@@ -63,15 +66,20 @@ class WorkItemController extends Controller
      */
     public function edit(WorkItem $work)
     {
-        return view('admin.work.edit', compact('work'));
+
+        // Fetch all tags for the form
+        $tags = Tag::all();
+
+        return view('admin.work.edit', compact('work', 'tags'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, WorkItem $workItem)
+    public function update(Request $request, $workItem)
     {
+        $workItem = WorkItem::findOrFail($workItem);
         $data = $request->validate([
             'title' => 'required',
             'excerpt' => 'nullable',

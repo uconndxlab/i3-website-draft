@@ -60,9 +60,10 @@
             </div>
             <div class="row">
                 @foreach ($items as $project)
+                @dump($project)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden;">
-                            <img src="{{ asset('storage/' . $project->thumbnail) }}" alt="{{ $project->title }}"
+                            <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time()}}" alt="{{ $project->title }}"
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;  border-radius:10px;">
                         </div>
                     </div>
