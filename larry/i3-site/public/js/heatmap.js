@@ -1,5 +1,5 @@
-const cellSize = 11;
-const cellMargin = 4;
+const cellSize = 14;
+const cellMargin = 6;
 const weekCount = 52; 
 const monthGap = 15;
 
@@ -10,14 +10,16 @@ const CONFIG = {
     year: 2025,
 };
 
-let today, startDate;
+let today, startDate, endDate;
 
-if (CONFIG.year == new Date().getFullYear()) {
+if (CONFIG.year === new Date().getFullYear()) {
     today = new Date();
-    startDate = new Date(today.getFullYear(), 0, 1);
+    startDate = new Date(today.getFullYear(), 0, 1); // January 1 of the current year
+    endDate = new Date(today.getFullYear(), 11, 31); // December 31 of the current year
 } else {
-    startDate = new Date(CONFIG.year, 0, 1); 
-    today = new Date(CONFIG.year, 11, 31);
+    startDate = new Date(CONFIG.year, 0, 1); // January 1 of the selected year
+    endDate = new Date(CONFIG.year, 11, 31); // December 31 of the selected year
+    today = endDate; // Set today to the last day of the selected year
 }
 
 document.getElementById('contribution-year').textContent = " in " + CONFIG.year;
@@ -54,12 +56,11 @@ const colorScale = d3.scaleThreshold()
 // Generate dates for the entire year
 function generateDates() {
     const dates = [];
-    const endDate = new Date(CONFIG.year, 11, 31); 
     for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
         const dateStr = d.toISOString().split('T')[0];
         dates.push({
             date: new Date(d),
-            count: 0 // Initialize with zero contributions
+            count: 0
         });
     }
     return dates;
@@ -80,8 +81,8 @@ function createEmptyHeatmap() {
         .attr("height", cellSize)
         .attr("rx", 2)
         .attr("ry", 2)
-        .attr("x", (d, i) => {
-            const weekNum = Math.floor(i / 7);
+        .attr("x", d => {
+            const weekNum = d3.timeWeek.count(d3.timeYear(d.date), d.date);
             return weekNum * (cellSize + cellMargin) + 30;
         })
         .attr("y", (d, i) => {
@@ -129,19 +130,19 @@ function createEmptyHeatmap() {
 
 // Draw the legend
 function drawLegend() {
-    const legendX = width - 120; 
+    const legendX = width - 250; 
     const legendY = height + 20; 
     
     svg.append("text")
         .attr("class", "legend-label")
         .attr("x", legendX - 35)
-        .attr("y", legendY + 3)
+        .attr("y", legendY + 4)
         .text("Less");
         
     svg.append("text")
         .attr("class", "legend-label")
-        .attr("x", legendX + 75)
-        .attr("y", legendY + 3)
+        .attr("x", legendX + 100)
+        .attr("y", legendY + 4)
         .text("More");
         
     svg.selectAll(".legend-item")
@@ -173,22 +174,10 @@ async function loadContributionData() {
         const data = await response.json();
         console.log(`Successfully loaded contribution data for ${CONFIG.organization} (${CONFIG.year})`);
         
-        // Update total contributions count
-        document.getElementById('contribution-count').textContent = 
-            data.totalContributions.toLocaleString() + " contributions";
-        document.getElementById('contribution-year').textContent = " in " + CONFIG.year;
-        
-        // Convert the data format
-        const contributionsData = {};
-        for (const [date, count] of Object.entries(data.contributionsByDay)) {
-            contributionsData[date] = count;
-        }
-        
-        return contributionsData;
+        return data.contributionsByDay;
     } catch (error) {
         console.error('Error loading contribution data:', error);
-        // Return empty data object, not random data
-        return {};
+        return {}; // Return empty data object
     }
 }
 
@@ -211,12 +200,10 @@ function generateRandomContributionData() {
 function updateHeatmapWithData(contributionsData) {
     console.log("Updating heatmap with contribution data");
     
-    const dates = generateDates();
-    // Update counts with actual data
-    dates.forEach(d => {
-        const dateStr = d.date.toISOString().split('T')[0];
-        d.count = contributionsData[dateStr] || 0;
-    });
+    const dates = Object.keys(contributionsData).map(dateStr => ({
+        date: new Date(dateStr),
+        count: contributionsData[dateStr]
+    }));
     
     // Update cell colors
     svg.selectAll(".day")
@@ -246,25 +233,17 @@ async function initializeHeatmap() {
     createEmptyHeatmap();
     
     try {
-        // Then try to load real data
+        // Load real data
         const contributionsData = await loadContributionData();
         
-        // Check if we got actual data
-        const hasData = Object.keys(contributionsData).length > 0;
-        
-        if (hasData) {
+        if (Object.keys(contributionsData).length > 0) {
             // Update the visualization with real data
             updateHeatmapWithData(contributionsData);
         } else {
             console.log("No contribution data available, showing empty heatmap");
-            // const randomData = generateRandomContributionData();
-            // updateHeatmapWithData(randomData);
         }
     } catch (error) {
         console.error("Failed to initialize heatmap:", error);
-        console.log("Skipping data as fallback");
-        // const randomData = generateRandomContributionData();
-        // updateHeatmapWithData(randomData);
     }
 }
 
