@@ -1354,3 +1354,8 @@ p.small {
     scroll-snap-align: center;
     scroll-margin: 40px;
 }
+
+.roboto-mono {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+}

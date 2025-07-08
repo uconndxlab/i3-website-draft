@@ -3,10 +3,6 @@
 
 @section('content')
 <style>
-    #origins h1 {
-        font-size: 6rem;
-    }
-
     #origins p {
         font-size: 1.2rem;
     }
@@ -33,6 +29,13 @@
 
     #origins .slide p {
         margin-top:1.2rem;
+    }
+
+    #origins .slide h2 {
+        font-family:"Roboto Mono", monospace;
+        font-size: 10rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
     }
 </style>
 
@@ -122,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="container my-5">
             <div class="row slide" id="slide-2017">
                 <div class="col-md-6 text-center timeline-header">
-                    <h1 class="text-light">2017</h1>
+                    <h2 class="text-light">2017</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <p class="text-light">
@@ -140,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="row slide" id="slide-2019">
                 <div class="col-md-6 text-center timeline-header">
-                    <h1 class="text-light">2019</h1>
+                    <h2 class="text-light">2019</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
 
@@ -171,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="row slide" id="slide-2020">
                 <div class="col-md-6 text-center timeline-header">
-                    <h1 class="text-light">2020</h1>
+                    <h2 class="text-light">2020</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <a href="#slide-2019" class="btn btn-outline-light p-1"
@@ -194,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="row slide" id="slide-2024">
                 <div class="col-md-6 text-center timeline-header">
-                    <h1 class="text-light">2024</h1>
+                    <h2 class="text-light">2024</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <a href="#slide-2020" class="btn btn-outline-light p-1"

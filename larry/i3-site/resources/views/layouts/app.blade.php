@@ -5,13 +5,22 @@
     <meta charset="utf-8">
     <title>@yield('title', 'i3') | Internal Insights & Innovation | UConn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
     <!-- Bootstrap Icons (optional) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
     <!-- Your own styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 </head>
@@ -36,36 +45,41 @@
                         <div class="row mb-4">
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-dark text-light" id="firstName" placeholder="Lorem">
+                                    <input type="text" class="form-control bg-dark text-light" id="firstName"
+                                        placeholder="Lorem">
                                     <label for="firstName">First Name</label>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-dark text-light" id="lastName" placeholder="Ipsum">
+                                    <input type="text" class="form-control bg-dark text-light" id="lastName"
+                                        placeholder="Ipsum">
                                     <label for="lastName">Last Name</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-floating mb-4">
-                            <input type="email" class="form-control bg-dark text-light" id="email" placeholder="name@example.com">
+                            <input type="email" class="form-control bg-dark text-light" id="email"
+                                placeholder="name@example.com">
                             <label for="email">Email address</label>
                         </div>
 
                         <div class="form-floating mb-4">
-                            <textarea class="form-control bg-dark text-light" placeholder="Leave a comment here" id="message" style="height: 100px"></textarea>
+                            <textarea class="form-control bg-dark text-light" placeholder="Leave a comment here" id="message"
+                                style="height: 100px"></textarea>
                             <label for="message">Message</label>
                         </div>
                         <div class="btn display-btn btn-arrow-slide">
-                            <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:200px">
+                            <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white"
+                                style="width:200px">
                                 <span class="btn-arrow-slide-circle" aria-hidden="true">
                                     <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                                 </span>
                                 <span class="btn-arrow-slide-text"> Send Message </span>
                             </a>
                         </div>
-                        
+
                     </form>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
@@ -101,7 +115,8 @@
 </body>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
 @vite('resources/js/app.js')
 </body>
 
