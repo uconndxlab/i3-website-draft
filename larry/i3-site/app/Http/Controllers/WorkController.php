@@ -11,10 +11,21 @@ class WorkController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, $tag = null)
     {
-        $items = WorkItem::with('tags')->latest()->paginate(18);
-        return view('pages.projects', compact('items'));
+        $allTags = Tag::all();
+      
+
+        if ($tag && $tag !== 'for-all') {
+            $tagModel = Tag::where('slug', $tag)->firstOrFail();
+            $items = WorkItem::whereHas('tags', function ($query) use ($tagModel) {
+                $query->where('tags.slug', $tagModel->slug);
+            })->with('tags')->latest()->paginate(18);
+        } else {
+            $items = WorkItem::with('tags')->latest()->paginate(18);
+        }
+
+        return view('pages.projects', compact('items', 'allTags', 'tag'));
     }
 
     /**

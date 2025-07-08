@@ -94,6 +94,11 @@ class WorkItemController extends Controller
         }
 
         $data['slug'] = Str::slug($data['title']);
+
+        if ($request->has('tags')) {
+            $workItem->tags()->sync($request->input('tags'));
+        }
+
         $workItem->update($data);
 
         return redirect()->route('admin.work.index')->with('success', 'Work item updated.');

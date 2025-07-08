@@ -98,7 +98,7 @@
                     couches, and get a great view of campus!
                 </p>
                 <div class="btn display-btn btn-arrow-slide">
-                    <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:225px">
+                    <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:225px">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                             <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
@@ -109,7 +109,7 @@
         </div>
     </section>
 
-    <section id="hire-us" class="bg-deep" style="min-height: 100vh;">
+    <section id="hire-us" class="bg-deep">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire Us</h2>
@@ -143,11 +143,16 @@
                         <div class="card-body px-0">
                             <h3 class="card-title text-center mb-4 text-uppercase text-dark letter-spacing-1">Fees</h3>
                             <div class="list-group list-group-flush">
-                                @foreach ([['label' => 'Faculty Oversight/Development'], ['label' => 'Application Development'], ['label' => 'Graduate Assistant'], ['label' => 'Student Design'], ['label' => 'Student Development'], ['label' => 'Hosting Services'], ['label' => 'Equipment Fees (for research relating to custom development)']] as $fee)
+                                @foreach([
+                                    ['label' => 'Director Project Engagement', 'amount' => 158],
+                                    ['label' => 'Senior App Developer', 'amount' => 114],
+                                    ['label' => 'Senior UX Designer', 'amount' => 78],
+                                    ['label' => 'Student Design', 'amount' => 46],
+                                ] as $fee)
                                     <div
                                         class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom border-primary-subtle py-3 px-4">
                                         <span>{{ $fee['label'] }}</span>
-                                        <span class="fw-bold text-end" style="min-width: 80px;">$...</span>
+                                        <span class="fw-bold text-end" style="min-width: 80px;">${{ $fee['amount'] }}/hr</span>
                                     </div>
                                 @endforeach
                             </div>
@@ -160,7 +165,7 @@
 
     </section>
 
-    <section class="bg-teal text-light" style="min-height: 100vh;">
+    <section class="bg-teal text-light">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire You</h2>
@@ -204,9 +209,9 @@
             </div>
     </section>
 
-    <section class="bg-white text-dark d-flex align-items-center" style="min-height: 100vh;">
+    <section class="bg-white text-dark d-flex align-items-center py-5">
         <div class="container py-5">
-            <div class="row mt-4 g-5">
+            <div class="row mt-4 g-5 d-flex align-items-center">
                 <div class="col-lg-6">
                     <h2 class="my-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
                         class="border-bottom border-2 pb-3 border-primary">Support</span> Us</h2>

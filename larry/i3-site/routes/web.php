@@ -11,7 +11,10 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/connect', 'connect')->name('connect');
 });
 
-Route::resource('projects', WorkController::class)->only(['index', 'show']);
+Route::resource('projects', WorkController::class)->only(['index']);
+Route::get('projects/{tag}', [WorkController::class, 'index'])
+    ->name('projects.tag')
+    ->where('tag', '[a-zA-Z0-9-]+');
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
