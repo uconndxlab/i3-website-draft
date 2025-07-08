@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite('resources/js/app.js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 </head>
 
 <body>
@@ -23,7 +24,7 @@
             @yield('content')
         </main>
     </div>
-</body>
+
 <section id="contact" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
     <div class="container">
         <h2 class="mb-4 d-inline-block pb-3" data-aos="fade-down"><span
