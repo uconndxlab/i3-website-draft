@@ -202,8 +202,10 @@ class PhotoScroller {
                 return total + wrapper.offsetWidth + this.gap;
             }, 0);
             
-            // Set initial position for seamless loop
-            const startX = direction === 1 ? 0 : -originalSetWidth;
+            // Set initial position to ensure row is filled from the start
+            // For right-moving rows, start at -originalSetWidth so the second set is visible
+            // For left-moving rows, start at -originalSetWidth so the second set is visible
+            const startX = -originalSetWidth;
             gsap.set(row, { x: startX });
 
             // Create seamless looping animation
@@ -211,7 +213,7 @@ class PhotoScroller {
             const duration = distance / this.speed;
             
             const animation = gsap.to(row, {
-                x: direction === 1 ? -originalSetWidth : 0,
+                x: direction === 1 ? -originalSetWidth * 2 : 0,
                 duration: duration,
                 ease: 'none',
                 repeat: -1,
@@ -236,12 +238,12 @@ class PhotoScroller {
     }
 
     calculateRowWidth(row) {
-        const wrappers = row.querySelectorAll(`.${this.wrapperClass}`);
+        const images = row.querySelectorAll('img');
         let totalWidth = 0;
         
-        wrappers.forEach((wrapper, index) => {
-            totalWidth += wrapper.offsetWidth;
-            if (index < wrappers.length - 1) {
+        images.forEach((img, index) => {
+            totalWidth += img.offsetWidth;
+            if (index < images.length - 1) {
                 totalWidth += this.gap;
             }
         });

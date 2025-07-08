@@ -24,8 +24,8 @@
     </section>
 
 
-    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 1;">
-        <div id="projectsScroller">
+    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 0;">
+        <div id="projectsScroller" style="visibility:hidden;">
             @foreach(\App\Models\WorkItem::all() as $item)
             <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
                 <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
@@ -238,6 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         imageClass: 'photo-scroller-image',
         wrapperClass: 'photo-box-effect'
     });
+    document.getElementById('projectsScroller').style.visibility = '';
 });
 </script>
 @endsection
