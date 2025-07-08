@@ -2,7 +2,7 @@
 @section('title', 'Mobile Apps, Web Apps, UX Design, Web Development, and Web Design')
 
 @section('content')
-
+{{-- <div class="scroll-snap-container"> --}}
     {{-- Hero --}}
     <section class="hero-section d-flex align-items-center position-relative text-light" style="min-height: 80vh;">
         <div class="container z-2">
@@ -22,6 +22,72 @@
             </div>
         </div>
     </section>
+
+
+    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 1;">
+        <div id="projectsScroller">
+            @foreach(\App\Models\WorkItem::all() as $item)
+            <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
+                <img src="{{ $item->thumbnail }}" alt="{{ $item->title }}">
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scroller = document.getElementById('projectScrollerContainer');
+        const whatWeDo = document.getElementById('what-we-do');
+        const teamSection = document.getElementById('team');
+
+        function updateScrollerPosition() {
+            const rect = whatWeDo.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Calculate the vertical center of the viewport
+            const viewportCenter = windowHeight / 2;
+            // Calculate the vertical center of the section relative to the viewport
+            const sectionCenter = rect.top + rect.height / 2;
+
+            // Fade out as we scroll into #team
+            let teamRect = teamSection.getBoundingClientRect();
+            let teamEnter = teamRect.top;
+            let teamFadeDistance = Math.min(windowHeight, teamRect.height);
+
+            let fadeOutRatio = 1;
+            if (teamEnter < windowHeight && teamEnter > 0) {
+                // Start fading out sooner: begin fade when #team is 60% from bottom of viewport
+                const fadeStart = windowHeight * 0.6;
+                const fadeDistance = teamFadeDistance * 0.2; // fade over 80% of #team's height
+                if (teamEnter < fadeStart) {
+                    fadeOutRatio = Math.max(0, Math.min(1, (teamEnter - (fadeStart - fadeDistance)) / fadeDistance));
+                }
+            } else if (teamEnter <= 0) {
+                fadeOutRatio = 0;
+            }
+
+            // If the section's center is above the viewport center, stick at 0%
+            if (sectionCenter <= viewportCenter) {
+                scroller.style.transform = 'translateY(0%)';
+                scroller.style.opacity = (0.05 * fadeOutRatio).toString();
+            } else {
+                // Otherwise, interpolate from 50% to 0% as the section's center approaches the viewport center
+                const distance = sectionCenter - viewportCenter;
+                const maxDistance = windowHeight / 2 + rect.height / 2;
+                const ratio = Math.max(0, Math.min(1, distance / maxDistance));
+                const translateY = 50 * ratio;
+                // Opacity interpolates from 1 (fully visible) to 0.05 (faded), then multiplies by fadeOutRatio
+                const opacity = (0.05 + 0.95 * ratio) * fadeOutRatio;
+                scroller.style.transform = `translateY(${translateY}%)`;
+                scroller.style.opacity = opacity.toString();
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollerPosition, { passive: true });
+        window.addEventListener('resize', updateScrollerPosition);
+        updateScrollerPosition();
+    });
+    </script>
+    
 
     {{-- What We Do --}}
     <section id="what-we-do" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
@@ -148,14 +214,30 @@
             </div>
         </div>
     </section>
+{{-- </div> --}}
+    
 
 @vite('resources/js/explodingPhrases.js')
+@vite('resources/js/photoScroller.js')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     window.startPhraseAnimator({
         phrases: ["build systems", "create websites", "explore tech", "implement solutions", "develop apps"],
         selector: "#phrase-animator-uconn",
-    })
+    });
+
+    const projectScroller = window.createPhotoScroller({
+        selector: "#projectsScroller",
+        rows: 2,
+        aspectRatio: 16/9,
+        speed: 50,
+        maxImageWidth: 400,
+        gap: 70,
+        rowGap: 100,
+        direction: -10,
+        imageClass: 'photo-scroller-image',
+        wrapperClass: 'photo-box-effect'
+    });
 });
 </script>
 @endsection
