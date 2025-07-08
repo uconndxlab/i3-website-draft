@@ -3,7 +3,6 @@
 
 @section('content')
 
-
     <h1 class="page-h1 display-1">Projects</h1>
 
     <section id="completed-projects" class=" d-flex align-items-center px-5" style="min-height: 80vh;">
@@ -189,8 +188,14 @@
             </div>
         </div>
     </section>
-    
 
+    <section class="my-5">
+        <div class="container">
+            <h2 class="mb-4">GitHub Activity</h2>
+            <x-heatmap />
+        </div>
+    </section>
+    
     <section class="news-section py-5 bg-light text-dark">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
