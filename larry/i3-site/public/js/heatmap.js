@@ -54,7 +54,8 @@ const colorScale = d3.scaleThreshold()
 // Generate dates for the entire year
 function generateDates() {
     const dates = [];
-    for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
+    const endDate = new Date(CONFIG.year, 11, 31); 
+    for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
         const dateStr = d.toISOString().split('T')[0];
         dates.push({
             date: new Date(d),
