@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
         speed: 50,
         gap: 70,
         maxImageWidth: 200,
-        direction: 95,
+        direction: -85,
         imageClass: 'photo-scroller-image ',
         wrapperClass: 'photo-box-effect'
     });
