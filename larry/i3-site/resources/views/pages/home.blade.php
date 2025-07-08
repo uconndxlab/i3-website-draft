@@ -28,7 +28,7 @@
         <div id="projectsScroller">
             @foreach(\App\Models\WorkItem::all() as $item)
             <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
-                <img src="{{ $item->thumbnail }}" alt="{{ $item->title }}">
+                <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
             </div>
             @endforeach
         </div>
