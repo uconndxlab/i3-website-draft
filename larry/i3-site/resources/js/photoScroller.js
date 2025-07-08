@@ -16,6 +16,10 @@ class PhotoScroller {
         this.imageClass = options.imageClass || 'photo-scroller-image'; // class name for img elements
         this.wrapperClass = options.wrapperClass || 'photo-scroller-wrapper'; // class name for img wrapper elements
         
+        // Image rotation properties
+        this.imageRotationThreshold = 45; // degrees - when to start rotating images
+        this.imageRotation = 0; // current image rotation
+        
         this.container = null;
         this.images = [];
         this.rowElements = [];
@@ -53,6 +57,9 @@ class PhotoScroller {
             height: '400px', // Set a default height so rows are visible
             transform: `rotate(${this.direction}deg)`
         });
+        
+        // Calculate initial image rotation
+        this.imageRotation = this.calculateImageRotation();
     }
 
     organizeIntoRows() {
@@ -139,55 +146,137 @@ class PhotoScroller {
     styleImageWrapper(wrapper) {
         const img = wrapper.querySelector('img');
         
+        // Calculate dimensions based on aspect ratio and constraints
+        const containerHeight = this.container.offsetHeight / this.rows;
+        let imageWidth, imageHeight;
+        
+        if (this.aspectRatio) {
+            // When images are rotated 90°, we need to account for visual aspect ratio
+            let effectiveAspectRatio = this.aspectRatio;
+            if (Math.abs(this.imageRotation) === 90) {
+                // Flip aspect ratio for 90° rotation since width becomes height visually
+                effectiveAspectRatio = 1 / this.aspectRatio;
+            }
+            
+            // Calculate width from height and effective aspect ratio
+            const calculatedWidth = containerHeight * effectiveAspectRatio;
+            imageWidth = Math.min(calculatedWidth, this.maxImageWidth);
+            imageHeight = imageWidth / effectiveAspectRatio;
+        } else {
+            // Use natural image dimensions up to maxImageWidth
+            const naturalAspectRatio = img.naturalWidth / img.naturalHeight;
+            if (img.naturalWidth > this.maxImageWidth) {
+                imageWidth = this.maxImageWidth;
+                imageHeight = this.maxImageWidth / naturalAspectRatio;
+            } else {
+                imageWidth = img.naturalWidth;
+                imageHeight = img.naturalHeight;
+            }
+            // Scale down if height exceeds container
+            if (imageHeight > containerHeight) {
+                imageHeight = containerHeight;
+                imageWidth = containerHeight * naturalAspectRatio;
+            }
+        }
+        
+        // Calculate wrapper dimensions to account for rotation
+        let wrapperWidth = imageWidth;
+        let wrapperHeight = imageHeight;
+        
+        // When images are rotated 90 degrees, swap width and height for wrapper
+        if (Math.abs(this.imageRotation) === 90) {
+            wrapperWidth = imageHeight;
+            wrapperHeight = imageWidth;
+        }
+        
         const wrapperStyles = {
-            height: '100%',
-            maxWidth: `${this.maxImageWidth}px`,
+            width: `${wrapperWidth}px`,
+            height: `${wrapperHeight}px`,
             flexShrink: 0,
-            display: 'inline-block',
-            position: 'relative' // Important for pseudo-elements
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            overflow: 'visible' // Changed to visible so rotated content isn't clipped
         };
 
         const imageStyles = {
-            width: '100%',
-            height: '100%',
+            width: `${imageWidth}px`,
+            height: `${imageHeight}px`,
             objectFit: 'cover',
-            display: 'block'
+            display: 'block',
+            transform: `rotate(${this.imageRotation}deg)`,
+            transformOrigin: 'center center'
         };
-
-        // Apply aspect ratio if specified
-        if (this.aspectRatio) {
-            const containerHeight = this.container.offsetHeight / this.rows;
-            const calculatedWidth = containerHeight * this.aspectRatio;
-            wrapperStyles.width = `${Math.min(calculatedWidth, this.maxImageWidth)}px`;
-            wrapperStyles.height = `${Math.min(calculatedWidth / this.aspectRatio, containerHeight)}px`;
-        } else {
-            wrapperStyles.width = 'auto';
-        }
 
         gsap.set(wrapper, wrapperStyles);
         gsap.set(img, imageStyles);
     }
 
     styleImage(img) {
-        const styles = {
-            height: '100%',
-            maxWidth: `${this.maxImageWidth}px`,
-            objectFit: 'cover',
-            flexShrink: 0,
-            display: 'inline-block'
-        };
-
-        // Apply aspect ratio if specified
+        // Calculate dimensions based on aspect ratio and constraints
+        const containerHeight = this.container.offsetHeight / this.rows;
+        let imageWidth, imageHeight;
+        
         if (this.aspectRatio) {
-            const containerHeight = this.container.offsetHeight / this.rows;
-            const calculatedWidth = containerHeight * this.aspectRatio;
-            styles.width = `${Math.min(calculatedWidth, this.maxImageWidth)}px`;
-            styles.height = `${Math.min(calculatedWidth / this.aspectRatio, containerHeight)}px`;
+            // When images are rotated 90°, we need to account for visual aspect ratio
+            let effectiveAspectRatio = this.aspectRatio;
+            if (Math.abs(this.imageRotation) === 90) {
+                // Flip aspect ratio for 90° rotation since width becomes height visually
+                effectiveAspectRatio = 1 / this.aspectRatio;
+            }
+            
+            // Calculate width from height and effective aspect ratio
+            const calculatedWidth = containerHeight * effectiveAspectRatio;
+            imageWidth = Math.min(calculatedWidth, this.maxImageWidth);
+            imageHeight = imageWidth / effectiveAspectRatio;
         } else {
-            styles.width = 'auto';
+            // Use natural image dimensions up to maxImageWidth
+            const naturalAspectRatio = img.naturalWidth / img.naturalHeight;
+            if (img.naturalWidth > this.maxImageWidth) {
+                imageWidth = this.maxImageWidth;
+                imageHeight = this.maxImageWidth / naturalAspectRatio;
+            } else {
+                imageWidth = img.naturalWidth;
+                imageHeight = img.naturalHeight;
+            }
+            // Scale down if height exceeds container
+            if (imageHeight > containerHeight) {
+                imageHeight = containerHeight;
+                imageWidth = containerHeight * naturalAspectRatio;
+            }
         }
 
+        const styles = {
+            width: `${imageWidth}px`,
+            height: `${imageHeight}px`,
+            objectFit: 'cover',
+            flexShrink: 0,
+            display: 'inline-block',
+            transform: `rotate(${this.imageRotation}deg)`,
+            transformOrigin: 'center center'
+        };
+
         gsap.set(img, styles);
+    }
+
+    /**
+     * Calculate the rotation to apply to individual images based on container direction
+     */
+    calculateImageRotation() {
+        const absDirection = Math.abs(this.direction % 360);
+        const normalizedDirection = absDirection > 180 ? 360 - absDirection : absDirection;
+        
+        if (normalizedDirection > this.imageRotationThreshold) {
+            // Rotate images to be closer to upright
+            // For angles > 45°, rotate by -90° to make images more vertical
+            if (this.direction > this.imageRotationThreshold) {
+                return -90;
+            } else if (this.direction < -this.imageRotationThreshold) {
+                return 90;
+            }
+        }
+        return 0;
     }
 
     start() {
@@ -260,9 +349,27 @@ class PhotoScroller {
 
     setDirection(newDirection) {
         this.direction = newDirection;
+        
+        // Calculate new image rotation
+        const newImageRotation = this.calculateImageRotation();
+        
+        // Update container rotation
         gsap.set(this.container, {
             transform: `rotate(${this.direction}deg)`
         });
+        
+        // Update image rotation if it changed
+        if (newImageRotation !== this.imageRotation) {
+            this.imageRotation = newImageRotation;
+            
+            // Apply new rotation to all images and recalculate wrapper dimensions
+            this.rowElements.forEach(row => {
+                const wrappers = row.querySelectorAll(`.${this.wrapperClass}`);
+                wrappers.forEach(wrapper => {
+                    this.styleImageWrapper(wrapper);
+                });
+            });
+        }
     }
 
     destroy() {

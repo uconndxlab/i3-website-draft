@@ -97,15 +97,15 @@
                 <div class="col-lg-7" data-aos="fade-right">
                     <p class="text-light">
                         The Internal Insights & Innovation (i3) team provides custom software development, web design,
-                        and other digital services in support of improving UConn’s business processes, academic operations,
+                        and other digital services in support of improving UConn's business processes, academic operations,
                         and research enterprise.
                     </p>
                     <p class="text-light">
-                        We’re not trying to reinvent the wheel—sometimes, we just help our colleagues find the wheel and use
+                        We're not trying to reinvent the wheel—sometimes, we just help our colleagues find the wheel and use
                         it,
-                        making the most of the tools already available at UConn. But when the wheel doesn’t fit the task,
+                        making the most of the tools already available at UConn. But when the wheel doesn't fit the task,
                         we step in with a lean, agile approach—building, testing, and refining solutions that adapt to the
-                        university’s evolving needs.
+                        university's evolving needs.
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
@@ -177,29 +177,27 @@
                       </a>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     </section>
     {{-- Team --}}
-    <section id="team" class="bg-teal text-light d-flex align-items-center px-5" style="min-height: 100vh;">
-        <div class="container">
+    <section id="team" class="bg-teal text-light d-flex align-items-center px-5 position-relative" style="min-height: 100vh;">
+        <div class="container z-1">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center" data-aos="fade-down">BY THE UNIVERSITY</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
             </div>
 
             <div class="row py-4 text-center">
-                <div class="col-lg-6 offset-3" data-aos="fade-up">
+                <div class="col-lg-6 offset-lg-3" data-aos="fade-up">
                     <p class="text-light">
                         Our team runs on the talent and drive of UConn students. They're some of the brightest minds around, and they bring serious skill, creativity, and hustle to everything we build.
                     </p>
                     <p class="text-light">
-                        We pair that student energy with professional oversight to deliver real, production-grade work. It’s not just busy work. It’s impact, and it’s powering the university every day.
+                        We pair that student energy with professional oversight to deliver real, production-grade work. It's not just busy work. It's impact, and it's powering the university every day.
                     </p>
                     <p class="text-light">
-                        Like UConn itself, we thrive on pride, collaboration, and doing work that matters. When you work with us, you’re getting a team that’s smart, capable, and 100% all in.
+                        Like UConn itself, we thrive on pride, collaboration, and doing work that matters. When you work with us, you're getting a team that's smart, capable, and 100% all in.
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
@@ -211,6 +209,26 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        @php
+        $teamMembers = \App\Models\TeamMember::all();
+        @endphp
+
+        <div id="teamScrollerContainer1" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-start start-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-left: 15vw;">
+            <div id="teamScroller1">
+                @foreach($teamMembers as $member)
+                    <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
+                @endforeach
+            </div>
+        </div>
+
+        <div id="teamScrollerContainer2" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-end end-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-right: 15vw;">
+            <div id="teamScroller2">
+                @foreach($teamMembers->reverse() as $member)
+                    <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
+                @endforeach
             </div>
         </div>
     </section>
@@ -239,6 +257,42 @@ document.addEventListener('DOMContentLoaded', function() {
         wrapperClass: 'photo-box-effect'
     });
     document.getElementById('projectsScroller').style.visibility = '';
+
+
+    const teamScroller1 = window.createPhotoScroller({
+        selector: "#teamScroller1",
+        rows: 1,
+        aspectRatio: 1.5 / 1,
+        speed: 50,
+        gap: 70,
+        rowGap: 100,
+        maxImageWidth: 200,
+        direction: 85,
+        imageClass: 'photo-scroller-image',
+        wrapperClass: 'photo-box-effect'
+    });
+    document.getElementById('teamScrollerContainer1').style.visibility = '';
+
+    const teamScroller2 = window.createPhotoScroller({
+        selector: "#teamScroller2",
+        rows: 1,
+        aspectRatio: 1.5/1,
+        speed: 50,
+        gap: 70,
+        maxImageWidth: 200,
+        direction: 95,
+        imageClass: 'photo-scroller-image ',
+        wrapperClass: 'photo-box-effect'
+    });
+    document.getElementById('teamScrollerContainer2').style.visibility = '';
 });
 </script>
+<style>
+    .rotate-270 {
+        transform: rotate(270deg);
+    }
+    .opacity-01 {
+        opacity: 0.1;
+    }
+</style>
 @endsection
