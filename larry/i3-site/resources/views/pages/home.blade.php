@@ -4,7 +4,7 @@
 @section('content')
 {{-- <div class="scroll-snap-container"> --}}
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center position-relative text-light" style="min-height: 80vh;">
+    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-5" style="min-height: 80vh;">
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="hero-title mb-4">
@@ -237,6 +237,7 @@
 
 @vite('resources/js/explodingPhrases.js')
 @vite('resources/js/photoScroller.js')
+@vite('resources/js/starParticles.js')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     window.startPhraseAnimator({
@@ -285,6 +286,18 @@ document.addEventListener('DOMContentLoaded', function() {
         wrapperClass: 'photo-box-effect'
     });
     document.getElementById('teamScrollerContainer2').style.visibility = '';
+
+    // Animated background particles
+const animatedBg = new StarParticles({
+    selector: '.hero-section',
+    particleCount: 200,
+    particleColor: 'rgba(255,255,255,0.3)',
+    // direction: 45, // 45 degree angle
+    mousePush: true,
+    pushRadius: 100,
+    maxSpeed: 0.1,
+    connections: true,
+});
 });
 </script>
 <style>
@@ -294,5 +307,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .opacity-01 {
         opacity: 0.1;
     }
+
 </style>
 @endsection
