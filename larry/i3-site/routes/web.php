@@ -6,12 +6,12 @@ use App\Http\Controllers\WorkController;
 
 Route::controller(PageController::class)->group(function () {
     Route::get('/',        'home')->name('home');
-    Route::get('/about',   'about')->name('about');
-    Route::get('/team',    'team')->name('team');
-    Route::get('/contact', 'contact')->name('contact');
+    Route::get('/story',   'story')->name('story');
+    Route::get('/people',    'team')->name('team');
+    Route::get('/connect', 'connect')->name('connect');
 });
 
-Route::resource('work', WorkController::class)->only(['index', 'show']);
+Route::resource('projects', WorkController::class)->only(['index', 'show']);
 
 
 Route::prefix('admin')->name('admin.')->group(function () {

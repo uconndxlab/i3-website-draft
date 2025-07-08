@@ -46,13 +46,12 @@
                             <div id="uconn-az-tooltip" style="z-index: 99999 !important"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-  <header style="background-color:transparent; padding-top:15px;">
+  <header class="position-sticky top-0 z-3 py-3">
     <nav class="navbar navbar-expand-lg" style="padding:0px;">
       <div class="container">
         <div>
@@ -69,18 +68,18 @@
         <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">People</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Story</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Connect with Us</a>
-            </li>
+              <a class="nav-link" href="{{ route('team') }}">People</a>
 
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('projects.index')}}">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('story')}}">Story</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('connect')}}">Connect with Us</a>
+            </li>
           </ul>
         </div>
       </div>

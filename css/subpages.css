@@ -810,12 +810,23 @@ h6,
 
 /* PROJECT PAGE SPECIFIC STYLING */
 
+#project-head {
+    position: absolute;
+    rotate: -90deg;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    font-size: 7rem;
+    top: 20px;
+    left: -180px;
+    transform: translateX(-50%);
+}
+
 #project-list {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     position: relative;
-    width: 100vw;
+    width: 100%;
 }
 .sort-head {
     font-size: xx-large;
@@ -825,10 +836,9 @@ h6,
 }
 .project-sort-wrap {
     display: flex;
-    border: grey 2px solid;
     box-shadow: inset rgba(241, 241, 241, .1) 0 4px 20px 0px;;
     border-radius: 25px;
-    max-width: 90vw;
+    max-width: 75vw;
     margin: 1rem auto 1rem auto;
     flex-direction: row;
     opacity: 0;
@@ -888,7 +898,7 @@ h6,
     border-radius: 25px;
     padding: .75rem;
     max-width: 97%;
-    gap: .75rem;
+    gap: 1.25rem;
     width: 100%;
     justify-content: center;
     align-items: flex-start;
@@ -957,7 +967,7 @@ h6,
 .projects-container {
     display: flex;
     height: 100%;
-    width: 100vw;
+    width: 65vw;
     overflow-y: auto;
 
     position: relative;
@@ -1488,7 +1498,7 @@ h6,
         height: 352px;
     }
     .projects-container {
-        width: 90vw;
+        width: 65vw;
     }
     :root {
         --project-card-width: 17rem;
@@ -1631,7 +1641,7 @@ h6,
     :root {
         --student-ani-dur: 26500ms;
         --student-ani-del: 5000ms;
-        --project-card-width: 18rem;
+        --project-card-width: 17rem;
         --project-card-height: 11rem;
     }
 

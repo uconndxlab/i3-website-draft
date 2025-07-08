@@ -376,6 +376,8 @@ p.small {
 }
 
 
+
+
 .collage-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -390,6 +392,7 @@ p.small {
         grid-auto-rows: 200px;
     }
 }
+
 
 #for-uconn {
     min-height: 100vh;

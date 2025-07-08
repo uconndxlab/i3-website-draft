@@ -15,16 +15,32 @@ class PageController extends Controller
         $totalTeamMembers = TeamMember::count();
         return view('pages.home', compact('featuredWork', 'teamMembers', 'totalTeamMembers'));
     }
-    public function about()
+    public function story()
     {
-        return view('pages.about');
+        return view('pages.story');
     }
     public function team()
     {
-        return view('pages.team');
+        $people = TeamMember::all()->sortBy(function ($person) {
+            $nameParts = explode(' ', $person->name);
+            return end($nameParts); // Sort by the last part of the name
+        });
+        $senior_staff = $people->filter(function ($person) {
+            return in_array('senior-staff', $person->tags);
+        });
+
+        $student_staff = $people->filter(function ($person) {
+            return in_array('student-staff', $person->tags);
+        });
+
+        $faculty_advisors = $people->filter(function ($person) {
+            return in_array('faculty-advisor', $person->tags);
+        });
+
+        return view('pages.people', compact('people', 'senior_staff', 'student_staff', 'faculty_advisors'));
     }
-    public function contact()
+    public function connect()
     {
-        return view('pages.contact');
+        return view('pages.connect');
     }
 }
