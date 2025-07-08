@@ -338,7 +338,22 @@ class WorkItemSeeder extends Seeder
                 'slug' => Str::slug($item['name']),
                 'excerpt' => $item['desc'],
                 'body' => '<p>' . $item['desc'] . '</p>',
-                'thumbnail' => $item['img'],
+                'thumbnail' => (function() use ($item) {
+                    $publicPath = public_path($item['img']);
+                    if (file_exists($publicPath)) {
+                        $filename = basename($item['img']);
+                        $targetPath = 'work_thumbnails/' . $filename;
+                        $storagePath = storage_path('app/public/' . $targetPath);
+                        if (!file_exists(dirname($storagePath))) {
+                            mkdir(dirname($storagePath), 0755, true);
+                        }
+                        if (!file_exists($storagePath)) {
+                            copy($publicPath, $storagePath);
+                        }
+                        return $targetPath;
+                    }
+                    return $item['img'];
+                })(),
             ])->tags()->sync(
                 collect($item['tags'])->map(function($tag) {
                     return Tag::firstOrCreate([
