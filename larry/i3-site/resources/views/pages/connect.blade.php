@@ -403,7 +403,7 @@
                 </div>
 
 
-                @vite(['resources/js/coffeeAnimation.js', 'resources/js/loopDeLoopAni.js'])
+                @vite(['resources/js/coffeeAnimation.js'])
                 <script type="module">
                     const path = document.getElementById('loopy-reveal');
 
