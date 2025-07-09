@@ -72,6 +72,7 @@ p {
     top: 50%;
     transform: rotate(-90deg) translateY(55%) translateX(-50%);
     transform-origin: left center;
+    font-family: area-normal, sans-serif;
 
     text-transform: uppercase;
     font-size: 108px;
