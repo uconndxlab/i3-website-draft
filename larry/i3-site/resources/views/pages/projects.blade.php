@@ -68,7 +68,16 @@
         </div>
     </section>
 
-    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5" style="min-height: 100vh;">
+    <!-- Wave SVG for smooth transition from dark to light -->
+    <div style="position: relative; overflow: hidden; margin-bottom: -2px;">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+        <path fill="white" d="M0,120 
+            C240,200 480,40 720,120 
+            C960,200 1200,40 1440,120 
+            L1440,160 L0,160 Z"></path>
+        </svg>
+    </div>
+    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5" style="min-height: 90vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats
@@ -124,6 +133,14 @@
             </dl>
         </div>
     </section>
+    <div style="position: relative; overflow: hidden; margin-top: -2px; transform: rotate(180deg);">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+        <path fill="white" d="M0,120 
+            C240,200 480,40 720,120 
+            C960,200 1200,40 1440,120 
+            L1440,160 L0,160 Z"></path>
+        </svg>
+    </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
@@ -158,7 +175,7 @@
     </div>
     </section>
 
-    <section class="bg-deep text-light py-5 position-relative d-flex align-items-center" style="min-height: 100vh;">
+    <section class="bg-deep-gradient text-light py-5 position-relative d-flex align-items-center py-5" style="min-height: 100vh;">
         <div class="container">
 
             <div class="row align-items-center justify-content-center">
@@ -218,6 +235,14 @@
     </section>
 
 
+    <div style="position: relative; overflow: hidden; margin-bottom: -2px;">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+        <path fill="white" d="M0,120 
+            C240,200 480,40 720,120 
+            C960,200 1200,40 1440,120 
+            L1440,160 L0,160 Z"></path>
+        </svg>
+    </div>
     <section class="news-section py-5 bg-light text-dark">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
@@ -245,4 +270,12 @@
             </div>
         </div>
     </section>
+    <div style="position: relative; overflow: hidden; margin-top: -2px; transform: rotate(180deg);">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+        <path fill="white" d="M0,120 
+            C240,200 480,40 720,120 
+            C960,200 1200,40 1440,120 
+            L1440,160 L0,160 Z"></path>
+        </svg>
+    </div>
 @endsection
