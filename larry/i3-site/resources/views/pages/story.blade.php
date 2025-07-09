@@ -45,6 +45,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const slides = Array.from(document.querySelectorAll('#origins .slide'));
             let currentIndex = 0;
+            let isAnimating = false; // Track animation state
 
             gsap.set(slides, {
                 autoAlpha: 0,
@@ -62,15 +63,22 @@
                 zIndex: 1
             });
 
+            // Set initial background color on body
+            const initialBgColor = slides[currentIndex].dataset.bgColor || '#212529';
+            gsap.set('body', { backgroundColor: initialBgColor });
+
             function getSlideIndexById(id) {
                 return slides.findIndex(slide => slide.id === id);
             }
 
             function showSlide(targetIndex) {
-                if (targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
+                if (isAnimating || targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
+                
+                isAnimating = true; // Prevent new animations
 
                 const currentSlide = slides[currentIndex];
                 const nextSlide = slides[targetIndex];
+                const newBgColor = nextSlide.dataset.bgColor || '#212529';
 
                 gsap.set(nextSlide, {
                     y: 100,
@@ -84,6 +92,7 @@
                             zIndex: 0
                         });
                         currentIndex = targetIndex;
+                        isAnimating = false; // Re-enable animations when complete
                     }
                 });
 
@@ -96,19 +105,39 @@
                     y: 0,
                     duration: 0.5,
                     ease: 'power2.out'
-                }, '<0.1');
+                }, '<0.1').to('body', {
+                    backgroundColor: newBgColor,
+                    duration: 0.6,
+                    ease: 'power2.out'
+                }, '<');
             }
 
             slides.forEach((slide) => {
                 slide.querySelectorAll('a[href^="#slide-"]').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.preventDefault();
+                        if (isAnimating) return; // Prevent clicks during animation
                         const targetId = this.getAttribute('href').substring(1);
                         const targetIndex = getSlideIndexById(targetId);
                         if (targetIndex !== -1) showSlide(targetIndex);
                     });
                 });
             });
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (isAnimating) return; // Prevent keyboard navigation during animation
+                if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    if (currentIndex > 0) {
+                        showSlide(currentIndex - 1);
+                    }
+                } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    if (currentIndex < slides.length - 1) {
+                        showSlide(currentIndex + 1);
+                    }
+                }
+            });
+
         });
     </script>
 
@@ -119,10 +148,10 @@
     <h1 class="page-h1 display-1">Story</h1>
 
 
-    <section id="origins" class="bg-dark d-flex align-items-center px-5" style="min-height: 90vh;">
+    <section id="origins" class="d-flex align-items-center px-5" style="min-height: 90vh;">
 
         <div class="container my-5">
-            <div class="row slide" id="slide-2017">
+            <div class="row slide" id="slide-2017" data-bg-color="#111111">
                 <div class="col-md-6 text-center timeline-header">
                     <h2 class="text-light">2017</h2>
                 </div>
@@ -133,7 +162,7 @@
                         Dan Schwartz, now UConn's Vice Provost for Academic Operations (and our biggest supporter!) formed
                         Squared Labs, an all-star team of developers,
                         designers, and communications students to work on high-
-                        value institutional projects. ​
+                        value institutional projects. 
                     </p>
                     <a href="#slide-2019" class="btn btn-outline-light p-1"
                         style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
@@ -142,7 +171,7 @@
                 </div>
             </div>
 
-            <div class="row slide" id="slide-2019">
+            <div class="row slide" id="slide-2019" data-bg-color="#911616">
                 <div class="col-md-6 text-center timeline-header">
                     <h2 class="text-light">2019</h2>
                 </div>
@@ -163,17 +192,23 @@
                         which explored experimental,
                         next-generation, and unique
                         applications for interactive media
-                        design.​​
+                        design.
                     </p>
 
-                    <a href="#slide-2020" class="btn btn-outline-light p-1"
-                        style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                        <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="#slide-2017" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
+                        </a>
+                        <a href="#slide-2020" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="row slide" id="slide-2020">
+            <div class="row slide" id="slide-2020" data-bg-color="#111111">
                 <div class="col-md-6 text-center timeline-header">
                     <h2 class="text-light">2020</h2>
                 </div>
@@ -185,17 +220,23 @@
                     <p class="text-light">
                         DX Lab moves into COR²E and becomes the DX Group, one of the only core facilities in the country to
                         offer app development and design services for faculty research. Squared Labs moved to fall under the
-                        DXG​​
+                        DXG
                     </p>
 
-                    <a href="#slide-2024" class="btn btn-outline-light p-1"
-                        style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                        <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="#slide-2019" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
+                        </a>
+                        <a href="#slide-2024" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="row slide" id="slide-2024">
+            <div class="row slide" id="slide-2024" data-bg-color="var(--deep)">
                 <div class="col-md-6 text-center timeline-header">
                     <h2 class="text-light">2024</h2>
                 </div>
@@ -210,10 +251,16 @@
                         extends its mission beyond research support—partnering with administrative and academic units to
                         design and build custom tools that improve how the university works.
                     </p>
-                    <a href="#approach" class="btn btn-outline-light mt-3">
-                        What's it Like Working with Us?
-                        <i class="bi bi-arrow-down ms-2"></i>
-                    </a>
+                    <div class="d-flex gap-2 align-items-center mt-3">
+                        <a href="#slide-2020" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
+                        </a>
+                        <a href="#approach" class="btn btn-outline-light">
+                            What's it Like Working with Us?
+                            <i class="bi bi-arrow-down ms-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,10 +289,10 @@
                         as we go. We think in terms of MVPs (Minimum Viable Products) and iterations, not big bang launches.
                     </p>
                     <p class="text-dark">
-                        You’ll see progress early, you’ll have input often, and you won’t be left wondering what’s happening
+                        You'll see progress early, you'll have input often, and you won't be left wondering what's happening
                         behind the scenes.
 
-                        We know this process isn’t one-size-fits-all. We haven’t always gotten it right. But this is how we
+                        We know this process isn't one-size-fits-all. We haven't always gotten it right. But this is how we
                         think about building things—with flexibility, transparency, and a healthy respect for what actually
                         works. We know this approach can seem strange, and we don't always get it right, but we can promise
                         you this: we won't stop until we get it right.

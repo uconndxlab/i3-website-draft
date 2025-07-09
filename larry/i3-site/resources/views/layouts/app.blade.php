@@ -28,7 +28,7 @@
 <body>
     @include('layouts.header')
     <div class="d-flex flex-column min-vh-100">
-        <main class="flex-grow-1 py-3">
+        <main class="flex-grow-1 pt-3">
             @yield('content')
         </main>
     </div>
