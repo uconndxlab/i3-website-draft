@@ -6,7 +6,7 @@
     <style>
         .person-card {
             aspect-ratio: 4 / 5;
-            background-color: #000;
+            background-color: transparent;
             border-radius: 1rem;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             position: relative;
