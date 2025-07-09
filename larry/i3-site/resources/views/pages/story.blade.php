@@ -153,7 +153,7 @@
 
         <div class="container position-relative my-5">
             <div class="row slide" id="slide-2017" data-bg-color="#111111">
-                <div class="col-md-6 text-center timeline-header">
+                <div class="col-md-6 text-center d-flex align-items-center timeline-header">
                     <h2 class="text-light">2017</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
@@ -176,7 +176,7 @@
             </div>
 
             <div class="row slide" id="slide-2019" data-bg-color="#911616">
-                <div class="col-md-6 text-center timeline-header">
+                <div class="col-md-6 text-center d-flex align-items-center timeline-header">
                     <h2 class="text-light">2019</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
@@ -213,7 +213,7 @@
             </div>
 
             <div class="row slide" id="slide-2020" data-bg-color="#111111">
-                <div class="col-md-6 text-center timeline-header">
+                <div class="col-md-6 text-center d-flex align-items-center timeline-header">
                     <h2 class="text-light">2020</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
@@ -243,7 +243,7 @@
             </div>
 
             <div class="row slide" id="slide-2024" data-bg-color="var(--deep)">
-                <div class="col-md-6 text-center timeline-header">
+                <div class="col-md-6 text-center d-flex align-items-center timeline-header">
                     <h2 class="text-light">2024</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column timeline-content">
