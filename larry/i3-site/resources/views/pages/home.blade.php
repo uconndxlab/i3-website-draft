@@ -4,10 +4,10 @@
 @section('content')
 {{-- <div class="scroll-snap-container"> --}}
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-5" style="min-height: 80vh;">
+    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-center justify-content-md-start">
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="hero-title mb-4">
+                <h1 class="hero-title mb-4 d-none d-md-block">
                     Internal<br>
                     Insights &<br>
                     Innovation
@@ -25,13 +25,16 @@
 
 
     <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 0;">
-        <div id="projectsScroller" style="visibility:hidden;">
-            @foreach(\App\Models\WorkItem::all() as $item)
-            <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
-                <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
+        <div class="mobile-scaledown">
+            <div id="projectsScroller" style="visibility:hidden;">
+                @foreach(\App\Models\WorkItem::all() as $item)
+                <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
+                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
+        
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -70,14 +73,16 @@
                 scroller.style.transform = 'translateY(0%)';
                 scroller.style.opacity = (0.05 * fadeOutRatio).toString();
             } else {
-                // Otherwise, interpolate from 50% to 0% as the section's center approaches the viewport center
+                // Otherwise, interpolate from 50% (desktop) or 30% (mobile) to 0% as the section's center approaches the viewport center
+                const isMobile = window.innerWidth <= 768;
+                const startTranslateY = isMobile ? 30 : 50;
                 const distance = sectionCenter - viewportCenter;
                 const maxDistance = windowHeight / 2 + rect.height / 2;
                 const ratio = Math.max(0, Math.min(1, distance / maxDistance));
                 const translateY = 50 * ratio;
                 // Opacity interpolates from 1 (fully visible) to 0.05 (faded), then multiplies by fadeOutRatio
                 const opacity = (0.05 + 0.95 * ratio) * fadeOutRatio;
-                scroller.style.transform = `translateY(${translateY}%)`;
+                scroller.style.transform = `translateY(${translateY}vh)`;
                 scroller.style.opacity = opacity.toString();
             }
         }
@@ -147,8 +152,8 @@
     <section id="for-uconn" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6 d-flex justify-content-center position-relative" data-aos="fade-right">
-                    <div class="position-relative text-center" style="width: 240px; height: 240px;">
+                <div class="col-lg-6 d-block justify-content-center position-relative" data-aos="fade-right" >
+                    {{-- <div class="position-relative text-center" style="width: 240px; height: 240px;">
                         <div
                             class="rounded-circle border-2 border-light w-100 h-100 d-flex flex-column justify-content-center align-items-center">
                             <div class="fs-2 fw-bold text-accent">30+</div>
@@ -156,7 +161,23 @@
                         </div>
                         <div class="position-absolute top-0 start-50 translate-middle bg-light rounded-circle"
                             style="width: 20px; height: 20px;"></div>
+                    </div> --}}
+                    <div class="d-flex justify-content-center align-items-center for-uni-stat-wrapper" style="min-height: 400px;">
+                        <div class="for-uni-stat" id="for-uni-stat">
+                            <h2 id="stat-head">37+</h2>
+                            <span id="stat-span" class="fs-4 fw-bolder">Projects This Year</span>
+                        </div>
+                        <div class="svg-wrapper">
+                            <svg class="for-uni-stat-circle" width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle style="fill:#f2f1f1" cx="35" cy="4.44" r="4.44"/>
+                                <circle style="fill:none;stroke:#f2f1f1;stroke-miterlimit:10;stroke-width:.5px" cx="35" cy="35" r="30.56"/>
+                                <circle style="fill:none" cx="4.44" cy="35" r="4.44"/>
+                                <circle style="fill:none" cx="35" cy="65.56" r="4.44"/>
+                                <circle style="fill:none" cx="65.56" cy="35" r="4.44"/>
+                            </svg>
+                        </div>
                     </div>
+                    
                 </div>
 
                 <div class="col-lg-6" data-aos="fade-left">
@@ -181,7 +202,18 @@
         </div>
     </section>
     {{-- Team --}}
+    
+
     <section id="team" class="bg-teal text-light d-flex align-items-center px-5 position-relative" style="min-height: 100vh;">
+        {{-- Feathered Top Edge --}}
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 160px; pointer-events: none; z-index: 2;">
+            <div style="
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #111 50%, rgba(0,0,0,0) 100%);
+                transform: translateY(-50%);
+            "></div>
+        </div>
         <div class="container z-1">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center" data-aos="fade-down">BY THE UNIVERSITY</h2>
@@ -216,28 +248,47 @@
         $teamMembers = \App\Models\TeamMember::all();
         @endphp
 
-        <div id="teamScrollerContainer1" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-start start-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-left: 15vw;">
-            <div id="teamScroller1">
-                @foreach($teamMembers as $member)
-                    <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
-                @endforeach
+        
+            <div id="teamScrollerContainer1" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-start start-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-left: 15vw;">
+                <div class="mobile-scaledown">
+                    <div id="teamScroller1">
+                        @foreach($teamMembers as $member)
+                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
+                        @endforeach
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div id="teamScrollerContainer2" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-end end-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-right: 15vw;">
-            <div id="teamScroller2">
-                @foreach($teamMembers->reverse() as $member)
-                    <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
-                @endforeach
+            <div id="teamScrollerContainer2" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-end end-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-right: 15vw;">
+                <div class="mobile-scaledown">
+                    <div id="teamScroller2">
+                        @foreach($teamMembers->reverse() as $member)
+                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
+                        @endforeach
+                    </div>
+                </div>
             </div>
+        
+
+        {{-- Feathered Bottom Edge --}}
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 120px; pointer-events: none; z-index: 2;">
+            <div style="
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #111 50%, rgba(0,0,0,0) 100%);
+                transform: translateY(50%);
+            "></div>
         </div>
     </section>
+
+    
 {{-- </div> --}}
     
 
 @vite('resources/js/explodingPhrases.js')
 @vite('resources/js/photoScroller.js')
 @vite('resources/js/starParticles.js')
+@vite('resources/js/circleTurnAnimation.js')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     window.startPhraseAnimator({
@@ -288,25 +339,109 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('teamScrollerContainer2').style.visibility = '';
 
     // Animated background particles
-const animatedBg = new StarParticles({
-    selector: '.hero-section',
-    particleCount: 200,
-    particleColor: 'rgba(255,255,255,0.3)',
-    // direction: 45, // 45 degree angle
-    mousePush: true,
-    pushRadius: 100,
-    maxSpeed: 0.1,
-    connections: true,
-});
+    const animatedBg = new StarParticles({
+        selector: '.hero-section',
+        particleCount: 200,
+        particleColor: 'rgba(255,255,255,0.3)',
+        // direction: 45, // 45 degree angle
+        mousePush: true,
+        pushRadius: 100,
+        maxSpeed: 0.1,
+        connections: true,
+    });
+
+    
 });
 </script>
 <style>
+
     .rotate-270 {
         transform: rotate(270deg);
     }
     .opacity-01 {
         opacity: 0.1;
     }
+    #team {
+        background: #0e0f4b;
+        background: linear-gradient(180deg, rgb(17, 17, 17) 0%, rgba(13, 57, 65, 1) 50%, rgb(17, 17, 17) 100%);
+    }
+    #what-we-do {
+        background: #0d3941;
+        background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #0e0f4b 50%, rgb(17, 17, 17) 100%);
+    }
+
+    
+.for-uni-stat-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.for-uni-stat {
+  margin-top: 0;
+  position: absolute;
+  text-align: center;
+  max-width: 250px;
+  transition: transform 0.65s ease-in-out;
+}
+
+#stat-head {
+  font-size: 50px;
+  color: #4DB3FF;
+  margin: 0;
+}
+
+#stat-span {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.for-uni-stat-circle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.svg-wrapper {
+  will-change: transform;
+  transition: transform 1.5s ease-in-out;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+}
+
+
+#for-uni {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  margin-top: 10rem;
+}
+
+@media(max-width: 1200px) {
+  .mobile-scaledown {
+    transform: scale(0.7);
+    transform-origin: center;
+  }
+}
+
+@media(max-width: 1000px) {
+  .mobile-scaledown {
+    transform: scale(0.6);
+    transform-origin: center;
+  }
+}
+
+@media(max-width: 768px) {
+  .mobile-scaledown {
+  transform: scale(0.5);
+  transform-origin: center;
+}
+}
+
+
+
+
 
 </style>
 @endsection

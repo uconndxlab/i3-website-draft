@@ -19,87 +19,104 @@ class TeamSeeder extends Seeder
             [
                 'name' => 'Joel Salisbury',
                 'title' => 'Director of i3',
-                'img' => 'img/i3/people/salisbury-narrow.jpg'
+                'img' => 'img/i3/people/salisbury-narrow.jpg',
+                'tags' => ['director', 'senior-staff']
             ],
             [
                 'name' => 'Brian Kelleher',
                 'title' => 'Senior Applications Developer',
-                'img' => 'img/i3/people/kelleher.jpg'
+                'img' => 'img/i3/people/kelleher.jpg',
+                'tags' => ['senior-staff', 'developer']
             ],
             [
                 'name' => 'Natalie Lacroix',
                 'title' => 'Senior UX Designer',
-                'img' => 'img/i3/people/lacroix.jpg'
+                'img' => 'img/i3/people/lacroix.jpg',
+                'tags' => ['senior-staff', 'designer']
             ],
             [
                 'name' => 'Jeff Winston',
                 'title' => 'Director: - Nexus',
-                'img' => 'img/i3/people/winston.jpg'
+                'img' => 'img/i3/people/winston.jpg',
+                'tags' => ['senior-staff', 'nexus']
             ],
             [
                 'name' => 'Brian Daley',
                 'title' => 'Faculty Advisor - DMD',
-                'img' => 'img/i3/people/daley.jpg'
+                'img' => 'img/i3/people/daley.jpg',
+                'tags' => ['faculty-advisor']
             ],
             [
                 'name' => 'Michael Vertefeuille',
                 'title' => 'Faculty Advisor - DMD',
-                'img' => 'img/i3/people/vert-narrow.jpg'
+                'img' => 'img/i3/people/vert-narrow.jpg',
+                'tags' => ['faculty-advisor']
             ],
             [
                 'name' => 'Emma Adams',
                 'title' => 'Student Web Developer',
-                'img' => 'img/i3/people/adams.jpg'
+                'img' => 'img/i3/people/adams.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Lauren Busavage',
                 'title' => 'Student Web Developer',
-                'img' => 'img/i3/people/busavage.png'
+                'img' => 'img/i3/people/busavage.png',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Kelis Clarke',
                 'title' => 'Student UI/UX Designer',
-                'img' => 'img/i3/people/jonathan.jpg'
+                'img' => 'img/i3/people/jonathan.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Ryan Cohutt',
                 'title' => 'Student UI/UX Designer',
-                'img' => 'img/i3/people/jonathan.jpg'
+                'img' => 'img/i3/people/jonathan.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Maggie Danielewicz',
                 'title' => 'Student Web Developer',
-                'img' => 'img/i3/people/danielewicz.jpg'
+                'img' => 'img/i3/people/danielewicz.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Luna Gonzalez',
                 'title' => 'Student Illustrator',
-                'img' => 'img/i3/people/luna.jpg'
+                'img' => 'img/i3/people/luna.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Aaron Mark',
                 'title' => 'Student Web Developer',
-                'img' => 'img/i3/people/jonathan.jpg'
+                'img' => 'img/i3/people/jonathan.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Jack Medrek',
                 'title' => 'Student Software Developer',
-                'img' => 'img/i3/people/medrek.jpg'
+                'img' => 'img/i3/people/medrek.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Kailey Moore',
                 'title' => 'Student UI/UX Designer',
-                'img' => 'img/i3/people/moore.jpg'
+                'img' => 'img/i3/people/moore.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'William Shostak',
                 'title' => 'Student Software Developer',
-                'img' => 'img/i3/people/shostak.jpg'
+                'img' => 'img/i3/people/shostak.jpg',
+                'tags' => ['student-staff']
             ],
             [
                 'name' => 'Emelia Salmon',
                 'title' => 'Student UI/UX Designer',
-                'img' => 'img/i3/people/jonathan.jpg'
+                'img' => 'img/i3/people/jonathan.jpg',
+                'tags' => ['student-staff']
             ]
         ];
 
@@ -118,7 +135,7 @@ class TeamSeeder extends Seeder
                 'name' => $memberData['name'],
                 'role' => $memberData['title'],
                 'photo' => $photoPath,
-                'tags' => explode(' ', str_replace([' - ', ': - '], ' ', $memberData['title']))
+                'tags' => $memberData['tags']
             ]);
         }
     }

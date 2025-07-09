@@ -163,11 +163,14 @@ h2.border-accent,
     position: relative;
     overflow: hidden;
     flex-direction: column;
-    justify-content: center;
+    min-height: 80vh;
+    height: 80vh;
 }
 
 .hero-title {
-    font-size: clamp(8.5rem, 8vw, 5.5rem);
+    padding-top: 3rem;
+    font-size: clamp(2rem, 12vh, 150px);
+    /* font-size: 12vh; */
     font-weight: 900;
     line-height: 1.1;
     color: transparent;
@@ -175,8 +178,23 @@ h2.border-accent,
     text-stroke: 2px white;
     margin-bottom: 1rem;
     text-transform: uppercase;
-
 }
+
+@media (max-width: 1000px) {
+    .hero-title {
+        font-size: clamp(1rem, 10vw, 6rem);
+        -webkit-text-stroke: 1.5px white;
+        text-stroke: 1.5px white;
+    }
+}
+
+/* @media (max-width: 600px) {
+    .hero-title {
+        font-size: clamp(1.5rem, 7vw, 2.8rem);
+        -webkit-text-stroke: 1px white;
+        text-stroke: 1px white;
+    }
+} */
 
 h6 {
     font-weight: 600;

@@ -61,6 +61,9 @@ class StarParticles {
         this.height = 0;
         this.pixelRatio = 1;
         this.prefersReducedMotion = false;
+        this.resizeTimeout = null;
+        this.boundHandleResize = null;
+        this.boundHandleOrientationChange = null;
         
         this.init();
     }
@@ -144,6 +147,9 @@ class StarParticles {
 
     handleResize() {
         const rect = this.container.getBoundingClientRect();
+        const oldWidth = this.width;
+        const oldHeight = this.height;
+        
         this.width = rect.width;
         this.height = rect.height;
         
@@ -154,18 +160,46 @@ class StarParticles {
             this.canvas.height = this.height * this.pixelRatio;
             this.canvas.style.width = this.width + 'px';
             this.canvas.style.height = this.height + 'px';
-            this.ctx.scale(this.pixelRatio, this.pixelRatio);
+            
+            // Reset transform and apply pixel ratio scaling
+            this.ctx.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
         } else {
             this.canvas.width = this.width;
             this.canvas.height = this.height;
+            
+            // Reset transform
+            this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        }
+        
+        // Adjust particle positions if canvas was resized
+        if (oldWidth && oldHeight && this.particles.length > 0) {
+            this.adjustParticlesForResize(oldWidth, oldHeight);
         }
     }
 
     setupEventListeners() {
+        // Create bound resize handler for proper cleanup
+        this.boundHandleResize = () => {
+            // Debounce resize events for better performance
+            clearTimeout(this.resizeTimeout);
+            this.resizeTimeout = setTimeout(() => {
+                this.handleResize();
+            }, 16); // ~60fps
+        };
+        
+        // Create bound orientation change handler
+        this.boundHandleOrientationChange = () => {
+            // Add a slight delay for orientation change to complete
+            setTimeout(() => {
+                this.handleResize();
+            }, 100);
+        };
+        
         // Handle window resize
-        window.addEventListener('resize', () => {
-            this.handleResize();
-        });
+        window.addEventListener('resize', this.boundHandleResize);
+        
+        // Handle orientation change for mobile devices
+        window.addEventListener('orientationchange', this.boundHandleOrientationChange);
 
         // Handle mouse movement for push effect
         if (this.mousePush) {
@@ -442,11 +476,43 @@ class StarParticles {
     // Cleanup
     destroy() {
         this.stop();
+        
+        // Clear resize timeout
+        if (this.resizeTimeout) {
+            clearTimeout(this.resizeTimeout);
+        }
+        
         if (this.canvas && this.canvas.parentNode) {
             this.canvas.parentNode.removeChild(this.canvas);
         }
+        
         // Remove event listeners
-        window.removeEventListener('resize', this.handleResize);
+        if (this.boundHandleResize) {
+            window.removeEventListener('resize', this.boundHandleResize);
+        }
+        if (this.boundHandleOrientationChange) {
+            window.removeEventListener('orientationchange', this.boundHandleOrientationChange);
+        }
+    }
+
+    adjustParticlesForResize(oldWidth, oldHeight) {
+        // Calculate scaling factors
+        const scaleX = this.width / oldWidth;
+        const scaleY = this.height / oldHeight;
+        
+        // Adjust particle positions proportionally
+        this.particles.forEach(particle => {
+            particle.x *= scaleX;
+            particle.y *= scaleY;
+            particle.originalX *= scaleX;
+            particle.originalY *= scaleY;
+            
+            // Ensure particles stay within bounds
+            particle.x = Math.max(0, Math.min(this.width, particle.x));
+            particle.y = Math.max(0, Math.min(this.height, particle.y));
+            particle.originalX = Math.max(0, Math.min(this.width, particle.originalX));
+            particle.originalY = Math.max(0, Math.min(this.height, particle.originalY));
+        });
     }
 }
 
