@@ -49,12 +49,13 @@
 
             gsap.set(slides, {
                 autoAlpha: 0,
+                yPercent: -50,
                 y: 100,
                 position: 'absolute',
-                top: '35%',
+                top: '50%',
                 left: 0,
                 width: '100%',
-                zIndex: 0
+                zIndex: 0,
             });
 
             gsap.set(slides[currentIndex], {
@@ -148,9 +149,9 @@
     <h1 class="page-h1 display-1">Story</h1>
 
 
-    <section id="origins" class="d-flex align-items-center px-5" style="min-height: 90vh;">
+    <section id="origins" class="d-flex align-items-stretch px-5" style="min-height: 90vh;">
 
-        <div class="container my-5">
+        <div class="container position-relative my-5">
             <div class="row slide" id="slide-2017" data-bg-color="#111111">
                 <div class="col-md-6 text-center timeline-header">
                     <h2 class="text-light">2017</h2>
