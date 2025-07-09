@@ -15,7 +15,7 @@ class WorkItemController extends Controller
      */
     public function index()
     {
-        $items = WorkItem::latest()->paginate(10);
+        $items = WorkItem::latest()->paginate(100);
         return view('admin.work.index', compact('items'));
     }
 

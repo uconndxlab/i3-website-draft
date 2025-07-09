@@ -82,8 +82,7 @@
 
     <section class="hero-section" style="background-color: #f8f9fa; ">
         <div class="hero-img-wrapper">
-            <img src="{{ asset('img/i3/room.jpg') }}" class="img-fluid" alt="Hero background"
-                style="filter: brightness(0.45);"
+            <img src="{{ asset('img/i3/room.jpg') }}" class="img-fluid" alt="Hero background" style="filter: brightness(0.45);"
                 alt="Hero background">
         </div>
         <div class="container hero-overlay">
@@ -111,17 +110,18 @@
         </div>
     </section>
 
-    <section id="hire-us" class="bg-deep py-5">
+    <section id="hire-us" class="bg-deep-gradient py-5">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire Us</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
 
-                <div class="text-center"  data-aos="fade-down">
-                    <p class="lead px-md-5 py-3 mb-0" >
+                <div class="text-center" data-aos="fade-down">
+                    <p class="lead px-md-5 py-3 mb-0">
                         Need a website, app, or design help for your grant? Let's talk. We can write you a letter of
-                        support, help you plan your submission, and, when the work starts, bill directly to your grant, all while helping you navigate UConn's branding and go-live
+                        support, help you plan your submission, and, when the work starts, bill directly to your grant, all
+                        while helping you navigate UConn's branding and go-live
                         approvals without losing your mind.
                     </p>
                 </div>
@@ -171,7 +171,7 @@
 
     </section>
 
-    <section class="bg-teal text-light">
+    <section class="bg-teal-gradient text-light">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire You</h2>
@@ -197,35 +197,63 @@
                 </div>
             </div>
             <div class="row mt-4 g-5">
-                <div class="col-6">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                            <div class="badge bg-warning text-dark mb-2">Class IV</div>
-                            <h5 class="fw-bold">Student Developer</h5>
-                            <p>Got a passion for coding and making things happen? The Internal Insights & Innovation [i3]
-                                unit
-                                is
-                                looking for driven Student Web Developers...</p>
-                            <a href="#" class="btn btn-link ps-0 fw-bold d-inline-flex align-items-center">
-                                <span class="me-2 display-6 lh-1">➔</span> Apply on JobX
+                             <i class="bi bi-code-slash display-6 mb-4"></i>
+                            <h5 class="fw-bold">
+                                Developers</h5>
+                            <p>Love coding and building things? Join us to create amazing web apps and digital experiences
+                                that make a difference at UConn.</p>
+                        <a href="#contact" class="btn btn-outline-light">
+                            Are you a Dev? Let's Chat!
+                            <i class="bi bi-arrow-down ms-2"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="position-relative mb-4">
+                        <div class="card-outline"></div>
+                        <div class="card-content p-4 rounded-3">
+                            <i class="bi bi-palette display-6 mb-4"></i>
+                            <h5 class="fw-bold">Designers</h5>
+                            <p>Have an eye for design? Help us create beautiful, user-friendly interfaces and engaging
+                                visual experiences.</p>
+                        <a href="#contact" class="btn btn-outline-light">
+                            Designer? Let's Chat!
+                            <i class="bi bi-arrow-down ms-2"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="position-relative mb-4">
+                        <div class="card-outline"></div>
+                        <div class="card-content p-4 rounded-3">
+                            <i class="bi bi-pencil-square display-6 mb-4"></i>
+                            <h5 class="fw-bold">Illustrators</h5>
+                            <p>Turn ideas into visuals? We need your creative talent to bring stories and concepts to life
+                                through illustration.</p>
+                            <a href="#contact" class="btn btn-outline-light">Illustrator? Let's Chat!
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                            <div class="badge bg-warning text-dark mb-2">Class IV</div>
-                            <h5 class="fw-bold">Student Developer</h5>
-                            <p>Got a passion for coding and making things happen? The Internal Insights & Innovation [i3]
-                                unit
-                                is
-                                looking for driven Student Web Developers...</p>
-                            <a href="#" class="btn btn-link ps-0 fw-bold d-inline-flex align-items-center">
-                                <span class="me-2 display-6 lh-1">➔</span> Apply on JobX
+                            <i class="bi bi-chat-dots display-6 mb-4"></i>
+                            <h5 class="fw-bold">Something Elses?</h5>
+                            <p>Writers, marketers, project managers, and creative minds of all kinds - we'd love to hear
+                                from you!</p>
+                            <a href="#contact" class="btn btn-outline-light">
+                                Something Else? Let's Chat!
                             </a>
                         </div>
                     </div>
@@ -281,7 +309,7 @@
                             height: 100%;
                             top: -2px;
                             left: 31.5%;
-                            transform: translateX(-50%);
+                            transform: translateX(-400px);
                             -webkit-mask-image: url(/img/i3/i3-coffee-fill.svg);
                             -webkit-mask-repeat: no-repeat;
                             -webkit-mask-size: contain;

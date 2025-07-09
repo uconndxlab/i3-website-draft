@@ -73,7 +73,9 @@
             }
 
             function showSlide(targetIndex) {
+
                 if (isAnimating || targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
+
                 
                 isAnimating = true; // Prevent new animations
 
@@ -111,6 +113,21 @@
                     duration: 0.6,
                     ease: 'power2.out'
                 }, '<');
+                // Animate odometer-like effect for the h2 text
+                const currentH2 = slides[currentIndex].querySelector('h2');
+                const nextH2 = slides[targetIndex].querySelector('h2');
+                if (nextH2.dataset.odometerInitial && nextH2.dataset.odometerFinal) {
+                    tl.fromTo(nextH2, {
+                        innerText: nextH2.dataset.odometerInitial
+                    }, {
+                        innerText: nextH2.dataset.odometerFinal,
+                        duration: 0.5,
+                        snap: { innerText: 1 },
+                        ease: "none"
+                    }, '<');
+                }
+
+                
             }
 
             slides.forEach((slide) => {
@@ -139,6 +156,8 @@
                 }
             });
 
+
+
         });
     </script>
 
@@ -154,7 +173,7 @@
         <div class="container position-relative my-5">
             <div class="row slide" id="slide-2017" data-bg-color="#111111">
                 <div class="col-md-6 text-center d-flex align-items-center timeline-header">
-                    <h2 class="text-light">2017</h2>
+                    <h2 data-odometer-initial="2025"  data-odometer-final="2017" data-aos="odometer" class="text-light odometer">2017</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <h3 style="font-family: area-normal,sans-serif; font-size: 40px;" class="fw-bold text-white mb-2 mt-3">Our Origins</h3>
@@ -177,7 +196,7 @@
 
             <div class="row slide" id="slide-2019" data-bg-color="#911616">
                 <div class="col-md-6 text-center d-flex align-items-center timeline-header">
-                    <h2 class="text-light">2019</h2>
+                    <h2 data-odometer-initial="2017"  data-odometer-final="2019" data-aos="odometer"  class="text-light odometer">2019</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <div class="mb-3">
@@ -194,7 +213,7 @@
                         The UConn DMD DX Lab (Digital
                         Experience Lab) forms as a
                         special topics/independent study
-                        course in DMD. The DX Lab was a
+                        course in UConn's Digital Media & Design department. The DX Lab was a
                         research lab and undergraduate
                         experiential learning offering
                         which explored experimental,
@@ -214,7 +233,7 @@
 
             <div class="row slide" id="slide-2020" data-bg-color="#111111">
                 <div class="col-md-6 text-center d-flex align-items-center timeline-header">
-                    <h2 class="text-light">2020</h2>
+                    <h2 class="text-light odometer" data-odometer-initial="2019" data-odometer-final="2020" data-aos="odometer">2020</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <div class="mb-3">
@@ -244,7 +263,7 @@
 
             <div class="row slide" id="slide-2024" data-bg-color="var(--deep)">
                 <div class="col-md-6 text-center d-flex align-items-center timeline-header">
-                    <h2 class="text-light">2024</h2>
+                    <h2 class="text-light odometer" data-odometer-initial="2020" data-odometer-final="2024" data-aos="odometer">2024</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column timeline-content">
                     <div class="mb-3">
@@ -276,14 +295,6 @@
     </section>
 
 
-    <div style="position: relative; overflow: hidden; margin-bottom: -2px; ">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: #ffbb4d; z-index:2;">
-        <path fill="#ffbb4d" d="M0,120 
-            C240,200 480,40 720,120 
-            C960,200 1200,40 1440,120 
-            L1440,160 L0,160 Z"></path>
-        </svg>
-    </div>
     <section id="approach" style="background-color: #ffbb4d; min-height: 100vh; padding: 50px 0;"
         class="d-flex align-items-center">
         <div class="container">
@@ -292,45 +303,105 @@
                     <h2 class="mb-4 text-dark text-uppercase">Our Approach</h2>
                     <blockquote class="blockquote text-dark"
                         style="font-size: 1.5rem; font-style: italic; border-left: 5px solid #333; padding-left: 15px;">
-                        Create value as soon as possible.
+                        Create value early. Iterate quickly.
                     </blockquote>
-                    <p class="text-dark">That's what we try to do. There's more than one way to do that, and there's no
-                        one-size-fits-all solution, but here's what works for us:</p>
-                    <h5>Embrace the <acronym title="Minimum Viable Product">MVP</acronym> mindset.</h5>
+                    <p class="text-dark">That's the goal. There's no single path to get there, but here's how we like to work:</p>
+                    <h5>Start small. Learn fast. Build what matters.</h5>
                     <p class="text-dark">
-                        When we can, we like to work in incremental steps. Build something small, test it, and build on it.
-                        This way, we can adapt to your needs as they change, and you can see progress along the way.
+                        We usually begin with something simple—a rough draft, a working prototype, a first version you can click. 
+                        Then we test, refine, and build from there. It's not about cutting corners. It's about getting feedback sooner, 
+                        staying flexible, and keeping the momentum.
                     </p>
                     <p class="text-dark">
-                        We try to get something on the screen quickly, show it to you, learn from your feedback, and adjust
-                        as we go. We think in terms of MVPs (Minimum Viable Products) and iterations, not big bang launches.
-                    </p>
-                    <p class="text-dark">
-                        You'll see progress early, you'll have input often, and you won't be left wondering what's happening
-                        behind the scenes.
-
-                        We know this process isn't one-size-fits-all. We haven't always gotten it right. But this is how we
-                        think about building things—with flexibility, transparency, and a healthy respect for what actually
-                        works. We know this approach can seem strange, and we don't always get it right, but we can promise
-                        you this: we won't stop until we get it right.
+                        You'll see results early.
+                        We know every project is different, and we don't pretend this approach is perfect. But it's how we think 
+                        about progress: iterative, collaborative, and grounded in what actually works.
                     </p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <i class="bi bi-scooter" style="font-size: 5rem; margin: 0 15px;"></i>
-                        <i class="bi bi-bicycle" style="font-size: 5rem; margin: 0 15px;"></i>
-                        <i class="bi bi-car-front" style="font-size: 5rem; margin: 0 15px;"></i>
+                    <div data-aos="fade-left" data-aos-duration="1200">
+                        <svg viewBox="0 0 800 300" class="w-100" id="processSvg">
+                            <!-- Progress Line -->
+                            <path d="M700 150 H100" stroke="#ffffff" stroke-width="2" stroke-dasharray="5,5" class="progress-line"/>
+                            
+                            <!-- Stage 4: Complex Pattern -->
+                            <path d="M530,110 L450,110 L490,190 Z" fill="none" stroke="#ffffff" stroke-width="2" class="svg-element"/>
+                            <path d="M510,130 L470,130 L490,170 Z" fill="#ffffff" class="svg-element"/>
+                            
+                            <!-- Stage 3: Abstract Pattern -->
+                            <circle cx="380" cy="150" r="25" fill="none" stroke="#ffffff" stroke-width="2" class="svg-element"/>
+                            <circle cx="380" cy="150" r="15" fill="none" stroke="#ffffff" stroke-width="2" class="svg-element"/>
+                            <circle cx="380" cy="150" r="5" fill="#ffffff" class="svg-element"/>
+                            
+                            <!-- Stage 2: Simple Lines -->
+                            <line x1="290" y1="130" x2="250" y2="170" stroke="#ffffff" stroke-width="2" class="svg-element"/>
+                            <line x1="250" y1="130" x2="290" y2="170" stroke="#ffffff" stroke-width="2" class="svg-element"/>
+                            
+                            <!-- Stage 1: Abstract Shape -->
+                            <path d="M170,150 L150,130 L130,150 L150,170 Z" fill="#ffffff" class="svg-element"/>
+                            
+                            <!-- Progress Arrows -->
+                            <path d="M420 150 l-10 -5 v10 z" fill="#ffffff" class="arrow"/>
+                            <path d="M300 150 l-10 -5 v10 z" fill="#ffffff" class="arrow"/>
+                            <path d="M200 150 l-10 -5 v10 z" fill="#ffffff" class="arrow"/>
+                        </svg>
                     </div>
+
+                    <style>
+                        .svg-element {
+                            opacity: 0;
+                            animation: fadeIn 0.5s forwards;
+                            animation-delay: calc(var(--i) * 0.2s);
+                        }
+                        .arrow {
+                            animation: bounce 2s infinite;
+                        }
+                        @keyframes fadeIn {
+                            to { opacity: 1; }
+                        }
+                        @keyframes bounce {
+                            0%, 100% { transform: translateX(0); }
+                            50% { transform: translateX(5px); }
+                        }
+                    </style>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const elements = document.querySelectorAll('.svg-element');
+                            elements.forEach((el, index) => {
+                                el.style.setProperty('--i', index + 1);
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>
     </section>
-    <div style="position: relative; overflow: hidden; margin-top: -2px; ">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: #ffbb4d; z-index:2; transform: scaleY(-1.01);" class="bg-dark">
-        <path fill="#ffbb4d" d="M0,120 
-            C240,200 480,40 720,120 
-            C960,200 1200,40 1440,120 
-            L1440,160 L0,160 Z"></path>
-        </svg>
-    </div>
+    <section class="news-section py-5 bg-light text-dark">
+        <div class="container">
+            <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
+                    class="border-bottom border-2 pb-3 border-primary">In The</span> News</h2>
+            <div class="row g-4" data-aos="fade-up" data-aos-duration="1200">
+                {{-- Example cards, replace with dynamic content --}}
+                @for ($i = 0; $i < 5; $i++)
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card text-white border-0 shadow-sm overflow-hidden rounded-4">
+                            <img src="https://picsum.photos/600/40{{ $i }}" class="card-img"
+                                alt="placeholder image">
+                            <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50 p-3">
+                                <h5 class="card-title fw-bold">Title of Article</h5>
+                                <p class="card-text small mb-2">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nunc non eros congue
+                                    tincidunt.
+                                </p>
+                                <p class="card-text small text-white-50 mb-0">
+                                    <strong>Author of Article</strong> • 01/02/3456
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endfor
+            </div>
+        </div>
+    </section>
 @endsection

@@ -5,85 +5,12 @@
 
 
     <h1 class="page-h1 display-1">Projects</h1>
-
-    <section id="completed-projects" class=" d-flex px-5" style="min-height: 80vh;">
-
-        <div class="container my-5">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <h2 class="mb-3 d-inline-block pb-3 text-uppercase"><span
-                            class="border-bottom border-2 pb-3 border-primary">Completed</span> Projects</h2>
-                </div>
-                <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
-                    <div>
-                        <a class="btn rounded-pill me-3 border-0 shadow-none
-                            {{ $tag === 'for-all' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-all']) }}">All</a>
-                        <a class="btn rounded-pill me-3 shadow-none
-                            {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-research']) }}">For Research</a>
-                        <a class="btn rounded-pill shadow-none
-                            {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-uconn']) }}">For UConn</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                @foreach ($items as $project)
-                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; cursor:pointer;"
-                            data-bs-toggle="modal" data-bs-target="#projectModal{{ $project->id }}">
-                            <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
-                                alt="{{ $project->title }}"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius:10px;">
-                        </div>
-                    </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="projectModal{{ $project->id }}" tabindex="-1" aria-labelledby="projectModalLabel{{ $project->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content bg-dark text-white">
-                                <div class="modal-header border-0">
-                                    <h5 class="modal-title" id="projectModalLabel{{ $project->id }}">{{ $project->title }}</h5>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    @if($project->image)
-                                        <img src="{{ asset('storage/' . $project->image) }}?v={{ time() }}" alt="{{ $project->title }}" class="img-fluid rounded mb-3">
-                                    @endif
-                                    <p>{{ $project->body }}</p>
-                                    @if($project->link)
-                                        <a href="{{ $project->link }}" target="_blank" class="btn btn-primary mt-2">Visit Project</a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="d-flex justify-content-center mt-4">
-                {{ $items->links() }}
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Wave SVG for smooth transition from dark to light -->
-    <div style="position: relative; overflow: hidden; margin-bottom: -2px;">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
-        <path fill="white" d="M0,120 
-            C240,200 480,40 720,120 
-            C960,200 1200,40 1440,120 
-            L1440,160 L0,160 Z"></path>
-        </svg>
-    </div>
     <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5" style="min-height: 90vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats
                 </h2>
-                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
-                    style="width:50px"></span>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
             </div>
             <dl class="row text-center g-5 py-5" data-aos="fade-up">
                 <!-- Stat 1 -->
@@ -93,7 +20,7 @@
                     </dt>
                     <dd>
                         <h2 class="text-dark fw-bold display-5 odometer" data-odometer-final="37" data-aos="odometer">0</h2>
-                        <p class="text-muted">Projects This Year</p>
+                        <p class="text-muted">Active Projects This Year</p>
                     </dd>
                 </div>
 
@@ -111,10 +38,10 @@
                 <!-- Stat 3 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
-                        <i class="bi bi-lightbulb" style="font-size: 3rem;"></i>
+                        <i class="bi bi-eye" style="font-size: 3rem;"></i>
                     </dt>
                     <dd>
-                        <h2 class="text-dark fw-bold display-5 odometer" data-odometer-final="100000" data-aos="odometer">0
+                        <h2 class="text-dark fw-bold display-5 odometer" data-odometer-final="500000" data-aos="odometer">0
                         </h2>
                         <p class="text-muted">Pageviews per Month</p>
                     </dd>
@@ -133,49 +60,11 @@
             </dl>
         </div>
     </section>
-    <div style="position: relative; overflow: hidden; margin-top: -2px; ">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2; transform: scaleY(-1.01);" class="bg-deep">
-        <path fill="white" d="M0,120 
-            C240,200 480,40 720,120 
-            C960,200 1200,40 1440,120 
-            L1440,160 L0,160 Z"></path>
-        </svg>
-    </div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css" />
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function animateOdometers() {
-                document.querySelectorAll('.odometer').forEach(function(el) {
-                    if (el.dataset.animated) return;
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        el.dataset.animated = true;
-                        if (el.dataset.infinity) {
-                            el.innerHTML = '∞';
-                        } else {
-                            el.innerHTML = 0;
-                            setTimeout(() => {
-                                el.innerHTML = el.dataset.odometerFinal;
-                            }, 300);
-                        }
-                    }
-                });
-            }
-            window.addEventListener('scroll', animateOdometers);
-            animateOdometers();
-        });
-    </script>
-
     <section class="bg-deep text-light py-5 position-relative d-flex align-items-center" style="min-height: 100vh;">
         <div class="container">
 
             <div class="row align-items-center justify-content-center">
-                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">On Deck</h2>
+                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">In Progress</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
                 <!-- Section Heading -->
@@ -216,13 +105,11 @@
                 </div>
 
                 <!-- Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#onDeckCarousel"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#onDeckCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#onDeckCarousel"
-                    data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#onDeckCarousel" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -230,48 +117,106 @@
         </div>
     </section>
 
+    <section id="completed-projects" class=" d-flex px-5" style="min-height: 80vh;">
 
-    <div style="position: relative; overflow: hidden; margin-bottom: -2px;">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;"  class="bg-deep">
-        <path fill="white" d="M0,120 
-            C240,200 480,40 720,120 
-            C960,200 1200,40 1440,120 
-            L1440,160 L0,160 Z"></path>
-        </svg>
-    </div>
-    <section class="news-section py-5 bg-light text-dark">
-        <div class="container">
-            <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
-                    class="border-bottom border-2 pb-3 border-primary">In The</span> News</h2>
-            <div class="row g-4" data-aos="fade-up" data-aos-duration="1200">
-                {{-- Example cards, replace with dynamic content --}}
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="card text-white border-0 shadow-sm overflow-hidden rounded-4">
-                            <img src="https://picsum.photos/600/40{{ $i }}" class="card-img"
-                                alt="placeholder image">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50 p-3">
-                                <h5 class="card-title fw-bold">Title of Article</h5>
-                                <p class="card-text small mb-2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nunc non eros congue
-                                    tincidunt.
-                                </p>
-                                <p class="card-text small text-white-50 mb-0">
-                                    <strong>Author of Article</strong> • 01/02/3456
-                                </p>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h2 class="mb-3 d-inline-block pb-3 text-uppercase"><span
+                            class="border-bottom border-2 pb-3 border-primary">In</span> Production</h2>
+                    <p class="lead mb-4" data-aos="fade-down">
+                        These are just a few of the many projects we've brought to life for our partners. 
+                        Each one is a unique collaboration, blending creativity, strategy, and technical expertise to deliver results that matter. 
+                        Explore our portfolio to see how we help UConn achieve its digital goals.
+                    </p>
+                </div>
+                <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
+                    <div>
+                        <a class="btn rounded-pill me-3 border-0 shadow-none
+                            {{ $tag === 'for-all' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            href="{{ route('projects.tag', ['tag' => 'for-all']) }}">All</a>
+                        <a class="btn rounded-pill me-3 shadow-none
+                            {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            href="{{ route('projects.tag', ['tag' => 'for-research']) }}">For Research</a>
+                        <a class="btn rounded-pill shadow-none
+                            {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            href="{{ route('projects.tag', ['tag' => 'for-uconn']) }}">For UConn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($items as $project)
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; cursor:pointer;"
+                            data-bs-toggle="modal" data-bs-target="#projectModal{{ $project->id }}">
+                            <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
+                                alt="{{ $project->title }}"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius:10px;">
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="projectModal{{ $project->id }}" tabindex="-1"
+                        aria-labelledby="projectModalLabel{{ $project->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content bg-dark text-white">
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title" id="projectModalLabel{{ $project->id }}">
+                                        {{ $project->title }}</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @if ($project->image)
+                                        <img src="{{ asset('storage/' . $project->image) }}?v={{ time() }}"
+                                            alt="{{ $project->title }}" class="img-fluid rounded mb-3">
+                                    @endif
+                                    <p>{{ $project->body }}</p>
+                                    @if ($project->link)
+                                        <a href="{{ $project->link }}" target="_blank"
+                                            class="btn btn-primary mt-2">Visit Project</a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </section>
-    <div style="position: relative; overflow: hidden; margin-top: -2px; ">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2; transform: scaleY(-1.01);">
-        <path fill="white" d="M0,120 
-            C240,200 480,40 720,120 
-            C960,200 1200,40 1440,120 
-            L1440,160 L0,160 Z"></path>
-        </svg>
-    </div>
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function animateOdometers() {
+                document.querySelectorAll('.odometer').forEach(function(el) {
+                    if (el.dataset.animated) return;
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        el.dataset.animated = true;
+                        if (el.dataset.infinity) {
+                            el.innerHTML = '∞';
+                        } else {
+                            el.innerHTML = 0;
+                            setTimeout(() => {
+                                el.innerHTML = el.dataset.odometerFinal;
+                            }, 300);
+                        }
+                    }
+                });
+            }
+            window.addEventListener('scroll', animateOdometers);
+            animateOdometers();
+        });
+    </script>
+
+
 @endsection
