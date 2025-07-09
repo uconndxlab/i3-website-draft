@@ -95,7 +95,7 @@
     
 
     {{-- What We Do --}}
-    <section id="what-we-do" class="bg-deep text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+    <section id="what-we-do" class="bg-deep-gradient text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">What</span> We Do</h2>
             <div class="row align-items-top g-5">
@@ -204,7 +204,7 @@
     {{-- Team --}}
     
 
-    <section id="team" class="bg-teal text-light d-flex align-items-center px-5 position-relative" style="min-height: 100vh;">
+    <section id="team" class="bg-teal-gradient text-light d-flex align-items-center px-5 position-relative" style="min-height: 100vh;">
         {{-- Feathered Top Edge --}}
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 160px; pointer-events: none; z-index: 2;">
             <div style="
@@ -360,14 +360,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     .opacity-01 {
         opacity: 0.1;
-    }
-    #team {
-        background: #0e0f4b;
-        background: linear-gradient(180deg, rgb(17, 17, 17) 0%, rgba(13, 57, 65, 1) 50%, rgb(17, 17, 17) 100%);
-    }
-    #what-we-do {
-        background: #0d3941;
-        background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #0e0f4b 50%, rgb(17, 17, 17) 100%);
     }
 
     

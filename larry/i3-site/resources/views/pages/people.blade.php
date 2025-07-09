@@ -63,7 +63,7 @@
     </style>
     <h1 class="page-h1 display-1">People</h1>
 
-    <section id="senior-staff" class=" d-flex align-items-center px-5" style="min-height: 80vh;">
+    <section id="senior-staff" class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
 
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
@@ -98,7 +98,7 @@
         </div>
     </section>
 
-    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep" style="min-height: 80vh;">
+    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient" style="min-height: 80vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
                 <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Faculty Advisors</h2>
@@ -133,7 +133,7 @@
             </div>
         </div>
     </section>
-    <section id="students" class="d-flex align-items-center px-5" style="min-height: 80vh;">
+    <section id="students" class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
         <div class="container">
 
 

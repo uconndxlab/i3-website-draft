@@ -9,6 +9,27 @@
 .bg-deep {
     background-color: var(--deep);
 }
+.bg-deep-gradient {
+    background: var(--deep);
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--deep) 50%, rgb(17, 17, 17) 100%);
+}
+
+.bg-lightblue {
+    background-color: var(--light-blue);
+}
+.bg-lightblue-gradient {
+    background: var(--light-blue);
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--light-blue) 50%, rgb(17, 17, 17) 100%);
+}
+
+
+.bg-blue {
+    background-color: #243250;
+}
+.bg-blue-gradient {
+    background: #243250;
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #243250 50%, rgb(17, 17, 17) 100%);
+}
 
 .bg-dark {
     background-color: var(--dark);
@@ -17,6 +38,20 @@
 .bg-teal {
     background-color: var(--teal);
 }
+.bg-teal-gradient {
+    background: var(--teal);
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--teal) 50%, rgb(17, 17, 17) 100%);
+}
+
+
+.bg-purple {
+    background-color: #280E3A;
+}
+.bg-purple-gradient {
+    background: #280E3A;
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #280E3A 50%, rgb(17, 17, 17) 100%);
+}
+
 
 body, html {
     overflow-x:hidden;
