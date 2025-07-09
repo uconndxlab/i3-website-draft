@@ -2,116 +2,115 @@
 @section('title', 'Our Web Design, Web Development, and UX Design Projects')
 
 @section('content')
-<style>
-    #origins p {
-        font-size: 1.2rem;
-    }
+    <style>
+        #origins p {
+            font-size: 1.2rem;
+        }
 
-    #origins .slide {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-    }
+        #origins .slide {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
 
-    #origins .slide.active {
-        visibility: visible;
-        position: relative;
-    }
+        #origins .slide.active {
+            visibility: visible;
+            position: relative;
+        }
 
-    #origins {
-        position: relative;
-        overflow: hidden;
-        min-height: 80vh;
-    }
+        #origins {
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+        }
 
-    #origins .slide p {
-        margin-top:1.2rem;
-    }
+        #origins .slide p {
+            margin-top: 1.2rem;
+        }
 
-    #origins .slide h2 {
-        font-family:"Roboto Mono", monospace;
-        font-size: 10rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-</style>
+        #origins .slide h2 {
+            font-family: "Roboto Mono", monospace;
+            font-size: 10rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+    </style>
 
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const slides = Array.from(document.querySelectorAll('#origins .slide'));
-    let currentIndex = 0;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = Array.from(document.querySelectorAll('#origins .slide'));
+            let currentIndex = 0;
 
-    gsap.set(slides, {
-        autoAlpha: 0,
-        y: 100,
-        position: 'absolute',
-        top: '35%',
-        left: 0,
-        width: '100%',
-        zIndex: 0
-    });
+            gsap.set(slides, {
+                autoAlpha: 0,
+                y: 100,
+                position: 'absolute',
+                top: '35%',
+                left: 0,
+                width: '100%',
+                zIndex: 0
+            });
 
-    gsap.set(slides[currentIndex], {
-        autoAlpha: 1,
-        y: 0,
-        zIndex: 1
-    });
+            gsap.set(slides[currentIndex], {
+                autoAlpha: 1,
+                y: 0,
+                zIndex: 1
+            });
 
-    function getSlideIndexById(id) {
-        return slides.findIndex(slide => slide.id === id);
-    }
-
-    function showSlide(targetIndex) {
-        if (targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
-
-        const currentSlide = slides[currentIndex];
-        const nextSlide = slides[targetIndex];
-
-        gsap.set(nextSlide, {
-            y: 100,
-            zIndex: 2
-        });
-
-        const tl = gsap.timeline({
-            onComplete: () => {
-                gsap.set(currentSlide, {
-                    autoAlpha: 0,
-                    zIndex: 0
-                });
-                currentIndex = targetIndex;
+            function getSlideIndexById(id) {
+                return slides.findIndex(slide => slide.id === id);
             }
-        });
 
-        tl.to(currentSlide, {
-            autoAlpha: 0,
-            duration: 0.4,
-            ease: 'power2.out'
-        }).to(nextSlide, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.5,
-            ease: 'power2.out'
-        }, '<0.1');
-    }
+            function showSlide(targetIndex) {
+                if (targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
 
-    slides.forEach((slide) => {
-        slide.querySelectorAll('a[href^="#slide-"]').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetIndex = getSlideIndexById(targetId);
-                if (targetIndex !== -1) showSlide(targetIndex);
+                const currentSlide = slides[currentIndex];
+                const nextSlide = slides[targetIndex];
+
+                gsap.set(nextSlide, {
+                    y: 100,
+                    zIndex: 2
+                });
+
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        gsap.set(currentSlide, {
+                            autoAlpha: 0,
+                            zIndex: 0
+                        });
+                        currentIndex = targetIndex;
+                    }
+                });
+
+                tl.to(currentSlide, {
+                    autoAlpha: 0,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                }).to(nextSlide, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                }, '<0.1');
+            }
+
+            slides.forEach((slide) => {
+                slide.querySelectorAll('a[href^="#slide-"]').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetIndex = getSlideIndexById(targetId);
+                        if (targetIndex !== -1) showSlide(targetIndex);
+                    });
+                });
             });
         });
-    });
-});
-
-</script>
+    </script>
 
 
 
@@ -120,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <h1 class="page-h1 display-1">Story</h1>
 
 
-    <section id="origins" class="bg-dark d-flex align-items-center px-5" style="min-height: 80vh;">
+    <section id="origins" class="bg-dark d-flex align-items-center px-5" style="min-height: 90vh;">
 
         <div class="container my-5">
             <div class="row slide" id="slide-2017">
@@ -128,7 +127,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <h2 class="text-light">2017</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
+                    <h3>Our Origins</h3>
                     <p class="text-light">
+
                         Dan Schwartz, now UConn's Vice Provost for Academic Operations (and our biggest supporter!) formed
                         Squared Labs, an all-star team of developers,
                         designers, and communications students to work on high-
@@ -147,10 +148,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
 
-                    <a href="#slide-2017" class="btn btn-outline-light p-1"
-                        style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                        <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
-                    </a>
+
+
+                    <h3>Born in the DX Lab</h3>
+
 
                     <p class="text-light">
                         The UConn DMD DX Lab (Digital
@@ -177,10 +178,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <h2 class="text-light">2020</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
-                    <a href="#slide-2019" class="btn btn-outline-light p-1"
-                        style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                        <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
-                    </a>
+
+
+                    <h3>The DX Group Emerges...</h3>
 
                     <p class="text-light">
                         DX Lab moves into COR²E and becomes the DX Group, one of the only core facilities in the country to
@@ -199,17 +199,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="col-md-6 text-center timeline-header">
                     <h2 class="text-light">2024</h2>
                 </div>
-                <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
-                    <a href="#slide-2020" class="btn btn-outline-light p-1"
-                        style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                        <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
-                    </a>
+                <div class="col-md-6 d-flex flex-column timeline-content">
+
+
+                    <h3>i3 is Born</h3>
+
                     <p class="text-light">
                         Internal Insights & Innovation (i3) launches as a strategic development team under the Vice Provost
                         for Academic Operations (hey, remember him?!). Built on the foundation of DXG and Squared Labs, i3
                         extends its mission beyond research support—partnering with administrative and academic units to
                         design and build custom tools that improve how the university works.
                     </p>
+                    <a href="#approach" class="btn btn-outline-light mt-3">
+                        What's it Like Working with Us?
+                        <i class="bi bi-arrow-down ms-2"></i>
+                    </a>
                 </div>
             </div>
         </div>

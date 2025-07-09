@@ -11,19 +11,19 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-12 mb-4">
-                <h2 class="mb-3 d-inline-block pb-3 text-uppercase"><span
-                        class="border-bottom border-2 pb-3 border-primary">Completed</span> Projects</h2>
+                    <h2 class="mb-3 d-inline-block pb-3 text-uppercase"><span
+                            class="border-bottom border-2 pb-3 border-primary">Completed</span> Projects</h2>
                 </div>
                 <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
                     <div>
                         <a class="btn rounded-pill me-3 border-0 shadow-none
-                            {{ ($tag === 'for-all') ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            {{ $tag === 'for-all' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
                             href="{{ route('projects.tag', ['tag' => 'for-all']) }}">All</a>
                         <a class="btn rounded-pill me-3 shadow-none
-                            {{ ($tag === 'for-research') ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
                             href="{{ route('projects.tag', ['tag' => 'for-research']) }}">For Research</a>
                         <a class="btn rounded-pill shadow-none
-                            {{ ($tag === 'for-uconn') ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
                             href="{{ route('projects.tag', ['tag' => 'for-uconn']) }}">For UConn</a>
                     </div>
                 </div>
@@ -31,10 +31,32 @@
             <div class="row">
                 @foreach ($items as $project)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden;">
+                        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; cursor:pointer;"
+                            data-bs-toggle="modal" data-bs-target="#projectModal{{ $project->id }}">
                             <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
                                 alt="{{ $project->title }}"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;  border-radius:10px;">
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius:10px;">
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="projectModal{{ $project->id }}" tabindex="-1" aria-labelledby="projectModalLabel{{ $project->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content bg-dark text-white">
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title" id="projectModalLabel{{ $project->id }}">{{ $project->title }}</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @if($project->image)
+                                        <img src="{{ asset('storage/' . $project->image) }}?v={{ time() }}" alt="{{ $project->title }}" class="img-fluid rounded mb-3">
+                                    @endif
+                                    <p>{{ $project->body }}</p>
+                                    @if($project->link)
+                                        <a href="{{ $project->link }}" target="_blank" class="btn btn-primary mt-2">Visit Project</a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -49,7 +71,8 @@
     <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats</h2>
+                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats
+                </h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
             </div>
@@ -103,14 +126,12 @@
     </section>
 
 
-    <!-- Odometer.js CDN (or use your own asset) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css" />
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate odometer numbers when in viewport
             function animateOdometers() {
                 document.querySelectorAll('.odometer').forEach(function(el) {
                     if (el.dataset.animated) return;
@@ -140,19 +161,20 @@
     <section class="bg-deep text-light py-5 position-relative d-flex align-items-center" style="min-height: 100vh;">
         <div class="container">
 
-                        <div class="row align-items-center justify-content-center">
+            <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">On Deck</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
+                <!-- Section Heading -->
+                <div class=" mb-5" data-aos="fade-down">
+                    <p class="lead px-md-5">
+                        We’ve got some exciting work in progress right now. From custom websites to mobile apps,
+                        we’re building digital experiences that are thoughtful, creative, and built to perform.
+                        Our team is deep in design and development, and this is just a sneak peek at what is to come!
+                    </p>
+                </div>
             </div>
-            <!-- Section Heading -->
-            <div class=" mb-5" data-aos="fade-down">
-                <p class="lead px-md-5">
-                    We’ve got some exciting work in progress right now. From custom websites to mobile apps,
-                    we’re building digital experiences that are thoughtful, creative, and built to perform.
-                    Our team is deep in design and development, and this is just a sneak peek at what is to come!
-                </p>
-            </div>
+
 
             <!-- Carousel -->
             <div id="onDeckCarousel" class="carousel slide shadow-lg rounded overflow-hidden" data-bs-ride="carousel">

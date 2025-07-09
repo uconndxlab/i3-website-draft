@@ -63,17 +63,19 @@
     </style>
     <h1 class="page-h1 display-1">People</h1>
 
-    <section id="people" class=" d-flex align-items-center px-5" style="min-height: 80vh;">
+    <section id="senior-staff" class=" d-flex align-items-center px-5" style="min-height: 80vh;">
 
-        <div class="container my-5">
-            <div class="row align-items-center justify-content-center mb-3">
+        <div class="container">
+            <div class="row align-items-center justify-content-center mb-3 ">
                 <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Leadership</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
 
             </div>
             <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
                 <p>
-                    Meet the minds steering i3, turning ideas into action and innovation into impact.
+                    We're the type of nerds who eat, sleep, and breathe UConn. This team of senior staff members is
+                    dedicated to making i3 a hub of innovation and creativity. From leading projects to mentoring students,
+                    we are committed to pushing the boundaries of what's possible at UConn.
                 </p>
             </div>
             <div class="row">
@@ -93,50 +95,63 @@
                     </div>
                 @endforeach
             </div>
+        </div>
+    </section>
 
+    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep" style="min-height: 80vh;">
+        <div class="container">
+            <div class="row align-items-center justify-content-center mb-3 ">
+                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Faculty Advisors</h2>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
+                    style="width:50px"></span>
+            </div>
+            <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                <p>
+                    Our faculty advisors are the backbone of i3, providing invaluable guidance and support. They bring a
+                    wealth of knowledge and experience to our team, helping us navigate challenges and seize opportunities.
+                </p>
+                <p>Interested in becoming a faculty advisor? <a class="text-white fw-bold"
+                        href="{{ route('connect') }}">Connect with us</a> to learn more about how you can get involved.</p>
 
-            <div class="row py-3">
-                <div class="col-md-12 text-center">
-                    <div class="row align-items-center justify-content-center mb-3">
-                        <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Faculty Advisors</h2>
-                        <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
-                    </div>
-
-                    <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
-                        <p>
-                            Faculty advisors play a pivotal role in our journey. They help us recruit talent, provide invaluable mentorship, and connect us with their esteemed colleagues, fostering growth and collaboration.
-                        </p>
-                    </div>
-                </div>
-                @foreach ($faculty_advisors as $advisor)
+            </div>
+            <div class="row justify-content-center">
+                @foreach ($faculty_advisors as $person)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="position-relative person-card rounded-3">
                             <div class="card-outline"></div>
-                            <img src="{{ asset('storage/' . $advisor->photo) }}" alt="{{ $advisor->name }}"
+                            <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
                                 class="person-photo">
                             <div class="person-overlay text-white p-3">
                                 <div class="person-name-and-role">
-                                    <h5 class="mb-0 fw-bold">{{ $advisor->name }}</h5>
-                                    <small>{{ $advisor->role }}</small>
+                                    <h5 class="mb-0 fw-bold">{{ $person->name }}</h5>
+                                    <small>{{ $person->role }}</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
+    </section>
+    <section id="students" class="d-flex align-items-center px-5" style="min-height: 80vh;">
+        <div class="container">
 
 
-            <div class="row">
+            <div class="row align-items-center justify-content-center mb-3 ">
 
                 <div class="col-md-12 text-center">
                     <div class="row align-items-center justify-content-center mb-3">
                         <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Student Staff</h2>
-                        <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
+                        <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
+                            style="width:50px"></span>
                     </div>
 
                     <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
                         <p>
-                            Our student staff are the heart of i3. They bring fresh perspectives, technical skills, and a passion for innovation that drives our projects forward. From app development to research support, they make it happen.
+                            Our student staff are the heart of i3. They bring fresh perspectives, technical skills, and a
+                            passion for innovation that drives our projects forward. From app development to research
+                            support,
+                            they make it happen.
                         </p>
                     </div>
 
@@ -158,7 +173,6 @@
                     </div>
                 @endforeach
             </div>
-
         </div>
     </section>
 
