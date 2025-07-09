@@ -133,8 +133,8 @@
             </dl>
         </div>
     </section>
-    <div style="position: relative; overflow: hidden; margin-top: -2px; transform: rotate(180deg);">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+    <div style="position: relative; overflow: hidden; margin-top: -2px; ">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2; transform: scaleY(-1.01);" class="bg-deep">
         <path fill="white" d="M0,120 
             C240,200 480,40 720,120 
             C960,200 1200,40 1440,120 
@@ -171,11 +171,7 @@
         });
     </script>
 
-
-    </div>
-    </section>
-
-    <section class="bg-deep-gradient text-light py-5 position-relative d-flex align-items-center py-5" style="min-height: 100vh;">
+    <section class="bg-deep text-light py-5 position-relative d-flex align-items-center" style="min-height: 100vh;">
         <div class="container">
 
             <div class="row align-items-center justify-content-center">
@@ -236,7 +232,7 @@
 
 
     <div style="position: relative; overflow: hidden; margin-bottom: -2px;">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;"  class="bg-deep">
         <path fill="white" d="M0,120 
             C240,200 480,40 720,120 
             C960,200 1200,40 1440,120 
@@ -270,8 +266,8 @@
             </div>
         </div>
     </section>
-    <div style="position: relative; overflow: hidden; margin-top: -2px; transform: rotate(180deg);">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2;">
+    <div style="position: relative; overflow: hidden; margin-top: -2px; ">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: white; z-index:2; transform: scaleY(-1);">
         <path fill="white" d="M0,120 
             C240,200 480,40 720,120 
             C960,200 1200,40 1440,120 
