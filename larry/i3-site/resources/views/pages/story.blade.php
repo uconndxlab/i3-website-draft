@@ -156,7 +156,8 @@
                     <h2 class="text-light">2017</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
-                    <h3>Our Origins</h3>
+                    <h3 style="font-family: area-normal,sans-serif; font-size: 40px;" class="fw-bold text-white mb-2 mt-3">Our Origins</h3>
+                    <hr style="width: 60px; height: 2px; margin: 1rem 0; border-color: #4DB3FF; background-color: #4DB3FF;opacity: 1;">
                     <p class="text-light">
 
                         Dan Schwartz, now UConn's Vice Provost for Academic Operations (and our biggest supporter!) formed
@@ -164,10 +165,12 @@
                         designers, and communications students to work on high-
                         value institutional projects. 
                     </p>
-                    <a href="#slide-2019" class="btn btn-outline-light p-1"
-                        style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                        <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
-                    </a>
+                    <div class="mt-3">
+                        <a href="#slide-2019" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
+                            <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -176,11 +179,15 @@
                     <h2 class="text-light">2019</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
+                    <div class="mb-3">
+                        <a href="#slide-2017" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #FFBB4D; background-color: #FFFFFF1A; border: none;">
+                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
+                        </a>
+                    </div>
 
-
-
-                    <h3>Born in the DX Lab</h3>
-
+                    <h3 style="font-family: area-normal,sans-serif; font-size: 40px;" class="fw-bold text-white mb-2 mt-3">Born in the DX Lab</h3>
+                    <hr style="width: 60px; height: 2px; margin: 1rem 0; border-color: #FFBB4D; background-color: #FFBB4D;opacity: 1;">
 
                     <p class="text-light">
                         The UConn DMD DX Lab (Digital
@@ -195,13 +202,9 @@
                         design.
                     </p>
 
-                    <div class="d-flex gap-2">
-                        <a href="#slide-2017" class="btn btn-outline-light p-1"
-                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
-                        </a>
+                    <div class="mt-3">
                         <a href="#slide-2020" class="btn btn-outline-light p-1"
-                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #FFBB4D; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
                         </a>
                     </div>
@@ -213,9 +216,15 @@
                     <h2 class="text-light">2020</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
+                    <div class="mb-3">
+                        <a href="#slide-2019" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
+                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
+                        </a>
+                    </div>
 
-
-                    <h3>The DX Group Emerges...</h3>
+                    <h3 style="font-family: area-normal,sans-serif; font-size: 40px;" class="fw-bold text-white mb-2 mt-3">The DX Group Emerges...</h3>
+                    <hr style="width: 60px; height: 2px; margin: 1rem 0; border-color: #4DB3FF; background-color: #4DB3FF;opacity: 1;">
 
                     <p class="text-light">
                         DX Lab moves into COR²E and becomes the DX Group, one of the only core facilities in the country to
@@ -223,13 +232,9 @@
                         DXG
                     </p>
 
-                    <div class="d-flex gap-2">
-                        <a href="#slide-2019" class="btn btn-outline-light p-1"
-                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
-                        </a>
+                    <div class="mt-3">
                         <a href="#slide-2024" class="btn btn-outline-light p-1"
-                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
                         </a>
                     </div>
@@ -241,9 +246,15 @@
                     <h2 class="text-light">2024</h2>
                 </div>
                 <div class="col-md-6 d-flex flex-column timeline-content">
+                    <div class="mb-3">
+                        <a href="#slide-2020" class="btn btn-outline-light p-1"
+                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
+                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
+                        </a>
+                    </div>
 
-
-                    <h3>i3 is Born</h3>
+                    <h3 style="font-family: area-normal,sans-serif; font-size: 40px;" class="fw-bold text-white mb-2 mt-3">i3 is Born</h3>
+                    <hr style="width: 60px; height: 2px; margin: 1rem 0; border-color: #4DB3FF; background-color: #4DB3FF;opacity: 1;">
 
                     <p class="text-light">
                         Internal Insights & Innovation (i3) launches as a strategic development team under the Vice Provost
@@ -251,11 +262,7 @@
                         extends its mission beyond research support—partnering with administrative and academic units to
                         design and build custom tools that improve how the university works.
                     </p>
-                    <div class="d-flex gap-2 align-items-center mt-3">
-                        <a href="#slide-2020" class="btn btn-outline-light p-1"
-                            style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
-                            <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
-                        </a>
+                    <div class="mt-3">
                         <a href="#approach" class="btn btn-outline-light">
                             What's it Like Working with Us?
                             <i class="bi bi-arrow-down ms-2"></i>
@@ -272,7 +279,7 @@
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
-                    <h2 class="mb-4 text-dark"">Our Approach</h2>
+                    <h2 class="mb-4 text-dark">Our Approach</h2>
                     <blockquote class="blockquote text-dark"
                         style="font-size: 1.5rem; font-style: italic; border-left: 5px solid #333; padding-left: 15px;">
                         Create value as soon as possible.
