@@ -183,9 +183,9 @@
                 <div class="col-lg-6" data-aos="fade-left">
                 <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">FOR</span> THE UNIVERSITY</h2>
 
-                    <p class="text-secondary">
+                    <p class="text-light">
                         We work directly with faculty, staff, and researchers to understand real needs and build tools that solve real problems. Sometimes that means shipping quick fixes. Other times it means digging into legacy systems or designing something from scratch. Either way, we stay close to the work, iterate fast, and make sure what we deliver actually helps.                    </p>
-                    <p class="text-secondary">
+                    <p class="text-light">
                         We're here to help UConn work smarter. That means replacing expensive vendor tools when we can, streamlining operations, and applying custom technology to reduce friction and improve outcomes. Whether it's administrative processes or research infrastructure, we build with the goal of making the university stronger.
                     </p>
 

@@ -44,8 +44,15 @@ class WorkItemController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
 
+
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('work_thumbnails', 'public');
+        }
+
+        if ($request->has('link')) {
+            $data['link'] = $request->input('link');
+        } else {
+            $data['link'] = null; // Ensure link is set to null if not provided
         }
 
         WorkItem::create($data);
@@ -92,6 +99,8 @@ class WorkItemController extends Controller
         } else {
             unset($data['thumbnail']);
         }
+
+        $data['link'] = $request->input('link');
 
         $data['slug'] = Str::slug($data['title']);
 

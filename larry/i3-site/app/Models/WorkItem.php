@@ -7,7 +7,7 @@ use App\Models\Tag;
 
 class WorkItem extends Model
 {
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'thumbnail'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'thumbnail', 'link'];
 
     public function tags()
     {
