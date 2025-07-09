@@ -289,7 +289,7 @@
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
-                    <h2 class="mb-4 text-dark">Our Approach</h2>
+                    <h2 class="mb-4 text-dark text-uppercase">Our Approach</h2>
                     <blockquote class="blockquote text-dark"
                         style="font-size: 1.5rem; font-style: italic; border-left: 5px solid #333; padding-left: 15px;">
                         Create value as soon as possible.
