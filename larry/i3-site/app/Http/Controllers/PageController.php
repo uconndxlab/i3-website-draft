@@ -25,6 +25,14 @@ class PageController extends Controller
             $nameParts = explode(' ', $person->name);
             return end($nameParts); // Sort by the last part of the name
         });
+        $people = $people->sortBy(function ($person) {
+            if ($person->name === 'Joel Salisbury') {
+            return '0000'; // Ensures Joel comes first
+            }
+            $nameParts = explode(' ', $person->name);
+            return end($nameParts);
+        });
+
         $senior_staff = $people->filter(function ($person) {
             return in_array('senior-staff', $person->tags);
         });
