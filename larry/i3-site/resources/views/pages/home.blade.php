@@ -24,7 +24,7 @@
     </section>
 
 
-    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 0;">
+    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 0; overflow:hidden;">
         <div class="mobile-scaledown">
             <div id="projectsScroller" style="visibility:hidden;">
                 @foreach(\App\Models\WorkItem::all() as $item)

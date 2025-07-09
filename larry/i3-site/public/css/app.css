@@ -57,10 +57,17 @@
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--light) 10%, var(--light) 90%, rgb(17, 17, 17) 100%);
 }
 
+.bg-dark-opaque {
+    background: rgba(17, 17, 17, 0.5);
+}
+
 
 body, html {
-    overflow-x:hidden;
+    /* overflow-x:hidden; */
     background:#111;
+}
+main {
+    overflow:hidden;
 }
 
 p {

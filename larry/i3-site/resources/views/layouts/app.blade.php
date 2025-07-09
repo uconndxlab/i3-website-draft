@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body class="position-relative">
     @include('layouts.header')
     <div class="d-flex flex-column min-vh-100">
         <main class="flex-grow-1 pt-3">
@@ -33,7 +33,7 @@
         </main>
     </div>
 
-    <div class="footercontain">
+    <div class="footercontain overflow-hidden">
         <section id="contact" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
             <div class="container">
                 <h2 class="mb-4 d-inline-block pb-3" data-aos="fade-down"><span

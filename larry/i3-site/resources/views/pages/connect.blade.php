@@ -95,8 +95,8 @@
                         class="border-bottom border-2 pb-3 border-primary">Let's</span> Connect</h2>
                 <p>
                     All aboard the Rowe Boat! Here at Rowe 321, we're always shipping.
-                    Conveniently located in the heart of campus (and right by The Beanery), we’re in a great spot for
-                    students and clients to collaborate. Swing by to check out what we’re working on, hang out on our comfy
+                    Conveniently located in the heart of campus (and right by The Beanery), we're in a great spot for
+                    students and clients to collaborate. Swing by to check out what we're working on, hang out on our comfy
                     couches, and get a great view of campus!
                 </p>
                 <div class="btn display-btn btn-arrow-slide">
@@ -182,10 +182,10 @@
                 <div class="text-center mb-5" data-aos="fade-down">
                     <p class="lead px-md-5">
                         We're always looking for talented, high-energy UConn lovers to join our team.
-                        If you’re a student with a passion for technology, design, and innovation,
+                        If you're a student with a passion for technology, design, and innovation,
                         we want to hear from you! Whether you're into web development, UX design, or digital consulting,
                         writing, illustration, project management, or anything in between,
-                        there’s a place for you at i3.
+                        there's a place for you at i3.
                     </p>
 
                     <p class="lead px-md-5">Like you, we're pretty confused about the current state of the Student Job
@@ -235,7 +235,7 @@
 
 
 
-    <section class="bg-white text-dark d-flex align-items-center py-5">
+    <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden">
         <div class="container py-5">
             <div class="row mt-4 g-5 d-flex align-items-center">
                 <div class="col-lg-6">
@@ -280,7 +280,7 @@
                             width: 100%;
                             height: 100%;
                             top: -2px;
-                            left: 27%;
+                            left: 31.5%;
                             transform: translateX(-50%);
                             -webkit-mask-image: url(/img/i3/i3-coffee-fill.svg);
                             -webkit-mask-repeat: no-repeat;
@@ -344,6 +344,7 @@
 
                         .loop {
                             opacity: 1;
+                            max-width:100%;
                             width: 100vw;
                             height: auto;
                             pointer-events: none;
@@ -388,7 +389,7 @@
                         </svg>
                     </div>
 
-                    <svg class="loop" viewBox="0 0 2025.08 1001.09" preserveAspectRatio="none">
+                    {{-- <svg class="loop" viewBox="0 0 2025.08 1001.09" preserveAspectRatio="none">
                         <path id="loopy"
                             d="M1.25.84s179.42,267.7,316.14,257.22S583.02,84.72,477.82,54.66s-82.94,327.41,212.31,287.31,459.17-118.22,491.34,192.75-204.35,131.01-204.35,131.01c0,0-230.71-175.44-247.56,103.37s226.72,176.17,226.72,176.17c0,0,364.6-171.57,444.26-291.06s50.55-556.09,257.36-470.3-75.06,320.17-114.89,128.68S1918.31,30.73,1918.31,30.73"
                             fill="none" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="15"
@@ -398,7 +399,7 @@
                             fill="none" stroke="#ffbb4e" stroke-width="5" stroke-dasharray="15"
                             stroke-miterlimit="10" stroke-dashoffset="0" />
 
-                    </svg>
+                    </svg> --}}
                 </div>
 
 

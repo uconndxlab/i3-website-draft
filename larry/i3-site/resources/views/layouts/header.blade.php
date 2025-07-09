@@ -51,11 +51,11 @@
         </div>
     </div>
 </div>
-  <header class="position-sticky top-0 z-3 py-3">
-    <nav class="navbar navbar-expand-lg" style="padding:0px;">
+  <header class="sticky-top py-3 bg-dark-opaque">
+    <nav class="navbar navbar-expand-lg" style="padding:0px;" data-bs-theme="dark">
       <div class="container">
         <div>
-            <h1 class="header-level-one">
+            <h1 class="header-level-one mb-0">
                 <a href="/" class="link-offset-1">
                     Internal Insights & Innovation
                 </a>
@@ -65,7 +65,7 @@
           aria-controls="i3navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent">
+        <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent" data-bs-theme="dark">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="{{ route('team') }}">People</a>
