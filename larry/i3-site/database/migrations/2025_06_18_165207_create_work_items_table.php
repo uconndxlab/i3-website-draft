@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->longText('body')->nullable();
             $table->string('thumbnail')->nullable();   // path to image
+            $table->string('link')->nullable();       // external link
             $table->timestamps();
         });
     }
