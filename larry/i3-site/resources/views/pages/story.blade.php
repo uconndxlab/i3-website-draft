@@ -326,7 +326,7 @@
         </div>
     </section>
     <div style="position: relative; overflow: hidden; margin-top: -2px; ">
-        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: #ffbb4d; z-index:2; transform: scaleY(-1.0);" class="bg-dark">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; fill: #ffbb4d; z-index:2; transform: scaleY(-1.01);" class="bg-dark">
         <path fill="#ffbb4d" d="M0,120 
             C240,200 480,40 720,120 
             C960,200 1200,40 1440,120 
