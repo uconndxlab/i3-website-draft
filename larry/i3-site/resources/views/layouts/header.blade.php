@@ -80,7 +80,7 @@
                               href="{{ route('story') }}">Story</a>
                       </li>
                       <li class="nav-item">
-                          <a class="btn btn-outline-light ms-2 px-2 ms-2 mt-1{{ request()->routeIs('connect') ? ' active' : '' }}"
+                          <a class="btn btn-outline-light px-2 ms-md-3 mt-1{{ request()->routeIs('connect') ? ' active' : '' }}"
                               href="{{ route('connect') }}">
                               Connect with Us
                           </a>

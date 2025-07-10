@@ -4,7 +4,7 @@
 @section('content')
 
 
-    <h1 class="page-h1 display-1">Projects</h1>
+    <h1 class="page-h1">Projects</h1>
     <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5" style="min-height: 90vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
