@@ -278,7 +278,10 @@
                             --waveX25Percent: -750px;
                             --waveX50Percent: -1500px;
                             --waveX75Percent: -2250px;
+
                         }
+
+                        
 
                         .coffee-wrapper {
                             position: relative;
@@ -304,13 +307,20 @@
                             height: 100%;
                             top: -2px;
                             left: 31.5%;
-                            transform: translateX(-400px);
+                            transform: translateX(-343px);
                             -webkit-mask-image: url(/img/i3/i3-coffee-fill.svg);
                             -webkit-mask-repeat: no-repeat;
                             -webkit-mask-size: contain;
                             -webkit-mask-position: center;
                             overflow: hidden;
                             z-index: 2;
+                            cursor: pointer
+                        }
+
+                        @media (max-width: 1399.98px) {
+                            .coffee-flow-wrapper {
+                                transform: translateX(-255px);
+                            }
                         }
 
 
@@ -384,13 +394,16 @@
                         #loopy {
                             z-index: 0;
                         }
+
+                        #coffee:hover .coffee-flow {
+                            filter: brightness(1.2) drop-shadow(0 0 60px #ffbb4e);
+                            transition: filter 0.3s ease-in-out;
+                        }
+
                     </style>
 
-                    <button class="fill-coffee px-4 py-2 d-flex align-items-center gap-2 my-2" id="coffee"
-                        style="font-size:1rem; background: #dbf7f0; color: #13404a; border: none;">
-                        Fill Our Cup!
-                    </button>
-                    <div class="coffee-wrapper">
+
+                    <div id="coffee" class="coffee-wrapper">
                         <div class="coffee-flow-wrapper coffee">
                             <div class="coffee-track animated">
                                 <svg class="coffee-liquid coffee-flow" width="3000" height="510"

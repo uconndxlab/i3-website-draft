@@ -95,7 +95,7 @@
     
 
     {{-- What We Do --}}
-    <section id="what-we-do" class="bg-deep-gradient text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+    <section role="region" aria-label="What We Do" id="what-we-do" class="bg-deep-gradient text-light d-flex align-items-center px-5" style="min-height: 100vh;">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">What</span> We Do</h2>
             <div class="row align-items-top g-5">

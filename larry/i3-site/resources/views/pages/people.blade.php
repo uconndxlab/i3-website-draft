@@ -62,7 +62,7 @@
     </style>
     <h1 class="page-h1 display-1">People</h1>
 
-    <section id="senior-staff" class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
+    <section role="region" aria-label="Our Leadership" id="senior-staff" class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
 
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
@@ -97,7 +97,7 @@
         </div>
     </section>
 
-    <section id="students" class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
+    <section role="region" aria-label="Student Staff" id="students" class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
         <div class="container">
 
 
