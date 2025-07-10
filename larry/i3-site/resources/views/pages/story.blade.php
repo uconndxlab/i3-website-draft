@@ -340,50 +340,38 @@
 
                             <!-- Define Badge -->
                             <g class="svg-element" transform="translate(100,80)">
-                                <rect x="-35" y="20" width="70" height="30" rx="15" fill="#333"/>
-                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Define</text>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#000" font-weight="bold" font-size="16">Define</text>
                             </g>
 
                             <!-- Build Badge -->
                             <g class="svg-element" transform="translate(300,80)">
-                                <rect x="-30" y="20" width="60" height="30" rx="15" fill="#333"/>
-                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Build</text>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#000" font-weight="bold" font-size="16">Build</text>
                             </g>
 
                             <!-- Refine Badge -->
                             <g class="svg-element" transform="translate(500,80)">
-                                <rect x="-32" y="20" width="64" height="30" rx="15" fill="#333"/>
-                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Refine</text>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#000" font-weight="bold" font-size="16">Refine</text>
                             </g>
 
                             <!-- Repeat Badge -->
                             <g class="svg-element" transform="translate(700,80)">
-                                <rect x="-34" y="20" width="68" height="30" rx="15" fill="#333"/>
-                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Repeat</text>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#000" font-weight="bold" font-size="16">Repeat</text>
                             </g>
 
                             <!-- Husky Head Character -->
-                            <g id="huskyCharacter" transform="translate(100,80)">
+                            <g id="huskyCharacter" transform="translate(100,80)"  title="This was really the UConn Husky logo in 1959.">
+>
                                 <!-- Rotation wrapper - this will handle only rotation -->
                                 <g id="huskyRotation">
                                     <!-- Husky Head (Simple line art) -->
-                                    <g id="huskyHead">
-                                        <!-- Head outline -->
-                                        <path d="M-12,-35 Q-15,-40 -10,-45 Q0,-50 10,-45 Q15,-40 12,-35 Q10,-30 8,-28 Q5,-25 0,-25 Q-5,-25 -8,-28 Q-10,-30 -12,-35 Z" 
-                                              fill="none" stroke="#333" stroke-width="2"/>
-                                        <!-- Ears -->
-                                        <path d="M-8,-42 L-12,-48 L-6,-45 Z" fill="none" stroke="#333" stroke-width="2"/>
-                                        <path d="M8,-42 L12,-48 L6,-45 Z" fill="none" stroke="#333" stroke-width="2"/>
-                                        <!-- Eyes -->
-                                        <circle cx="-4" cy="-38" r="2" fill="#333"/>
-                                        <circle cx="4" cy="-38" r="2" fill="#333"/>
-                                        <!-- Nose -->
-                                        <circle cx="0" cy="-32" r="1.5" fill="#333"/>
-                                        <!-- Happy Mouth -->
-                                        <path d="M-6,-28 Q0,-24 6,-28" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
-                                        <!-- Tongue (optional - makes it more playful) -->
-                                        <ellipse cx="0" cy="-26" rx="3" ry="1.5" fill="#ff6b6b" opacity="0.8"/>
-                                    </g>
+                                    <image 
+                                        href="{{ asset('img/i3/1959-uconn-husky.png') }}" 
+                                        x="-25" 
+                                        y="-75" 
+                                        width="50" 
+                                        height="50"
+                                        preserveAspectRatio="xMidYMid meet"
+                                    />
                                 </g>
                             </g>
 
@@ -469,6 +457,10 @@
                             }, elements.length * 200 + 1000);
                         });
                         </script>
+
+                        <span class="text-dark text-small mt-2" style="font-size:0.8rem">
+                            * this was really the UConn Husky logo in 1959.
+                        </span>
                     </div>
                 </div>
             </div>
