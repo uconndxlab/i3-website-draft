@@ -1171,12 +1171,14 @@ p.small {
 
 /*NAV*/
 /* header */
-.nav-link{color:#fff!important}
+.nav-link{color:#fff!important; font-size: 1.2rem!important;}
 .header-level-two{font-family:proxima-nova,sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
 .header-level-one{font-family:proxima-nova,sans-serif;font-size:24px;font-weight:500}
 .header-level-one a,.header-level-two a{color:#fff;text-decoration:none}
 .header-level-one a:hover,.header-level-two a:hover{text-decoration:underline}
 .nav-link:hover{color:var(--light-blue)!important}
+
+.nav-link.active{color:var(--light-blue)!important; text-decoration:underline!important;}
 
 /*END OF NAV*/
 /*FOOTER*/
@@ -1433,3 +1435,4 @@ p.small {
     font-family: 'Roboto Mono', monospace;
     font-weight: 400;
 }
+

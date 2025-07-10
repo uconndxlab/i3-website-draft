@@ -70,8 +70,8 @@
                 <!-- Section Heading -->
                 <div class=" mb-5" data-aos="fade-down">
                     <p class="lead px-md-5">
-                        We’ve got some exciting work in progress right now. From custom websites to mobile apps,
-                        we’re building digital experiences that are thoughtful, creative, and built to perform.
+                        We've got some exciting work in progress right now. From custom websites to mobile apps,
+                        we're building digital experiences that are thoughtful, creative, and built to perform.
                         Our team is deep in design and development, and this is just a sneak peek at what is to come!
                     </p>
                 </div>
@@ -81,27 +81,73 @@
             <!-- Carousel -->
             <div id="onDeckCarousel" class="carousel slide shadow-lg rounded overflow-hidden" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://placehold.co/1200x600" class="d-block w-100" alt="Placeholder Image 1">
-                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                            <h5>Placeholder Caption 1</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
+                    @php
+                    $inProgressProjects = collect([
+                        (object)[
+                            'title' => 'UConn Mobile App Redesign',
+                            'client' => 'UConn IT',
+                            'status' => 'Design'
+                        ],
+                        (object)[
+                            'title' => 'Research Portal',
+                            'client' => 'UConn Research',
+                            'status' => 'Development'
+                        ],
+                        (object)[
+                            'title' => 'Student Success Dashboard',
+                            'client' => 'Student Affairs',
+                            'status' => 'Planning'
+                        ],
+                        (object)[
+                            'title' => 'Digital Accessibility Audit',
+                            'client' => 'Office of Diversity',
+                            'status' => 'Testing'
+                        ],
+                        (object)[
+                            'title' => 'Alumni Engagement Platform',
+                            'client' => 'UConn Alumni',
+                            'status' => 'Development'
+                        ],
+                        (object)[
+                            'title' => 'Virtual Campus Tour',
+                            'client' => 'Admissions',
+                            'status' => 'Design'
+                        ],
+                        (object)[
+                            'title' => 'Faculty Directory Upgrade',
+                            'client' => 'College of Liberal Arts',
+                            'status' => 'Development'
+                        ],
+                        (object)[
+                            'title' => 'Sustainability Tracker',
+                            'client' => 'Sustainability Office',
+                            'status' => 'Planning'
+                        ],
+                    ]);
+
+                        $chunks = $inProgressProjects->chunk(4);
+                    @endphp
+                    @foreach ($chunks as $chunkIndex => $projects)
+                        <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
+                            <div class="row g-4 justify-content-center px-3 py-4">
+                                @foreach ($projects as $project)
+                                    <div class="col-md-3 col-12">
+                                        <div class="card h-100 shadow bg-dark text-white">
+                                            <div class="card-body d-flex flex-column">
+                                                <h5 class="card-title">{{ $project->title }}</h5>
+                                                <p class="card-text mb-2">
+                                                    <strong>Client:</strong> {{ $project->client ?? 'N/A' }}
+                                                </p>
+                                                <span class="badge bg-warning text-dark align-self-start">
+                                                    {{ $project->status ?? 'In Progress' }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placehold.co/1200x600" class="d-block w-100" alt="Placeholder Image 2">
-                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                            <h5>Placeholder Caption 2</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placehold.co/1200x600" class="d-block w-100" alt="Placeholder Image 3">
-                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                            <h5>Placeholder Caption 3</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-- Controls -->

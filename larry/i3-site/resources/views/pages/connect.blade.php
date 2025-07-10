@@ -89,6 +89,7 @@
             <div class="hero-card shadow-lg">
                 <div class="mb-2 text-light small">
                     <i class="bi bi-geo-alt"></i> Rowe 321, Storrs Campus
+                    &nbsp;|&nbsp;<i class="bi bi-envelope"></i> <a href="mailto:i3@uconn.edu" class="text-light text-decoration-underline">i3@uconn.edu</a>
                 </div>
                 <h2 class="my-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
                         class="border-bottom border-2 pb-3 border-primary">Let's</span> Connect</h2>
