@@ -51,7 +51,7 @@
           </div>
       </div>
   </div>
-  <header class="sticky-top py-3 bg-dark-opaque">
+  <header class="sticky-top py-3 bg-dark-gradient">
       <nav class="navbar navbar-expand-lg" style="padding:0px;" data-bs-theme="dark">
           <div class="container">
               <div>

@@ -51,7 +51,6 @@
 
         .person-name-and-role {
             text-shadow: rgba(0, 0, 0, 0.78) 0px 2px 10px;
-            background-color: rgba(0, 0, 0, 0.5);
             /* Dark highlight background color */
             padding: 5px;
             /* Add some padding for better appearance */
@@ -85,7 +84,7 @@
                             <div class="card-outline"></div>
                             <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
                                 class="person-photo">
-                            <div class="person-overlay text-white p-3">
+                            <div class="person-overlay bg-blue-to-transparent text-white p-3 pt-5">
                                 <div class="person-name-and-role">
                                     <h5 class="mb-0 fw-bold">{{ $person->name }}</h5>
                                     <small>{{ $person->role }}</small>
@@ -121,7 +120,7 @@
                             <div class="card-outline"></div>
                             <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
                                 class="person-photo">
-                            <div class="person-overlay text-white p-3">
+                            <div class="person-overlay bg-dark-to-transparent text-white p-3 pt-5">
                                 <div class="person-name-and-role">
                                     <h5 class="mb-0 fw-bold">{{ $person->name }}</h5>
                                     <small>{{ $person->role }}</small>
@@ -163,7 +162,7 @@
                             <div class="card-outline"></div>
                             <img src="{{ asset('storage/' . $student->photo) }}" alt="{{ $student->name }}"
                                 class="person-photo">
-                            <div class="person-overlay text-white p-3">
+                            <div class="person-overlay bg-purple-to-transparent pt-5 text-white p-3">
                                 <div class="person-name-and-role">
                                     <h5 class="mb-0 fw-bold">{{ $student->name }}</h5>
                                     <small>{{ $student->role }}</small>

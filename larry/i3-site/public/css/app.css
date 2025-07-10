@@ -13,6 +13,9 @@
     background: var(--deep);
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--deep) 50%, rgb(17, 17, 17) 100%);
 }
+.bg-deep-to-transparent {
+    background: linear-gradient(0deg, var(--deep) 0%, rgba(36,50,80,0.5) 80%, rgba(36, 50, 80, 0) 100%);
+}
 
 .bg-lightblue {
     background-color: var(--light-blue);
@@ -31,8 +34,23 @@
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #243250 50%, rgb(17, 17, 17) 100%);
 }
 
+.bg-blue-to-transparent {
+    background: linear-gradient(0deg, #243250 0%, rgba(36, 50, 80, 0) 100%);
+}
+
+.bg-dark-gradient {
+    background: var(--dark);
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--dark) 50%, rgb(17, 17, 17) 100%);
+}
+
+
+
 .bg-dark {
     background-color: var(--dark);
+}
+
+.bg-dark-to-transparent {
+    background: linear-gradient(0deg, rgba(17, 17, 17, 1) 0%, rgba(17, 17, 17, 0.5) 80%, rgba(17, 17, 17, 0) 100%);
 }
 
 .bg-teal {
@@ -55,6 +73,10 @@
 .bg-light-gradient {
     background: var(--light);
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--light) 10%, var(--light) 90%, rgb(17, 17, 17) 100%);
+}
+
+.bg-purple-to-transparent {
+    background: linear-gradient(0deg, #280E3A 0%, rgba(36, 50, 80, 0) 100%);
 }
 
 .bg-dark-opaque {
