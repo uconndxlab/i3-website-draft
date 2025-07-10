@@ -233,7 +233,7 @@
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
-                        <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:200px">
+                        <a href="{{route('team')}}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:200px">
                             <span class="btn-arrow-slide-circle" aria-hidden="true">
                                 <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                             </span>

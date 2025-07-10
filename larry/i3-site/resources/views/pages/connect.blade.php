@@ -261,12 +261,16 @@
     <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden">
         <div class="container py-5">
             <div class="row mt-4 g-5 d-flex align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6 ">
                     <h2 class="my-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
                             class="border-bottom border-2 pb-3 border-primary">Support</span> Us</h2>
-                    <p class=" text-dark">The i3 team is a self-funded unit, and we rely on the support of our
-                        community to continue our work. If you believe in the value of innovation and collaboration at
-                        UConn, consider supporting us through donations or partnerships.</p>
+                    <p class=" text-dark">The i3 team is a primarily self-funded unit. 
+                        We keep the lights on by providing services to the UConn community and billing for our work, 
+                        but there are so many ways to support us beyond just financial contributions! </p>
+
+                    <a href="#contact" class="btn btn-outline-dark mt-3">
+                        Get in Touch to Learn How <i class="bi bi-arrow-down ms-2"></i>
+                    </a>
                 </div>
 
                 <div class="col-lg-6">
@@ -307,7 +311,7 @@
                             height: 100%;
                             top: -2px;
                             left: 31.5%;
-                            transform: translateX(-343px);
+                            transform: translateX(-195px);
                             -webkit-mask-image: url(/img/i3/i3-coffee-fill.svg);
                             -webkit-mask-repeat: no-repeat;
                             -webkit-mask-size: contain;
@@ -319,7 +323,7 @@
 
                         @media (max-width: 1399.98px) {
                             .coffee-flow-wrapper {
-                                transform: translateX(-255px);
+                                transform: translateX(-140px);
                             }
                         }
 
@@ -403,7 +407,7 @@
                     </style>
 
 
-                    <div id="coffee" class="coffee-wrapper">
+                    <div id="coffee" class="coffee-wrapper text-center">
                         <div class="coffee-flow-wrapper coffee">
                             <div class="coffee-track animated">
                                 <svg class="coffee-liquid coffee-flow" width="3000" height="510"
@@ -425,7 +429,7 @@
                         </svg>
                     </div>
 
-                    {{-- <svg class="loop" viewBox="0 0 2025.08 1001.09" preserveAspectRatio="none">
+                    <svg class="loop" viewBox="0 0 2025.08 1001.09" preserveAspectRatio="none">
                         <path id="loopy"
                             d="M1.25.84s179.42,267.7,316.14,257.22S583.02,84.72,477.82,54.66s-82.94,327.41,212.31,287.31,459.17-118.22,491.34,192.75-204.35,131.01-204.35,131.01c0,0-230.71-175.44-247.56,103.37s226.72,176.17,226.72,176.17c0,0,364.6-171.57,444.26-291.06s50.55-556.09,257.36-470.3-75.06,320.17-114.89,128.68S1918.31,30.73,1918.31,30.73"
                             fill="none" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="15"
@@ -435,7 +439,7 @@
                             fill="none" stroke="#ffbb4e" stroke-width="5" stroke-dasharray="15"
                             stroke-miterlimit="10" stroke-dashoffset="0" />
 
-                    </svg> --}}
+                    </svg>
                 </div>
 
 
