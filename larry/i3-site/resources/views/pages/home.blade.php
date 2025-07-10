@@ -118,7 +118,7 @@
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                           <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
-                        <span class="btn-arrow-slide-text"> Our Projects </span>
+                        <span class="btn-arrow-slide-text"> See Our Projects </span>
                       </a>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                           <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
-                        <span class="btn-arrow-slide-text"> Our Story </span>
+                        <span class="btn-arrow-slide-text"> Read Our Story </span>
                       </a>
                     </div>
                 </div>
@@ -237,7 +237,7 @@
                             <span class="btn-arrow-slide-circle" aria-hidden="true">
                                 <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                             </span>
-                            <span class="btn-arrow-slide-text"> View Our Team </span>
+                            <span class="btn-arrow-slide-text"> Meet Our People </span>
                         </a>
                     </div>
                 </div>

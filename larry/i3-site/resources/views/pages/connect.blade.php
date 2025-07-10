@@ -100,13 +100,15 @@
                     students and clients to collaborate. Swing by to check out what we're working on, hang out on our comfy
                     couches, and get a great view of campus!
                 </p>
-                <div class="btn display-btn btn-arrow-slide">
-                    <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:225px">
-                        <span class="btn-arrow-slide-circle" aria-hidden="true">
-                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                        </span>
-                        <span class="btn-arrow-slide-text"> Send us a Message </span>
-                    </a>
+                <div class="d-flex">
+                    <div class="btn display-btn btn-arrow-slide">
+                        <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:225px">
+                            <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                            </span>
+                            <span class="btn-arrow-slide-text"> Send us a Message </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,7 +126,9 @@
             <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
                 data-aos="fade-up">
                 <p>
-                    Need a website, app, or design help for your grant? Let's talk. Have an idea for a project that could help make things better at UConn? We're all ears! Just want a little advice on how to put together your Aurora site? Let's figure it out together.
+                    Need a website, app, or design help for your grant? Let's talk. Have an idea for a project that could
+                    help make things better at UConn? We're all ears! Just want a little advice on how to put together your
+                    Aurora site? Let's figure it out together.
             </div>
 
             <div class="row g-5 mt-1 mb-5">
@@ -181,13 +185,13 @@
 
             <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
                 data-aos="fade-up">
-                    <p class="">
-                        We're always looking for talented, high-energy UConn lovers to join our team.
-                        If you're a student with a passion for technology, design, and innovation,
-                        we want to hear from you! Whether you're into web development, UX design, or digital consulting,
-                        writing, illustration, project management, or anything in between,
-                        there's a place for you at i3.
-                    </p>
+                <p class="">
+                    We're always looking for talented, high-energy UConn lovers to join our team.
+                    If you're a student with a passion for technology, design, and innovation,
+                    we want to hear from you! Whether you're into web development, UX design, or digital consulting,
+                    writing, illustration, project management, or anything in between,
+                    there's a place for you at i3.
+                </p>
 
             </div>
 
@@ -196,8 +200,8 @@
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                            <i class="bi bi-code-slash display-6 mb-4"></i>
-                            <h5 class="fw-bold">
+                            <i class="bi bi-code-slash display-7 mb-4"></i>
+                            <h5 class="fw-bold mt-3">
                                 Developers</h5>
                             <p>Love coding and building things? Join us to create amazing web apps and digital experiences
                                 that make a difference at UConn.</p>
@@ -213,8 +217,8 @@
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                            <i class="bi bi-palette display-6 mb-4"></i>
-                            <h5 class="fw-bold">Designers</h5>
+                            <i class="bi bi-palette display-7 mb-4"></i>
+                            <h5 class="fw-bold mt-3">Designers</h5>
                             <p>Have an eye for design? Help us create beautiful, user-friendly interfaces and engaging
                                 visual experiences.</p>
                             <a href="#contact" class="btn btn-outline-light">
@@ -229,8 +233,8 @@
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                            <i class="bi bi-pencil-square display-6 mb-4"></i>
-                            <h5 class="fw-bold">Illustrators</h5>
+                            <i class="bi bi-pencil-square display-7 mb-4"></i>
+                            <h5 class="fw-bold mt-3">Illustrators</h5>
                             <p>Turn ideas into visuals? We need your creative talent to bring stories and concepts to life
                                 through illustration.</p>
                             <a href="#contact" class="btn btn-outline-light">Illustrator? Let's Chat!
@@ -243,8 +247,8 @@
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                            <i class="bi bi-chat-dots display-6 mb-4"></i>
-                            <h5 class="fw-bold">Something Elses</h5>
+                            <i class="bi bi-chat-dots display-7 mb-4"></i>
+                            <h5 class="fw-bold mt-3">Something Else?</h5>
                             <p>Writers, marketers, project managers, and creative minds of all kinds - we'd love to hear
                                 from you!</p>
                             <a href="#contact" class="btn btn-outline-light">
@@ -264,8 +268,8 @@
                 <div class="col-lg-6 ">
                     <h2 class="my-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
                             class="border-bottom border-2 pb-3 border-primary">Support</span> Us</h2>
-                    <p class=" text-dark">The i3 team is a primarily self-funded unit. 
-                        We keep the lights on by providing services to the UConn community and billing for our work, 
+                    <p class=" text-dark">The i3 team is a primarily self-funded unit.
+                        We keep the lights on by providing services to the UConn community and billing for our work,
                         but there are so many ways to support us beyond just financial contributions! </p>
 
                     <a href="#contact" class="btn btn-outline-dark mt-3">
@@ -285,7 +289,7 @@
 
                         }
 
-                        
+
 
                         .coffee-wrapper {
                             position: relative;
@@ -403,7 +407,6 @@
                             filter: brightness(1.2) drop-shadow(0 0 60px #ffbb4e);
                             transition: filter 0.3s ease-in-out;
                         }
-
                     </style>
 
 
