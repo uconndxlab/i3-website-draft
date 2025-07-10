@@ -14,6 +14,7 @@
             width: 100%;
             top: 0;
             left: 0;
+
         }
 
         #origins .slide.active {
@@ -36,6 +37,13 @@
             font-size: 10rem;
             margin-bottom: 1.5rem;
             text-align: center;
+        }
+
+        .slide >.col-md-6:first-child {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 
