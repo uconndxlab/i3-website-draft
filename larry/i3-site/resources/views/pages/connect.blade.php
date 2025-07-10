@@ -89,7 +89,8 @@
             <div class="hero-card shadow-lg">
                 <div class="mb-2 text-light small">
                     <i class="bi bi-geo-alt"></i> Rowe 321, Storrs Campus
-                    &nbsp;|&nbsp;<i class="bi bi-envelope"></i> <a href="mailto:i3@uconn.edu" class="text-light text-decoration-underline">i3@uconn.edu</a>
+                    &nbsp;|&nbsp;<i class="bi bi-envelope"></i> <a href="mailto:i3@uconn.edu"
+                        class="text-light text-decoration-underline">i3@uconn.edu</a>
                 </div>
                 <h2 class="my-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
                         class="border-bottom border-2 pb-3 border-primary">Let's</span> Connect</h2>
@@ -118,14 +119,12 @@
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
 
-                <div class="text-center" data-aos="fade-down">
-                    <p class="lead px-md-5 py-3 mb-0">
-                        Need a website, app, or design help for your grant? Let's talk. We can write you a letter of
-                        support, help you plan your submission, and, when the work starts, bill directly to your grant, all
-                        while helping you navigate UConn's branding and go-live
-                        approvals without losing your mind.
-                    </p>
-                </div>
+
+            </div>
+            <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
+                data-aos="fade-up">
+                <p>
+                    Need a website, app, or design help for your grant? Let's talk. Have an idea for a project that could help make things better at UConn? We're all ears! Just want a little advice on how to put together your Aurora site? Let's figure it out together.
             </div>
 
             <div class="row g-5 mt-1 mb-5">
@@ -178,10 +177,11 @@
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire You</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
+            </div>
 
-                <!-- Section Heading -->
-                <div class="text-center mb-5" data-aos="fade-down">
-                    <p class="lead px-md-5">
+            <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
+                data-aos="fade-up">
+                    <p class="">
                         We're always looking for talented, high-energy UConn lovers to join our team.
                         If you're a student with a passion for technology, design, and innovation,
                         we want to hear from you! Whether you're into web development, UX design, or digital consulting,
@@ -189,28 +189,22 @@
                         there's a place for you at i3.
                     </p>
 
-                    <p class="lead px-md-5">Like you, we're pretty confused about the current state of the Student Job
-                        Application process, so it might be easier to just
-                        <a class="text-white fw-bold" href="#contact">contact us</a> to get the ball rolling. Start by
-                        telling us what type of work you like doing,
-                        why you'd want to work with us, and what you hope to learn.
-                    </p>
-                </div>
             </div>
+
             <div class="row mt-4 g-5">
                 <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
-                             <i class="bi bi-code-slash display-6 mb-4"></i>
+                            <i class="bi bi-code-slash display-6 mb-4"></i>
                             <h5 class="fw-bold">
                                 Developers</h5>
                             <p>Love coding and building things? Join us to create amazing web apps and digital experiences
                                 that make a difference at UConn.</p>
-                        <a href="#contact" class="btn btn-outline-light">
-                            Are you a Dev? Let's Chat!
-                            <i class="bi bi-arrow-down ms-2"></i>
-                        </a>
+                            <a href="#contact" class="btn btn-outline-light">
+                                Are you a Dev? Let's Chat!
+                                <i class="bi bi-arrow-down ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -223,10 +217,10 @@
                             <h5 class="fw-bold">Designers</h5>
                             <p>Have an eye for design? Help us create beautiful, user-friendly interfaces and engaging
                                 visual experiences.</p>
-                        <a href="#contact" class="btn btn-outline-light">
-                            Designer? Let's Chat!
-                            <i class="bi bi-arrow-down ms-2"></i>
-                        </a>
+                            <a href="#contact" class="btn btn-outline-light">
+                                Designer? Let's Chat!
+                                <i class="bi bi-arrow-down ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -373,7 +367,7 @@
 
                         .loop {
                             opacity: 1;
-                            max-width:100%;
+                            max-width: 100%;
                             width: 100vw;
                             height: auto;
                             pointer-events: none;

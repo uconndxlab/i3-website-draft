@@ -51,7 +51,7 @@
           </div>
       </div>
   </div>
-  <header class="sticky-top py-3 bg-dark-gradient">
+  <header class="sticky-top py-3 bg-deep-gradient">
       <nav class="navbar navbar-expand-lg" style="padding:0px;" data-bs-theme="dark">
           <div class="container">
               <div>
@@ -67,21 +67,26 @@
               </button>
               <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent" data-bs-theme="dark">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link{{ request()->routeIs('team') ? ' active' : '' }}" href="{{ route('team') }}">People</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link{{ request()->routeIs('projects.index') ? ' active' : '' }}" href="{{ route('projects.index') }}">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link{{ request()->routeIs('story') ? ' active' : '' }}" href="{{ route('story') }}">Story</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="btn btn-outline-light ms-2 px-3 mt-1{{ request()->routeIs('connect') ? ' active' : '' }}" href="{{ route('connect') }}">
-                        <i class="bi bi-person-lines-fill"></i> Connect with Us
-                      </a>
-                    </li>
-                  </ul>  </div>
+                      <li class="nav-item">
+                          <a class="nav-link{{ request()->routeIs('team') ? ' active' : '' }}"
+                              href="{{ route('team') }}">People</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link{{ request()->routeIs('projects.index') ? ' active' : '' }}"
+                              href="{{ route('projects.index') }}">Projects</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link{{ request()->routeIs('story') ? ' active' : '' }}"
+                              href="{{ route('story') }}">Story</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="btn btn-outline-light ms-2 px-3 mt-1{{ request()->routeIs('connect') ? ' active' : '' }}"
+                              href="{{ route('connect') }}">
+                              <i class="bi bi-person-lines-fill"></i> Connect with Us
+                          </a>
+                      </li>
+                  </ul>
+              </div>
           </div>
       </nav>
   </header>

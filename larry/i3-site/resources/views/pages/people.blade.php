@@ -97,41 +97,6 @@
         </div>
     </section>
 
-    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient" style="min-height: 80vh;">
-        <div class="container">
-            <div class="row align-items-center justify-content-center mb-3 ">
-                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Faculty Advisors</h2>
-                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
-                    style="width:50px"></span>
-            </div>
-            <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
-                <p>
-                    Our faculty advisors are the backbone of i3, providing invaluable guidance and support. They bring a
-                    wealth of knowledge and experience to our team, helping us navigate challenges and seize opportunities.
-                </p>
-                <p>Interested in becoming a faculty advisor? <a class="text-white fw-bold"
-                        href="{{ route('connect') }}">Connect with us</a> to learn more about how you can get involved.</p>
-
-            </div>
-            <div class="row justify-content-center">
-                @foreach ($faculty_advisors as $person)
-                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div class="position-relative person-card rounded-3">
-                            <div class="card-outline"></div>
-                            <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
-                                class="person-photo">
-                            <div class="person-overlay bg-dark-to-transparent text-white p-3 pt-5">
-                                <div class="person-name-and-role">
-                                    <h5 class="mb-0 fw-bold">{{ $person->name }}</h5>
-                                    <small>{{ $person->role }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
     <section id="students" class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
         <div class="container">
 
@@ -178,6 +143,41 @@
 
 
 
+    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient" style="min-height: 80vh;">
+        <div class="container">
+            <div class="row align-items-center justify-content-center mb-3 ">
+                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Faculty Advisors</h2>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
+                    style="width:50px"></span>
+            </div>
+            <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                <p>
+                    Our faculty advisors are the backbone of i3, providing invaluable guidance and support. They bring a
+                    wealth of knowledge and experience to our team, helping us navigate challenges and seize opportunities.
+                </p>
+                <p>Interested in becoming a faculty advisor? <a class="text-white fw-bold"
+                        href="{{ route('connect') }}">Connect with us</a> to learn more about how you can get involved.</p>
+
+            </div>
+            <div class="row justify-content-center">
+                @foreach ($faculty_advisors as $person)
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                        <div class="position-relative person-card rounded-3">
+                            <div class="card-outline"></div>
+                            <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
+                                class="person-photo">
+                            <div class="person-overlay bg-dark-to-transparent text-white p-3 pt-5">
+                                <div class="person-name-and-role">
+                                    <h5 class="mb-0 fw-bold">{{ $person->name }}</h5>
+                                    <small>{{ $person->role }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
 
 
 

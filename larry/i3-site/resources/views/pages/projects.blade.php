@@ -12,6 +12,15 @@
                 </h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
             </div>
+
+            <div class="text-dark text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
+                data-aos="fade-up">
+                <p class="text-dark">
+                    We take pride in our work and the impact it has on the UConn community. Here are some of the key
+                    statistics that showcase our team's dedication and the breadth of our projects.
+                </p>
+            </div>
+
             <dl class="row text-center g-5 py-5" data-aos="fade-up">
                 <!-- Stat 1 -->
                 <div class="col-md-3 col-6">
@@ -58,72 +67,82 @@
                     </dd>
                 </div>
             </dl>
+
+            <div class="d-flex justify-content-center mb-4">
+                <a class="btn btn-outline-dark shadow-none" href="#in-progress">
+                    See What We're Working On
+                    <i class="bi bi-arrow-down ms-2"></i>
+                </a>
+            </div>
         </div>
     </section>
-    <section class="bg-deep text-light py-5 position-relative d-flex align-items-center" style="min-height: 100vh;">
+    <section id="in-progress" class="bg-deep-gradient text-light py-5 position-relative d-flex align-items-center"
+        style="min-height: 100vh;">
         <div class="container">
 
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">In Progress</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
-                <!-- Section Heading -->
-                <div class=" mb-5" data-aos="fade-down">
-                    <p class="lead px-md-5">
-                        We've got some exciting work in progress right now. From custom websites to mobile apps,
-                        we're building digital experiences that are thoughtful, creative, and built to perform.
-                        Our team is deep in design and development, and this is just a sneak peek at what is to come!
-                    </p>
-                </div>
             </div>
 
 
+                <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
+                    data-aos="fade-up">
+                    <p>
+                        We've got some exciting work in progress right now. We find ourselves working on all sorts of things for all sorts of people at UConn. 
+                        We love learning about what makes UConn tick, and we're always looking for ways to help.
+                    </p>
+                </div>
+
+
             <!-- Carousel -->
-            <div id="onDeckCarousel" class="carousel slide shadow-lg rounded overflow-hidden" data-bs-ride="carousel">
+            <div id="onDeckCarousel" class="carousel slide overflow-hidden" style="padding-bottom:55px;"
+                data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @php
-                    $inProgressProjects = collect([
-                        (object)[
-                            'title' => 'UConn Mobile App Redesign',
-                            'client' => 'UConn IT',
-                            'status' => 'Design'
-                        ],
-                        (object)[
-                            'title' => 'Research Portal',
-                            'client' => 'UConn Research',
-                            'status' => 'Development'
-                        ],
-                        (object)[
-                            'title' => 'Student Success Dashboard',
-                            'client' => 'Student Affairs',
-                            'status' => 'Planning'
-                        ],
-                        (object)[
-                            'title' => 'Digital Accessibility Audit',
-                            'client' => 'Office of Diversity',
-                            'status' => 'Testing'
-                        ],
-                        (object)[
-                            'title' => 'Alumni Engagement Platform',
-                            'client' => 'UConn Alumni',
-                            'status' => 'Development'
-                        ],
-                        (object)[
-                            'title' => 'Virtual Campus Tour',
-                            'client' => 'Admissions',
-                            'status' => 'Design'
-                        ],
-                        (object)[
-                            'title' => 'Faculty Directory Upgrade',
-                            'client' => 'College of Liberal Arts',
-                            'status' => 'Development'
-                        ],
-                        (object)[
-                            'title' => 'Sustainability Tracker',
-                            'client' => 'Sustainability Office',
-                            'status' => 'Planning'
-                        ],
-                    ]);
+                        $inProgressProjects = collect([
+                            (object) [
+                                'title' => 'UConn Mobile App Redesign',
+                                'client' => 'UConn IT',
+                                'status' => 'Design',
+                            ],
+                            (object) [
+                                'title' => 'Research Portal',
+                                'client' => 'UConn Research',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Student Success Dashboard',
+                                'client' => 'Student Affairs',
+                                'status' => 'Planning',
+                            ],
+                            (object) [
+                                'title' => 'Digital Accessibility Audit',
+                                'client' => 'Office of Diversity',
+                                'status' => 'Testing',
+                            ],
+                            (object) [
+                                'title' => 'Alumni Engagement Platform',
+                                'client' => 'UConn Alumni',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Virtual Campus Tour',
+                                'client' => 'Admissions',
+                                'status' => 'Design',
+                            ],
+                            (object) [
+                                'title' => 'Faculty Directory Upgrade',
+                                'client' => 'College of Liberal Arts',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Sustainability Tracker',
+                                'client' => 'Sustainability Office',
+                                'status' => 'Planning',
+                            ],
+                        ]);
 
                         $chunks = $inProgressProjects->chunk(4);
                     @endphp
@@ -132,7 +151,7 @@
                             <div class="row g-4 justify-content-center px-3 py-4">
                                 @foreach ($projects as $project)
                                     <div class="col-md-3 col-12">
-                                        <div class="card h-100 shadow bg-dark text-white">
+                                        <div class="card h-100 shadow bg-dark text-white" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                                             <div class="card-body d-flex flex-column">
                                                 <h5 class="card-title">{{ $project->title }}</h5>
                                                 <p class="card-text mb-2">
@@ -150,30 +169,36 @@
                     @endforeach
                 </div>
 
-                <!-- Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#onDeckCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#onDeckCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <!-- Carousel Indicators (dots) -->
+                <div class="carousel-indicators mt-4">
+                    @foreach ($chunks as $chunkIndex => $projects)
+                        <button type="button" data-bs-target="#onDeckCarousel" data-bs-slide-to="{{ $chunkIndex }}"
+                            class="{{ $chunkIndex === 0 ? 'active' : '' }}"
+                            aria-current="{{ $chunkIndex === 0 ? 'true' : 'false' }}"
+                            aria-label="Slide {{ $chunkIndex + 1 }}"></button>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <a class="btn btn-outline-light shadow-none" href="#completed-projects">
+                    See Our Completed Projects
+                    <i class="bi bi-arrow-down ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <section id="completed-projects" class=" d-flex px-5" style="min-height: 80vh;">
+    <section id="completed-projects" class="bg-dark-gradient d-flex px-5 py-5" style="min-height: 80vh;">
 
         <div class="container my-5">
             <div class="row">
                 <div class="col-12 mb-4">
                     <h2 class="mb-3 d-inline-block pb-3 text-uppercase"><span
                             class="border-bottom border-2 pb-3 border-primary">In</span> Production</h2>
-                    <p class="lead mb-4" data-aos="fade-down">
-                        These are just a few of the many projects we've brought to life for our partners. 
-                        Each one is a unique collaboration, blending creativity, strategy, and technical expertise to deliver results that matter. 
-                        Explore our portfolio to see how we help UConn achieve its digital goals.
+                    <p class="my-4" data-aos="fade-down">
+                        In addition to our many in-progress projects, we're proud of our varied portfolio of completed, in-production projects.
+                        Each one of these projects represents a collaboration with a UConn partner, new lessons learned, new value created, and a new student learning experience.
                     </p>
                 </div>
                 <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
