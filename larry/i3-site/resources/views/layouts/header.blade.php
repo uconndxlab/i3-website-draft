@@ -51,8 +51,8 @@
           </div>
       </div>
   </div>
-  <header class="sticky-top py-3 bg-deep-gradient py-2">
-      <nav class="navbar navbar-expand-lg" style="padding:0px;" data-bs-theme="dark">
+  <header class="sticky-top py-3 bg-dark py-2">
+      <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
           <div class="container">
               <div>
                   <h1 class="header-level-one mb-0">
@@ -80,9 +80,9 @@
                               href="{{ route('story') }}">Story</a>
                       </li>
                       <li class="nav-item">
-                          <a class="btn btn-outline-light ms-2 px-3 mt-1{{ request()->routeIs('connect') ? ' active' : '' }}"
+                          <a class="btn btn-outline-light ms-2 px-2 ms-2 mt-1{{ request()->routeIs('connect') ? ' active' : '' }}"
                               href="{{ route('connect') }}">
-                              <i class="bi bi-person-lines-fill"></i> Connect with Us
+                              Connect with Us
                           </a>
                       </li>
                   </ul>

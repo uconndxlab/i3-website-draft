@@ -2,6 +2,10 @@
 
 @import url('vars.css');
 
+body {
+    font-family: "area-normal", sans-serif;
+}
+
 .text-secondary {
     color: var(--secondary);
 }
@@ -15,8 +19,7 @@
 }
 
 .bg-deep-gradient-transparent{
-        background: linear-gradient(180deg, rgba(17, 17, 17,0) 0%, var(--deep) 50%, rgba(17, 17, 17, 0) 100%);
-
+        background: linear-gradient(180deg, var(--deep) 0%, var(--deep) 70%, rgba(17, 17, 17, 0) 100%);
 }
 
 .bg-deep-to-transparent {
@@ -35,9 +38,14 @@
 .bg-blue {
     background-color: #243250;
 }
+
 .bg-blue-gradient {
     background: #243250;
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #243250 50%, rgb(17, 17, 17) 100%);
+}
+
+.bg-blue-gradient-transparent {
+    background: linear-gradient(180deg, #243250 0%, #243250 60%, rgba(36, 50, 80, 0) 100%);
 }
 
 .bg-blue-to-transparent {
@@ -47,6 +55,10 @@
 .bg-dark-gradient {
     background: var(--dark);
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--dark) 50%, rgb(17, 17, 17) 100%);
+}
+
+.bg-dark-gradient-transparent {
+    background: linear-gradient(180deg, var(--dark) 0%, var(--dark) 60%, rgba(17, 17, 17, 0) 100%);
 }
 
 
@@ -1199,7 +1211,7 @@ p.small {
 
 /*NAV*/
 /* header */
-.nav-link{color:#fff!important; font-size: 1.2rem!important;}
+.nav-link{color:#fff!important; font-size: 1rem!important; font-family: "area-normal", serif;}
 .header-level-two{font-family:proxima-nova,sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
 .header-level-one{font-family:proxima-nova,sans-serif;font-size:24px;font-weight:500}
 .header-level-one a,.header-level-two a{color:#fff;text-decoration:none}

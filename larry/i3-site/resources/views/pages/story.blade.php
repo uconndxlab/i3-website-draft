@@ -328,59 +328,148 @@
                 </div>
                 <div class="col-md-6 text-center">
                     <div data-aos="fade-left" data-aos-duration="1200">
-                        <svg viewBox="0 0 800 300" class="w-100" id="processSvg">
-                            <!-- Progress Line -->
-                            <path d="M700 150 H100" stroke="#ffffff" stroke-width="2" stroke-dasharray="5,5" class="progress-line"/>
+                        <svg viewBox="0 0 800 200" class="w-100" id="processSvg" style="overflow:visible">
+                            <!-- Timeline Line -->
+                            <line x1="100" y1="80" x2="700" y2="80" stroke="#333" stroke-width="3" class="svg-element"/>
                             
-                            <!-- Stage 4: Complex Pattern -->
-                            <path d="M530,110 L450,110 L490,190 Z" fill="none" stroke="#ffffff" stroke-width="2" class="svg-element"/>
-                            <path d="M510,130 L470,130 L490,170 Z" fill="#ffffff" class="svg-element"/>
-                            
-                            <!-- Stage 3: Abstract Pattern -->
-                            <circle cx="380" cy="150" r="25" fill="none" stroke="#ffffff" stroke-width="2" class="svg-element"/>
-                            <circle cx="380" cy="150" r="15" fill="none" stroke="#ffffff" stroke-width="2" class="svg-element"/>
-                            <circle cx="380" cy="150" r="5" fill="#ffffff" class="svg-element"/>
-                            
-                            <!-- Stage 2: Simple Lines -->
-                            <line x1="290" y1="130" x2="250" y2="170" stroke="#ffffff" stroke-width="2" class="svg-element"/>
-                            <line x1="250" y1="130" x2="290" y2="170" stroke="#ffffff" stroke-width="2" class="svg-element"/>
-                            
-                            <!-- Stage 1: Abstract Shape -->
-                            <path d="M170,150 L150,130 L130,150 L150,170 Z" fill="#ffffff" class="svg-element"/>
-                            
-                            <!-- Progress Arrows -->
-                            <path d="M420 150 l-10 -5 v10 z" fill="#ffffff" class="arrow"/>
-                            <path d="M300 150 l-10 -5 v10 z" fill="#ffffff" class="arrow"/>
-                            <path d="M200 150 l-10 -5 v10 z" fill="#ffffff" class="arrow"/>
+                            <!-- Station Dots -->
+                            <circle cx="100" cy="80" r="8" fill="#4DB3FF" stroke="#333" stroke-width="2" class="svg-element station-dot"/>
+                            <circle cx="300" cy="80" r="8" fill="#4DB3FF" stroke="#333" stroke-width="2" class="svg-element station-dot"/>
+                            <circle cx="500" cy="80" r="8" fill="#4DB3FF" stroke="#333" stroke-width="2" class="svg-element station-dot"/>
+                            <circle cx="700" cy="80" r="8" fill="#4DB3FF" stroke="#333" stroke-width="2" class="svg-element station-dot"/>
+
+                            <!-- Define Badge -->
+                            <g class="svg-element" transform="translate(100,80)">
+                                <rect x="-35" y="20" width="70" height="30" rx="15" fill="#333"/>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Define</text>
+                            </g>
+
+                            <!-- Build Badge -->
+                            <g class="svg-element" transform="translate(300,80)">
+                                <rect x="-30" y="20" width="60" height="30" rx="15" fill="#333"/>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Build</text>
+                            </g>
+
+                            <!-- Refine Badge -->
+                            <g class="svg-element" transform="translate(500,80)">
+                                <rect x="-32" y="20" width="64" height="30" rx="15" fill="#333"/>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Refine</text>
+                            </g>
+
+                            <!-- Repeat Badge -->
+                            <g class="svg-element" transform="translate(700,80)">
+                                <rect x="-34" y="20" width="68" height="30" rx="15" fill="#333"/>
+                                <text x="0" y="38" text-anchor="middle" font-family="area-normal" fill="#fff" font-weight="bold" font-size="14">Repeat</text>
+                            </g>
+
+                            <!-- Husky Head Character -->
+                            <g id="huskyCharacter" transform="translate(100,80)">
+                                <!-- Rotation wrapper - this will handle only rotation -->
+                                <g id="huskyRotation">
+                                    <!-- Husky Head (Simple line art) -->
+                                    <g id="huskyHead">
+                                        <!-- Head outline -->
+                                        <path d="M-12,-35 Q-15,-40 -10,-45 Q0,-50 10,-45 Q15,-40 12,-35 Q10,-30 8,-28 Q5,-25 0,-25 Q-5,-25 -8,-28 Q-10,-30 -12,-35 Z" 
+                                              fill="none" stroke="#333" stroke-width="2"/>
+                                        <!-- Ears -->
+                                        <path d="M-8,-42 L-12,-48 L-6,-45 Z" fill="none" stroke="#333" stroke-width="2"/>
+                                        <path d="M8,-42 L12,-48 L6,-45 Z" fill="none" stroke="#333" stroke-width="2"/>
+                                        <!-- Eyes -->
+                                        <circle cx="-4" cy="-38" r="2" fill="#333"/>
+                                        <circle cx="4" cy="-38" r="2" fill="#333"/>
+                                        <!-- Nose -->
+                                        <circle cx="0" cy="-32" r="1.5" fill="#333"/>
+                                        <!-- Happy Mouth -->
+                                        <path d="M-6,-28 Q0,-24 6,-28" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                                        <!-- Tongue (optional - makes it more playful) -->
+                                        <ellipse cx="0" cy="-26" rx="3" ry="1.5" fill="#ff6b6b" opacity="0.8"/>
+                                    </g>
+                                </g>
+                            </g>
+
+                            <!-- Glow effect -->
+                            <defs>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
                         </svg>
-                    </div>
 
-                    <style>
-                        .svg-element {
-                            opacity: 0;
-                            animation: fadeIn 0.5s forwards;
-                            animation-delay: calc(var(--i) * 0.2s);
-                        }
-                        .arrow {
-                            animation: bounce 2s infinite;
-                        }
-                        @keyframes fadeIn {
-                            to { opacity: 1; }
-                        }
-                        @keyframes bounce {
-                            0%, 100% { transform: translateX(0); }
-                            50% { transform: translateX(5px); }
-                        }
-                    </style>
-
-                    <script>
+                        <script>
                         document.addEventListener('DOMContentLoaded', function() {
+                            const husky = document.getElementById('huskyCharacter');
+                            const huskyRotation = document.getElementById('huskyRotation');
+                            
+                            const stations = [
+                                { x: 100, y: 80 },
+                                { x: 300, y: 80 },
+                                { x: 500, y: 80 },
+                                { x: 700, y: 80 }
+                            ];
+                            let currentStation = 0;
+                            let isAnimating = false;
+
+                            function moveToNextStation() {
+                                if (isAnimating) return;
+                                
+                                isAnimating = true;
+                                const nextStation = (currentStation + 1) % stations.length;
+                                const target = stations[nextStation];
+                                
+                                // Move to next station (only translate the main group)
+                                gsap.to(husky, {
+                                    duration: 1.5,
+                                    x: target.x,
+                                    y: target.y,
+                                    ease: "power2.inOut",
+                                    onComplete: () => {
+                                        // Bounce the husky a few times at the station
+                                        gsap.to(huskyRotation, {
+                                            duration: 0.6,
+                                            y: -15,
+                                            ease: "power2.out",
+                                            yoyo: true,
+                                            repeat: 5, // 3 bounces (down-up-down-up-down-up)
+                                            onComplete: () => {
+                                                isAnimating = false;
+                                                currentStation = nextStation;
+                                                
+                                                // Wait a moment before moving to next station
+                                                setTimeout(moveToNextStation, 800);
+                                            }
+                                        });
+                                    }
+                                });
+                                
+                                // Add station glow effect
+                                const stationDots = document.querySelectorAll('.station-dot');
+                                stationDots[nextStation].style.filter = 'url(#glow)';
+                                setTimeout(() => {
+                                    stationDots[nextStation].style.filter = '';
+                                }, 2000);
+                            }
+
+                            // Fade in elements sequentially
                             const elements = document.querySelectorAll('.svg-element');
                             elements.forEach((el, index) => {
-                                el.style.setProperty('--i', index + 1);
+                                el.style.opacity = 0;
+                                setTimeout(() => {
+                                    el.style.transition = "opacity 0.8s ease";
+                                    el.style.opacity = 1;
+                                }, 200 * index);
                             });
+
+                            // Start the husky animation after elements fade in
+                            setTimeout(() => {
+                                moveToNextStation();
+                            }, elements.length * 200 + 1000);
                         });
-                    </script>
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

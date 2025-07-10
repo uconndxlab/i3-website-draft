@@ -114,7 +114,7 @@
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
-                      <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:190px">
+                      <a href="{{ route('projects.index') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:190px">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                           <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
@@ -190,7 +190,7 @@
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
-                      <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:170px">
+                      <a href="{{ route('story') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:170px">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                           <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
