@@ -192,7 +192,7 @@
             </div>
 
             <div class="row mt-4 g-5">
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
@@ -209,7 +209,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
@@ -225,7 +225,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
@@ -239,12 +239,12 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="400">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-chat-dots display-6 mb-4"></i>
-                            <h5 class="fw-bold">Something Elses?</h5>
+                            <h5 class="fw-bold">Something Elses</h5>
                             <p>Writers, marketers, project managers, and creative minds of all kinds - we'd love to hear
                                 from you!</p>
                             <a href="#contact" class="btn btn-outline-light">

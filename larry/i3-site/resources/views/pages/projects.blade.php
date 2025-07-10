@@ -238,11 +238,11 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    @if ($project->image)
-                                        <img src="{{ asset('storage/' . $project->image) }}?v={{ time() }}"
+                                    @if ($project->thumbnail)
+                                        <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
                                             alt="{{ $project->title }}" class="img-fluid rounded mb-3">
                                     @endif
-                                    <p>{{ $project->body }}</p>
+                                    <p>{!! $project->body !!}</p>
                                     @if ($project->link)
                                         <a href="{{ $project->link }}" target="_blank"
                                             class="btn btn-primary mt-2">Visit Project</a>
