@@ -13,6 +13,12 @@
     background: var(--deep);
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--deep) 50%, rgb(17, 17, 17) 100%);
 }
+
+.bg-deep-gradient-transparent{
+        background: linear-gradient(180deg, rgba(17, 17, 17,0) 0%, var(--deep) 50%, rgba(17, 17, 17, 0) 100%);
+
+}
+
 .bg-deep-to-transparent {
     background: linear-gradient(0deg, var(--deep) 0%, rgba(36,50,80,0.5) 80%, rgba(36, 50, 80, 0) 100%);
 }
