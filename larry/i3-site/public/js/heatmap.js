@@ -75,19 +75,16 @@ function createEmptyHeatmap() {
     svg.selectAll(".day")
         .data(dates)
         .enter()
-        .append("rect")
+        .append("circle") // Change from <rect> to <circle>
         .attr("class", "day")
-        .attr("width", cellSize)
-        .attr("height", cellSize)
-        .attr("rx", 2)
-        .attr("ry", 2)
-        .attr("x", d => {
+        .attr("r", cellSize / 2) // Set radius to half the cell size
+        .attr("cx", d => {
             const weekNum = d3.timeWeek.count(d3.timeYear(d.date), d.date);
-            return weekNum * (cellSize + cellMargin) + 30;
+            return weekNum * (cellSize + cellMargin) + 30 + cellSize / 2; // Adjust for circle center
         })
-        .attr("y", (d, i) => {
+        .attr("cy", d => {
             const dayOfWeek = d.date.getDay();
-            return dayOfWeek * (cellSize + cellMargin) + 20;
+            return dayOfWeek * (cellSize + cellMargin) + 20 + cellSize / 2; // Adjust for circle center
         })
         .attr("fill", colors[0]) // Use lightest color for empty cells
         .on("mouseover", function(event, d) {
