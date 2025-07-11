@@ -77,9 +77,9 @@
                     we are committed to pushing the boundaries of what's possible at UConn.
                 </p>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 @foreach ($senior_staff as $person)
-                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-md-2 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="position-relative person-card rounded-3">
                             <div class="card-outline"></div>
                             <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
