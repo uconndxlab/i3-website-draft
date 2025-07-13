@@ -16,8 +16,8 @@
             <div class="text-dark text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
                 data-aos="fade-up">
                 <p class="text-dark">
-                    We take pride in our work and the impact it has on the UConn community. Here are some of the key
-                    statistics that showcase our team's dedication and the breadth of our projects.
+                    We take pride in our work and the impact it has on the UConn community. Here are some
+                    stats that might give you a sense for just how varied our workload is.
                 </p>
             </div>
 
@@ -105,44 +105,64 @@
                     @php
                         $inProgressProjects = collect([
                             (object) [
-                                'title' => 'UConn Mobile App Redesign',
-                                'client' => 'UConn IT',
-                                'status' => 'Design',
-                            ],
-                            (object) [
-                                'title' => 'Research Portal',
-                                'client' => 'UConn Research',
+                                'title' => '2025 Honeycrisp Improvements',
+                                'client' => 'OVPR',
                                 'status' => 'Development',
                             ],
                             (object) [
-                                'title' => 'Student Success Dashboard',
-                                'client' => 'Student Affairs',
-                                'status' => 'Planning',
-                            ],
-                            (object) [
-                                'title' => 'Digital Accessibility Audit',
-                                'client' => 'Office of Diversity',
-                                'status' => 'Testing',
-                            ],
-                            (object) [
-                                'title' => 'Alumni Engagement Platform',
-                                'client' => 'UConn Alumni',
+                                'title' => '2025 RIF Improvements',
+                                'client' => 'OVPR',
                                 'status' => 'Development',
                             ],
                             (object) [
-                                'title' => 'Virtual Campus Tour',
-                                'client' => 'Admissions',
-                                'status' => 'Design',
-                            ],
-                            (object) [
-                                'title' => 'Faculty Directory Upgrade',
-                                'client' => 'College of Liberal Arts',
+                                'title' => 'V2 of the Outreach & Engagement Database',
+                                'client' => 'Outreach & Engagement',
                                 'status' => 'Development',
                             ],
                             (object) [
-                                'title' => 'Sustainability Tracker',
-                                'client' => 'Sustainability Office',
-                                'status' => 'Planning',
+                                'title' => 'Botantical Conservatory Website & Database',
+                                'client' => 'UConn EEB',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Impact.uconn.edu: Aurora Migration',
+                                'client' => 'BPIR',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Farm2School Data Collection Tool',
+                                'client' => 'CT Fresh Ed',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Sourcery 2025 Launch',
+                                'client' => 'Greenhouse Studios',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Lincus V2',
+                                'client' => "Provost's Office",
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'CT Children with Incarcerated Parents Initiative',
+                                'client' => 'IMRP',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Project #ESSY Data Collection/Processing Tool',
+                                'client' => 'CSCH',
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Centers & Institutes Data Repository',
+                                'client' => "Provost's Office",
+                                'status' => 'Development',
+                            ],
+                            (object) [
+                                'title' => 'Research Space Planning Dashboard',
+                                'client' => "Provost's Office",
+                                'status' => 'Development',
                             ],
                         ]);
 
@@ -157,7 +177,7 @@
                                             <div class="card-body d-flex flex-column">
                                                 <h5 class="card-title">{{ $project->title }}</h5>
                                                 <p class="card-text mb-2">
-                                                    <strong>Client:</strong> {{ $project->client ?? 'N/A' }}
+                                                    {{ $project->client ?? 'N/A' }}
                                                 </p>
                                                 <span class="badge bg-warning text-dark align-self-start">
                                                     {{ $project->status ?? 'In Progress' }}
