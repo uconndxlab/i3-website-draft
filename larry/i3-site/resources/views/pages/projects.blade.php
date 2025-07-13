@@ -21,7 +21,11 @@
                 </p>
             </div>
 
-            <x-heatmap />
+            <div class="row d-flex justify-content-center mb-5">
+                <div class="col-md-10 offset-md-1">
+                    <x-heatmap />
+                </div>
+            </div>
 
             <dl class="row text-center g-5 py-5" data-aos="fade-up">
                 <!-- Stat 1 -->
@@ -89,13 +93,14 @@
             </div>
 
 
-                <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
-                    data-aos="fade-up">
-                    <p>
-                        We've got some exciting work in progress right now. We find ourselves working on all sorts of things for all sorts of people at UConn. 
-                        We love learning about what makes UConn tick, and we're always looking for ways to help.
-                    </p>
-                </div>
+            <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
+                data-aos="fade-up">
+                <p>
+                    We've got some exciting work in progress right now. We find ourselves working on all sorts of things for
+                    all sorts of people at UConn.
+                    We love learning about what makes UConn tick, and we're always looking for ways to help.
+                </p>
+            </div>
 
 
             <!-- Carousel -->
@@ -173,7 +178,8 @@
                             <div class="row g-4 justify-content-center px-3 py-4">
                                 @foreach ($projects as $project)
                                     <div class="col-md-3 col-12">
-                                        <div class="card h-100 shadow bg-dark text-white" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                                        <div class="card h-100 shadow bg-dark text-white" data-aos="fade-up"
+                                            data-aos-delay="{{ $loop->index * 100 }}">
                                             <div class="card-body d-flex flex-column">
                                                 <h5 class="card-title">{{ $project->title }}</h5>
                                                 <p class="card-text mb-2">
@@ -219,8 +225,10 @@
                     <h2 class="mb-3 d-inline-block pb-3 text-uppercase"><span
                             class="border-bottom border-2 pb-3 border-primary">In</span> Production</h2>
                     <p class="my-4" data-aos="fade-down">
-                        In addition to our many in-progress projects, we're proud of our varied portfolio of completed, in-production projects.
-                        Each one of these projects represents a collaboration with a UConn partner, new lessons learned, new value created, and a new student learning experience.
+                        In addition to our many in-progress projects, we're proud of our varied portfolio of completed,
+                        in-production projects.
+                        Each one of these projects represents a collaboration with a UConn partner, new lessons learned, new
+                        value created, and a new student learning experience.
                     </p>
                 </div>
                 <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">

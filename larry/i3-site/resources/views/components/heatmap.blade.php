@@ -19,6 +19,7 @@
         color: #0366d6;
         position: relative;
         left: 30px;
+        text-align: center
     }
 
     .day {

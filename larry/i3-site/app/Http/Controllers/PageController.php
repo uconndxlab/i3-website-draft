@@ -26,9 +26,9 @@ class PageController extends Controller
             return end($nameParts); // Sort by the last part of the name
         });
         $people = $people->sortBy(function ($person) {
-            if ($person->name === 'Joel Salisbury') {
-            return '0000'; // Ensures Joel comes first
-            }
+            // if ($person->name === 'Joel Salisbury') {
+            // return '0000'; // Ensures Joel comes first
+            // }
             $nameParts = explode(' ', $person->name);
             return end($nameParts);
         });
