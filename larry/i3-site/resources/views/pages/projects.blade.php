@@ -5,7 +5,7 @@
 
 
     <h1 class="page-h1">Projects</h1>
-    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5" style="min-height: 90vh;">
+    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5" style="min-height: 90vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats
@@ -20,6 +20,8 @@
                     statistics that showcase our team's dedication and the breadth of our projects.
                 </p>
             </div>
+
+            <x-heatmap />
 
             <dl class="row text-center g-5 py-5" data-aos="fade-up">
                 <!-- Stat 1 -->
