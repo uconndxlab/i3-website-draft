@@ -14,7 +14,6 @@
             width: 100%;
             top: 0;
             left: 0;
-
         }
 
         #origins .slide.active {
@@ -37,6 +36,16 @@
             font-size: 10rem;
             margin-bottom: 1.5rem;
             text-align: center;
+        }
+        #origins .slide.active {
+                position: relative!important;
+            }
+
+        @media (max-width: 768px) {
+            
+            #origins .slide h2 {
+                font-size: 6rem;
+            }
         }
 
         .slide >.col-md-6:first-child {
@@ -84,12 +93,15 @@
 
                 if (isAnimating || targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
 
-                
                 isAnimating = true; // Prevent new animations
 
                 const currentSlide = slides[currentIndex];
                 const nextSlide = slides[targetIndex];
                 const newBgColor = nextSlide.dataset.bgColor || '#212529';
+
+                // Remove .active from all slides, add to nextSlide
+                slides.forEach(slide => slide.classList.remove('active'));
+                nextSlide.classList.add('active');
 
                 gsap.set(nextSlide, {
                     y: 100,
@@ -134,8 +146,6 @@
                         ease: "none"
                     }, '<');
                 }
-
-                
             }
 
             slides.forEach((slide) => {
@@ -176,7 +186,7 @@
     <h1 class="page-h1 display-1">Story</h1>
 
 
-    <section id="origins" class="d-flex align-items-stretch px-5" style="min-height: 90vh;">
+    <section id="origins" class="d-flex align-items-stretch px-5">
 
         <div class="container position-relative my-5">
             <div class="row slide" id="slide-2017" data-bg-color="#111111">

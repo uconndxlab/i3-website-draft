@@ -313,7 +313,6 @@
                             position: absolute;
                             width: 100%;
                             height: 100%;
-                            top: -2px;
                             -webkit-mask-image: url(/img/i3/i3-coffee-fill.svg);
                             -webkit-mask-repeat: no-repeat;
                             -webkit-mask-size: contain;
