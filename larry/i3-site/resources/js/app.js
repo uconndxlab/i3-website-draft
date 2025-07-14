@@ -17,11 +17,19 @@ function initFormDisableOnSubmit() {
     const forms = document.querySelectorAll('form[data-disable-on-submit="true"]');
     
     forms.forEach(form => {
+        let isSubmitting = false;
+        
         form.addEventListener('submit', function(e) {
-            // Find all submit buttons and regular buttons in the form
+            // Prevent multiple submissions
+            if (isSubmitting) {
+                e.preventDefault();
+                return false;
+            }
+            
+            isSubmitting = true;
+            
+            // Find all submit buttons
             const submitButtons = form.querySelectorAll('button[type="submit"], input[type="submit"]');
-            const allButtons = form.querySelectorAll('button, input[type="submit"]');
-            const allInputs = form.querySelectorAll('input, textarea, select');
             
             // Get custom submit text if provided
             const customSubmitText = form.getAttribute('data-submit-text') || 'Please wait...';
@@ -45,15 +53,6 @@ function initFormDisableOnSubmit() {
                 button.disabled = true;
             });
             
-            // Disable all form elements
-            allButtons.forEach(button => {
-                button.disabled = true;
-            });
-            
-            allInputs.forEach(input => {
-                input.disabled = true;
-            });
-            
             // Re-enable form if submission fails (for client-side validation errors)
             // This will run on the next tick to allow form validation to occur first
             setTimeout(() => {
@@ -65,6 +64,7 @@ function initFormDisableOnSubmit() {
                     if (hasValidationErrors) {
                         // Re-enable the form
                         enableForm(form, originalButtonStates);
+                        isSubmitting = false;
                     }
                 }
             }, 100);
@@ -87,18 +87,6 @@ function enableForm(form, originalButtonStates) {
             state.element.value = state.originalText;
         }
         state.element.disabled = state.originalDisabled;
-    });
-    
-    // Re-enable all form elements
-    const allButtons = form.querySelectorAll('button, input[type="submit"]');
-    const allInputs = form.querySelectorAll('input, textarea, select');
-    
-    allButtons.forEach(button => {
-        button.disabled = false;
-    });
-    
-    allInputs.forEach(input => {
-        input.disabled = false;
     });
     
     // Remove submitted marker

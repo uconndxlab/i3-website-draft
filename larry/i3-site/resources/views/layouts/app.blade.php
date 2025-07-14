@@ -40,19 +40,19 @@
                 <div class="row align-items-top g-5" data-aos-delay="200">
                     {{-- Form --}}
                     <div class="col-lg-6" data-aos="fade-right">
-                        <form method="POST" action="#" class="contact-form text-light" data-disable-on-submit="true">
+                        <form method="POST" action="{{ route('contact.store') }}" class="contact-form text-light" data-disable-on-submit="true">
                             @csrf
                             <div class="row mb-4">
                                 <div class="col-md mb-4 mb-md-0">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-dark text-light" id="firstName"
+                                        <input type="text" class="form-control bg-dark text-light" id="firstName" name="first_name"
                                             placeholder="Lorem">
                                         <label for="firstName">First Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-dark text-light" id="lastName"
+                                        <input type="text" class="form-control bg-dark text-light" id="lastName" name="last_name"
                                             placeholder="Ipsum">
                                         <label for="lastName">Last Name</label>
                                     </div>
@@ -60,23 +60,23 @@
                             </div>
 
                             <div class="form-floating mb-4">
-                                <input type="email" class="form-control bg-dark text-light" id="email"
+                                <input type="email" class="form-control bg-dark text-light" id="email" name="email"
                                     placeholder="name@example.com">
                                 <label for="email">Email address</label>
                             </div>
 
                             <div class="form-floating mb-4">
-                                <textarea class="form-control bg-dark text-light" placeholder="Leave a comment here" id="message"
+                                <textarea class="form-control bg-dark text-light" placeholder="Leave a comment here" id="message" name="message"
                                     style="height: 100px"></textarea>
                                 <label for="message">Message</label>
                             </div>
                             <div class="display-btn btn-arrow-slide">
-                                <a href="#" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                                <button type="submit" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                                     <span class="btn-arrow-slide-circle" aria-hidden="true">
                                         <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                                     </span>
                                     <span class="btn-arrow-slide-text"> Send Message </span>
-                                </a>
+                                </button>
                             </div>
 
                         </form>

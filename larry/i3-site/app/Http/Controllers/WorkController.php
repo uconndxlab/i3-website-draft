@@ -17,9 +17,9 @@ class WorkController extends Controller
       
 
         if ($tag && $tag !== 'for-all') {
-            $tagModel = Tag::where('slug', $tag)->firstOrFail();
+            $tagModel = Tag::where('slug', $tag)->first();
             $items = WorkItem::whereHas('tags', function ($query) use ($tagModel) {
-                $query->where('tags.slug', $tagModel->slug);
+                $query->where('tags.slug', $tagModel->slug ?? '');
             })->with('tags')->latest()->paginate(18);
         } else {
             $items = WorkItem::with('tags')->latest()->paginate(18);

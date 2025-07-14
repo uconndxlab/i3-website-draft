@@ -22,7 +22,7 @@
             </div>
 
             <div class="row d-flex justify-content-center mb-5">
-                <div class="col-md-10 offset-md-1">
+                <div class="col-xl-10 offset-xl-1">
                     <x-heatmap />
                 </div>
             </div>
@@ -235,13 +235,13 @@
                     <div>
                         <a class="btn rounded-pill me-3 border-0 shadow-none
                             {{ $tag === 'for-all' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-all']) }}">All</a>
+                            href="{{ route('projects.tag', ['tag' => 'for-all', '#completed-projects']) }}">All</a>
                         <a class="btn rounded-pill me-3 shadow-none
                             {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-research']) }}">For Research</a>
+                            href="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}">For Research</a>
                         <a class="btn rounded-pill shadow-none
                             {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-uconn']) }}">For UConn</a>
+                            href="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}">For UConn</a>
                     </div>
                 </div>
             </div>
@@ -282,6 +282,11 @@
                         </div>
                     </div>
                 @endforeach
+                @if ($items->isEmpty())
+                    <div class="col-12 text-center pt-5">
+                        <p class="text-muted fst-italic">No projects found for this tag.</p>
+                    </div>
+                @endif
             </div>
         </div>
     </section>

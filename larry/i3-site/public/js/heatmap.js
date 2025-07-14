@@ -31,7 +31,7 @@ const height = 7 * (cellSize + cellMargin) + 30;
 // Create the SVG element
 const svg = d3.select("#calendar")
     .append("svg")
-    .attr("width", width)
+    .attr("width", '100%')
     .attr("height", height + 50) // Add extra space for legend
     .attr("viewBox", `0 0 ${width} ${height + 50}`)
     .attr("fill", "none");
