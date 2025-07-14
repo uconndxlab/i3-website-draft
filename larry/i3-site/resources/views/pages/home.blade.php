@@ -7,7 +7,7 @@
     <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-center justify-content-md-start">
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="hero-title mb-4 d-none d-md-block">
+                <h1 class="hero-title mb-4">
                     Internal<br>
                     Insights &<br>
                     Innovation
