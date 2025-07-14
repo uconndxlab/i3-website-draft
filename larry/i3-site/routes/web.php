@@ -24,7 +24,8 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/admin', function () {
     return redirect()->route('admin.contact-submissions.index');
 })->name('admin.dashboard');
-Route::prefix('admin')->name('admin.')->group(function () {
+
+Route::prefix('admin')->name('admin.')->middleware(['cas.auth', 'netid.auth'])->group(function () {
     Route::resource('work', \App\Http\Controllers\Admin\WorkItemController::class);
     Route::resource('team', \App\Http\Controllers\Admin\TeamMemberController::class);
     Route::resource('contact-submissions', \App\Http\Controllers\Admin\ContactSubmissionController::class)
@@ -35,4 +36,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::patch('contact-submissions/{contact_submission}/mark-unsent', 
         [\App\Http\Controllers\Admin\ContactSubmissionController::class, 'markAsUnsent'])
         ->name('contact-submissions.mark-unsent');
+    
+    Route::resource('authorized-netids', \App\Http\Controllers\Admin\AuthorizedNetidController::class);
 });

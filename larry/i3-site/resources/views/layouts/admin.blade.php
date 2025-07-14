@@ -57,6 +57,13 @@
                                 Contact Submissions
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.authorized-netids.*') ? 'active' : '' }}" 
+                               href="{{ route('admin.authorized-netids.index') }}">
+                                <i class="bi bi-shield-check me-2"></i>
+                                Authorized NetIDs
+                            </a>
+                        </li>
                     </ul>
                     
                     <hr>

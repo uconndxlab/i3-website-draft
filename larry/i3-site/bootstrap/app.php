@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'cas.auth' => \Subfission\Cas\Middleware\CASAuth::class,
+            'netid.auth' => \App\Http\Middleware\CheckNetidAuthorization::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
