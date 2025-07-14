@@ -20,7 +20,7 @@ class ContactController extends Controller
             'page_submitted' => $request->header('referer') ?? $request->url(),
         ]);
 
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Thank you for your message! We\'ll get back to you soon.');
+        // Redirect to success page
+        return redirect()->route('contact.success');
     }
 }

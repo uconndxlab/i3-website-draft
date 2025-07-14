@@ -10,6 +10,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/story',   'story')->name('story');
     Route::get('/people',    'team')->name('team');
     Route::get('/connect', 'connect')->name('connect');
+    Route::get('/contact/success', 'contactSuccess')->name('contact.success');
 });
 
 Route::resource('projects', WorkController::class)->only(['index']);

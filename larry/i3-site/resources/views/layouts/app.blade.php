@@ -26,7 +26,7 @@
 
 <body class="position-relative">
     @include('layouts.header')
-    <div class="d-flex flex-column min-vh-100">
+    <div class="d-flex flex-column">
         <main class="flex-grow-1">
             @yield('content')
         </main>

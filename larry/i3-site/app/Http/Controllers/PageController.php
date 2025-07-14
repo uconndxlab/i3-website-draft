@@ -51,4 +51,8 @@ class PageController extends Controller
     {
         return view('pages.connect');
     }
+    public function contactSuccess()
+    {
+        return view('pages.contact-success');
+    }
 }
