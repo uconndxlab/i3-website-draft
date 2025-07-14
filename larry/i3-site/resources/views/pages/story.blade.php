@@ -314,7 +314,7 @@
 
 
     <section id="approach" style="background-color: #ffbb4d; min-height: 100vh; padding: 50px 0;"
-        class="d-flex align-items-center">
+        class="d-flex align-items-center" data-bs-theme="light">
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
@@ -324,7 +324,7 @@
                         Create value early. Iterate quickly.
                     </blockquote>
                     <p class="text-dark">That's the goal. There's no single path to get there, but here's how we like to work:</p>
-                    <h5>Start small. Learn fast. Build what matters.</h5>
+                    <h5 class="text-dark">Start small. Learn fast. Build what matters.</h5>
                     <p class="text-dark">
                         We usually begin with something simple—a rough draft, a working prototype, a first version you can click. 
                         Then we test, refine, and build from there. It's not about cutting corners. It's about getting feedback sooner, 

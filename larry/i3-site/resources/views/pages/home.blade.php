@@ -114,7 +114,7 @@
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
-                      <a href="{{ route('projects.index') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:190px">
+                      <a href="{{ route('projects.index') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                           <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
@@ -149,7 +149,7 @@
             </div>
         </div>
     </section>
-    <section id="for-uconn" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
+    <section id="for-uconn" class="bg-dark text-light d-flex align-items-center px-5 py-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 d-block justify-content-center position-relative" data-aos="fade-right" >
@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="col-lg-6" data-aos="fade-left">
-                <h2 class="mb-3 d-inline-block pb-3" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">FOR</span> THE UNIVERSITY</h2>
+                <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">For</span> The University</h2>
 
                     <p class="text-light">
                         We work directly with faculty, staff, and researchers to understand real needs and build tools that solve real problems. Sometimes that means shipping quick fixes. Other times it means digging into legacy systems or designing something from scratch. Either way, we stay close to the work, iterate fast, and make sure what we deliver actually helps.                    </p>
@@ -190,7 +190,7 @@
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
-                      <a href="{{ route('story') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:170px">
+                      <a href="{{ route('story') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                           <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
@@ -233,7 +233,7 @@
                     </p>
 
                     <div class="btn display-btn btn-arrow-slide">
-                        <a href="{{route('team')}}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:200px">
+                        <a href="{{route('team')}}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                             <span class="btn-arrow-slide-circle" aria-hidden="true">
                                 <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                             </span>

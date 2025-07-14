@@ -5,7 +5,7 @@
 
 
     <h1 class="page-h1">Projects</h1>
-    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5" style="min-height: 90vh;">
+    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5" style="min-height: 90vh;" data-bs-theme="light">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <dl class="row text-center g-5 py-5" data-aos="fade-up">
+            <dl class="row text-center g-5 py-5" data-aos="fade-up" >
                 <!-- Stat 1 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
@@ -105,7 +105,7 @@
 
             <!-- Carousel -->
             <div id="onDeckCarousel" class="carousel slide overflow-hidden" style="padding-bottom:55px;"
-                data-bs-ride="carousel">
+                data-bs-ride="carousel" data-bs-theme="light">
                 <div class="carousel-inner">
                     @php
                         $inProgressProjects = collect([

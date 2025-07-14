@@ -102,7 +102,7 @@
                 </p>
                 <div class="d-flex">
                     <div class="btn display-btn btn-arrow-slide">
-                        <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white" style="width:225px">
+                        <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                             <span class="btn-arrow-slide-circle" aria-hidden="true">
                                 <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                             </span>
