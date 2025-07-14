@@ -314,8 +314,6 @@
                             width: 100%;
                             height: 100%;
                             top: -2px;
-                            left: 31.5%;
-                            transform: translateX(-195px);
                             -webkit-mask-image: url(/img/i3/i3-coffee-fill.svg);
                             -webkit-mask-repeat: no-repeat;
                             -webkit-mask-size: contain;
@@ -325,11 +323,11 @@
                             cursor: pointer
                         }
 
-                        @media (max-width: 1399.98px) {
+                        /* @media (max-width: 1399.98px) {
                             .coffee-flow-wrapper {
                                 transform: translateX(-140px);
                             }
-                        }
+                        } */
 
 
                         .coffee-track {
