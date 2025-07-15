@@ -149,7 +149,7 @@
             </div>
         </div>
     </section>
-    <section id="for-uconn" class="bg-dark text-light d-flex align-items-center px-5 py-5" style="min-height: 100vh;">
+    <section id="for-uconn" class="bg-purple-gradient text-light d-flex align-items-center px-5 py-5" style="min-height: 100vh;">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 d-block justify-content-center position-relative" data-aos="fade-right" >
