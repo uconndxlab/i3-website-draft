@@ -15,7 +15,7 @@
 
                 <div class="phrase-animator-container text-white">
                     <span class="d-block d-md-inline">We</span>
-                    <div id="phrase-animator-uconn" class="phrase-animator"></div>
+                    <div id="phrase-animator-uconn" class="phrase-animator">make stuff</div>
                     <span class="d-block d-md-inline">for UConn.</span>
                 </div>
                 
@@ -293,7 +293,7 @@ Our goal is to support UConn’s mission by providing practical, purpose-driven 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     window.startPhraseAnimator({
-        phrases: ["build systems", "create websites", "explore tech", "implement solutions", "develop apps"],
+        phrases: ["build apps", "design websites", "innovate", "nerd out", "pull all-nighters"],
         selector: "#phrase-animator-uconn",
     });
 
