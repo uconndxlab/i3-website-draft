@@ -184,10 +184,11 @@
                 <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">For</span> The University</h2>
 
                     <p class="text-light">
-                        We work directly with faculty, staff, and researchers to understand real needs and build tools that solve real problems. Sometimes that means shipping quick fixes. Other times it means digging into legacy systems or designing something from scratch. Either way, we stay close to the work, iterate fast, and make sure what we deliver actually helps.                    </p>
+Our goal is to support UConn’s mission by providing practical, purpose-driven tools and services that help the university run more efficiently, support innovation, and improve the day-to-day experience of working, researching, and learning here.                    </p>
                     <p class="text-light">
-                        We're here to help UConn work smarter. That means replacing expensive vendor tools when we can, streamlining operations, and applying custom technology to reduce friction and improve outcomes. Whether it's administrative processes or research infrastructure, we build with the goal of making the university stronger.
+                        Sometimes that means quick fixes or process improvements. Other times, it means replacing a vendor system or building something new from scratch.
                     </p>
+
 
                     <div class="btn display-btn btn-arrow-slide">
                       <a href="{{ route('story') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
