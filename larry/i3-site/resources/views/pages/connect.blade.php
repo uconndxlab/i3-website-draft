@@ -155,7 +155,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="card bg-primary-subtle text-light shadow-lg border-0">
                         <div class="card-body px-0">
-                            <h3 class="card-title text-center mb-4 text-uppercase text-dark letter-spacing-1">Fees</h3>
+                            <h3 class="card-title text-center mb-4 text-uppercase text-light letter-spacing-1">Fees</h3>
                             <div class="list-group list-group-flush">
                                 @foreach ([['label' => 'Director Project Engagement', 'amount' => 158], ['label' => 'Senior App Developer', 'amount' => 114], ['label' => 'Senior UX Designer', 'amount' => 78], ['label' => 'Student Design', 'amount' => 46]] as $fee)
                                     <div

@@ -6,14 +6,14 @@ const statList = [
   },
   {
     head: "35",
-    text: "Different UConn Partners Served"
+    text: "Different UConn Partners (and counting!)"
   },
   {
-    head: "100,000",
+    head: "500,000",
     text: "Monthly Pageviews"
   },
   {
-    head: "Several",
+    head: "∞",
     text: "Cups of Coffee"
   }
 ]

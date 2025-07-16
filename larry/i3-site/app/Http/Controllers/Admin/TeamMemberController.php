@@ -32,6 +32,11 @@ class TeamMemberController extends Controller
             $data['photo'] = $request->file('photo')->store('team_photos', 'public');
         }
 
+        // Handle LinkedIn URL if provided
+        if ($request->has('linkedin')) {
+            $data['linkedin'] = $request->input('linkedin');
+        }
+
         $data['tags'] = $request->filled('tags')
             ? array_map('trim', explode(',', $request->tags))
             : [];
@@ -61,6 +66,11 @@ class TeamMemberController extends Controller
         $data['tags'] = $request->filled('tags')
             ? array_map('trim', explode(',', $request->tags))
             : [];
+
+        // Update LinkedIn URL if provided
+        if ($request->has('linkedin')) {
+            $data['linkedin'] = $request->input('linkedin');
+        }
 
         $team->update($data);
         return redirect()->route('admin.team.index')->with('success', 'Team member updated.');

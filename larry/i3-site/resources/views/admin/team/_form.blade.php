@@ -19,6 +19,14 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">LinkedIn Profile URL</label>
+            <input name="linkedin" class="form-control @error('linkedin') is-invalid @enderror" value="{{ old('linkedin', $team->linkedin ?? '') }}">
+            @error('linkedin')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Tags <small class="text-muted">(comma-separated)</small></label>
             <input name="tags" class="form-control @error('tags') is-invalid @enderror" value="{{ old('tags', isset($team->tags) ? implode(', ', $team->tags) : '') }}" placeholder="e.g., senior-staff, student-staff, faculty-advisor">
             @error('tags')

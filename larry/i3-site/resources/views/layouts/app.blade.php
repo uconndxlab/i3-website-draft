@@ -26,13 +26,16 @@
 
 <body class="position-relative">
     @include('layouts.header')
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column pb-4">
         <main class="flex-grow-1">
             @yield('content')
         </main>
     </div>
 
+
     <div class="footercontain overflow-hidden">
+            @if(Route::currentRouteName() === 'connect')
+
         <section id="contact" class="bg-dark text-light d-flex align-items-center px-5" style="min-height: 100vh;">
             <div class="container">
                 <h2 class="mb-4 d-inline-block pb-3" data-aos="fade-down"><span
@@ -103,6 +106,7 @@
                 </div>
             </div>
         </section>
+          @endif
         <footer class="footer footer-index py-4 bg-dark text-light">
             <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center">
                 <a class="footer-link" href="https://uconn.edu">© 2025 University of Connecticut</a>
@@ -112,6 +116,8 @@
             </div>
         </footer>
     </div>
+            {{-- Content specific to the "connect" route goes here --}}
+  
     
 </body>
 
