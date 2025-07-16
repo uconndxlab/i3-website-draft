@@ -197,18 +197,15 @@ function generateRandomContributionData() {
 function updateHeatmapWithData(contributionsData) {
     console.log("Updating heatmap with contribution data");
 
-        document.querySelector('#contribution-count').innerHTML = Object.values(contributionsData).reduce((sum, count) => sum + count, 0) +" GitHub contributions";
+    document.querySelector('#contribution-count').innerHTML = Object.values(contributionsData).reduce((sum, count) => sum + count, 0) + " GitHub commits";
 
-    
-    const dates = Object.keys(contributionsData).map(dateStr => ({
-        date: new Date(dateStr),
-        count: contributionsData[dateStr]
-    }));
-    
-    // Update cell colors
+    // Update existing cells instead of rebinding data
     svg.selectAll(".day")
-        .data(dates)
-        .attr("fill", d => colorScale(d.count))
+        .attr("fill", function(d) {
+            const dateStr = d.date.toISOString().split('T')[0];
+            const count = contributionsData[dateStr] || 0;
+            return colorScale(count);
+        })
         .on("mouseover", function(event, d) {
             const dateStr = d.date.toLocaleDateString('en-US', {
                 month: 'short',
@@ -216,12 +213,17 @@ function updateHeatmapWithData(contributionsData) {
                 year: 'numeric'
             });
             
-            const countText = d.count === 1 ? "1 contribution" : `${d.count} contributions`;
+            const dateKey = d.date.toISOString().split('T')[0];
+            const count = contributionsData[dateKey] || 0;
+            const countText = count === 1 ? "1 contribution" : `${count} contributions`;
             
             tooltip.html(`${dateStr}: ${countText}`)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 30) + "px")
                 .style("opacity", 1);
+        })
+        .on("mouseout", function() {
+            tooltip.style("opacity", 0);
         });
 }
 
