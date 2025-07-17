@@ -181,6 +181,8 @@
 
                         ]);
 
+                        $inProgressProjects = $inProgressProjects->sortBy('title');
+
                         $chunks = $inProgressProjects->chunk(8);
                     @endphp
 
@@ -214,23 +216,23 @@
                         <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                             <div class="row g-4 justify-content-center px-3 py-4">
                                 @foreach ($projects->chunk(4) as $rowProjects)
-                                    @foreach ($rowProjects as $project)
-                                        <div class="col-md-3 col-12">
-                                            <div class="position-relative" data-aos="fade-up" data-aos-delay="{{ $loop->parent->index * 100 }}">
-                                                <div class="bg-dark bg-opacity-75 backdrop-blur rounded-3 p-4 h-100 border border-primary border-opacity-25 hover-lift">
-                                                    <div class="d-flex align-items-start mb-3">
-
-                                                        <div class="flex-grow-1">
-                                                            <span class="badge bg-warning text-dark mb-2">{{ $project->status ?? 'In Progress' }}</span>
-                                                            <h6 class="text-white mb-2 fw-bold">{{ $project->title }}</h6>
-                                                            <p class="text-light opacity-75 mb-0 small">{{ $project->client ?? 'N/A' }}</p>
+                                    <div class="row g-4 w-100">
+                                        @foreach ($rowProjects as $project)
+                                            <div class="col-md-3 col-12 d-flex">
+                                                <div class="position-relative w-100" data-aos="fade-up" data-aos-delay="{{ $loop->parent->index * 100 }}">
+                                                    <div class="bg-white bg-opacity-90 rounded-3 p-4 h-100 border border-light shadow-sm hover-lift d-flex flex-column">
+                                                        <div class="d-flex align-items-start mb-3 flex-grow-1">
+                                                            <div class="flex-grow-1">
+                                                                <span class="badge bg-dark text-white mb-2">{{ $project->status ?? 'In Progress' }}</span>
+                                                                <h6 class="text-dark mb-2 fw-bold" style="text-shadow: none!important;">{{ $project->title }}</h6>
+                                                                <p class="text-muted mb-0 small">{{ $project->client ?? 'N/A' }}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -361,6 +363,24 @@
         #onDeckCarousel .carousel-indicators button:hover {
             background-color: rgba(255, 255, 255, 0.7);
             border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        #onDeckCarousel .carousel-item .row {
+            min-height: 200px;
+        }
+
+        #onDeckCarousel .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #onDeckCarousel .hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        #onDeckCarousel .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
         }
     </style>
 
