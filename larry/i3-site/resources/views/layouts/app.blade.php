@@ -133,7 +133,7 @@
                             <span class="text-primary">i3</span> Internal Insights & Innovation
                         </h5>
                         <p class="text-light opacity-75 mb-3">
-                            We're a team of developers, designers, and researchers working to create innovative digital solutions for the UConn community.
+                            We're a team of developers, designers, and innovators working to create digital solutions for the UConn community.
                         </p>
                         <div class="d-flex gap-3">
                             <a href="https://github.com/uconndxlab" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
