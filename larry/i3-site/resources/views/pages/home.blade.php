@@ -4,7 +4,7 @@
 @section('content')
 {{-- <div class="scroll-snap-container"> --}}
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-center justify-content-md-start">
+    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-start justify-content-md-center" style=" background-image: url('{{ asset('images/hero-bg.jpg') }}'); background-size: cover; background-position: center;">
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="hero-title mb-4">
@@ -13,7 +13,7 @@
                     Innovation
                 </h1>
 
-                <div class="phrase-animator-container text-white">
+                <div class="phrase-animator-container text-white bg-dark d-inline-block px-4">
                     <span class="d-block d-md-inline">We</span>
                     <div id="phrase-animator-uconn" class="phrase-animator">make stuff</div>
                     <span class="d-block d-md-inline">for UConn.</span>

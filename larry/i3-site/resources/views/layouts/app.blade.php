@@ -19,6 +19,21 @@
 
     <!-- Your own styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <style>
+        .bg-gradient-dark {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .hover-opacity-100:hover {
+            opacity: 1 !important;
+            transition: opacity 0.3s ease;
+        }
+        
+        .text-primary {
+            color: #007bff !important;
+        }
+    </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -107,7 +122,113 @@
             </div>
         </section>
           @endif
+        
+        <!-- i3 Footer Section -->
+        <section class="bg-gradient-dark text-light py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <!-- About i3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <h5 class="fw-bold mb-3">
+                            <span class="text-primary">i3</span> Internal Insights & Innovation
+                        </h5>
+                        <p class="text-light opacity-75 mb-3">
+                            We're a team of student developers, designers, and researchers working to create innovative digital solutions for the UConn community.
+                        </p>
+                        <div class="d-flex gap-3">
+                            <a href="https://github.com/uconndxlab" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="mailto:dxlab@uconn.edu" class="text-light opacity-75 hover-opacity-100 fs-5">
+                                <i class="bi bi-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="fw-bold mb-3">Quick Links</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a href="{{ route('home') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">Home</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ route('projects.index') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">Projects</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ route('team') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">People</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ route('connect') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">Connect</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Services -->
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="fw-bold mb-3">What We Do</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <span class="text-light opacity-75">Web Development</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="text-light opacity-75">UX/UI Design</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="text-light opacity-75">Data Visualization</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="text-light opacity-75">Research Tools</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="fw-bold mb-3">Visit Us</h6>
+                        <div class="mb-3">
+                            <div class="d-flex align-items-start gap-2 mb-2">
+                                <i class="bi bi-geo-alt text-primary mt-1"></i>
+                                <div>
+                                    <div class="text-light">Rowe 321</div>
+                                    <div class="text-light opacity-75 small">University of Connecticut</div>
+                                    <div class="text-light opacity-75 small">Storrs, CT 06269</div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-envelope text-primary"></i>
+                                <a href="mailto:dxlab@uconn.edu" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+                                    i3@uconn.edu
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Divider -->
+                <hr class="my-4 opacity-25">
+                
+                <!-- Bottom Row -->
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+  
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="text-light opacity-75 mb-0 small">
+                            Built with ❤️ by the i3 team
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer class="footer footer-index py-4 bg-dark text-light">
+
+            
+
             <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center">
                 <a class="footer-link" href="https://uconn.edu">© 2025 University of Connecticut</a>
                 <a class="footer-link" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy &amp;
@@ -116,7 +237,6 @@
             </div>
         </footer>
     </div>
-            {{-- Content specific to the "connect" route goes here --}}
   
     
 </body>
