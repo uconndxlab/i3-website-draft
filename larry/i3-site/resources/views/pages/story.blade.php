@@ -54,6 +54,26 @@
             justify-content: center;
             align-items: center;
         }
+
+        .timeline-navigation {
+            backdrop-filter: blur(10px);
+        }
+
+        .year-marker .marker-dot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(77, 179, 255, 0.5);
+        }
+
+        .year-marker.active .marker-dot {
+            background-color: #4DB3FF !important;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(77, 179, 255, 0.7);
+        }
+
+        .year-marker.active .year-label {
+            color: #4DB3FF !important;
+            font-weight: bold;
+        }
     </style>
 
 
@@ -61,6 +81,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const slides = Array.from(document.querySelectorAll('#origins .slide'));
+            const yearMarkers = Array.from(document.querySelectorAll('.year-marker'));
             let currentIndex = 0;
             let isAnimating = false; // Track animation state
 
@@ -85,6 +106,16 @@
             const initialBgColor = slides[currentIndex].dataset.bgColor || '#212529';
             gsap.set('body', { backgroundColor: initialBgColor });
 
+            // Initialize timeline navigation
+            function updateTimelineNavigation(activeIndex) {
+                yearMarkers.forEach((marker, index) => {
+                    marker.classList.toggle('active', index === activeIndex);
+                });
+            }
+
+            // Set initial active marker
+            updateTimelineNavigation(currentIndex);
+
             function getSlideIndexById(id) {
                 return slides.findIndex(slide => slide.id === id);
             }
@@ -102,6 +133,9 @@
                 // Remove .active from all slides, add to nextSlide
                 slides.forEach(slide => slide.classList.remove('active'));
                 nextSlide.classList.add('active');
+
+                // Update timeline navigation
+                updateTimelineNavigation(targetIndex);
 
                 gsap.set(nextSlide, {
                     y: 100,
@@ -148,6 +182,14 @@
                 }
             }
 
+            // Timeline navigation click handlers
+            yearMarkers.forEach((marker, index) => {
+                marker.addEventListener('click', function() {
+                    if (isAnimating) return;
+                    showSlide(index);
+                });
+            });
+
             slides.forEach((slide) => {
                 slide.querySelectorAll('a[href^="#slide-"]').forEach(btn => {
                     btn.addEventListener('click', function(e) {
@@ -189,6 +231,38 @@
     <section id="origins" class="d-flex align-items-stretch px-5">
 
         <div class="container position-relative my-5">
+        <!-- Horizontal Timeline Navigation -->
+        <div class="timeline-navigation mb-4" style="z-index: 1000; max-width:400px; margin:0 auto;">
+            <div class="d-flex align-items-center justify-content-center  rounded-pill px-4 py-3">
+                <!-- Timeline line -->
+                <div class="timeline-line position-relative d-flex align-items-center justify-content-center">
+                    <div class="line bg-light opacity-25" style="height: 2px; width: 240px;"></div>
+                    
+                    <!-- Year markers -->
+                    <div class="year-marker position-absolute" data-year="2017" data-slide="slide-2017" style="left: 0;">
+                        <div class="marker-dot bg-primary rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2017</span>
+                    </div>
+                    
+                    <div class="year-marker position-absolute" data-year="2019" data-slide="slide-2019" style="left: 80px;">
+                        <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2019</span>
+                    </div>
+                    
+                    <div class="year-marker position-absolute" data-year="2020" data-slide="slide-2020" style="left: 160px;">
+                        <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2020</span>
+                    </div>
+                    
+                    <div class="year-marker position-absolute" data-year="2024" data-slide="slide-2024" style="left: 240px;">
+                        <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
             <div class="row slide" id="slide-2017" data-bg-color="#111111">
                 <div class="col-md-6 text-center d-flex align-items-center timeline-header">
                     <h2 data-odometer-initial="2025"  data-odometer-final="2017" data-aos="odometer" class="text-light odometer">2017</h2>
@@ -309,6 +383,8 @@
                 </div>
             </div>
         </div>
+
+
 
     </section>
 

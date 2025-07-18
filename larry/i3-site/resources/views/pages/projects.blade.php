@@ -5,7 +5,8 @@
 
 
     <h1 class="page-h1">Projects</h1>
-    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5" style="min-height: 90vh;" data-bs-theme="light">
+    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5" style="min-height: 90vh;"
+        data-bs-theme="light">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase text-dark" data-aos="fade-down">The Stats
@@ -21,13 +22,9 @@
                 </p>
             </div>
 
-            <div class="row d-flex justify-content-center mb-5">
-                <div class="col-xl-10 offset-xl-1">
-                    <x-heatmap />
-                </div>
-            </div>
 
-            <dl class="row text-center g-5 py-5" data-aos="fade-up" >
+
+            <dl class="row text-center g-5 py-5" data-aos="fade-up">
                 <!-- Stat 1 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
@@ -74,6 +71,18 @@
                 </div>
             </dl>
 
+            <div class="row d-flex justify-content-center mb-5">
+                <div class="col-xl-10 offset-xl-1">
+                    <x-heatmap />
+                </div>
+                <div class="text-muted small text-center mt-3" data-aos="fade-up">
+                    <em>
+                        Note: this doesn't include repositories outside our core organization (of which there are a few, nor
+                        does it include projects that don't have repositories!)
+                    </em>
+                </div>
+            </div>
+
             <div class="d-flex justify-content-center mb-4">
                 <a class="btn btn-outline-dark shadow-none" href="#in-progress">
                     See What We're Working On
@@ -86,6 +95,128 @@
         style="min-height: 100vh;">
         <div class="container">
 
+             @php
+                        $inProgressProjects = collect([
+                            (object) [
+                                'title' => '2025 Honeycrisp Improvements',
+                                'client' => 'OVPR',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => '2025 RIF Improvements',
+                                'client' => 'OVPR',
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'V1.5 of the Outreach & Engagement Database',
+                                'client' => 'Outreach & Engagement',
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'Botantical Conservatory Website & Database',
+                                'client' => 'UConn EEB',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Impact.uconn.edu: Aurora Migration',
+                                'client' => 'BPIR',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Farm2School "Compass" Data Collection Tool',
+                                'client' => 'CT Fresh Ed',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Sourcery 2025 Launch',
+                                'client' => 'Greenhouse Studios',
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'Lincus V2',
+                                'client' => "Provost's Office",
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'CT Children with Incarcerated Parents Initiative',
+                                'client' => 'IMRP',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Project #ESSY Data Collection/Processing Tool',
+                                'client' => 'CSCH',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Centers & Institutes Data Repository',
+                                'client' => "Provost's Office",
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'Research Space Planning Dashboard',
+                                'client' => "Provost's Office",
+                                'status' => 'Fall 2025',
+                            ],
+
+                            (object) [
+                                'title' => 'Healing Hearts Improvements App Improvements',
+                                'client' => 'HDFS',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'US Animal Vaccinology Research Coordination Network Members database',
+                                'client' => 'CAHNR',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Proteome-X Improvements',
+                                'client' => 'Schwartz Lab',
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'PrEPChoices Improvements',
+                                'client' => 'Allied Health Sciences',
+                                'status' => 'Fall 2025',
+                            ],
+                            (object) [
+                                'title' => 'Puerto Rican Research Consortium',
+                                'client' => 'Puerto Rican Research Initiative',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'PR Oral Histories Project',
+                                'client' => 'Puerto Rican Research Initiative',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Sing Sing Prison Museum Archive',
+                                'client' => 'Sing Sing Prison Museum',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'IAQ Website (Indoor Air Quality Initiative)',
+                                'client' => 'Indoor Air Quality Initiative',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Coming out With Care',
+                                'client' => 'SOGIE Center',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Mansfield Training & Museum Website',
+                                'client' => 'UCHI',
+                                'status' => 'Summer 2025',
+                            ],
+
+
+                        ]);
+
+                        $inProgressProjects = $inProgressProjects->sortBy('title');
+
+                        $chunks = $inProgressProjects->chunk(8);
+                    @endphp
+
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">In Progress</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
@@ -95,6 +226,10 @@
 
             <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
                 data-aos="fade-up">
+                <p class="mb-2">
+                    <span class="fw-bold display-5 odometer" data-odometer-final="{{ $inProgressProjects->count() }}" data-aos="odometer">0</span>
+                    <span class="ms-2">projects currently in progress</span>
+                </p>
                 <p>
                     We've got some exciting work in progress right now. We find ourselves working on all sorts of things for
                     all sorts of people at UConn.
@@ -107,89 +242,27 @@
             <div id="onDeckCarousel" class="carousel slide overflow-hidden" style="padding-bottom:55px;"
                 data-bs-ride="carousel" data-bs-theme="light">
                 <div class="carousel-inner">
-                    @php
-                        $inProgressProjects = collect([
-                            (object) [
-                                'title' => '2025 Honeycrisp Improvements',
-                                'client' => 'OVPR',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => '2025 RIF Improvements',
-                                'client' => 'OVPR',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'V2 of the Outreach & Engagement Database',
-                                'client' => 'Outreach & Engagement',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Botantical Conservatory Website & Database',
-                                'client' => 'UConn EEB',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Impact.uconn.edu: Aurora Migration',
-                                'client' => 'BPIR',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Farm2School Data Collection Tool',
-                                'client' => 'CT Fresh Ed',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Sourcery 2025 Launch',
-                                'client' => 'Greenhouse Studios',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Lincus V2',
-                                'client' => "Provost's Office",
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'CT Children with Incarcerated Parents Initiative',
-                                'client' => 'IMRP',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Project #ESSY Data Collection/Processing Tool',
-                                'client' => 'CSCH',
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Centers & Institutes Data Repository',
-                                'client' => "Provost's Office",
-                                'status' => 'Development',
-                            ],
-                            (object) [
-                                'title' => 'Research Space Planning Dashboard',
-                                'client' => "Provost's Office",
-                                'status' => 'Development',
-                            ],
-                        ]);
-
-                        $chunks = $inProgressProjects->chunk(4);
-                    @endphp
+                   
                     @foreach ($chunks as $chunkIndex => $projects)
                         <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                             <div class="row g-4 justify-content-center px-3 py-4">
-                                @foreach ($projects as $project)
-                                    <div class="col-md-3 col-12">
-                                        <div class="card h-100 shadow bg-dark text-white" data-aos="fade-up"
-                                            data-aos-delay="{{ $loop->index * 100 }}">
-                                            <div class="card-body d-flex flex-column">
-                                                <h5 class="card-title">{{ $project->title }}</h5>
-                                                <p class="card-text mb-2">
-                                                    {{ $project->client ?? 'N/A' }}
-                                                </p>
-                                                <span class="badge bg-warning text-dark align-self-start">
-                                                    {{ $project->status ?? 'In Progress' }}
-                                                </span>
+                                @foreach ($projects->chunk(4) as $rowProjects)
+                                    <div class="row g-4 w-100">
+                                        @foreach ($rowProjects as $project)
+                                            <div class="col-md-3 col-12 d-flex">
+                                                <div class="position-relative w-100" data-aos="fade-up" data-aos-delay="{{ $loop->parent->index * 100 }}">
+                                                    <div class="bg-white bg-opacity-90 rounded-3 p-4 h-100 border border-light shadow-sm hover-lift d-flex flex-column">
+                                                        <div class="d-flex align-items-start mb-3 flex-grow-1">
+                                                            <div class="flex-grow-1">
+                                                                <span class="badge bg-dark text-white mb-2">{{ $project->status ?? 'In Progress' }}</span>
+                                                                <h6 class="text-dark mb-2 fw-bold" style="text-shadow: none!important;">{{ $project->title }}</h6>
+                                                                <p class="text-muted mb-0 small">{{ $project->client ?? 'N/A' }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 @endforeach
                             </div>
@@ -201,7 +274,7 @@
                 <div class="carousel-indicators mt-4">
                     @foreach ($chunks as $chunkIndex => $projects)
                         <button type="button" data-bs-target="#onDeckCarousel" data-bs-slide-to="{{ $chunkIndex }}"
-                            class="{{ $chunkIndex === 0 ? 'active' : '' }}"
+                            class="rounded-circle {{ $chunkIndex === 0 ? 'active' : '' }}"
                             aria-current="{{ $chunkIndex === 0 ? 'true' : 'false' }}"
                             aria-label="Slide {{ $chunkIndex + 1 }}"></button>
                     @endforeach
@@ -238,10 +311,12 @@
                             href="{{ route('projects.tag', ['tag' => 'for-all', '#completed-projects']) }}">All</a>
                         <a class="btn rounded-pill me-3 shadow-none
                             {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}">For Research</a>
+                            href="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}">For
+                            Research</a>
                         <a class="btn rounded-pill shadow-none
                             {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
-                            href="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}">For UConn</a>
+                            href="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}">For
+                            UConn</a>
                     </div>
                 </div>
             </div>
@@ -299,6 +374,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css" />
+
+    <style>
+        #onDeckCarousel .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background-color: transparent;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        #onDeckCarousel .carousel-indicators button.active {
+            background-color: white;
+            border-color: white;
+        }
+
+        #onDeckCarousel .carousel-indicators button:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        #onDeckCarousel .carousel-item .row {
+            min-height: 200px;
+        }
+
+        #onDeckCarousel .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #onDeckCarousel .hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        #onDeckCarousel .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
