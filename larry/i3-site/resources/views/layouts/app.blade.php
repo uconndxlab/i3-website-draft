@@ -218,7 +218,7 @@
                     </div>
                     <div class="col-md-6 text-md-end">
                         <p class="text-light opacity-75 mb-0 small">
-                            Built with ❤️ by the i3 team
+                            Built with ❤️ and Laravel by the i3 team
                         </p>
                     </div>
                 </div>
