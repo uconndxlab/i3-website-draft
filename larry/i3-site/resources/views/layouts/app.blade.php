@@ -109,7 +109,7 @@
 
                         </div>
                         <div class="social-links d-flex justify-content-center gap-3 mt-4">
-                            <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank"
+                            <a href="https://www.linkedin.com/company/uconn-i3/" target="_blank"
                                 class="text-light fs-4">
                                 <i class="bi bi-linkedin"></i>
                             </a>
@@ -139,7 +139,7 @@
                             <a href="https://github.com/uconndxlab" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-github"></i>
                             </a>
-                            <a href="https://www.linkedin.com/school/university-of-connecticut/" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
+                            <a href="https://www.linkedin.com/company/uconn-i3/" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-linkedin"></i>
                             </a>
                             <a href="mailto:dxlab@uconn.edu" class="text-light opacity-75 hover-opacity-100 fs-5">
