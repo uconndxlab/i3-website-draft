@@ -8,6 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/lmy8hrr.css">
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -22,7 +23,13 @@
     
     <style>
         .bg-gradient-dark {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(
+            to bottom,
+            #111111 0%,
+            #1a1a2e 30%,
+            #16213e 75%,
+            #0f3460 100%
+            );
         }
         
         .hover-opacity-100:hover {
@@ -124,7 +131,7 @@
           @endif
         
         <!-- i3 Footer Section -->
-        <section class="bg-gradient-dark text-light py-5">
+        <footer class="bg-gradient-dark text-light py-5">
             <div class="container">
                 <div class="row g-4">
                     <!-- About i3 -->
@@ -217,26 +224,32 @@
   
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <p class="text-light opacity-75 mb-0 small">
-                            Built with ❤️ and Laravel by the <acronym style="cursor: help"
-                            title="Victoria, BK, Natalie, Shium, and Joel">i3 team</acronym>
-                        </p>
+
                     </div>
                 </div>
             </div>
-        </section>
+            <section class="footer footer-index py-4 text-light">
 
-        <footer class="footer footer-index py-4 bg-dark text-light">
+                <!--start dark footer-->
+                <section class="i3-footer i3-footer--dark py-2">
+                    <img src = "/../img/i3/i3-symbol-light-blue.svg" alt="i3 symbol"/>
+                    <p>Powered by 
+                    </p>
+                    <a class="btn" target="_blank" href="https://i3.core.uconn.edu/"> i3 </a>
+                </section>
+                <!--end dark footer-->
 
-            
-
-            <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center">
-                <a class="footer-link" href="https://uconn.edu">© 2025 University of Connecticut</a>
-                <a class="footer-link" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy &amp;
+            <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center pt-4">
+                <a class="footer-link small" href="https://uconn.edu">© 2025 University of Connecticut</a>
+                <a class="footer-link small" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy &amp;
                     Copyright</a>
-                <a class="footer-link" href="https://accessibility.uconn.edu/">Accessibility</a>
+                <a class="footer-link small" href="https://accessibility.uconn.edu/">Accessibility</a>
+                <p class="footer-link" style="font-size:14px">Built with ❤️ and Laravel by the <acronym style="cursor: help"title="Victoria, BK, Natalie, Shium, and Joel">i3 team</acronym></p>
             </div>
-        </footer>
+        </section>
+    </footer>
+
+
     </div>
   
     
