@@ -174,10 +174,41 @@
                                 'status' => 'Fall 2025',
                             ],
                             (object) [
-                                'title' => 'pREPChoices Improvements',
+                                'title' => 'PrEPChoices Improvements',
                                 'client' => 'Allied Health Sciences',
                                 'status' => 'Fall 2025',
                             ],
+                            (object) [
+                                'title' => 'Puerto Rican Research Consortium',
+                                'client' => 'Puerto Rican Research Initiative',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'PR Oral Histories Project',
+                                'client' => 'Puerto Rican Research Initiative',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Sing Sing Prison Museum Archive',
+                                'client' => 'Sing Sing Prison Museum',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'IAQ Website (Indoor Air Quality Initiative)',
+                                'client' => 'Indoor Air Quality Initiative',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Coming out With Care',
+                                'client' => 'SOGIE Center',
+                                'status' => 'Summer 2025',
+                            ],
+                            (object) [
+                                'title' => 'Mansfield Training & Museum Website',
+                                'client' => 'UCHI',
+                                'status' => 'Summer 2025',
+                            ],
+
 
                         ]);
 
