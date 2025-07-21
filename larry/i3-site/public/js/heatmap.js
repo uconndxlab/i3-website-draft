@@ -125,6 +125,19 @@ function createEmptyHeatmap() {
     drawLegend();
 }
 
+// draw day of week labels
+const daysOfWeek = ['S', 'M', 'T', 'W', 'Th', 'F', 'Su'];
+svg.selectAll(".day-label")
+    .data(daysOfWeek)
+    .enter()
+    .append("text")
+    .attr("class", "day-label")
+    .attr("x", 0)
+    .attr("y", (d, i) => i * (cellSize + cellMargin) + 20 + cellSize / 2 + 4) // +4 for vertical centering
+    .text(d => d)
+    .attr("font-size", "10px")
+    .attr("fill", "#666");
+
 // Draw the legend
 function drawLegend() {
     const legendX = width - 250; 
