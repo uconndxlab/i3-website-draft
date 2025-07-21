@@ -48,7 +48,7 @@
 
 <body class="position-relative">
     @include('layouts.header')
-    <div class="d-flex flex-column pb-4">
+    <div class="d-flex flex-column">
         <main class="flex-grow-1">
             @yield('content')
         </main>
@@ -132,7 +132,7 @@
         
         <!-- i3 Footer Section -->
         <footer class="bg-gradient-dark text-light py-5">
-            <div class="container">
+            <div class="container pt-5">
                 <div class="row g-4">
                     <!-- About i3 -->
                     <div class="col-lg-4 col-md-6">
