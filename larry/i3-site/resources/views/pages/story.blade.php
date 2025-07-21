@@ -278,7 +278,7 @@
                         value institutional projects. 
                     </p>
                     <div class="mt-3">
-                        <a href="#slide-2019" class="btn btn-outline-light p-1"
+                        <a title="Next: 2019" href="#slide-2019" class="btn btn-outline-light p-1"
                             style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
                         </a>
@@ -292,7 +292,7 @@
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <div class="mb-3">
-                        <a href="#slide-2017" class="btn btn-outline-light p-1"
+                        <a title="Previous: 2017" href="#slide-2017" class="btn btn-outline-light p-1"
                             style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #FFBB4D; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
                         </a>
@@ -315,7 +315,7 @@
                     </p>
 
                     <div class="mt-3">
-                        <a href="#slide-2020" class="btn btn-outline-light p-1"
+                        <a title="Next: 2020" href="#slide-2020" class="btn btn-outline-light p-1"
                             style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #FFBB4D; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
                         </a>
@@ -329,7 +329,7 @@
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center timeline-content">
                     <div class="mb-3">
-                        <a href="#slide-2019" class="btn btn-outline-light p-1"
+                        <a title="Previous: 2019" href="#slide-2019" class="btn btn-outline-light p-1"
                             style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
                         </a>
@@ -345,7 +345,7 @@
                     </p>
 
                     <div class="mt-3">
-                        <a href="#slide-2024" class="btn btn-outline-light p-1"
+                        <a title="Next: 2024" href="#slide-2024" class="btn btn-outline-light p-1"
                             style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-down" style="font-size:1rem;"></i>
                         </a>
@@ -359,7 +359,7 @@
                 </div>
                 <div class="col-md-6 d-flex flex-column timeline-content">
                     <div class="mb-3">
-                        <a href="#slide-2020" class="btn btn-outline-light p-1"
+                        <a title="Previous: 2020" href="#slide-2020" class="btn btn-outline-light p-1"
                             style="border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color: #4DB3FF; background-color: #FFFFFF1A; border: none;">
                             <i class="bi bi-arrow-up" style="font-size:1rem;"></i>
                         </a>
@@ -400,7 +400,7 @@
                         Create value early. Iterate quickly.
                     </blockquote>
                     <p class="text-dark">That's the goal. There's no single path to get there, but here's how we like to work:</p>
-                    <h5 class="text-dark">Start small. Learn fast. Build what matters.</h5>
+                    <h3 class="text-dark">Start small. Learn fast. Build what matters.</h3>
                     <p class="text-dark">
                         We usually begin with something simple—a rough draft, a working prototype, a first version you can click. 
                         Then we test, refine, and build from there. It's not about cutting corners. It's about getting feedback sooner, 
@@ -558,24 +558,43 @@
                     class="border-bottom border-2 pb-3 border-primary">In The</span> News</h2>
             <div class="row g-4" data-aos="fade-up" data-aos-duration="1200">
                 {{-- Example cards, replace with dynamic content --}}
-                @for ($i = 0; $i < 5; $i++)
+
+                @php 
+                    $stories =  array(
+                        ['title' => 'UConn Funds Five COVID-19 Research Projects, Announces Additional Funding', 'publication' => 'UConn Today', 'date' => '10/02/2020', 'link' => 'https://today.uconn.edu/2020/10/uconn-funds-five-covid-19-research-projects-announces-additional-funding/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2020/05/GettyImages-1220459949-e1615807575563.jpg'],
+                        ['title' => 'Scorecard for Safer Play: Athletic Field Assessment Form Updated for Mobile Use', 'publication' => 'UConn Today', 'date' => '06/23/2025', 'link' => 'https://today.uconn.edu/2025/06/scorecard-for-safer-play-athletic-field-assessment-form-updated-for-mobile-use/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2025/06/Drag-mat-cultivation-by-Alyssa-Siegel-Miles-1024x683.jpg'],
+                        ['title' => 'New UConn Extension Publication Website Shares Answers Connecticut Residents Can Trust', 'publication' => 'UConn Today', 'date' => '04/19/2024', 'link' => 'https://today.uconn.edu/2024/04/new-uconn-extension-publication-website-shares-answers-connecticut-residents-can-trust/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2023/04/DJI_0622-HDR-Edit-Crop-1024x683.jpg'],
+                        ['title' => 'New Game Makes Financial Education Fun', 'publication' => 'UConn Today', 'date' => '04/26/2023', 'link' => 'https://today.uconn.edu/2023/04/new-game-makes-financial-education-fun/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2023/03/law170419a219-1024x683.jpg'],
+                        ['title' => "Research Spotlight: Pushing the boundaries of digital media with UConn's DX Lab",  'publication' => 'The Daily Campus', 'date' => '04/20/2020', 'link' => 'https://dailycampus.com/2020/04/20/2020-4-20-research-spotlight-pushing-the-boundaries-of-digital-media-with-uconns-dx-lab/', 'img' => 'https://i0.wp.com/images.squarespace-cdn.com/content/v1/54f74f23e4b0952b4e0011c0/1587340490915-L4Y26FHIGTYJR4GYY71L/ke17ZwdGBToddI8pDm48kMiC1kkJMCC5CmdIxgmMBQRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwDkWRUVPzILwwU1Cm0tACnQ-gsxKt_jcXVfT9FtNluPGWW0QT5AQYLWdKSnWNUYi4/TREE.jpg?w=696&ssl=1'],
+                        ['title' => 'Pilot testing an intervention to educate and promote nutritious choices at food pantries', 'publication' => 'Journal of Public Health', 'date' => '05/25/2021', 'link' => 'https://link.springer.com/article/10.1007/s10389-021-01570-6', 'img' => asset('img/i3/work/wellscan.png')],
+                        ['title' => 'Strengthening Connecticut Farms with Risk Management Training and Tools', 'publication' => 'UConn Today', 'date' => '04/01/2025', 'link' => 'https://today.uconn.edu/2025/04/strengthening-connecticut-farms-with-risk-management-training-and-tools/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2020/11/Farm160719c092-e1697619059398.jpg'],
+                        ['title' => 'Website Breaks Down Statewide Benefit of UConn Research Funding', 'publication' => 'UConn Today', 'date' => '10/02/2017', 'link' => 'https://today.uconn.edu/2017/10/website-breaks-statewide-benefit-uconn-research-funding/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2017/09/CTMapGrantExpenditures.jpg']
+                    );
+
+                    // order by date desc
+                    usort($stories, function($a, $b) {
+                        return strtotime($b['date']) - strtotime($a['date']);
+                    });
+
+                @endphp
+                
+                @foreach ($stories as $story)
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="card text-white border-0 shadow-sm overflow-hidden rounded-4">
-                            <img src="https://picsum.photos/600/40{{ $i }}" class="card-img"
-                                alt="placeholder image">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50 p-3">
-                                <h5 class="card-title fw-bold">Title of Article</h5>
-                                <p class="card-text small mb-2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et nunc non eros congue
-                                    tincidunt.
-                                </p>
-                                <p class="card-text small text-white-50 mb-0">
-                                    <strong>Author of Article</strong> • 01/02/3456
-                                </p>
+                        <div class="position-relative" style="padding-top: 62.5%;">
+                            <div class="card text-white border-0 shadow-sm overflow-hidden rounded-4 position-absolute top-0 start-0 w-100 h-100">
+                                <img src="{{ $story['img'] }}" class="card-img h-100 w-100 object-fit-cover"
+                                    alt="Image for {{ $story['title'] }}" loading="lazy" style="object-fit: cover;">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50 p-3">
+                                    <h3 class="card-title fw-bold">{{ $story['title'] }}</h3>
+                                    <p class="card-text small text-white mb-0 bg-dark bg-opacity-50 py-2 px-2">
+                                        <strong>{{ $story['publication'] }}</strong> • {{ $story['date'] }}
+                                    </p>
+                                </div>
+                                <a href="{{ $story['link'] }}" target="_blank" class="stretched-link" aria-label="Read more about {{ $story['title'] }}"></a>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </section>

@@ -24,17 +24,16 @@
     </section>
 
 
-    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 0; overflow:hidden;">
+    <div id="projectScrollerContainer" style="top: 0; bottom: 0; left: 0; right: 0; height: 100vh; position: fixed; display: flex; align-items:center; justify-content: center; transform: translateY(50%); z-index: 0; overflow:hidden;" aria-hidden="true" role="presentation">
         <div class="mobile-scaledown">
             <div id="projectsScroller" style="visibility:hidden;">
                 @foreach(\App\Models\WorkItem::all() as $item)
                 <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
-                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}">
+                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="" role="presentation">
                 </div>
                 @endforeach
             </div>
         </div>
-        
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -250,21 +249,21 @@ Our goal is to support UConn’s mission by providing practical, purpose-driven 
         @endphp
 
         
-            <div id="teamScrollerContainer1" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-start start-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-left: 15vw;">
+            <div id="teamScrollerContainer1" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-start start-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-left: 15vw;" aria-hidden="true" role="presentation">
                 <div class="mobile-scaledown">
                     <div id="teamScroller1">
                         @foreach($teamMembers as $member)
-                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
+                            <img src="{{ asset('storage/' . $member->photo) }}" alt="" role="presentation">
                         @endforeach
                     </div>
                 </div>
             </div>
 
-            <div id="teamScrollerContainer2" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-end end-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-right: 15vw;">
+            <div id="teamScrollerContainer2" class="position-absolute w-100 h-100 d-flex align-items-center justify-content-end end-0 z-0" style="visibility: hidden; overflow: hidden; opacity: 0.2; padding-right: 15vw;" aria-hidden="true" role="presentation">
                 <div class="mobile-scaledown">
                     <div id="teamScroller2">
                         @foreach($teamMembers->reverse() as $member)
-                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" >
+                            <img src="{{ asset('storage/' . $member->photo) }}" alt="" role="presentation">
                         @endforeach
                     </div>
                 </div>

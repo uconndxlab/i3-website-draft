@@ -33,7 +33,7 @@
             object-fit: cover;
             z-index: 1;
             border-radius: 1rem;
-                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         }
 
@@ -75,9 +75,9 @@
             transform: translateY(20px);
             overflow: hidden;
             transition:
-            opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-            height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-            transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .person-role {
@@ -86,14 +86,15 @@
             transform: translateY(20px);
             overflow: hidden;
             transition:
-            opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-            height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-            transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .person-card:hover .person-photo, .person-card:hover .person-overlay {
+        .person-card:hover .person-photo,
+        .person-card:hover .person-overlay {
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-            
+
         }
 
         .person-card:hover .lastname,
@@ -103,16 +104,17 @@
             height: auto;
             transform: translateY(0);
         }
-
     </style>
     <h1 class="page-h1 display-1">People</h1>
 
-    <section role="region" aria-label="Our Leadership" id="senior-staff" class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
+    <section role="region" aria-label="Our Leadership" id="senior-staff"
+        class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
 
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
                 <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Leadership</h2>
-                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
+                    style="width:50px"></span>
 
             </div>
             <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
@@ -127,14 +129,22 @@
                     <div class="col-md-2 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="position-relative person-card rounded-3">
                             <div class="card-outline"></div>
+                            @if ($person->linkedin)
+                                <a title ="Linkedin Profile for {{ $person->name }}" href="{{ $person->linkedin }}"
+                                    target="_blank" rel="noopener" aria-label="LinkedIn"
+                                    style="position: absolute; top:20px; right: 20px; z-index: 3;">
+                                    <i class="bi bi-linkedin fs-3 text-primary"></i>
+                                </a>
+                            @endif
                             <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
                                 class="person-photo">
                             <div class="person-overlay bg-blue-to-transparent text-white p-3 pt-5">
                                 <div class="person-name-and-role">
-                                    <h5 class="mb-0 fw-bold person-name fs-6">
+                                    <h3 class="mb-0 fw-bold person-name fs-6">
                                         <span class="firstname">{{ explode(' ', $person->name)[0] }}</span>
-                                        <span class="lastname"> {{ implode(' ', array_slice(explode(' ', $person->name), 1)) }}</span>
-                                    </h5>
+                                        <span class="lastname">
+                                            {{ implode(' ', array_slice(explode(' ', $person->name), 1)) }}</span>
+                                    </h3>
                                     <small class="person-role">{{ $person->role }}</small>
                                 </div>
                             </div>
@@ -145,7 +155,8 @@
         </div>
     </section>
 
-    <section role="region" aria-label="Student Staff" id="students" class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
+    <section role="region" aria-label="Student Staff" id="students"
+        class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
         <div class="container">
 
 
@@ -173,22 +184,22 @@
                         <div class="position-relative person-card rounded-3">
                             <div class="card-outline"></div>
 
-                                @if ($student->linkedin)
-
-                                <a title ="Linkedin Profile for {{ $student->name }}"
-                                href="{{ $student->linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"
-                                   style="position: absolute; top:20px; right: 20px; z-index: 3;">
+                            @if ($student->linkedin)
+                                <a title ="Linkedin Profile for {{ $student->name }}" href="{{ $student->linkedin }}"
+                                    target="_blank" rel="noopener" aria-label="LinkedIn"
+                                    style="position: absolute; top:20px; right: 20px; z-index: 3;">
                                     <i class="bi bi-linkedin fs-3 text-primary"></i>
                                 </a>
-                                @endif
+                            @endif
                             <img src="{{ asset('storage/' . $student->photo) }}" alt="{{ $student->name }}"
                                 class="person-photo">
                             <div class="person-overlay bg-purple-to-transparent pt-5 text-white p-3">
                                 <div class="person-name-and-role">
-                                    <h5 class="mb-0 fw-bold person-name">
+                                    <h3 class="mb-0 fw-bold person-name fs-5">
                                         <span class="firstname">{{ explode(' ', $student->name)[0] }}</span>
-                                        <span class="lastname"> {{ implode(' ', array_slice(explode(' ', $student->name), 1)) }}</span>
-                                    </h5>
+                                        <span class="lastname">
+                                            {{ implode(' ', array_slice(explode(' ', $student->name), 1)) }}</span>
+                                    </h3>
                                     <small class="person-role">{{ $student->role }}</small>
                                 </div>
                             </div>
@@ -223,14 +234,24 @@
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="position-relative person-card rounded-3">
                             <div class="card-outline"></div>
+
+                            @if ($person->linkedin)
+                                <a title ="Linkedin Profile for {{ $person->name }}" href="{{ $person->linkedin }}"
+                                    target="_blank" rel="noopener" aria-label="LinkedIn"
+                                    style="position: absolute; top:20px; right: 20px; z-index: 3;">
+                                    <i class="bi bi-linkedin fs-3 text-primary"></i>
+                                </a>
+                            @endif
+
                             <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
                                 class="person-photo">
                             <div class="person-overlay bg-dark-to-transparent text-white p-3 pt-5">
                                 <div class="person-name-and-role">
-                                    <h5 class="mb-0 fw-bold person-name">
+                                    <h3 class="mb-0 fw-bold person-name fs-5">
                                         <span class="firstname">{{ explode(' ', $person->name)[0] }}</span>
-                                        <span class="lastname"> {{ implode(' ', array_slice(explode(' ', $person->name), 1)) }}</span>
-                                    </h5>
+                                        <span class="lastname">
+                                            {{ implode(' ', array_slice(explode(' ', $person->name), 1)) }}</span>
+                                    </h3>
                                     <small class="person-role">{{ $person->role }}</small>
                                 </div>
                             </div>

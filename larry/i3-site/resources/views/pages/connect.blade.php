@@ -201,8 +201,8 @@
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-code-slash display-7 mb-4"></i>
-                            <h5 class="fw-bold mt-3">
-                                Developers</h5>
+                            <h3 class="fw-bold mt-3 fs-5">
+                                Developers</h3>
                             <p>Love coding and building things? Join us to create amazing web apps and digital experiences
                                 that make a difference at UConn.</p>
                             <a href="#contact" class="btn btn-outline-light">
@@ -218,7 +218,7 @@
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-palette display-7 mb-4"></i>
-                            <h5 class="fw-bold mt-3">Designers</h5>
+                            <h3 class="fw-bold mt-3 fs-5">Designers</h3>
                             <p>Have an eye for design? Help us create beautiful, user-friendly interfaces and engaging
                                 visual experiences.</p>
                             <a href="#contact" class="btn btn-outline-light">
@@ -234,7 +234,7 @@
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-pencil-square display-7 mb-4"></i>
-                            <h5 class="fw-bold mt-3">Illustrators</h5>
+                            <h3 class="fw-bold mt-3 fs-5">Illustrators</h3>
                             <p>Turn ideas into visuals? We need your creative talent to bring stories and concepts to life
                                 through illustration.</p>
                             <a href="#contact" class="btn btn-outline-light">Illustrator? Let's Chat!
@@ -248,7 +248,7 @@
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-chat-dots display-7 mb-4"></i>
-                            <h5 class="fw-bold mt-3">Something Else?</h5>
+                            <h3 class="fw-bold mt-3 fs-5">Something Else?</h3>
                             <p>Writers, marketers, project managers, and creative minds of all kinds - we'd love to hear
                                 from you!</p>
                             <a href="#contact" class="btn btn-outline-light">

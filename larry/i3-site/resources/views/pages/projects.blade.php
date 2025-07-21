@@ -31,7 +31,7 @@
                         <i class="bi bi-code-slash" style="font-size: 3rem;"></i>
                     </dt>
                     <dd>
-                        <h2 class="text-dark fw-bold display-5 odometer" data-odometer-final="37" data-aos="odometer">0</h2>
+                        <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="37" data-aos="odometer">0</h3>
                         <p class="text-muted">Active Projects This Year</p>
                     </dd>
                 </div>
@@ -42,7 +42,7 @@
                         <i class="bi bi-person-workspace" style="font-size: 3rem;"></i>
                     </dt>
                     <dd>
-                        <h2 class="text-dark fw-bold display-5 odometer" data-odometer-final="35" data-aos="odometer">0</h2>
+                        <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="35" data-aos="odometer">0</h3>
                         <p class="text-muted">Different UConn Partners Served (and counting!)</p>
                     </dd>
                 </div>
@@ -53,8 +53,8 @@
                         <i class="bi bi-eye" style="font-size: 3rem;"></i>
                     </dt>
                     <dd>
-                        <h2 class="text-dark fw-bold display-5 odometer" data-odometer-final="500000" data-aos="odometer">0
-                        </h2>
+                        <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="500000" data-aos="odometer">0
+                        </h3>
                         <p class="text-muted">Pageviews per Month</p>
                     </dd>
                 </div>
@@ -65,7 +65,7 @@
                         <i class="bi bi-cup-hot" style="font-size: 3rem;"></i>
                     </dt>
                     <dd>
-                        <h2 class="fw-bold display-5 text-dark" data-infinity="true">∞</h2>
+                        <h3 class="fw-bold display-5 text-dark" data-infinity="true">∞</h3>
                         <p class="text-muted">Cups of Coffee</p>
                     </dd>
                 </div>
@@ -95,127 +95,125 @@
         style="min-height: 100vh;">
         <div class="container">
 
-             @php
-                        $inProgressProjects = collect([
-                            (object) [
-                                'title' => '2025 Honeycrisp Improvements',
-                                'client' => 'OVPR',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => '2025 RIF Improvements',
-                                'client' => 'OVPR',
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'V1.5 of the Outreach & Engagement Database',
-                                'client' => 'Outreach & Engagement',
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'Botantical Conservatory Website & Database',
-                                'client' => 'UConn EEB',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Impact.uconn.edu: Aurora Migration',
-                                'client' => 'BPIR',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Farm2School "Compass" Data Collection Tool',
-                                'client' => 'CT Fresh Ed',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Sourcery 2025 Launch',
-                                'client' => 'Greenhouse Studios',
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'Lincus V2',
-                                'client' => "Provost's Office",
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'CT Children with Incarcerated Parents Initiative',
-                                'client' => 'IMRP',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Project #ESSY Data Collection/Processing Tool',
-                                'client' => 'CSCH',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Centers & Institutes Data Repository',
-                                'client' => "Provost's Office",
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'Research Space Planning Dashboard',
-                                'client' => "Provost's Office",
-                                'status' => 'Fall 2025',
-                            ],
+            @php
+                $inProgressProjects = collect([
+                    (object) [
+                        'title' => '2025 Honeycrisp Improvements',
+                        'client' => 'OVPR',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => '2025 RIF Improvements',
+                        'client' => 'OVPR',
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'V1.5 of the Outreach & Engagement Database',
+                        'client' => 'Outreach & Engagement',
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'Botantical Conservatory Website & Database',
+                        'client' => 'UConn EEB',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Impact.uconn.edu: Aurora Migration',
+                        'client' => 'BPIR',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Farm2School "Compass" Data Collection Tool',
+                        'client' => 'CT Fresh Ed',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Sourcery 2025 Launch',
+                        'client' => 'Greenhouse Studios',
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'Lincus V2',
+                        'client' => "Provost's Office",
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'CT Children with Incarcerated Parents Initiative',
+                        'client' => 'IMRP',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Project #ESSY Data Collection/Processing Tool',
+                        'client' => 'CSCH',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Centers & Institutes Data Repository',
+                        'client' => "Provost's Office",
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'Research Space Planning Dashboard',
+                        'client' => "Provost's Office",
+                        'status' => 'Fall 2025',
+                    ],
 
-                            (object) [
-                                'title' => 'Healing Hearts Improvements App Improvements',
-                                'client' => 'HDFS',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'US Animal Vaccinology Research Coordination Network Members database',
-                                'client' => 'CAHNR',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Proteome-X Improvements',
-                                'client' => 'Schwartz Lab',
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'PrEPChoices Improvements',
-                                'client' => 'Allied Health Sciences',
-                                'status' => 'Fall 2025',
-                            ],
-                            (object) [
-                                'title' => 'Puerto Rican Research Consortium',
-                                'client' => 'Puerto Rican Research Initiative',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'PR Oral Histories Project',
-                                'client' => 'Puerto Rican Research Initiative',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Sing Sing Prison Museum Archive',
-                                'client' => 'Sing Sing Prison Museum',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'IAQ Website (Indoor Air Quality Initiative)',
-                                'client' => 'Indoor Air Quality Initiative',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Coming out With Care',
-                                'client' => 'SOGIE Center',
-                                'status' => 'Summer 2025',
-                            ],
-                            (object) [
-                                'title' => 'Mansfield Training & Museum Website',
-                                'client' => 'UCHI',
-                                'status' => 'Summer 2025',
-                            ],
+                    (object) [
+                        'title' => 'Healing Hearts Improvements App Improvements',
+                        'client' => 'HDFS',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'US Animal Vaccinology Research Coordination Network Members database',
+                        'client' => 'CAHNR',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Proteome-X Improvements',
+                        'client' => 'Schwartz Lab',
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'PrEPChoices Improvements',
+                        'client' => 'Allied Health Sciences',
+                        'status' => 'Fall 2025',
+                    ],
+                    (object) [
+                        'title' => 'Puerto Rican Research Consortium',
+                        'client' => 'Puerto Rican Research Initiative',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'PR Oral Histories Project',
+                        'client' => 'Puerto Rican Research Initiative',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Sing Sing Prison Museum Archive',
+                        'client' => 'Sing Sing Prison Museum',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'IAQ Website (Indoor Air Quality Initiative)',
+                        'client' => 'Indoor Air Quality Initiative',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Coming out With Care',
+                        'client' => 'SOGIE Center',
+                        'status' => 'Summer 2025',
+                    ],
+                    (object) [
+                        'title' => 'Mansfield Training & Museum Website',
+                        'client' => 'UCHI',
+                        'status' => 'Summer 2025',
+                    ],
+                ]);
 
+                $inProgressProjects = $inProgressProjects->sortBy('title');
 
-                        ]);
-
-                        $inProgressProjects = $inProgressProjects->sortBy('title');
-
-                        $chunks = $inProgressProjects->chunk(8);
-                    @endphp
+                $chunks = $inProgressProjects->chunk(8);
+            @endphp
 
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">In Progress</h2>
@@ -227,7 +225,8 @@
             <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
                 data-aos="fade-up">
                 <p class="mb-2">
-                    <span class="fw-bold display-5 odometer" data-odometer-final="{{ $inProgressProjects->count() }}" data-aos="odometer">0</span>
+                    <span class="fw-bold display-5 odometer" data-odometer-final="{{ $inProgressProjects->count() }}"
+                        data-aos="odometer">0</span>
                     <span class="ms-2">projects currently in progress</span>
                 </p>
                 <p>
@@ -242,7 +241,7 @@
             <div id="onDeckCarousel" class="carousel slide overflow-hidden" style="padding-bottom:55px;"
                 data-bs-ride="carousel" data-bs-theme="light">
                 <div class="carousel-inner">
-                   
+
                     @foreach ($chunks as $chunkIndex => $projects)
                         <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                             <div class="row g-4 justify-content-center px-3 py-4">
@@ -250,13 +249,19 @@
                                     <div class="row g-4 w-100">
                                         @foreach ($rowProjects as $project)
                                             <div class="col-md-3 col-12 d-flex">
-                                                <div class="position-relative w-100" data-aos="fade-up" data-aos-delay="{{ $loop->parent->index * 100 }}">
-                                                    <div class="bg-white bg-opacity-90 rounded-3 p-4 h-100 border border-light shadow-sm hover-lift d-flex flex-column">
+                                                <div class="position-relative w-100" data-aos="fade-up"
+                                                    data-aos-delay="{{ $loop->parent->index * 100 }}">
+                                                    <div
+                                                        class="bg-white bg-opacity-90 rounded-3 p-4 h-100 border border-light shadow-sm hover-lift d-flex flex-column">
                                                         <div class="d-flex align-items-start mb-3 flex-grow-1">
                                                             <div class="flex-grow-1">
-                                                                <span class="badge bg-dark text-white mb-2">{{ $project->status ?? 'In Progress' }}</span>
-                                                                <h6 class="text-dark mb-2 fw-bold" style="text-shadow: none!important;">{{ $project->title }}</h6>
-                                                                <p class="text-muted mb-0 small">{{ $project->client ?? 'N/A' }}</p>
+                                                                <span
+                                                                    class="badge bg-dark text-white mb-2">{{ $project->status ?? 'In Progress' }}</span>
+                                                                <h3 class="fs-6 text-dark mb-2 fw-bold"
+                                                                    style="text-shadow: none!important;">
+                                                                    {{ $project->title }}</h3>
+                                                                <p class="text-muted mb-0 small">
+                                                                    {{ $project->client ?? 'N/A' }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -323,12 +328,15 @@
             <div class="row">
                 @foreach ($items as $project)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; cursor:pointer;"
-                            data-bs-toggle="modal" data-bs-target="#projectModal{{ $project->id }}">
+                        <a href="#projectModal{{ $project->id }}" data-bs-toggle="modal"
+                            data-bs-target="#projectModal{{ $project->id }}"
+                            title="View details for {{ $project->title }}"
+                            aria-label="View details for {{ $project->title }}"
+                            style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; cursor:pointer; display:block;">
                             <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
                                 alt="{{ $project->title }}"
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius:10px;">
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Modal -->
@@ -337,8 +345,8 @@
                         <div class="modal-dialog modal-lg modal-dialog-centered">
                             <div class="modal-content bg-dark text-white">
                                 <div class="modal-header border-0">
-                                    <h5 class="modal-title" id="projectModalLabel{{ $project->id }}">
-                                        {{ $project->title }}</h5>
+                                    <h3 class="modal-title" id="projectModalLabel{{ $project->id }}">
+                                        {{ $project->title }}</h3>
                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>

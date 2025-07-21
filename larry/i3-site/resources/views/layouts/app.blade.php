@@ -116,13 +116,7 @@
 
                         </div>
                         <div class="social-links d-flex justify-content-center gap-3 mt-4">
-                            <a href="https://www.linkedin.com/company/uconn-i3/" target="_blank"
-                                class="text-light fs-4">
-                                <i class="bi bi-linkedin"></i>
-                            </a>
-                            <a href="https://www.instagram.com/UConn" target="_blank" class="text-light fs-4">
-                                <i class="bi bi-instagram"></i>
-                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -136,20 +130,20 @@
                 <div class="row g-4">
                     <!-- About i3 -->
                     <div class="col-lg-4 col-md-6">
-                        <h5 class="fw-bold mb-3">
+                        <h3 class="fw-bold mb-3 fs-5">
                             <span class="text-primary">i3</span> Internal Insights & Innovation
-                        </h5>
+                        </h3>
                         <p class="text-light opacity-75 mb-3">
                             We're a team of developers, designers, and innovators working to create digital solutions for the UConn community.
                         </p>
                         <div class="d-flex gap-3">
-                            <a href="https://github.com/uconndxlab" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
+                            <a title="View our GitHub Org" href="https://github.com/uconndxlab" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-github"></i>
                             </a>
-                            <a href="https://www.linkedin.com/company/uconn-i3/" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
+                            <a title="View our LinkedIn Profile" href="https://www.linkedin.com/company/uconn-i3/" target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-linkedin"></i>
                             </a>
-                            <a href="mailto:dxlab@uconn.edu" class="text-light opacity-75 hover-opacity-100 fs-5">
+                            <a title="Email Us" href="mailto:dxlab@uconn.edu" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-envelope"></i>
                             </a>
                         </div>
@@ -157,7 +151,7 @@
                     
                     <!-- Quick Links -->
                     <div class="col-lg-2 col-md-6">
-                        <h6 class="fw-bold mb-3">Quick Links</h6>
+                        <h4 class="fw-bold mb-3 fs-6">Quick Links</h4>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <a href="{{ route('home') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">Home</a>
@@ -176,7 +170,7 @@
                     
                     <!-- Services -->
                     <div class="col-lg-3 col-md-6">
-                        <h6 class="fw-bold mb-3">What We Do</h6>
+                        <h4 class="fw-bold mb-3 fs-6">What We Do</h4>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <span class="text-light opacity-75">Web Development</span>
@@ -195,7 +189,7 @@
                     
                     <!-- Contact Info -->
                     <div class="col-lg-3 col-md-6">
-                        <h6 class="fw-bold mb-3">Visit Us</h6>
+                        <h4 class="fw-bold mb-3 fs-6">Visit Us</h4>
                         <div class="mb-3">
                             <div class="d-flex align-items-start gap-2 mb-2">
                                 <i class="bi bi-geo-alt text-primary mt-1"></i>
@@ -207,7 +201,7 @@
                             </div>
                             <div class="d-flex align-items-center gap-2">
                                 <i class="bi bi-envelope text-primary"></i>
-                                <a href="mailto:dxlab@uconn.edu" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+                                <a title="Email: i3@uconn.edu" href="mailto:dxlab@uconn.edu" class="text-light opacity-75 text-decoration-none hover-opacity-100">
                                     i3@uconn.edu
                                 </a>
                             </div>
@@ -240,10 +234,10 @@
                 <!--end dark footer-->
 
             <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center pt-4">
-                <a class="footer-link small" href="https://uconn.edu">© 2025 University of Connecticut</a>
-                <a class="footer-link small" href="https://uconn.edu/disclaimers-privacy-copyright/">Disclaimers, Privacy &amp;
+                <a class="footer-link small" href="https://uconn.edu" target="_blank">© 2025 University of Connecticut</a>
+                <a class="footer-link small" href="https://uconn.edu/disclaimers-privacy-copyright/" target="_blank">Disclaimers, Privacy &amp;
                     Copyright</a>
-                <a class="footer-link small" href="https://accessibility.uconn.edu/">Accessibility</a>
+                <a class="footer-link small" href="https://accessibility.uconn.edu/" target="_blank">Accessibility</a>
                 <p class="footer-link" style="font-size:14px">Built with ❤️ and Laravel by the <acronym style="cursor: help"title="Victoria, BK, Natalie, Shium, and Joel">i3 team</acronym></p>
             </div>
         </section>
