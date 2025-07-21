@@ -208,8 +208,9 @@ function updateHeatmapWithData(contributionsData) {
         })
         .on("mouseover", function(event, d) {
             const dateStr = d.date.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric', 
+                weekday: 'short',
+                month: 'short', 
+                day: 'numeric',
                 year: 'numeric'
             });
             

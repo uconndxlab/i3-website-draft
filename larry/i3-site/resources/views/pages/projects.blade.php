@@ -77,8 +77,8 @@
                 </div>
                 <div class="text-muted small text-center mt-3" data-aos="fade-up">
                     <em>
-                        Note: this doesn't include repositories outside our core organization (of which there are a few, nor
-                        does it include projects that don't have repositories!)
+                        Note: this doesn't include repositories outside our core organization (of which there are a few), nor
+                        does it include projects that don't have repositories!
                     </em>
                 </div>
             </div>
