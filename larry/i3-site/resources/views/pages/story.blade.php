@@ -85,8 +85,9 @@
             let currentIndex = 0;
             let isAnimating = false; // Track animation state
             let autoAdvanceTimer = null;
+            let progressTimer = null;
             let isAutoPlaying = true;
-            const autoAdvanceDelay = 6000; // 6 seconds per slide
+            const autoAdvanceDelay = 4500; // 4.5 seconds per slide
 
             gsap.set(slides, {
                 autoAlpha: 0,
@@ -162,16 +163,16 @@
 
                 tl.to(currentSlide, {
                     autoAlpha: 0,
-                    duration: 0.4,
+                    duration: 1,
                     ease: 'power2.out'
                 }).to(nextSlide, {
                     autoAlpha: 1,
                     y: 0,
-                    duration: 0.5,
+                    duration: 1,
                     ease: 'power2.out'
                 }, '<0.1').to('body', {
                     backgroundColor: newBgColor,
-                    duration: 0.6,
+                    duration: 1,
                     ease: 'power2.out'
                 }, '<');
                 
@@ -197,15 +198,74 @@
                 showSlide(nextIndex);
             }
 
+            function updateProgressBar() {
+                const progressBar = document.getElementById('timeline-progress');
+                if (!isAutoPlaying || isAnimating) {
+                    progressBar.style.width = '0%';
+                    return;
+                }
+
+                // Calculate positions based on slide positions (0, 80, 160, 240 out of 240px total)
+                const slidePositions = [0, 80, 160, 240]; // pixel positions of each slide
+                const totalWidth = 240; // total timeline width
+                
+                const currentPosition = slidePositions[currentIndex];
+                const nextIndex = (currentIndex + 1) % slides.length;
+                const nextPosition = slidePositions[nextIndex];
+                
+                // Calculate the segment width we need to fill
+                const segmentStart = (currentPosition / totalWidth) * 100;
+                const segmentWidth = ((nextPosition - currentPosition) / totalWidth) * 100;
+                
+                let startTime = Date.now();
+                
+                function animate() {
+                    if (!isAutoPlaying || isAnimating) {
+                        // Reset to just show up to current position
+                        progressBar.style.width = segmentStart + '%';
+                        return;
+                    }
+                    
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / autoAdvanceDelay, 1);
+                    
+                    // Fill from current position to next position
+                    const currentWidth = segmentStart + (segmentWidth * progress);
+                    progressBar.style.width = currentWidth + '%';
+                    
+                    if (progress < 1) {
+                        progressTimer = requestAnimationFrame(animate);
+                    }
+                }
+                
+                progressTimer = requestAnimationFrame(animate);
+            }
+
             function startAutoAdvance() {
                 clearTimeout(autoAdvanceTimer);
+                if (progressTimer) {
+                    cancelAnimationFrame(progressTimer);
+                }
+                
                 if (isAutoPlaying) {
+                    updateProgressBar();
                     autoAdvanceTimer = setTimeout(autoAdvance, autoAdvanceDelay);
                 }
             }
 
             function stopAutoAdvance() {
                 clearTimeout(autoAdvanceTimer);
+                if (progressTimer) {
+                    cancelAnimationFrame(progressTimer);
+                }
+                
+                // Keep progress bar showing up to current slide position
+                const progressBar = document.getElementById('timeline-progress');
+                const slidePositions = [0, 80, 160, 240];
+                const totalWidth = 240;
+                const currentPosition = slidePositions[currentIndex];
+                const segmentStart = (currentPosition / totalWidth) * 100;
+                progressBar.style.width = segmentStart + '%';
             }
 
             function toggleAutoPlay() {
@@ -284,7 +344,7 @@
 
         <div class="container position-relative my-5">
         <!-- Horizontal Timeline Navigation -->
-        <div class="timeline-navigation mb-4" style="z-index: 1000; max-width:450px; margin:0 auto;">
+        <div class="timeline-navigation mb-4" style="z-index: 1000; max-width:450px; margin:0 auto; position: absolute;">
             <div class="d-flex align-items-center justify-content-center rounded-pill px-4 py-3">
                 <!-- Play/Pause Button -->
                 <button id="timeline-play-pause" class="btn btn-sm btn-outline-light me-3 rounded-circle" 
@@ -296,6 +356,8 @@
                 <!-- Timeline line -->
                 <div class="timeline-line position-relative d-flex align-items-center justify-content-center">
                     <div class="line bg-light opacity-25" style="height: 2px; width: 240px;"></div>
+                    <!-- Progress indicator line -->
+                    <div id="timeline-progress" class="position-absolute bg-primary" style="height: 2px; width: 0%; left: 0; top: 50%; transform: translateY(-50%); transition: width 0.1s linear;"></div>
                     
                     <!-- Year markers -->
                     <div class="year-marker position-absolute" data-year="2017" data-slide="slide-2017" style="left: 0;">
