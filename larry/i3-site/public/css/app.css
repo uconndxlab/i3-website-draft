@@ -153,7 +153,7 @@ p {
 
 
 .page-h1 {
-    font-weight: 800;
+    /* font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1.1;
     text-transform: uppercase;
@@ -164,7 +164,9 @@ p {
     -webkit-text-stroke: 1px #f1f1f1;
 
     text-transform: uppercase;
-    font-size: clamp(40px, 10vw, 108px);
+    font-size: clamp(40px, 10vw, 108px); */
+
+
     mix-blend-mode: difference;
     z-index: 998;
     opacity:100%;
@@ -277,7 +279,7 @@ h2.border-accent,
     height: 80vh;
 }
 
-.hero-title {
+.hero-title, .page-h1 {
     padding-top: 3rem;
     font-size: clamp(2rem, 12vh, 150px);
     /* font-size: 12vh; */
