@@ -309,23 +309,39 @@
                         value created, and a new student learning experience.
                     </p>
                 </div>
-                <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
+
+            </div>
+            <div class="row" id="project-grid">
+                                <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
                     <div>
                         <a class="btn rounded-pill me-3 border-0 shadow-none
                             {{ $tag === 'for-all' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            hx-get="{{ route('projects.tag', ['tag' => 'for-all', '#completed-projects']) }}"
+                            hx-target="#project-grid"
+                            hx-swap="innerHTML"
+                            hx-push-url="true"
+                            hx-select="#project-grid"
                             href="{{ route('projects.tag', ['tag' => 'for-all', '#completed-projects']) }}">All</a>
                         <a class="btn rounded-pill me-3 shadow-none
                             {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            hx-get="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}"
+                            hx-target="#project-grid"
+                            hx-swap="innerHTML"
+                            hx-push-url="true"
+                            hx-select="#project-grid"
                             href="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}">For
                             Research</a>
                         <a class="btn rounded-pill shadow-none
                             {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
+                            hx-get="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}"
+                            hx-target="#project-grid"
+                            hx-swap="innerHTML"
+                            hx-push-url="true"
+                            hx-select="#project-grid"
                             href="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}">For
                             UConn</a>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 @foreach ($items as $project)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <a href="#projectModal{{ $project->id }}" data-bs-toggle="modal"
