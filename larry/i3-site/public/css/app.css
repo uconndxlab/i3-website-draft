@@ -1600,3 +1600,25 @@ margin-bottom:0px;
 .i3-footer--dark .btn {
     outline: var(--thickness) solid #007EEF; /* the corner color */
 }
+
+
+@media(max-width: 1200px) {
+  .mobile-scaledown {
+    transform: scale(0.7);
+    transform-origin: center;
+  }
+}
+
+@media(max-width: 1000px) {
+  .mobile-scaledown {
+    transform: scale(0.6);
+    transform-origin: center;
+  }
+}
+
+@media(max-width: 768px) {
+  .mobile-scaledown {
+  transform: scale(0.5);
+  transform-origin: center;
+}
+}

@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
             speed: 20,
             maxImageWidth: 400,
             gap: 70,
-            rowGap: 100,
+            rowGap: 40,
             direction: -10,
             imageClass: 'photo-scroller-image',
             wrapperClass: 'photo-box-effect'
@@ -425,26 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
   margin-top: 10rem;
 }
 
-@media(max-width: 1200px) {
-  .mobile-scaledown {
-    transform: scale(0.7);
-    transform-origin: center;
-  }
-}
 
-@media(max-width: 1000px) {
-  .mobile-scaledown {
-    transform: scale(0.6);
-    transform-origin: center;
-  }
-}
-
-@media(max-width: 768px) {
-  .mobile-scaledown {
-  transform: scale(0.5);
-  transform-origin: center;
-}
-}
 
 
 

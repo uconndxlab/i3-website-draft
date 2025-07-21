@@ -262,9 +262,109 @@
         </div>
     </section>
 
+    @php
+        $brandLogos = [
+            'IBM.svg',
+            'amazon.svg',
+            'cvs_health.svg',
+            'hubspot.svg',
+            'oracle.svg',
+            'thehartford.svg',
+            'KeyBank.png',
+            'clever.webp',
+            'google.svg',
+            'mlb.svg',
+            'palantir.png',
+            'us-bank.svg',
+        ];
+    @endphp
 
 
 
+    <section id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative">
+        <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 100px; z-index: 0;" aria-hidden="true" role="presentation">
+            <div class="mobile-scaledown">
+            <div id="alumniScroller1" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
+                @foreach($brandLogos as $logo)
+                <div>
+                    <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $logo }}" role="presentation" class="img-fluid">
+                </div>
+                @endforeach
+            </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center mb-3 ">
+                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">i3 Alumni</h2>
+                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
+                    style="width:50px"></span>
+            </div>
+            <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                <p>
+                    Alumni from our programs are now working at leading tech firms like Meta and Google, at mission-driven nonprofits, museums, startups, and even other universities, carrying the knowledge, confidence, and experience they gained here into every corner of the industry.
+                </p>
+                <div class="btn display-btn btn-arrow-slide">
+                    <a href="{{route('team')}}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> Our Alumni </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 100px; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
+            <div class="mobile-scaledown">
+                <div id="alumniScroller2" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
+                    @foreach($brandLogos as $logo)
+                    <div>
+                        <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $logo }}" role="presentation" class="img-fluid">
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+
+@vite('resources/js/photoScroller.js')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const alumniScroller1 = window.createPhotoScroller({
+        selector: "#alumniScroller1",
+        rows: 1,
+        aspectRatio: 16/9,
+        speed: 20,
+        maxImageWidth: 200,
+        imageFit: 'fit-width',
+        constrainHeight: false,
+        gap: 70,
+        direction: -7,
+        imageClass: 'img-fluid',
+        imageRowClass: 'photo-scroller-row',
+    });
+    document.getElementById('alumniScroller1').style.visibility = '';
+
+    const alumniScroller2 = window.createPhotoScroller({
+        selector: "#alumniScroller2",
+        rows: 1,
+        aspectRatio: 16/9,
+        speed: 20,
+        maxImageWidth: 200,
+        imageFit: 'fit-width',
+        constrainHeight: false,
+        gap: 70,
+        direction: 7,
+        reverseDirection: true,
+        imageClass: 'img-fluid',
+        imageRowClass: 'photo-scroller-row',
+    });
+    document.getElementById('alumniScroller2').style.visibility = '';
+});
+</script>
 
 
 @endsection
