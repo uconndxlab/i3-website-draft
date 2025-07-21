@@ -290,67 +290,82 @@ Our goal is to support UConn’s mission by providing practical, purpose-driven 
 @vite('resources/js/starParticles.js')
 @vite('resources/js/circleTurnAnimation.js')
 <script>
+    
 document.addEventListener('DOMContentLoaded', function() {
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    //prefersReducedMotion = true;
+
+    // Always initialize phrase animator, but with reduced motion if preferred
     window.startPhraseAnimator({
         phrases: ["build apps", "design websites", "innovate", "nerd out", "pull all-nighters"],
         selector: "#phrase-animator-uconn",
+        reducedMotion: prefersReducedMotion
     });
 
-    const projectScroller = window.createPhotoScroller({
-        selector: "#projectsScroller",
-        rows: 2,
-        aspectRatio: 16/9,
-        speed: 50,
-        maxImageWidth: 400,
-        gap: 70,
-        rowGap: 100,
-        direction: -10,
-        imageClass: 'photo-scroller-image',
-        wrapperClass: 'photo-box-effect'
-    });
-    document.getElementById('projectsScroller').style.visibility = '';
+    // Only create scrollers if motion is not reduced
+    if (!prefersReducedMotion) {
+        const projectScroller = window.createPhotoScroller({
+            selector: "#projectsScroller",
+            rows: 2,
+            aspectRatio: 16/9,
+            speed: 20,
+            maxImageWidth: 400,
+            gap: 70,
+            rowGap: 100,
+            direction: -10,
+            imageClass: 'photo-scroller-image',
+            wrapperClass: 'photo-box-effect'
+        });
+        document.getElementById('projectsScroller').style.visibility = '';
 
+        const teamScroller1 = window.createPhotoScroller({
+            selector: "#teamScroller1",
+            rows: 1,
+            aspectRatio: 1.5 / 1,
+            speed: 50,
+            gap: 70,
+            rowGap: 100,
+            maxImageWidth: 200,
+            direction: 85,
+            imageClass: 'photo-scroller-image',
+            wrapperClass: 'photo-box-effect'
+        });
+        document.getElementById('teamScrollerContainer1').style.visibility = '';
 
-    const teamScroller1 = window.createPhotoScroller({
-        selector: "#teamScroller1",
-        rows: 1,
-        aspectRatio: 1.5 / 1,
-        speed: 50,
-        gap: 70,
-        rowGap: 100,
-        maxImageWidth: 200,
-        direction: 85,
-        imageClass: 'photo-scroller-image',
-        wrapperClass: 'photo-box-effect'
-    });
-    document.getElementById('teamScrollerContainer1').style.visibility = '';
+        const teamScroller2 = window.createPhotoScroller({
+            selector: "#teamScroller2",
+            rows: 1,
+            aspectRatio: 1.5/1,
+            speed: 50,
+            gap: 70,
+            maxImageWidth: 200,
+            direction: -85,
+            imageClass: 'photo-scroller-image ',
+            wrapperClass: 'photo-box-effect'
+        });
+        document.getElementById('teamScrollerContainer2').style.visibility = '';
 
-    const teamScroller2 = window.createPhotoScroller({
-        selector: "#teamScroller2",
-        rows: 1,
-        aspectRatio: 1.5/1,
-        speed: 50,
-        gap: 70,
-        maxImageWidth: 200,
-        direction: -85,
-        imageClass: 'photo-scroller-image ',
-        wrapperClass: 'photo-box-effect'
-    });
-    document.getElementById('teamScrollerContainer2').style.visibility = '';
-
-    // Animated background particles
-    const animatedBg = new StarParticles({
-        selector: '.hero-section',
-        particleCount: 200,
-        particleColor: 'rgba(255,255,255,0.3)',
-        // direction: 45, // 45 degree angle
-        mousePush: true,
-        pushRadius: 100,
-        maxSpeed: 0.1,
-        connections: true,
-    });
-
-    
+        // Animated background particles - only if motion is enabled
+        const animatedBg = new StarParticles({
+            selector: '.hero-section',
+            particleCount: 200,
+            particleColor: 'rgba(255,255,255,0.3)',
+            mousePush: true,
+            pushRadius: 100,
+            maxSpeed: 0.1,
+            connections: true,
+        });
+    } else {
+        // For reduced motion users, show static content instead of scrollers
+        document.getElementById('projectsScroller').style.display = 'none';
+        document.getElementById('teamScrollerContainer1').style.display = 'none';
+        document.getElementById('teamScrollerContainer2').style.display = 'none';
+        
+        // Hide the entire project scroller container since it's decorative
+        document.getElementById('projectScrollerContainer').style.display = 'none';
+    }
 });
 </script>
 <style>

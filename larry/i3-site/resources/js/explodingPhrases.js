@@ -1,4 +1,4 @@
-export function startPhraseAnimator({ phrases, selector }) {
+export function startPhraseAnimator({ phrases, selector, reducedMotion = false }) {
   const container = document.querySelector(selector);
   if (!container) {
     console.warn(`PhraseAnimator: No element found for selector "${selector}"`);
@@ -8,6 +8,23 @@ export function startPhraseAnimator({ phrases, selector }) {
   let phraseIndex = 0;
 
   const animatePhrase = (phrase) => {
+    // Clear existing content
+    container.innerHTML = '';
+    
+    if (reducedMotion) {
+      // For reduced motion users, simply show the text without animation
+      container.textContent = phrase;
+      container.style.width = 'auto';
+      
+      // Still cycle through phrases but with a simple fade
+      setTimeout(() => {
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        animatePhrase(phrases[phraseIndex]);
+      }, 3000);
+      return;
+    }
+
+    // Original animation logic for users who prefer motion
     // Step 1: Measure width
     const temp = document.createElement("div");
     temp.style.position = "absolute";
