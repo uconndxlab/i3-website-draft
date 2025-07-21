@@ -170,6 +170,7 @@ p {
     mix-blend-mode: difference;
     z-index: 998;
     opacity:100%;
+    font-size: clamp(40px, 10vw, 108px)!important;
 
 
     /* Optional: prevent text from wrapping or shrinking weirdly */
@@ -187,7 +188,6 @@ p {
         transform: rotate(-90deg) translateY(55%) translateX(-50%);
         transform-origin: left center;
         margin-top: 0px;
-        opacity:20%;
     }
 }
 

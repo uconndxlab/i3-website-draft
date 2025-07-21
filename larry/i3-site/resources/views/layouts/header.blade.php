@@ -54,7 +54,7 @@
   <header class="sticky-top py-3 bg-dark py-2">
       <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
           <div class="container">
-              <div>
+              <div  style="max-width:85%">
                   <h1 class="header-level-one mb-0">
                       <a href="/" class="link-offset-1">
                           Internal Insights & Innovation
@@ -63,9 +63,9 @@
               </div>
               <button style="border-color:#fff;" class="navbar-toggler btn-outline-white" type="button" data-bs-toggle="collapse" data-bs-target="#i3navbarContent"
                   aria-controls="i3navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span style="color:#fff;" class="navbar-toggler-icon text-white"></span>
-              </button>
-              <div class="collapse navbar-collapse flex-grow-0" id="i3navbarContent" data-bs-theme="dark">
+                    <i class="bi bi-list text-white "></i>
+                </button>
+              <div class="text-center text-md-left collapse navbar-collapse flex-grow-0 mt-2" id="i3navbarContent" data-bs-theme="dark">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
                           <a class="nav-link{{ request()->routeIs('team') ? ' active' : '' }}"
