@@ -132,8 +132,8 @@
                             @if ($person->linkedin)
                                 <a title ="Linkedin Profile for {{ $person->name }}" href="{{ $person->linkedin }}"
                                     target="_blank" rel="noopener" aria-label="LinkedIn"
-                                    style="position: absolute; top:20px; right: 20px; z-index: 3;">
-                                    <i class="bi bi-linkedin fs-3 text-primary"></i>
+                                    style="position: absolute; top:20px; right: 5px; z-index: 3; padding: 5px;">
+                                    <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
                                 </a>
                             @endif
                             <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
@@ -187,8 +187,8 @@
                             @if ($student->linkedin)
                                 <a title ="Linkedin Profile for {{ $student->name }}" href="{{ $student->linkedin }}"
                                     target="_blank" rel="noopener" aria-label="LinkedIn"
-                                    style="position: absolute; top:20px; right: 20px; z-index: 3;">
-                                    <i class="bi bi-linkedin fs-3 text-primary"></i>
+                                    style="position: absolute; top:20px; right: 5px; z-index: 3;  padding: 5px;">
+                                    <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
                                 </a>
                             @endif
                             <img src="{{ asset('storage/' . $student->photo) }}" alt="{{ $student->name }}"
@@ -238,8 +238,8 @@
                             @if ($person->linkedin)
                                 <a title ="Linkedin Profile for {{ $person->name }}" href="{{ $person->linkedin }}"
                                     target="_blank" rel="noopener" aria-label="LinkedIn"
-                                    style="position: absolute; top:20px; right: 20px; z-index: 3;">
-                                    <i class="bi bi-linkedin fs-3 text-primary"></i>
+                                    style="position: absolute; top:20px; right: 5px; z-index: 3; padding: 5px;">
+                                    <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
                                 </a>
                             @endif
 

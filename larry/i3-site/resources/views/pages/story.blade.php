@@ -535,7 +535,7 @@
                 </div>
                 <div class="col-md-6 text-center">
                     <div data-aos="fade-left" data-aos-duration="1200">
-                        <svg viewBox="0 0 800 200" class="w-100" id="processSvg" style="overflow:visible">
+                        <svg viewBox="0 0 800 200" class="w-100" id="processSvg" style="overflow:visible" aria-hidden="true" role="presentation">
                             <!-- Timeline Line -->
                             <line x1="100" y1="80" x2="700" y2="80" stroke="#333" stroke-width="3" class="svg-element"/>
                             
@@ -566,8 +566,7 @@
                             </g>
 
                             <!-- Husky Head Character -->
-                            <g id="huskyCharacter" transform="translate(100,80)"  title="This was really the UConn Husky logo in 1959.">
->
+                            <g id="huskyCharacter" transform="translate(100,80)" title="This was really the UConn Husky logo in 1959.">
                                 <!-- Rotation wrapper - this will handle only rotation -->
                                 <g id="huskyRotation">
                                     <!-- Husky Head (Simple line art) -->
@@ -578,6 +577,7 @@
                                         width="50" 
                                         height="50"
                                         preserveAspectRatio="xMidYMid meet"
+                                        alt="UConn Husky Logo from 1959"
                                     />
                                 </g>
                             </g>
