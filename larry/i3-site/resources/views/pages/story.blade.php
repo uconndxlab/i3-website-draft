@@ -84,6 +84,9 @@
             const yearMarkers = Array.from(document.querySelectorAll('.year-marker'));
             let currentIndex = 0;
             let isAnimating = false; // Track animation state
+            let autoAdvanceTimer = null;
+            let isAutoPlaying = true;
+            const autoAdvanceDelay = 6000; // 6 seconds per slide
 
             gsap.set(slides, {
                 autoAlpha: 0,
@@ -121,7 +124,6 @@
             }
 
             function showSlide(targetIndex) {
-
                 if (isAnimating || targetIndex === currentIndex || targetIndex < 0 || targetIndex >= slides.length) return;
 
                 isAnimating = true; // Prevent new animations
@@ -150,6 +152,11 @@
                         });
                         currentIndex = targetIndex;
                         isAnimating = false; // Re-enable animations when complete
+                        
+                        // Restart auto-advance timer if auto-playing
+                        if (isAutoPlaying) {
+                            startAutoAdvance();
+                        }
                     }
                 });
 
@@ -167,6 +174,7 @@
                     duration: 0.6,
                     ease: 'power2.out'
                 }, '<');
+                
                 // Animate odometer-like effect for the h2 text
                 const currentH2 = slides[currentIndex].querySelector('h2');
                 const nextH2 = slides[targetIndex].querySelector('h2');
@@ -182,10 +190,45 @@
                 }
             }
 
+            function autoAdvance() {
+                if (!isAutoPlaying || isAnimating) return;
+                
+                const nextIndex = (currentIndex + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+
+            function startAutoAdvance() {
+                clearTimeout(autoAdvanceTimer);
+                if (isAutoPlaying) {
+                    autoAdvanceTimer = setTimeout(autoAdvance, autoAdvanceDelay);
+                }
+            }
+
+            function stopAutoAdvance() {
+                clearTimeout(autoAdvanceTimer);
+            }
+
+            function toggleAutoPlay() {
+                isAutoPlaying = !isAutoPlaying;
+                const playPauseBtn = document.getElementById('timeline-play-pause');
+                const icon = playPauseBtn.querySelector('i');
+                
+                if (isAutoPlaying) {
+                    icon.className = 'bi bi-pause-fill';
+                    playPauseBtn.title = 'Pause auto-advance';
+                    startAutoAdvance();
+                } else {
+                    icon.className = 'bi bi-play-fill';
+                    playPauseBtn.title = 'Resume auto-advance';
+                    stopAutoAdvance();
+                }
+            }
+
             // Timeline navigation click handlers
             yearMarkers.forEach((marker, index) => {
                 marker.addEventListener('click', function() {
                     if (isAnimating) return;
+                    stopAutoAdvance();
                     showSlide(index);
                 });
             });
@@ -195,6 +238,7 @@
                     btn.addEventListener('click', function(e) {
                         e.preventDefault();
                         if (isAnimating) return; // Prevent clicks during animation
+                        stopAutoAdvance();
                         const targetId = this.getAttribute('href').substring(1);
                         const targetIndex = getSlideIndexById(targetId);
                         if (targetIndex !== -1) showSlide(targetIndex);
@@ -207,17 +251,25 @@
                 if (isAnimating) return; // Prevent keyboard navigation during animation
                 if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
                     if (currentIndex > 0) {
+                        stopAutoAdvance();
                         showSlide(currentIndex - 1);
                     }
                 } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
                     if (currentIndex < slides.length - 1) {
+                        stopAutoAdvance();
                         showSlide(currentIndex + 1);
                     }
+                } else if (e.key === ' ') { // Spacebar to toggle play/pause
+                    e.preventDefault();
+                    toggleAutoPlay();
                 }
             });
 
+            // Play/Pause button handler
+            document.getElementById('timeline-play-pause').addEventListener('click', toggleAutoPlay);
 
-
+            // Start auto-advance
+            startAutoAdvance();
         });
     </script>
 
@@ -232,8 +284,15 @@
 
         <div class="container position-relative my-5">
         <!-- Horizontal Timeline Navigation -->
-        <div class="timeline-navigation mb-4" style="z-index: 1000; max-width:400px; margin:0 auto;">
-            <div class="d-flex align-items-center justify-content-center  rounded-pill px-4 py-3">
+        <div class="timeline-navigation mb-4" style="z-index: 1000; max-width:450px; margin:0 auto;">
+            <div class="d-flex align-items-center justify-content-center rounded-pill px-4 py-3">
+                <!-- Play/Pause Button -->
+                <button id="timeline-play-pause" class="btn btn-sm btn-outline-light me-3 rounded-circle" 
+                        style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3);" 
+                        title="Pause auto-advance" aria-label="Pause or resume timeline auto-advance">
+                    <i class="bi bi-pause-fill"></i>
+                </button>
+                
                 <!-- Timeline line -->
                 <div class="timeline-line position-relative d-flex align-items-center justify-content-center">
                     <div class="line bg-light opacity-25" style="height: 2px; width: 240px;"></div>
