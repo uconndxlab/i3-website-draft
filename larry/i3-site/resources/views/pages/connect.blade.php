@@ -205,10 +205,14 @@
                                 Developers</h5>
                             <p>Love coding and building things? Join us to create amazing web apps and digital experiences
                                 that make a difference at UConn.</p>
-                            <a href="#contact" class="btn btn-outline-light">
-                                Are you a Dev? Let's Chat!
-                                <i class="bi bi-arrow-down ms-2"></i>
-                            </a>
+                            <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                                <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                                <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                    <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                                </span>
+                                <span class="btn-arrow-slide-text"> Dev? Let's Chat! </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,10 +225,14 @@
                             <h5 class="fw-bold mt-3">Designers</h5>
                             <p>Have an eye for design? Help us create beautiful, user-friendly interfaces and engaging
                                 visual experiences.</p>
-                            <a href="#contact" class="btn btn-outline-light">
-                                Designer? Let's Chat!
-                                <i class="bi bi-arrow-down ms-2"></i>
-                            </a>
+                            <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                                <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                                <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                    <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                                </span>
+                                <span class="btn-arrow-slide-text"> Designer? Let's Chat! </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,8 +245,14 @@
                             <h5 class="fw-bold mt-3">Illustrators</h5>
                             <p>Turn ideas into visuals? We need your creative talent to bring stories and concepts to life
                                 through illustration.</p>
-                            <a href="#contact" class="btn btn-outline-light">Illustrator? Let's Chat!
-                            </a>
+                            <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                                <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                                <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                    <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                                </span>
+                                <span class="btn-arrow-slide-text"> Illustrator? Let's Chat! </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,16 +265,19 @@
                             <h5 class="fw-bold mt-3">Something Else?</h5>
                             <p>Writers, marketers, project managers, and creative minds of all kinds - we'd love to hear
                                 from you!</p>
-                            <a href="#contact" class="btn btn-outline-light">
-                                Something Else? Let's Chat!
-                            </a>
+                            <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                                <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                                <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                    <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                                </span>
+                                <span class="btn-arrow-slide-text"> Something Else? Let's Chat! </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
     </section>
-
-
 
     <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden">
         <div class="container py-5">
@@ -272,9 +289,14 @@
                         We keep the lights on by providing services to the UConn community and billing for our work,
                         but there are so many ways to support us beyond just financial contributions! </p>
 
-                    <a href="#contact" class="btn btn-outline-dark mt-3">
-                        Get in Touch to Learn How <i class="bi bi-arrow-down ms-2"></i>
-                    </a>
+                    <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                        <a href="#contact" class="btn-arrow-slide-cont btn-arrow-slide-cont--blue">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> Get in Touch to Learn How </span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="col-lg-6">
