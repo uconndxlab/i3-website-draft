@@ -48,7 +48,7 @@
 
 <body class="position-relative">
     @include('layouts.header')
-    <div class="d-flex flex-column pb-4">
+    <div class="d-flex flex-column">
         <main class="flex-grow-1">
             @yield('content')
         </main>
@@ -127,13 +127,13 @@
 
         <!-- i3 Footer Section -->
         <footer class="bg-gradient-dark text-light py-5">
-            <div class="container">
+            <div class="container pt-5">
                 <div class="row g-4">
                     <!-- About i3 -->
                     <div class="col-lg-4 col-md-6">
-                        <h3 class="fw-bold mb-3 fs-5">
+                        <p class="fw-bold mb-3 h5">
                             <span class="text-primary">i3</span> Internal Insights & Innovation
-                        </h3>
+                        </p>
                         <p class="text-light opacity-75 mb-3">
                             We're a team of developers, designers, and innovators working to create digital solutions
                             for the UConn community.
@@ -156,7 +156,7 @@
 
                     <!-- Quick Links -->
                     <div class="col-lg-2 col-md-6">
-                        <h4 class="fw-bold mb-3 fs-6">Quick Links</h4>
+                        <p class="fw-bold mb-3 h6">Quick Links</p>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <a href="{{ route('home') }}"
@@ -179,7 +179,7 @@
 
                     <!-- Services -->
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="fw-bold mb-3 fs-6">What We Do</h4>
+                        <p class="fw-bold mb-3 h6">What We Do</p>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <span class="text-light opacity-75">Web Development</span>
@@ -198,7 +198,7 @@
 
                     <!-- Contact Info -->
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="fw-bold mb-3 fs-6">Visit Us</h4>
+                        <p class="fw-bold mb-3 h6">Visit Us</p>
                         <div class="mb-3">
                             <div class="d-flex align-items-start gap-2 mb-2">
                                 <i class="bi bi-geo-alt text-primary mt-1"></i>

@@ -495,11 +495,15 @@
                         extends its mission beyond research support—partnering with administrative and academic units to
                         design and build custom tools that improve how the university works.
                     </p>
-                    <div class="mt-3">
-                        <a href="#approach" class="btn btn-outline-light">
-                            What's it Like Working with Us?
-                            <i class="bi bi-arrow-down ms-2"></i>
-                        </a>
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                            <a href="#approach" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                            <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                            </span>
+                            <span class="btn-arrow-slide-text"> What's it Like Working with Us? </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

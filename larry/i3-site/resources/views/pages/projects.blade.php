@@ -82,12 +82,15 @@
                     </em>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-center mb-4">
-                <a class="btn btn-outline-dark shadow-none" href="#in-progress">
-                    See What We're Working On
-                    <i class="bi bi-arrow-down ms-2"></i>
-                </a>
+            <div class="d-flex w-100 justify-content-center align-items-center">
+                <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                    <a href="#in-progress" class="btn-arrow-slide-cont btn-arrow-slide-cont--blue">
+                    <span class="btn-arrow-slide-circle" aria-hidden="true">
+                        <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                    </span>
+                    <span class="btn-arrow-slide-text"> See What We're Working On </span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -286,11 +289,15 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center mt-4">
-                <a class="btn btn-outline-light shadow-none" href="#completed-projects">
-                    See Our Completed Projects
-                    <i class="bi bi-arrow-down ms-2"></i>
-                </a>
+            <div class="d-flex w-100 justify-content-center align-items-center">
+                <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
+                    <a href="#completed-projects" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                    <span class="btn-arrow-slide-circle" aria-hidden="true">
+                        <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                    </span>
+                    <span class="btn-arrow-slide-text"> See Our Completed Projects </span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>

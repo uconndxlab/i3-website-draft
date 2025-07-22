@@ -6,6 +6,12 @@ body {
     font-family: "area-normal", sans-serif;
 }
 
+:root {
+  --black: #111;
+  --white: #ffffff;
+  --blue: #0034DA;
+}
+
 .text-secondary {
     color: var(--secondary);
 }
@@ -1404,21 +1410,52 @@ a.footer-link:hover{color:var(--light-blue)!important}
 }
 
 .btn-arrow-slide-cont--blue .btn-arrow-slide-circle {
-  background: var(--accent-3);
+  background: var(--blue);
 }
 
 .btn-arrow-slide-cont--blue .btn-arrow-slide-text {
-  color: var(--accent-3);
+  color: var(--blue);
 }
 
 .btn-arrow-slide-cont--blue .btn-arrow-slide-circle .btn-arrow-slide-icon {
-  background: var(--accent-3);
+  background: var(--blue);
 }
 
 .btn-arrow-slide-cont--blue .btn-arrow-slide-arrow::before {
   border-top: 0.125rem solid var(--white);
   border-right: 0.125rem solid var(--white);
 }
+
+/* --- Down Arrow Mod --- */
+.btn-arrow-slide--down .btn-arrow-slide-icon.btn-arrow-slide-arrow {
+  width: 0.125rem;
+  height: 1.125rem;
+  left: 1.4375rem; /* horizontally center inside 3rem circle (3rem / 2 - arrow width / 2) */
+  top: 0%;
+  transform: translateY(-30%);
+  background: none;
+}
+
+.btn-arrow-slide--down .btn-arrow-slide-arrow::before {
+  top: 40%;
+  left: -0.25rem;
+  width: 0.625rem;
+  height: 0.625rem;
+
+  transform: rotate(135deg); /* makes the arrow point down */
+  transition: top 0.45s ease;
+}
+
+.btn-arrow-slide--down .btn-arrow-slide-cont--blue .btn-arrow-slide-arrow::before {
+  border-top: 0.125rem solid var(--white);
+  border-right: 0.125rem solid var(--white);
+}
+
+.btn-arrow-slide--down .btn-arrow-slide-cont--white .btn-arrow-slide-arrow::before {
+  border-top: 0.125rem solid var(--black);
+  border-right: 0.125rem solid var(--black);
+}
+
 /*end of btn*/
 
 /*badges*/
