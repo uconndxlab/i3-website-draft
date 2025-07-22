@@ -285,7 +285,7 @@
         <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 10vh; z-index: 0; width: 100%" aria-hidden="true" role="presentation">
             <div class="mobile-scaledown">
             <div id="alumniScroller1" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
-                @foreach($brandLogos as $logo)
+                @foreach(collect($brandLogos)->shuffle() as $logo)
                 <div>
                     <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $logo }}" role="presentation" class="img-fluid">
                 </div>
@@ -304,21 +304,21 @@
                 <p>
                     Alumni from our programs are now working at leading tech firms like Meta and Google, at mission-driven nonprofits, museums, startups, and even other universities, carrying the knowledge, confidence, and experience they gained here into every corner of the industry.
                 </p>
-                <div class="btn display-btn btn-arrow-slide">
+                {{-- <div class="btn display-btn btn-arrow-slide">
                     <a href="{{route('team')}}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                         <span class="btn-arrow-slide-circle" aria-hidden="true">
                             <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                         </span>
                         <span class="btn-arrow-slide-text"> Our Alumni </span>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
 
         <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 10vh; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
             <div class="mobile-scaledown">
                 <div id="alumniScroller2" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
-                    @foreach($brandLogos as $logo)
+                    @foreach(collect($brandLogos)->shuffle() as $logo)
                     <div>
                         <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $logo }}" role="presentation" class="img-fluid">
                     </div>
