@@ -13,12 +13,13 @@ class PhotoScroller {
         this.autoStart = options.autoStart !== false;
         this.maxImageWidth = options.maxImageWidth || 300; // max width in pixels
         this.aspectRatio = options.aspectRatio || null; // e.g., 16/9, 4/3, 1 (square)
-        this.imageFit = options.imageFit || 'cover'; // 'cover', 'contain', 'fit-width', or any CSS object-fit value
-        this.constrainHeight = options.constrainHeight !== false; // whether to set a specific height on images
         this.imageClass = options.imageClass || 'photo-scroller-image'; // class name for img elements
         this.wrapperClass = options.wrapperClass || 'photo-scroller-wrapper'; // class name for img wrapper elements
-        this.imageRowClass = options.imageRowClass || 'photo-scroller-row'; // class name for row elements
         this.reverseDirection = options.reverseDirection || false; // reverse the scrolling direction
+        this.objectFit = options.objectFit || 'cover'; // object-fit CSS property: 'cover', 'contain', 'fill', 'scale-down', 'none'
+        this.enforceHeight = options.enforceHeight !== false; // whether to enforce explicit height on images
+        this.extendRows = options.extendRows || false; // whether to extend rows beyond page edges for background bleeding
+        this.rowExtension = options.rowExtension || 100; // pixels to extend rows on each side when extendRows is true
         
         // Image rotation properties
         this.imageRotationThreshold = 45; // degrees - when to start rotating images
@@ -54,14 +55,23 @@ class PhotoScroller {
     }
 
     setupContainer() {
-        // Set container styles for proper positioning
-        gsap.set(this.container, {
+        // Configure container positioning and extension
+        const containerStyles = {
             position: 'relative',
             // overflow: 'hidden',
-            // transform: `rotate(${this.direction}deg)`,
-            width: '200vw', // Make container full viewport width
-            transform: `translateX(-50vw) rotate(${this.direction}deg)` // Center and rotate
-        });
+            height: '400px', // Set a default height so rows are visible
+            transform: `rotate(${this.direction}deg)`
+        };
+        
+        if (this.extendRows) {
+            // Extend container beyond its parent edges
+            containerStyles.left = `-${this.rowExtension}px`;
+            containerStyles.width = `calc(100% + ${this.rowExtension * 2}px)`;
+            containerStyles.paddingLeft = `${this.rowExtension}px`;
+            containerStyles.paddingRight = `${this.rowExtension}px`;
+        }
+        
+        gsap.set(this.container, containerStyles);
         
         // Calculate initial image rotation
         this.imageRotation = this.calculateImageRotation();
@@ -121,24 +131,32 @@ class PhotoScroller {
 
     createRow(index) {
         const row = document.createElement('div');
-        row.className = `${this.imageRowClass} photo-scroller-row-${index}`;
+        row.className = `photo-scroller-row row-${index}`;
+        
+        // Calculate row height accounting for gaps between rows
+        const totalGapHeight = (this.rows - 1) * this.rowGap;
+        const availableHeight = 100; // percentage
+        const rowHeight = (availableHeight - (totalGapHeight / 4)) / this.rows; // Convert gap to percentage approximation
         
         // Calculate top position accounting for previous rows and their gaps
-        const topPosition = index * this.rowGap;
+        const topPosition = index * (rowHeight + (this.rowGap / 4));
         
-        gsap.set(row, {
-            position: 'relative',
-            top: index === 0 ? 0 : `${topPosition}px`,
+        // Configure row positioning and extension
+        const rowStyles = {
+            position: 'absolute',
+            top: `${topPosition}%`,
+            height: `${rowHeight}%`,
             left: 0,
-            width: '100%', // Full width of the already full-width container
+            width: '100%',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center', // Center the content within the row
             gap: `${this.gap}px`,
             whiteSpace: 'nowrap',
             zIndex: 10 + index, // Ensure rows are visible above original images
             marginBottom: index < this.rows - 1 ? `${this.rowGap}px` : '0' // Add margin except for last row
-        });
+        };
+        
+        gsap.set(row, rowStyles);
 
         return row;
     }
@@ -147,16 +165,10 @@ class PhotoScroller {
         const img = wrapper.querySelector('img');
         
         // Calculate dimensions based on aspect ratio and constraints
-        // Use maxImageWidth to derive a reasonable default row height
-        const defaultRowHeight = this.aspectRatio ? this.maxImageWidth / this.aspectRatio : 200;
+        const containerHeight = this.container.offsetHeight / this.rows;
         let imageWidth, imageHeight;
         
-        if (this.imageFit === 'fit-width') {
-            // Fit to width: use maxImageWidth and let height be natural
-            const naturalAspectRatio = img.naturalWidth / img.naturalHeight;
-            imageWidth = Math.min(this.maxImageWidth, img.naturalWidth);
-            imageHeight = imageWidth / naturalAspectRatio;
-        } else if (this.aspectRatio) {
+        if (this.aspectRatio) {
             // When images are rotated 90°, we need to account for visual aspect ratio
             let effectiveAspectRatio = this.aspectRatio;
             if (Math.abs(this.imageRotation) === 90) {
@@ -165,38 +177,54 @@ class PhotoScroller {
             }
             
             // Calculate width from height and effective aspect ratio
-            const calculatedWidth = defaultRowHeight * effectiveAspectRatio;
+            const calculatedWidth = containerHeight * effectiveAspectRatio;
             imageWidth = Math.min(calculatedWidth, this.maxImageWidth);
-            imageHeight = imageWidth / effectiveAspectRatio;
+            
+            if (this.enforceHeight) {
+                imageHeight = imageWidth / effectiveAspectRatio;
+            } else {
+                // When not enforcing height, let the image maintain its natural proportions
+                imageHeight = 'auto';
+            }
         } else {
             // Use natural image dimensions up to maxImageWidth
             const naturalAspectRatio = img.naturalWidth / img.naturalHeight;
             if (img.naturalWidth > this.maxImageWidth) {
                 imageWidth = this.maxImageWidth;
-                imageHeight = this.maxImageWidth / naturalAspectRatio;
+                imageHeight = this.enforceHeight ? this.maxImageWidth / naturalAspectRatio : 'auto';
             } else {
                 imageWidth = img.naturalWidth;
-                imageHeight = img.naturalHeight;
+                imageHeight = this.enforceHeight ? img.naturalHeight : 'auto';
             }
-            // Scale down if height exceeds reasonable default
-            if (imageHeight > defaultRowHeight) {
-                imageHeight = defaultRowHeight;
-                imageWidth = defaultRowHeight * naturalAspectRatio;
+            // Scale down if height exceeds container and enforcing height
+            if (this.enforceHeight && typeof imageHeight === 'number' && imageHeight > containerHeight) {
+                imageHeight = containerHeight;
+                imageWidth = containerHeight * naturalAspectRatio;
             }
         }
         
         // Calculate wrapper dimensions to account for rotation
         let wrapperWidth = imageWidth;
-        let wrapperHeight = this.constrainHeight ? imageHeight : 'auto';
+        let wrapperHeight;
         
-        // When images are rotated 90 degrees, swap width and height for wrapper
-        if (Math.abs(this.imageRotation) === 90) {
-            wrapperWidth = this.constrainHeight ? imageHeight : 'auto';
-            wrapperHeight = imageWidth;
+        if (this.enforceHeight && typeof imageHeight === 'number') {
+            wrapperHeight = imageHeight;
+            // When images are rotated 90 degrees, swap width and height for wrapper
+            if (Math.abs(this.imageRotation) === 90) {
+                wrapperWidth = imageHeight;
+                wrapperHeight = imageWidth;
+            }
+        } else {
+            // When not enforcing height, let wrapper height be auto or match container
+            wrapperHeight = 'auto';
+            if (Math.abs(this.imageRotation) === 90) {
+                wrapperWidth = 'auto';
+            }
         }
         
         const wrapperStyles = {
-            width: `${wrapperWidth}px`,
+            width: typeof wrapperWidth === 'number' ? `${wrapperWidth}px` : wrapperWidth,
+            height: typeof wrapperHeight === 'number' ? `${wrapperHeight}px` : wrapperHeight,
             flexShrink: 0,
             display: 'inline-flex',
             alignItems: 'center',
@@ -205,23 +233,14 @@ class PhotoScroller {
             overflow: 'visible' // Changed to visible so rotated content isn't clipped
         };
 
-        // Only set wrapper height if we're constraining height
-        if (this.constrainHeight && wrapperHeight !== 'auto') {
-            wrapperStyles.height = `${wrapperHeight}px`;
-        }
-
         const imageStyles = {
-            width: `${imageWidth}px`,
-            objectFit: this.imageFit,
+            width: typeof imageWidth === 'number' ? `${imageWidth}px` : imageWidth,
+            height: typeof imageHeight === 'number' ? `${imageHeight}px` : imageHeight,
+            objectFit: this.objectFit,
             display: 'block',
             transform: `rotate(${this.imageRotation}deg)`,
             transformOrigin: 'center center'
         };
-
-        // Only set height if constrainHeight is true
-        if (this.constrainHeight) {
-            imageStyles.height = `${imageHeight}px`;
-        }
 
         gsap.set(wrapper, wrapperStyles);
         gsap.set(img, imageStyles);
@@ -229,16 +248,10 @@ class PhotoScroller {
 
     styleImage(img) {
         // Calculate dimensions based on aspect ratio and constraints
-        // Use maxImageWidth to derive a reasonable default row height
-        const defaultRowHeight = this.aspectRatio ? this.maxImageWidth / this.aspectRatio : 200;
+        const containerHeight = this.container.offsetHeight / this.rows;
         let imageWidth, imageHeight;
         
-        if (this.imageFit === 'fit-width') {
-            // Fit to width: use maxImageWidth and let height be natural
-            const naturalAspectRatio = img.naturalWidth / img.naturalHeight;
-            imageWidth = Math.min(this.maxImageWidth, img.naturalWidth);
-            imageHeight = imageWidth / naturalAspectRatio;
-        } else if (this.aspectRatio) {
+        if (this.aspectRatio) {
             // When images are rotated 90°, we need to account for visual aspect ratio
             let effectiveAspectRatio = this.aspectRatio;
             if (Math.abs(this.imageRotation) === 90) {
@@ -247,39 +260,41 @@ class PhotoScroller {
             }
             
             // Calculate width from height and effective aspect ratio
-            const calculatedWidth = defaultRowHeight * effectiveAspectRatio;
+            const calculatedWidth = containerHeight * effectiveAspectRatio;
             imageWidth = Math.min(calculatedWidth, this.maxImageWidth);
-            imageHeight = imageWidth / effectiveAspectRatio;
+            
+            if (this.enforceHeight) {
+                imageHeight = imageWidth / effectiveAspectRatio;
+            } else {
+                // When not enforcing height, let the image maintain its natural proportions
+                imageHeight = 'auto';
+            }
         } else {
             // Use natural image dimensions up to maxImageWidth
             const naturalAspectRatio = img.naturalWidth / img.naturalHeight;
             if (img.naturalWidth > this.maxImageWidth) {
                 imageWidth = this.maxImageWidth;
-                imageHeight = this.maxImageWidth / naturalAspectRatio;
+                imageHeight = this.enforceHeight ? this.maxImageWidth / naturalAspectRatio : 'auto';
             } else {
                 imageWidth = img.naturalWidth;
-                imageHeight = img.naturalHeight;
+                imageHeight = this.enforceHeight ? img.naturalHeight : 'auto';
             }
-            // Scale down if height exceeds reasonable default
-            if (imageHeight > defaultRowHeight) {
-                imageHeight = defaultRowHeight;
-                imageWidth = defaultRowHeight * naturalAspectRatio;
+            // Scale down if height exceeds container and enforcing height
+            if (this.enforceHeight && typeof imageHeight === 'number' && imageHeight > containerHeight) {
+                imageHeight = containerHeight;
+                imageWidth = containerHeight * naturalAspectRatio;
             }
         }
 
         const styles = {
-            width: `${imageWidth}px`,
-            objectFit: this.imageFit === 'fit-width' ? 'none' : this.imageFit,
+            width: typeof imageWidth === 'number' ? `${imageWidth}px` : imageWidth,
+            height: typeof imageHeight === 'number' ? `${imageHeight}px` : imageHeight,
+            objectFit: this.objectFit,
             flexShrink: 0,
             display: 'inline-block',
             transform: `rotate(${this.imageRotation}deg)`,
             transformOrigin: 'center center'
         };
-
-        // Only set height if constrainHeight is true
-        if (this.constrainHeight) {
-            styles.height = `${imageHeight}px`;
-        }
 
         gsap.set(img, styles);
     }
@@ -413,6 +428,56 @@ class PhotoScroller {
                 });
             });
         }
+    }
+
+    setObjectFit(newObjectFit) {
+        this.objectFit = newObjectFit;
+        
+        // Apply new object-fit to all images
+        this.rowElements.forEach(row => {
+            const wrappers = row.querySelectorAll(`.${this.wrapperClass}`);
+            wrappers.forEach(wrapper => {
+                this.styleImageWrapper(wrapper);
+            });
+        });
+    }
+
+    setEnforceHeight(enforceHeight) {
+        this.enforceHeight = enforceHeight;
+        
+        // Re-style all images with new height enforcement setting
+        this.rowElements.forEach(row => {
+            const wrappers = row.querySelectorAll(`.${this.wrapperClass}`);
+            wrappers.forEach(wrapper => {
+                this.styleImageWrapper(wrapper);
+            });
+        });
+    }
+
+    setExtendRows(extendRows, rowExtension = null) {
+        this.extendRows = extendRows;
+        if (rowExtension !== null) {
+            this.rowExtension = rowExtension;
+        }
+        
+        // Re-apply container positioning with new extension settings
+        const containerStyles = {
+            transform: `rotate(${this.direction}deg)`
+        };
+        
+        if (this.extendRows) {
+            containerStyles.left = `-${this.rowExtension}px`;
+            containerStyles.width = `calc(100% + ${this.rowExtension * 2}px)`;
+            containerStyles.paddingLeft = `${this.rowExtension}px`;
+            containerStyles.paddingRight = `${this.rowExtension}px`;
+        } else {
+            containerStyles.left = '0px';
+            containerStyles.width = '100%';
+            containerStyles.paddingLeft = '0px';
+            containerStyles.paddingRight = '0px';
+        }
+        
+        gsap.set(this.container, containerStyles);
     }
 
     destroy() {

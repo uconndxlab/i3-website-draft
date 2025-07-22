@@ -282,7 +282,7 @@
 
 
     <section id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative">
-        <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 100px; z-index: 0;" aria-hidden="true" role="presentation">
+        <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 10vh; z-index: 0; width: 100%" aria-hidden="true" role="presentation">
             <div class="mobile-scaledown">
             <div id="alumniScroller1" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
                 @foreach($brandLogos as $logo)
@@ -315,7 +315,7 @@
             </div>
         </div>
 
-        <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 100px; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
+        <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 10vh; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
             <div class="mobile-scaledown">
                 <div id="alumniScroller2" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
                     @foreach($brandLogos as $logo)
@@ -339,12 +339,15 @@ document.addEventListener('DOMContentLoaded', function() {
         aspectRatio: 16/9,
         speed: 20,
         maxImageWidth: 200,
-        imageFit: 'fit-width',
+        objectFit: 'fit-width',
         constrainHeight: false,
         gap: 70,
         direction: -7,
         imageClass: 'img-fluid',
         imageRowClass: 'photo-scroller-row',
+        enforceHeight: false,
+        extendRows: true,
+        rowExtension: 1000
     });
     document.getElementById('alumniScroller1').style.visibility = '';
 
@@ -354,17 +357,32 @@ document.addEventListener('DOMContentLoaded', function() {
         aspectRatio: 16/9,
         speed: 20,
         maxImageWidth: 200,
-        imageFit: 'fit-width',
+        objectFit: 'fit-width',
         constrainHeight: false,
         gap: 70,
         direction: 7,
         reverseDirection: true,
         imageClass: 'img-fluid',
         imageRowClass: 'photo-scroller-row',
+        enforceHeight: false,
+        extendRows: true,
+        rowExtension: 1000
     });
     document.getElementById('alumniScroller2').style.visibility = '';
 });
 </script>
+
+<style>
+#alumniScroller1Contain, #alumniScroller2Contain {
+    width: 200vw;
+    /* transform: translateX(-50%); */
+}
+
+#alumniScroller1, #alumniScroller2 {
+    height: 180px!important;
+}
+</style>
+
 
 
 @endsection

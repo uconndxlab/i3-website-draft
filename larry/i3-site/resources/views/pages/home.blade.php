@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
             speed: 20,
             maxImageWidth: 400,
             gap: 70,
-            rowGap: 40,
+            rowGap: 100,
             direction: -10,
             imageClass: 'photo-scroller-image',
             wrapperClass: 'photo-box-effect'
