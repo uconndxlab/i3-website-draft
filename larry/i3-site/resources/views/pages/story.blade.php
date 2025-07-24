@@ -64,6 +64,17 @@
             box-shadow: 0 0 15px rgba(77, 179, 255, 0.5);
         }
 
+        .year-marker:focus {
+            outline: 2px solid #4DB3FF;
+            outline-offset: 4px;
+            border-radius: 50%;
+        }
+
+        .year-marker:focus .marker-dot {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(77, 179, 255, 0.7);
+        }
+
         .year-marker.active .marker-dot {
             background-color: #4DB3FF !important;
             transform: scale(1.3);
@@ -360,25 +371,33 @@
                     <div id="timeline-progress" class="position-absolute bg-primary" style="height: 2px; width: 0%; left: 0; top: 50%; transform: translateY(-50%); transition: width 0.1s linear;"></div>
                     
                     <!-- Year markers -->
-                    <div class="year-marker position-absolute" data-year="2017" data-slide="slide-2017" style="left: 0;">
+                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                            data-year="2017" data-slide="slide-2017" style="left: 0;" 
+                            aria-label="Go to 2017: Our Origins" role="button" tabindex="0">
                         <div class="marker-dot bg-primary rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
                         <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2017</span>
-                    </div>
+                    </button>
                     
-                    <div class="year-marker position-absolute" data-year="2019" data-slide="slide-2019" style="left: 80px;">
+                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                            data-year="2019" data-slide="slide-2019" style="left: 80px;" 
+                            aria-label="Go to 2019: Born in the DX Lab" role="button" tabindex="0">
                         <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
                         <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2019</span>
-                    </div>
+                    </button>
                     
-                    <div class="year-marker position-absolute" data-year="2020" data-slide="slide-2020" style="left: 160px;">
+                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                            data-year="2020" data-slide="slide-2020" style="left: 160px;" 
+                            aria-label="Go to 2020: The DX Group Emerges" role="button" tabindex="0">
                         <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
                         <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2020</span>
-                    </div>
+                    </button>
                     
-                    <div class="year-marker position-absolute" data-year="2024" data-slide="slide-2024" style="left: 240px;">
+                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                            data-year="2024" data-slide="slide-2024" style="left: 240px;" 
+                            aria-label="Go to 2024: i3 is Born" role="button" tabindex="0">
                         <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
                         <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2024</span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

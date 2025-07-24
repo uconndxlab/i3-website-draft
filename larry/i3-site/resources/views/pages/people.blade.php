@@ -281,13 +281,17 @@
 
 
 
-    <section id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative">
+    <section aria-labelledby="alumni-heading" id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative">
         <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 10vh; z-index: 0; width: 100%" aria-hidden="true" role="presentation">
             <div class="mobile-scaledown">
             <div id="alumniScroller1" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
                 @foreach(collect($brandLogos)->shuffle() as $logo)
                 <div>
-                    <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $logo }}" role="presentation" class="img-fluid">
+                    @php
+                        $companyName = explode('.', $logo)[0];
+                        $companyName = str_replace('_', ' ', $companyName);
+                    @endphp
+                    <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $companyName }} logo" class="img-fluid">
                 </div>
                 @endforeach
             </div>
@@ -296,7 +300,7 @@
 
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
-                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">i3 Alumni</h2>
+                <h2 id="alumni-heading" class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">i3 Alumni</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
             </div>
@@ -320,7 +324,7 @@
                 <div id="alumniScroller2" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
                     @foreach(collect($brandLogos)->shuffle() as $logo)
                     <div>
-                        <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $logo }}" role="presentation" class="img-fluid">
+                        <img aria-hidden="true" src="{{ asset('img/brands/' . $logo) }}" alt="" role="presentation" class="img-fluid">
                     </div>
                     @endforeach
                 </div>
