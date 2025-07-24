@@ -696,6 +696,25 @@
             </div>
         </div>
     </section>
+    <style>
+        .news-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        .news-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+
     <section class="news-section py-5 bg-light text-dark">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
@@ -712,7 +731,8 @@
                         ['title' => "Research Spotlight: Pushing the boundaries of digital media with UConn's DX Lab",  'publication' => 'The Daily Campus', 'date' => '04/20/2020', 'link' => 'https://dailycampus.com/2020/04/20/2020-4-20-research-spotlight-pushing-the-boundaries-of-digital-media-with-uconns-dx-lab/', 'img' => 'https://i0.wp.com/images.squarespace-cdn.com/content/v1/54f74f23e4b0952b4e0011c0/1587340490915-L4Y26FHIGTYJR4GYY71L/ke17ZwdGBToddI8pDm48kMiC1kkJMCC5CmdIxgmMBQRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwDkWRUVPzILwwU1Cm0tACnQ-gsxKt_jcXVfT9FtNluPGWW0QT5AQYLWdKSnWNUYi4/TREE.jpg?w=696&ssl=1'],
                         ['title' => 'Pilot testing an intervention to educate and promote nutritious choices at food pantries', 'publication' => 'Journal of Public Health', 'date' => '05/25/2021', 'link' => 'https://link.springer.com/article/10.1007/s10389-021-01570-6', 'img' => asset('img/i3/work/wellscan.png')],
                         ['title' => 'Strengthening Connecticut Farms with Risk Management Training and Tools', 'publication' => 'UConn Today', 'date' => '04/01/2025', 'link' => 'https://today.uconn.edu/2025/04/strengthening-connecticut-farms-with-risk-management-training-and-tools/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2020/11/Farm160719c092-e1697619059398.jpg'],
-                        ['title' => 'Website Breaks Down Statewide Benefit of UConn Research Funding', 'publication' => 'UConn Today', 'date' => '10/02/2017', 'link' => 'https://today.uconn.edu/2017/10/website-breaks-statewide-benefit-uconn-research-funding/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2017/09/CTMapGrantExpenditures.jpg']
+                        ['title' => 'Website Breaks Down Statewide Benefit of UConn Research Funding', 'publication' => 'UConn Today', 'date' => '10/02/2017', 'link' => 'https://today.uconn.edu/2017/10/website-breaks-statewide-benefit-uconn-research-funding/', 'img' => 'https://today.uconn.edu/wp-content/uploads/2017/09/CTMapGrantExpenditures.jpg'],
+                        ['title' => 'App Supporting Archival Research Continues Development with Community Partnerships', 'publication' => 'UConn Today', 'date' => '02/15/2022', 'link' => 'https://today.uconn.edu/2022/02/app-supporting-archival-research-continue-development-with-community-partnerships/', 'img' => asset('img/i3/work/sourcery.png')]
                     );
 
                     // order by date desc
@@ -725,12 +745,12 @@
                 @foreach ($stories as $story)
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div class="position-relative" style="padding-top: 62.5%;">
-                            <div class="card text-white border-0 shadow-sm overflow-hidden rounded-4 position-absolute top-0 start-0 w-100 h-100">
+                            <div class="card news-card text-white border-0 shadow-sm overflow-hidden rounded-4 position-absolute top-0 start-0 w-100 h-100">
                                 <img src="{{ $story['img'] }}" class="card-img h-100 w-100 object-fit-cover"
                                     alt="Image for {{ $story['title'] }}" loading="lazy" style="object-fit: cover;">
-                                <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50 p-3">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end p-3" style="background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);">
                                     <h3 class="card-title fw-bold">{{ $story['title'] }}</h3>
-                                    <p class="card-text small text-white mb-0 bg-dark bg-opacity-50 py-2 px-2">
+                                    <p class="card-text small text-white mb-0">
                                         <strong>{{ $story['publication'] }}</strong> • {{ $story['date'] }}
                                     </p>
                                 </div>
