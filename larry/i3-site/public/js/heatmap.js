@@ -126,7 +126,7 @@ function createEmptyHeatmap() {
 }
 
 // draw day of week labels
-const daysOfWeek = ['S', 'M', 'T', 'W', 'Th', 'F', 'Su'];
+const daysOfWeek = ['Su', 'M', 'T', 'W', 'Th', 'F', 'Sa'];
 svg.selectAll(".day-label")
     .data(daysOfWeek)
     .enter()
