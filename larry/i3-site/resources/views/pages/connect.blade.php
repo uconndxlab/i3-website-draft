@@ -80,7 +80,7 @@
 
 
 
-    <section class="hero-section" style="background-color: #f8f9fa; ">
+    <section class="hero-section bg-dark">
         <div class="hero-img-wrapper">
             <img src="{{ asset('img/i3/room.webp') }}" class="img-fluid" alt="Hero background" style="filter: brightness(0.45);"
                 alt="Hero background">
