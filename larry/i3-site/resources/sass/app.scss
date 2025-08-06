@@ -1501,6 +1501,10 @@ p.small {
   width: -moz-max-content;
   width: max-content;
   margin-left: 60px;
+
+  @media(max-width: 900px) {
+    font-size: 14px;
+  }
 }
 
 .btn-arrow-slide-cont:hover .btn-arrow-slide-circle {

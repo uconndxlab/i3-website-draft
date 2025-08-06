@@ -351,51 +351,51 @@
     <h1 class="page-h1 display-1">Story</h1>
 
     <div class="timeline-navigation mb-4 mt-xl-5" style="z-index: 1000; max-width:450px; margin:0 auto; position: relative;">
-            <div class="d-flex align-items-center justify-content-center rounded-pill px-4 py-3">
-                <!-- Play/Pause Button -->
-                <button id="timeline-play-pause" class="btn btn-sm btn-outline-light me-3 rounded-circle" 
-                        style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3);" 
-                        title="Pause auto-advance" aria-label="Pause or resume timeline auto-advance">
-                    <i class="bi bi-pause-fill"></i>
+        <div class="d-flex align-items-center justify-content-center rounded-pill px-4 py-3">
+            <!-- Play/Pause Button -->
+            <button id="timeline-play-pause" class="btn btn-sm btn-outline-light me-3 rounded-circle" 
+                    style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3);" 
+                    title="Pause auto-advance" aria-label="Pause or resume timeline auto-advance">
+                <i class="bi bi-pause-fill"></i>
+            </button>
+            
+            <!-- Timeline line -->
+            <div class="timeline-line position-relative d-flex align-items-center justify-content-center">
+                <div class="line bg-light opacity-25" style="height: 2px; width: 240px;"></div>
+                <!-- Progress indicator line -->
+                <div id="timeline-progress" class="position-absolute bg-primary" style="height: 2px; width: 0%; left: 0; top: 50%; transform: translateY(-50%); transition: width 0.1s linear;"></div>
+                
+                <!-- Year markers -->
+                <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                        data-year="2017" data-slide="slide-2017" style="left: 0;" 
+                        aria-label="Go to 2017: Our Origins" role="button" tabindex="0">
+                    <div class="marker-dot bg-primary rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2017</span>
                 </button>
                 
-                <!-- Timeline line -->
-                <div class="timeline-line position-relative d-flex align-items-center justify-content-center">
-                    <div class="line bg-light opacity-25" style="height: 2px; width: 240px;"></div>
-                    <!-- Progress indicator line -->
-                    <div id="timeline-progress" class="position-absolute bg-primary" style="height: 2px; width: 0%; left: 0; top: 50%; transform: translateY(-50%); transition: width 0.1s linear;"></div>
-                    
-                    <!-- Year markers -->
-                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
-                            data-year="2017" data-slide="slide-2017" style="left: 0;" 
-                            aria-label="Go to 2017: Our Origins" role="button" tabindex="0">
-                        <div class="marker-dot bg-primary rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
-                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2017</span>
-                    </button>
-                    
-                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
-                            data-year="2019" data-slide="slide-2019" style="left: 80px;" 
-                            aria-label="Go to 2019: Born in the DX Lab" role="button" tabindex="0">
-                        <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
-                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2019</span>
-                    </button>
-                    
-                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
-                            data-year="2020" data-slide="slide-2020" style="left: 160px;" 
-                            aria-label="Go to 2020: The DX Group Emerges" role="button" tabindex="0">
-                        <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
-                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2020</span>
-                    </button>
-                    
-                    <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
-                            data-year="2024" data-slide="slide-2024" style="left: 240px;" 
-                            aria-label="Go to 2024: i3 is Born" role="button" tabindex="0">
-                        <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
-                        <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2024</span>
-                    </button>
-                </div>
+                <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                        data-year="2019" data-slide="slide-2019" style="left: 80px;" 
+                        aria-label="Go to 2019: Born in the DX Lab" role="button" tabindex="0">
+                    <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2019</span>
+                </button>
+                
+                <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                        data-year="2020" data-slide="slide-2020" style="left: 160px;" 
+                        aria-label="Go to 2020: The DX Group Emerges" role="button" tabindex="0">
+                    <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2020</span>
+                </button>
+                
+                <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" 
+                        data-year="2024" data-slide="slide-2024" style="left: 240px;" 
+                        aria-label="Go to 2024: i3 is Born" role="button" tabindex="0">
+                    <div class="marker-dot bg-light rounded-circle" style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
+                    <span class="year-label position-absolute text-light small" style="top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap;">2024</span>
+                </button>
             </div>
         </div>
+    </div>
 
 
     <section id="origins" class="d-flex align-items-stretch px-5">
