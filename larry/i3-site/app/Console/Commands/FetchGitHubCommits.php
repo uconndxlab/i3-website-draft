@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 
-class FetchGithubCommits extends Command
+class FetchGitHubCommits extends Command
 {
     protected $signature = 'github:fetch-commits
         {org=uconndxlab : GitHub organization name}
