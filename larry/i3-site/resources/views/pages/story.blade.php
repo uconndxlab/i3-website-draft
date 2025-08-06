@@ -350,12 +350,7 @@
 
     <h1 class="page-h1 display-1">Story</h1>
 
-
-    <section id="origins" class="d-flex align-items-stretch px-5">
-
-        <div class="container position-relative my-5">
-        <!-- Horizontal Timeline Navigation -->
-        <div class="timeline-navigation mb-4" style="z-index: 1000; max-width:450px; margin:0 auto; position: absolute;">
+    <div class="timeline-navigation mb-4 mt-xl-5" style="z-index: 1000; max-width:450px; margin:0 auto; position: relative;">
             <div class="d-flex align-items-center justify-content-center rounded-pill px-4 py-3">
                 <!-- Play/Pause Button -->
                 <button id="timeline-play-pause" class="btn btn-sm btn-outline-light me-3 rounded-circle" 
@@ -401,6 +396,13 @@
                 </div>
             </div>
         </div>
+
+
+    <section id="origins" class="d-flex align-items-stretch px-5">
+
+        <div class="container position-relative my-5">
+        <!-- Horizontal Timeline Navigation -->
+        
 
 
             <div class="row slide" id="slide-2017" data-bg-color="#111111">
