@@ -405,7 +405,7 @@
         
 
 
-            <div class="row slide" id="slide-2017" data-bg-color="#111111">
+            <div class="row slide active" id="slide-2017" data-bg-color="#111111">
                 <div class="col-md-6 text-center d-flex align-items-center timeline-header">
                     <h2 data-odometer-initial="2025"  data-odometer-final="2017" data-aos="odometer" class="text-light odometer">2017</h2>
                 </div>
