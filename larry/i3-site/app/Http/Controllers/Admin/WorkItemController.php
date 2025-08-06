@@ -4,12 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WorkItem;
+use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Tag;
 
 class WorkItemController extends Controller
 {
+    protected ImageProcessingService $imageProcessingService;
+
+    public function __construct(ImageProcessingService $imageProcessingService)
+    {
+        $this->imageProcessingService = $imageProcessingService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -44,9 +51,11 @@ class WorkItemController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
 
-
         if ($request->hasFile('thumbnail')) {
-            $data['thumbnail'] = $request->file('thumbnail')->store('work_thumbnails', 'public');
+            $imagePaths = $this->imageProcessingService->processWorkItemThumbnail($request->file('thumbnail'));
+            $data['thumbnail'] = $imagePaths['original'];
+            $data['thumbnail_medium'] = $imagePaths['medium'];
+            $data['thumbnail_webp'] = $imagePaths['webp'];
         }
 
         if ($request->has('link')) {
@@ -55,7 +64,12 @@ class WorkItemController extends Controller
             $data['link'] = null; // Ensure link is set to null if not provided
         }
 
-        WorkItem::create($data);
+        $workItem = WorkItem::create($data);
+
+        // Sync tags if provided
+        if ($request->has('tags')) {
+            $workItem->tags()->sync($request->input('tags'));
+        }
 
         return redirect()->route('admin.work.index')->with('success', 'Work item created.');
     }
@@ -95,7 +109,19 @@ class WorkItemController extends Controller
         ]);
 
         if ($request->hasFile('thumbnail')) {
-            $data['thumbnail'] = $request->file('thumbnail')->store('work_thumbnails', 'public');
+            // Delete old images if they exist
+            $oldImages = [
+                $workItem->thumbnail,
+                $workItem->thumbnail_medium,
+                $workItem->thumbnail_webp
+            ];
+            $this->imageProcessingService->deleteWorkItemThumbnails($oldImages);
+
+            // Process new thumbnail
+            $imagePaths = $this->imageProcessingService->processWorkItemThumbnail($request->file('thumbnail'));
+            $data['thumbnail'] = $imagePaths['original'];
+            $data['thumbnail_medium'] = $imagePaths['medium'];
+            $data['thumbnail_webp'] = $imagePaths['webp'];
         } else {
             unset($data['thumbnail']);
         }
@@ -118,7 +144,14 @@ class WorkItemController extends Controller
      */
     public function destroy(WorkItem $work)
     {   
-        
+        // Delete all associated thumbnails
+        $thumbnails = [
+            $work->thumbnail,
+            $work->thumbnail_medium,
+            $work->thumbnail_webp
+        ];
+        $this->imageProcessingService->deleteWorkItemThumbnails($thumbnails);
+
         $work->delete();
         return redirect()->route('admin.work.index')->with('success', 'Work item deleted.');
     }

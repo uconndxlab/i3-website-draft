@@ -28,8 +28,8 @@
         <div class="mobile-scaledown">
             <div id="projectsScroller" style="visibility:hidden;">
                 @foreach(\App\Models\WorkItem::all() as $item)
-                <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->thumbnail }}" >
-                    <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="" role="presentation">
+                <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->best_thumbnail_url }}" >
+                    <img src="{{ $item->best_thumbnail_url }}" alt="" role="presentation">
                 </div>
                 @endforeach
             </div>
@@ -253,7 +253,7 @@ Our goal is to support UConn’s mission by providing practical, purpose-driven 
                 <div class="mobile-scaledown">
                     <div id="teamScroller1">
                         @foreach($teamMembers as $member)
-                            <img src="{{ asset('storage/' . $member->photo) }}" alt="" role="presentation">
+                            <img src="{{ $member->best_image_url }}" alt="" role="presentation">
                         @endforeach
                     </div>
                 </div>
@@ -263,7 +263,7 @@ Our goal is to support UConn’s mission by providing practical, purpose-driven 
                 <div class="mobile-scaledown">
                     <div id="teamScroller2">
                         @foreach($teamMembers->reverse() as $member)
-                            <img src="{{ asset('storage/' . $member->photo) }}" alt="" role="presentation">
+                            <img src="{{ $member->best_image_url }}" alt="" role="presentation">
                         @endforeach
                     </div>
                 </div>

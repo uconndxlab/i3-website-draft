@@ -30,7 +30,7 @@
                                         <tr>
                                             <td>
                                                 @if($member->photo)
-                                                    <img src="{{ asset('storage/' . $member->photo) }}" 
+                                                    <img src="{{ $member->best_image_url }}" 
                                                          class="rounded-circle" 
                                                          width="40" 
                                                          height="40" 

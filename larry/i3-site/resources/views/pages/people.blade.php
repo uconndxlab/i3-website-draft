@@ -136,7 +136,7 @@
                                     <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
                                 </a>
                             @endif
-                            <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
+                            <img src="{{ $person->best_image_url }}" alt="{{ $person->name }}"
                                 class="person-photo">
                             <div class="person-overlay bg-blue-to-transparent text-white p-3 pt-5">
                                 <div class="person-name-and-role">
@@ -191,7 +191,7 @@
                                     <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
                                 </a>
                             @endif
-                            <img src="{{ asset('storage/' . $student->photo) }}" alt="{{ $student->name }}"
+                            <img src="{{  $student->best_image_url }}" alt="{{ $student->name }}"
                                 class="person-photo">
                             <div class="person-overlay bg-purple-to-transparent pt-5 text-white p-3">
                                 <div class="person-name-and-role">
@@ -243,7 +243,7 @@
                                 </a>
                             @endif
 
-                            <img src="{{ asset('storage/' . $person->photo) }}" alt="{{ $person->name }}"
+                            <img src="{{ $person->best_image_url }}" alt="{{ $person->name }}"
                                 class="person-photo">
                             <div class="person-overlay bg-dark-to-transparent text-white p-3 pt-5">
                                 <div class="person-name-and-role">

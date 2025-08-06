@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\TeamMember;
+use App\Services\ImageProcessingService;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -10,6 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class TeamSeeder extends Seeder
 {
+    protected ImageProcessingService $imageProcessingService;
+
+    public function __construct(ImageProcessingService $imageProcessingService)
+    {
+        $this->imageProcessingService = $imageProcessingService;
+    }
     /**
      * Run the database seeds.
      */
@@ -123,18 +130,32 @@ class TeamSeeder extends Seeder
         foreach ($team as $memberData) {
             $sourcePath = public_path($memberData['img']);
             $photoPath = null;
+            $photoMediumPath = null;
+            $photoWebpPath = null;
 
             if (File::exists($sourcePath)) {
                 $fileName = basename($sourcePath);
                 $destinationPath = 'team_thumbnails/' . $fileName;
                 Storage::disk('public')->put($destinationPath, File::get($sourcePath));
                 $photoPath = $destinationPath;
+
+                // Generate additional image formats for existing images
+                try {
+                    $imagePaths = $this->imageProcessingService->processExistingImage($destinationPath);
+                    $photoMediumPath = $imagePaths['medium'];
+                    $photoWebpPath = $imagePaths['webp'];
+                } catch (\Exception $e) {
+                    // If image processing fails, just use the original
+                    \Log::warning("Failed to process image for {$memberData['name']}: " . $e->getMessage());
+                }
             }
 
             TeamMember::create([
                 'name' => $memberData['name'],
                 'role' => $memberData['title'],
                 'photo' => $photoPath,
+                'photo_medium' => $photoMediumPath,
+                'photo_webp' => $photoWebpPath,
                 'tags' => $memberData['tags']
             ]);
         }

@@ -82,7 +82,7 @@
 
     <section class="hero-section" style="background-color: #f8f9fa; ">
         <div class="hero-img-wrapper">
-            <img src="{{ asset('img/i3/room.jpg') }}" class="img-fluid" alt="Hero background" style="filter: brightness(0.45);"
+            <img src="{{ asset('img/i3/room.webp') }}" class="img-fluid" alt="Hero background" style="filter: brightness(0.45);"
                 alt="Hero background">
         </div>
         <div class="container hero-overlay">

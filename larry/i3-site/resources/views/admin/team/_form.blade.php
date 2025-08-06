@@ -44,7 +44,15 @@
         </div>
         @if (!empty($team?->photo))
             <div class="mb-3 text-center">
-                <img src="{{ asset('storage/' . $team->photo) }}" class="img-fluid rounded shadow" style="max-width: 200px;">
+                <img src="{{ $team->best_image_url }}" class="img-fluid rounded shadow" style="max-width: 200px;">
+                <div class="small text-muted mt-2">
+                    @if($team->photo_medium)
+                        <i class="bi bi-check-circle-fill text-success"></i> Medium version available<br>
+                    @endif
+                    @if($team->photo_webp)
+                        <i class="bi bi-check-circle-fill text-success"></i> WebP version available
+                    @endif
+                </div>
             </div>
         @endif
     </div>

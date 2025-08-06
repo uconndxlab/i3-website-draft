@@ -356,7 +356,7 @@
                             title="View details for {{ $project->title }}"
                             aria-label="View details for {{ $project->title }}"
                             style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; cursor:pointer; display:block;">
-                            <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
+                            <img src="{{ $project->best_thumbnail_url }}?v={{ time() }}"
                                 alt="{{ $project->title }}"
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius:10px;">
                         </a>
@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="modal-body">
                                     @if ($project->thumbnail)
-                                        <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
+                                        <img src="{{ $project->best_thumbnail_url }}?v={{ time() }}"
                                             alt="{{ $project->title }}" class="img-fluid rounded mb-3">
                                     @endif
                                     <p>{!! $project->body !!}</p>

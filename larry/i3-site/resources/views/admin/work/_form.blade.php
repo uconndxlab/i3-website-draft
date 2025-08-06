@@ -24,7 +24,7 @@
             <input type="file" name="thumbnail" class="form-control">
             @if (!empty($work?->thumbnail))
                 <div class="mt-2">
-                    <img src="{{ asset('storage/' . $work->thumbnail) }}" class="img-fluid rounded border">
+                    <img src="{{ $work->best_thumbnail_url }}" class="img-fluid rounded border">
                 </div>
             @endif
         </div>

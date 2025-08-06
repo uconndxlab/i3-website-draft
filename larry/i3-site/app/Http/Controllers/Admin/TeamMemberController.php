@@ -3,11 +3,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TeamMember;
+use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class TeamMemberController extends Controller
 {
+    protected ImageProcessingService $imageProcessingService;
+
+    public function __construct(ImageProcessingService $imageProcessingService)
+    {
+        $this->imageProcessingService = $imageProcessingService;
+    }
     public function index()
     {
         $members = TeamMember::all();
@@ -29,7 +36,10 @@ class TeamMemberController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('team_photos', 'public');
+            $imagePaths = $this->imageProcessingService->processTeamMemberPhoto($request->file('photo'));
+            $data['photo'] = $imagePaths['original'];
+            $data['photo_medium'] = $imagePaths['medium'];
+            $data['photo_webp'] = $imagePaths['webp'];
         }
 
         // Handle LinkedIn URL if provided
@@ -60,7 +70,19 @@ class TeamMemberController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('team_photos', 'public');
+            // Delete old images if they exist
+            $oldImages = [
+                $team->photo,
+                $team->photo_medium,
+                $team->photo_webp
+            ];
+            $this->imageProcessingService->deleteTeamMemberImages($oldImages);
+
+            // Process new image
+            $imagePaths = $this->imageProcessingService->processTeamMemberPhoto($request->file('photo'));
+            $data['photo'] = $imagePaths['original'];
+            $data['photo_medium'] = $imagePaths['medium'];
+            $data['photo_webp'] = $imagePaths['webp'];
         }
 
         $data['tags'] = $request->filled('tags')
@@ -78,6 +100,14 @@ class TeamMemberController extends Controller
 
     public function destroy(TeamMember $team)
     {
+        // Delete all associated images
+        $images = [
+            $team->photo,
+            $team->photo_medium,
+            $team->photo_webp
+        ];
+        $this->imageProcessingService->deleteTeamMemberImages($images);
+
         $team->delete();
         return back()->with('success', 'Team member deleted.');
     }
