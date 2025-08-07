@@ -375,8 +375,8 @@
                                 </div>
                                 <div class="modal-body">
                                     @if ($project->thumbnail)
-                                        <img src="{{ $project->best_thumbnail_url }}?v={{ time() }}"
-                                            alt="{{ $project->title }}" class="img-fluid rounded mb-3">
+                                        <img src="{{ asset('storage/'.$project->thumbnail) }}?v={{ time() }}"
+                                            alt="{{ $project->title }}" loading="lazy" class="img-fluid rounded mb-3">
                                     @endif
                                     <p>{!! $project->body !!}</p>
                                     @if ($project->link)
