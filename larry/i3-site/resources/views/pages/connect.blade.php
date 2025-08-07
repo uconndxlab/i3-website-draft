@@ -114,7 +114,7 @@
         </div>
     </section>
 
-    <section id="hire-us" class="bg-deep-gradient py-5 header-aware">
+    <section id="hire-us" class="bg-deep-gradient py-5">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire Us</h2>
@@ -161,7 +161,7 @@
 
     </section>
 
-    <section class="bg-teal-gradient text-light header-aware">
+    <section class="bg-teal-gradient text-light">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire You</h2>
@@ -265,7 +265,7 @@
             </div>
     </section>
 
-    <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden header-aware">
+    <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden">
         <div class="container py-5">
             <div class="row mt-4 g-5 d-flex align-items-center">
                 <div class="col-lg-6 ">

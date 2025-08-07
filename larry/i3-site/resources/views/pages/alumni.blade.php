@@ -118,7 +118,7 @@ $tagmap = [
 
 @endphp
 
-<section role="region" aria-label="Our Leadership" id="senior-staff" class="bg-blue-gradient d-flex align-items-center px-5 py-5 header-aware" style="min-height: 100vh;">
+<section role="region" aria-label="Our Leadership" id="senior-staff" class="bg-blue-gradient d-flex align-items-center px-5 py-5" style="min-height: 100vh;">
     <div class="container">
         <div class="row align-items-center justify-content-center mb-3 ">
             <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">i3 Alumni</h2>
@@ -152,7 +152,7 @@ $tagmap = [
     <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden">
 
 
-        <div class="container py-5 header-aware">
+        <div class="container py-5">
             <div class="row justify-content-center align-items-center g-5">
                 @foreach (\App\Services\Brands::$brands as $name => $logo)
                     <div class="col-4 col-sm-3 col-md-2 text-center">
@@ -164,7 +164,7 @@ $tagmap = [
         </div>
 
     </section>
-<section class="bg-dark text-light header-aware">
+<section class="bg-dark text-light">
         
     <div class="container py-5">
 

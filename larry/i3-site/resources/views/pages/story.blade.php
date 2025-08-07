@@ -536,7 +536,7 @@
 
 
     <section id="approach" style="background-color: #ffbb4d; min-height: 100vh; padding: 50px 0;"
-        class="d-flex align-items-center header-aware" data-bs-theme="light">
+        class="d-flex align-items-center " data-bs-theme="light">
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
@@ -717,7 +717,7 @@
         }
     </style>
 
-    <section class="news-section py-5 bg-light text-dark header-aware">
+    <section class="news-section py-5 bg-light text-dark ">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
                     class="border-bottom border-2 pb-3 border-primary">In The</span> News</h2>

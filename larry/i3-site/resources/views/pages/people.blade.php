@@ -108,7 +108,7 @@
     <h1 class="page-h1 display-1">People</h1>
 
     <section role="region" aria-label="Our Leadership" id="senior-staff"
-        class="bg-blue-gradient d-flex align-items-center px-5 header-aware" style="min-height: 80vh;">
+        class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
 
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
@@ -139,7 +139,7 @@
     </section>
 
     <section role="region" aria-label="Student Staff" id="students"
-        class="d-flex align-items-center px-5 bg-purple-gradient header-aware" style="min-height: 80vh;">
+        class="d-flex align-items-center px-5 bg-purple-gradient " style="min-height: 80vh;">
         <div class="container">
 
 
@@ -174,7 +174,7 @@
 
 
 
-    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient header-aware" style="min-height: 80vh;">
+    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient" style="min-height: 80vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
                 <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Faculty Advisors</h2>
@@ -201,7 +201,7 @@
     </section>
 
 
-    <section aria-labelledby="alumni-heading" id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative header-aware">
+    <section aria-labelledby="alumni-heading" id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative">
         <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 10vh; z-index: 0; width: 100%" aria-hidden="true" role="presentation">
             <div class="mobile-scaledown">
             <div id="alumniScroller1" style="visibility:hidden;" class="bg-white d-block z-1 py-4">

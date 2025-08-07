@@ -5,7 +5,7 @@
 
 
     <h1 class="page-h1">Projects</h1>
-    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5 header-aware" style="min-height: 90vh;"
+    <section id="the-stats" class="bg-light text-dark d-flex align-items-center px-5 py-5" style="min-height: 90vh;"
         data-bs-theme="light">
         <div class="container">
             <div class="row align-items-center justify-content-center">
@@ -94,7 +94,7 @@
             </div>
         </div>
     </section>
-    <section id="in-progress" class="bg-deep-gradient text-light py-5 position-relative d-flex align-items-center header-aware"
+    <section id="in-progress" class="bg-deep-gradient text-light py-5 position-relative d-flex align-items-center "
         style="min-height: 100vh;">
         <div class="container">
 
@@ -302,7 +302,7 @@
         </div>
     </section>
 
-    <section id="completed-projects" class="bg-dark-gradient d-flex px-5 py-5 header-aware" style="min-height: 80vh;">
+    <section id="completed-projects" class="bg-dark-gradient d-flex px-5 py-5 " style="min-height: 80vh;">
 
         <div class="container my-5">
             <div class="row">
