@@ -55,4 +55,9 @@ class PageController extends Controller
     {
         return view('pages.contact-success');
     }
+
+    public function alumni() {
+        $alumni = TeamMember::where('tags', 'like', '%alumni%')->get();
+        return view('pages.alumni', compact('alumni'));
+    }
 }

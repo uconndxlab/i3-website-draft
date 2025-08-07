@@ -536,7 +536,7 @@
 
 
     <section id="approach" style="background-color: #ffbb4d; min-height: 100vh; padding: 50px 0;"
-        class="d-flex align-items-center" data-bs-theme="light">
+        class="d-flex align-items-center header-aware" data-bs-theme="light">
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
@@ -591,7 +591,7 @@
                             </g>
 
                             <!-- Husky Head Character -->
-                            <g id="huskyCharacter" transform="translate(100,80)" title="This was really the UConn Husky logo in 1959.">
+                            <g id="huskyCharacter" transform="translate(100,80)" title="This was really the UConn Husky logo in 1959." aria-label="UConn Husky Logo from 1959" role="img">
                                 <!-- Rotation wrapper - this will handle only rotation -->
                                 <g id="huskyRotation">
                                     <!-- Husky Head (Simple line art) -->
@@ -690,7 +690,7 @@
                         });
                         </script>
 
-                        <span class="text-dark text-small mt-2" style="font-size:0.8rem">
+                        <span class="text-dark text-small mt-2" style="font-size:0.8rem" aria-hidden="true">
                             * this was really the UConn Husky logo in 1959.
                         </span>
                     </div>
@@ -717,7 +717,7 @@
         }
     </style>
 
-    <section class="news-section py-5 bg-light text-dark">
+    <section class="news-section py-5 bg-light text-dark header-aware">
         <div class="container">
             <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-dark" data-aos="fade-down"><span
                     class="border-bottom border-2 pb-3 border-primary">In The</span> News</h2>
@@ -747,7 +747,7 @@
                 @foreach ($stories as $story)
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div class="position-relative" style="padding-top: 62.5%;">
-                            <div class="card news-card text-white border-0 shadow-sm overflow-hidden rounded-4 position-absolute top-0 start-0 w-100 h-100">
+                            <div class="card news-card text-white border-0 shadow-sm overflow-hidden rounded-4 position-absolute top-0 start-0 w-100 h-100 ">
                                 <img src="{{ $story['img'] }}" class="card-img h-100 w-100 object-fit-cover"
                                     alt="Image for {{ $story['title'] }}" loading="lazy" style="object-fit: cover;">
                                 <div class="card-img-overlay d-flex flex-column justify-content-end p-3" style="background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);">
@@ -756,7 +756,7 @@
                                         <strong>{{ $story['publication'] }}</strong> • {{ $story['date'] }}
                                     </p>
                                 </div>
-                                <a href="{{ $story['link'] }}" target="_blank" class="stretched-link" aria-label="Read more about {{ $story['title'] }}"></a>
+                                <a href="{{ $story['link'] }}" target="_blank" class="stretched-link focus-ring" aria-label="Read more about {{ $story['title'] }}"></a>
                             </div>
                         </div>
                     </div>

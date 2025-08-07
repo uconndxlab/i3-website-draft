@@ -114,7 +114,7 @@
         </div>
     </section>
 
-    <section id="hire-us" class="bg-deep-gradient py-5">
+    <section id="hire-us" class="bg-deep-gradient py-5 header-aware">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire Us</h2>
@@ -133,21 +133,7 @@
 
             <div class="row g-5 mt-1 mb-5">
                 <div class="col-lg-6 offset-lg-3" data-aos="fade-left">
-                    @php
-                        $directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
-                    @endphp
-
-                    <div class="row">
-                        @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'class' => 'web-design-color'], ['label' => 'UX Design', 'icon' => 'pencil', 'class' => 'ux-design-color'], ['label' => 'App Development', 'icon' => 'phone', 'class' => 'app-development-color'], ['label' => 'Digital Services for Research', 'icon' => 'beaker', 'class' => 'tech-support-color'], ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'class' => 'digital-consulting-color'], ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'class' => 'custom-tech-solutions-color']] as $badge)
-                            <div class="col-md-6 mb-3">
-                                <div class="service-badge text-light px-3 py-2 rounded-pill shadow-sm {{ $badge['class'] }}"
-                                    data-aos="fade" data-aos-duration="1200" data-aos-delay="{{ rand(100, 500) }}"
-                                    data-aos-easing="ease-out-back" data-aos-once="true">
-                                    <i class="bi bi-{{ $badge['icon'] }} me-2"></i> {{ $badge['label'] }}
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    <x-service-badges />
                 </div>
             </div>
 
@@ -175,7 +161,7 @@
 
     </section>
 
-    <section class="bg-teal-gradient text-light">
+    <section class="bg-teal-gradient text-light header-aware">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
                 <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire You</h2>
@@ -279,7 +265,7 @@
             </div>
     </section>
 
-    <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden">
+    <section class="bg-white text-dark d-flex align-items-center py-5 overflow-hidden header-aware">
         <div class="container py-5">
             <div class="row mt-4 g-5 d-flex align-items-center">
                 <div class="col-lg-6 ">

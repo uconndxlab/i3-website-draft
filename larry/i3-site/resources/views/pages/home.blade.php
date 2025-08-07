@@ -4,20 +4,24 @@
 @section('content')
 {{-- <div class="scroll-snap-container"> --}}
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-start justify-content-md-center" style=" background-image: url('{{ asset('images/hero-bg.jpg') }}'); background-size: cover; background-position: center;">
+    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-start justify-content-md-center">
         <div class="container z-2">
             <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="hero-title mb-4">
-                    Internal<br>
-                    Insights &<br>
-                    Innovation
+                {{-- <h1 class="visually-hidden">Internal Insights &amp; Innovation</h1> --}}
+                <h1 class="hero-title mb-4" aria-label="Internal Insights & Innovation">
+                    <span class="d-block" aria-hidden="true">Internal</span>
+                    <span class="d-block" aria-hidden="true">Insights &</span>
+                    <span class="d-block" aria-hidden="true">Innovation</span>
                 </h1>
 
-                <div class="phrase-animator-container text-white bg-dark d-inline-block px-4">
+                <div class="phrase-animator-container text-white bg-dark d-inline-block px-4" aria-hidden="true">
                     <span class="d-block d-md-inline">We</span>
                     <div id="phrase-animator-uconn" class="phrase-animator">make stuff</div>
                     <span class="d-block d-md-inline">for UConn.</span>
                 </div>
+                
+                {{-- Screen reader friendly static version --}}
+                <div class="visually-hidden">We build apps, design websites, innovate, and create custom solutions for UConn.</div>
                 
             </div>
         </div>
@@ -123,27 +127,7 @@
                 </div>
 
                 <div class="col-lg-5" data-aos="fade-left">
-                    @php
-                        $directions = ['from-left', 'from-right', 'from-top', 'from-bottom'];
-                    @endphp
-
-                    <div class="row">
-                        @foreach ([['label' => 'Web Design', 'icon' => 'laptop', 'class' => 'web-design-color'],
-                                ['label' => 'UX Design', 'icon' => 'pencil', 'class' => 'ux-design-color'],
-                                ['label' => 'App Development', 'icon' => 'phone', 'class' => 'app-development-color'],
-                                ['label' => 'Digital Services for Research', 'icon' => 'beaker', 'class' => 'tech-support-color'],
-                                ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'class' => 'digital-consulting-color'],
-                                ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'class' => 'custom-tech-solutions-color']
-                                ] as $badge)
-                            <div class="col-md-6 mb-3">
-                                <div class="service-badge text-light px-3 py-2 rounded-pill shadow-sm {{ $badge['class'] }}"
-                                    data-aos="fade" data-aos-duration="1200" data-aos-delay="{{ rand(100, 500) }}"
-                                    data-aos-easing="ease-out-back" data-aos-once="true">
-                                    <i class="bi bi-{{ $badge['icon'] }} me-2"></i> {{ $badge['label'] }}
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    <x-service-badges />
                 </div>
             </div>
         </div>
@@ -161,8 +145,8 @@
                         <div class="position-absolute top-0 start-50 translate-middle bg-light rounded-circle"
                             style="width: 20px; height: 20px;"></div>
                     </div> --}}
-                    <div class="d-flex justify-content-center align-items-center for-uni-stat-wrapper" style="min-height: 400px;">
-                        <div class="for-uni-stat" id="for-uni-stat">
+                    <div class="d-flex justify-content-center align-items-center for-uni-stat-wrapper" style="min-height: 400px;" aria-label="We've worked on over 37 projects this year for the University of Connecticut.">
+                        <div class="for-uni-stat" id="for-uni-stat" aria-hidden="true">
                             <h2 id="stat-head">37+</h2>
                             <span id="stat-span" class="fs-4 fw-bolder">Projects This Year</span>
                         </div>
@@ -183,7 +167,7 @@
                 <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span class="border-bottom border-2 pb-3 border-primary">For</span> The University</h2>
 
                     <p class="text-light">
-Our goal is to support UConn’s mission by providing practical, purpose-driven tools and services that help the university run more efficiently, support innovation, and improve the day-to-day experience of working, researching, and learning here.                    </p>
+Our goal is to support UConn's mission by providing practical, purpose-driven tools and services that help the university run more efficiently, support innovation, and improve the day-to-day experience of working, researching, and learning here.                    </p>
                     <p class="text-light">
                         Sometimes that means quick fixes or process improvements. Other times, it means replacing a vendor system or building something new from scratch.
                     </p>

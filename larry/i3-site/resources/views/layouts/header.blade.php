@@ -68,7 +68,7 @@
               <div class="text-center text-md-left collapse navbar-collapse flex-grow-0 mt-2" id="i3navbarContent" data-bs-theme="dark">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                          <a class="nav-link{{ request()->routeIs('team') ? ' active' : '' }}"
+                          <a class="nav-link{{ (request()->routeIs('team') || request()->routeIs('alumni')) ? ' active' : '' }}"
                               href="{{ route('team') }}">People</a>
                       </li>
                       <li class="nav-item">

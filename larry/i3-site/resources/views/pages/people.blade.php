@@ -108,7 +108,7 @@
     <h1 class="page-h1 display-1">People</h1>
 
     <section role="region" aria-label="Our Leadership" id="senior-staff"
-        class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">
+        class="bg-blue-gradient d-flex align-items-center px-5 header-aware" style="min-height: 80vh;">
 
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
@@ -127,28 +127,11 @@
             <div class="row justify-content-center">
                 @foreach ($senior_staff as $person)
                     <div class="col-md-2 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div class="position-relative person-card rounded-3">
-                            <div class="card-outline"></div>
-                            @if ($person->linkedin)
-                                <a title ="Linkedin Profile for {{ $person->name }}" href="{{ $person->linkedin }}"
-                                    target="_blank" rel="noopener" aria-label="LinkedIn"
-                                    style="position: absolute; top:20px; right: 5px; z-index: 3; padding: 5px;">
-                                    <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
-                                </a>
-                            @endif
-                            <img src="{{ $person->best_image_url }}" alt="{{ $person->name }}"
-                                class="person-photo">
-                            <div class="person-overlay bg-blue-to-transparent text-white p-3 pt-5">
-                                <div class="person-name-and-role">
-                                    <h3 class="mb-0 fw-bold person-name fs-6">
-                                        <span class="firstname">{{ explode(' ', $person->name)[0] }}</span>
-                                        <span class="lastname">
-                                            {{ implode(' ', array_slice(explode(' ', $person->name), 1)) }}</span>
-                                    </h3>
-                                    <small class="person-role">{{ $person->role }}</small>
-                                </div>
-                            </div>
-                        </div>
+                        <x-person-card 
+                            :person="$person" 
+                            overlay-class="bg-blue-to-transparent" 
+                            name-size="fs-6" 
+                        />
                     </div>
                 @endforeach
             </div>
@@ -156,7 +139,7 @@
     </section>
 
     <section role="region" aria-label="Student Staff" id="students"
-        class="d-flex align-items-center px-5 bg-purple-gradient" style="min-height: 80vh;">
+        class="d-flex align-items-center px-5 bg-purple-gradient header-aware" style="min-height: 80vh;">
         <div class="container">
 
 
@@ -181,29 +164,7 @@
 
                 @foreach ($student_staff as $student)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div class="position-relative person-card rounded-3">
-                            <div class="card-outline"></div>
-
-                            @if ($student->linkedin)
-                                <a title ="Linkedin Profile for {{ $student->name }}" href="{{ $student->linkedin }}"
-                                    target="_blank" rel="noopener" aria-label="LinkedIn"
-                                    style="position: absolute; top:20px; right: 5px; z-index: 3;  padding: 5px;">
-                                    <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
-                                </a>
-                            @endif
-                            <img src="{{  $student->best_image_url }}" alt="{{ $student->name }}"
-                                class="person-photo">
-                            <div class="person-overlay bg-purple-to-transparent pt-5 text-white p-3">
-                                <div class="person-name-and-role">
-                                    <h3 class="mb-0 fw-bold person-name fs-5">
-                                        <span class="firstname">{{ explode(' ', $student->name)[0] }}</span>
-                                        <span class="lastname">
-                                            {{ implode(' ', array_slice(explode(' ', $student->name), 1)) }}</span>
-                                    </h3>
-                                    <small class="person-role">{{ $student->role }}</small>
-                                </div>
-                            </div>
-                        </div>
+                        <x-person-card :person="$student" overlay-class="bg-purple-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
             </div>
@@ -213,7 +174,7 @@
 
 
 
-    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient" style="min-height: 80vh;">
+    <section id="faculty-advisors" class="d-flex align-items-center px-5 bg-deep-gradient header-aware" style="min-height: 80vh;">
         <div class="container">
             <div class="row align-items-center justify-content-center mb-3 ">
                 <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Faculty Advisors</h2>
@@ -232,66 +193,21 @@
             <div class="row justify-content-center">
                 @foreach ($faculty_advisors as $person)
                     <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div class="position-relative person-card rounded-3">
-                            <div class="card-outline"></div>
-
-                            @if ($person->linkedin)
-                                <a title ="Linkedin Profile for {{ $person->name }}" href="{{ $person->linkedin }}"
-                                    target="_blank" rel="noopener" aria-label="LinkedIn"
-                                    style="position: absolute; top:20px; right: 5px; z-index: 3; padding: 5px;">
-                                    <i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i>
-                                </a>
-                            @endif
-
-                            <img src="{{ $person->best_image_url }}" alt="{{ $person->name }}"
-                                class="person-photo">
-                            <div class="person-overlay bg-dark-to-transparent text-white p-3 pt-5">
-                                <div class="person-name-and-role">
-                                    <h3 class="mb-0 fw-bold person-name fs-5">
-                                        <span class="firstname">{{ explode(' ', $person->name)[0] }}</span>
-                                        <span class="lastname">
-                                            {{ implode(' ', array_slice(explode(' ', $person->name), 1)) }}</span>
-                                    </h3>
-                                    <small class="person-role">{{ $person->role }}</small>
-                                </div>
-                            </div>
-                        </div>
+                        <x-person-card :person="$person" overlay-class="bg-dark-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
 
-    @php
-        $brandLogos = [
-            'IBM.svg',
-            'amazon.svg',
-            'cvs_health.svg',
-            'hubspot.svg',
-            'oracle.svg',
-            'thehartford.svg',
-            'KeyBank.png',
-            'clever.webp',
-            'google.svg',
-            'mlb.svg',
-            'palantir.png',
-            'us-bank.svg',
-        ];
-    @endphp
 
-
-
-    <section aria-labelledby="alumni-heading" id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative">
+    <section aria-labelledby="alumni-heading" id="alumni" style="min-height: clamp(1000px, 80vh, 80vw);" class="d-flex align-items-center position-relative header-aware">
         <div id="alumniScroller1Contain" style="position: absolute; left: 0; right: 0; top: 10vh; z-index: 0; width: 100%" aria-hidden="true" role="presentation">
             <div class="mobile-scaledown">
             <div id="alumniScroller1" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
-                @foreach(collect($brandLogos)->shuffle() as $logo)
+                @foreach(collect(App\Services\Brands::$brands)->shuffle() as $name => $logo)
                 <div>
-                    @php
-                        $companyName = explode('.', $logo)[0];
-                        $companyName = str_replace('_', ' ', $companyName);
-                    @endphp
-                    <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $companyName }} logo" class="img-fluid">
+                    <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $name }} logo" class="img-fluid">
                 </div>
                 @endforeach
             </div>
@@ -316,15 +232,24 @@
                         <span class="btn-arrow-slide-text"> Our Alumni </span>
                     </a>
                 </div> --}}
+
+                <div class="btn display-btn btn-arrow-slide">
+                    <a href="{{route('alumni')}}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> See Our Alumni </span>
+                    </a>
+                </div>
             </div>
         </div>
 
         <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 10vh; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
             <div class="mobile-scaledown">
                 <div id="alumniScroller2" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
-                    @foreach(collect($brandLogos)->shuffle() as $logo)
+                    @foreach(collect(App\Services\Brands::$brands)->shuffle() as $name => $logo)
                     <div>
-                        <img aria-hidden="true" src="{{ asset('img/brands/' . $logo) }}" alt="" role="presentation" class="img-fluid">
+                        <img src="{{ asset('img/brands/' . $logo) }}" alt="{{ $name }} logo" class="img-fluid">
                     </div>
                     @endforeach
                 </div>

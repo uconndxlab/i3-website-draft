@@ -42,11 +42,11 @@ class ImageProcessingService
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
         $mediumImage->scaleDown(width: 600);
-        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(90)->toString());
+        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(75)->toString());
 
         // Generate optimized WebP version (90% quality)
         $webpImage = clone $image;
-        Storage::disk('public')->put($webpPath, $webpImage->toWebp(90)->toString());
+        Storage::disk('public')->put($webpPath, $webpImage->toWebp(75)->toString());
 
         return [
             'original' => $originalPath,
@@ -84,11 +84,11 @@ class ImageProcessingService
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
         $mediumImage->scaleDown(width: 600);
-        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(90)->toString());
+        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(75)->toString());
 
         // Generate optimized WebP version (90% quality)
         $webpImage = clone $image;
-        Storage::disk('public')->put($webpPath, $webpImage->toWebp(90)->toString());
+        Storage::disk('public')->put($webpPath, $webpImage->toWebp(75)->toString());
 
         return [
             'original' => $existingPath,
@@ -138,11 +138,11 @@ class ImageProcessingService
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
         $mediumImage->scaleDown(width: 600);
-        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(90)->toString());
+        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(75)->toString());
 
         // Generate optimized WebP version (90% quality)
         $webpImage = clone $image;
-        Storage::disk('public')->put($webpPath, $webpImage->toWebp(90)->toString());
+        Storage::disk('public')->put($webpPath, $webpImage->toWebp(75)->toString());
 
         return [
             'original' => $originalPath,
@@ -180,11 +180,11 @@ class ImageProcessingService
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
         $mediumImage->scaleDown(width: 600);
-        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(90)->toString());
+        Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(75)->toString());
 
         // Generate optimized WebP version (90% quality)
         $webpImage = clone $image;
-        Storage::disk('public')->put($webpPath, $webpImage->toWebp(90)->toString());
+        Storage::disk('public')->put($webpPath, $webpImage->toWebp(75)->toString());
 
         return [
             'original' => $existingPath,

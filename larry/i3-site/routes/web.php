@@ -11,6 +11,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/people',    'team')->name('team');
     Route::get('/connect', 'connect')->name('connect');
     Route::get('/contact/success', 'contactSuccess')->name('contact.success');
+    Route::get('/alumni',  'alumni')->name('alumni');
 });
 
 Route::resource('projects', WorkController::class)->only(['index']);

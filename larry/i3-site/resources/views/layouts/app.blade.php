@@ -55,7 +55,7 @@
     </div>
 
 
-    <div class="footercontain overflow-hidden">
+    <div class="footercontain overflow-hidden z-1000">
         @if (Route::currentRouteName() === 'connect')
             <section id="contact" class="bg-dark text-light d-flex align-items-center px-5"
                 style="min-height: 100vh;">
@@ -72,14 +72,14 @@
                                     <div class="col-md mb-4 mb-md-0">
                                         <div class="form-floating">
                                             <input type="text" class="form-control bg-dark text-light" id="firstName"
-                                                name="first_name" placeholder="Lorem">
+                                                name="first_name" placeholder="First Name">
                                             <label for="firstName">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating">
                                             <input type="text" class="form-control bg-dark text-light" id="lastName"
-                                                name="last_name" placeholder="Ipsum">
+                                                name="last_name" placeholder="Last Name">
                                             <label for="lastName">Last Name</label>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
         @endif
 
         <!-- i3 Footer Section -->
-        <footer class="bg-gradient-dark text-light py-5">
+        <footer class="bg-gradient-dark text-light py-5 ">
             <div class="container pt-5">
                 <div class="row g-4">
                     <!-- About i3 -->
@@ -147,7 +147,7 @@
                                 target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-linkedin"></i>
                             </a>
-                            <a title="Email Us" href="mailto:dxlab@uconn.edu"
+                            <a title="Email Us" href="mailto:i3@uconn.edu"
                                 class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-envelope"></i>
                             </a>
@@ -210,7 +210,7 @@
                             </div>
                             <div class="d-flex align-items-center gap-2">
                                 <i class="bi bi-envelope text-primary"></i>
-                                <a title="Email: i3@uconn.edu" href="mailto:dxlab@uconn.edu"
+                                <a title="Email: i3@uconn.edu" href="mailto:i3@uconn.edu"
                                     class="text-light opacity-75 text-decoration-none hover-opacity-100">
                                     i3@uconn.edu
                                 </a>

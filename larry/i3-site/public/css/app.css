@@ -195,6 +195,10 @@ p {
         transform-origin: left center;
         margin-top: 0px;
     }
+    /* Can be used to offset content when header is fixed */
+    .header-aware {
+        padding-left: 14vw!important;
+    }
 }
 
 .card-outline {
@@ -1352,7 +1356,7 @@ a.footer-link:hover{color:var(--light-blue)!important}
 
 .btn-arrow-slide-text {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-  padding: 8px 2rem 8px 4rem;
+  padding: 8px 2rem 4px 4rem;
   margin: 0;
   margin-left:6px;
   font-weight: 700;
@@ -1657,4 +1661,15 @@ margin-bottom:0px;
   transform: scale(0.5);
   transform-origin: center;
 }
+}
+
+
+
+.z-1000 {
+    z-index: 1000;
+}
+
+.stretched-link:empty:focus::after {
+    outline: 0;
+    border: 3px solid var(--blue);
 }
