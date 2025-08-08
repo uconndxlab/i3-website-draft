@@ -28,7 +28,7 @@
                 <!-- Stat 1 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
-                        <i class="bi bi-code-slash" style="font-size: 3rem;"></i>
+                        <i class="bi bi-code-slash" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
                         <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="37" data-aos="odometer">0</h3>
@@ -39,7 +39,7 @@
                 <!-- Stat 2 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
-                        <i class="bi bi-person-workspace" style="font-size: 3rem;"></i>
+                        <i class="bi bi-person-workspace" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
                         <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="35" data-aos="odometer">0</h3>
@@ -50,7 +50,7 @@
                 <!-- Stat 3 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
-                        <i class="bi bi-eye" style="font-size: 3rem;"></i>
+                        <i class="bi bi-eye" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
                         <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="500000" data-aos="odometer">0
@@ -62,7 +62,7 @@
                 <!-- Stat 4 -->
                 <div class="col-md-3 col-6">
                     <dt class="mb-3">
-                        <i class="bi bi-cup-hot" style="font-size: 3rem;"></i>
+                        <i class="bi bi-cup-hot" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
                         <h3 class="fw-bold display-5 text-dark" data-infinity="true">∞</h3>
@@ -77,7 +77,8 @@
                 </div>
                 <div class="text-muted small text-center mt-3" data-aos="fade-up">
                     <em>
-                        Note: this doesn't include repositories outside our core organization (of which there are a few), nor
+                        Note: this doesn't include repositories outside our core organization (of which there are a few),
+                        nor
                         does it include projects that don't have repositories!
                     </em>
                 </div>
@@ -85,10 +86,10 @@
             <div class="d-flex w-100 justify-content-center align-items-center">
                 <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
                     <a href="#in-progress" class="btn-arrow-slide-cont btn-arrow-slide-cont--blue">
-                    <span class="btn-arrow-slide-circle" aria-hidden="true">
-                        <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                    </span>
-                    <span class="btn-arrow-slide-text"> See What We're Working On </span>
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> See What We're Working On </span>
                     </a>
                 </div>
             </div>
@@ -292,10 +293,10 @@
             <div class="d-flex w-100 justify-content-center align-items-center">
                 <div class="btn display-btn btn-arrow-slide btn-arrow-slide--down">
                     <a href="#completed-projects" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
-                    <span class="btn-arrow-slide-circle" aria-hidden="true">
-                        <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                    </span>
-                    <span class="btn-arrow-slide-text"> See Our Completed Projects </span>
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text"> See Our Completed Projects </span>
                     </a>
                 </div>
             </div>
@@ -319,32 +320,23 @@
 
             </div>
             <div class="row" id="project-grid">
-                                <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
+                <div class="col-lg-12 d-flex mb-3 justify-content-between align-items-center">
                     <div>
                         <a class="btn rounded-pill me-3 border-0 shadow-none
                             {{ $tag === 'for-all' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
                             hx-get="{{ route('projects.tag', ['tag' => 'for-all', '#completed-projects']) }}"
-                            hx-target="#project-grid"
-                            hx-swap="innerHTML"
-                            hx-push-url="true"
-                            hx-select="#project-grid"
+                            hx-target="#project-grid" hx-swap="innerHTML" hx-push-url="true" hx-select="#project-grid"
                             href="{{ route('projects.tag', ['tag' => 'for-all', '#completed-projects']) }}">All</a>
                         <a class="btn rounded-pill me-3 shadow-none
                             {{ $tag === 'for-research' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
                             hx-get="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}"
-                            hx-target="#project-grid"
-                            hx-swap="innerHTML"
-                            hx-push-url="true"
-                            hx-select="#project-grid"
+                            hx-target="#project-grid" hx-swap="innerHTML" hx-push-url="true" hx-select="#project-grid"
                             href="{{ route('projects.tag', ['tag' => 'for-research', '#completed-projects']) }}">For
                             Research</a>
                         <a class="btn rounded-pill shadow-none
                             {{ $tag === 'for-uconn' ? 'bg-white text-dark' : 'bg-transparent text-white border border-white' }}"
                             hx-get="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}"
-                            hx-target="#project-grid"
-                            hx-swap="innerHTML"
-                            hx-push-url="true"
-                            hx-select="#project-grid"
+                            hx-target="#project-grid" hx-swap="innerHTML" hx-push-url="true" hx-select="#project-grid"
                             href="{{ route('projects.tag', ['tag' => 'for-uconn', '#completed-projects']) }}">For
                             UConn</a>
                     </div>
@@ -375,7 +367,7 @@
                                 </div>
                                 <div class="modal-body">
                                     @if ($project->thumbnail)
-                                        <img src="{{ asset('storage/'.$project->thumbnail) }}?v={{ time() }}"
+                                        <img src="{{ asset('storage/' . $project->thumbnail) }}?v={{ time() }}"
                                             alt="{{ $project->title }}" loading="lazy" class="img-fluid rounded mb-3">
                                     @endif
                                     <p>{!! $project->body !!}</p>

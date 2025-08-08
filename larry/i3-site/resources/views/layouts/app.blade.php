@@ -139,15 +139,17 @@
                             for the UConn community.
                         </p>
                         <div class="d-flex gap-3">
-                            <a title="View our GitHub Org" href="https://github.com/uconndxlab" target="_blank"
+                            <a title="View our GitHub Org" aria-label="i3 GitHub Profile"
+                                href="https://github.com/uconndxlab" target="_blank"
                                 class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-github"></i>
                             </a>
-                            <a title="View our LinkedIn Profile" href="https://www.linkedin.com/company/uconn-i3/"
+                            <a title="View our LinkedIn Profile" aria-label="LinkedIn Profile"
+                                href="https://www.linkedin.com/company/uconn-i3/"
                                 target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-linkedin"></i>
                             </a>
-                            <a title="Email Us" href="mailto:i3@uconn.edu"
+                            <a title="Email Us" href="mailto:i3@uconn.edu" aria-label="Email i3@uconn.edu"
                                 class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-envelope"></i>
                             </a>
@@ -244,7 +246,7 @@
                 <!--end dark footer-->
 
                 <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center pt-4">
-                    <a class="footer-link small" href="https://uconn.edu" target="_blank">© 2025 University of
+                    <a class="footer-link small" href="https://uconn.edu" aria-label="University of Connecticut" target="_blank">© 2025 University of
                         Connecticut</a>
                     <a class="footer-link small" href="https://uconn.edu/disclaimers-privacy-copyright/"
                         target="_blank">Disclaimers, Privacy &amp;
