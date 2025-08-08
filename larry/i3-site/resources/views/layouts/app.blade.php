@@ -269,6 +269,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
 </script>
+
+<script type='text/javascript' src='https://ucommobjectstorage.blob.core.windows.net/cookie-jar/cookie-notification.js'>
+    </script>
+    <noscript>
+        <p>Our websites may use cookies to personalize and enhance your experience. By continuing without changing your
+            cookie settings, you agree to this collection. For more information, please see our <a
+                href="https://privacy.uconn.edu/university-website-notice/" target="_blank">University Websites
+                Privacy Notice</a>.</p>
+    </noscript>
+
 @vite('resources/js/app.js')
 @vite('resources/js/starParticles.js')
 <script>
