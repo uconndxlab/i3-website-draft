@@ -118,7 +118,12 @@ class FetchGitHubCommits extends Command
                 $nextPageUrl = "https://api.github.com/repos/{$org}/{$repoName}/commits?sha={$branchName}&since={$sinceISO}&until={$untilISO}&per_page=100";
 
                 while ($nextPageUrl) {
-                    $commitResponse = $httpClient->get($nextPageUrl);
+                    try {
+                        $commitResponse = $httpClient->get($nextPageUrl);
+                    } catch (\Exception $e) {
+                        $this->warn("Error fetching commits for {$repoName}/{$branchName}: " . $e->getMessage());
+                        break;
+                    }
                     
                     if ($commitResponse->failed()) {
                         $this->warn("Failed to fetch commits for {$repoName}/{$branchName}: " . $commitResponse->body());

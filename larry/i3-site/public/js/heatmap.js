@@ -6,7 +6,7 @@ const monthGap = 15;
 const colors = ["#ebedf0", "#9ecae1", "#6baed6", "#4292c6", "#08519c"];
 
 const CONFIG = {
-    organization: 'uconndxlab',
+    organizations: ['uconndxlab', 'sourceryapp'], // Array of organizations - add more as needed
     year: 2025,
 };
 
@@ -169,24 +169,44 @@ function drawLegend() {
         .attr("fill", d => d);
 }
 
-// Load contribution data
+// Load contribution data from multiple organizations and combine them
 async function loadContributionData() {
-    try {
-        const dataFile = `data/github-contributions-${CONFIG.organization}-${CONFIG.year}.json`;
-        console.log(`Attempting to load data from: ${dataFile}`);
-        
-        const response = await fetch(dataFile);
-        if (!response.ok) {
-            console.warn(`Failed to load data: ${response.status} ${response.statusText}`);
-            throw new Error(`Failed to load data: ${response.status} ${response.statusText}`);
+    console.log(`Loading contribution data for organizations: ${CONFIG.organizations.join(', ')}`);
+    
+    const combinedContributions = {};
+    let successCount = 0;
+    
+    for (const org of CONFIG.organizations) {
+        try {
+            const dataFile = `data/github-contributions-${org}-${CONFIG.year}.json`;
+            console.log(`Attempting to load data from: ${dataFile}`);
+            
+            const response = await fetch(dataFile);
+            if (!response.ok) {
+                console.warn(`Failed to load data for ${org}: ${response.status} ${response.statusText}`);
+                continue;
+            }
+            
+            const data = await response.json();
+            console.log(`Successfully loaded contribution data for ${org} (${CONFIG.year})`);
+            successCount++;
+            
+            // Combine contributions by date
+            const orgContributions = data.contributionsByDay;
+            for (const [date, count] of Object.entries(orgContributions)) {
+                combinedContributions[date] = (combinedContributions[date] || 0) + count;
+            }
+            
+        } catch (error) {
+            console.error(`Error loading contribution data for ${org}:`, error);
         }
-        
-        const data = await response.json();
-        console.log(`Successfully loaded contribution data for ${CONFIG.organization} (${CONFIG.year})`);
-        
-        return data.contributionsByDay;
-    } catch (error) {
-        console.error('Error loading contribution data:', error);
+    }
+    
+    if (successCount > 0) {
+        console.log(`Successfully combined data from ${successCount}/${CONFIG.organizations.length} organizations`);
+        return combinedContributions;
+    } else {
+        console.warn('No contribution data could be loaded from any organization');
         return {}; // Return empty data object
     }
 }
@@ -243,7 +263,7 @@ function updateHeatmapWithData(contributionsData) {
 
 // Initialize the heatmap
 async function initializeHeatmap() {
-    console.log("Initializing GitHub contribution heatmap");
+    console.log(`Initializing GitHub contribution heatmap for organizations: ${CONFIG.organizations.join(', ')}`);
     
     // First create an empty heatmap skeleton
     createEmptyHeatmap();
