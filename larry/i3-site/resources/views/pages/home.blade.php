@@ -4,17 +4,16 @@
 @section('content')
 {{-- <div class="scroll-snap-container"> --}}
     {{-- Hero --}}
-    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-start justify-content-md-center">
+    <section class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-start justify-content-center">
         <div class="container z-2">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <div class="hero-content text-md-center" data-aos="fade-up" data-aos-duration="1000">
                 {{-- <h1 class="visually-hidden">Internal Insights &amp; Innovation</h1> --}}
-                <h1 class="hero-title mb-4" aria-label="Internal Insights & Innovation">
-                    <span class="d-block" aria-hidden="true">Internal</span>
-                    <span class="d-block" aria-hidden="true">Insights &</span>
-                    <span class="d-block" aria-hidden="true">Innovation</span>
+                <h1 class="hero-title mb-4 pt-md-0 text-center" aria-label="Internal Insights & Innovation">
+                    <span class="d-block" aria-hidden="true">Welcome to i3.</span>
+
                 </h1>
 
-                <div class="phrase-animator-container text-white bg-dark d-inline-block px-4" aria-hidden="true">
+                <div class="phrase-animator-container text-white bg-dark d-inline-block px-4 " aria-hidden="true">
                     <span class="d-block d-md-inline">We</span>
                     <div id="phrase-animator-uconn" class="phrase-animator">make stuff</div>
                     <span class="d-block d-md-inline">for UConn.</span>

@@ -230,6 +230,13 @@ p {
   font-weight: bold;
   white-space: nowrap;
 }
+
+@media (max-width: 600px) {
+    .phrase-animator-container {
+        font-size: 1.2rem;
+    }
+}
+
 .phrase-animator {
   display: inline-block;
   position: relative;
@@ -291,7 +298,7 @@ h2.border-accent,
 
 .hero-title, .page-h1 {
     padding-top: 3rem;
-    font-size: clamp(2rem, 12vh, 150px);
+    font-size: clamp(2rem, 12vh, 110px);
     /* font-size: 12vh; */
     font-weight: 900;
     line-height: 1.1;
@@ -302,6 +309,8 @@ h2.border-accent,
     text-transform: uppercase;
     font-family: area-normal, sans-serif;
 }
+
+
 
 @media (max-width: 1000px) {
     .hero-title {
