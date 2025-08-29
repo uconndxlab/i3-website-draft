@@ -297,7 +297,6 @@ h2.border-accent,
 }
 
 .hero-title, .page-h1 {
-    padding-top: 3rem;
     font-size: clamp(2rem, 12vh, 110px);
     /* font-size: 12vh; */
     font-weight: 900;

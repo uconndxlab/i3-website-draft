@@ -12,6 +12,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/connect', 'connect')->name('connect');
     Route::get('/contact/success', 'contactSuccess')->name('contact.success');
     Route::get('/alumni',  'alumni')->name('alumni');
+    Route::get('/merger',  'merger')->name('merger');
 });
 
 Route::resource('projects', WorkController::class)->only(['index']);

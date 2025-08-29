@@ -60,4 +60,8 @@ class PageController extends Controller
         $alumni = TeamMember::where('tags', 'like', '%alumni%')->get();
         return view('pages.alumni', compact('alumni'));
     }
+
+    public function merger() {
+        return view('pages.merger');
+    }
 }
