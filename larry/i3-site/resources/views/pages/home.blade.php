@@ -693,7 +693,8 @@
         }
     </style>
 
-    <!-- Dismissable Banner -->
+    <!-- Dismissable Banner - Only show after September 3, 2025 -->
+    @if(now()->gte('2025-09-03'))
     <div id="merger-banner" class="dismissable-banner" role="region" aria-label="Important announcement about i3 merger" aria-live="polite">
         <div class="banner-header">
             <div class="banner-icon" aria-hidden="true">
@@ -798,4 +799,5 @@
             }
         });
     </script>
+    @endif
 @endsection

@@ -12,7 +12,14 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/connect', 'connect')->name('connect');
     Route::get('/contact/success', 'contactSuccess')->name('contact.success');
     Route::get('/alumni',  'alumni')->name('alumni');
-    Route::get('/merger',  'merger')->name('merger');
+    
+    // Merger route - only active after September 3, 2025
+    Route::get('/merger', function () {
+        if (now()->lt('2025-09-03')) {
+            abort(404);
+        }
+        return app(PageController::class)->merger();
+    })->name('merger');
 });
 
 Route::resource('projects', WorkController::class)->only(['index']);
