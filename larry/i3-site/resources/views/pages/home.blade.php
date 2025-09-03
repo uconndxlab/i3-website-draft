@@ -463,7 +463,6 @@
             flex-direction: column;
             gap: 8px;
             animation: slideUp 0.4s ease-out;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .banner-header {

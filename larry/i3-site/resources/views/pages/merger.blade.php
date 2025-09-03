@@ -56,7 +56,7 @@
                 <div class="logo-container">
                     <img src="{{ asset('img/i3/i3-symbol-fill.svg') }}" alt="i">
                     <div class="merge-symbol">+</div>
-                    <img style="background-color:#fff;" src="{{ asset('img/i3/GS-Full-Brackets-Green-Black.png') }}"
+                    <img src="{{ asset('img/i3/gs-knockout.png') }}"
                         alt="Greenhouse Studios">
                     =
                     <span class="merge-symbol" style="font-size:2rem; color:#e25555;">&#10084;&#65039;</span>
