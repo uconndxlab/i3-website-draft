@@ -219,7 +219,9 @@ p {
     z-index: 1;
 }
 
-
+#cookie-policy-wrapper p{
+    color:#000;
+}
 
 /**
  * Phrase Animator Styles
@@ -270,7 +272,7 @@ h2 {
 h3 {
     font-size: 1.75rem;
     font-weight: 600;
-    color: #ccc;
+    color: #fff;
     margin-bottom: 1rem;
 }
 

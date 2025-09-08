@@ -105,7 +105,7 @@
             transform: translateY(0);
         }
     </style>
-    <h1 class="page-h1 display-1">People</h1>
+    <h1 class="page-h1 display-1" style="z-index:0">People</h1>
 
     <section role="region" aria-label="Our Leadership" id="senior-staff"
         class="bg-blue-gradient d-flex align-items-center px-5" style="min-height: 80vh;">

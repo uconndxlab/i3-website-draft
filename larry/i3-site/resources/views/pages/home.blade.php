@@ -705,7 +705,7 @@
                 </svg>
             </div>
             <div class="banner-content">
-                <div class="banner-title"><code class="d-none d-md-inline">git merge greenhouse</code>
+                <div class="banner-title"><code class="d-none d-md-inline" style="font-size:16px">git merge greenhouse</code>
                     <code class="d-inline d-md-none">We've Merged with Greenhouse Studios.</code>
                 </div>
                 <div class="banner-text fs-6">
@@ -716,7 +716,7 @@
             </div>
             <div class="banner-actions">
                 <button class="banner-close" onclick="dismissBanner()" aria-label="Close merger announcement" title="Close">
-                    <span aria-hidden="true">×</span>
+                    <i class="bi bi-x"></i>
                 </button>
             </div>
         </div>
