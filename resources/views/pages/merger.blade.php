@@ -95,9 +95,9 @@
                 <p>Based in the Provost's Office, i3 serves the university on two fronts:</p>
 
                 <ul>
-                    <li>Institutional systems and platforms that support everyday academic and operational needs</li>
+                    <li>Institutional systems and platforms that support everyday academic and operational needs;</li>
                     <li>Research and scholarly projects that benefit from creative design, innovative methods, and
-                        digital tools</li>
+                        digital tools.</li>
                 </ul>
 
                 <p>Together, these strengths position i3 as a comprehensive partner for UConn's students, faculty, and
