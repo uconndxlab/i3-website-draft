@@ -342,7 +342,7 @@
                     </div>
                 </div>
                 @foreach ($items as $project)
-                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-6 col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <a href="#projectModal{{ $project->id }}" data-bs-toggle="modal"
                             data-bs-target="#projectModal{{ $project->id }}"
                             title="View details for {{ $project->title }}"
