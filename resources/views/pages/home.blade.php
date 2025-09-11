@@ -254,7 +254,11 @@
         </div>
 
         @php
-            $teamMembers = \App\Models\TeamMember::all();
+            use App\Models\TeamMember;
+            $teamMembers = TeamMember::where(function($query) {
+            $query->whereNull('tags')
+                  ->orWhere('tags', 'not like', '%alumni%');
+            })->get();
         @endphp
 
 
