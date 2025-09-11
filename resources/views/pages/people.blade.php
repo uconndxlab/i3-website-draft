@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Meet Our Nerds - The i3 Team')
+@section('meta_description', 'Meet the dedicated team behind i3, UConn\'s hub of innovation and creativity. Learn about our leadership, student staff, and faculty advisors who drive our mission forward.')
 
 @section('content')
 

@@ -3,9 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'i3') | Internal Insights & Innovation | UConn</title>
+    <title>@yield('title', 'i3') | i3 - Internal Insights & Innovation | UConn</title>
     <script type="application/ld+json" src="{{ asset('structured-data.jsonld') }}"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description"
+        content="@yield('meta_description', 'i3 is a team of developers, designers, and innovators working to create digital solutions for the UConn community.')">
+    <meta name="author" content="i3 - Internal Insights & Innovation">
+
     <meta property="og:image" content="{{ asset('img/i3/room.webp') }}">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="image_src" href="{{ asset('img/i3/room.webp') }}">
