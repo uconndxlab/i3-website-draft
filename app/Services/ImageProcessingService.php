@@ -137,7 +137,7 @@ class ImageProcessingService
 
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
-        $mediumImage->scaleDown(width: 600);
+        $mediumImage->scaleDown(width: 800);
         Storage::disk('public')->put($mediumPath, $mediumImage->toWebp(75)->toString());
 
         // Generate optimized WebP version (90% quality)
