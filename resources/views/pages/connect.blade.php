@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Connect with Us')
 
 @section('content')
     <h1 class="page-h1 display-1">Connect</h1>

@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@section('title', 'i3 Alumni')
+@section('title', 'Alumni')
+@section('meta_description', 'Alumni from Squared Labs, DX Lab, DX Group, Greenhouse Studios, and i3. Discover how our former team members are making an impact in the tech industry and beyond.')
 
 @section('content')
 

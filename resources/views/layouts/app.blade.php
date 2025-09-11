@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'i3') | i3 - Internal Insights & Innovation | UConn</title>
+    <title>@yield('title', 'i3') | Internal Insights & Innovation (i3)</title>
     <script type="application/ld+json" src="{{ asset('structured-data.jsonld') }}"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">

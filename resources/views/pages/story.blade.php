@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Our Story - The Origins of i3')
+@section('title', 'Our Story')
 @section('meta_description', 'Discover the origins of i3, UConn\'s hub for innovation and creativity. Learn how we began and our journey towards enhancing digital solutions for the UConn community.')
 
 @section('content')

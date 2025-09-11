@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Mobile Apps, Web Apps, UX Design, Web Development, and Design Thinking')
+@section('title', 'Welcome')
 
 @section('content')
     {{-- <div class="scroll-snap-container"> --}}
