@@ -5,7 +5,7 @@ $defaultServices = [
     ['label' => 'Web Design', 'icon' => 'laptop', 'class' => 'web-design-color'],
     ['label' => 'UX Design', 'icon' => 'pencil', 'class' => 'ux-design-color'],
     ['label' => 'App Development', 'icon' => 'phone', 'class' => 'app-development-color'],
-    ['label' => 'Digital Services for Research', 'icon' => 'beaker', 'class' => 'tech-support-color'],
+    ['label' => 'Design Thinking', 'icon' => 'lightbulb', 'class' => 'tech-support-color'],
     ['label' => 'Digital Consulting', 'icon' => 'chat-dots', 'class' => 'digital-consulting-color'],
     ['label' => 'Custom Tech Solutions', 'icon' => 'tools', 'class' => 'custom-tech-solutions-color']
 ];

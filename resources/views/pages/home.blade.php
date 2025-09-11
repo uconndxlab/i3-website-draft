@@ -113,9 +113,7 @@
             <div class="row align-items-top g-5">
                 <div class="col-lg-7" data-aos="fade-right">
                     <p class="text-light">
-                        The Internal Insights & Innovation (i3) team provides custom software development, web design,
-                        and other digital services in support of improving UConn's business processes, academic operations,
-                        and research enterprise.
+The Internal Insights & Innovation (i3) team provides custom software development, web design, design thinking, and other innovation services in support of improving UConn's business processes, academic operations, and research enterprise.
                     </p>
                     <p class="text-light">
                         We're not trying to reinvent the wheel—sometimes, we just help our colleagues find the wheel and use
@@ -182,12 +180,10 @@
                             class="border-bottom border-2 pb-3 border-primary">For</span> The University</h2>
 
                     <p class="text-light">
-                        Our goal is to support UConn's mission by providing practical, purpose-driven tools and services
-                        that help the university run more efficiently, support innovation, and improve the day-to-day
-                        experience of working, researching, and learning here. </p>
+Our goal is to support UConn's mission by providing practical, purpose-driven services and tools that help the university run more efficiently, support innovation, and improve the day-to-day experience of working, researching, and learning here. </p>
                     <p class="text-light">
-                        Sometimes that means quick fixes or process improvements. Other times, it means replacing a vendor
-                        system or building something new from scratch.
+Sometimes that means quick fixes or process improvements. Other times, it means replacing a vendor system or imagining something new from scratch.
+
                     </p>
 
 
