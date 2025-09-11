@@ -27,17 +27,6 @@
         font-weight: bold;
     }
 
-    @media (max-width: 768px) {
-        .logo-container {
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .merge-symbol {
-            transform: rotate(90deg);
-        }
-    }
-
     .gs-link {
         text-decoration-line: none;
     }
@@ -50,6 +39,21 @@
         display: flex;
         justify-content: center;
         gap: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .logo-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .merge-symbol {
+            transform: rotate(90deg);
+        }
+
+        .btn-layout {
+            flex-direction: column;
+        }
     }
 </style>
 
