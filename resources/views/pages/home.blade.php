@@ -613,7 +613,8 @@
             }
 
             .banner-actions {
-                display: none;
+                display: flex;
+                align-items: center;
             }
             
             .banner-cta {
@@ -621,6 +622,10 @@
                 display: flex;
                 justify-content: flex-end;
                 flex-shrink: 0;
+            }
+            
+            .banner-cta .d-md-none {
+                display: none !important;
             }
             
             .banner-cta .btn-arrow-slide-cont {
@@ -706,7 +711,7 @@
             </div>
             <div class="banner-content">
                 <div class="banner-title"><code class="d-none d-md-inline" style="font-size:16px">git merge greenhouse</code>
-                    <code class="d-inline d-md-none">We've Merged with Greenhouse Studios.</code>
+                    <span class="d-inline d-md-none">We've merged with Greenhouse Studios! <a href="{{ route('merger') }}" style="color:#4DB3FF; text-decoration:underline; font-weight:normal;">Learn more</a></span>
                 </div>
                 <div class="banner-text fs-6">
                     <strong>i3 is merging with Greenhouse Studios.</strong>
@@ -765,7 +770,7 @@
         // Check if banner was previously dismissed
         document.addEventListener('DOMContentLoaded', function() {
             // Remove this line when you want the banner to persist dismissal
-             localStorage.removeItem('merger-banner-dismissed');
+             // localStorage.removeItem('merger-banner-dismissed');
 
             if (localStorage.getItem('merger-banner-dismissed') === 'true') {
                 const banner = document.getElementById('merger-banner');
