@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Our Merger')
+@section('title', 'Greenhouse Studios Merger')
 @section('meta_description', 'Learn about the exciting merger between i3 and Greenhouse Studios, combining innovation and technology to enhance scholarly practices at UConn.')
 
 @section('content')
