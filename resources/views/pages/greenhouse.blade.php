@@ -38,11 +38,11 @@
                 <p>
                     Predicated on a history of forging new approaches to scholarly work rooted in radical collaboration and 
                     design thinking methodologies, Greenhouse Studios has always been a place for imagining new futures and growing 
-                    big ideas, together. This new phase of growth poses and exciting opportunity for our team to increase the breadth 
+                    big ideas, together. This new phase of growth poses an exciting opportunity for our team to increase the breadth 
                     and depth of our reach, both within and beyond the university.
                 </p>
                 <p>
-                    As we merge with our incredible colleagues at i3, we are already dreaming up so many exciting new directions that we will take on together. By joining forces, we look forward to integrating Greenhouse Studios' pioneering approach directly into the university's core practices, all while preserving the innovative and human-centered spirit which remains at the center of our practice. Stay tuned!
+                    As we merge with our incredible colleagues at i3, we are already dreaming up so many exciting new directions that we will pursue together. By joining forces, we look forward to integrating Greenhouse Studios' pioneering approach directly into the university's core practices, all while preserving the innovative and human-centered spirit, which remains at the center of our practice. Stay tuned!
                 </p>
             </div>
 
