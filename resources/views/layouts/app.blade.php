@@ -6,6 +6,9 @@
     <title>@yield('title', 'i3') | Internal Insights & Innovation | UConn</title>
     <script type="application/ld+json" src="{{ asset('structured-data.jsonld') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="{{ asset('img/i3/room.webp') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="image_src" href="{{ asset('img/i3/room.webp') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
