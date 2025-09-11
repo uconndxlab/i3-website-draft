@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title', 'i3') | Internal Insights & Innovation | UConn</title>
-<script type="application/ld+json" src="{{ asset('structured-data.jsonld') }}"></script>
+    <script type="application/ld+json" src="{{ asset('structured-data.jsonld') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,18 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQW17CJV2T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-JQW17CJV2T');
+    </script>
 
     <!-- Your own styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -146,8 +158,8 @@
                                 <i class="bi bi-github"></i>
                             </a>
                             <a title="View our LinkedIn Profile" aria-label="LinkedIn Profile"
-                                href="https://www.linkedin.com/company/uconn-i3/"
-                                target="_blank" class="text-light opacity-75 hover-opacity-100 fs-5">
+                                href="https://www.linkedin.com/company/uconn-i3/" target="_blank"
+                                class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-linkedin"></i>
                             </a>
                             <a title="Email Us" href="mailto:i3@uconn.edu" aria-label="Email i3@uconn.edu"
@@ -247,7 +259,8 @@
                 <!--end dark footer-->
 
                 <div class="container footer-info d-flex justify-space-between flex-wrap justify-content-center pt-4">
-                    <a class="footer-link small" href="https://uconn.edu" aria-label="University of Connecticut" target="_blank">© 2025 University of
+                    <a class="footer-link small" href="https://uconn.edu" aria-label="University of Connecticut"
+                        target="_blank">© 2025 University of
                         Connecticut</a>
                     <a class="footer-link small" href="https://uconn.edu/disclaimers-privacy-copyright/"
                         target="_blank">Disclaimers, Privacy &amp;
@@ -272,13 +285,13 @@
 </script>
 
 <script type='text/javascript' src='https://ucommobjectstorage.blob.core.windows.net/cookie-jar/cookie-notification.js'>
-    </script>
-    <noscript>
-        <p>Our websites may use cookies to personalize and enhance your experience. By continuing without changing your
-            cookie settings, you agree to this collection. For more information, please see our <a
-                href="https://privacy.uconn.edu/university-website-notice/" target="_blank">University Websites
-                Privacy Notice</a>.</p>
-    </noscript>
+</script>
+<noscript>
+    <p>Our websites may use cookies to personalize and enhance your experience. By continuing without changing your
+        cookie settings, you agree to this collection. For more information, please see our <a
+            href="https://privacy.uconn.edu/university-website-notice/" target="_blank">University Websites
+            Privacy Notice</a>.</p>
+</noscript>
 
 @vite('resources/js/app.js')
 @vite('resources/js/starParticles.js')
