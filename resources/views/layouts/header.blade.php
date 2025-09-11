@@ -54,21 +54,23 @@
   <header class="sticky-top py-3 bg-dark py-2">
       <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
           <div class="container">
-              <div  style="max-width:85%">
+              <div style="max-width:85%">
                   <h1 class="header-level-one mb-0">
                       <a href="/" class="link-offset-1">
                           Internal Insights & Innovation
                       </a>
                   </h1>
               </div>
-              <button style="border-color:#fff;" class="navbar-toggler btn-outline-white" type="button" data-bs-toggle="collapse" data-bs-target="#i3navbarContent"
-                  aria-controls="i3navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="bi bi-list text-white "></i>
-                </button>
-              <div class="text-center text-md-left collapse navbar-collapse flex-grow-0 mt-2" id="i3navbarContent" data-bs-theme="dark">
+              <button style="border-color:#fff;" class="navbar-toggler btn-outline-white" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#i3navbarContent" aria-controls="i3navbarContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="bi bi-list text-white "></i>
+              </button>
+              <div class="text-center text-md-left collapse navbar-collapse flex-grow-0 mt-2" id="i3navbarContent"
+                  data-bs-theme="dark">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                          <a class="nav-link{{ (request()->routeIs('team') || request()->routeIs('alumni')) ? ' active' : '' }}"
+                          <a class="nav-link{{ request()->routeIs('team') || request()->routeIs('alumni') ? ' active' : '' }}"
                               href="{{ route('team') }}">People</a>
                       </li>
                       <li class="nav-item">
@@ -85,6 +87,17 @@
                               Connect
                           </a>
                       </li>
+                      
+                      @if(now()->gte('2025-09-03'))
+                      <li class="nav-item ms-2">
+                          <a class="nav-link{{ request()->routeIs('merger') ? ' active' : '' }}" 
+                             href="{{ route('merger') }}"
+                             style="background: rgba(140, 201, 71, 0.1); border: 1px solid rgba(140, 201, 71, 0.3); border-radius: 6px; padding: 0.4rem 0.8rem;">
+                              <img src="{{ asset('img/i3/g-icon-white.png') }}" alt="GS" style="height: 28px; width: auto; margin-right: 6px;">
+                              <span style="color: #8CC947; font-weight: bold; font-size: 0.8em;">Big News! 👀</span>
+                          </a>
+                      </li>
+                      @endif
                   </ul>
               </div>
           </div>

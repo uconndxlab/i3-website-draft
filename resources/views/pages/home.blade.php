@@ -113,7 +113,9 @@
             <div class="row align-items-top g-5">
                 <div class="col-lg-7" data-aos="fade-right">
                     <p class="text-light">
-The Internal Insights & Innovation (i3) team provides custom software development, web design, design thinking, and other innovation services in support of improving UConn's business processes, academic operations, and research enterprise.
+                        The Internal Insights & Innovation (i3) team provides custom software development, web design,
+                        design thinking, and other innovation services in support of improving UConn's business processes,
+                        academic operations, and research enterprise.
                     </p>
                     <p class="text-light">
                         We're not trying to reinvent the wheel—sometimes, we just help our colleagues find the wheel and use
@@ -180,9 +182,12 @@ The Internal Insights & Innovation (i3) team provides custom software developmen
                             class="border-bottom border-2 pb-3 border-primary">For</span> The University</h2>
 
                     <p class="text-light">
-Our goal is to support UConn's mission by providing practical, purpose-driven services and tools that help the university run more efficiently, support innovation, and improve the day-to-day experience of working, researching, and learning here. </p>
+                        Our goal is to support UConn's mission by providing practical, purpose-driven services and tools
+                        that help the university run more efficiently, support innovation, and improve the day-to-day
+                        experience of working, researching, and learning here. </p>
                     <p class="text-light">
-Sometimes that means quick fixes or process improvements. Other times, it means replacing a vendor system or imagining something new from scratch.
+                        Sometimes that means quick fixes or process improvements. Other times, it means replacing a vendor
+                        system or imagining something new from scratch.
 
                     </p>
 
@@ -251,9 +256,8 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
 
         @php
             use App\Models\TeamMember;
-            $teamMembers = TeamMember::where(function($query) {
-            $query->whereNull('tags')
-                  ->orWhere('tags', 'not like', '%alumni%');
+            $teamMembers = TeamMember::where(function ($query) {
+                $query->whereNull('tags')->orWhere('tags', 'not like', '%alumni%');
             })->get();
         @endphp
 
@@ -582,7 +586,7 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
             .dismissable-banner {
                 animation: none;
             }
-            
+
             .dismissable-banner.hidden {
                 animation: none;
                 opacity: 0;
@@ -607,7 +611,7 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
                 flex: 1;
                 min-width: 0;
             }
-            
+
             .banner-icon {
                 display: none;
             }
@@ -616,38 +620,38 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
                 display: flex;
                 align-items: center;
             }
-            
+
             .banner-cta {
                 margin-top: 0;
                 display: flex;
                 justify-content: flex-end;
                 flex-shrink: 0;
             }
-            
+
             .banner-cta .d-md-none {
                 display: none !important;
             }
-            
+
             .banner-cta .btn-arrow-slide-cont {
                 padding: 4px 8px;
                 font-size: 12px;
             }
-            
+
             .banner-cta .btn-arrow-slide-text {
                 font-size: 12px;
             }
-            
+
             .banner-close {
                 min-width: 40px;
                 min-height: 40px;
                 flex-shrink: 0;
             }
-            
+
             .banner-content {
                 font-size: 13px;
                 min-width: 0;
             }
-            
+
             .banner-title {
                 font-size: 11px;
                 margin: 0 0 2px 0;
@@ -666,14 +670,14 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
                 font-weight: 600;
             }
 
-         
-            
+
+
             /* Override the banner text content on mobile */
             .banner-text::before {
                 content: "We've merged with Greenhouse Studios!";
                 font-weight: 600;
             }
-            
+
             .banner-text * {
                 display: none;
             }
@@ -684,7 +688,7 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
             .dismissable-banner {
                 border: 2px solid white;
             }
-            
+
             .banner-close {
                 border: 1px solid white;
             }
@@ -698,110 +702,120 @@ Sometimes that means quick fixes or process improvements. Other times, it means 
     </style>
 
     <!-- Dismissable Banner - Only show after September 3, 2025 -->
-    @if(now()->gte('2025-09-03'))
-    <div id="merger-banner" class="dismissable-banner" role="region" aria-label="Important announcement about i3 merger" aria-live="polite">
-        <div class="banner-header">
-            <div class="banner-icon" aria-hidden="true">
-                <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                    <title>git merge icon</title>
-                    <path
-                        d="M385,224a64,64,0,0,0-55.33,31.89c-42.23-1.21-85.19-12.72-116.21-31.33-32.2-19.32-49.71-44-52.15-73.35a64,64,0,1,0-64.31.18V360.61a64,64,0,1,0,64,0V266.15c44.76,34,107.28,52.38,168.56,53.76A64,64,0,1,0,385,224ZM129,64A32,32,0,1,1,97,96,32,32,0,0,1,129,64Zm0,384a32,32,0,1,1,32-32A32,32,0,0,1,129,448ZM385,320a32,32,0,1,1,32-32A32,32,0,0,1,385,320Z" />
-                </svg>
-            </div>
-            <div class="banner-content">
-                <div class="banner-title"><code class="d-none d-md-inline" style="font-size:16px">git merge greenhouse</code>
-                    <span class="d-inline d-md-none">We've merged with Greenhouse Studios! <a href="{{ route('merger') }}" style="color:#4DB3FF; text-decoration:underline; font-weight:normal;">Learn more</a></span>
+    @if (now()->gte('2025-09-03'))
+        <div id="merger-banner" class="dismissable-banner" role="region"
+            aria-label="Important announcement about i3 merger" aria-live="polite">
+            <div class="banner-header">
+                <div class="banner-icon" aria-hidden="true">
+                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <svg fill="#000000" width="800px" height="800px" viewBox="0 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <title>git merge icon</title>
+                        <path
+                            d="M385,224a64,64,0,0,0-55.33,31.89c-42.23-1.21-85.19-12.72-116.21-31.33-32.2-19.32-49.71-44-52.15-73.35a64,64,0,1,0-64.31.18V360.61a64,64,0,1,0,64,0V266.15c44.76,34,107.28,52.38,168.56,53.76A64,64,0,1,0,385,224ZM129,64A32,32,0,1,1,97,96,32,32,0,0,1,129,64Zm0,384a32,32,0,1,1,32-32A32,32,0,0,1,129,448ZM385,320a32,32,0,1,1,32-32A32,32,0,0,1,385,320Z" />
+                    </svg>
                 </div>
-                <div class="banner-text fs-6">
-                    <strong>i3 is merging with Greenhouse Studios.</strong>
-                    UConn is bringing together the functions and staff of
-                    two highly innovative groups, Greenhouse Studios and i3 (Internal Insights and Innovation). This merger creates a stronger hub for digital scholarship at UConn, combining i3's technical expertise with Greenhouse's innovative design approach to support research and academic work across campus.
+                <div class="banner-content">
+                    <div class="banner-title"><code class="d-none d-md-inline" style="font-size:16px">git merge
+                            greenhouse</code>
+                        <span class="d-inline d-md-none">We've merged with Greenhouse Studios! <a
+                                href="{{ route('merger') }}"
+                                style="color:#4DB3FF; text-decoration:underline; font-weight:normal;">Learn more</a></span>
+                    </div>
+                    <div class="banner-text fs-6">
+                        <strong>i3 is merging with Greenhouse Studios.</strong>
+                        UConn is bringing together the functions and staff of
+                        two highly innovative groups, Greenhouse Studios and i3 (Internal Insights and Innovation). This
+                        merger creates a stronger hub for digital scholarship at UConn, combining i3's technical expertise
+                        with Greenhouse's innovative design approach to support research and academic work across campus.
+                    </div>
+                </div>
+                <div class="banner-actions">
+                    <button class="banner-close" onclick="dismissBanner()" aria-label="Close merger announcement"
+                        title="Close">
+                        <i class="bi bi-x"></i>
+                    </button>
                 </div>
             </div>
-            <div class="banner-actions">
-                <button class="banner-close" onclick="dismissBanner()" aria-label="Close merger announcement" title="Close">
-                    <i class="bi bi-x"></i>
-                </button>
+
+            <div class="banner-cta">
+                <a href="{{ route('merger') }}"
+                    class="d-none d-md-inline-block btn-arrow-slide-cont btn-arrow-slide-cont--white" style="padding:0;"
+                    aria-describedby="merger-description">
+                    <span class="btn-arrow-slide-circle" aria-hidden="true">
+                        <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                    </span>
+                    <span class="btn-arrow-slide-text">About Our Merger</span>
+                </a>
+
+                <a href="{{ route('merger') }}" class="d-md-none"
+                    style="font-size:13px; color:#fff; text-decoration:underline; margin-left:8px;">
+                    Learn More
+                </a>
+
+            </div>
+
+            <div id="merger-description" class="visually-hidden">
+                Learn more about the merger between i3 and Greenhouse Studios
             </div>
         </div>
-        
-        <div class="banner-cta">
-            <a href="{{ route('merger') }}" class="d-none d-md-inline-block btn-arrow-slide-cont btn-arrow-slide-cont--white"
-                style="padding:0;" aria-describedby="merger-description">
-                <span class="btn-arrow-slide-circle" aria-hidden="true">
-                    <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                </span>
-                <span class="btn-arrow-slide-text">About Our Merger</span>
-            </a>
 
-            <a href="{{ route('merger') }}" class="d-md-none" style="font-size:13px; color:#fff; text-decoration:underline; margin-left:8px;">
-                Learn More
-            </a>
+        <script>
+            function dismissBanner() {
+                const banner = document.getElementById('merger-banner');
+                banner.classList.add('hidden');
 
-        </div>
-        
-        <div id="merger-description" class="visually-hidden">
-            Learn more about the merger between i3 and Greenhouse Studios
-        </div>
-    </div>
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    banner.remove();
+                }, 300);
 
-    <script>
-        function dismissBanner() {
-            const banner = document.getElementById('merger-banner');
-            banner.classList.add('hidden');
-
-            // Remove from DOM after animation
-            setTimeout(() => {
-                banner.remove();
-            }, 300);
-
-            // Store dismissal in localStorage
-            localStorage.setItem('merger-banner-dismissed', 'true');
-        }
-
-        // Handle keyboard interactions
-        function handleBannerKeydown(event) {
-            if (event.key === 'Escape') {
-                dismissBanner();
+                // Store dismissal in localStorage
+                localStorage.setItem('merger-banner-dismissed', 'true');
             }
-        }
 
-        // Check if banner was previously dismissed
-        document.addEventListener('DOMContentLoaded', function() {
-            // Remove this line when you want the banner to persist dismissal
-             // localStorage.removeItem('merger-banner-dismissed');
+            // Handle keyboard interactions
+            function handleBannerKeydown(event) {
+                if (event.key === 'Escape') {
+                    dismissBanner();
+                }
+            }
 
-            if (localStorage.getItem('merger-banner-dismissed') === 'true') {
+            // Check if banner was previously dismissed
+            document.addEventListener('DOMContentLoaded', function() {
+                // Remove this line when you want the banner to persist dismissal
+                // localStorage.removeItem('merger-banner-dismissed');
+
+                if (localStorage.getItem('merger-banner-dismissed') === 'true') {
+                    const banner = document.getElementById('merger-banner');
+                    if (banner) {
+                        banner.remove();
+                    }
+                    return;
+                }
+
+                // Add keyboard event listeners if banner exists
                 const banner = document.getElementById('merger-banner');
                 if (banner) {
-                    banner.remove();
+                    // Add keyboard support
+                    document.addEventListener('keydown', handleBannerKeydown);
+
+                    // Focus management - move focus to banner when it appears
+                    setTimeout(() => {
+                        const closeButton = banner.querySelector('.banner-close');
+                        if (closeButton && document.activeElement === document.body) {
+                            closeButton.focus();
+                        }
+                    }, 500); // Small delay to let page load
+
+                    // Cleanup when banner is dismissed
+                    const originalDismiss = window.dismissBanner;
+                    window.dismissBanner = function() {
+                        document.removeEventListener('keydown', handleBannerKeydown);
+                        originalDismiss();
+                    };
                 }
-                return;
-            }
-
-            // Add keyboard event listeners if banner exists
-            const banner = document.getElementById('merger-banner');
-            if (banner) {
-                // Add keyboard support
-                document.addEventListener('keydown', handleBannerKeydown);
-                
-                // Focus management - move focus to banner when it appears
-                setTimeout(() => {
-                    const closeButton = banner.querySelector('.banner-close');
-                    if (closeButton && document.activeElement === document.body) {
-                        closeButton.focus();
-                    }
-                }, 500); // Small delay to let page load
-
-                // Cleanup when banner is dismissed
-                const originalDismiss = window.dismissBanner;
-                window.dismissBanner = function() {
-                    document.removeEventListener('keydown', handleBannerKeydown);
-                    originalDismiss();
-                };
-            }
-        });
-    </script>
+            });
+        </script>
     @endif
 @endsection

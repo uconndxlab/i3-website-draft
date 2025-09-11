@@ -192,6 +192,8 @@
                                 <a href="{{ route('connect') }}"
                                     class="text-light opacity-75 text-decoration-none hover-opacity-100">Connect</a>
                             </li>
+
+
                         </ul>
                     </div>
 
