@@ -20,6 +20,13 @@ Route::controller(PageController::class)->group(function () {
         }
         return app(PageController::class)->merger();
     })->name('merger');
+
+    Route::get('/greenhouse-studios', function () {
+        if (now()->lt('2025-09-03')) {
+            abort(404);
+        }
+        return app(PageController::class)->greenhouse();
+    })->name('greenhouse-studios');
 });
 
 Route::resource('projects', WorkController::class)->only(['index']);

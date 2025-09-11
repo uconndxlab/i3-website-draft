@@ -64,4 +64,8 @@ class PageController extends Controller
     public function merger() {
         return view('pages.merger');
     }
+
+    public function greenhouse() {
+        return view('pages.greenhouse');
+    }
 }

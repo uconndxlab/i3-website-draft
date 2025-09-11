@@ -18,7 +18,7 @@
 
     .logo-container img {
         max-height: 80px;
-        width: auto;
+        max-width: 100px;
     }
 
     .merge-symbol {
@@ -36,6 +36,20 @@
         .merge-symbol {
             transform: rotate(90deg);
         }
+    }
+
+    .gs-link {
+        text-decoration-line: none;
+    }
+
+    .gs-btn {
+        background-color: #8cc948;
+    }
+
+    .btn-layout {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
     }
 </style>
 
@@ -94,16 +108,31 @@
                     <strong>More info to come soon!</strong> Stay tuned for updates about this exciting evolution.
                 </div>
 
-                <!-- Read the Announcement Button -->
-                <div class="text-center mt-4">
+                <div class="btn-layout">
+                    <!-- Read the Announcement Button -->
+                    <div class="text-center mt-4">
 
-                    <button type="button" class="btn-arrow-slide-cont btn-arrow-slide-cont--white"
-                        data-bs-toggle="modal" data-bs-target="#announcementModal">
-                        <span class="btn-arrow-slide-circle" aria-hidden="true">
-                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                        </span>
-                        <span class="btn-arrow-slide-text">Read the Announcement</span>
-                    </button>
+                        <button type="button" class="btn-arrow-slide-cont btn-arrow-slide-cont--white"
+                            data-bs-toggle="modal" data-bs-target="#announcementModal">
+                            <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                            </span>
+                            <span class="btn-arrow-slide-text">Read the Announcement</span>
+                        </button>
+                    </div>
+
+                    <!-- More about Greenhouse Studios Button -->
+
+                    <div class="text-center mt-4">
+
+                        <button type="button" class="btn-arrow-slide-cont btn-arrow-slide-cont--white"
+                            data-bs-toggle="modal" data-bs-target="#announcementModal">
+                            <span class="btn-arrow-slide-circle" aria-hidden="true">
+                                <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                            </span>
+                            <a class="btn-arrow-slide-text gs-link" href="/greenhouse-studios">More About Greenhouse Studios</a>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Announcement Modal -->
