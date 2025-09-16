@@ -178,8 +178,7 @@
                 </div>
 
                 <div class="col-lg-6" data-aos="fade-left">
-                    <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
-                            class="border-bottom border-2 pb-3 border-primary">For</span> The University</h2>
+                    <h2 class="mb-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down">For The <span class="border-bottom border-2 pb-3 border-primary">University</span></h2>
 
                     <p class="text-light">
                         Our goal is to support UConn's mission by providing practical, purpose-driven services and tools
