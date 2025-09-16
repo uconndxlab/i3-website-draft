@@ -265,7 +265,7 @@
                     <img src = "/../img/i3/i3-symbol-light-blue.svg" alt="i3 symbol" />
                     <p>Powered by
                     </p>
-                    <a class="btn" target="_blank" href="https://i3.core.uconn.edu/"> i3 </a>
+                    <a class="btn" target="_blank" href="https://i3.uconn.edu"> i3 </a>
                 </section>
                 <!--end dark footer-->
 
