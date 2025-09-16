@@ -245,7 +245,7 @@
             </div>
         </div>
 
-        <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 10vh; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
+        <div id="alumniScroller2Contain" style="left: 0; right: 0; bottom: 12vh; position: absolute; z-index: 0; width: 100%" aria-hidden="true" role="presentation" >
             <div class="mobile-scaledown">
                 <div id="alumniScroller2" style="visibility:hidden;" class="bg-white d-block z-1 py-4">
                     @foreach(collect(App\Services\Brands::$brands)->shuffle() as $name => $logo)
