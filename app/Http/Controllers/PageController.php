@@ -57,7 +57,12 @@ class PageController extends Controller
     }
 
     public function alumni() {
-        $alumni = TeamMember::where('tags', 'like', '%alumni%')->get();
+        $alumni = TeamMember::where('tags', 'like', '%alumni%')
+            ->get()
+            ->sortBy(function ($person) {
+                $parts = explode(' ', $person->name);
+                return end($parts);
+            });
         return view('pages.alumni', compact('alumni'));
     }
 
