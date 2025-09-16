@@ -157,7 +157,7 @@
                         <p>
                             Our student staff are the heart of i3. They bring fresh perspectives, technical skills, and a
                             passion for innovation that drives our projects forward. From app development to research
-                            support,they make it happen.
+                            support, they make it happen.
                         </p>
                     </div>
 
