@@ -10,99 +10,48 @@
     border-radius: 1rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 18px 10px 10px 10px;
 }
 
 .person-card .card-outline {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    border: 2px solid white;
-    border-radius: 1rem;
-    z-index: 0;
-
+    display: none;
 }
 
 .person-photo {
-    position: absolute;
-    top: 10px;
-    left: 10px;
     width: 100%;
-    height: 100%;
+    height: 220px;
     object-fit: cover;
-    z-index: 1;
     border-radius: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+    margin-bottom: 12px;
+    position: static;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.person-overlay {
-    /* position: absolute; */
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 2;
-    bottom: -10px;
-    left: 10px;
-    border-radius: 0 0 1rem 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-
-    overflow: hidden;
-}
-
-.person-name-and-role {
-    text-shadow: rgba(0, 0, 0, 0.78) 0px 2px 10px;
-    /* Dark highlight background color */
-    padding: 5px;
-    /* Add some padding for better appearance */
-    border-radius: 5px;
-    /* Rounded corners for the highlight */
-    padding-left: 10px;
-    padding-right: 10px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: relative;
-}
-
-.lastname {
-    height: 0px;
-    opacity: 0;
-    transform: translateY(20px);
-    overflow: hidden;
-    transition:
-        opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-        height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+.person-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #fff;
+    margin-bottom: 2px;
 }
 
 .person-role {
-    opacity: 0;
-    height: 0px;
-    transform: translateY(20px);
-    overflow: hidden;
-    transition:
-        opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-        height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #fff;
+    font-size: 0.95em;
+    margin-bottom: 2px;
 }
 
-.person-card:hover .person-photo,
-.person-card:hover .person-overlay {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-
+.person-tags {
+    color: #b8c6d1;
+    font-size: 0.9em;
+    font-style: italic;
+    margin-bottom: 2px;
 }
 
-.person-card:hover .lastname,
-.person-card:hover .person-role {
-    display: inline;
-    opacity: 1;
-    height: auto;
-    transform: translateY(0);
+.person-linkedin {
+    display: inline-block;
+    margin-top: 4px;
 }
 </style>
 
@@ -127,25 +76,29 @@ $tagmap = [
                 style="width:50px"></span>
 
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5 justify-content-center">
             @foreach ($alumni as $person)
-                <div class="col-md-3 mb-5" data-aos="fade-up">
-                    <h3 class="fs-5 mb-1">{{ $person->name }}</h3>
-                    <p class="mb-0">{{ $person->role }}</p>
-                    @php
-                        $matchedTags = collect($person->tags)
-                            ->filter(fn($tag) => array_key_exists($tag, $tagmap))
-                            ->map(fn($tag) => $tagmap[$tag])
-                            ->values();
-                    @endphp
-                    @if ($matchedTags->isNotEmpty())
-                        <p class="text-muted fst-italic mb-0">{{ $matchedTags->join(', ') }}</p>
-                    @endif
-
-                    @if ( $person->linkedin )
-                        <a href="{{ $person->linkedin }}" target="_blank" rel="noopener noreferrer"
-                            class="mb-2" title="LinkedIn Profile for {{ $person->name }}" aria-label="LinkedIn for {{ $person->name }}"><i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i></a>
-                    @endif
+                <div class="col-6 col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="person-card">
+                        @if ($person->best_image_url)
+                            <img src="{{ $person->best_image_url }}" alt="Photo of {{ $person->name }}" class="person-photo">
+                        @endif
+                        <div class="person-name">{{ $person->name }}</div>
+                        <div class="person-role">{{ $person->role }}</div>
+                        @php
+                            $matchedTags = collect($person->tags)
+                                ->filter(fn($tag) => array_key_exists($tag, $tagmap))
+                                ->map(fn($tag) => $tagmap[$tag])
+                                ->values();
+                        @endphp
+                        @if ($matchedTags->isNotEmpty())
+                            <div class="person-tags">{{ $matchedTags->join(', ') }}</div>
+                        @endif
+                        @if ($person->linkedin)
+                            <a href="{{ $person->linkedin }}" target="_blank" rel="noopener noreferrer"
+                                class="person-linkedin" title="LinkedIn Profile for {{ $person->name }}" aria-label="LinkedIn for {{ $person->name }}"><i class="bi bi-linkedin fs-3 text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);"></i></a>
+                        @endif
+                    </div>
                 </div>
             @endforeach
         </div>
