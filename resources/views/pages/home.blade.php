@@ -703,7 +703,7 @@
     <!-- Dismissable Banner - Only show after September 3, 2025 -->
     @if (now()->gte('2025-09-03'))
         <div id="merger-banner" class="dismissable-banner" role="region"
-            aria-label="Important announcement about i3 merger" aria-live="polite">
+            aria-label="Important announcement about i3 merger" aria-live="polite" style="display:none;">
             <div class="banner-header">
                 <div class="banner-icon" aria-hidden="true">
                     <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
@@ -763,51 +763,36 @@
             function dismissBanner() {
                 const banner = document.getElementById('merger-banner');
                 banner.classList.add('hidden');
-
-                // Remove from DOM after animation
                 setTimeout(() => {
-                    banner.remove();
+                    banner.style.display = 'none';
                 }, 300);
-
-                // Store dismissal in localStorage
                 localStorage.setItem('merger-banner-dismissed', 'true');
             }
 
-            // Handle keyboard interactions
             function handleBannerKeydown(event) {
                 if (event.key === 'Escape') {
                     dismissBanner();
                 }
             }
 
-            // Check if banner was previously dismissed
             document.addEventListener('DOMContentLoaded', function() {
-                // Remove this line when you want the banner to persist dismissal
                 // localStorage.removeItem('merger-banner-dismissed');
-
+                const banner = document.getElementById('merger-banner');
                 if (localStorage.getItem('merger-banner-dismissed') === 'true') {
-                    const banner = document.getElementById('merger-banner');
                     if (banner) {
-                        banner.remove();
+                        banner.style.display = 'none';
                     }
                     return;
                 }
-
-                // Add keyboard event listeners if banner exists
-                const banner = document.getElementById('merger-banner');
                 if (banner) {
-                    // Add keyboard support
+                    banner.style.display = '';
                     document.addEventListener('keydown', handleBannerKeydown);
-
-                    // Focus management - move focus to banner when it appears
                     setTimeout(() => {
                         const closeButton = banner.querySelector('.banner-close');
                         if (closeButton && document.activeElement === document.body) {
                             closeButton.focus();
                         }
-                    }, 500); // Small delay to let page load
-
-                    // Cleanup when banner is dismissed
+                    }, 500);
                     const originalDismiss = window.dismissBanner;
                     window.dismissBanner = function() {
                         document.removeEventListener('keydown', handleBannerKeydown);
