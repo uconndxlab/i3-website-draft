@@ -27,6 +27,10 @@ Route::controller(PageController::class)->group(function () {
         }
         return app(PageController::class)->greenhouse();
     })->name('greenhouse-studios');
+
+    Route::get('/beyond-nuremberg', function () {
+        return app(PageController::class)->beyond_nuremberg();
+    })->name('beyond-nuremberg');
 });
 
 Route::resource('projects', WorkController::class)->only(['index']);

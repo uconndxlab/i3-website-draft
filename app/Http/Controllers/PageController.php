@@ -73,4 +73,8 @@ class PageController extends Controller
     public function greenhouse() {
         return view('pages.greenhouse');
     }
+
+    public function beyond_nuremberg() {
+        return view('pages.beyond-nuremberg');
+    }
 }
