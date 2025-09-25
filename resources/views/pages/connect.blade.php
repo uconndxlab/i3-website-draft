@@ -144,7 +144,7 @@
                         <div class="card-body px-0">
                             <h3 class="card-title text-center mb-4 text-uppercase text-light letter-spacing-1">Fees</h3>
                             <div class="list-group list-group-flush">
-                                @foreach ([['label' => 'Director Project Engagement', 'amount' => 158], ['label' => 'Senior App Developer', 'amount' => 114], ['label' => 'Senior UX Designer', 'amount' => 78], ['label' => 'Student Design', 'amount' => 46]] as $fee)
+                                @foreach ([['label' => 'Director Project Engagement', 'amount' => 158], ['label' => 'Senior App Developer', 'amount' => 120], ['label' => 'Senior UX Designer', 'amount' => 79], ['label' => 'Student Design', 'amount' => 46]] as $fee)
                                     <div
                                         class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom border-primary-subtle py-3 px-4">
                                         <span>{{ $fee['label'] }}</span>
