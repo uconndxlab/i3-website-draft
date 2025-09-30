@@ -10,23 +10,65 @@ use Carbon\Carbon;
 class FetchGitHubCommits extends Command
 {
     protected $signature = 'github:fetch-commits
-        {org=uconndxlab : GitHub organization name}
-        {--token= : GitHub API token}
-        {--year=2025 : Year to fetch commit history for}';
+        {--orgs=uconndxlab,sourceryapp : Comma-separated list of GitHub organization names}
+        {--token= : GitHub API token (overrides env vars)}
+        {--year=2025 : Year to fetch commit history for}
+        {--all : Fetch data for all configured organizations}';
 
-    protected $description = 'Fetch daily GitHub commit counts for all repos in an org for a given year.';
+    protected $description = 'Fetch daily GitHub commit counts for all repos in one or more GitHub organizations for a given year.';
 
     public function handle()
     {
-        $org = $this->argument('org');
-        $token = $this->option('token') ?? env('GITHUB_API_TOKEN');
+        $orgsInput = $this->option('orgs');
+        $token = $this->option('token');
         $year = (int) $this->option('year');
+        $fetchAll = $this->option('all');
 
-        if (!$token) {
-            $this->error('GitHub API token is required.');
-            return 1;
+        // Determine which organizations to process
+        $organizations = [];
+        if ($fetchAll) {
+            $organizations = ['uconndxlab', 'sourceryapp'];
+        } else {
+            $organizations = array_map('trim', explode(',', $orgsInput));
         }
 
+        $this->info("Processing organizations: " . implode(', ', $organizations));
+
+        // Process each organization
+        foreach ($organizations as $org) {
+            $this->info("\n" . str_repeat('=', 50));
+            $this->info("Processing organization: {$org}");
+            $this->info(str_repeat('=', 50));
+
+            $orgToken = $this->getTokenForOrganization($org, $token);
+            
+            if (!$orgToken) {
+                $this->error("No API token found for organization: {$org}");
+                continue;
+            }
+
+            $this->processOrganization($org, $orgToken, $year);
+        }
+
+        return 0;
+    }
+
+    private function getTokenForOrganization($org, $overrideToken = null)
+    {
+        if ($overrideToken) {
+            return $overrideToken;
+        }
+
+        $tokenMap = [
+            'uconndxlab' => env('GITHUB_API_TOKEN_XLAB'),
+            'sourceryapp' => env('GITHUB_API_TOKEN_SOURCERYAPP'),
+        ];
+
+        return $tokenMap[$org] ?? null;
+    }
+
+    private function processOrganization($org, $token, $year)
+    {
         $start = Carbon::create($year, 1, 1)->startOfDay();
         $end = ($year === (int) date('Y'))
             ? Carbon::now()->endOfDay()
@@ -67,7 +109,7 @@ class FetchGitHubCommits extends Command
 
             if ($response->failed()) {
                 $this->error("Failed to fetch repos: " . $response->body());
-                return 1;
+                return;
             }
 
             $pageRepos = $response->json();
@@ -194,7 +236,5 @@ class FetchGitHubCommits extends Command
 
         File::put($filepath, json_encode($data, JSON_PRETTY_PRINT));
         $this->info("Saved to {$filepath}");
-
-        return 0;
     }
 }

@@ -10,3 +10,5 @@ Artisan::command('inspire', function () {
 
 // Schedule the contact submission summary to run daily at 9 AM
 Schedule::command('contact:send-summary')->dailyAt('09:00');
+
+Schedule::command('github:fetch-commits')->dailyAt('00:00');
