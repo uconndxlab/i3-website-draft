@@ -1,5 +1,7 @@
 @csrf
 
+<input type="hidden" name="publish_action" id="publish_action" value="">
+
 <div class="row">
     <div class="col-md-8">
         <div class="mb-3">
@@ -67,24 +69,18 @@
         @endif
     </div>
     <div class="d-flex gap-2">
-        @if(isset($post) && !$post->published)
-            <button type="button" 
+        @if(!isset($post) || !$post->published)
+            <button type="submit" 
                     class="btn btn-success px-4 py-2"
-                    onclick="document.getElementById('publish-form').submit();">
+                    onclick="document.getElementById('publish_action').value='publish';">
                 <i class="bi bi-check-circle me-2"></i>Save & Publish
             </button>
         @endif
-        <button class="btn btn-primary px-4 py-2">
+        <button type="submit" class="btn btn-primary px-4 py-2">
             <i class="bi bi-save me-2"></i>Save
         </button>
     </div>
 </div>
-
-@if(isset($post))
-    <form id="publish-form" action="{{ route('admin.posts.publish', $post) }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-@endif
 
 <!-- Quill WYSIWYG Editor -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
