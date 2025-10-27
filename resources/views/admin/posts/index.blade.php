@@ -74,6 +74,28 @@
                                                        title="Edit post">
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
+                                                    @if($post->published)
+                                                        <form action="{{ route('admin.posts.unpublish', $post) }}" 
+                                                              method="POST" 
+                                                              class="d-inline">
+                                                            @csrf
+                                                            <button class="btn btn-sm btn-outline-warning" 
+                                                                    title="Unpublish"
+                                                                    onclick="return confirm('Are you sure you want to unpublish this post?')">
+                                                                <i class="bi bi-x-circle"></i>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{ route('admin.posts.publish', $post) }}" 
+                                                              method="POST" 
+                                                              class="d-inline">
+                                                            @csrf
+                                                            <button class="btn btn-sm btn-outline-success" 
+                                                                    title="Publish">
+                                                                <i class="bi bi-check-circle"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                     <form action="{{ route('admin.posts.destroy', $post) }}" 
                                                           method="POST" 
                                                           class="d-inline"

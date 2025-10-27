@@ -36,6 +36,7 @@ class PostController extends Controller
             'published_at' => 'required|date',
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
+            'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
         ]);
 
         $data['url_friendly'] = Str::slug($data['title']);
@@ -54,12 +55,20 @@ class PostController extends Controller
             $data['featured_image_webp'] = $imagePaths['webp'];
         }
 
-        // Set default to draft (not published)
-        $data['published'] = false;
+        $shouldPublish = $request->input('publish_action') === 'publish';
+        $data['published'] = $shouldPublish;
+        
+        if (!isset($data['image_position'])) {
+            $data['image_position'] = 'before_content';
+        }
 
         $post = Post::create($data);
 
-        return redirect()->route('admin.posts.index')->with('success', 'Post saved as draft.');
+        $message = $shouldPublish 
+            ? 'Post created and published successfully.' 
+            : 'Post saved as draft.';
+
+        return redirect()->route('admin.posts.index')->with('success', $message);
     }
 
     public function show(Post $post)
@@ -80,6 +89,7 @@ class PostController extends Controller
             'published_at' => 'required|date',
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
+            'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
         ]);
 
         $data['url_friendly'] = Str::slug($data['title']);
@@ -109,9 +119,28 @@ class PostController extends Controller
             unset($data['featured_image']);
         }
 
+        // Always set image_position from request
+        $data['image_position'] = $request->input('image_position', $post->image_position ?? 'before_content');
+
+        $shouldPublish = $request->input('publish_action') === 'publish';
+        
+        // Preserve published status - if already published, keep it published
+        $wasPublished = $post->published;
+        if ($shouldPublish || $wasPublished) {
+            $data['published'] = true;
+        }
+
         $post->update($data);
 
-        return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
+        if ($shouldPublish) {
+            $message = 'Post saved and published successfully.';
+        } elseif ($wasPublished) {
+            $message = 'Post updated and republished successfully.';
+        } else {
+            $message = 'Post updated successfully.';
+        }
+
+        return redirect()->route('admin.posts.index')->with('success', $message);
     }
 
     public function destroy(Post $post)
@@ -136,7 +165,7 @@ class PostController extends Controller
     public function unpublish(Post $post)
     {
         $post->update(['published' => false]);
-        return back()->with('success', 'Post unpublished.');
+        return back()->with('success', 'Post unpublished successfully.');
     }
 
     public function preview(Post $post)

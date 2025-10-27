@@ -200,12 +200,13 @@
                             <!-- TODO ADD THIS TAG IDK WHAT ITS SUPPOSED TO BE<span class="blog-meta-tag">People</span> --> 
                         </div>
                         
-                        <h1 class="blog-title-image">{{ $post->title }}</h1>
-                        <div class="blog-title-underline"></div>
-                        <div class="blog-content">
-                            {!! $post->content !!}
-                        </div>
-                        @if($post->featured_image)
+                        @php
+                            $imagePosition = $post->image_position ?? 'before_content';
+                            $shouldShowImage = $imagePosition !== 'no_image' && $post->featured_image;
+                        @endphp
+                        
+                        {{-- Image before title --}}
+                        @if($shouldShowImage && $imagePosition === 'before_title')
                             <div class="blog-header">
                                 <img src="{{ $post->best_featured_image_url }}" 
                                      alt="{{ $post->title }}" 
@@ -213,6 +214,30 @@
                             </div>
                         @endif
                         
+                        <h1 class="blog-title-image">{{ $post->title }}</h1>
+                        <div class="blog-title-underline"></div>
+                        
+                        {{-- Image before content --}}
+                        @if($shouldShowImage && $imagePosition === 'before_content')
+                            <div class="blog-header">
+                                <img src="{{ $post->best_featured_image_url }}" 
+                                     alt="{{ $post->title }}" 
+                                     class="blog-featured-image">
+                            </div>
+                        @endif
+                        
+                        <div class="blog-content">
+                            {!! $post->content !!}
+                        </div>
+                        
+                        {{-- Image after content --}}
+                        @if($shouldShowImage && $imagePosition === 'after_content')
+                            <div class="blog-header">
+                                <img src="{{ $post->best_featured_image_url }}" 
+                                     alt="{{ $post->title }}" 
+                                     class="blog-featured-image">
+                            </div>
+                        @endif
                         
                     </article>
                 @empty

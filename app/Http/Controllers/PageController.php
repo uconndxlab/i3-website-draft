@@ -80,7 +80,9 @@ class PageController extends Controller
     }
 
     public function blogs() {
-        $posts = Post::where('published', true)->latest()->paginate(10);
+        $posts = Post::where('published', true)
+            ->orderBy('published_at', 'desc')
+            ->paginate(10);
         return view('pages.blogs', compact('posts'));
     }
 }

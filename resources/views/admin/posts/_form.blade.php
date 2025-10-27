@@ -43,6 +43,19 @@
 
     <div class="col-md-4">
         <div class="mb-3">
+            <label class="form-label">Image Position</label>
+            <select name="image_position" class="form-control">
+                <option value="before_title" {{ old('image_position', $post->image_position ?? 'before_content') == 'before_title' ? 'selected' : '' }}>Before Title</option>
+                <option value="before_content" {{ old('image_position', $post->image_position ?? 'before_content') == 'before_content' ? 'selected' : '' }}>Before Content (Default)</option>
+                <option value="after_content" {{ old('image_position', $post->image_position ?? 'before_content') == 'after_content' ? 'selected' : '' }}>After Content</option>
+                <option value="no_image" {{ old('image_position', $post->image_position ?? 'before_content') == 'no_image' ? 'selected' : '' }}>No Image</option>
+            </select>
+            @error('image_position')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Featured Image</label>
             <input type="file" name="featured_image" class="form-control" accept="image/*">
             @error('featured_image')
