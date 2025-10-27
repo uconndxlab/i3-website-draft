@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\TeamMember;
+use App\Models\Post;
 
 class PageController extends Controller
 {
@@ -76,5 +77,10 @@ class PageController extends Controller
 
     public function beyond_nuremberg() {
         return view('pages.beyond-nuremberg');
+    }
+
+    public function blogs() {
+        $posts = Post::where('published', true)->latest()->paginate(10);
+        return view('pages.blogs', compact('posts'));
     }
 }

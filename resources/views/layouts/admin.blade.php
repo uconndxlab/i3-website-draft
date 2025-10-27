@@ -45,6 +45,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}" href="{{ route('admin.posts.index') }}">
+                                <i class="bi bi-newspaper me-2"></i>
+                                Posts
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.team.*') ? 'active' : '' }}" href="{{ route('admin.team.index') }}">
                                 <i class="bi bi-people me-2"></i>
                                 Team Members

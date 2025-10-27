@@ -12,7 +12,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/connect', 'connect')->name('connect');
     Route::get('/contact/success', 'contactSuccess')->name('contact.success');
     Route::get('/alumni',  'alumni')->name('alumni');
-    
+    Route::get('/blogs', 'blogs')->name('blogs');
     // Merger route - only active after September 3, 2025
     Route::get('/merger', function () {
         if (now()->lt('2025-09-03')) {
@@ -48,6 +48,13 @@ Route::get('/admin', function () {
 Route::prefix('admin')->name('admin.')->middleware(['cas.auth', 'netid.auth'])->group(function () {
     Route::resource('work', \App\Http\Controllers\Admin\WorkItemController::class);
     Route::resource('team', \App\Http\Controllers\Admin\TeamMemberController::class);
+    Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
+    Route::post('posts/{post}/publish', [\App\Http\Controllers\Admin\PostController::class, 'publish'])
+        ->name('posts.publish');
+    Route::post('posts/{post}/unpublish', [\App\Http\Controllers\Admin\PostController::class, 'unpublish'])
+        ->name('posts.unpublish');
+    Route::get('posts/{post}/preview', [\App\Http\Controllers\Admin\PostController::class, 'preview'])
+        ->name('posts.preview');
     Route::resource('contact-submissions', \App\Http\Controllers\Admin\ContactSubmissionController::class)
         ->only(['index', 'show', 'destroy']);
     Route::patch('contact-submissions/{contact_submission}/mark-sent', 
