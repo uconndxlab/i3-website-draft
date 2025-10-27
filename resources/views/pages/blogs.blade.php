@@ -5,21 +5,26 @@
 @section('content')
 
 <style>
+    /* Background gradient and dot pattern */
+    .bg-dark-gradient-dots {
+        background: 
+            radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(180deg, #051a29 0%, #030a0f 100%);
+        background-size: 40px 40px, 100% 100%;
+        background-position: 0 0, 0 0;
+        min-height: 100vh;
+    }
+
     .blog-post {
         background: transparent;
-        border-radius: 24px;
         padding: 3rem;
         margin-bottom: 3rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .blog-post:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
 
     .blog-header {
+        position: relative;
         margin-bottom: 2rem;
     }
 
@@ -28,6 +33,23 @@
         height: 400px;
         object-fit: cover;
         border-radius: 16px;
+        position: relative;
+        z-index: 2;
+        transform: translate(10px, -10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Outline square effect behind the image */
+    .blog-header::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: -10px;
+        width: 100%;
+        height: 400px;
+        border: 4px solid #fff;
+        border-radius: 16px;
+        z-index: 1;
     }
 
     .blog-title-image {
@@ -55,7 +77,7 @@
 
     .blog-meta {
         font-size: 0.875rem;
-        color: #a0a0a0;
+        color: #fff;
         margin-bottom: 1.5rem;
         font-weight: 500;
     }
@@ -71,8 +93,13 @@
         font-size: 1.125rem;
         line-height: 1.8;
         color: #e0e0e0;
+        margin-bottom: 2rem;
     }
 
+
+    /* THese styles right here will be the actual style of 
+    your blog content so the actual text in your post will be styled like this
+    This is something we should most likely mess with to make look good*/
     .blog-content p {
         margin-bottom: 1.25rem;
     }
@@ -95,10 +122,6 @@
         font-size: 1.5rem;
     }
 
-    .blog-content a {
-        color: #007bff;
-        text-decoration: none;
-    }
 
     .blog-content a:hover {
         text-decoration: underline;
@@ -116,13 +139,47 @@
     .blog-content li {
         margin-bottom: 0.5rem;
     }
+
+    .decorative-blog-text {
+        position: fixed;
+        left: -130px;
+        top: 70%;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: center center;
+        font-size: 5rem;
+        font-weight: 900;
+        color: transparent;
+        -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+        text-stroke: 2px rgba(255, 255, 255, 0.1);
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+        z-index: 0;
+        pointer-events: none;
+        width: 400px;
+        text-align: center;
+    }
+
+    @media (max-width: 992px) {
+        .decorative-blog-text {
+            font-size: 3.5rem;
+            left: -150px;
+            width: 300px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .decorative-blog-text {
+            font-size: 2.5rem;
+            left: -100px;
+            width: 250px;
+        }
+    }
 </style>
 
-<section class="bg-dark text-light d-flex align-items-start px-5 py-5" style="min-height: 100vh;">
+<section class="bg-dark-gradient-dots text-light d-flex align-items-start px-5 py-5">
+    <div class="decorative-blog-text">BLOG POST</div>
     <div class="container">
         <div class="row align-items-center justify-content-center mb-5">
-            <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Blog</h2>
-            <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up" style="width:50px"></span>
         </div>
 
         <div class="row">
@@ -145,7 +202,9 @@
                         
                         <h1 class="blog-title-image">{{ $post->title }}</h1>
                         <div class="blog-title-underline"></div>
-                        
+                        <div class="blog-content">
+                            {!! $post->content !!}
+                        </div>
                         @if($post->featured_image)
                             <div class="blog-header">
                                 <img src="{{ $post->best_featured_image_url }}" 
@@ -154,9 +213,7 @@
                             </div>
                         @endif
                         
-                        <div class="blog-content">
-                            {!! $post->content !!}
-                        </div>
+                        
                     </article>
                 @empty
                     <div class="text-center py-5">
