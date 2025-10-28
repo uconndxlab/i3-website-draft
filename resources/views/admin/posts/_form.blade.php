@@ -21,6 +21,25 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Permalink (slug)</label>
+            <div class="input-group">
+                <span class="input-group-text">/blog/</span>
+                <input name="url_friendly" id="url_friendly" class="form-control" value="{{ old('url_friendly', $post->url_friendly ?? '') }}" placeholder="auto-generated-from-title">
+            </div>
+            <small class="text-muted">Customize the URL slug. Leave blank to auto-generate from the title.</small>
+            @error('url_friendly')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
+            @if(isset($post))
+            <div class="mt-1">
+                @if($post->published)
+                    <a href="{{ url('/blog/' . ($post->url_friendly ?? '')) }}" target="_blank">View public permalink</a>
+                @endif
+            </div>
+            @endif
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Published Date <span class="text-danger">*</span></label>
             <input type="date" name="published_at" class="form-control" 
                    value="{{ old('published_at', isset($post) && $post->published_at ? $post->published_at->format('Y-m-d') : '') }}" 
@@ -124,5 +143,34 @@
     document.querySelector('form').addEventListener('submit', function(e) {
         document.getElementById('content-hidden').value = quill.root.innerHTML;
     });
+
+    // Auto-generate slug from title when url_friendly is empty or when editing title initially
+    const titleInput = document.querySelector('input[name="title"]');
+    const slugInput = document.getElementById('url_friendly');
+    const slugify = (text) => {
+        return (text || '')
+            .toString()
+            .normalize('NFKD')
+            .replace(/[\u0300-\u036f]/g, '') // remove diacritics
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .trim()
+            .replace(/[\s_-]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    };
+    if (titleInput && slugInput) {
+        let userEditedSlug = slugInput.value && slugInput.value.length > 0;
+        titleInput.addEventListener('input', function() {
+            if (!userEditedSlug) {
+                slugInput.value = slugify(titleInput.value);
+            }
+        });
+        slugInput.addEventListener('input', function() {
+            userEditedSlug = slugInput.value.length > 0;
+        });
+        slugInput.addEventListener('blur', function() {
+            slugInput.value = slugify(slugInput.value);
+        });
+    }
 </script>
 

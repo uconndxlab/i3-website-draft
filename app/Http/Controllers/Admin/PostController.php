@@ -37,15 +37,17 @@ class PostController extends Controller
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
             'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
+            'url_friendly' => 'nullable|string|max:255',
         ]);
 
-        $data['url_friendly'] = Str::slug($data['title']);
+        $data['url_friendly'] = $data['url_friendly']
+            ? Str::slug($data['url_friendly'])
+            : Str::slug($data['title']);
 
-        //Better error handling when we already have a post with the same slug
-        if (Post::where('url_friendly', $data['url_friendly'])->exists()) {
+            if (Post::where('url_friendly', $data['url_friendly'])->exists()) {
             return back()
                 ->withInput()
-                ->withErrors(['title' => 'A post with this title already exists. Please use a different title.']);
+                ->withErrors(['url_friendly' => 'This permalink is already in use. Please use a different slug.']);
         }
 
         if ($request->hasFile('featured_image')) {
@@ -90,17 +92,19 @@ class PostController extends Controller
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
             'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
+            'url_friendly' => 'nullable|string|max:255',
         ]);
 
-        $data['url_friendly'] = Str::slug($data['title']);
+        $data['url_friendly'] = $data['url_friendly']
+            ? Str::slug($data['url_friendly'])
+            : Str::slug($data['title']);
 
-        //Better error handling when we already have a post with the same slug
         if (Post::where('url_friendly', $data['url_friendly'])
             ->where('id', '!=', $post->id)
             ->exists()) {
             return back()
                 ->withInput()
-                ->withErrors(['title' => 'A post with this title already exists. Please use a different title.']);
+                ->withErrors(['url_friendly' => 'This permalink is already in use. Please use a different slug.']);
         }
 
         if ($request->hasFile('featured_image')) {

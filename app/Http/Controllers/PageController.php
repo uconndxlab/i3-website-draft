@@ -85,4 +85,13 @@ class PageController extends Controller
             ->paginate(10);
         return view('pages.blogs', compact('posts'));
     }
+
+    public function blogShow(string $slug)
+    {
+        $post = Post::where('url_friendly', $slug)
+            ->where('published', true)
+            ->firstOrFail();
+
+        return view('pages.blogs', ['posts' => collect([$post])]);
+    }
 }
