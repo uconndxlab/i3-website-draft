@@ -5,15 +5,6 @@
 @section('content')
 
 <style>
-    /* Background gradient and dot pattern */
-    .bg-dark-gradient-dots {
-        background: 
-            radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(180deg, #051a29 0%, #030a0f 100%);
-        background-size: 40px 40px, 100% 100%;
-        background-position: 0 0, 0 0;
-        min-height: 100vh;
-    }
 
     .blog-post {
         background: transparent;
@@ -26,46 +17,45 @@
     .blog-header {
         position: relative;
         margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .blog-featured-image {
-        width: 100%;
-        height: clamp(260px, 55vh, 560px);
-        object-fit: cover;
+        max-width: 100%;
+        height: auto;
+        max-height: clamp(400px, 60vh, 700px);
+        object-fit: contain;
         border-radius: 16px;
         position: relative;
         z-index: 2;
         transform: translate(10px, -10px);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background-color: transparent;
+        display: block;
+        margin: 0 auto;
     }
 
     /* Outline square effect behind the image */
     .blog-header::after {
         content: '';
         position: absolute;
-        top: 10px;
-        left: -10px;
-        width: 100%;
-        height: clamp(260px, 55vh, 560px);
         border: 4px solid #fff;
         border-radius: 16px;
         z-index: 1;
+        pointer-events: none;
     }
 
     @media (max-width: 992px) {
         .blog-featured-image {
-            height: clamp(220px, 45vh, 480px);
+            max-height: clamp(300px, 50vh, 500px);
             transform: translate(6px, -6px);
             border-radius: 14px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-            object-fit: contain;
-            background-color: transparent; /*TODO::  FOr weird aspect raitos we loose our corner roundness */
         }
 
         .blog-header::after {
-            top: 6px;
-            left: -6px;
-            height: clamp(220px, 45vh, 480px);
             border-width: 3px;
             border-radius: 14px;
         }
@@ -73,13 +63,10 @@
 
     @media (max-width: 576px) {
         .blog-featured-image {
-            height: auto; /* show full image without cropping */
-            max-height: none;
+            max-height: 400px;
             transform: none;
             border-radius: 12px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-            object-fit: contain;
-            background-color: #000;
         }
 
         /* Hide decorative outline on very small screens to avoid overflow */
@@ -137,6 +124,7 @@
         line-height: 1.8;
         color: #e0e0e0;
         margin-bottom: 2rem;
+        position: relative;
     }
 
 
@@ -169,7 +157,16 @@
         max-width: 100%;
         height: auto;
         border-radius: 8px;
-        margin: 2rem 0;
+        margin: 2rem auto;
+        display: block;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Prevent images from being too small on large screens */
+    @media (min-width: 768px) {
+        .blog-content img {
+            min-width: 50%;
+        }
     }
 
     .blog-content a:hover {
@@ -209,9 +206,40 @@
         z-index: 100;
     }
 
+    .style-container {
+        width: 100vw;
+        height: calc(100% + 2rem + clamp(260px, 55vh, 560px)/2); /* 2rem for footer*/
+        background-color: #0f2e4b;
+        background: linear-gradient(to bottom, #0f2e4b 0%, #0f2e4b 80%, #111111 100%);
+        position: absolute;
+        bottom: -2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+    }
+
+    .style-container2 {
+        width: 100vw;
+        height:100px;
+        background-color: #0f2e4b;
+        position: absolute;
+        bottom: calc(100% + clamp(260px, 55vh, 560px)/2);
+        left: 50%;  
+        height: 100vh;
+        transform: translateX(-50%);
+        background: 
+            radial-gradient(circle, rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px),
+            linear-gradient(180deg, #051a29 0%, #030a0f 100%);
+        background-size: 50px 50px, 100% 100%;
+        z-index: -1;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 75%);
+        -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 75%);
+    }
+
 </style>
 
-<section class="bg-dark-gradient-dots text-light d-flex align-items-start px-5 py-5">
+<section class=" text-light d-flex align-items-start px-5 py-5">
+    
     <div class="decorative-blog-text">BLOG POST</div>
     <div class="container">
         <div class="row align-items-center justify-content-center mb-5">
@@ -219,8 +247,10 @@
 
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
-                @forelse ($posts as $post)
+                
+                @if($post)
                     <article class="blog-post" data-aos="fade-up">
+                    
                         <div class="blog-meta">
                             @if($post->author)
                                 {{ $post->author }}
@@ -242,58 +272,124 @@
                             @endif
                         </div>
                         
-                        @php
-                            $imagePosition = $post->image_position ?? 'before_content';
-                            $shouldShowImage = $imagePosition !== 'no_image' && $post->featured_image;
-                        @endphp
-                        
-                        {{-- Image before title --}}
-                        @if($shouldShowImage && $imagePosition === 'before_title')
-                            <div class="blog-header">
-                                <img src="{{ $post->best_featured_image_url }}" 
-                                     alt="{{ $post->title }}" 
-                                     class="blog-featured-image">
-                            </div>
-                        @endif
                         
                         <h1 class="blog-title-image">{{ $post->title }}</h1>
                         @if($post->subheader)
                             <p class="blog-subheader text-muted">{{ $post->subheader }}</p>
                         @endif
+                        @if($post->featured_image && $post->best_featured_image_url)
                         <div class="blog-title-underline"></div>
-                        
-                        {{-- Image before content --}}
-                        @if($shouldShowImage && $imagePosition === 'before_content')
-                            <div class="blog-header">
-                                <img src="{{ $post->best_featured_image_url }}" 
-                                     alt="{{ $post->title }}" 
-                                     class="blog-featured-image">
-                            </div>
+
+                        <div class="blog-header" id="blog-header">
+                            <img src="{{ $post->best_featured_image_url }}" 
+                                    alt="{{ $post->title }}" 
+                                    class="blog-featured-image"
+                                    id="blog-featured-image">
+                        </div>
                         @endif
-                        
                         <div class="blog-content">
                             {!! $post->content !!}
+                            <div class = "style-container"></div>
+                            <div class = "style-container2"></div>
                         </div>
-                        
-                        {{-- Image after content --}}
-                        @if($shouldShowImage && $imagePosition === 'after_content')
-                            <div class="blog-header">
-                                <img src="{{ $post->best_featured_image_url }}" 
-                                     alt="{{ $post->title }}" 
-                                     class="blog-featured-image">
-                            </div>
+                    </article>
+
+                    {{-- Navigation buttons --}}
+                    <div class="d-flex justify-content-center align-items-center mt-5 mb-5" style="gap: 1rem;">
+                        @if($prevPost)
+                            <a href="{{ route('blogs') }}?post={{ $prevPost->url_friendly }}" 
+                               class="btn btn-outline-light btn-lg text-start" 
+                               style="white-space: normal; height: 60px; display: flex; align-items: center; min-width: 150px;">
+                                <i class="bi bi-arrow-left"></i> <span>Previous</span>
+                            </a>
+                        @else
+                            <span class="btn btn-outline-secondary btn-lg disabled" style="opacity: 0.3; height: 60px; display: flex; align-items: center; min-width: 150px;">
+                                <i class="bi bi-arrow-left"></i> <span>No Older Posts</span>
+                            </span>
                         @endif
                         
-                    </article>
-                @empty
+                        @if($nextPost)
+                            <a href="{{ route('blogs') }}?post={{ $nextPost->url_friendly }}" 
+                               class="btn btn-outline-light btn-lg text-end" 
+                               style="white-space: normal; height: 60px; display: flex; align-items: center; justify-content: flex-end; min-width: 150px;">
+                                <span>Next</span> <i class="bi bi-arrow-right"></i>
+                            </a>
+                        @else
+                            <span class="btn btn-outline-secondary btn-lg disabled" style="opacity: 0.3; height: 60px; display: flex; align-items: center; justify-content: flex-end; min-width: 150px;">
+                                <span>No Newer Posts</span> <i class="bi bi-arrow-right"></i>
+                            </span>
+                        @endif
+                    </div>
+                @else
                     <div class="text-center py-5">
                         <i class="bi bi-newspaper display-1 text-muted"></i>
                         <h3 class="mt-3">No posts yet</h3>
                         <p class="text-muted">Check back soon for updates!</p>
                     </div>
-                @endforelse
+                @endif
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    // IT really does seem silly that this is needed but it is as far as I cant tell
+    // for osme reasons on weird size devices the outline goes wacko mode
+    //Bit of a hack but it works for now
+    function sizeImageOutline() {
+        const img = document.getElementById('blog-featured-image');
+        const header = document.getElementById('blog-header');
+        
+        if (!img || !header) return;
+        
+        const updateOutline = () => {
+            const imgWidth = img.offsetWidth;
+            const imgHeight = img.offsetHeight;
+            
+            if (imgWidth && imgHeight) {
+                const isMobile = window.innerWidth <= 992;
+                const offset = isMobile ? 6 : 10;
+                
+                const headerRect = header.getBoundingClientRect();
+                const imgRect = img.getBoundingClientRect();
+                const imgLeft = imgRect.left - headerRect.left;
+                const imgTop = imgRect.top - headerRect.top;
+                
+                const outlineLeft = imgLeft - offset;
+                const outlineTop = imgTop + offset;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    .blog-header::after {
+                        width: ${imgWidth}px !important;
+                        height: ${imgHeight}px !important;
+                        top: ${outlineTop}px !important;
+                        left: ${outlineLeft}px !important;
+                    }
+                `;
+                
+                const oldStyle = document.getElementById('dynamic-outline-style');
+                if (oldStyle) oldStyle.remove();
+                
+                style.id = 'dynamic-outline-style';
+                document.head.appendChild(style);
+            }
+        };
+        
+        if (img.complete) {
+            updateOutline();
+        } else {
+            img.addEventListener('load', updateOutline);
+        }
+        
+        window.addEventListener('resize', updateOutline);
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sizeImageOutline);
+    } else {
+        sizeImageOutline();
+    }
+</script>
+
 @endsection

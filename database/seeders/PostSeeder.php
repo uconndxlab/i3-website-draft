@@ -114,8 +114,8 @@ class PostSeeder extends Seeder
                 'content' => $article['content'],
                 'published' => true,
                 'published_at' => $article['published_at'],
-                'image_position' => 'no_image',
                 'tags' => $article['tags'] ?? [],
+                'featured_image' => 'post_imagesz/johnatahn.jpg',
             ]);
         }
     }

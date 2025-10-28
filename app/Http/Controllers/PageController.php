@@ -79,11 +79,39 @@ class PageController extends Controller
         return view('pages.beyond-nuremberg');
     }
 
-    public function blogs() {
-        $posts = Post::where('published', true)
+    public function blogs(Request $request) {
+        if ($request->has('post')) {
+            $slug = $request->get('post');
+            $post = Post::where('url_friendly', $slug)
+                ->where('published', true)
+                ->whereNotNull('published_at')
+                ->first();
+        } else {
+            $post = Post::where('published', true)
+                ->whereNotNull('published_at')
+                ->orderBy('published_at', 'desc')
+                ->first();
+        }
+        
+        if (!$post) {
+            return view('pages.blogs', ['post' => null, 'nextPost' => null, 'prevPost' => null]);
+        }
+
+        $nextPost = Post::where('published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '>', $post->published_at)
+            ->where('id', '!=', $post->id)
+            ->orderBy('published_at', 'asc')
+            ->first();
+
+        $prevPost = Post::where('published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<', $post->published_at)
+            ->where('id', '!=', $post->id)
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
-        return view('pages.blogs', compact('posts'));
+            ->first();
+
+        return view('pages.blogs', compact('post', 'nextPost', 'prevPost'));
     }
 
     public function blogShow(string $slug)

@@ -19,7 +19,10 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(20);
+        $posts = Post::orderByRaw('CASE WHEN published_at IS NULL THEN 1 ELSE 0 END')
+            ->orderBy('published_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -37,7 +40,6 @@ class PostController extends Controller
             'published_at' => 'nullable|date',
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
-            'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:People,News,Projects',
@@ -78,10 +80,6 @@ class PostController extends Controller
             }
         }
         
-        if (!isset($data['image_position'])) {
-            $data['image_position'] = 'before_content';
-            }
-
         // Handle tags - checkboxes return array, convert to empty array if not set
         if (!isset($data['tags']) || !is_array($data['tags'])) {
             $data['tags'] = [];
@@ -115,7 +113,6 @@ class PostController extends Controller
             'published_at' => 'nullable|date',
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
-            'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:People,News,Projects',
@@ -148,9 +145,6 @@ class PostController extends Controller
         } else {
             unset($data['featured_image']);
         }
-
-        // Always set image_position from request
-        $data['image_position'] = $request->input('image_position', $post->image_position ?? 'before_content');
 
         // Handle tags - checkboxes return array, convert to empty array if not set
         if (!isset($data['tags']) || !is_array($data['tags'])) {
@@ -219,7 +213,12 @@ class PostController extends Controller
 
     public function preview(Post $post)
     {
-        return view('pages.blogs', ['posts' => collect([$post])]);
+        // For preview, we don't need next/prev posts, so pass them as null
+        return view('pages.blogs', [
+            'post' => $post,
+            'prevPost' => null,
+            'nextPost' => null
+        ]);
     }
 
     public function uploadImage(Request $request)

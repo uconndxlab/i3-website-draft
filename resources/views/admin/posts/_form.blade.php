@@ -54,7 +54,7 @@
         <div class="mb-3">
             <label class="form-label">Permalink (slug)</label>
             <div class="input-group">
-                <span class="input-group-text">/blog/</span>
+                <span class="input-group-text">{{ route('blogs') }}?post=</span>
                 <input name="url_friendly" id="url_friendly" class="form-control" value="{{ old('url_friendly', $post->url_friendly ?? '') }}" placeholder="auto-generated-from-title">
             </div>
             <small class="text-muted">Customize the URL slug. Leave blank to auto-generate from the title.</small>
@@ -64,7 +64,7 @@
             @if(isset($post))
             <div class="mt-1">
                 @if($post->published)
-                    <a href="{{ url('/blog/' . ($post->url_friendly ?? '')) }}" target="_blank">View public permalink</a>
+                    <a href="{{ route('blogs') }}?post={{ $post->url_friendly }}" target="_blank">View public permalink</a>
                 @endif
             </div>
             @endif
@@ -91,19 +91,6 @@
     </div>
 
     <div class="col-md-4">
-        <div class="mb-3">
-            <label class="form-label">Image Position</label>
-            <select name="image_position" class="form-control">
-                <option value="before_title" {{ old('image_position', $post->image_position ?? 'before_content') == 'before_title' ? 'selected' : '' }}>Before Title</option>
-                <option value="before_content" {{ old('image_position', $post->image_position ?? 'before_content') == 'before_content' ? 'selected' : '' }}>Before Content (Default)</option>
-                <option value="after_content" {{ old('image_position', $post->image_position ?? 'before_content') == 'after_content' ? 'selected' : '' }}>After Content</option>
-                <option value="no_image" {{ old('image_position', $post->image_position ?? 'before_content') == 'no_image' ? 'selected' : '' }}>No Image</option>
-            </select>
-            @error('image_position')
-                <div class="text-danger small">{{ $message }}</div>
-            @enderror
-        </div>
-
         <div class="mb-3">
             <label class="form-label">Featured Image</label>
             <input type="file" name="featured_image" class="form-control" accept="image/*">
@@ -144,17 +131,22 @@
     </div>
 </div>
 
+
+</div>
 <!-- Quill WYSIWYG Editor -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
 <script>
+    // Initialize Quill editor
     var quill = new Quill('#content-editor', {
         theme: 'snow',
         modules: {
-            toolbar: [
+            toolbar: {
+                container: [
                 [{ 'header': [1, 2, 3, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
-                ['blockquote', 'code-block'],
+                    ['blockquote', 'code-block'],
                 [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                 [{ 'script': 'sub'}, { 'script': 'super' }],
                 [{ 'indent': '-1'}, { 'indent': '+1' }],
@@ -164,21 +156,25 @@
                 [{ 'font': [] }],
                 [{ 'align': [] }],
                 ['clean'],
-                ['link', 'image']
-            ]
+                    ['link', 'image']
+                ]
+            }
         }
     });
 
-    // Custom image handler to upload images to backend instead of base64
     var toolbar = quill.getModule('toolbar');
+    
+    // Custom image handler to upload images to backend
     toolbar.addHandler('image', function() {
         var input = document.createElement('input');
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');
+        
         input.click();
         
         input.onchange = function() {
             var file = input.files[0];
+            
             if (file) {
                 var formData = new FormData();
                 formData.append('image', file);
@@ -195,12 +191,11 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success && data.url) {
                         quill.deleteText(range.index, 'Uploading image...'.length);
+                        if (data.success && data.url) {
                         quill.insertEmbed(range.index, 'image', data.url);
                         quill.setSelection(range.index + 1);
                     } else {
-                        quill.deleteText(range.index, 'Uploading image...'.length);
                         alert('Failed to upload image');
                     }
                 })
@@ -246,4 +241,3 @@
         });
     }
 </script>
-

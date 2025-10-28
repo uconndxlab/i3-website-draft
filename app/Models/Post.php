@@ -17,7 +17,6 @@ class Post extends Model
         'featured_image',
         'featured_image_medium',
         'featured_image_webp',
-        'image_position',
         'tags',
     ];
 
