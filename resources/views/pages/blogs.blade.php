@@ -58,6 +58,13 @@
         margin-bottom: 1rem;
     }
 
+    .blog-subheader {
+        font-size: 1.25rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        opacity: 0.8;
+    }
+
     .blog-title-underline {
         height: 4px;
         width: 100px;
@@ -206,6 +213,9 @@
                         @endif
                         
                         <h1 class="blog-title-image">{{ $post->title }}</h1>
+                        @if($post->subheader)
+                            <p class="blog-subheader text-muted">{{ $post->subheader }}</p>
+                        @endif
                         <div class="blog-title-underline"></div>
                         
                         {{-- Image before content --}}

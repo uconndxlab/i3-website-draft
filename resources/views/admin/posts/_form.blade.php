@@ -13,6 +13,15 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Subheader</label>
+            <input name="subheader" class="form-control" value="{{ old('subheader', $post->subheader ?? '') }}" placeholder="Optional subtitle or brief description">
+            <small class="text-muted">Optional subtext that appears below the title</small>
+            @error('subheader')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Author</label>
             <input name="author" class="form-control" value="{{ old('author', $post->author ?? '') }}">
             @error('author')

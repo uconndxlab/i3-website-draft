@@ -32,6 +32,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
+            'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
             'published_at' => 'required|date',
             'content' => 'required|string',
@@ -94,6 +95,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
+            'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
             'published_at' => 'required|date',
             'content' => 'required|string',

@@ -8,6 +8,7 @@ class Post extends Model
 {
     protected $fillable = [
         'title',
+        'subheader',
         'author',
         'url_friendly',
         'published',
