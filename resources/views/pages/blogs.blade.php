@@ -155,7 +155,7 @@
 
     .decorative-blog-text {
         position: fixed;
-        left: -10%;
+        left: -3.5vw;
         top: 60%;
         transform: translateY(-50%) rotate(-90deg);
         transform-origin: center center;
@@ -170,6 +170,7 @@
         pointer-events: none;
         width: clamp(150px, 30vw, 400px);
         text-align: center;
+        z-index: 100;
     }
 
     /* Responsive tweaks for smaller screens */
