@@ -142,11 +142,11 @@
 
     .decorative-blog-text {
         position: fixed;
-        left: -130px;
-        top: 70%;
+        left: -10%;
+        top: 60%;
         transform: translateY(-50%) rotate(-90deg);
         transform-origin: center center;
-        font-size: 5rem;
+        font-size: clamp(2rem, 5vw, 5rem);
         font-weight: 900;
         color: transparent;
         -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
@@ -155,24 +155,8 @@
         white-space: nowrap;
         z-index: 0;
         pointer-events: none;
-        width: 400px;
+        width: clamp(150px, 30vw, 400px);
         text-align: center;
-    }
-
-    @media (max-width: 992px) {
-        .decorative-blog-text {
-            font-size: 3.5rem;
-            left: -150px;
-            width: 300px;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .decorative-blog-text {
-            font-size: 2.5rem;
-            left: -100px;
-            width: 250px;
-        }
     }
 </style>
 
