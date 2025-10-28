@@ -203,6 +203,10 @@ class PostController extends Controller
 
     public function publish(Post $post)
     {
+        if (!$post->published_at) {
+            return back()->with('error', 'Cannot publish post without a published date. Please edit the post and set a published date first.');
+        }
+        
         $post->update(['published' => true]);
         return back()->with('success', 'Post published successfully.');
     }
