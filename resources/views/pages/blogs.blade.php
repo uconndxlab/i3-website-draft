@@ -129,6 +129,12 @@
         font-size: 1.5rem;
     }
 
+    .blog-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 2rem 0;
+    }
 
     .blog-content a:hover {
         text-decoration: underline;

@@ -165,9 +165,52 @@
                 [{ 'font': [] }],
                 [{ 'align': [] }],
                 ['clean'],
-                ['link']
+                ['link', 'image']
             ]
         }
+    });
+
+    // Custom image handler to upload images to backend instead of base64
+    var toolbar = quill.getModule('toolbar');
+    toolbar.addHandler('image', function() {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+        
+        input.onchange = function() {
+            var file = input.files[0];
+            if (file) {
+                var formData = new FormData();
+                formData.append('image', file);
+                
+                var range = quill.getSelection();
+                quill.insertText(range.index, 'Uploading image...', 'user');
+                
+                fetch('{{ route("admin.posts.upload-image") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.url) {
+=                        quill.deleteText(range.index, 'Uploading image...'.length);
+=                        quill.insertEmbed(range.index, 'image', data.url);
+                        quill.setSelection(range.index + 1);
+                    } else {
+                        quill.deleteText(range.index, 'Uploading image...'.length);
+                        alert('Failed to upload image');
+                    }
+                })
+                .catch(error => {
+                    quill.deleteText(range.index, 'Uploading image...'.length);
+                    alert('Error uploading image: ' + error.message);
+                });
+            }
+        };
     });
 
     // Update hidden input before form submission

@@ -192,5 +192,21 @@ class PostController extends Controller
     {
         return view('pages.blogs', ['posts' => collect([$post])]);
     }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:10000',
+        ]);
+
+        $image = $request->file('image');
+        $path = $image->store('post_images', 'public');
+        $url = asset('storage/' . $path);
+
+        return response()->json([
+            'success' => true,
+            'url' => $url
+        ]);
+    }
 }
 

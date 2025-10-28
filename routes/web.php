@@ -58,6 +58,8 @@ Route::prefix('admin')->name('admin.')->middleware(['cas.auth', 'netid.auth'])->
         ->name('posts.unpublish');
     Route::get('posts/{post}/preview', [\App\Http\Controllers\Admin\PostController::class, 'preview'])
         ->name('posts.preview');
+    Route::post('posts/upload-image', [\App\Http\Controllers\Admin\PostController::class, 'uploadImage'])
+        ->name('posts.upload-image');
     Route::resource('contact-submissions', \App\Http\Controllers\Admin\ContactSubmissionController::class)
         ->only(['index', 'show', 'destroy']);
     Route::patch('contact-submissions/{contact_submission}/mark-sent', 
