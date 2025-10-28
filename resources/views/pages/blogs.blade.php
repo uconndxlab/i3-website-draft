@@ -20,8 +20,8 @@
         padding: 3rem;
         margin-bottom: 3rem;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
     }
-
 
     .blog-header {
         position: relative;
@@ -104,7 +104,7 @@
     }
 
 
-    /* THese styles right here will be the actual style of 
+    /* These styles right here will be the actual style of 
     your blog content so the actual text in your post will be styled like this
     This is something we should most likely mess with to make look good*/
     .blog-content p {
