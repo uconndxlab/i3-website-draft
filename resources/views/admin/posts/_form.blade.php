@@ -21,6 +21,28 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Tags</label>
+            <div class="d-flex gap-3 flex-wrap">
+                @foreach(['People', 'News', 'Projects'] as $tag)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tags[]" 
+                               value="{{ $tag }}" 
+                               id="tag-{{ strtolower($tag) }}"
+                               @if(old('tags', isset($post) && is_array($post->tags) ? $post->tags : []))
+                                   {{ in_array($tag, old('tags', is_array($post->tags ?? null) ? $post->tags : [])) ? 'checked' : '' }}
+                               @endif>
+                        <label class="form-check-label" for="tag-{{ strtolower($tag) }}">
+                            {{ $tag }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+            @error('tags')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Permalink (slug)</label>
             <div class="input-group">
                 <span class="input-group-text">/blog/</span>

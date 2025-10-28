@@ -172,16 +172,23 @@
                     <article class="blog-post" data-aos="fade-up">
                         <div class="blog-meta">
                             @if($post->author)
-                                <i class="bi bi-person me-2"></i>{{ $post->author }}
+                                {{ $post->author }}
                             @endif
                             @if($post->author && $post->published_at)
                                 <span class="mx-2">•</span>
                             @endif
                             @if($post->published_at)
-                                <i class="bi bi-calendar3 me-2"></i>{{ $post->published_at->format('F j, Y') }}
+                                {{ $post->published_at->format('F j, Y') }}
                             @endif
-                            <span class="mx-3">|</span>
-                            <!-- TODO ADD THIS TAG IDK WHAT ITS SUPPOSED TO BE<span class="blog-meta-tag">People</span> --> 
+                            @if($post->author || $post->published_at)
+                                    <span class="mx-2">•</span>
+                                @endif
+                            @if(is_array($post->tags) && count($post->tags))
+                                
+                                @foreach($post->tags as $tag)
+                                    <span class="blog-meta-tag" style="background-color: {{ \App\Enums\PostTag::from($tag)->color() }}">{{ $tag }}</span>
+                                @endforeach
+                            @endif
                         </div>
                         
                         @php

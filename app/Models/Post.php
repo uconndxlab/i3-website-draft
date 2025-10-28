@@ -17,11 +17,13 @@ class Post extends Model
         'featured_image_medium',
         'featured_image_webp',
         'image_position',
+        'tags',
     ];
 
     protected $casts = [
         'published' => 'boolean',
         'published_at' => 'date',
+        'tags' => 'array',
     ];
 
 

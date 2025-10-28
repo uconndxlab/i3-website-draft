@@ -94,6 +94,7 @@ class PostSeeder extends Seeder
                 'published' => true,
                 'published_at' => $article['published_at'],
                 'image_position' => 'no_image',
+                'tags' => $article['tags'] ?? [],
             ]);
         }
     }

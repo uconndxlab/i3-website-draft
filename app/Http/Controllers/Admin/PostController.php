@@ -38,6 +38,8 @@ class PostController extends Controller
             'featured_image' => 'nullable|image',
             'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
             'url_friendly' => 'nullable|string|max:255',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|in:People,News,Projects',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -62,6 +64,11 @@ class PostController extends Controller
         
         if (!isset($data['image_position'])) {
             $data['image_position'] = 'before_content';
+            }
+
+        // Handle tags - checkboxes return array, convert to empty array if not set
+        if (!isset($data['tags']) || !is_array($data['tags'])) {
+            $data['tags'] = [];
         }
 
         $post = Post::create($data);
@@ -93,6 +100,8 @@ class PostController extends Controller
             'featured_image' => 'nullable|image',
             'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
             'url_friendly' => 'nullable|string|max:255',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|in:People,News,Projects',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -125,6 +134,11 @@ class PostController extends Controller
 
         // Always set image_position from request
         $data['image_position'] = $request->input('image_position', $post->image_position ?? 'before_content');
+
+        // Handle tags - checkboxes return array, convert to empty array if not set
+        if (!isset($data['tags']) || !is_array($data['tags'])) {
+            $data['tags'] = [];
+        }
 
         $shouldPublish = $request->input('publish_action') === 'publish';
         
