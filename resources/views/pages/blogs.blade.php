@@ -52,6 +52,42 @@
         z-index: 1;
     }
 
+    @media (max-width: 992px) {
+        .blog-featured-image {
+            height: clamp(220px, 45vh, 480px);
+            transform: translate(6px, -6px);
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+            object-fit: contain;
+            background-color: transparent; /*TODO::  FOr weird aspect raitos we loose our corner roundness */
+        }
+
+        .blog-header::after {
+            top: 6px;
+            left: -6px;
+            height: clamp(220px, 45vh, 480px);
+            border-width: 3px;
+            border-radius: 14px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .blog-featured-image {
+            height: auto; /* show full image without cropping */
+            max-height: none;
+            transform: none;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            object-fit: contain;
+            background-color: #000;
+        }
+
+        /* Hide decorative outline on very small screens to avoid overflow */
+        .blog-header::after {
+            display: none;
+        }
+    }
+
     .blog-title-image {
         font-size: 3rem;
         font-weight: 700;
@@ -173,22 +209,6 @@
         z-index: 100;
     }
 
-    /* Responsive tweaks for smaller screens */
-    @media (max-width: 576px) {
-        .blog-featured-image {
-            height: clamp(220px, 45vh, 420px);
-            transform: translate(6px, -6px);
-            border-radius: 12px;
-        }
-
-        .blog-header::after {
-            top: 6px;
-            left: -6px;
-            height: clamp(220px, 45vh, 420px);
-            border-radius: 12px;
-            border-width: 3px;
-        }
-    }
 </style>
 
 <section class="bg-dark-gradient-dots text-light d-flex align-items-start px-5 py-5">
