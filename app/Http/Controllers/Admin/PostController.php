@@ -34,7 +34,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
-            'published_at' => 'required|date',
+            'published_at' => 'nullable|date',
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
             'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
@@ -61,7 +61,22 @@ class PostController extends Controller
         }
 
         $shouldPublish = $request->input('publish_action') === 'publish';
+        
+        if ($shouldPublish && !$request->filled('published_at')) {
+            return back()
+                ->withInput()
+                ->withErrors(['published_at' => 'Please select a published date to publish this post.']);
+        }
+        
         $data['published'] = $shouldPublish;
+
+        // Allow blank publish date to keep as draft
+        if (!$request->filled('published_at')) {
+            $data['published_at'] = null;
+            if (!$shouldPublish) {
+                $data['published'] = false;
+            }
+        }
         
         if (!isset($data['image_position'])) {
             $data['image_position'] = 'before_content';
@@ -97,7 +112,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
-            'published_at' => 'required|date',
+            'published_at' => 'nullable|date',
             'content' => 'required|string',
             'featured_image' => 'nullable|image',
             'image_position' => 'nullable|string|in:before_title,before_content,after_content,no_image',
@@ -143,18 +158,28 @@ class PostController extends Controller
         }
 
         $shouldPublish = $request->input('publish_action') === 'publish';
-        
-        // Preserve published status - if already published, keep it published
-        $wasPublished = $post->published;
-        if ($shouldPublish || $wasPublished) {
-            $data['published'] = true;
+
+        if ($shouldPublish && !$request->filled('published_at')) {
+            return back()
+                ->withInput()
+                ->withErrors(['published_at' => 'Please select a published date to publish this post.']);
+        }
+
+        if (!$request->filled('published_at')) {
+            $data['published_at'] = null;
+            $data['published'] = false;
+        } else {
+            $wasPublished = $post->published;
+            if ($shouldPublish || $wasPublished) {
+                $data['published'] = true;
+            }
         }
 
         $post->update($data);
 
         if ($shouldPublish) {
             $message = 'Post saved and published successfully.';
-        } elseif ($wasPublished) {
+        } elseif (($post->published && $request->filled('published_at')) || ($post->published && isset($data['published']) && $data['published'])) {
             $message = 'Post updated and republished successfully.';
         } else {
             $message = 'Post updated successfully.';

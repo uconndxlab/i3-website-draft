@@ -30,7 +30,7 @@
 
     .blog-featured-image {
         width: 100%;
-        height: 400px;
+        height: clamp(260px, 55vh, 560px);
         object-fit: cover;
         border-radius: 16px;
         position: relative;
@@ -46,7 +46,7 @@
         top: 10px;
         left: -10px;
         width: 100%;
-        height: 400px;
+        height: clamp(260px, 55vh, 560px);
         border: 4px solid #fff;
         border-radius: 16px;
         z-index: 1;
@@ -170,6 +170,23 @@
         pointer-events: none;
         width: clamp(150px, 30vw, 400px);
         text-align: center;
+    }
+
+    /* Responsive tweaks for smaller screens */
+    @media (max-width: 576px) {
+        .blog-featured-image {
+            height: clamp(220px, 45vh, 420px);
+            transform: translate(6px, -6px);
+            border-radius: 12px;
+        }
+
+        .blog-header::after {
+            top: 6px;
+            left: -6px;
+            height: clamp(220px, 45vh, 420px);
+            border-radius: 12px;
+            border-width: 3px;
+        }
     }
 </style>
 

@@ -71,10 +71,9 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Published Date <span class="text-danger">*</span></label>
+            <label class="form-label">Published Date</label>
             <input type="date" name="published_at" class="form-control" 
-                   value="{{ old('published_at', isset($post) && $post->published_at ? $post->published_at->format('Y-m-d') : '') }}" 
-                   required>
+                   value="{{ old('published_at', isset($post) && $post->published_at ? $post->published_at->format('Y-m-d') : '') }}">
             @error('published_at')
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
@@ -197,8 +196,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.url) {
-=                        quill.deleteText(range.index, 'Uploading image...'.length);
-=                        quill.insertEmbed(range.index, 'image', data.url);
+                        quill.deleteText(range.index, 'Uploading image...'.length);
+                        quill.insertEmbed(range.index, 'image', data.url);
                         quill.setSelection(range.index + 1);
                     } else {
                         quill.deleteText(range.index, 'Uploading image...'.length);
