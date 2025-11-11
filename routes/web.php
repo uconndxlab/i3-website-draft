@@ -13,7 +13,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/contact/success', 'contactSuccess')->name('contact.success');
     Route::get('/alumni',  'alumni')->name('alumni');
     Route::get('/blogs', 'blogs')->name('blogs');
-    Route::get('/blog/{slug}', function ($slug) {
+    Route::get('/blogs/{slug}', function ($slug) {
         return app(PageController::class)->blogShow($slug);
     })->name('blog.show')->where('slug', '[a-zA-Z0-9-]+');
     // Merger route - only active after September 3, 2025

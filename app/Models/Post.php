@@ -13,11 +13,11 @@ class Post extends Model
         'url_friendly',
         'published',
         'published_at',
-        'content',
         'featured_image',
         'featured_image_medium',
         'featured_image_webp',
         'tags',
+        'blade_file',
     ];
 
     protected $casts = [

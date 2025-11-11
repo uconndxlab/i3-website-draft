@@ -54,7 +54,7 @@
         <div class="mb-3">
             <label class="form-label">Permalink (slug)</label>
             <div class="input-group">
-                <span class="input-group-text">{{ route('blogs') }}?post=</span>
+                <span class="input-group-text">{{ url('blogs') }}/</span>
                 <input name="url_friendly" id="url_friendly" class="form-control" value="{{ old('url_friendly', $post->url_friendly ?? '') }}" placeholder="auto-generated-from-title">
             </div>
             <small class="text-muted">Customize the URL slug. Leave blank to auto-generate from the title.</small>
@@ -64,7 +64,7 @@
             @if(isset($post))
             <div class="mt-1">
                 @if($post->published)
-                    <a href="{{ route('blogs') }}?post={{ $post->url_friendly }}" target="_blank">View public permalink</a>
+                    <a href="{{ route('blog.show', ['slug' => $post->url_friendly]) }}" target="_blank">View public permalink</a>
                 @endif
             </div>
             @endif
@@ -78,15 +78,21 @@
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
-
         <div class="mb-3">
-            <label class="form-label">Content <span class="text-danger">*</span></label>
-            <input type="hidden" name="content" id="content-hidden">
-            <div id="content-editor" style="height: 400px;">{!! old('content', $post->content ?? '') !!}</div>
-            @error('content')
+            <label class="form-label">Blade Template</label>
+            <select name="blade_file" class="form-select">
+                <option value="">Select a template</option>
+                @foreach(($bladeTemplates ?? []) as $template)
+                    <option value="{{ $template['value'] }}"
+                        {{ old('blade_file', $post->blade_file ?? '') === $template['value'] ? 'selected' : '' }}>
+                        {{ $template['label'] }}
+                    </option>
+                @endforeach
+            </select>
+            <small class="text-muted">Templates are loaded from <code>resources/views/pages/blogs</code>.</small>
+            @error('blade_file')
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
-            <small class="text-muted">Use the toolbar above to format your content</small>
         </div>
     </div>
 
@@ -133,85 +139,8 @@
 
 
 </div>
-<!-- Quill WYSIWYG Editor -->
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-
 <script>
-    // Initialize Quill editor
-    var quill = new Quill('#content-editor', {
-        theme: 'snow',
-        modules: {
-            toolbar: {
-                container: [
-                [{ 'header': [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                    ['blockquote', 'code-block'],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                [{ 'script': 'sub'}, { 'script': 'super' }],
-                [{ 'indent': '-1'}, { 'indent': '+1' }],
-                [{ 'direction': 'rtl' }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'font': [] }],
-                [{ 'align': [] }],
-                ['clean'],
-                    ['link', 'image']
-                ]
-            }
-        }
-    });
-
-    var toolbar = quill.getModule('toolbar');
-    
-    // Custom image handler to upload images to backend
-    toolbar.addHandler('image', function() {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        
-        input.click();
-        
-        input.onchange = function() {
-            var file = input.files[0];
-            
-            if (file) {
-                var formData = new FormData();
-                formData.append('image', file);
-                
-                var range = quill.getSelection();
-                quill.insertText(range.index, 'Uploading image...', 'user');
-                
-                fetch('{{ route("admin.posts.upload-image") }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                        quill.deleteText(range.index, 'Uploading image...'.length);
-                        if (data.success && data.url) {
-                        quill.insertEmbed(range.index, 'image', data.url);
-                        quill.setSelection(range.index + 1);
-                    } else {
-                        alert('Failed to upload image');
-                    }
-                })
-                .catch(error => {
-                    quill.deleteText(range.index, 'Uploading image...'.length);
-                    alert('Error uploading image: ' + error.message);
-                });
-            }
-        };
-    });
-
-    // Update hidden input before form submission
-    document.querySelector('form').addEventListener('submit', function(e) {
-        document.getElementById('content-hidden').value = quill.root.innerHTML;
-    });
-
+   
     // Auto-generate slug from title when url_friendly is empty or when editing title initially
     const titleInput = document.querySelector('input[name="title"]');
     const slugInput = document.getElementById('url_friendly');

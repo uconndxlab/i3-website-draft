@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\TeamMember;
 use App\Models\Post;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -79,47 +81,120 @@ class PageController extends Controller
         return view('pages.beyond-nuremberg');
     }
 
-    public function blogs(Request $request) {
-        if ($request->has('post')) {
-            $slug = $request->get('post');
-            $post = Post::where('url_friendly', $slug)
-                ->where('published', true)
-                ->whereNotNull('published_at')
-                ->first();
-        } else {
-            $post = Post::where('published', true)
-                ->whereNotNull('published_at')
-                ->orderBy('published_at', 'desc')
-                ->first();
-        }
-        
-        if (!$post) {
-            return view('pages.blogs', ['post' => null, 'nextPost' => null, 'prevPost' => null]);
-        }
-
-        $nextPost = Post::where('published', true)
+    public function blogs() {
+        $post = Post::where('published', true)
             ->whereNotNull('published_at')
-            ->where('published_at', '>', $post->published_at)
-            ->where('id', '!=', $post->id)
-            ->orderBy('published_at', 'asc')
-            ->first();
-
-        $prevPost = Post::where('published', true)
-            ->whereNotNull('published_at')
-            ->where('published_at', '<', $post->published_at)
-            ->where('id', '!=', $post->id)
             ->orderBy('published_at', 'desc')
             ->first();
 
-        return view('pages.blogs', compact('post', 'nextPost', 'prevPost'));
+        return $this->renderBlogView($post);
     }
 
     public function blogShow(string $slug)
     {
         $post = Post::where('url_friendly', $slug)
             ->where('published', true)
+            ->whereNotNull('published_at')
             ->firstOrFail();
 
-        return view('pages.blogs', ['posts' => collect([$post])]);
+        return $this->renderBlogView($post);
+    }
+
+    protected function renderBlogView(?Post $post)
+    {
+        if (!$post) {
+            return view('pages.blogs.empty', [
+                'post' => null,
+                'nextPost' => null,
+                'prevPost' => null,
+            ]);
+        }
+
+        $nextPost = Post::where('published', true)
+            ->whereNotNull('published_at')
+            ->where(function ($query) use ($post) {
+                $query->where('published_at', '>', $post->published_at)
+                    ->orWhere(function ($inner) use ($post) {
+                        $inner->where('published_at', $post->published_at)
+                            ->where('id', '>', $post->id);
+                    });
+            })
+            ->orderBy('published_at', 'asc')
+            ->orderBy('id', 'asc')
+            ->first();
+
+        $prevPost = Post::where('published', true)
+            ->whereNotNull('published_at')
+            ->where(function ($query) use ($post) {
+                $query->where('published_at', '<', $post->published_at)
+                    ->orWhere(function ($inner) use ($post) {
+                        $inner->where('published_at', $post->published_at)
+                            ->where('id', '<', $post->id);
+                    });
+            })
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $view = $this->resolvePostTemplate($post->blade_file)
+            ?: 'pages.blogs.template-missing';
+
+        return view($view, compact('post', 'nextPost', 'prevPost'));
+    }
+
+    protected function resolvePostTemplate(?string $bladeFile): ?string
+    {
+        if (!$bladeFile) {
+            return null;
+        }
+
+        $bladeFile = trim($bladeFile);
+
+        $candidates = [];
+        $candidates[] = $bladeFile;
+
+        $withoutBlade = preg_replace('/\.blade(\.php)?$/', '', $bladeFile);
+        if (!empty($withoutBlade)) {
+            $candidates[] = $withoutBlade;
+        }
+
+        $dotNotation = str_replace(['/', '\\'], '.', $bladeFile);
+        if (!empty($dotNotation)) {
+            $candidates[] = $dotNotation;
+        }
+
+        $dotWithoutBlade = preg_replace('/\.blade(\.php)?$/', '', $dotNotation);
+        if (!empty($dotWithoutBlade)) {
+            $candidates[] = $dotWithoutBlade;
+        }
+
+        $expanded = [];
+        foreach ($candidates as $candidate) {
+            $candidate = trim($candidate, '.') ;
+            if (empty($candidate)) {
+                continue;
+            }
+            $expanded[] = $candidate;
+
+            if (Str::startsWith($candidate, 'resources.views.')) {
+                $expanded[] = Str::after($candidate, 'resources.views.');
+            }
+
+            if (Str::startsWith($candidate, 'views.')) {
+                $expanded[] = Str::after($candidate, 'views.');
+            }
+        }
+
+        $expanded = array_unique(array_map(function ($value) {
+            return trim($value, '.');
+        }, array_filter($expanded)));
+
+        foreach ($expanded as $viewName) {
+            if (View::exists($viewName)) {
+                return $viewName;
+            }
+        }
+
+        return null;
     }
 }

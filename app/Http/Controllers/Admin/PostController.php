@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
 
 class PostController extends Controller
 {
@@ -28,7 +30,9 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.posts.create', [
+            'bladeTemplates' => $this->getBlogBladeTemplates(),
+        ]);
     }
 
     public function store(Request $request)
@@ -38,11 +42,11 @@ class PostController extends Controller
             'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'content' => 'required|string',
             'featured_image' => 'nullable|image',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:People,News,Projects',
+            'blade_file' => 'nullable|string',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -85,6 +89,10 @@ class PostController extends Controller
             $data['tags'] = [];
         }
 
+        if (empty($data['blade_file'])) {
+            $data['blade_file'] = null;
+        }
+
         $post = Post::create($data);
 
         $message = $shouldPublish 
@@ -101,7 +109,10 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'bladeTemplates' => $this->getBlogBladeTemplates(),
+        ]);
     }
 
     public function update(Request $request, Post $post)
@@ -111,11 +122,11 @@ class PostController extends Controller
             'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'content' => 'required|string',
             'featured_image' => 'nullable|image',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:People,News,Projects',
+            'blade_file' => 'nullable|string',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -149,6 +160,10 @@ class PostController extends Controller
         // Handle tags - checkboxes return array, convert to empty array if not set
         if (!isset($data['tags']) || !is_array($data['tags'])) {
             $data['tags'] = [];
+        }
+
+        if (empty($data['blade_file'])) {
+            $data['blade_file'] = null;
         }
 
         $shouldPublish = $request->input('publish_action') === 'publish';
@@ -213,11 +228,14 @@ class PostController extends Controller
 
     public function preview(Post $post)
     {
-        // For preview, we don't need next/prev posts, so pass them as null
-        return view('pages.blogs', [
+        $view = $post->blade_file && View::exists($post->blade_file)
+            ? $post->blade_file
+            : 'pages.blogs.default';
+
+        return view($view, [
             'post' => $post,
             'prevPost' => null,
-            'nextPost' => null
+            'nextPost' => null,
         ]);
     }
 
@@ -235,6 +253,33 @@ class PostController extends Controller
             'success' => true,
             'url' => $url
         ]);
+    }
+
+    protected function getBlogBladeTemplates(): array
+    {
+        $directory = resource_path('views/pages/blogs');
+
+        if (!is_dir($directory)) {
+            return [];
+        }
+
+        return collect(File::files($directory))
+            ->filter(fn ($file) => Str::endsWith($file->getFilename(), '.blade.php'))
+            ->map(function ($file) {
+                $filename = $file->getFilename();
+                $viewName = 'pages.blogs.' . Str::of($filename)->replace('.blade.php', '');
+
+                return [
+                    'value' => $viewName,
+                    'label' => Str::of($filename)
+                        ->replace('.blade.php', '')
+                        ->replace(['-', '_'], ' ')
+                        ->title(),
+                ];
+            })
+            ->sortBy('label')
+            ->values()
+            ->all();
     }
 }
 
