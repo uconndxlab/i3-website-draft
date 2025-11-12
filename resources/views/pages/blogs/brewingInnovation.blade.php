@@ -1,5 +1,29 @@
 @extends('pages.blogs.backgrounds.blogs')
 
+@section('og_title')
+    Brewing Innovation: How Design Thinking Shaped UConn Brewing Innovation
+@endsection
+
+@section('og_description')
+    Learn how Greenhouse Studios used design thinking sprints to help scale up UConn's brewing science course into a larger initiative that provides life-transformative education experiences for undergraduates.
+@endsection
+
+@section('og_image')
+    {{ asset('storage/post_images/brewconn-img1-can-label.jpeg') }}
+@endsection
+
+@section('twitter_title')
+    Brewing Innovation: How Design Thinking Shaped UConn Brewing Innovation
+@endsection
+
+@section('twitter_description')
+    Learn how Greenhouse Studios used design thinking sprints to help scale up UConn's brewing science course into a larger initiative.
+@endsection
+
+@section('twitter_image')
+    {{ asset('storage/post_images/brewconn-img1-can-label.jpeg') }}
+@endsection
+
 @section('blog-content')
     <div class="clearfix" style="padding-top: 2rem;">
         <i>This post has been adapted and revised from its original version, first published on the Greenhouse Studios blog in November 2024. </i>

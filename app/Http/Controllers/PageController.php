@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\TeamMember;
 use App\Models\Post;
+use App\Enums\PostTag;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -81,13 +82,27 @@ class PageController extends Controller
         return view('pages.beyond-nuremberg');
     }
 
-    public function blogs() {
-        $post = Post::where('published', true)
-            ->whereNotNull('published_at')
-            ->orderBy('published_at', 'desc')
-            ->first();
-
-        return $this->renderBlogView($post);
+    public function blogs(Request $request) {
+        $query = Post::where('published', true)
+            ->whereNotNull('published_at');
+        
+        $filterTag = $request->get('tag');
+        if ($filterTag && $filterTag !== 'all') {
+            $query->whereJsonContains('tags', $filterTag);
+        } else {
+            $filterTag = null;
+        }
+        
+        $sort = $request->get('sort', 'newest');
+        if ($sort === 'oldest') {
+            $query->orderBy('published_at', 'asc');
+        } else {
+            $query->orderBy('published_at', 'desc');
+        }
+        
+        $posts = $query->get();
+        
+        return view('pages.blogs.index', compact('posts', 'filterTag', 'sort'));
     }
 
     public function blogShow(string $slug)

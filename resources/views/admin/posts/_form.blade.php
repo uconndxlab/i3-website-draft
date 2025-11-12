@@ -32,7 +32,7 @@
         <div class="mb-3">
             <label class="form-label">Tags</label>
             <div class="d-flex gap-3 flex-wrap">
-                @foreach(['People', 'News', 'Projects'] as $tag)
+                @foreach(\App\Enums\PostTag::all() as $tag)
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="tags[]" 
                                value="{{ $tag }}" 

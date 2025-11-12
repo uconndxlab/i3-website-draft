@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Enums\PostTag;
 use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -45,7 +46,7 @@ class PostController extends Controller
             'featured_image' => 'nullable|image',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
-            'tags.*' => 'string|in:People,News,Projects',
+            'tags.*' => 'string|in:' . implode(',', PostTag::all()),
             'blade_file' => 'nullable|string',
         ]);
 
@@ -125,7 +126,7 @@ class PostController extends Controller
             'featured_image' => 'nullable|image',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
-            'tags.*' => 'string|in:People,News,Projects',
+            'tags.*' => 'string|in:' . implode(',', PostTag::all()),
             'blade_file' => 'nullable|string',
         ]);
 

@@ -1,6 +1,110 @@
 @extends('layouts.app')
-@section('title', 'Blogs')
-@section('meta_description', 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.')
+
+@php
+    $pageTitle = isset($post) ? $post->title : 'Blogs';
+    $metaDesc = isset($post) ? ($post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.') : 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.';
+@endphp
+
+@section('title', $pageTitle)
+@section('meta_description', $metaDesc)
+
+@if(isset($post))
+    @section('og_title')
+        {{ $post->title }}
+    @endsection
+
+    @section('og_description')
+        {{ $post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.' }}
+    @endsection
+
+    @section('og_image')
+        {{ $post->best_featured_image_url ?? '' }}
+    @endsection
+
+    @section('twitter_title')
+        {{ $post->title }}
+    @endsection
+
+    @section('twitter_description')
+        {{ $post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.' }}
+    @endsection
+
+    @section('twitter_image')
+        {{ $post->best_featured_image_url ?? '' }}
+    @endsection
+
+@push('meta')
+    @php
+        $ogTitle = trim((string) view()->yieldContent('og_title'));
+        $ogDescription = trim((string) view()->yieldContent('og_description'));
+        $ogImageRaw = trim((string) view()->yieldContent('og_image'));
+        $ogImage = $ogImageRaw ? (filter_var($ogImageRaw, FILTER_VALIDATE_URL) ? $ogImageRaw : url($ogImageRaw)) : null;
+        
+        $ogImageType = 'image/jpeg';
+        if ($ogImage) {
+            $extension = strtolower(pathinfo(parse_url($ogImage, PHP_URL_PATH), PATHINFO_EXTENSION));
+            $imageTypes = [
+                'jpg' => 'image/jpeg',
+                'jpeg' => 'image/jpeg',
+                'png' => 'image/png',
+                'webp' => 'image/webp',
+                'gif' => 'image/gif',
+            ];
+            $ogImageType = $imageTypes[$extension] ?? 'image/jpeg';
+        }
+        
+        $blogUrl = url(route('blog.show', $post->url_friendly, false));
+    @endphp
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ $blogUrl }}">
+    <meta property="og:title" content="{{ e($ogTitle) }}">
+    <meta property="og:description" content="{{ e($ogDescription) }}">
+    <meta property="og:site_name" content="i3 - Internal Insights & Innovation">
+    <meta property="og:locale" content="en_US">
+    @if($ogImage)
+    <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:image:secure_url" content="{{ $ogImage }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ e($ogTitle) }}">
+    <meta property="og:image:type" content="{{ $ogImageType }}">
+    @endif
+    @if($post->published_at)
+    <meta property="article:published_time" content="{{ $post->published_at->toIso8601String() }}">
+    @endif
+    @if($post->author)
+    <meta property="article:author" content="{{ e($post->author) }}">
+    @endif
+    @if(is_array($post->tags) && count($post->tags))
+        @foreach($post->tags as $tag)
+    <meta property="article:tag" content="{{ e($tag) }}">
+        @endforeach
+    @endif
+
+    @php
+        $twitterTitle = trim((string) view()->yieldContent('twitter_title'));
+        $twitterDescription = trim((string) view()->yieldContent('twitter_description'));
+        $twitterImageRaw = trim((string) view()->yieldContent('twitter_image'));
+        // Ensure absolute URL for images
+        $twitterImage = $twitterImageRaw ? (filter_var($twitterImageRaw, FILTER_VALIDATE_URL) ? $twitterImageRaw : url($twitterImageRaw)) : null;
+    @endphp
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ $blogUrl }}">
+    <meta name="twitter:title" content="{{ e($twitterTitle) }}">
+    <meta name="twitter:description" content="{{ e($twitterDescription) }}">
+    @if($twitterImage)
+    <meta name="twitter:image" content="{{ $twitterImage }}">
+    <meta name="twitter:image:alt" content="{{ e($twitterTitle) }}">
+    @endif
+
+    <!-- Additional Meta -->
+    <link rel="canonical" href="{{ $blogUrl }}">
+@endpush
+@endif
 
 @section('content')
 
