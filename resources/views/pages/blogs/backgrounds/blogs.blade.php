@@ -5,6 +5,7 @@
     $metaDesc = isset($post) ? ($post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.') : 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.';
 @endphp
 
+
 @section('title', $pageTitle)
 @section('meta_description', $metaDesc)
 
@@ -35,9 +36,10 @@
 
 @push('meta')
     @php
-        // Helper function to escape meta tag content (escapes HTML but preserves apostrophes for social media)
-        $escapeMeta = function($value) {
-            return htmlspecialchars($value, ENT_COMPAT | ENT_HTML401, 'UTF-8', false);
+        // Helper function to prepare meta tag content
+        // Blade's {{ }} will handle escaping automatically
+        $escapeMetaAttr = function($value) {
+            return (string) $value;
         };
         
         $ogTitle = trim((string) view()->yieldContent('og_title'));
@@ -63,28 +65,28 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ $escapeMeta($blogUrl) }}">
-    <meta property="og:title" content="{{ $escapeMeta($ogTitle) }}">
-    <meta property="og:description" content="{{ $escapeMeta($ogDescription) }}">
-    <meta property="og:site_name" content="{{ $escapeMeta('i3 - Internal Insights & Innovation') }}">
+    <meta property="og:url" content="{{ $escapeMetaAttr($blogUrl) }}">
+    <meta property="og:title" content="{{ $escapeMetaAttr($ogTitle) }}">
+    <meta property="og:description" content="{{ $escapeMetaAttr($ogDescription) }}">
+    <meta property="og:site_name" content="{{ $escapeMetaAttr('i3 - Internal Insights & Innovation') }}">
     <meta property="og:locale" content="en_US">
     @if($ogImage)
-    <meta property="og:image" content="{{ $escapeMeta($ogImage) }}">
-    <meta property="og:image:secure_url" content="{{ $escapeMeta($ogImage) }}">
+    <meta property="og:image" content="{{ $escapeMetaAttr($ogImage) }}">
+    <meta property="og:image:secure_url" content="{{ $escapeMetaAttr($ogImage) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="{{ $escapeMeta($ogTitle) }}">
-    <meta property="og:image:type" content="{{ $escapeMeta($ogImageType) }}">
+    <meta property="og:image:alt" content="{{ $escapeMetaAttr($ogTitle) }}">
+    <meta property="og:image:type" content="{{ $escapeMetaAttr($ogImageType) }}">
     @endif
     @if($post->published_at)
-    <meta property="article:published_time" content="{{ $escapeMeta($post->published_at->toIso8601String()) }}">
+    <meta property="article:published_time" content="{{ $escapeMetaAttr($post->published_at->toIso8601String()) }}">
     @endif
     @if($post->author)
-    <meta property="article:author" content="{{ $escapeMeta($post->author) }}">
+    <meta property="article:author" content="{{ $escapeMetaAttr($post->author) }}">
     @endif
     @if(is_array($post->tags) && count($post->tags))
         @foreach($post->tags as $tag)
-    <meta property="article:tag" content="{{ $escapeMeta($tag) }}">
+    <meta property="article:tag" content="{{ $escapeMetaAttr($tag) }}">
         @endforeach
     @endif
 
@@ -98,16 +100,16 @@
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ $escapeMeta($blogUrl) }}">
-    <meta name="twitter:title" content="{{ $escapeMeta($twitterTitle) }}">
-    <meta name="twitter:description" content="{{ $escapeMeta($twitterDescription) }}">
+    <meta name="twitter:url" content="{{ $escapeMetaAttr($blogUrl) }}">
+    <meta name="twitter:title" content="{{ $escapeMetaAttr($twitterTitle) }}">
+    <meta name="twitter:description" content="{{ $escapeMetaAttr($twitterDescription) }}">
     @if($twitterImage)
-    <meta name="twitter:image" content="{{ $escapeMeta($twitterImage) }}">
-    <meta name="twitter:image:alt" content="{{ $escapeMeta($twitterTitle) }}">
+    <meta name="twitter:image" content="{{ $escapeMetaAttr($twitterImage) }}">
+    <meta name="twitter:image:alt" content="{{ $escapeMetaAttr($twitterTitle) }}">
     @endif
 
     <!-- Additional Meta -->
-    <link rel="canonical" href="{{ $escapeMeta($blogUrl) }}">
+    <link rel="canonical" href="{{ $escapeMetaAttr($blogUrl) }}">
 @endpush
 @endif
 
