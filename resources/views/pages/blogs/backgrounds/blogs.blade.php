@@ -354,13 +354,14 @@
                     <div class="blog-navigation">
                         <a @if($prevPost) href="{{ route('blog.show', ['slug' => $prevPost->url_friendly]) }}" @endif
                            class="nav-card {{ $prevPost ? '' : 'disabled' }}">
+                           <div class="icon">
+                                <i class="bi bi-arrow-left-circle"></i>
+                            </div>
                             <div>
                                 <span class="label"><i class="bi bi-arrow-left me-2"></i>Previous Post</span>
                                 <h4>{{ $prevPost->title ?? 'No older posts yet' }}</h4>
                             </div>
-                            <div class="icon">
-                                <i class="bi bi-arrow-left-circle"></i>
-                            </div>
+                            
                         </a>
 
                         <a @if($nextPost) href="{{ route('blog.show', ['slug' => $nextPost->url_friendly]) }}" @endif
