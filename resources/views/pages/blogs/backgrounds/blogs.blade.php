@@ -139,6 +139,7 @@
         background-color: transparent;
         display: block;
         margin: 0 auto;
+        
     }
 
     /* Outline square effect behind the image */
@@ -196,7 +197,7 @@
         height: 4px;
         width: 100px;
         background: #0ea5e9;
-        margin-bottom: 1.5rem;
+        margin-bottom: 4rem;
     }
 
     .blog-meta-tag {
@@ -246,11 +247,13 @@
     }
 
     .blog-content h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .blog-content h2 {
-        font-size: 1.75rem;
+        
+        padding-top: 4rem;
+        font-size: 2rem;
     }
 
     .blog-content h3 {

@@ -21,14 +21,14 @@
 @endsection
 
 @section('twitter_image')
-    {{ asset('storage/post_images/brewconn-img1-can-label.jpeg') }}
+    {{ asset('storage/post_images/brewconn-feat-img_1762980428_medium.webp') }}
 @endsection
 
 @section('blog-content')
     <div class="clearfix" style="padding-top: 2rem;">
         <i>This post has been adapted and revised from its original version, first published on the Greenhouse Studios blog in November 2024. </i>
     </div>
-    <div class="d-lg-flex gap-4 align-items-center">
+    <div class="d-lg-flex gap-4 align-items-center py-4">
         <div class="flex-shrink-0 mb-3 mb-lg-0 d-lg-flex" style="width: 260px;">
             <img src="{{ asset('storage/post_images/brewconn-img1-can-label.jpeg') }}"
                  alt="BrewConn Can Label"
@@ -44,7 +44,7 @@
         <p class="mb-0">UConn Brewing Innovation originates in a popular brewing science class taught by Jennifer Pascal, associate professor in the Department of Chemical and Biomolecular Engineering. Wanting to develop the class into something larger, Pascal teamed up with her colleague, Pete Menard, Director of Technical Services in the College of Engineering and a longtime homebrewer. Under a program overseen by UConn’s Life Transformative Education (LTE) initiative, Pascal and Menard’s project was selected to undergo a design thinking sprint led by Greenhouse Studios. The principal charge for our design sprint was to figure out how to scale up the brewing course into a larger initiative that could provide life-transformative education experiences for a much larger number of UConn undergraduates.</p>
     </div>
 
-    <h2 class="mt-4">Assembling a Team</h2>
+    <h2>Assembling a Team</h2>
 
     <div class="clearfix mt-4">
         <img src="{{ asset('storage/post_images/brewconn-img3-team.jpeg') }}" alt="Team Meeting" class="img-fluid rounded shadow mb-3 me-lg-4 float-lg-start" style="width: 360px;">
@@ -79,16 +79,10 @@
         <p>With this eventuality in mind, we constructed the design process, from start to finish, so that all the work the team undertook over the five days of the sprint would inform the project proposal. In fact, each activity of the sprint sessions was designed to directly feed into the different sections of the proposal template we drew up for the team. For instance, the section of the proposal concerned with “Stakeholders” drew directly from the Day 3 empathy mapping exercise. Meanwhile, the “Work Plan and Budget” section of the proposal was informed by insights gained during the “Two Radically Different Project Visions” exercise and the catalog of “Resources and Constraints” undertaken on Day 2 and Day 3 of the sprint. 
     </div>
   
-
-Our team has continuously refined our design process, previously working almost exclusively on academic research projects. However, this scaling sprint gave us the chance to take what we have learned about collaboration and adapt it to a non-academic project. The success of the brewery project – now UConn Brewing Innovation – is ultimately due to the hard work and creativity of the project team members. But its success has also shown us that our expertise in collaboration and design thinking can be generalized to a much broader range of projects, something we look forward to doing more of in the future. </p>
-
-<style>
-    div{
-    }
-
-    h2{
-        padding-top: 2rem;
-        font-size: 2rem;
-    }
-</style>
+    <div class="clearfix mt-4">
+        <p>
+            Our team has continuously refined our design process, previously working almost exclusively on academic research projects. However, this scaling sprint gave us the chance to take what we have learned about collaboration and adapt it to a non-academic project. The success of the brewery project – now UConn Brewing Innovation – is ultimately due to the hard work and creativity of the project team members. But its success has also shown us that our expertise in collaboration and design thinking can be generalized to a much broader range of projects, something we look forward to doing more of in the future. </
+        </p>
+    </div>
+<!-- Think for now lets keep style in the backgrounds/blogs.blade.php file so its universal -->
 @endsection
