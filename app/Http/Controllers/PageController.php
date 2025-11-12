@@ -83,6 +83,8 @@ class PageController extends Controller
     }
 
     public function blogs(Request $request) {
+
+        // TODO: SHOW MORE POSTS button to get past the paginate 21
         $query = Post::where('published', true)
             ->whereNotNull('published_at');
         
@@ -100,7 +102,7 @@ class PageController extends Controller
             $query->orderBy('published_at', 'desc');
         }
         
-        $posts = $query->get();
+        $posts = $query->paginate(21);
         
         return view('pages.blogs.index', compact('posts', 'filterTag', 'sort'));
     }
