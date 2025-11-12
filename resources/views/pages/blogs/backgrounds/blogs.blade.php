@@ -35,6 +35,11 @@
 
 @push('meta')
     @php
+        // Helper function to escape meta tag content (escapes HTML but preserves apostrophes for social media)
+        $escapeMeta = function($value) {
+            return htmlspecialchars($value, ENT_COMPAT | ENT_HTML401, 'UTF-8', false);
+        };
+        
         $ogTitle = trim((string) view()->yieldContent('og_title'));
         $ogDescription = trim((string) view()->yieldContent('og_description'));
         $ogImageRaw = trim((string) view()->yieldContent('og_image'));
@@ -58,28 +63,28 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ $blogUrl }}">
-    <meta property="og:title" content="{{ e($ogTitle) }}">
-    <meta property="og:description" content="{{ e($ogDescription) }}">
-    <meta property="og:site_name" content="i3 - Internal Insights & Innovation">
+    <meta property="og:url" content="{{ $escapeMeta($blogUrl) }}">
+    <meta property="og:title" content="{{ $escapeMeta($ogTitle) }}">
+    <meta property="og:description" content="{{ $escapeMeta($ogDescription) }}">
+    <meta property="og:site_name" content="{{ $escapeMeta('i3 - Internal Insights & Innovation') }}">
     <meta property="og:locale" content="en_US">
     @if($ogImage)
-    <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:image:secure_url" content="{{ $ogImage }}">
+    <meta property="og:image" content="{{ $escapeMeta($ogImage) }}">
+    <meta property="og:image:secure_url" content="{{ $escapeMeta($ogImage) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="{{ e($ogTitle) }}">
-    <meta property="og:image:type" content="{{ $ogImageType }}">
+    <meta property="og:image:alt" content="{{ $escapeMeta($ogTitle) }}">
+    <meta property="og:image:type" content="{{ $escapeMeta($ogImageType) }}">
     @endif
     @if($post->published_at)
-    <meta property="article:published_time" content="{{ $post->published_at->toIso8601String() }}">
+    <meta property="article:published_time" content="{{ $escapeMeta($post->published_at->toIso8601String()) }}">
     @endif
     @if($post->author)
-    <meta property="article:author" content="{{ e($post->author) }}">
+    <meta property="article:author" content="{{ $escapeMeta($post->author) }}">
     @endif
     @if(is_array($post->tags) && count($post->tags))
         @foreach($post->tags as $tag)
-    <meta property="article:tag" content="{{ e($tag) }}">
+    <meta property="article:tag" content="{{ $escapeMeta($tag) }}">
         @endforeach
     @endif
 
@@ -93,16 +98,16 @@
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ $blogUrl }}">
-    <meta name="twitter:title" content="{{ e($twitterTitle) }}">
-    <meta name="twitter:description" content="{{ e($twitterDescription) }}">
+    <meta name="twitter:url" content="{{ $escapeMeta($blogUrl) }}">
+    <meta name="twitter:title" content="{{ $escapeMeta($twitterTitle) }}">
+    <meta name="twitter:description" content="{{ $escapeMeta($twitterDescription) }}">
     @if($twitterImage)
-    <meta name="twitter:image" content="{{ $twitterImage }}">
-    <meta name="twitter:image:alt" content="{{ e($twitterTitle) }}">
+    <meta name="twitter:image" content="{{ $escapeMeta($twitterImage) }}">
+    <meta name="twitter:image:alt" content="{{ $escapeMeta($twitterTitle) }}">
     @endif
 
     <!-- Additional Meta -->
-    <link rel="canonical" href="{{ $blogUrl }}">
+    <link rel="canonical" href="{{ $escapeMeta($blogUrl) }}">
 @endpush
 @endif
 
