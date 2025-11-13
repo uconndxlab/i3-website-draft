@@ -1,116 +1,20 @@
 @extends('layouts.app')
 
 @php
+    $defaultDescription = 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.';
     $pageTitle = isset($post) ? $post->title : 'Blogs';
-    $metaDesc = isset($post) ? ($post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.') : 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.';
+    $metaDesc = isset($post) 
+        ? ($post->subheader ?: $defaultDescription) 
+        : $defaultDescription . ' Learn about our latest projects, events, and updates.';
 @endphp
-
 
 @section('title', $pageTitle)
 @section('meta_description', $metaDesc)
 
 @if(isset($post))
-    @section('og_title')
-        {{ $post->title }}
-    @endsection
-
-    @section('og_description')
-        {{ $post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.' }}
-    @endsection
-
-    @section('og_image')
-        {{ $post->best_featured_image_url ?? '' }}
-    @endsection
-
-    @section('twitter_title')
-        {{ $post->title }}
-    @endsection
-
-    @section('twitter_description')
-        {{ $post->subheader ?: 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.' }}
-    @endsection
-
-    @section('twitter_image')
-        {{ $post->best_featured_image_url ?? '' }}
-    @endsection
-
-@push('meta')
-    @php
-        // Helper function to prepare meta tag content
-        // Blade's {{ }} will handle escaping automatically
-        $escapeMetaAttr = function($value) {
-            return (string) $value;
-        };
-        
-        $ogTitle = trim((string) view()->yieldContent('og_title'));
-        $ogDescription = trim((string) view()->yieldContent('og_description'));
-        $ogImageRaw = trim((string) view()->yieldContent('og_image'));
-        $ogImage = $ogImageRaw ? (filter_var($ogImageRaw, FILTER_VALIDATE_URL) ? $ogImageRaw : url($ogImageRaw)) : null;
-        
-        $ogImageType = 'image/jpeg';
-        if ($ogImage) {
-            $extension = strtolower(pathinfo(parse_url($ogImage, PHP_URL_PATH), PATHINFO_EXTENSION));
-            $imageTypes = [
-                'jpg' => 'image/jpeg',
-                'jpeg' => 'image/jpeg',
-                'png' => 'image/png',
-                'webp' => 'image/webp',
-                'gif' => 'image/gif',
-            ];
-            $ogImageType = $imageTypes[$extension] ?? 'image/jpeg';
-        }
-        
-        $blogUrl = url(route('blog.show', $post->url_friendly, false));
-    @endphp
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ $escapeMetaAttr($blogUrl) }}">
-    <meta property="og:title" content="{{ $escapeMetaAttr($ogTitle) }}">
-    <meta property="og:description" content="{{ $escapeMetaAttr($ogDescription) }}">
-    <meta property="og:site_name" content="{{ $escapeMetaAttr('i3 - Internal Insights & Innovation') }}">
-    <meta property="og:locale" content="en_US">
-    @if($ogImage)
-    <meta property="og:image" content="{{ $escapeMetaAttr($ogImage) }}">
-    <meta property="og:image:secure_url" content="{{ $escapeMetaAttr($ogImage) }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="{{ $escapeMetaAttr($ogTitle) }}">
-    <meta property="og:image:type" content="{{ $escapeMetaAttr($ogImageType) }}">
-    @endif
-    @if($post->published_at)
-    <meta property="article:published_time" content="{{ $escapeMetaAttr($post->published_at->toIso8601String()) }}">
-    @endif
-    @if($post->author)
-    <meta property="article:author" content="{{ $escapeMetaAttr($post->author) }}">
-    @endif
-    @if(is_array($post->tags) && count($post->tags))
-        @foreach($post->tags as $tag)
-    <meta property="article:tag" content="{{ $escapeMetaAttr($tag) }}">
-        @endforeach
-    @endif
-
-    @php
-        $twitterTitle = trim((string) view()->yieldContent('twitter_title'));
-        $twitterDescription = trim((string) view()->yieldContent('twitter_description'));
-        $twitterImageRaw = trim((string) view()->yieldContent('twitter_image'));
-        // Ensure absolute URL for images
-        $twitterImage = $twitterImageRaw ? (filter_var($twitterImageRaw, FILTER_VALIDATE_URL) ? $twitterImageRaw : url($twitterImageRaw)) : null;
-    @endphp
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ $escapeMetaAttr($blogUrl) }}">
-    <meta name="twitter:title" content="{{ $escapeMetaAttr($twitterTitle) }}">
-    <meta name="twitter:description" content="{{ $escapeMetaAttr($twitterDescription) }}">
-    @if($twitterImage)
-    <meta name="twitter:image" content="{{ $escapeMetaAttr($twitterImage) }}">
-    <meta name="twitter:image:alt" content="{{ $escapeMetaAttr($twitterTitle) }}">
-    @endif
-
-    <!-- Additional Meta -->
-    <link rel="canonical" href="{{ $escapeMetaAttr($blogUrl) }}">
-@endpush
+@section('meta')
+    @include('pages.blogs.components.blog-meta', ['post' => $post, 'defaultDescription' => $defaultDescription])
+@endsection
 @endif
 
 @section('content')
@@ -188,16 +92,18 @@
     }
 
     .blog-title-image {
-        font-size: 3rem;
+        font-size: clamp(1.75rem, 5vw, 3rem);
         font-weight: 700;
         margin-bottom: 1rem;
+        line-height: 1.2;
     }
 
     .blog-subheader {
-        font-size: 1.25rem;
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
         font-weight: 400;
         margin-bottom: 1rem;
         opacity: 0.8;
+        line-height: 1.4;
     }
 
     .blog-title-underline {
@@ -240,11 +146,24 @@
     }
 
 
-    /* These styles right here will be the actual style of 
+    /* 
+    These styles right here will be the actual style of 
     your blog content so the actual text in your post will be styled like this
-    This is something we should most likely mess with to make look good*/
+    This is something we should most likely mess with to make look good
+    (I dont wanna mess with it anymore :( CSSad
+    */
     .blog-content p {
         margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 991px) {
+        .blog-content {
+            font-size: 1rem;
+        }
+        
+        .blog-content p {
+            font-size: 0.9375rem;
+        }
     }
 
     .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
@@ -267,11 +186,63 @@
         font-size: 1.5rem;
     }
 
-    
-    /* Prevent images from being too small on large screens */
     @media (min-width: 768px) {
         .blog-content img {
             min-width: 25%;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .blog-content img {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            margin: 1.5rem 0 !important;
+            float: none !important;
+        }
+        
+        .blog-content .float-lg-start,
+        .blog-content .float-lg-end {
+            float: none !important;
+        }
+        
+        .blog-content div[style*="width"] {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        .blog-content .me-lg-4,
+        .blog-content .ms-lg-4 {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+    }
+
+    @media (min-width: 576px) and (max-width: 991px) {
+        .blog-content img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
+        .blog-content img[style*="width"] {
+            max-width: 50% !important;
+        }
+        
+        .blog-content .float-lg-start {
+            float: left !important;
+            margin-right: 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .blog-content .float-lg-end {
+            float: right !important;
+            margin-left: 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .blog-content div[style*="width"] {
+            max-width: 50% !important;
         }
     }
 
@@ -290,66 +261,6 @@
 
     .blog-content li {
         margin-bottom: 0.5rem;
-    }
-
-    .blog-navigation {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        justify-content: center;
-        margin: 4rem 0 3rem;
-    }
-
-    .blog-navigation .nav-card {
-        flex: 1 1 260px;
-        max-width: 340px;
-        background: rgba(15, 46, 75, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 18px;
-        padding: 1.75rem;
-        color: #fff;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    .blog-navigation .nav-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(56, 189, 248, 0.5);
-        box-shadow: 0 18px 36px rgba(56, 189, 248, 0.25);
-    }
-
-    .blog-navigation .nav-card.disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
-        pointer-events: none;
-        border-color: rgba(255, 255, 255, 0.08);
-        box-shadow: none;
-    }
-
-    .blog-navigation .nav-card span.label {
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: rgba(255, 255, 255, 0.6);
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-
-    .blog-navigation .nav-card h4 {
-        font-size: 1.15rem;
-        font-weight: 600;
-        margin: 0;
-        color: #fff;
-    }
-
-    .blog-navigation .nav-card .icon {
-        font-size: 1.4rem;
-        color: #38bdf8;
     }
 
     .decorative-blog-text {
@@ -371,6 +282,40 @@
         text-align: center;
         z-index: 100;
     }
+
+    @media (max-width: 992px) {
+        .decorative-blog-text {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .container {
+            max-width: 100% !important;
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+        }
+        
+        section.px-5 {
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+        }
+        
+        .blog-post {
+            padding: 1rem !important;
+        }
+        
+        .blog-content {
+            max-width: 100%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .container {
+            max-width: 95%;
+        }
+    }
+
 
     .style-container {
         width: 100vw;
@@ -394,12 +339,30 @@
         height: 100vh;
         transform: translateX(-50%);
         background: 
-            radial-gradient(circle, rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px),
+            radial-gradient(circle, rgba(255, 255, 255, 0.35) 2px, transparent 2px),
             linear-gradient(180deg, #051a29 0%, #030a0f 100%);
         background-size: 50px 50px, 100% 100%;
         z-index: -1;
         mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 75%);
         -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 75%);
+    }
+
+    @media (min-width: 1200px) {
+        .style-container2 {
+            background: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.4) 2.5px, transparent 2.5px),
+                linear-gradient(180deg, #051a29 0%, #030a0f 100%);
+            background-size: 60px 60px, 100% 100%;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .style-container2 {
+            background: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.45) 3px, transparent 3px),
+                linear-gradient(180deg, #051a29 0%, #030a0f 100%);
+            background-size: 70px 70px, 100% 100%;
+        }
     }
 
 </style>
@@ -411,8 +374,8 @@
         <div class="row align-items-center justify-content-center mb-5">
         </div>
 
-        <div class="row">
-            <div class="col-12 col-lg-10 offset-lg-1">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-11">
                 
                 @if($post ?? null)
                     <article class="blog-post" data-aos="fade-up">
@@ -454,41 +417,14 @@
                         </div>
                         @endif
                         <div class="blog-content">
-                            @hasSection('blog-content')
-                                @yield('blog-content')
-                            @else
-                                {!! $post->content !!}
-                            @endif
+                            @yield('blog-content')
                             <div class="style-container"></div>
                             <div class="style-container2"></div>
                         </div>
                     </article>
 
                     {{-- Navigation --}}
-                    <div class="blog-navigation">
-                        <a @if($prevPost) href="{{ route('blog.show', ['slug' => $prevPost->url_friendly]) }}" @endif
-                           class="nav-card {{ $prevPost ? '' : 'disabled' }}">
-                           <div class="icon">
-                                <i class="bi bi-arrow-left-circle"></i>
-                            </div>
-                            <div>
-                                <span class="label"><i class="bi bi-arrow-left me-2"></i>Previous Post</span>
-                                <h4>{{ $prevPost->title ?? 'No older posts yet' }}</h4>
-                            </div>
-                            
-                        </a>
-
-                        <a @if($nextPost) href="{{ route('blog.show', ['slug' => $nextPost->url_friendly]) }}" @endif
-                           class="nav-card {{ $nextPost ? '' : 'disabled' }}">
-                            <div>
-                                <span class="label">Next Post<i class="bi bi-arrow-right ms-2"></i></span>
-                                <h4>{{ $nextPost->title ?? 'You’re all caught up' }}</h4>
-                            </div>
-                            <div class="icon">
-                                <i class="bi bi-arrow-right-circle"></i>
-                            </div>
-                        </a>
-                    </div>
+                    @include('pages.blogs.components.blog-navigation', ['prevPost' => $prevPost, 'nextPost' => $nextPost])
                 @endif
             </div>
         </div>

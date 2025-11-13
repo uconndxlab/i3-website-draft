@@ -57,7 +57,7 @@
   
     <div class="clearfix mt-4">
         <p>
-            Our team has continuously refined our design process, previously working almost exclusively on academic research projects. However, this scaling sprint gave us the chance to take what we have learned about collaboration and adapt it to a non-academic project. The success of the brewery project – now UConn Brewing Innovation – is ultimately due to the hard work and creativity of the project team members. But its success has also shown us that our expertise in collaboration and design thinking can be generalized to a much broader range of projects, something we look forward to doing more of in the future. </
+            Our team has continuously refined our design process, previously working almost exclusively on academic research projects. However, this scaling sprint gave us the chance to take what we have learned about collaboration and adapt it to a non-academic project. The success of the brewery project – now UConn Brewing Innovation – is ultimately due to the hard work and creativity of the project team members. But its success has also shown us that our expertise in collaboration and design thinking can be generalized to a much broader range of projects, something we look forward to doing more of in the future.
         </p>
     </div>
 <!-- Think for now lets keep style in the backgrounds/blogs.blade.php file so its universal -->
