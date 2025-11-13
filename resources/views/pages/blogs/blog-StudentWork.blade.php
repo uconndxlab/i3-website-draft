@@ -42,12 +42,24 @@
         <p class="mb-0">The most critical part of each agenda was the first bullet point: our "no B.S. check-in" (a ritual introduced by my colleague, Carly Wanner-Hyde - thanks Carly!). Each team member was invited to honestly answer the question, "How are you doing?" I feel that the key to doing this effectively, as both a staff member and (hopefully!) a mentor, was to offer my own response first, and to let myself be appropriately transparent and vulnerable. This was a group that truly trusted each other, and it showed in the freedom with which they brought their most brilliant ideas to the table. This team became an extremely tight-knit group, and our weekly meeting was easily the best part of my week! </p>
     </div>
 
-    <h2>Teamwork Makes the Dream Work </h2>
+    <h2>A Brand That We Were Proud Of </h2>
 
     <div class="py-4 clearfix">
         @include('pages.blogs.components.blog-image', [
             'src' => 'storage/post_images/treehouse-img3-gsbrand.png',
             'alt' => 'Greenhouse Studios Brand',
+            'caption' => 'During what started as a redesign of the Greenhouse Studios website, the 2019 cohort of students embarked on what would become a full refresh of the entire Greenhouse Studios brand identity.'
+        ])
+        <p class="mb-0">There was no better feeling than when Greenhouse Studios students became what I like to call "true believers." Not-so-humble brag: we had an insanely low rate of attrition, and our students almost always tried to find ways to keep working with us after graduation when possible (I wish we could have kept them all!). The Greenhouse Studios wordmark symbolized a place where individuals belonged to something bigger than themselves, and could create outcomes that were greater than they had ever dreamed of. In The Treehouse, we channeled that tremendous amount of buy-in into advancing the research of the studio that we all believed in. We still revel in the successes of our alumni (<a href="https://www.linkedin.com/in/briannaricciardone/"> Bri Ricciardone</a>, <a href="https://www.linkedin.com/in/andrew-wolf-2044b311a/">Andrew Wolf</a>, <a href="https://www.linkedin.com/in/luisa-fernanda-arrieta-fernandez-7160ab184/">Luisa Fernanda Arrieta Fernandez</a>, and <a href="https://www.linkedin.com/in/alyssa-mcdonald/ ">Alyssa McDonald</a> to name just a few), most significantly in the ways in which they bring our inclusive work culture into their own career environments.  </p>
+    </div>
+
+    <h2>Teamwork Makes the Dream Work </h2>
+
+    <div class="py-4 clearfix">
+        @include('pages.blogs.components.blog-image', [
+            'src' => 'storage/post_images/treehouse-img4-process.png',
+            'alt' => 'Greenhouse Studios Brand',
+            'float' => 'right',
             'caption' => 'An excerpt from a student-produced animation which illustrated the Greenhouse Studios design process model. Produced by Cameron Slocum, Cara Tracey, and Kenia Rodriguez. You can view the animation on our YouTube channel and our website.'
         ])
         <p class="mb-0">I know...[insert groan here]...but true-blue teamwork was the special sauce that made The Treehouse such a success each semester. As we identified specific projects and tasks that we were going to tackle–whether it be a social media campaign, an animation, or a blog post–students were given opportunities to act as project managers. The size and makeup of the team would depend on the scope of the project, but the majority of the teams were cross-disciplinary and given the freedom (and tools) to manage their own day-to-day strategies. Though I had an eye on each project and campaign, Treehouse collaborators were almost always the sole producers and creators, and they were given the latitude to show off 100% of their work in their own portfolios. </p>
