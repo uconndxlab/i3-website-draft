@@ -8,6 +8,7 @@ use App\Enums\PostTag;
 use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 
@@ -43,11 +44,14 @@ class PostController extends Controller
             'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'featured_image' => 'nullable|image',
+            'featured_image' => 'nullable|image|max:10240',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:' . implode(',', PostTag::all()),
             'blade_file' => 'nullable|string',
+        ], [
+            'featured_image.image' => 'The featured image must be a valid image file.',
+            'featured_image.max' => 'The featured image must not be larger than 10MB.',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -61,10 +65,20 @@ class PostController extends Controller
         }
 
         if ($request->hasFile('featured_image')) {
-            $imagePaths = $this->imageProcessingService->processWorkItemThumbnail($request->file('featured_image'), 'post_images');
-            $data['featured_image'] = $imagePaths['original'];
-            $data['featured_image_medium'] = $imagePaths['medium'];
-            $data['featured_image_webp'] = $imagePaths['webp'];
+            try {
+                $imagePaths = $this->imageProcessingService->processWorkItemThumbnail($request->file('featured_image'), 'post_images');
+                $data['featured_image'] = $imagePaths['original'];
+                $data['featured_image_medium'] = $imagePaths['medium'];
+                $data['featured_image_webp'] = $imagePaths['webp'];
+            } catch (\Exception $e) {
+                Log::error('Featured image processing failed', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                return back()
+                    ->withInput()
+                    ->withErrors(['featured_image' => 'Failed to process image. Please ensure the file is a valid image format (JPEG, PNG, GIF, WebP) and try again.']);
+            }
         }
 
         $shouldPublish = $request->input('publish_action') === 'publish';
@@ -123,11 +137,14 @@ class PostController extends Controller
             'subheader' => 'nullable|string|max:500',
             'author' => 'nullable|string|max:255',
             'published_at' => 'nullable|date',
-            'featured_image' => 'nullable|image',
+            'featured_image' => 'nullable|image|max:10240',
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:' . implode(',', PostTag::all()),
             'blade_file' => 'nullable|string',
+        ], [
+            'featured_image.image' => 'The featured image must be a valid image file.',
+            'featured_image.max' => 'The featured image must not be larger than 10MB.',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -143,17 +160,27 @@ class PostController extends Controller
         }
 
         if ($request->hasFile('featured_image')) {
-            $oldImages = [
-                $post->featured_image,
-                $post->featured_image_medium,
-                $post->featured_image_webp
-            ];
-            $this->imageProcessingService->deleteWorkItemThumbnails($oldImages);
+            try {
+                $oldImages = [
+                    $post->featured_image,
+                    $post->featured_image_medium,
+                    $post->featured_image_webp
+                ];
+                $this->imageProcessingService->deleteWorkItemThumbnails($oldImages);
 
-            $imagePaths = $this->imageProcessingService->processWorkItemThumbnail($request->file('featured_image'), 'post_images');
-            $data['featured_image'] = $imagePaths['original'];
-            $data['featured_image_medium'] = $imagePaths['medium'];
-            $data['featured_image_webp'] = $imagePaths['webp'];
+                $imagePaths = $this->imageProcessingService->processWorkItemThumbnail($request->file('featured_image'), 'post_images');
+                $data['featured_image'] = $imagePaths['original'];
+                $data['featured_image_medium'] = $imagePaths['medium'];
+                $data['featured_image_webp'] = $imagePaths['webp'];
+            } catch (\Exception $e) {
+                Log::error('Featured image processing failed', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                return back()
+                    ->withInput()
+                    ->withErrors(['featured_image' => 'Failed to process image. Please ensure the file is a valid image format (JPEG, PNG, GIF, WebP) and try again.']);
+            }
         } else {
             unset($data['featured_image']);
         }

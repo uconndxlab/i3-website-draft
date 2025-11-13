@@ -152,8 +152,9 @@
     This is something we should most likely mess with to make look good
     (I dont wanna mess with it anymore :( CSSad
     */
-    .blog-content p {
+    .blog-content p:not(.blog-image-caption) {
         margin-bottom: 1.25rem;
+        font-size: 1.25rem;
     }
 
     @media (max-width: 991px) {
@@ -161,8 +162,8 @@
             font-size: 1rem;
         }
         
-        .blog-content p {
-            font-size: 0.9375rem;
+        .blog-content p:not(.blog-image-caption) {
+            font-size: 1.0625rem;
         }
     }
 
@@ -332,13 +333,6 @@
             max-width: 100%;
         }
     }
-
-    @media (min-width: 992px) {
-        .container {
-            max-width: 95%;
-        }
-    }
-
 
     .style-container {
         width: 100vw;

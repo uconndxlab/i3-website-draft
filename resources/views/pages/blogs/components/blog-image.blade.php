@@ -12,7 +12,7 @@
          class="img-fluid rounded shadow" 
          style="width: {{ $imageWidth }};">
     @if($hasCaption)
-        <p class="blog-image-caption mb-0">{{ $caption }}</p>
+        <p class="blog-image-caption mb-0 text-white small">{{ $caption }}</p>
     @endif
 </div>
 
