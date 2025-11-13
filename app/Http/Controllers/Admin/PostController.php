@@ -266,6 +266,7 @@ class PostController extends Controller
 
         return collect(File::files($directory))
             ->filter(fn ($file) => Str::endsWith($file->getFilename(), '.blade.php'))
+            ->filter(fn ($file) => Str::startsWith($file->getFilename(), 'blog-'))
             ->map(function ($file) {
                 $filename = $file->getFilename();
                 $viewName = 'pages.blogs.' . Str::of($filename)->replace('.blade.php', '');

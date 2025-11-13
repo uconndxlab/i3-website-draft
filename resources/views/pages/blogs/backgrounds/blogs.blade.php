@@ -217,6 +217,14 @@
             margin-left: 0 !important;
             margin-right: 0 !important;
         }
+        
+        .blog-image-with-caption {
+            float: none !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-right: 0 !important;
+            margin-bottom: 1.5rem !important;
+        }
     }
 
     @media (min-width: 576px) and (max-width: 991px) {
@@ -261,6 +269,21 @@
 
     .blog-content li {
         margin-bottom: 0.5rem;
+    }
+
+    .blog-image-with-caption {
+        float: left;
+        max-width: 100%;
+        margin-right: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .blog-image-caption {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 0.75rem;
+        line-height: 1.5;
+        font-style: italic;
     }
 
     .decorative-blog-text {
@@ -375,7 +398,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-11">
+            <div class="col-12 col-lg-10 col-xl-10">
                 
                 @if($post ?? null)
                     <article class="blog-post" data-aos="fade-up">

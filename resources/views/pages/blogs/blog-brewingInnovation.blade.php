@@ -4,16 +4,12 @@
     <div class="clearfix" style="padding-top: 2rem;">
         <i>This post has been adapted and revised from its original version, first published on the Greenhouse Studios blog in November 2024. </i>
     </div>
-    <div class="d-lg-flex gap-4 align-items-center py-4">
-        <div class="flex-shrink-0 mb-3 mb-lg-0 d-lg-flex" style="width: 260px;">
-            <img src="{{ asset('storage/post_images/brewconn-img1-can-label.jpeg') }}"
-                 alt="BrewConn Can Label"
-                 class="img-fluid rounded shadow" 
-                 style="width: 250px;">
-        </div>
-        <div>
-            <p class="mb-4">Last month, Kinsmen Brewing Company in Southington held an event to launch BrewConn, a new, student-designed IPA. The night also saw the official launch of UConn Brewing Innovation, a new initiative that seeks to provide unique educational opportunities around the science and business of brewing, while also collaborating with and supporting Connecticut’s growing craft brew industry. One of the most exciting things about these developments is that much of the work began earlier this year with a diverse group of people gathered around a table in Greenhouse Studios (formerly located in the Homer Babbidge Library).</p>
-        </div>
+    <div class="py-4 clearfix">
+        @include('pages.blogs.components.blog-image', [
+            'src' => 'storage/post_images/brewconn-img1-can-label.jpeg',
+            'alt' => 'BrewConn Can Label'
+        ])
+        <p class="mb-4">Last month, Kinsmen Brewing Company in Southington held an event to launch BrewConn, a new, student-designed IPA. The night also saw the official launch of UConn Brewing Innovation, a new initiative that seeks to provide unique educational opportunities around the science and business of brewing, while also collaborating with and supporting Connecticut's growing craft brew industry. One of the most exciting things about these developments is that much of the work began earlier this year with a diverse group of people gathered around a table in Greenhouse Studios (formerly located in the Homer Babbidge Library).</p>
     </div>
     
     <div class="py-4">
@@ -23,16 +19,27 @@
     <h2>Assembling a Team</h2>
 
     <div class="clearfix mt-4">
-        <img src="{{ asset('storage/post_images/brewconn-img3-team.jpeg') }}" alt="Team Meeting" class="img-fluid rounded shadow mb-3 me-lg-4 float-lg-start" style="width: 360px;">
-        <p>In addition to planning the activities that would take place during the sprint, one of our first tasks was to assemble a diverse team of collaborators. The strength of Pascal and Menard’s proposal suggested that the project could draw support not just from the College of Engineering, but also from other schools and colleges at UConn. Given the university’s <a href="https://cahnr.uconn.edu/history/#:~:text=College%20History&text=The%20College%20of%20Agriculture%2C%20Health%20and%20Natural%20Resources%20(CAHNR),original%20land%20grant%20university%20system.">long heritage as an agricultural school</a> and its particular strengths in agricultural science, it was clear to us that <a href="https://cahnr.uconn.edu/">CAHNR</a> could play an important role going forward. To that end, we were fortunate to add <a href="https://cahnr.uconn.edu/person/richard-meinert/">Rich Meinert</a> and <a href="https://psla.uconn.edu/person/nicholas-goltz/">Nick Goltz</a> to the project team.</p>
-        <p>Likewise, we hoped to draw from UConn’s award-winning Dining Services department, especially as we began thinking about the possibility of having an on-campus brewery or tap room. <a href="https://dining.uconn.edu/contact-us/">Andy Iverson</a> not only brought expertise in food service management, but also happened to be a knowledgeable craft beer enthusiast. Finally, we understood that an essential piece of the puzzle would be someone with expertise in business and entrepreneurship. The first person that came to mind was <a href="https://www.business.uconn.edu/person/jennifer-mathieu/">Jennifer Mathieu</a>, Executive Director of the <a href="https://ccei.uconn.edu/">Connecticut Center for Entrepreneurship and Innovation (CCEI)</a>. (Our relationship with CCEI dates to 2019, when we participated in <a href="https://accelerate.uconn.edu/">Accelerate UConn for the <a href="https://sourceryapp.org/">Sourcery project</a>.)</p>
+        @include('pages.blogs.components.blog-image', [
+            'src' => 'storage/post_images/brewconn-img3-team.jpeg',
+            'alt' => 'Team Meeting',
+            'width' => '360px',
+            'imageWidth' => '360px'
+        ])
+        <p>In addition to planning the activities that would take place during the sprint, one of our first tasks was to assemble a diverse team of collaborators. The strength of Pascal and Menard's proposal suggested that the project could draw support not just from the College of Engineering, but also from other schools and colleges at UConn. Given the university's <a href="https://cahnr.uconn.edu/history/#:~:text=College%20History&text=The%20College%20of%20Agriculture%2C%20Health%20and%20Natural%20Resources%20(CAHNR),original%20land%20grant%20university%20system.">long heritage as an agricultural school</a> and its particular strengths in agricultural science, it was clear to us that <a href="https://cahnr.uconn.edu/">CAHNR</a> could play an important role going forward. To that end, we were fortunate to add <a href="https://cahnr.uconn.edu/person/richard-meinert/">Rich Meinert</a> and <a href="https://psla.uconn.edu/person/nicholas-goltz/">Nick Goltz</a> to the project team.</p>
+        <p>Likewise, we hoped to draw from UConn's award-winning Dining Services department, especially as we began thinking about the possibility of having an on-campus brewery or tap room. <a href="https://dining.uconn.edu/contact-us/">Andy Iverson</a> not only brought expertise in food service management, but also happened to be a knowledgeable craft beer enthusiast. Finally, we understood that an essential piece of the puzzle would be someone with expertise in business and entrepreneurship. The first person that came to mind was <a href="https://www.business.uconn.edu/person/jennifer-mathieu/">Jennifer Mathieu</a>, Executive Director of the <a href="https://ccei.uconn.edu/">Connecticut Center for Entrepreneurship and Innovation (CCEI)</a>. (Our relationship with CCEI dates to 2019, when we participated in <a href="https://accelerate.uconn.edu/">Accelerate UConn for the <a href="https://sourceryapp.org/">Sourcery project</a>.)</p>
     </div>
 
     <h2 class="mt-4">Design Thinking for Scaling Up</h2>
 
     <div class="clearfix mt-4">
-        <img src="{{ asset('storage/post_images/brewconn-img4-headlines.png') }}" alt="Headlines from the Future" class="img-fluid rounded shadow mb-3 ms-lg-4 float-lg-end" style="width: 320px;">
-        <p>The sprint sessions were scheduled on five separate days over the course of two weeks. In the first half of the design sprint, we led the team through exercises that facilitated divergent thinking and open ideation about the forms the project could take. In an activity called <a href="https://miro.com/app/board/uXjVPhnuB9U=/?share_link_id=988066318601">“Headlines from the Future,”</a> the team was also tasked with imagining what success might look like five years down the road, and asked to imagine what a UConn student might say about how the project impacted their undergraduate education. In addition, the team cataloged the various networks available to them – both at UConn and beyond – as well as their resources and constraints, both individually and institutionally. We also led the team through a process of empathy mapping, where the team thinks imaginatively and broadly about the needs of specific stakeholders, including students, faculty, parents, administrators, and alumni.</p>
+        @include('pages.blogs.components.blog-image', [
+            'src' => 'storage/post_images/brewconn-img4-headlines.png',
+            'alt' => 'Headlines from the Future',
+            'width' => '320px',
+            'imageWidth' => '320px',
+            'float' => 'right'
+        ])
+        <p>The sprint sessions were scheduled on five separate days over the course of two weeks. In the first half of the design sprint, we led the team through exercises that facilitated divergent thinking and open ideation about the forms the project could take. In an activity called <a href="https://miro.com/app/board/uXjVPhnuB9U=/?share_link_id=988066318601">"Headlines from the Future,"</a> the team was also tasked with imagining what success might look like five years down the road, and asked to imagine what a UConn student might say about how the project impacted their undergraduate education. In addition, the team cataloged the various networks available to them – both at UConn and beyond – as well as their resources and constraints, both individually and institutionally. We also led the team through a process of empathy mapping, where the team thinks imaginatively and broadly about the needs of specific stakeholders, including students, faculty, parents, administrators, and alumni.</p>
     </div>
 
     <div class="row g-4 mt-2">

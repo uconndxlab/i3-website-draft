@@ -2,7 +2,7 @@
 @section('title', 'Blogs')
 
 @section('content')
-<h1 class="page-h1 display-1" style="z-index:0">Blogs</h1>
+<h1 class="page-h1 display-1" style="z-index:0">Blog</h1>
 
 <section class="py-5">
     <div class="container">

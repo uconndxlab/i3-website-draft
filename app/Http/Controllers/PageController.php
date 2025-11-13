@@ -207,6 +207,13 @@ class PageController extends Controller
         }, array_filter($expanded)));
 
         foreach ($expanded as $viewName) {
+            if (Str::startsWith($viewName, 'pages.blogs.')) {
+                $viewBasename = Str::after($viewName, 'pages.blogs.');
+                if (!Str::startsWith($viewBasename, 'blog-')) {
+                    continue;
+                }
+            }
+            
             if (View::exists($viewName)) {
                 return $viewName;
             }
