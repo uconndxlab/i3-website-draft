@@ -255,7 +255,6 @@
         flex-wrap: wrap;
         gap: 0.75rem;
         align-items: center;
-        margin-bottom: 2rem;
     }
 
     .blog-filter-btn {
@@ -301,7 +300,7 @@
         color: white;
         border: 2px solid transparent;
         border-radius: 8px;
-        padding: 0.3    rem 1rem;
+        padding: 0.3rem 1rem;
         font-size: 0.95rem;
         font-weight: 500;
         cursor: pointer;
@@ -330,6 +329,7 @@
 
         .filter-container {
             gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .blog-filter-btn {
