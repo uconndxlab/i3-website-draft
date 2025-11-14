@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Blogs')
+@section('title', 'Blog')
 
 @section('content')
 <h1 class="page-h1 display-1" style="z-index:0">Blog</h1>

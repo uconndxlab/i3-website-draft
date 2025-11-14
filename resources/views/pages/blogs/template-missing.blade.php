@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $post->title ?? 'Blog Post')
-@section('meta_description', 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.')
+@section('meta_description', 'Read the latest blog from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.')
 
 @section('content')
 <section class="py-5 text-light" style="background: linear-gradient(180deg, #0f2e4b 0%, #101820 100%); min-height: 60vh;">
@@ -16,7 +16,7 @@
                     <p class="lead mb-4">The content for “{{ $post->title }}” hasn’t been connected to a display template yet. Please choose a template for this post in the admin panel so visitors can view it.</p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info text-dark">Assign Template</a>
-                        <a href="{{ route('blog') }}" class="btn btn-outline-light">Back to Blogs</a>
+                        <a href="{{ route('blog') }}" class="btn btn-outline-light">Back to Blog</a>
                     </div>
                 </div>
             </div>

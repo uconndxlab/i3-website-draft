@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @php
-    $defaultDescription = 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.';
-    $pageTitle = isset($post) ? $post->title : 'Blogs';
+    $defaultDescription = 'Read the latest blog from i3, UConn\'s hub of innovation and creativity.';
+    $pageTitle = isset($post) ? $post->title : 'Blog';
     $metaDesc = isset($post) 
         ? ($post->subheader ?: $defaultDescription) 
         : $defaultDescription . ' Learn about our latest projects, events, and updates.';

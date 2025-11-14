@@ -1,5 +1,5 @@
 @php
-    $defaultDescription = $defaultDescription ?? 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity.';
+    $defaultDescription = $defaultDescription ?? 'Read the latest blog from i3, UConn\'s hub of innovation and creativity.';
     $description = $post->subheader ?: $defaultDescription;
     $imageRaw = $post->best_featured_image_url ?? '';
     $image = $imageRaw ? (filter_var($imageRaw, FILTER_VALIDATE_URL) ? $imageRaw : url($imageRaw)) : null;

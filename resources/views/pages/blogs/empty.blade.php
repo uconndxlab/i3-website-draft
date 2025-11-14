@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Blogs')
-@section('meta_description', 'Read the latest blogs from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.')
+@section('title', 'Blog')
+@section('meta_description', 'Read the latest blog from i3, UConn\'s hub of innovation and creativity. Learn about our latest projects, events, and updates.')
 
 @section('content')
 <style>
