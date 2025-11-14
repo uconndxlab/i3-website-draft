@@ -54,7 +54,7 @@
         <div class="mb-3">
             <label class="form-label">Permalink (slug)</label>
             <div class="input-group">
-                <span class="input-group-text">{{ url('blogs') }}/</span>
+                <span class="input-group-text">{{ url('blog') }}/</span>
                 <input name="url_friendly" id="url_friendly" class="form-control" value="{{ old('url_friendly', $post->url_friendly ?? '') }}" placeholder="auto-generated-from-title">
             </div>
             <small class="text-muted">Customize the URL slug. Leave blank to auto-generate from the title.</small>

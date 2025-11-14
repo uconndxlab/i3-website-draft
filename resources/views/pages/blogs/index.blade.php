@@ -6,15 +6,15 @@
 
 <section class="py-5">
     <div class="container">
-    <form method="GET" action="{{ route('blogs') }}" id="blog-filter-form">
+    <form method="GET" action="{{ route('blog') }}" id="blog-filter-form">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
                     <div class="filter-container">
-                        <a href="{{ route('blogs', ['sort' => $sort ?? 'newest']) }}" 
+                        <a href="{{ route('blog', ['sort' => $sort ?? 'newest']) }}" 
                            class="blog-filter-btn {{ (!isset($filterTag) || $filterTag === 'all') ? 'active' : '' }}">
                             All
                         </a>
                         @foreach(\App\Enums\PostTag::all() as $tag)
-                            <a href="{{ route('blogs', ['tag' => $tag, 'sort' => $sort ?? 'newest']) }}" 
+                            <a href="{{ route('blog', ['tag' => $tag, 'sort' => $sort ?? 'newest']) }}" 
                                class="blog-filter-btn {{ (isset($filterTag) && $filterTag === $tag) ? 'active' : '' }}"
                                style="background-color: {{ \App\Enums\PostTag::from($tag)->color() }}">
                                 {{ $tag }}
@@ -43,7 +43,9 @@
                 @foreach($posts as $post)
                     <div class="col-12 col-md-6 col-lg-4 blog-post-item" 
                          data-aos="fade-up" 
-                         data-aos-delay="{{ $loop->index * 100 }}">
+                         data-aos-delay="{{ $loop->index * 50 }}"
+                         data-aos-duration="400"
+                         data-aos-offset="50">
                         <article class="blog-card h-100">
                             <a href="{{ route('blog.show', $post->url_friendly) }}" class="text-decoration-none">
                                 <div class="blog-card-image-wrapper">
@@ -259,26 +261,30 @@
     .blog-filter-btn {
         display: inline-block;
         color: white;
-        padding: 0.5rem 1.25rem;
-        border-radius: 8px;
-        border: 2px solid transparent;
+        padding: 0.4rem 0.875rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
-        background-color: #333;
-        font-size: 0.95rem;
+        background-color: rgba(51, 51, 51, 0.8);
+        font-size: 0.875rem;
         text-decoration: none;
+        backdrop-filter: blur(10px);
     }
 
     .blog-filter-btn:hover {
-        transform: translateY(-2px);
+        transform: translateY(-1px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
+        background-color: rgba(51, 51, 51, 0.95);
     }
 
     .blog-filter-btn.active {
-        border-color: white;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
-        transform: scale(1.05);
+        border-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(77, 179, 255, 0.2);
+        box-shadow: 0 0 0 1px rgba(77, 179, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+        transform: scale(1.01);
     }
 
     .blog-post-item {
@@ -328,8 +334,8 @@
         }
 
         .blog-filter-btn {
-            padding: 0.4rem 1rem;
-            font-size: 0.875rem;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
         }
 
         .sort-container {

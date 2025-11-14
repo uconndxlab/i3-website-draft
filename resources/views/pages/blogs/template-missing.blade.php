@@ -16,7 +16,7 @@
                     <p class="lead mb-4">The content for “{{ $post->title }}” hasn’t been connected to a display template yet. Please choose a template for this post in the admin panel so visitors can view it.</p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info text-dark">Assign Template</a>
-                        <a href="{{ route('blogs') }}" class="btn btn-outline-light">Back to Blogs</a>
+                        <a href="{{ route('blog') }}" class="btn btn-outline-light">Back to Blogs</a>
                     </div>
                 </div>
             </div>
