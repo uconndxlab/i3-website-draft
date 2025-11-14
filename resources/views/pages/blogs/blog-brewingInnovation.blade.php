@@ -4,7 +4,7 @@
     <div class="clearfix" style="padding-top: 2rem;">
         <i>This post has been adapted and revised from its original version, first published on the Greenhouse Studios blog in November 2024. </i>
     </div>
-    <div class="py-4 clearfix">
+    <div class="clearfix" style="padding-top: 4rem;">
         @include('pages.blogs.components.blog-image', [
             'src' => 'storage/post_images/brewconn-img1-can-label.jpeg',
             'alt' => 'BrewConn Can Label'

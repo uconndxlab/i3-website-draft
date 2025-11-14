@@ -24,7 +24,7 @@
         @include('pages.blogs.components.blog-image', [
             'src' => 'storage/post_images/treehouse-img1-arden.png',
             'alt' => 'Arden Stull',
-            'caption' => 'One of ten student features created by Lauren Harland (BA \'24) to welcome back students in the Fall 2022 semester. Arden Ricciardone returned to the studio in August for her sixth semester working with us and wrote about her ambitions for her senior year in a student-authored blog post.'
+            'caption' => 'Arden Ricciardone returned to the studio in August for her sixth semester working with us and wrote about her ambitions for her senior year in a student-authored blog post.'
         ])
         <p class="mb-0">The key to the success of our students lies in understanding why they've come to work with us in the first place. Only then can we figure out how to give them the tools and opportunities they need to blossom. We spent the first few Treehouse meetings of each term just taking stock of where each individual has been, where they were in that moment, and where thought they might want to be. What curiosities do you have? Are there specific skills you'd like to hone? Which past projects resonated with you the most? From there, we began to identify the big-ticket items that needed to be accomplished over the semester, and found ways to plug in each team member's motivations and desires into the overall design of each project & initiative that we came up with. </p>
     </div>
@@ -68,7 +68,7 @@
     <h2>How do students become a part of the team? </h2>
 
     <div class="py-4">
-        <p class="mb-0">While weekly iteration of The Treehouse has been (at least temporarily) retired since the merge, that very same spirit is alive and well at Internal Insights & Innovation–if anything, the student-first ethos is even stronger. We take pride in the diversity of our students' backgrounds, as they join us from a wide variety of geographic, academic, and philosophical backgrounds. We consistently welcome new undergraduate employees through UConn’s 12twenty platform, and will announce these positions through our social media channels. However, if you or someone you know is interested in being a member of the team, please do feel free to reach out to us at any time! </p>
+        <p class="mb-0">While weekly iteration of The Treehouse has been (at least temporarily) retired since the merge, that very same spirit is alive and well at Internal Insights & Innovation; if anything, the student-first ethos is even stronger. We take pride in the diversity of our students' backgrounds, as they join us from a wide variety of geographic, academic, and philosophical backgrounds. We consistently welcome new undergraduate employees through UConn’s 12twenty platform, and will announce these positions through our social media channels. However, if you or someone you know is interested in being a member of the team, please do feel free to reach out to us at any time! </p>
     </div>
     
 

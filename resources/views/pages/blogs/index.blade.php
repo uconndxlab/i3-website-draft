@@ -261,14 +261,14 @@
     .blog-filter-btn {
         display: inline-block;
         color: white;
-        padding: 0.4rem 0.875rem;
+        padding: 0.25rem 0.875rem;
         border-radius: 0.5rem;
         border: 1px solid rgba(255, 255, 255, 0.2);
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
         background-color: rgba(51, 51, 51, 0.8);
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         text-decoration: none;
         backdrop-filter: blur(10px);
     }
@@ -294,7 +294,6 @@
     .sort-container {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
     }
 
     .blog-sort-select {
@@ -302,7 +301,7 @@
         color: white;
         border: 2px solid transparent;
         border-radius: 8px;
-        padding: 0.5rem 1rem;
+        padding: 0.3    rem 1rem;
         font-size: 0.95rem;
         font-weight: 500;
         cursor: pointer;
