@@ -18,12 +18,21 @@ enum PostTag: string
         return array_map(fn($case) => $case->value, self::cases());
     }
 
-    public function color(): string
+    public function cssClass(): string
     {
         return match($this) {
-            self::PEOPLE => '#f97316',     // Orange
-            self::NEWS => '#3b82f6',       // Blue
-            self::PROJECTS => '#10b981',    // Green
+            self::PEOPLE => 'bg-orange',
+            self::NEWS => 'bg-light-green',
+            self::PROJECTS => 'bg-light-purple',
+        };
+    }
+
+    public function cssMutedClass(): string
+    {
+        return match($this) {
+            self::PEOPLE => 'btn-orange-muted',
+            self::NEWS => 'btn-success-muted',
+            self::PROJECTS => 'btn-purple-muted',
         };
     }
 }

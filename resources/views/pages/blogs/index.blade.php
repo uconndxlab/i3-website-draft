@@ -5,18 +5,18 @@
 <h1 class="page-h1 display-1" style="z-index:0">Blog</h1>
 
 <section class="py-5">
-    <div class="container">
+    <div class="container px-4">
     <form method="GET" action="{{ route('blog') }}" id="blog-filter-form">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
                     <div class="filter-container">
                         <a href="{{ route('blog', ['sort' => $sort ?? 'newest']) }}" 
-                           class="blog-filter-btn {{ (!isset($filterTag) || $filterTag === 'all') ? 'active' : '' }}">
+                            @class(['btn btn-dark rounded-pill me-3', 'active' => !isset($filterTag) || $filterTag === 'all'])>
                             All
                         </a>
                         @foreach(\App\Enums\PostTag::all() as $tag)
                             <a href="{{ route('blog', ['tag' => $tag, 'sort' => $sort ?? 'newest']) }}" 
-                               class="blog-filter-btn {{ (isset($filterTag) && $filterTag === $tag) ? 'active' : '' }}"
-                               style="background-color: {{ \App\Enums\PostTag::from($tag)->color() }}">
+                                @class(['btn btn-dark rounded-pill me-3 shadow-none',
+                                \App\Enums\PostTag::from($tag)->cssClass() => (isset($filterTag) && $filterTag === $tag)])>
                                 {{ $tag }}
                             </a>
                         @endforeach
@@ -72,14 +72,19 @@
                                             <span class="blog-card-author">{{ $post->author }}</span>
                                         @endif
                                     </div>
-                                    <h2 class="blog-card-title">{{ $post->title }}</h2>
+                                    <h2 class="blog-card-title" style="text-transform: initial;">{{ $post->title }}</h2>
                                     @if($post->subheader)
                                         <p class="blog-card-subheader">{{ $post->subheader }}</p>
                                     @endif
                                     @if($post->tags && count($post->tags) > 0)
                                         <div class="blog-card-tags">
                                             @foreach(array_slice($post->tags, 0, 3) as $tag)
-                                                <span class="blog-tag">{{ $tag }}</span>
+                                                <span
+                                                style="font-size: 0.75rem;"
+                                                @class([
+                                                    "rounded-pill pt-2 pb-1 px-3",
+                                                    \App\Enums\PostTag::from($tag)->cssMutedClass()
+                                                ])>{{ $tag }}</span>
                                             @endforeach
                                         </div>
                                     @endif
@@ -196,7 +201,7 @@
     }
 
     .blog-card-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: #fff;
         margin-bottom: 0.75rem;
@@ -233,18 +238,6 @@
         border-top: 1px solid #333;
     }
 
-    .blog-tag {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        background: rgba(77, 179, 255, 0.15);
-        color: var(--light-blue, #4DB3FF);
-        border-radius: 1rem;
-        font-size: 0.75rem;
-        font-weight: 500;
-        border: 1px solid rgba(77, 179, 255, 0.3);
-        transition: all 0.3s ease;
-    }
-
     .blog-card:hover .blog-tag {
         background: rgba(77, 179, 255, 0.25);
         border-color: rgba(77, 179, 255, 0.5);
@@ -253,23 +246,8 @@
     .filter-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: 0.25rem;
         align-items: center;
-    }
-
-    .blog-filter-btn {
-        display: inline-block;
-        color: white;
-        padding: 0.25rem 0.875rem;
-        border-radius: 0.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background-color: rgba(51, 51, 51, 0.8);
-        font-size: 0.75rem;
-        text-decoration: none;
-        backdrop-filter: blur(10px);
     }
 
     .blog-filter-btn:hover {
