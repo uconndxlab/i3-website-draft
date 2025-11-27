@@ -115,8 +115,6 @@
 
     .blog-meta-tag {
         display: inline-block;
-        background: #f97316;
-        color: white;
         padding: 0.25rem 1rem;
         border-radius: 8px;
         font-size: 0.875rem;
@@ -413,7 +411,7 @@
                             @if(is_array($post->tags) && count($post->tags))
                                 
                                 @foreach($post->tags as $tag)
-                                    <span class="blog-meta-tag" style="background-color: {{ \App\Enums\PostTag::from($tag)->color() }}">{{ $tag }}</span>
+                                    <span @class(["blog-meta-tag", \App\Enums\PostTag::from($tag)->cssClass()])>{{ $tag }}</span>
                                 @endforeach
                             @endif
                         </div>
