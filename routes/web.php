@@ -33,8 +33,8 @@ Route::controller(PageController::class)->group(function () {
     })->name('beyond-nuremberg');
 });
 
-Route::resource('projects', WorkController::class)->only(['index']);
-Route::get('projects/{tag}', [WorkController::class, 'index'])
+Route::resource('work', WorkController::class)->only(['index']);
+Route::get('work/{tag}', [WorkController::class, 'index'])
     ->name('projects.tag')
     ->where('tag', '[a-zA-Z0-9-]+');
 

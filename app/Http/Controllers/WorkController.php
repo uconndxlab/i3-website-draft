@@ -25,7 +25,7 @@ class WorkController extends Controller
             $items = WorkItem::with('tags')->latest()->paginate(18);
         }
 
-        return view('pages.projects', compact('items', 'allTags', 'tag'));
+        return view('pages.work', compact('items', 'allTags', 'tag'));
     }
 
     /**

@@ -187,8 +187,8 @@
                                     class="text-light opacity-75 text-decoration-none hover-opacity-100">Home</a>
                             </li>
                             <li class="mb-2">
-                                <a href="{{ route('projects.index') }}"
-                                    class="text-light opacity-75 text-decoration-none hover-opacity-100">Projects</a>
+                                <a href="{{ route('work.index') }}"
+                                    class="text-light opacity-75 text-decoration-none hover-opacity-100">Work</a>
                             </li>
                             <li class="mb-2">
                                 <a href="{{ route('team') }}"
