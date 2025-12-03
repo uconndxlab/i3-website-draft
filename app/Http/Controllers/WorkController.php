@@ -28,6 +28,23 @@ class WorkController extends Controller
         return view('pages.work', compact('items', 'allTags', 'tag'));
     }
 
+    public function tools()
+    {
+        // TODO :: DECIDE HOW We want to display images.
+        $tools = WorkItem::whereNotNull('thumbnail')
+            ->with('tags')
+            ->latest()
+            ->take(6)
+            ->get();
+        
+        return view('pages.tools', compact('tools'));
+    }
+
+    public function services()
+    {
+        return view('pages.services');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

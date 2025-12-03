@@ -6,9 +6,10 @@
 
 <section id = "into" style="background-color: #111111!important;">
     <div class = "container">
-        <h1 class="page-h1 text-center">Work</h1>
+        <h1 class="page-h1">Work</h1>
+        
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <p class="text-center">
                     Our team takes great pride in creating bespoke solutions that make people's lives better. From producing innovative tools that solve complex problems for the university to developing cutting-edge products for principal investigators, we love biting into big challenges. Have a great idea but not sure where to start? We can help you with that, too. 
                 </p>
@@ -17,18 +18,25 @@
 
         <!-- LINKS TOOLS AND SERVICES -->
         <div class="row justify-content-center">
-            <div class="col-md-5 text-center">
-                <!-- TOOLS LINKS TODO: UPDATE ROUTES -->
-                <a href="{{ route('work.index') }}" class="btn-circle-white">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-                <a href="{{ route('work.index') }}" class="link-light text-decoration-none ms-2 me-4 fw-bold">Tools</a>
-                <!-- SERVIES LINKS TODO: UPDATE ROUTES -->
-                <a href="{{ route('work.index') }}" class="btn-circle-white">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-                <a href="{{ route('work.index') }}" class="link-light text-decoration-none ms-2 fw-bold">Services</a>
-
+            <div class="col-md-5 text-center d-flex align-items-center justify-content-center gap-4">
+                <!-- TOOLS LINKS -->
+                <div class="btn display-btn btn-arrow-slide">
+                    <a href="{{ route('work.tools') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text">Tools</span>
+                    </a>
+                </div>
+                <!-- SERVICES LINKS -->
+                <div class="btn display-btn btn-arrow-slide">
+                    <a href="{{ route('work.services') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                        <span class="btn-arrow-slide-circle" aria-hidden="true">
+                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
+                        </span>
+                        <span class="btn-arrow-slide-text">Services</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center py-5">

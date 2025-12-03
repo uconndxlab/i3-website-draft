@@ -38,6 +38,8 @@ Route::get('work/{tag}', [WorkController::class, 'index'])
     ->name('projects.tag')
     ->where('tag', '[a-zA-Z0-9-]+');
 
+Route::get('/tools', [WorkController::class, 'tools'])->name('work.tools');
+Route::get('/services', [WorkController::class, 'services'])->name('work.services');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
