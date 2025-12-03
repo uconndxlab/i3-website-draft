@@ -40,6 +40,7 @@ Route::get('work/{tag}', [WorkController::class, 'index'])
 
 Route::get('/tools', [WorkController::class, 'tools'])->name('work.tools');
 Route::get('/services', [WorkController::class, 'services'])->name('work.services');
+Route::get('/grant-funded', [WorkController::class, 'grantFunded'])->name('work.grant-funded');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 

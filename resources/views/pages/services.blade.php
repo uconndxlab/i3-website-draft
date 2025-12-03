@@ -7,9 +7,9 @@
 <section id = "into">
     <div class="container">
         
-        <h1 class="page-h1">Services</h1>
+        <h1 class="hero-title text-center">Services</h1>
 
-        <div class="row justify-content-center pb-5">
+        <div class="row justify-content-center pb-5 py-5">
             <div class="col-md-6">
             <p class="text-center">
                 Nothing makes our team happier than bringing big ideas into fruition. We love meeting new people, learning about their needs, and dreaming up solutions that exceed the status quo. From problem-discovery & ideation to designing & shipping a product, our team is here to partner with you every step of the way.
