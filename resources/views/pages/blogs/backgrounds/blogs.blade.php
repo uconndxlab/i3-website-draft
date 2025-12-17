@@ -346,39 +346,48 @@
 
     .style-container2 {
         width: 100vw;
-        height:100px;
-        background-color: #0f2e4b;
+        min-height: clamp(320px, 100vh, 640px);
         position: absolute;
         bottom: calc(100% + clamp(260px, 55vh, 560px)/2);
         left: 50%;  
-        height: 100vh;
         transform: translateX(-50%);
-        background: 
-            radial-gradient(circle, rgba(255, 255, 255, 0.35) 2px, transparent 2px),
-            linear-gradient(180deg, #051a29 0%, #030a0f 100%);
-        background-size: 50px 50px, 100% 100%;
+        background: linear-gradient(180deg, #071826 0%, #111111 60%);
         z-index: -1;
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 75%);
-        -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 75%);
+        overflow: hidden;
     }
 
-    @media (min-width: 1200px) {
-        .style-container2 {
-            background: 
-                radial-gradient(circle, rgba(255, 255, 255, 0.4) 2.5px, transparent 2.5px),
-                linear-gradient(180deg, #051a29 0%, #030a0f 100%);
-            background-size: 60px 60px, 100% 100%;
-        }
+    .style-container3 {
+        width:100%;
+        height:100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-image: radial-gradient(#999 7.5%, transparent 0);
+        background-size: 50px 50px;
+        background-repeat: repeat;
+        opacity: 0.55;
+        /* Fade the dot pattern toward the bottom */
+        -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0) 100%);
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0) 100%);
+        pointer-events: none;
+        z-index: 0;
     }
 
-    @media (min-width: 1600px) {
-        .style-container2 {
-            background: 
-                radial-gradient(circle, rgba(255, 255, 255, 0.45) 3px, transparent 3px),
-                linear-gradient(180deg, #051a29 0%, #030a0f 100%);
-            background-size: 70px 70px, 100% 100%;
-        }
+    /*.style-container2::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle, rgba(255, 255, 255, 0.35) 2px, transparent 3px),
+            linear-gradient(180deg, rgba(15, 46, 75, 0.9) 0%, rgba(15, 46, 75, 0.6) 25%, rgba(3, 10, 15, 0) 70%);
+        background-size: 50px 50px, 100% 100%;
+        background-repeat: repeat, no-repeat;
+        background-blend-mode: multiply;
+        opacity: 0.8;
+        pointer-events: none;
     }
+*/
+   
 
 </style>
 
@@ -434,7 +443,7 @@
                         <div class="blog-content">
                             @yield('blog-content')
                             <div class="style-container"></div>
-                            <div class="style-container2"></div>
+                            <div class="style-container2"><div class="style-container3"></div></div>
                         </div>
                     </article>
 
