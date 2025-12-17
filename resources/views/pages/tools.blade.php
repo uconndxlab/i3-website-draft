@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <h1 class="hero-title text-center">Tools</h1>  
+    <h1 class="hero-title text-center py-2">Tools</h1>  
     
     <div class="row justify-content-center pb-5 py-5">
         <div class="col-md-6">
@@ -20,66 +20,32 @@
 
 
     @if($tools && $tools->count() > 0)
-        @php
-            $topRowTools = $tools->take(3);
-            $bottomRowTools = $tools->skip(3)->take(3);
-        @endphp
-        
-        @if($topRowTools->count() > 0)
-            <div class="row justify-content-center mb-4 mb-md-5 image-row" id="toolsTopRow">
-                @foreach($topRowTools as $tool)
-                    <div class="col-auto px-3 tool-image-container">
-                        @if($tool->best_thumbnail_url)
-                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" 
-                                 class="img-fluid w-100 rounded tool-image" 
-                                 style="cursor: pointer; visibility: hidden;" 
-                                 data-bs-toggle="modal" 
-                                 data-bs-target="#toolModal{{ $tool->id }}">
-                            <x-tool-modal :tool="$tool" />
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        @endif
-        
-        @if($bottomRowTools->count() > 0)
-            <div class="row justify-content-center mb-4 mb-md-5 pb-5 image-row" id="toolsBottomRow">
-                @foreach($bottomRowTools as $tool)
-                    <div class="col-auto px-3 tool-image-container">
-                        @if($tool->best_thumbnail_url)
-                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" 
-                                 class="img-fluid w-100 rounded tool-image" 
-                                 style="cursor: pointer; visibility: hidden;" 
-                                 data-bs-toggle="modal" 
-                                 data-bs-target="#toolModal{{ $tool->id }}">
-                            <x-tool-modal :tool="$tool" />
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        @endif
+        <div class="row justify-content-center mb-4 mb-md-5 pb-5 image-row">
+            @foreach($tools as $tool)
+                <div class="col-6 col-md-3 px-3 mb-4 tool-image-container">
+                    @if($tool->best_thumbnail_url)
+                        <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->alt_text ?? $tool->description }}" 
+                             class="img-fluid w-100 rounded tool-image" 
+                             style="cursor: pointer; visibility: hidden;" 
+                             data-bs-toggle="modal" 
+                             data-bs-target="#toolModal{{ $tool->id }}">
+                        <x-tool-modal :tool="$tool" />
+                    @endif
+                </div>
+            @endforeach
+        </div>
     @endif
 </div>
 
 <style>
-
 @media (min-width: 768px) {
-    #toolsTopRow {
-        margin-left: calc(-100px - 10rem);
-    }
-    .image-row .tool-image-container{
-        max-width: 200px;
+    .image-row .tool-image-container img {
+        height: 100%
     }
 }
 @media (max-width: 768px) {
-    .image-row .tool-image-container, 
-    .image-row .tool-image-container{
+    .image-row .tool-image-container {
         padding-bottom: 1rem;
-    }
-
-    .image-row .tool-image-container{
-        width: 90% !important;
-        max-width: 90% !important;
     }
 }
 
