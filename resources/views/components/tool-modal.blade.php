@@ -5,17 +5,17 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-3 px-4" style="background-color: #1f1f1f; max-width: 500px;">
             <div class="modal-header border-0 pb-2">
-                <h5 class="text-white mb-0" id="toolModalLabel{{ $tool->id }}">{{ $tool->title }}</h5>
+                <h5 class="text-white mb-0" id="toolModalLabel{{ $tool->id }}">{{ $tool->description ? Str::limit($tool->description, 50) : 'Tool' }}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex align-items-center justify-content-center py-4">
                 @if($tool->best_thumbnail_url)
-                    <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" class="img-fluid rounded" style="max-width: 100%; max-height: 300px; object-fit: contain;">
+                    <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->alt_text ?? $tool->description }}" class="img-fluid rounded" style="max-width: 100%; max-height: 300px; object-fit: contain;">
                 @endif
             </div>
             <div class="modal-footer border-0 d-flex align-items-center pt-0" style="flex-wrap: nowrap; gap: 1rem;">
-                @if($tool->excerpt)
-                    <p class="text-white-50 mb-0 small" style="flex: 1 1 0; min-width: 0; line-height: 1.5; overflow-wrap: break-word; word-wrap: break-word;">{{ $tool->excerpt }}</p>
+                @if($tool->description)
+                    <p class="text-white-50 mb-0 small" style="flex: 1 1 0; min-width: 0; line-height: 1.5; overflow-wrap: break-word; word-wrap: break-word;">{{ $tool->description }}</p>
                 @endif
                 @if($tool->link)
                     <div class="btn-arrow-slide" style="flex-shrink: 0;">

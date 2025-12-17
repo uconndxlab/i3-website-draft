@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\ToolController;
 
 Route::controller(PageController::class)->group(function () {
     Route::get('/',        'home')->name('home');
@@ -40,7 +41,7 @@ Route::get('work/{tag}', [WorkController::class, 'index'])
 
 Route::get('/tools', [WorkController::class, 'tools'])->name('work.tools');
 Route::get('/services', [WorkController::class, 'services'])->name('work.services');
-Route::get('/grant-funded', [WorkController::class, 'grantFunded'])->name('work.grant-funded');
+//Route::get('/grant-funded', [WorkController::class, 'grantFunded'])->name('work.grant-funded');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
@@ -61,4 +62,5 @@ Route::prefix('admin')->name('admin.')->middleware(['cas.auth', 'netid.auth'])->
         ->name('contact-submissions.mark-unsent');
     
     Route::resource('authorized-netids', \App\Http\Controllers\Admin\AuthorizedNetidController::class);
+    Route::resource('tools', \App\Http\Controllers\Admin\ToolController::class);
 });

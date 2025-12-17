@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\Tag;
-
+use App\Models\Tool;
 class WorkController extends Controller
 {
     /**
@@ -30,11 +30,7 @@ class WorkController extends Controller
 
     public function tools()
     {
-        // TODO :: DECIDE HOW We want to get display images.
-        $tools = WorkItem::whereNotNull('thumbnail')
-            ->with('tags')
-            ->latest()
-            ->take(6)
+        $tools = Tool::where('is_active', true)
             ->get();
         
         return view('pages.tools', compact('tools'));

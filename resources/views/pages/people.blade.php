@@ -126,7 +126,10 @@
                 </p>
             </div>
             <div class="row justify-content-center">
-                @foreach ($senior_staff as $person)
+                @php
+                    $staff_combined = $senior_staff->concat($staff);
+                @endphp
+                @foreach ($staff_combined as $person)
                     <div class="col-6 col-md-2 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <x-person-card 
                             :person="$person" 

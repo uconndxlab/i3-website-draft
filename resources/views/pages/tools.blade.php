@@ -13,7 +13,7 @@
                 Built for the university, by the university, and available to all.
             </p>
             <p class="text-center">
-                We are proud to offer a suite of readily-available and freely accessible tools that are already in use out in the wild. Check back often, as our tool belt is always growing as we continue to build unique solutions alongside our ever-innovative university community.
+            We are proud to offer a suite of enterprise tools that are already in use throughout the university. Check back often, as our tool belt is always growing as we continue to build unique solutions for and alongside our ever-innovative university community.
             </p>
         </div>
     </div>
@@ -30,7 +30,7 @@
                 @foreach($topRowTools as $tool)
                     <div class="col-auto px-3 tool-image-container">
                         @if($tool->best_thumbnail_url)
-                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" 
+                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->alt_text ?? $tool->description }}" 
                                  class="img-fluid w-100 rounded tool-image" 
                                  style="cursor: pointer; visibility: hidden;" 
                                  data-bs-toggle="modal" 
@@ -47,7 +47,7 @@
                 @foreach($bottomRowTools as $tool)
                     <div class="col-auto px-3 tool-image-container">
                         @if($tool->best_thumbnail_url)
-                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" 
+                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->alt_text ?? $tool->description }}" 
                                  class="img-fluid w-100 rounded tool-image" 
                                  style="cursor: pointer; visibility: hidden;" 
                                  data-bs-toggle="modal" 
