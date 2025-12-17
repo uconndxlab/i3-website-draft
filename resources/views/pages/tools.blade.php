@@ -30,7 +30,7 @@
                 @foreach($topRowTools as $tool)
                     <div class="col-auto px-3 tool-image-container">
                         @if($tool->best_thumbnail_url)
-                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->alt_text ?? $tool->description }}" 
+                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" 
                                  class="img-fluid w-100 rounded tool-image" 
                                  style="cursor: pointer; visibility: hidden;" 
                                  data-bs-toggle="modal" 
@@ -47,7 +47,7 @@
                 @foreach($bottomRowTools as $tool)
                     <div class="col-auto px-3 tool-image-container">
                         @if($tool->best_thumbnail_url)
-                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->alt_text ?? $tool->description }}" 
+                            <img src="{{ $tool->best_thumbnail_url }}" alt="{{ $tool->title }}" 
                                  class="img-fluid w-100 rounded tool-image" 
                                  style="cursor: pointer; visibility: hidden;" 
                                  data-bs-toggle="modal" 

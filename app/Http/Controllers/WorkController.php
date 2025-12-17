@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\Tag;
-use App\Models\Tool;
 class WorkController extends Controller
 {
     /**
@@ -30,8 +29,13 @@ class WorkController extends Controller
 
     public function tools()
     {
-        $tools = Tool::where('is_active', true)
-            ->get();
+        $toolsTag = Tag::where('slug', 'tools')->first();
+        
+        $tools = WorkItem::whereHas('tags', function ($query) use ($toolsTag) {
+            if ($toolsTag) {
+                $query->where('tags.id', $toolsTag->id);
+            }
+        })->with('tags')->latest()->get();
         
         return view('pages.tools', compact('tools'));
     }
