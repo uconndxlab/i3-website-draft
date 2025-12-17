@@ -76,7 +76,13 @@
                       <li class="nav-item">
                           <a class="nav-link{{ request()->routeIs('work.index') ? ' active' : '' }}"
                               href="{{ route('work.index') }}">Work</a>
+                          <a class="nav-link{{ request()->routeIs('blog') ? ' active' : '' }}"
+                              href="{{ route('blog') }}">Blog</a>
                       </li>
+                      {{-- <li class="nav-item">
+                          <a class="nav-link{{ request()->routeIs('projects.index') ? ' active' : '' }}"
+                              href="{{ route('projects.index') }}">Projects</a>
+                      </li> --}}
                       <li class="nav-item">
                           <a class="nav-link{{ request()->routeIs('story') ? ' active' : '' }}"
                               href="{{ route('story') }}">Story</a>

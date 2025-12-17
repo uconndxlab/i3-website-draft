@@ -12,7 +12,10 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/connect', 'connect')->name('connect');
     Route::get('/contact/success', 'contactSuccess')->name('contact.success');
     Route::get('/alumni',  'alumni')->name('alumni');
-    
+    Route::get('/blog', 'blogs')->name('blog');
+    Route::get('/blog/{slug}', function ($slug) {
+        return app(PageController::class)->blogShow($slug);
+    })->name('blog.show')->where('slug', '[a-zA-Z0-9-]+');
     // Merger route - only active after September 3, 2025
     Route::get('/merger', function () {
         if (now()->lt('2025-09-03')) {
@@ -51,6 +54,15 @@ Route::get('/admin', function () {
 Route::prefix('admin')->name('admin.')->middleware(['cas.auth', 'netid.auth'])->group(function () {
     Route::resource('work', \App\Http\Controllers\Admin\WorkItemController::class);
     Route::resource('team', \App\Http\Controllers\Admin\TeamMemberController::class);
+    Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
+    Route::post('posts/{post}/publish', [\App\Http\Controllers\Admin\PostController::class, 'publish'])
+        ->name('posts.publish');
+    Route::post('posts/{post}/unpublish', [\App\Http\Controllers\Admin\PostController::class, 'unpublish'])
+        ->name('posts.unpublish');
+    Route::get('posts/{post}/preview', [\App\Http\Controllers\Admin\PostController::class, 'preview'])
+        ->name('posts.preview');
+    Route::post('posts/upload-image', [\App\Http\Controllers\Admin\PostController::class, 'uploadImage'])
+        ->name('posts.upload-image');
     Route::resource('contact-submissions', \App\Http\Controllers\Admin\ContactSubmissionController::class)
         ->only(['index', 'show', 'destroy']);
     Route::patch('contact-submissions/{contact_submission}/mark-sent', 
