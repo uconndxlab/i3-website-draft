@@ -23,6 +23,8 @@ class ToolController extends Controller
      */
     public function index()
     {
+        //If you ever get over a 100 do me a favor and just delete some
+        // Or just dont care about the old ones
         $tools = Tool::latest()->paginate(100);
         return view('admin.tools.index', compact('tools'));
     }

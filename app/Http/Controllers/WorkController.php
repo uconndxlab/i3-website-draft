@@ -36,7 +36,7 @@ class WorkController extends Controller
         return view('pages.tools', compact('tools'));
     }
 
-    public function grantFunded()
+    /*public function grantFunded()
     {
         // TODO :: DECIDE HOW We want to get display images.
         $tools = WorkItem::whereNotNull('thumbnail')
@@ -45,7 +45,7 @@ class WorkController extends Controller
             ->take(6)
             ->get();
         return view('pages.grant-funded', compact('tools'));
-    }
+    }*/
 
     public function services()
     {
