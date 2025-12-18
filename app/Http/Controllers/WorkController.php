@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\Tag;
-
 class WorkController extends Controller
 {
     /**
@@ -30,17 +29,18 @@ class WorkController extends Controller
 
     public function tools()
     {
-        // TODO :: DECIDE HOW We want to get display images.
-        $tools = WorkItem::whereNotNull('thumbnail')
-            ->with('tags')
-            ->latest()
-            ->take(6)
-            ->get();
+        $toolsTag = Tag::where('slug', 'tools')->first();
+        
+        $tools = WorkItem::whereHas('tags', function ($query) use ($toolsTag) {
+            if ($toolsTag) {
+                $query->where('tags.id', $toolsTag->id);
+            }
+        })->with('tags')->latest()->get();
         
         return view('pages.tools', compact('tools'));
     }
 
-    public function grantFunded()
+    /*public function grantFunded()
     {
         // TODO :: DECIDE HOW We want to get display images.
         $tools = WorkItem::whereNotNull('thumbnail')
@@ -49,7 +49,7 @@ class WorkController extends Controller
             ->take(6)
             ->get();
         return view('pages.grant-funded', compact('tools'));
-    }
+    }*/
 
     public function services()
     {

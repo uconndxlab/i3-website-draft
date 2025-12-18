@@ -107,7 +107,13 @@
         }
     </style>
     <h1 class="page-h1 display-1" style="z-index:0">People</h1>
-
+    <div class="row py-2 justify-content-center">
+        <div class="col-auto">
+            <button class="btn btn-outline-primary filter-btn active" data-filter="all">All</button>
+            <button class="btn btn-outline-primary filter-btn" data-filter="Innovation">Innovation</button>
+            <button class="btn btn-outline-primary filter-btn" data-filter="Insight">Insight</button>
+        </div>
+    </div>
     <section role="region" aria-label="Our Leadership" id="senior-staff"
         class="bg-blue-gradient d-flex align-items-center px-5 py-5" style="min-height: 80vh;">
 
@@ -126,8 +132,14 @@
                 </p>
             </div>
             <div class="row justify-content-center">
-                @foreach ($senior_staff as $person)
-                    <div class="col-6 col-md-2 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                @php
+                    $staff_combined = $senior_staff->concat($staff);
+                @endphp
+                @foreach ($staff_combined as $person)
+                    <div class="col-6 col-md-2 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($person->tags ?? []) }}">
                         <x-person-card 
                             :person="$person" 
                             overlay-class="bg-blue-to-transparent" 
@@ -164,7 +176,10 @@
                 </div>
 
                 @foreach ($student_staff as $student)
-                    <div class="col-6 col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($student->tags ?? []) }}">
                         <x-person-card :person="$student" overlay-class="bg-purple-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
@@ -193,7 +208,10 @@
             </div>
             <div class="row justify-content-center">
                 @foreach ($faculty_advisors as $person)
-                    <div class="col-6 col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($person->tags ?? []) }}">
                         <x-person-card :person="$person" overlay-class="bg-dark-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
@@ -311,7 +329,51 @@ document.addEventListener('DOMContentLoaded', function() {
 #alumniScroller1, #alumniScroller2 {
     height: 180px!important;
 }
+
+.person-card-wrapper {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.person-card-wrapper.hidden {
+    display: none;
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const personCards = document.querySelectorAll('.person-card-wrapper');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Update active button state
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter person cards
+            personCards.forEach(card => {
+                if (filterValue === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    const tagsJson = card.getAttribute('data-tags');
+                    const tags = tagsJson ? JSON.parse(tagsJson) : [];
+                    const filterValueLower = filterValue.toLowerCase();
+                    
+                    const hasMatchingTag = tags.some(tag => tag.toLowerCase() === filterValueLower);
+                    
+                    if (hasMatchingTag) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
 
 
 

@@ -64,6 +64,13 @@
                                 Authorized NetIDs
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.tools.*') ? 'active' : '' }}" 
+                               href="{{ route('admin.tools.index') }}">
+                                <i class="bi bi-envelope me-2"></i>
+                                Tools
+                            </a>
+                        </li>
                     </ul>
                     
                     <hr>
