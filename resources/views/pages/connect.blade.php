@@ -115,57 +115,11 @@
         </div>
     </section>
 
-    <section id="hire-us" class="bg-deep-gradient py-5">
-        <div class="container py-5">
-            <div class="row align-items-center justify-content-center">
-                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire Us</h2>
-                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
-                    style="width:50px"></span>
-
-
-            </div>
-            <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
-                data-aos="fade-up">
-                <p>
-                    Need a website, app, or design help for your grant? Let's talk. Have an idea for a project that could
-                    help make things better at UConn? We're all ears! Just want a little advice on how to put together your
-                    Aurora site? Let's figure it out together.
-            </div>
-
-            <div class="row g-5 mt-1 mb-5">
-                <div class="col-lg-6 offset-lg-3" data-aos="fade-left">
-                    <x-service-badges />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card bg-primary-subtle text-light shadow-lg border-0">
-                        <div class="card-body px-0">
-                            <h3 class="card-title text-center mb-4 text-uppercase text-light letter-spacing-1">Fees</h3>
-                            <div class="list-group list-group-flush">
-                                @foreach ([['label' => 'Director Project Engagement', 'amount' => 158], ['label' => 'Senior App Developer', 'amount' => 120], ['label' => 'Senior UX Designer', 'amount' => 79], ['label' => 'Student Design', 'amount' => 46]] as $fee)
-                                    <div
-                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 border-bottom border-primary-subtle py-3 px-4">
-                                        <span>{{ $fee['label'] }}</span>
-                                        <span class="fw-bold text-end"
-                                            style="min-width: 80px;">${{ $fee['amount'] }}/hr</span>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-    </section>
 
     <section class="bg-teal-gradient text-light">
         <div class="container py-5">
             <div class="row align-items-center justify-content-center">
-                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Hire You</h2>
+                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Employment</h2>
                 <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
                     style="width:50px"></span>
             </div>

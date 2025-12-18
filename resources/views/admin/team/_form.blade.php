@@ -28,7 +28,7 @@
 
         <div class="mb-3">
             <label class="form-label">Tags <small class="text-muted">(comma-separated)</small></label>
-            <input name="tags" class="form-control @error('tags') is-invalid @enderror" value="{{ old('tags', isset($team->tags) ? implode(', ', $team->tags) : '') }}" placeholder="e.g., senior-staff, student-staff, faculty-advisor">
+            <input name="tags" class="form-control @error('tags') is-invalid @enderror" value="{{ old('tags', isset($team->tags) ? implode(', ', $team->tags) : '') }}" placeholder="e.g., senior-staff, staff, student-staff, faculty-advisor">
             @error('tags')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

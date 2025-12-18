@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\Admin\ToolController;
 
 Route::controller(PageController::class)->group(function () {
     Route::get('/',        'home')->name('home');
@@ -62,5 +61,4 @@ Route::prefix('admin')->name('admin.')->middleware(['cas.auth', 'netid.auth'])->
         ->name('contact-submissions.mark-unsent');
     
     Route::resource('authorized-netids', \App\Http\Controllers\Admin\AuthorizedNetidController::class);
-    Route::resource('tools', \App\Http\Controllers\Admin\ToolController::class);
 });

@@ -24,7 +24,11 @@ class WorkController extends Controller
             $items = WorkItem::with('tags')->latest()->paginate(18);
         }
 
-        return view('pages.work', compact('items', 'allTags', 'tag'));
+        $featured = WorkItem::whereHas('tags', function ($query) {
+            $query->where('tags.slug', 'work-featured');
+        })->with('tags')->latest()->take(3)->get();
+
+        return view('pages.work', compact('items', 'allTags', 'tag', 'featured'));
     }
 
     public function tools()
