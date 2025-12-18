@@ -368,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
+{{-- Filtering 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -402,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-</script>
+</script>--}}
 
 
 
