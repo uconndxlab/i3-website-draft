@@ -5,7 +5,7 @@
 @section('content')
 
 <section id = "into">
-    <div class="container">
+    <div class="container py-5">
         
         <h1 class="hero-title text-center">Services</h1>
 

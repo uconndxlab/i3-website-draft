@@ -107,7 +107,13 @@
         }
     </style>
     <h1 class="page-h1 display-1" style="z-index:0">People</h1>
-
+    {{-- <div class="row py-2 justify-content-center">
+        <div class="col-auto">
+            <button class="btn btn-outline-primary filter-btn active" data-filter="all">All</button>
+            <button class="btn btn-outline-primary filter-btn" data-filter="Innovation">Innovation</button>
+            <button class="btn btn-outline-primary filter-btn" data-filter="Insight">Insight</button>
+        </div>
+    </div> --}}
     <section role="region" aria-label="Our Leadership" id="senior-staff"
         class="bg-blue-gradient d-flex align-items-center px-5 py-5" style="min-height: 80vh;">
 
@@ -120,19 +126,54 @@
             </div>
             <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
                 <p>
-                    We're the type of nerds who eat, sleep, and breathe UConn. This team of senior staff members is
-                    dedicated to making i3 a hub of innovation and creativity. From leading projects to mentoring students,
-                    we are committed to pushing the boundaries of what's possible at UConn.
+                We're the type of nerds who eat, sleep, and breathe UConn. From leading projects & initiatives to mentoring students, we are committed to pushing the boundaries of what's possible at UConn.
                 </p>
             </div>
             <div class="row justify-content-center">
                 @foreach ($senior_staff as $person)
-                    <div class="col-6 col-md-2 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-6 col-md-2 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($person->tags ?? []) }}">
                         <x-person-card 
                             :person="$person" 
                             overlay-class="bg-blue-to-transparent" 
                             name-size="fs-6" 
                         />
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section role="region" aria-label="Our Staff" id="staff"
+        class="d-flex align-items-center px-5 bg-green-gradient py-5" style="min-height: 80vh;">
+        <div class="container">
+
+
+            <div class="row align-items-center justify-content-center mb-3 ">
+
+                <div class="col-md-12 text-center">
+                    <div class="row align-items-center justify-content-center mb-3">
+                        <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Staff</h2>
+                        <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
+                            style="width:50px"></span>
+                    </div>
+
+                    <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                        <p>
+                        Our dynamic team of staff members is dedicated to making i3 a hub of innovation and creativity.  With expertise & talent ranging across a variety of disciplines, there is nothing that this group can't tackle.
+                        </p>
+                    </div>
+
+                </div>
+
+                @foreach ($staff as $staff_member)
+                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($staff_member->tags ?? []) }}">
+                        <x-person-card :person="$staff_member" overlay-class="bg-green-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
             </div>
@@ -164,7 +205,10 @@
                 </div>
 
                 @foreach ($student_staff as $student)
-                    <div class="col-6 col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($student->tags ?? []) }}">
                         <x-person-card :person="$student" overlay-class="bg-purple-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
@@ -193,7 +237,10 @@
             </div>
             <div class="row justify-content-center">
                 @foreach ($faculty_advisors as $person)
-                    <div class="col-6 col-md-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
+                         data-aos="fade-up" 
+                         data-aos-delay="{{ $loop->index * 100 }}"
+                         data-tags="{{ json_encode($person->tags ?? []) }}">
                         <x-person-card :person="$person" overlay-class="bg-dark-to-transparent" name-size="fs-6" />
                     </div>
                 @endforeach
@@ -311,7 +358,52 @@ document.addEventListener('DOMContentLoaded', function() {
 #alumniScroller1, #alumniScroller2 {
     height: 180px!important;
 }
+
+.person-card-wrapper {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.person-card-wrapper.hidden {
+    display: none;
+}
 </style>
+
+{{-- Filtering 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const personCards = document.querySelectorAll('.person-card-wrapper');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Update active button state
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter person cards
+            personCards.forEach(card => {
+                if (filterValue === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    const tagsJson = card.getAttribute('data-tags');
+                    const tags = tagsJson ? JSON.parse(tagsJson) : [];
+                    const filterValueLower = filterValue.toLowerCase();
+                    
+                    const hasMatchingTag = tags.some(tag => tag.toLowerCase() === filterValueLower);
+                    
+                    if (hasMatchingTag) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>--}}
 
 
 

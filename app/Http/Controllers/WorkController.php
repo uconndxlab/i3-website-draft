@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WorkItem;
 use App\Models\Tag;
-
 class WorkController extends Controller
 {
     /**
@@ -25,22 +24,27 @@ class WorkController extends Controller
             $items = WorkItem::with('tags')->latest()->paginate(18);
         }
 
-        return view('pages.work', compact('items', 'allTags', 'tag'));
+        $featured = WorkItem::whereHas('tags', function ($query) {
+            $query->where('tags.slug', 'work-featured');
+        })->with('tags')->latest()->take(3)->get();
+
+        return view('pages.work', compact('items', 'allTags', 'tag', 'featured'));
     }
 
     public function tools()
     {
-        // TODO :: DECIDE HOW We want to get display images.
-        $tools = WorkItem::whereNotNull('thumbnail')
-            ->with('tags')
-            ->latest()
-            ->take(6)
-            ->get();
+        $toolsTag = Tag::where('slug', 'tools')->first();
+        
+        $tools = WorkItem::whereHas('tags', function ($query) use ($toolsTag) {
+            if ($toolsTag) {
+                $query->where('tags.id', $toolsTag->id);
+            }
+        })->with('tags')->latest()->get();
         
         return view('pages.tools', compact('tools'));
     }
 
-    public function grantFunded()
+    /*public function grantFunded()
     {
         // TODO :: DECIDE HOW We want to get display images.
         $tools = WorkItem::whereNotNull('thumbnail')
@@ -49,7 +53,7 @@ class WorkController extends Controller
             ->take(6)
             ->get();
         return view('pages.grant-funded', compact('tools'));
-    }
+    }*/
 
     public function services()
     {

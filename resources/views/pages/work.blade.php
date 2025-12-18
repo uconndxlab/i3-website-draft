@@ -28,15 +28,6 @@
                         <span class="btn-arrow-slide-text">Tools</span>
                     </a>
                 </div>
-                <!-- GRANT FUNDED LINKS -->
-                <div class="btn display-btn btn-arrow-slide">
-                    <a href="{{ route('work.grant-funded') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
-                        <span class="btn-arrow-slide-circle" aria-hidden="true">
-                            <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                        </span>
-                        <span class="btn-arrow-slide-text">Grant Funded</span>
-                    </a>
-                </div>
                 <!-- SERVICES LINKS -->
                 <div class="btn display-btn btn-arrow-slide">
                     <a href="{{ route('work.services') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
@@ -54,54 +45,34 @@
             </div>
         </div>
 
-        @php
-            $featuredItems = [
-                [
-                    'image' => asset('img/i3/workCarousel/lincus.png'),  // Image URL or path
-                    'alt' => 'Featured Project 1',     // Alt text for image
-                    'link' => '#',                      // Optional: Link URL
-                ],
-                [
-                    'image' => asset('img/i3/workCarousel/sourcery.png'),
-                    'alt' => 'Featured Project 2',
-                    'link' => '#',
-                ],
-                [
-                    'image' => asset('img/i3/workCarousel/researchInsight.png'),
-                    'alt' => 'Featured Project 3',
-                    'link' => '#',
-                ],
-            ];
-        @endphp
-
         <!-- Featured Carousel -->
         <div class="row justify-content-center py-4 pb-5">
             <div class="col-md-8">
                 <div id="featuredCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
                     <div class="carousel-inner featured-carousel-inner">
-                        @foreach ($featuredItems as $index => $item)
+                        @foreach ($featured as $index => $item)
                             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" data-bs-interval="5000">
                                 @php
                                     // Get previous, current, and next items for the 3-item display
-                                    $prevIndex = $index > 0 ? $index - 1 : count($featuredItems) - 1;
-                                    $nextIndex = $index < count($featuredItems) - 1 ? $index + 1 : 0;
-                                    $prevItem = $featuredItems[$prevIndex];
-                                    $nextItem = $featuredItems[$nextIndex];
+                                    $prevIndex = $index > 0 ? $index - 1 : count($featured) - 1;
+                                    $nextIndex = $index < count($featured) - 1 ? $index + 1 : 0;
+                                    $prevItem = $featured[$prevIndex];
+                                    $nextItem = $featured[$nextIndex];
                                 @endphp
                                 <div class="featured-carousel-container">
                                     <div class="featured-item featured-item-left" data-bs-target="#featuredCarousel" data-bs-slide="prev" role="button" tabindex="0">
-                                        @if(!empty($prevItem['image']))
-                                            <img src="{{ $prevItem['image'] }}" alt="{{ $prevItem['alt'] ?? '' }}" class="featured-image">
+                                        @if(!empty($prevItem->best_thumbnail_url))
+                                            <img src="{{ $prevItem->best_thumbnail_url }}" alt="{{ $prevItem->title }}" class="featured-image">
                                         @endif
                                     </div>
                                     <div class="featured-item featured-item-center">
-                                        @if(!empty($item['image']))
-                                            <img src="{{ $item['image'] }}" alt="{{ $item['alt'] ?? '' }}" class="featured-image">
+                                        @if(!empty($item->best_thumbnail_url))
+                                            <img src="{{ $item->best_thumbnail_url }}" alt="{{ $item->title }}" class="featured-image">
                                         @endif
                                     </div>
                                     <div class="featured-item featured-item-right" data-bs-target="#featuredCarousel" data-bs-slide="next" role="button" tabindex="0">
-                                        @if(!empty($nextItem['image']))
-                                            <img src="{{ $nextItem['image'] }}" alt="{{ $nextItem['alt'] ?? '' }}" class="featured-image">
+                                        @if(!empty($nextItem->best_thumbnail_url))
+                                            <img src="{{ $nextItem->best_thumbnail_url }}" alt="{{ $nextItem->title }}" class="featured-image">
                                         @endif
                                     </div>
                                 </div>
