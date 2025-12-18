@@ -59,6 +59,81 @@
 
         .timeline-navigation {
             backdrop-filter: blur(10px);
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .timeline-nav-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 0.75rem;
+        }
+
+        .timeline-line {
+            flex: 1 1 auto;
+            min-width: 0;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .timeline-line .line {
+            width: 100%;
+        }
+
+        #timeline-play-pause {
+            position: absolute;
+            left: -52px;
+            top: 55%;
+            transform: translateY(-50%);
+        }
+
+        @media (max-width: 1000px) {
+            .timeline-navigation {
+                width: 80%;
+                max-width: 480px;
+            }
+            #timeline-play-pause {
+                left: -44px;
+                top: 55%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .timeline-navigation {
+                padding: 0 0.5rem;
+            }
+
+            .timeline-nav-inner {
+                padding-inline: 0.75rem !important;
+                gap: 0.5rem;
+                flex-direction: column;
+                padding-left: 0;
+            }
+
+            #timeline-play-pause {
+                margin-right: 0.25rem !important;
+                transform: none;
+                margin: 0.75rem 0 0;
+                order: 2;
+                align-self: center;
+                position: relative;
+                left: 6px; /* Half the width of a dot because the last one overflows this makes it look center */
+                top: 1rem;
+            }
+
+            .timeline-line .year-marker .marker-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .timeline-line .year-label {
+                top: 18px;
+            }
         }
 
         .year-marker .marker-dot:hover {
@@ -357,8 +432,8 @@
 
     <h1 class="page-h1 display-1">Story</h1>
 
-    <div class="timeline-navigation mb-4 mt-xl-5" style="z-index: 1000; max-width:450px; margin:0 auto; position: relative;">
-        <div class="d-flex align-items-center justify-content-center rounded-pill px-4 py-3">
+    <div class="timeline-navigation mb-4 mt-xl-5" style="z-index: 1000; position: relative;">
+        <div class="timeline-nav-inner d-flex align-items-center justify-content-center rounded-pill px-4 py-3 w-100">
             <!-- Play/Pause Button -->
             <button id="timeline-play-pause" class="btn btn-sm btn-outline-light me-3 rounded-circle"
                 style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3);" title="Pause auto-advance"
@@ -367,8 +442,8 @@
             </button>
 
             <!-- Timeline line -->
-            <div class="timeline-line position-relative d-flex align-items-center justify-content-center">
-                <div class="line bg-light opacity-25" style="height: 2px; width: 320px;"></div>
+            <div class="timeline-line position-relative d-flex align-items-center justify-content-center w-100">
+                <div class="line bg-light opacity-25" style="height: 2px;"></div>
                 <!-- Progress indicator line -->
                 <div id="timeline-progress" class="position-absolute bg-primary"
                     style="height: 2px; width: 0%; left: 0; top: 50%; transform: translateY(-50%); transition: width 0.1s linear;">
@@ -376,7 +451,7 @@
 
                 <!-- Year markers -->
                 <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" data-year="2017"
-                    data-slide="slide-2017" style="left: 0;" aria-label="Go to 2017: Our Origins" role="button"
+                    data-slide="slide-2017" style="left: 0%;" aria-label="Go to 2017: Our Origins" role="button"
                     tabindex="0">
                     <div class="marker-dot bg-primary rounded-circle"
                         style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
@@ -385,7 +460,7 @@
                 </button>
 
                 <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" data-year="2019"
-                    data-slide="slide-2019" style="left: 80px;" aria-label="Go to 2019: Born in the DX Lab" role="button"
+                    data-slide="slide-2019" style="left: 25%;" aria-label="Go to 2019: Born in the DX Lab" role="button"
                     tabindex="0">
                     <div class="marker-dot bg-light rounded-circle"
                         style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
@@ -394,7 +469,7 @@
                 </button>
 
                 <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" data-year="2020"
-                    data-slide="slide-2020" style="left: 160px;" aria-label="Go to 2020: The DX Group Emerges"
+                    data-slide="slide-2020" style="left: 50%;" aria-label="Go to 2020: The DX Group Emerges"
                     role="button" tabindex="0">
                     <div class="marker-dot bg-light rounded-circle"
                         style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
@@ -403,7 +478,7 @@
                 </button>
 
                 <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" data-year="2024"
-                    data-slide="slide-2024" style="left: 240px;" aria-label="Go to 2024: i3 is Born" role="button"
+                    data-slide="slide-2024" style="left: 75%;" aria-label="Go to 2024: i3 is Born" role="button"
                     tabindex="0">
                     <div class="marker-dot bg-light rounded-circle"
                         style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>
@@ -412,7 +487,7 @@
                 </button>
 
                 <button class="year-marker position-absolute btn p-0 border-0 bg-transparent" data-year="2025"
-                    data-slide="slide-2025" style="left: 320px;" aria-label="Go to 2025: A Strategic Merger" role="button"
+                    data-slide="slide-2025" style="left: 100%;" aria-label="Go to 2025: A Strategic Merger" role="button"
                     tabindex="0">
                     <div class="marker-dot bg-light rounded-circle"
                         style="width: 12px; height: 12px; cursor: pointer; transition: all 0.3s ease;"></div>

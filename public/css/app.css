@@ -85,6 +85,34 @@ body {
     background: linear-gradient(180deg, rgb(17, 17, 17) 0%, var(--teal) 50%, rgb(17, 17, 17) 100%);
 }
 
+.bg-orange {
+    background-color: #BA5D00;
+    color: #fff;
+}
+.bg-light-green {
+    background-color: #288550;
+    color: #fff;
+}
+.bg-light-purple {
+    background-color: #882CCE;
+    color: #FFF;
+}
+.btn-purple-muted {
+    background: rgba(179, 77, 255, 0.15);
+    color: #BF6BFF;
+    border: 1px solid rgba(179, 77, 255, 0.3);
+}
+.btn-success-muted {
+    background: rgba(77, 255, 153, 0.15);
+    color: #4DFF99;
+    border: 1px solid rgba(77, 255, 153, 0.3);
+}
+.btn-orange-muted {
+    background: rgba(255, 179, 77, 0.15);
+    color: #FFB34D;
+    border: 1px solid rgba(255, 179, 77, 0.3);
+}
+
 
 .bg-purple {
     background-color: #280E3A;

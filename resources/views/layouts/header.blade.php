@@ -74,6 +74,10 @@
                               href="{{ route('team') }}">People</a>
                       </li>
                       <li class="nav-item">
+                          <a class="nav-link{{ request()->routeIs('blog') ? ' active' : '' }}"
+                              href="{{ route('blog') }}">Blog</a>
+                      </li>
+                      <li class="nav-item">
                           <a class="nav-link{{ request()->routeIs('work.index') ? ' active' : '' }}"
                               href="{{ route('work.index') }}">Work</a>
                       </li>
