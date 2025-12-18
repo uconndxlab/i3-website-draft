@@ -20,10 +20,22 @@ class WorkItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = WorkItem::latest()->paginate(100);
-        return view('admin.work.index', compact('items'));
+        $query = WorkItem::latest();
+        
+        if ($request->has('tag') && $request->tag) {
+            $tagModel = Tag::where('slug', $request->tag)->first();
+            if ($tagModel) {
+                $query->whereHas('tags', function ($q) use ($tagModel) {
+                    $q->where('tags.id', $tagModel->id);
+                });
+            }
+        }
+        
+        $items = $query->paginate(100);
+        $tags = Tag::all();
+        return view('admin.work.index', compact('items', 'tags'));
     }
 
     /**

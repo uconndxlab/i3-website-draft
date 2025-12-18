@@ -21,6 +21,20 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Work Items</h5>
+                    <form method="GET" action="{{ route('admin.work.index') }}" class="d-flex gap-2">
+                        <select name="tag" class="form-select">
+                            <option value="">Select Tag</option>
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->slug }}" {{ request('tag') == $tag->slug ? 'selected' : '' }}>
+                                    {{ $tag->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        @if(request('tag'))
+                            <a href="{{ route('admin.work.index') }}" class="btn btn-outline-secondary">Clear</a>
+                        @endif
+                    </form>
                     <a href="{{ route('admin.work.create') }}" class="btn btn-primary">
                         <i class="bi bi-plus"></i> New Work Item
                     </a>
