@@ -1,39 +1,33 @@
 @extends('layouts.app')
 @section('title', 'Tools')
-@section('meta_description', 'Explore our diverse portfolio of web design, web development, and UX design projects at i3. See how we create innovative digital solutions for the UConn community.')
+@section('meta_description', 'Explore our diverse portfolio of web design, web development, and UX design projects at
+    i3. See how we create innovative digital solutions for the UConn community.')
 
 @section('content')
 
-<section id = "into">
-    <div class="container py-5">
-        
-        <h1 class="hero-title text-center">Services</h1>
-
-        <div class="row justify-content-center pb-5 py-5">
-            <div class="col-md-6">
-            <p class="text-center">
-                Nothing makes our team happier than bringing big ideas into fruition. We love meeting new people, learning about their needs, and dreaming up solutions that exceed the status quo. From problem-discovery & ideation to designing & shipping a product, our team is here to partner with you every step of the way.
-            </p>
-            </div>
-        </div>
+<section id="intro">
+    <div class="container">
+        <h1 class="page-h1">Services</h1>
     </div>
 </section>
 
-<section id="work-with-us" class="bg-deep-gradient py-5">
+    <section id="work-with-us" class="bg-deep-gradient py-5">
         <div class="container py-5">
-            <div class="row align-items-center justify-content-center">
-                <h2 class="mb-0 d-inline-block pb-3 text-center text-uppercase" data-aos="fade-down">Work With Us</h2>
-                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
-                    style="width:50px"></span>
 
-
+            <div class="row align-items-center justify-content-center py-5">
+                <h2 class="mb-3 d-inline-block pb-3 text-center text-uppercase"><span
+                        class="border-bottom border-2 pb-3 border-primary">What We Offer</span></h2>
             </div>
+
             <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 600px;"
                 data-aos="fade-up">
-                <p>
-                    Need a website, app, or design help for your grant? Let's talk. Have an idea for a project that could
-                    help make things better at UConn? We're all ears! Just want a little advice on how to put together your
-                    Aurora site? Let's figure it out together.
+                <p class="text-center">
+                    Nothing makes our team happier than bringing big ideas to fruition. We love meeting new people,
+                    learning about their needs, and dreaming up solutions that exceed the status quo. From early
+                    discovery & ideation to design and shipping, the i3 team is here to partner with you every step of
+                    the way!
+
+                </p>
             </div>
 
             <div class="row g-5 mt-1 mb-5">
@@ -62,23 +56,23 @@
                 </div>
 
             </div>
-</section>
+    </section>
 
-<style>
-.tools-top-row {
-    margin-left: calc(-100px - 10rem);
-}
+    <style>
+        .tools-top-row {
+            margin-left: calc(-100px - 10rem);
+        }
 
-@media (max-width: 768px) {
-    .tools-top-row {
-        margin-left: calc(-75px - 1rem);
-    }
-    
-    .tools-top-row img,
-    .row.justify-content-center:not(.tools-top-row) img {
-        max-width: 150px !important;
-    }
-}
-</style>
+        @media (max-width: 768px) {
+            .tools-top-row {
+                margin-left: calc(-75px - 1rem);
+            }
+
+            .tools-top-row img,
+            .row.justify-content-center:not(.tools-top-row) img {
+                max-width: 150px !important;
+            }
+        }
+    </style>
 
 @endsection
