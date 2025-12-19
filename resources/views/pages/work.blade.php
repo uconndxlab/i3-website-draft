@@ -50,7 +50,7 @@
 
 
             <!-- Featured Carousel -->
-            <div class="row justify-content-center py-4 pb-5">
+            <div class="row justify-content-center py-4 py-5">
                 <div class="col-md-8">
                     <div id="featuredCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
                         data-bs-interval="5000">
