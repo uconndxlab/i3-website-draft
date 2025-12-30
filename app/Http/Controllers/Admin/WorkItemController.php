@@ -59,6 +59,7 @@ class WorkItemController extends Controller
             'excerpt' => 'nullable',
             'body' => 'nullable',
             'thumbnail' => 'nullable|image',
+            'link' => 'nullable|url',
         ]);
 
         $data['slug'] = Str::slug($data['title']);
@@ -70,11 +71,7 @@ class WorkItemController extends Controller
             $data['thumbnail_webp'] = $imagePaths['webp'];
         }
 
-        if ($request->has('link')) {
-            $data['link'] = $request->input('link');
-        } else {
-            $data['link'] = null; // Ensure link is set to null if not provided
-        }
+
 
         $workItem = WorkItem::create($data);
 
@@ -118,6 +115,7 @@ class WorkItemController extends Controller
             'excerpt' => 'nullable',
             'body' => 'nullable',
             'thumbnail' => 'nullable|image',
+            'link' => 'nullable|url',
         ]);
 
         if ($request->hasFile('thumbnail')) {
@@ -137,8 +135,6 @@ class WorkItemController extends Controller
         } else {
             unset($data['thumbnail']);
         }
-
-        $data['link'] = $request->input('link');
 
         $data['slug'] = Str::slug($data['title']);
 

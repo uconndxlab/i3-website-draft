@@ -16,6 +16,12 @@
             <label class="form-label">Body</label>
             <textarea name="body" class="form-control" rows="8">{{ old('body', $work->body ?? '') }}</textarea>
         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Link</label>
+            <input type="url" name="link" class="form-control" value="{{ old('link', $work->link ?? '') }}" placeholder="https://example.com">
+            <div class="form-text">Optional external link to the project</div>
+        </div>
     </div>
 
     <div class="col-md-4">
