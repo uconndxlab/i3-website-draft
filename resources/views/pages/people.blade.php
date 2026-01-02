@@ -131,7 +131,7 @@
             </div>
             <div class="row justify-content-center">
                 @foreach ($senior_staff as $person)
-                    <div class="col-6 col-md-2 mb-4 person-card-wrapper" 
+                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
                          data-aos="fade-up" 
                          data-aos-delay="{{ $loop->index * 100 }}"
                          data-tags="{{ json_encode($person->tags ?? []) }}">

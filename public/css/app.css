@@ -137,11 +137,11 @@ body {
 
 .bg-green-gradient {
     background: #043b18;
-    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #043b18 50%, rgb(17, 17, 17) 100%);
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, #03200e 50%, rgb(17, 17, 17) 100%);
 }
 
 .bg-green-to-transparent {
-    background: linear-gradient(0deg, #043b18 0%, rgba(36, 50, 80, 0) 100%);
+    background: linear-gradient(0deg, #03200e 0%, rgba(36, 50, 80, 0) 100%);
 }
 
 body, html {
