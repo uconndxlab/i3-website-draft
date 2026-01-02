@@ -102,7 +102,7 @@
                         <i class="bi bi-code-slash" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
-                        <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="37" data-aos="odometer">0</h3>
+                        <h3 class="text-dark fw-bold display-5 odometer text-nowrap" data-odometer-final="37" data-aos="odometer">0</h3>
                         <p class="text-muted">Active Projects This Year</p>
                     </dd>
                 </div>
@@ -113,7 +113,7 @@
                         <i class="bi bi-person-workspace" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
-                        <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="35" data-aos="odometer">0</h3>
+                        <h3 class="text-dark fw-bold display-5 odometer  text-nowrap" data-odometer-final="35" data-aos="odometer">0</h3>
                         <p class="text-muted">Different UConn Partners Served (and counting!)</p>
                     </dd>
                 </div>
@@ -124,7 +124,7 @@
                         <i class="bi bi-eye" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
-                        <h3 class="text-dark fw-bold display-5 odometer" data-odometer-final="500000" data-aos="odometer">0
+                        <h3 class="text-dark fw-bold display-5 odometer text-nowrap" data-odometer-final="500000" data-aos="odometer">0
                         </h3>
                         <p class="text-muted">Pageviews per Month</p>
                     </dd>
@@ -136,7 +136,7 @@
                         <i class="bi bi-cup-hot" style="font-size: 3rem;" aria-hidden="true"></i>
                     </dt>
                     <dd>
-                        <h3 class="fw-bold display-5 text-dark" data-infinity="true">∞</h3>
+                        <h3 class="fw-bold display-5 text-dark text-nowrap" data-infinity="true">∞</h3>
                         <p class="text-muted">Cups of Coffee</p>
                     </dd>
                 </div>
@@ -229,11 +229,6 @@
 
         </div>
     </section>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css" />
 
     <style>
         .btn-circle-white {
@@ -376,97 +371,6 @@
         }
     </style>
 
-    <!-- SwiperJS CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
-    <!-- SwiperJS JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Swiper with Coverflow Effect
-            const swiper = new Swiper('.featuredSwiper', {
-                effect: 'coverflow',
-                grabCursor: true,
-                centeredSlides: true,
-                slidesPerView: 'auto',
-                loop: true,
-                initialSlide: 1,
-                autoplay: {
-                    delay: 7500,
-                    disableOnInteraction: false,
-                },
-                coverflowEffect: {
-                    rotate: 0,
-                    stretch: 0,
-                    depth: 200,
-                    modifier: 1,
-                    slideShadows: true,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    // When window width is >= 320px
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                        coverflowEffect: {
-                            rotate: 0,
-                            stretch: 0,
-                            depth: 100,
-                            modifier: 1,
-                            slideShadows: false,
-                        }
-                    },
-                    // When window width is >= 768px
-                    768: {
-                        slidesPerView: 'auto',
-                        coverflowEffect: {
-                            rotate: 0,
-                            stretch: 0,
-                            depth: 200,
-                            modifier: 1,
-                            slideShadows: true,
-                        }
-                    }
-                },
-                // on: {
-                //     click: function(swiper, event) {
-                //         const clickedSlide = event.target.closest('.swiper-slide');
-                //         if (clickedSlide) {
-                //             const modalTarget = clickedSlide.dataset.modalTarget;
-                //             if (modalTarget) {
-                //                 const modal = new bootstrap.Modal(document.querySelector(modalTarget));
-                //                 modal.show();
-                //             }
-                //         }
-                //     }
-                // }
-            });
-
-            // Odometer animation
-            function animateOdometers() {
-                document.querySelectorAll('.odometer').forEach(function(el) {
-                    if (el.dataset.animated) return;
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        el.dataset.animated = true;
-                        if (el.dataset.infinity) {
-                            el.innerHTML = '∞';
-                        } else {
-                            el.innerHTML = 0;
-                            setTimeout(() => {
-                                el.innerHTML = el.dataset.odometerFinal;
-                            }, 300);
-                        }
-                    }
-                });
-            }
-            window.addEventListener('scroll', animateOdometers);
-            animateOdometers();
-        });
-    </script>
+    @vite(['resources/js/swiperCarousel.js', 'resources/js/odometerAnimation.js'])
 
 @endsection

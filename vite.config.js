@@ -11,6 +11,8 @@ export default defineConfig({
                 'resources/js/explodingPhrases.js',
                 'resources/js/photoScroller.js',
                 'resources/js/starParticles.js',
+                'resources/js/swiperCarousel.js',
+                'resources/js/odometerAnimation.js'
         ],
             refresh: true,
         })

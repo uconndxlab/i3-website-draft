@@ -18,6 +18,7 @@
     "dependencies": {
         "aos": "^2.3.4",
         "bootstrap-icons": "^1.13.1",
+        "odometer": "^0.4.8",
         "swiper": "^11.1.15"
     }
 }
