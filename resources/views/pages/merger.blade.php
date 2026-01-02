@@ -157,8 +157,8 @@
                                 <p>
                                     We are writing today to share some exciting news about a significant development for
                                     digital scholarship at UConn. The university is bringing together the functions and
-                                    staff of two highly innovative groups: Greenhouse Studios and i3 (Internal Insights
-                                    and Innovation).
+                                    staff of two highly innovative groups: Greenhouse Studios and i3 (Institutional Insights
+                                    &amp; Innovation).
                                 </p>
 
                                 <p>

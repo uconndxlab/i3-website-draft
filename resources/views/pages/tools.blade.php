@@ -5,12 +5,9 @@
 
 @section('content')
 
-    <div class="container" style="min-height:800px;">
+    <div class="container pt-5" style="min-height:800px;">
         <h1 class="page-h1">Tools</h1>
-        <div class="row align-items-center justify-content-center mb-4 py-5">
-            <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-center"><span
-                    class="border-bottom border-2 pb-3 border-primary">Our Tools</span></h2>
-        </div>
+        
         <div class="row justify-content-center py-5">
             <div class="col-md-6">
                 <p class="text-center">
@@ -24,6 +21,10 @@
             </div>
         </div>
 
+        <div class="row align-items-center justify-content-center pb-5">
+            <h2 class="mb-3 d-inline-block pb-3 text-uppercase text-center"><span
+                    class="border-bottom border-2 pb-3 border-primary">Our Tools</span></h2>
+        </div>
 
 
         @if ($tools && $tools->count() > 0)

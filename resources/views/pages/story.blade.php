@@ -624,7 +624,7 @@
                         style="width: 60px; height: 2px; margin: 1rem 0; border-color: #4DB3FF; background-color: #4DB3FF;opacity: 1;">
 
                     <p class="text-light">
-                        Internal Insights & Innovation (i3) launches as a strategic development team under the Vice Provost
+                        Institutional Insights &amp; Innovation (i3) launches as a strategic development team under the Vice Provost
                         for Academic Operations (hey, remember him?!). Built on the foundation of DXG and Squared Labs, i3
                         extends its mission beyond research support—partnering with administrative and academic units to
                         design and build custom tools that improve how the university works.

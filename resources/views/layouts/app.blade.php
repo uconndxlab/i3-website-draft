@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'i3') | Internal Insights & Innovation (i3)</title>
+    <title>@yield('title', 'i3') | Institutional Insights & Innovation (i3)</title>
     <script type="application/ld+json" src="{{ asset('structured-data.jsonld') }}"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description"
         content="@yield('meta_description', 'i3 is a team of developers, designers, and innovators working to create digital solutions for the UConn community.')">
-    <meta name="author" content="i3 - Internal Insights & Innovation">
+    <meta name="author" content="i3 - Institutional Insights & Innovation">
 
     @hasSection('meta')
         @yield('meta')
@@ -18,10 +18,10 @@
         <!-- Default Open Graph tags -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:title" content="@yield('title', 'i3') | Internal Insights & Innovation (i3)">
+        <meta property="og:title" content="@yield('title', 'i3') | Institutional Insights & Innovation (i3)">
         <meta property="og:description" content="@yield('meta_description', 'i3 is a team of developers, designers, and innovators working to create digital solutions for the UConn community.')">
         <meta property="og:image" content="{{ url(asset('img/i3/room.webp')) }}">
-        <meta property="og:site_name" content="i3 - Internal Insights & Innovation">
+        <meta property="og:site_name" content="i3 - Institutional Insights & Innovation">
         <meta property="og:locale" content="en_US">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:image" content="{{ url(asset('img/i3/room.webp')) }}">
@@ -166,7 +166,7 @@
                     <!-- About i3 -->
                     <div class="col-lg-4 col-md-6">
                         <p class="fw-bold mb-3 h5">
-                            <span class="text-primary">i3</span> Internal Insights & Innovation
+                            <span class="text-primary">i3</span> Institutional Insights & Innovation
                         </p>
                         <p class="text-light opacity-75 mb-3">
                             We're a team of developers, designers, and innovators working to create digital solutions

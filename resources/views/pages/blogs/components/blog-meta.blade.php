@@ -26,7 +26,7 @@
 <meta property="og:url" content="{{ $blogUrl }}">
 <meta property="og:title" content="{{ $post->title }}">
 <meta property="og:description" content="{{ $description }}">
-<meta property="og:site_name" content="i3 - Internal Insights & Innovation">
+<meta property="og:site_name" content="i3 - Institutional Insights & Innovation">
 <meta property="og:locale" content="en_US">
 @if($image)
 <meta property="og:image" content="{{ $image }}">

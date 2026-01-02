@@ -6,16 +6,13 @@
 @section('content')
 
     <section id = "into" style="background-color: #111111!important;">
-        <div class = "container">
+        <div class = "container pt-5">
             <h1 class="page-h1">Work</h1>
-           <div class="row align-items-center justify-content-center py-5">
-                <h2 class="mb-3 d-inline-block pb-3 text-center text-uppercase"><span
-                        class="border-bottom border-2 pb-3 border-primary">Featured Work</span></h2>
-            </div>
+           
 
-            <div class="row justify-content-center pb-5">
+            <div class="row justify-content-center py-5 pb-4">
                 <div class="col-md-6">
-                    <p class="text-center">
+                    <p class="text-center mb-0">
                         Our team takes great pride in creating bespoke solutions that make people's lives better. From
                         producing innovative tools that solve complex problems for the university to developing cutting-edge
                         products for principal investigators, we love biting into big challenges. Have a great idea but not
@@ -25,7 +22,7 @@
             </div>
 
             <!-- LINKS TOOLS AND SERVICES -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-5">
                 <div class="text-center d-flex flex-md-row flex-column align-items-center justify-content-center gap-4">
                     <!-- TOOLS LINKS -->
                     <div class="btn display-btn btn-arrow-slide">
@@ -48,47 +45,28 @@
                 </div>
             </div>
 
+            <div class="row align-items-center justify-content-center py-5">
+                <h2 class="mb-3 d-inline-block pb-3 text-center text-uppercase"><span
+                        class="border-bottom border-2 pb-3 border-primary">Featured Work</span></h2>
+            </div>
 
-            <!-- Featured Carousel -->
-            <div class="row justify-content-center py-4 py-5">
-                <div class="col-md-8">
-                    <div id="featuredCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
-                        data-bs-interval="5000">
-                        <div class="carousel-inner featured-carousel-inner">
+
+            <!-- Featured Carousel - SwiperJS with Coverflow -->
+            <div class="pb-5 mb-5">
+                <div class="col-md-10 mx-auto">
+                    <div class="swiper featuredSwiper">
+                        <div class="swiper-wrapper">
                             @foreach ($featured as $index => $item)
-                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" data-bs-interval="5000">
-                                    @php
-                                        // Get previous, current, and next items for the 3-item display
-                                        $prevIndex = $index > 0 ? $index - 1 : count($featured) - 1;
-                                        $nextIndex = $index < count($featured) - 1 ? $index + 1 : 0;
-                                        $prevItem = $featured[$prevIndex];
-                                        $nextItem = $featured[$nextIndex];
-                                    @endphp
-                                    <div class="featured-carousel-container">
-                                        <div class="featured-item featured-item-left" data-bs-target="#featuredCarousel"
-                                            data-bs-slide="prev" role="button" tabindex="0">
-                                            @if (!empty($prevItem->best_thumbnail_url))
-                                                <img src="{{ $prevItem->best_thumbnail_url }}" alt="{{ $prevItem->title }}"
-                                                    class="featured-image">
-                                            @endif
-                                        </div>
-                                        <div class="featured-item featured-item-center">
-                                            @if (!empty($item->best_thumbnail_url))
-                                                <img src="{{ $item->best_thumbnail_url }}" alt="{{ $item->title }}"
-                                                    class="featured-image">
-                                            @endif
-                                        </div>
-                                        <div class="featured-item featured-item-right" data-bs-target="#featuredCarousel"
-                                            data-bs-slide="next" role="button" tabindex="0">
-                                            @if (!empty($nextItem->best_thumbnail_url))
-                                                <img src="{{ $nextItem->best_thumbnail_url }}" alt="{{ $nextItem->title }}"
-                                                    class="featured-image">
-                                            @endif
-                                        </div>
-                                    </div>
+                                <div class="swiper-slide" data-bs-target="#projectModal{{ $item->id }}" data-bs-toggle="modal" aria-hidden="true">
+                                    @if (!empty($item->best_thumbnail_url))
+                                        <img src="{{ $item->best_thumbnail_url }}" alt="{{ $item->title }}"
+                                            class="featured-image">
+                                    @endif
                                 </div>
                             @endforeach
                         </div>
+                        <!-- Pagination dots -->
+                        <div class="swiper-pagination d-block position-relative top-0 mt-4"></div>
                     </div>
                 </div>
             </div>
@@ -304,104 +282,57 @@
             background-color: #4DB3FF;
         }
 
-        /* Featured Carousel Styles */
-        .featured-carousel-inner {
-            position: relative;
-            overflow: hidden;
-        }
-
-        #featuredCarousel.carousel-fade .carousel-item {
-            opacity: 0;
-            transition-property: opacity;
-            transform: none;
-        }
-
-        #featuredCarousel.carousel-fade .carousel-item.active,
-        #featuredCarousel.carousel-fade .carousel-item-next.carousel-item-start,
-        #featuredCarousel.carousel-fade .carousel-item-prev.carousel-item-end {
-            opacity: 1;
-        }
-
-        #featuredCarousel.carousel-fade .active.carousel-item-start,
-        #featuredCarousel.carousel-fade .active.carousel-item-end {
-            opacity: 0;
-        }
-
-        .featured-carousel-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            gap: 0;
-        }
-
-        .featured-item {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease;
-            cursor: pointer;
-            aspect-ratio: 16 / 9;
-            /* Trying optimizations idk */
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-
-        .featured-item-left {
-            width: 30%;
-            opacity: 0.4;
-            transform: translateX(-10px) scale(0.85) translateZ(0);
-            z-index: 1;
-            margin-right: -8%;
-        }
-
-        .featured-item-left:hover {
-            opacity: 0.6;
-            transform: translateX(-5px) scale(0.9) translateZ(0);
-        }
-
-        .featured-item-center {
-            width: 44%;
-            opacity: 1;
-            transform: scale(1) translateZ(0);
-            z-index: 3;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            cursor: default;
-            position: relative;
-        }
-
-        .featured-item-right {
-            width: 30%;
-            opacity: 0.4;
-            transform: translateX(10px) scale(0.85) translateZ(0);
-            z-index: 1;
-            margin-left: -8%;
-        }
-
-        .featured-item-right:hover {
-            opacity: 0.6;
-            transform: translateX(5px) scale(0.9) translateZ(0);
-        }
-
-        .featured-image {
+        /* SwiperJS Featured Carousel Styles */
+        .featuredSwiper {
             width: 100%;
-            height: 100%;
+            padding-top: 50px;
+            padding-bottom: 80px;
+            overflow: visible;
+        }
+
+        .featuredSwiper .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 500px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .featuredSwiper .swiper-slide:hover {
+            transform: scale(1.02);
+        }
+
+        .featuredSwiper .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
-            image-rendering: auto;
-            -ms-interpolation-mode: bicubic;
-            transform: translateZ(0);
-            will-change: transform;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .featuredSwiper .swiper-pagination {
+            bottom: 20px;
+        }
+
+        .featuredSwiper .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .featuredSwiper .swiper-pagination-bullet-active {
+            background: #4DB3FF;
+            width: 14px;
+            height: 14px;
         }
 
         @media (max-width: 768px) {
-
-            .featured-item-left,
-            .featured-item-right {
-                width: 25%;
-            }
-
-            .featured-item-center {
-                width: 50%;
+            .featuredSwiper .swiper-slide {
+                width: 300px;
             }
         }
 
@@ -445,8 +376,77 @@
         }
     </style>
 
+    <!-- SwiperJS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- SwiperJS JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Swiper with Coverflow Effect
+            const swiper = new Swiper('.featuredSwiper', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: true,
+                initialSlide: 1,
+                autoplay: {
+                    delay: 7500,
+                    disableOnInteraction: false,
+                },
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 200,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    // When window width is >= 320px
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: 0,
+                            depth: 100,
+                            modifier: 1,
+                            slideShadows: false,
+                        }
+                    },
+                    // When window width is >= 768px
+                    768: {
+                        slidesPerView: 'auto',
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: 0,
+                            depth: 200,
+                            modifier: 1,
+                            slideShadows: true,
+                        }
+                    }
+                },
+                // on: {
+                //     click: function(swiper, event) {
+                //         const clickedSlide = event.target.closest('.swiper-slide');
+                //         if (clickedSlide) {
+                //             const modalTarget = clickedSlide.dataset.modalTarget;
+                //             if (modalTarget) {
+                //                 const modal = new bootstrap.Modal(document.querySelector(modalTarget));
+                //                 modal.show();
+                //             }
+                //         }
+                //     }
+                // }
+            });
+
+            // Odometer animation
             function animateOdometers() {
                 document.querySelectorAll('.odometer').forEach(function(el) {
                     if (el.dataset.animated) return;

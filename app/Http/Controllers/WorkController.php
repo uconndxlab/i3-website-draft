@@ -26,7 +26,7 @@ class WorkController extends Controller
 
         $featured = WorkItem::whereHas('tags', function ($query) {
             $query->where('tags.slug', 'work-featured');
-        })->with('tags')->latest()->take(3)->get();
+        })->with('tags')->latest()->get();
 
         return view('pages.work', compact('items', 'allTags', 'tag', 'featured'));
     }

@@ -8,8 +8,8 @@
         class="hero-section d-flex align-items-center position-relative text-light position-relative pb-3 pb-lg-5 justify-content-start justify-content-center">
         <div class="container z-2">
             <div class="hero-content text-md-center" data-aos="fade-up" data-aos-duration="1000">
-                {{-- <h1 class="visually-hidden">Internal Insights &amp; Innovation</h1> --}}
-                <h1 class="hero-title mb-4 pt-md-0 text-center" aria-label="Internal Insights & Innovation">
+                {{-- <h1 class="visually-hidden">Institutional Insights &amp; Innovation</h1> --}}
+                <h1 class="hero-title mb-4 pt-md-0 text-center" aria-label="Institutional Insights & Innovation">
                     <span class="d-block" aria-hidden="true">Welcome to i3.</span>
 
                 </h1>
@@ -113,7 +113,7 @@
             <div class="row align-items-top g-5">
                 <div class="col-lg-7" data-aos="fade-right">
                     <p class="text-light">
-                        The Internal Insights & Innovation (i3) team provides custom software development, web design,
+                        The Institutional Insights & Innovation (i3) team provides custom software development, web design,
                         design thinking, and other innovation services in support of improving UConn's business processes,
                         academic operations, and research enterprise.
                     </p>
@@ -724,7 +724,7 @@
                     <div class="banner-text fs-6">
                         <strong>i3 is merging with Greenhouse Studios.</strong>
                         UConn is bringing together the functions and staff of
-                        two highly innovative groups, Greenhouse Studios and i3 (Internal Insights and Innovation). This
+                        two highly innovative groups, Greenhouse Studios and i3 (Institutional Insights &amp; Innovation). This
                         merger creates a stronger hub for digital scholarship at UConn, combining i3's technical expertise
                         with Greenhouse's innovative design approach to support research and academic work across campus.
                     </div>

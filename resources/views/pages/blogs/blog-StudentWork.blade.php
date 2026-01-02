@@ -2,7 +2,7 @@
 
 @section('blog-content')
     <div class="py-4">
-        <p class="mb-0">The student experience was always central to the mission of Greenhouse Studios, a mindset which has only strengthened since the unit merged with the Internal Insights & Innovation team in September 2025. This blog post unpacks the concept of “The Treehouse” – the mechanism forged for the weekly coming-together of the talented collective of student employees who made Greenhouse Studios tick. (Spoiler alert: this mindset is still at the forefront of our work in our newly merged department!) .</p>
+        <p class="mb-0">The student experience was always central to the mission of Greenhouse Studios, a mindset which has only strengthened since the unit merged with the Institutional Insights &amp; Innovation team in September 2025. This blog post unpacks the concept of “The Treehouse” – the mechanism forged for the weekly coming-together of the talented collective of student employees who made Greenhouse Studios tick. (Spoiler alert: this mindset is still at the forefront of our work in our newly merged department!) .</p>
     </div>
 
     <div class="py-4">
@@ -68,7 +68,7 @@
     <h2>How do students become a part of the team? </h2>
 
     <div class="py-4">
-        <p class="mb-0">While weekly iteration of The Treehouse has been (at least temporarily) retired since the merge, that very same spirit is alive and well at Internal Insights & Innovation; if anything, the student-first ethos is even stronger. We take pride in the diversity of our students' backgrounds, as they join us from a wide variety of geographic, academic, and philosophical backgrounds. We consistently welcome new undergraduate employees through UConn’s 12twenty platform, and will announce these positions through our social media channels. However, if you or someone you know is interested in being a member of the team, please do feel free to reach out to us at any time! </p>
+        <p class="mb-0">While weekly iteration of The Treehouse has been (at least temporarily) retired since the merge, that very same spirit is alive and well at Institutional Insights &amp; Innovation; if anything, the student-first ethos is even stronger. We take pride in the diversity of our students' backgrounds, as they join us from a wide variety of geographic, academic, and philosophical backgrounds. We consistently welcome new undergraduate employees through UConn’s 12twenty platform, and will announce these positions through our social media channels. However, if you or someone you know is interested in being a member of the team, please do feel free to reach out to us at any time! </p>
     </div>
     
 

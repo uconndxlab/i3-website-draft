@@ -57,7 +57,7 @@
               <div style="max-width:85%">
                   <h1 class="header-level-one mb-0">
                       <a href="/" class="link-offset-1">
-                          Internal Insights & Innovation
+                          Institutional Insights & Innovation
                       </a>
                   </h1>
               </div>

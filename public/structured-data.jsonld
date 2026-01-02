@@ -2,7 +2,7 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "i3",
-    "alternateName": "Internal Insights & Innovation",
+    "alternateName": "Institutional Insights & Innovation",
     "@address": {
         "@type": "PostalAddress",
         "streetAddress": "Rowe 321, University of Connecticut",
@@ -15,7 +15,7 @@
         "@type": "ContactPoint",
         "email": "i3@uconn.edu"
     },
-    "description": "The Internal Insights & Innovation (i3) team provides custom software development, web design, and other digital services in support of improving UConn's business processes, academic operations, and research enterprise.",
+    "description": "The Institutional Insights & Innovation (i3) team provides custom software development, web design, and other digital services in support of improving UConn's business processes, academic operations, and research enterprise.",
     "email": "i3@uconn.edu",
     "logo": "https://i3.uconn.edu/img/i3/i3-symbol-light-blue.svg",
     "url": "https://i3.uconn.edu"
