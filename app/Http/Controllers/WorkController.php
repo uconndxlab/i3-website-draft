@@ -19,9 +19,10 @@ class WorkController extends Controller
             $tagModel = Tag::where('slug', $tag)->first();
             $items = WorkItem::whereHas('tags', function ($query) use ($tagModel) {
                 $query->where('tags.slug', $tagModel->slug ?? '');
-            })->with('tags')->latest()->paginate(18);
+            })->with('tags')->latest()->paginate(88);
         } else {
-            $items = WorkItem::with('tags')->latest()->paginate(18);
+            $items = WorkItem::with('tags')->latest()->paginate(88);
+            $tag = 'for-all';
         }
 
         $featured = WorkItem::whereHas('tags', function ($query) {
