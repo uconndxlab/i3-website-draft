@@ -7,7 +7,6 @@ use App\Models\Post;
 use App\Enums\PostTag;
 use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
@@ -32,9 +31,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create', [
-            'bladeTemplates' => $this->getBlogBladeTemplates(),
-        ]);
+        return view('admin.posts.create');
     }
 
     public function store(Request $request)
@@ -48,7 +45,7 @@ class PostController extends Controller
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:' . implode(',', PostTag::all()),
-            'blade_file' => 'nullable|string',
+            'body_markdown' => 'nullable|string',
         ], [
             'featured_image.image' => 'The featured image must be a valid image file.',
             'featured_image.max' => 'The featured image must not be larger than 10MB.',
@@ -88,6 +85,12 @@ class PostController extends Controller
                 ->withInput()
                 ->withErrors(['published_at' => 'Please select a published date to publish this post.']);
         }
+
+        if ($shouldPublish && empty(trim((string) ($data['body_markdown'] ?? '')))) {
+            return back()
+                ->withInput()
+                ->withErrors(['body_markdown' => 'Add post content before publishing.']);
+        }
         
         $data['published'] = $shouldPublish;
 
@@ -102,10 +105,6 @@ class PostController extends Controller
         // Handle tags - checkboxes return array, convert to empty array if not set
         if (!isset($data['tags']) || !is_array($data['tags'])) {
             $data['tags'] = [];
-        }
-
-        if (empty($data['blade_file'])) {
-            $data['blade_file'] = null;
         }
 
         $post = Post::create($data);
@@ -126,7 +125,6 @@ class PostController extends Controller
     {
         return view('admin.posts.edit', [
             'post' => $post,
-            'bladeTemplates' => $this->getBlogBladeTemplates(),
         ]);
     }
 
@@ -141,7 +139,7 @@ class PostController extends Controller
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:' . implode(',', PostTag::all()),
-            'blade_file' => 'nullable|string',
+            'body_markdown' => 'nullable|string',
         ], [
             'featured_image.image' => 'The featured image must be a valid image file.',
             'featured_image.max' => 'The featured image must not be larger than 10MB.',
@@ -190,16 +188,18 @@ class PostController extends Controller
             $data['tags'] = [];
         }
 
-        if (empty($data['blade_file'])) {
-            $data['blade_file'] = null;
-        }
-
         $shouldPublish = $request->input('publish_action') === 'publish';
 
         if ($shouldPublish && !$request->filled('published_at')) {
             return back()
                 ->withInput()
                 ->withErrors(['published_at' => 'Please select a published date to publish this post.']);
+        }
+
+        if ($shouldPublish && empty(trim((string) ($data['body_markdown'] ?? '')))) {
+            return back()
+                ->withInput()
+                ->withErrors(['body_markdown' => 'Add post content before publishing.']);
         }
 
         if (!$request->filled('published_at')) {
@@ -256,9 +256,13 @@ class PostController extends Controller
 
     public function preview(Post $post)
     {
-        $view = $post->blade_file && View::exists($post->blade_file)
-            ? $post->blade_file
-            : 'pages.blogs.default';
+        if ($post->blade_file && View::exists($post->blade_file)) {
+            $view = $post->blade_file;
+        } elseif (!empty(trim((string) ($post->body_markdown ?? '')))) {
+            $view = 'pages.blogs.backgrounds.blogs';
+        } else {
+            $view = 'pages.blogs.template-missing';
+        }
 
         return view($view, [
             'post' => $post,
@@ -283,32 +287,5 @@ class PostController extends Controller
         ]);
     }
 
-    protected function getBlogBladeTemplates(): array
-    {
-        $directory = resource_path('views/pages/blogs');
-
-        if (!is_dir($directory)) {
-            return [];
-        }
-
-        return collect(File::files($directory))
-            ->filter(fn ($file) => Str::endsWith($file->getFilename(), '.blade.php'))
-            ->filter(fn ($file) => Str::startsWith($file->getFilename(), 'blog-'))
-            ->map(function ($file) {
-                $filename = $file->getFilename();
-                $viewName = 'pages.blogs.' . Str::of($filename)->replace('.blade.php', '');
-
-                return [
-                    'value' => $viewName,
-                    'label' => Str::of($filename)
-                        ->replace('.blade.php', '')
-                        ->replace(['-', '_'], ' ')
-                        ->title(),
-                ];
-            })
-            ->sortBy('label')
-            ->values()
-            ->all();
-    }
 }
 

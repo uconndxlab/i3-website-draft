@@ -7,6 +7,7 @@ use App\Models\WorkItem;
 use App\Models\TeamMember;
 use App\Models\Post;
 use App\Enums\PostTag;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -106,9 +107,32 @@ class PageController extends Controller
             $query->orderBy('published_at', 'desc');
         }
         
-        $posts = $query->paginate(21);
+        $dbPosts = $query->get();
+        $posts = $dbPosts;
+
+        // Keep legacy template-backed posts visible even after DB posts are published.
+        if ($filterTag === null) {
+            $posts = $this->mergeTemplateAndDatabasePosts($dbPosts, $sort);
+        }
         
         return view('pages.blogs.index', compact('posts', 'filterTag', 'sort'));
+    }
+
+    protected function mergeTemplateAndDatabasePosts($dbPosts, string $sort)
+    {
+        $combined = $dbPosts->concat($this->fallbackBlogPosts($sort));
+
+        $sorted = $sort === 'oldest'
+            ? $combined->sortBy(function ($post) {
+                $timestamp = $post->published_at?->getTimestamp();
+                return [$timestamp ?? PHP_INT_MAX, $post->title ?? ''];
+            })
+            : $combined->sortByDesc(function ($post) {
+                $timestamp = $post->published_at?->getTimestamp();
+                return [$timestamp ?? PHP_INT_MIN, $post->title ?? ''];
+            });
+
+        return $sorted->values();
     }
 
     public function blogShow(string $slug)
@@ -116,9 +140,27 @@ class PageController extends Controller
         $post = Post::where('url_friendly', $slug)
             ->where('published', true)
             ->whereNotNull('published_at')
-            ->firstOrFail();
+            ->first();
 
-        return $this->renderBlogView($post);
+        if ($post) {
+            return $this->renderBlogView($post);
+        }
+
+        $fallbackPosts = $this->fallbackBlogPosts('newest')->values();
+        $currentIndex = $fallbackPosts->search(
+            fn ($fallbackPost) => $fallbackPost->url_friendly === $slug
+        );
+
+        if ($currentIndex === false) {
+            abort(404);
+        }
+
+        $currentPost = $fallbackPosts->get($currentIndex);
+        $prevPost = $fallbackPosts->get($currentIndex - 1);
+        $nextPost = $fallbackPosts->get($currentIndex + 1);
+
+        return view($currentPost->blade_file, compact('currentPost', 'prevPost', 'nextPost'))
+            ->with('post', $currentPost);
     }
 
     protected function renderBlogView(?Post $post)
@@ -157,8 +199,13 @@ class PageController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        $view = $this->resolvePostTemplate($post->blade_file)
-            ?: 'pages.blogs.template-missing';
+        $view = $this->resolvePostTemplate($post->blade_file);
+
+        if (!$view) {
+            $view = !empty(trim((string) ($post->body_markdown ?? '')))
+                ? 'pages.blogs.backgrounds.blogs'
+                : 'pages.blogs.template-missing';
+        }
 
         return view($view, compact('post', 'nextPost', 'prevPost'));
     }
@@ -224,5 +271,50 @@ class PageController extends Controller
         }
 
         return null;
+    }
+
+    protected function fallbackBlogPosts(string $sort = 'newest')
+    {
+        $directory = resource_path('views/pages/blogs');
+
+        if (!is_dir($directory)) {
+            return collect();
+        }
+
+        $posts = collect(File::files($directory))
+            ->filter(fn ($file) => Str::endsWith($file->getFilename(), '.blade.php'))
+            ->filter(fn ($file) => Str::startsWith($file->getFilename(), 'blog-'))
+            ->map(function ($file) {
+                $filename = $file->getFilename();
+                $basename = Str::replaceLast('.blade.php', '', $filename);
+                $titleBase = Str::after($basename, 'blog-');
+                $title = Str::of($titleBase)
+                    ->replace(['-', '_'], ' ')
+                    ->headline()
+                    ->value();
+
+                return (object) [
+                    'id' => null,
+                    'title' => $title,
+                    'subheader' => null,
+                    'author' => null,
+                    'published' => true,
+                    'published_at' => null,
+                    'url_friendly' => Str::slug($title),
+                    'tags' => [],
+                    'blade_file' => 'pages.blogs.' . $basename,
+                    'body_markdown' => null,
+                    'featured_image' => null,
+                    'featured_image_medium' => null,
+                    'featured_image_webp' => null,
+                    'best_featured_image_url' => null,
+                ];
+            });
+
+        if ($sort === 'oldest') {
+            return $posts->sortBy('title')->values();
+        }
+
+        return $posts->sortByDesc('title')->values();
     }
 }

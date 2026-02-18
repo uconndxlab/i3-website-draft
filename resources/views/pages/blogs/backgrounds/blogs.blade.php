@@ -257,6 +257,18 @@
         text-decoration: underline;
     }
 
+    .blog-content .ql-align-center {
+        text-align: center;
+    }
+
+    .blog-content .ql-align-right {
+        text-align: right;
+    }
+
+    .blog-content .ql-align-justify {
+        text-align: justify;
+    }
+
     .blog-content strong {
         font-weight: 600;
     }
@@ -275,6 +287,61 @@
         max-width: 100%;
         margin-right: 1.5rem;
         margin-bottom: 1rem;
+    }
+
+    .blog-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        margin: 1rem auto;
+    }
+
+    .blog-content .editor-image-left {
+        float: left;
+        max-width: 50%;
+        margin: 0.5rem 1.25rem 0.75rem 0;
+    }
+
+    .blog-content .editor-image-right {
+        float: right;
+        max-width: 50%;
+        margin: 0.5rem 0 0.75rem 1.25rem;
+    }
+
+    .blog-content .editor-image-center {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        max-width: 80%;
+    }
+
+    .blog-content .editor-image-full {
+        width: 100%;
+        max-width: 100%;
+        float: none;
+        display: block;
+        margin: 1rem 0;
+    }
+
+    .blog-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .blog-content table th,
+    .blog-content table td {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.5rem 0.75rem;
+        min-width: 120px;
+    }
+
+    .blog-content table th {
+        background: rgba(255, 255, 255, 0.08);
+        font-weight: 600;
     }
 
     .blog-image-caption {
@@ -441,7 +508,11 @@
                         </div>
                         @endif
                         <div class="blog-content">
-                            @yield('blog-content')
+                            @hasSection('blog-content')
+                                @yield('blog-content')
+                            @elseif(!empty($post->body_html ?? ''))
+                                {!! $post->body_html !!}
+                            @endif
                             <div class="style-container"></div>
                             <div class="style-container2"><div class="style-container3"></div></div>
                         </div>

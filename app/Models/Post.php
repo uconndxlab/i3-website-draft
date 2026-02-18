@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -18,6 +19,7 @@ class Post extends Model
         'featured_image_webp',
         'tags',
         'blade_file',
+        'body_markdown',
     ];
 
     protected $casts = [
@@ -53,5 +55,41 @@ class Post extends Model
     {
         $image = $this->getBestFeaturedImageAttribute();
         return $image ? asset('storage/' . $image) : null;
+    }
+
+    /**
+     * Render post body for frontend display.
+     * Supports legacy Markdown and Quill-generated HTML.
+     */
+    public function getBodyHtmlAttribute(): string
+    {
+        if (empty($this->body_markdown)) {
+            return '';
+        }
+
+        if ($this->looksLikeHtml($this->body_markdown)) {
+            return $this->sanitizeEditorHtml($this->body_markdown);
+        }
+
+        return Str::markdown($this->body_markdown, [
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
+    }
+
+    protected function looksLikeHtml(string $content): bool
+    {
+        return preg_match('/<\s*[a-zA-Z][^>]*>/', $content) === 1;
+    }
+
+    protected function sanitizeEditorHtml(string $html): string
+    {
+        $cleaned = preg_replace('/<(script|style)\b[^>]*>.*?<\/\1>/is', '', $html) ?? '';
+        $cleaned = preg_replace('/\son[a-z]+\s*=\s*"[^"]*"/i', '', $cleaned) ?? '';
+        $cleaned = preg_replace("/\son[a-z]+\s*=\s*'[^']*'/i", '', $cleaned) ?? '';
+        $cleaned = preg_replace('/\son[a-z]+\s*=\s*[^\s>]+/i', '', $cleaned) ?? '';
+        $cleaned = preg_replace('/\s(href|src)\s*=\s*([\"\'])\s*javascript:[^\"\']*\2/i', ' $1="#"', $cleaned) ?? '';
+
+        return $cleaned;
     }
 }
