@@ -1,6 +1,12 @@
 @csrf
 
 <input type="hidden" name="publish_action" id="publish_action" value="">
+@php
+    $backgroundTemplates = $backgroundTemplates ?? [];
+    $editorTemplates = $editorTemplates ?? [];
+    $selectedBackground = old('blade_file', $post->blade_file ?? '');
+    $selectedEditorTemplate = old('editor_template', '');
+@endphp
 
 <div class="row">
     <div class="col-12 col-xl-9">
@@ -78,6 +84,46 @@
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label class="form-label">Background Template</label>
+            <div class="d-flex gap-2 flex-wrap">
+                @foreach($backgroundTemplates as $key => $bg)
+                    @php $isActive = $selectedBackground === $key || ($loop->first && empty($selectedBackground)); @endphp
+                    <label class="bg-template-option position-relative {{ $isActive ? 'active' : '' }}" style="cursor:pointer;">
+                        <input type="radio" name="blade_file" value="{{ $key }}" class="d-none"
+                               {{ $isActive ? 'checked' : '' }}>
+                        <div class="rounded-3 border {{ $isActive ? 'border-primary border-2' : 'border-secondary' }}"
+                             style="width: 120px; height: 80px; overflow: hidden; transition: border-color 0.2s;">
+                            <div style="width:100%; height:100%; background: {{ $bg['preview'] }};"></div>
+                        </div>
+                        <div class="text-center mt-1 small {{ $isActive ? 'fw-bold' : '' }}">{{ $bg['label'] }}</div>
+                    </label>
+                @endforeach
+            </div>
+            <small class="text-muted">Choose a background style for the blog post page.</small>
+            @error('blade_file')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Editor Template</label>
+            <div class="d-flex flex-column flex-md-row gap-2">
+                <select id="editor_template" name="editor_template" class="form-select">
+                    <option value="">Start from blank</option>
+                    @foreach($editorTemplates as $templateKey => $template)
+                        <option value="{{ $templateKey }}" {{ $selectedEditorTemplate === $templateKey ? 'selected' : '' }}>
+                            {{ $template['label'] }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="button" id="apply_editor_template" class="btn btn-outline-secondary">
+                    Apply to Editor
+                </button>
+            </div>
+            <small class="text-muted">Applies a starter structure to the visual editor. You can switch templates anytime.</small>
+        </div>
+
         <div class="mb-3">
             <label class="form-label">Post Body (Visual Editor)</label>
             <input type="hidden" name="body_markdown" id="body_markdown" value="{{ old('body_markdown', $post->body_markdown ?? '') }}">
@@ -184,6 +230,16 @@
 <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/quill-better-table@1.2.10/dist/quill-better-table.css" rel="stylesheet">
 <style>
+    .bg-template-option {
+        transition: transform 0.15s ease;
+    }
+    .bg-template-option:hover {
+        transform: translateY(-2px);
+    }
+    .bg-template-option.active div:first-of-type {
+        box-shadow: 0 0 0 2px #0d6efd;
+    }
+
     #editor-toolbar .ql-formats {
         margin-right: 8px;
     }
@@ -255,6 +311,7 @@
 <script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quill-better-table@1.2.10/dist/quill-better-table.min.js"></script>
 <script>
+    const editorTemplates = @json($editorTemplates);
     const bodyInput = document.getElementById('body_markdown');
     const editorContainer = document.getElementById('editor-container');
     const autosaveStatus = document.getElementById('autosave-status');
@@ -559,7 +616,49 @@
             quill.clipboard.dangerouslyPasteHTML(range?.index ?? quill.getLength(), tableHtml, 'user');
             syncBodyInput();
         });
+
+        const editorTemplateSelect = document.getElementById('editor_template');
+        const applyEditorTemplateButton = document.getElementById('apply_editor_template');
+        const applyEditorTemplate = () => {
+            const selectedKey = editorTemplateSelect?.value || '';
+            if (!selectedKey) {
+                return;
+            }
+
+            const selectedTemplate = editorTemplates?.[selectedKey];
+            if (!selectedTemplate?.html) {
+                return;
+            }
+
+            const hasExistingContent = quill.getText().trim().length > 0;
+            if (hasExistingContent && !window.confirm('Replace current editor content with this template?')) {
+                return;
+            }
+
+            quill.root.innerHTML = selectedTemplate.html;
+            syncBodyInput();
+            userHasTyped = true;
+            setStatus(`Template "${selectedTemplate.label}" applied.`);
+        };
+
+        applyEditorTemplateButton?.addEventListener('click', applyEditorTemplate);
     }
+
+    document.querySelectorAll('.bg-template-option input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            document.querySelectorAll('.bg-template-option').forEach(opt => {
+                opt.classList.remove('active');
+                opt.querySelector('div > div')?.parentElement?.classList.remove('border-primary', 'border-2');
+                opt.querySelector('div > div')?.parentElement?.classList.add('border-secondary');
+                opt.querySelector('.small')?.classList.remove('fw-bold');
+            });
+            const label = radio.closest('.bg-template-option');
+            label.classList.add('active');
+            label.querySelector('div > div')?.parentElement?.classList.add('border-primary', 'border-2');
+            label.querySelector('div > div')?.parentElement?.classList.remove('border-secondary');
+            label.querySelector('.small')?.classList.add('fw-bold');
+        });
+    });
 
     // Auto-generate slug from title when url_friendly is empty or when editing title initially
     const titleInput = document.querySelector('input[name="title"]');
@@ -589,4 +688,5 @@
             slugInput.value = slugify(slugInput.value);
         });
     }
+
 </script>

@@ -6,6 +6,28 @@
     $metaDesc = isset($post) 
         ? ($post->subheader ?: $defaultDescription) 
         : $defaultDescription . ' Learn about our latest projects, events, and updates.';
+
+    $bgTheme = $post->blade_file ?? 'ocean-blue';
+    $bgColors = match ($bgTheme) {
+        'teal' => [
+            'primary'   => '#0d3941',
+            'hero'      => '#072e28',
+            'accent'    => '#2dd4bf',
+            'dot'       => '#7ab',
+        ],
+        'purple' => [
+            'primary'   => '#280E3A',
+            'hero'      => '#1a0828',
+            'accent'    => '#c084fc',
+            'dot'       => '#a7a',
+        ],
+        default => [
+            'primary'   => '#0f2e4b',
+            'hero'      => '#071826',
+            'accent'    => '#0ea5e9',
+            'dot'       => '#999',
+        ],
+    };
 @endphp
 
 @section('title', $pageTitle)
@@ -109,7 +131,7 @@
     .blog-title-underline {
         height: 4px;
         width: 100px;
-        background: #0ea5e9;
+        background: {{ $bgColors['accent'] }};
         margin-bottom: 4rem;
     }
 
@@ -401,9 +423,9 @@
 
     .style-container {
         width: 100vw;
-        height: calc(100% + 2rem + clamp(260px, 55vh, 560px)/2); /* 2rem for footer*/
-        background-color: #0f2e4b;
-        background: linear-gradient(to bottom, #0f2e4b 0%, #0f2e4b 80%, #111111 100%);
+        height: calc(100% + 2rem + clamp(260px, 55vh, 560px)/2);
+        background-color: {{ $bgColors['primary'] }};
+        background: linear-gradient(to bottom, {{ $bgColors['primary'] }} 0%, {{ $bgColors['primary'] }} 80%, #111111 100%);
         position: absolute;
         bottom: -2rem;
         left: 50%;
@@ -418,7 +440,7 @@
         bottom: calc(100% + clamp(260px, 55vh, 560px)/2);
         left: 50%;  
         transform: translateX(-50%);
-        background: linear-gradient(180deg, #071826 0%, #111111 60%);
+        background: linear-gradient(180deg, {{ $bgColors['hero'] }} 0%, #111111 60%);
         z-index: -1;
         overflow: hidden;
     }
@@ -429,7 +451,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background-image: radial-gradient(#999 7.5%, transparent 0);
+        background-image: radial-gradient({{ $bgColors['dot'] }} 7.5%, transparent 0);
         background-size: 50px 50px;
         background-repeat: repeat;
         opacity: 0.55;
