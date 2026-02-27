@@ -13,9 +13,9 @@
                         <span class="badge text-bg-info text-uppercase">Configuration Needed</span>
                     </div>
                     <h1 class="h2 fw-bold mb-3">This post is almost ready.</h1>
-                    <p class="lead mb-4">The content for “{{ $post->title }}” hasn’t been connected to a display template yet. Please choose a template for this post in the admin panel so visitors can view it.</p>
+                    <p class="lead mb-4">The content for “{{ $post->title }}” is missing. Add post body content in the admin panel so visitors can view it.</p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info text-dark">Assign Template</a>
+                        <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info text-dark">Edit Post Content</a>
                         <a href="{{ route('blog') }}" class="btn btn-outline-light">Back to Blog</a>
                     </div>
                 </div>

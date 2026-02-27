@@ -6,6 +6,28 @@
     $metaDesc = isset($post) 
         ? ($post->subheader ?: $defaultDescription) 
         : $defaultDescription . ' Learn about our latest projects, events, and updates.';
+
+    $bgTheme = $post->blade_file ?? 'ocean-blue';
+    $bgColors = match ($bgTheme) {
+        'teal' => [
+            'primary'   => '#0d3941',
+            'hero'      => '#072e28',
+            'accent'    => '#2dd4bf',
+            'dot'       => '#7ab',
+        ],
+        'purple' => [
+            'primary'   => '#280E3A',
+            'hero'      => '#1a0828',
+            'accent'    => '#c084fc',
+            'dot'       => '#a7a',
+        ],
+        default => [
+            'primary'   => '#0f2e4b',
+            'hero'      => '#071826',
+            'accent'    => '#0ea5e9',
+            'dot'       => '#999',
+        ],
+    };
 @endphp
 
 @section('title', $pageTitle)
@@ -109,7 +131,7 @@
     .blog-title-underline {
         height: 4px;
         width: 100px;
-        background: #0ea5e9;
+        background: {{ $bgColors['accent'] }};
         margin-bottom: 4rem;
     }
 
@@ -257,6 +279,18 @@
         text-decoration: underline;
     }
 
+    .blog-content .ql-align-center {
+        text-align: center;
+    }
+
+    .blog-content .ql-align-right {
+        text-align: right;
+    }
+
+    .blog-content .ql-align-justify {
+        text-align: justify;
+    }
+
     .blog-content strong {
         font-weight: 600;
     }
@@ -275,6 +309,61 @@
         max-width: 100%;
         margin-right: 1.5rem;
         margin-bottom: 1rem;
+    }
+
+    .blog-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        margin: 1rem auto;
+    }
+
+    .blog-content .editor-image-left {
+        float: left;
+        max-width: 50%;
+        margin: 0.5rem 1.25rem 0.75rem 0;
+    }
+
+    .blog-content .editor-image-right {
+        float: right;
+        max-width: 50%;
+        margin: 0.5rem 0 0.75rem 1.25rem;
+    }
+
+    .blog-content .editor-image-center {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        max-width: 80%;
+    }
+
+    .blog-content .editor-image-full {
+        width: 100%;
+        max-width: 100%;
+        float: none;
+        display: block;
+        margin: 1rem 0;
+    }
+
+    .blog-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .blog-content table th,
+    .blog-content table td {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.5rem 0.75rem;
+        min-width: 120px;
+    }
+
+    .blog-content table th {
+        background: rgba(255, 255, 255, 0.08);
+        font-weight: 600;
     }
 
     .blog-image-caption {
@@ -334,9 +423,9 @@
 
     .style-container {
         width: 100vw;
-        height: calc(100% + 2rem + clamp(260px, 55vh, 560px)/2); /* 2rem for footer*/
-        background-color: #0f2e4b;
-        background: linear-gradient(to bottom, #0f2e4b 0%, #0f2e4b 80%, #111111 100%);
+        height: calc(100% + 2rem + clamp(260px, 55vh, 560px)/2);
+        background-color: {{ $bgColors['primary'] }};
+        background: linear-gradient(to bottom, {{ $bgColors['primary'] }} 0%, {{ $bgColors['primary'] }} 80%, #111111 100%);
         position: absolute;
         bottom: -2rem;
         left: 50%;
@@ -351,7 +440,7 @@
         bottom: calc(100% + clamp(260px, 55vh, 560px)/2);
         left: 50%;  
         transform: translateX(-50%);
-        background: linear-gradient(180deg, #071826 0%, #111111 60%);
+        background: linear-gradient(180deg, {{ $bgColors['hero'] }} 0%, #111111 60%);
         z-index: -1;
         overflow: hidden;
     }
@@ -362,7 +451,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background-image: radial-gradient(#999 7.5%, transparent 0);
+        background-image: radial-gradient({{ $bgColors['dot'] }} 7.5%, transparent 0);
         background-size: 50px 50px;
         background-repeat: repeat;
         opacity: 0.55;
@@ -441,7 +530,11 @@
                         </div>
                         @endif
                         <div class="blog-content">
-                            @yield('blog-content')
+                            @hasSection('blog-content')
+                                @yield('blog-content')
+                            @elseif(!empty($post->body_html ?? ''))
+                                {!! $post->body_html !!}
+                            @endif
                             <div class="style-container"></div>
                             <div class="style-container2"><div class="style-container3"></div></div>
                         </div>
