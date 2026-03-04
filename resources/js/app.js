@@ -3,10 +3,43 @@ import 'aos/dist/aos.css';
 
 document.addEventListener('DOMContentLoaded', () => {
     AOS.init();
-    
     // Universal form disable on submit functionality
     initFormDisableOnSubmit();
+
+    
+    // Auto hide header on scroll
+    initAutoHideHeader();
 });
+
+function initAutoHideHeader() {
+    const header = document.getElementById('site-header');
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+    const scrollThreshold = 15;
+    const mouseRevealZone = 80; // px from top of viewport
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
+
+        if (currentScrollY <= 0) {
+            header.classList.remove('header-hidden');
+        } else if (delta > scrollThreshold) {
+            header.classList.add('header-hidden');
+        } else if (delta < -scrollThreshold) {
+            header.classList.remove('header-hidden');
+        }
+
+        lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    document.addEventListener('mousemove', (e) => {
+        if (e.clientY < mouseRevealZone) {
+            header.classList.remove('header-hidden');
+        }
+    }, { passive: true });
+}
 
 /**
  * Initialize form disable on submit functionality
