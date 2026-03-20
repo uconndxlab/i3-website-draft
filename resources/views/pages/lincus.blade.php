@@ -654,7 +654,7 @@ As the sole developer on the project, Maggie worked closely within the i3 ecosys
         <div class="col-lg-6 d-flex align-items-center justify-content-center">
           <div class="container mt-lg-0 mt-5 mb-lg-5">
           <p class="fs-5 inter-light mb-0">
-Lincus was built using the Laravel framework, which has become a core part of i3’s development approach. Laravel allows the team to move quickly from concept to working software while maintaining a clean, maintainable codebase. Its strong conventions and approachable learning curve make it well suited to a university environment where students and new developers can quickly contribute to real projects.
+Lincus was built using the <a href="https://laravel.com/" target="_blank">Laravel framework</a>, which has become a core part of i3’s development approach. Laravel allows the team to move quickly from concept to working software while maintaining a clean, maintainable codebase. Its strong conventions and approachable learning curve make it well suited to a university environment where students and new developers can quickly contribute to real projects.
 
           </p>
           </div>

@@ -1185,32 +1185,23 @@ span.tab-3 {
 }
 .yellow-shadow,.yellow-shadow-sm {
   position: relative;
-  z-index: 1;
+  background-image: linear-gradient(transparent 65%, rgba(248, 184, 29, 0.4) 65%, rgba(248, 184, 29, 0.4) 95%, transparent 95%);
+  transition: background-image .3s ease;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-.yellow-shadow:after,
-.yellow-shadow-sm:after {
-  position: absolute;
-  content: '';
-  height: 20px;
-  width: 100%;
-  left: 0;
-  bottom: 5px;
-  background: var(--color-yellow);
-  opacity: .4;
-  z-index: -1;
-  transform: scaleY(.35);
-  transform-origin: bottom;
-  transition: transform .3s ease;
+a:hover .yellow-shadow,
+a:hover .yellow-shadow-sm {
+  background-image: linear-gradient(transparent 10%, rgba(248, 184, 29, 0.4) 10%, rgba(248, 184, 29, 0.4) 95%, transparent 95%);
 }
 
-a:hover .yellow-shadow:after,
-a:hover .yellow-shadow-sm:after {
-  transform: scaleY(1);
+.yellow-shadow-sm {
+  background-image: linear-gradient(transparent 75%, rgba(248, 184, 29, 0.4) 75%, rgba(248, 184, 29, 0.4) 95%, transparent 95%);
 }
 
-.yellow-shadow-sm:after{
-  bottom:2px;
+a:hover .yellow-shadow-sm {
+  background-image: linear-gradient(transparent 20%, rgba(248, 184, 29, 0.4) 20%, rgba(248, 184, 29, 0.4) 95%, transparent 95%);
 }
 
 .quotation {
