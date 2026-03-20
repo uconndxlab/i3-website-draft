@@ -86,6 +86,10 @@ class PageController extends Controller
         return view('pages.beyond-nuremberg');
     }
 
+    public function lincus() {
+        return view('pages.lincus');
+    }
+
     public function blogs(Request $request) {
 
         // TODO: SHOW MORE POSTS button to get past the paginate 21
