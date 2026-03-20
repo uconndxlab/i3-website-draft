@@ -10,7 +10,7 @@
 
     <meta name="description"
         content="@yield('meta_description', 'i3 is a team of developers, designers, and innovators working to create digital solutions for the UConn community.')">
-    <meta name="author" content="i3 - Institutional Insights & Innovation">
+    <meta name="author" content="UConn i3 - Institutional Insights & Innovation">
 
     @hasSection('meta')
         @yield('meta')
@@ -20,12 +20,12 @@
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:title" content="@yield('title', 'i3') | Institutional Insights & Innovation (i3)">
         <meta property="og:description" content="@yield('meta_description', 'i3 is a team of developers, designers, and innovators working to create digital solutions for the UConn community.')">
-        <meta property="og:image" content="{{ url(asset('img/i3/room.webp')) }}">
+        <meta property="og:image" content="{{ url(asset(trim($__env->yieldContent('og_image')) ?: 'img/i3/room.webp')) }}">
         <meta property="og:site_name" content="i3 - Institutional Insights & Innovation">
         <meta property="og:locale" content="en_US">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image" content="{{ url(asset('img/i3/room.webp')) }}">
-        <link rel="image_src" href="{{ url(asset('img/i3/room.webp')) }}">
+        <meta name="twitter:image" content="{{ url(asset(trim($__env->yieldContent('og_image')) ?: 'img/i3/room.webp')) }}">
+        <link rel="image_src" href="{{ url(asset(trim($__env->yieldContent('og_image')) ?: 'img/i3/room.webp')) }}">
     @endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
