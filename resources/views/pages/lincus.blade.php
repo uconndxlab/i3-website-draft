@@ -60,8 +60,8 @@
       <h1 class="hero-title lust-light">
         Lincus<span class="hero-blink">|</span>
       </h1>
-      <h2 class="fs-3 inter-light text-slate-grey">A Scholarly Research Aggregator</h2>
-      <span class="inter-reg bg-white text-slate-grey fs-6 mt-2 py-1 px-4 hero-published" style="border:1px solid #CED0D6">CASE STUDY PUBLISHED 03/20/2026</span>
+      <h2 class="fs-3 inter-light text-slate-grey text-center">A Scholarly Research Aggregator</h2>
+      <span class="inter-reg bg-white text-slate-grey fs-6 mt-2 py-1 px-4 hero-published text-center" style="border:1px solid #CED0D6">CASE STUDY PUBLISHED 03/20/2026</span>
     </div>
   </section>
 
