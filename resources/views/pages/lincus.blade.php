@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Lincus Case Study')
-
+@section('og_image', 'img/case-studies/lincus_og.png')
 @section('meta_description', 'A Scholarly Research Aggregator - Lincus provides a centralized platform for discovering faculty expertise and research at UConn.')
 
 @section('content')
@@ -33,10 +33,12 @@
     .lincus-page h6 {
         font-family: inherit;
         color: inherit;
-        text-transform: capitalize;
+        text-transform: unset;
         -webkit-text-stroke:unset;
         text-stroke: unset;
     }
+
+    
 
     .lincus-page h2 {
         font-size: revert;
