@@ -10,7 +10,7 @@
 
     <meta name="description"
         content="@yield('meta_description', 'i3 is a team of developers, designers, and innovators working to create digital solutions for the UConn community.')">
-    <meta name="author" content="i3 - Institutional Insights & Innovation">
+    <meta name="author" content="UConn i3 - Institutional Insights & Innovation">
 
     @hasSection('meta')
         @yield('meta')

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lincus Case Study')
+@section('title', 'Case Study: Lincus V2 - A Scholarly Research Aggregator')
 @section('og_image', 'img/case-studies/lincus_og.png')
 @section('meta_description', 'A Scholarly Research Aggregator - Lincus provides a centralized platform for discovering faculty expertise and research at UConn.')
 
