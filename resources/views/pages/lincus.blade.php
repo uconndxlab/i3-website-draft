@@ -569,7 +569,7 @@ faculty expertise and research at UConn.')
       <div class="container challenge text-white my-4 pb-5">
         <span class="text-start inter-light fs-5">04 The Challenge</span>
         <div class="row">
-          <span class="inter-light fs-3 mb-3">A<span class="inter-med">useful tool</span> in need of
+          <span class="inter-light fs-3 mb-3">A <span class="inter-med">useful tool</span> in need of
             modernization.</span>
           <p class="w-100 fs-5 inter-light">Prior to its redevelopment, Lincus already existed as a research discovery
             tool—but it had significant limitations. For example, the website was difficult to navigate and users had
@@ -844,8 +844,7 @@ faculty expertise and research at UConn.')
         <span class="text-start inter-light fs-5">07 The Result</span>
 
         <div class="row">
-          <span class="inter-light fs-3 mb-3">A <span class="inter-med">centralized</span>, living source of academic
-            expertise.</span>
+          <span class="inter-light fs-3 mb-3">Connecting <span class="inter-med">people, topics, and research</span>.</span>
           <p class="w-100 fs-5 inter-light">
             Lincus provides more than search functionality—it reveals the research ecosystem of the University.
             Users can explore faculty collaboration networks, discover connections, and gain a fuller picture of
