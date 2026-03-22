@@ -80,7 +80,7 @@ faculty expertise and research at UConn.')
           Finding the <span class="inter-med">right expert</span> at a large research university can be harder than it
           should be. While faculty webpages provide basic information, they rarely capture the depth of a scholar's work
           or the <span class="inter-med">connections</span> that shape <span class="inter-med">academic research.</span>
-          This is the story of how an i3 student developer took a great idea and turned it into a powerful tool for the UConn community.
+          This is the story of how an i3 student developer took a great idea and turned it into a powerful, reimagined new platform.
         </p>
       </div>
 
@@ -1313,9 +1313,8 @@ faculty expertise and research at UConn.')
       <span class="text-start inter-light fs-5">08 Looking Ahead</span>
       <div class="row mb-2">
         <p class="w-100 fs-3 inter-light">
-          With Lincus, i3 has laid the foundation for
-          a <span class="inter-med">long-term research discovery platform </span> that reflects the University as it
-          exists today, not as it existed years ago.
+          
+          A <span class="inter-med">research discovery platform </span> built to evolve.
         </p>
       </div>
       <!-- hide for  now
