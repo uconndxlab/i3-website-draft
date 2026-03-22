@@ -1223,7 +1223,7 @@ faculty expertise and research at UConn.')
 
 
               <span class="z-2 inter-med text-slate-grey position-relative">Summarize</span>
-              <p class="z-2 mb-0 inter-light text-slate-grey position-relative">through a visual wordbubble of topics
+              <p class="z-2 mb-0 inter-light text-slate-grey position-relative">through a word cloud of related topics
               </p>
             </div>
           </div>
