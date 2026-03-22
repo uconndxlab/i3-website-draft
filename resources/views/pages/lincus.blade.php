@@ -71,7 +71,7 @@
       <span class="text-start inter-light fs-5">01 Overview</span>
       <div class="row mb-2">
         <p class="w-100 fs-3 inter-light">
-        Finding the <span class="inter-med">right expert</span> at a large research university can be harder than it should be. While faculty webpages provide basic information, they rarely capture the depth of a scholar’s work or the <span class="inter-med">connections</span> that shape <span class="inter-med">academic research.</span></p>
+        Finding the <span class="inter-med">right expert</span> at a large research university can be harder than it should be. While faculty webpages provide basic information, they rarely capture the depth of a scholar's work or the <span class="inter-med">connections</span> that shape <span class="inter-med">academic research.</span></p>
       </div>
 
       <div class="row gx-2 pb-2 justify-content-between">
@@ -238,10 +238,10 @@
         Reimagining <span class="inter-med">Research Discovery</span> at UConn with Lincus.</p>
       </div>
       <div class="row">
-        <p class="w-100 fs-5 inter-light mb-2">The concept behind <a target="_blank" href="https://lincus.uconn.edu/"><span class="yellow-shadow-sm">Lincus</span></a> originated with <a target="_blank" href="https://www.linkedin.com/in/dschwartz24"><span class="yellow-shadow-sm">Dan Schwartz</span></a>, who developed the original platform with undergraduate students in his lab in 2013. The early version of Lincus gained significant traction at University of Connecticut, reaching more than 4,000 student, faculty, and staff users. The platform was later spun out as a company and adopted by several Ivy League institutions on an annual contract basis. The company is no longer active, and the intellectual property has since returned to the University of Connecticut, where the platform has been redeveloped and is now maintained by the university.
+        <p class="w-100 fs-5 inter-light mb-2">The concept behind <a target="_blank" href="https://lincus.uconn.edu/"><span class="yellow-shadow-sm">Lincus</span></a> originated with <a target="_blank" href="https://www.linkedin.com/in/dschwartz24"><span class="yellow-shadow-sm">Dan Schwartz</span></a>, who developed the original platform with undergraduate students in his lab in 2013. The early version of Lincus gained significant traction at the University of Connecticut, reaching more than 4,000 student, faculty, and staff users. The platform was later spun out as a company and adopted by several Ivy League institutions on an annual contract basis. The company is no longer active, and the intellectual property has since returned to the UConn, where the platform has been redeveloped and is now maintained by the Institutional Insights & Innovation (i3) team.
         </p>
 
-        <p class="w-100 fs-5 inter-light mb-0">Years later, recognizing the continued need for a modern research discovery platform, UConn Institutional Insights & Innovation (i3) relaunched Lincus as part of a broader effort to make faculty expertise across the university more visible, searchable, and up to date. As part of this initiative, i3 hired <a target="_blank" href="https://www.linkedin.com/in/magdalena-danielewicz"><span class="yellow-shadow-sm">Maggie Danielewicz</span></a>, a senior computer science student, to serve as the project’s lead developer and rebuild Lincus for long-term use by the UConn community.
+        <p class="w-100 fs-5 inter-light mb-0">Years later, recognizing the continued need for a modern research discovery platform, i3 relaunched Lincus as part of a broader effort to make faculty expertise across the University more visible, searchable, and up to date. As part of this initiative, i3 hired <a target="_blank" href="https://www.linkedin.com/in/magdalena-danielewicz"><span class="yellow-shadow-sm">Maggie Danielewicz</span></a>, a senior computer science student, to serve as the project's lead developer and rebuild Lincus for long-term use by the UConn community.
         </p>
       </div>
 
@@ -313,7 +313,7 @@
       <div class="row">
         <span class="inter-light fs-3 mb-3">Start small. Learn fast. <span class="inter-med">Build what matters.</span></span>
         <p class="w-100 fs-5 inter-light">
-  At i3, we begin by putting something real in front of people. A rough draft, a working prototype, a first version you can click. From there we work closely with stakeholders to test ideas, gather feedback, and refine the system together. Because the work happens inside the university, we can respond quickly and shape the platform around the needs of the community rather than the constraints of a vendor product. The result is a solution that reflects how UConn actually works and evolves alongside it. Every project is different, but this approach helps us turn institutional challenges into tools that the university truly owns and can continue to improve over time.
+  At i3, we begin by putting something real in front of people. A rough draft, a working prototype, a first version you can click. From there we work closely with stakeholders to test ideas, gather feedback, and refine the system together. Because the work happens inside the University, we can respond quickly and shape the platform around the needs of the community rather than the constraints of a vendor product. The result is a solution that reflects how UConn actually works and evolves alongside it. Every project is different, but this approach helps us turn institutional challenges into tools that the University truly owns and can continue to improve over time.
         </p>
       </div>
 
@@ -340,7 +340,7 @@
               </svg>
               <div class="z-2 arrow-bg bg-extralight-grey"></div>
 
-              <span class="z-2 inter-light text-start mb-0">We begin by meeting with stakeholders and mapping the problem together. For Lincus, this meant understanding how faculty expertise is described across university systems and how people actually search for collaborators and research topics.</span>
+              <span class="z-2 inter-light text-start mb-0">We begin by meeting with stakeholders and mapping the problem together. For Lincus, this meant understanding how faculty expertise is described across University systems and how people actually search for collaborators and research topics.</span>
             </div>
           </div>
         </div>
@@ -412,7 +412,7 @@
               </svg>
               <div class="z-2 arrow-bg bg-extralight-grey"></div>
 
-              <span class="z-2 inter-light text-start mb-0">Once the platform was ready, Lincus was launched to the community. From there, real usage continues to guide improvements so the system grows alongside the university’s research ecosystem.</span>
+              <span class="z-2 inter-light text-start mb-0">Once the platform was ready, Lincus was launched to the community. From there, real usage continues to guide improvements so the system grows alongside the University's research ecosystem.</span>
             </div>
           </div>
         </div>
@@ -426,8 +426,8 @@
       <div class="container challenge text-white my-4 pb-5">
         <span class="text-start inter-light fs-5">04 The Challenge</span>
         <div class="row">
-          <span class="inter-light fs-3 mb-3">An <span class="inter-med">underutilized tool</span> with outdated infrastructure.</span>
-          <p class="w-100 fs-5 inter-light">Prior to its redevelopment, Lincus already existed as a research discovery tool—but it had significant limitations. For example, the website was difficult to navigate and users had little insight into a professor’s full academic profile beyond basic directory-style information.
+          <span class="inter-light fs-3 mb-3">A<span class="inter-med">useful tool</span> in need of modernization.</span>
+          <p class="w-100 fs-5 inter-light">Prior to its redevelopment, Lincus already existed as a research discovery tool—but it had significant limitations. For example, the website was difficult to navigate and users had little insight into a professor's full academic profile beyond basic directory-style information.
           </p>
         </div>
 
@@ -438,7 +438,7 @@
               <span class="fs-2 lust-light mb-2">Problem</span>
                 <ul class="fs-5 inter-light mb-0">
                   <li>Difficult to navigate the site</li>
-                  <li>Limited insight into professors’ full research profiles</li>
+                  <li>Limited insight into professors' full research profiles</li>
                   <li>Expertise across departments was hard to discover</li>
                   <li>Fragmented access for students, faculty, and external users</li>
                 </ul>
@@ -461,7 +461,7 @@
           </div>
         </div>
 
-        <p class="fs-5 inter-light mb-0">These shortcomings limited Lincus’s usefulness for students, faculty, and external users alike. Without a reliable, centralized way to explore research expertise, the university lacked a scalable solution for surfacing the work happening across departments and disciplines. Recognizing this need, i3 identified Lincus as a high-impact opportunity to improve research visibility and knowledge discovery across UConn. They aimed to rebuild Lincus to match new development standards, take advantage of new data sources, and align it to university sustainability goals.
+        <p class="fs-5 inter-light mb-0">These shortcomings limited Lincus's usefulness for students, faculty, and external users alike. Without a reliable, centralized way to explore research expertise, the University lacked a scalable solution for surfacing the work happening across departments and disciplines. Recognizing this need, i3 identified Lincus as a high-impact opportunity to improve research visibility and knowledge discovery across UConn. They aimed to rebuild Lincus to match new development standards, take advantage of new data sources, and align it to University sustainability goals.
         </p>
       </div>
     </div>
@@ -479,7 +479,7 @@
       <div class="row">
         <span class="inter-light fs-3 mb-3">A <span class="inter-med">centralized</span>, living source of academic expertise.</span>
         <p class="w-100 fs-5 inter-light">
-          Under i3’s leadership, the new version of Lincus was designed to be both technically sustainable and institutionally integrated. This approach aligns with i3’s broader mission: building internal tools that reduce duplication, improve data quality, and make institutional knowledge more accessible. Lincus not only serves students and external audiences searching for experts—it also provides a clear incentive for faculty to keep their Interfolio records accurate, knowing that this information feeds directly into a public-facing platform. 
+          Under i3's leadership, the new version of Lincus was designed to be both technically sustainable and institutionally integrated. This approach aligns with i3's broader mission: building internal tools that reduce duplication, improve data quality, and make institutional knowledge more accessible. Lincus not only serves students and external audiences searching for experts—it also provides a clear incentive for faculty to keep their Interfolio records accurate, knowing that this information feeds directly into a public-facing platform. 
         </p>
       </div>
       <div class="row mt-3 pt-xl-5 mb-0 mb-xxl-4 pb-0 pb-xxl-4 justify-content-start position-relative vision-stage
@@ -640,7 +640,7 @@
       <div class="container build-head my-4 pt-4 ">
         <span class="text-start inter-light fs-5 pt-4">06 The Build</span>
         <div class="row">
-          <span class="inter-light fs-3 mb-3">A demonstration of technical scale and <span class="inter-med">institutional</span> complexity.</span>
+          <span class="inter-light fs-3 mb-3">An <span class="inter-med">iterative approach.</span> </span>
         </div>
                   <p class="fs-5 inter-light mb-0">
 As the sole developer on the project, Maggie worked closely within the i3 ecosystem to translate this vision into a functional system. Over the course of a year, she designed the database architecture, built complex data relationships, and managed the integration of more than 120,000 research contributions including publications, grants, and records.
@@ -654,7 +654,7 @@ As the sole developer on the project, Maggie worked closely within the i3 ecosys
         <div class="col-lg-6 d-flex align-items-center justify-content-center">
           <div class="container mt-lg-0 mt-5 mb-lg-5">
           <p class="fs-5 inter-light mb-0">
-Lincus was built using the <a href="https://laravel.com/" target="_blank">Laravel framework</a>, which has become a core part of i3’s development approach. Laravel allows the team to move quickly from concept to working software while maintaining a clean, maintainable codebase. Its strong conventions and approachable learning curve make it well suited to a university environment where students and new developers can quickly contribute to real projects.
+Lincus was built using the <a class="" href="https://laravel.com/" target="_blank"><span class="inter-med yellow-shadow">Laravel Framework</span></a>, which has become a core part of i3's development approach. Laravel allows the team to move quickly from concept to working software while maintaining a clean, maintainable codebase. Its strong conventions and approachable learning curve make it well suited to a university environment where students and new developers can quickly contribute to real projects.
 
           </p>
           </div>
@@ -666,7 +666,7 @@ Lincus was built using the <a href="https://laravel.com/" target="_blank">Larave
           <div class="col-lg-5 d-flex align-items-center justify-content-start">
             <p class="fs-5 inter-light mb-lg-0 mb-4">
               <br />
-              For i3, Laravel enables rapid development of internal tools that integrate institutional data and evolve alongside the university’s needs. Lincus demonstrates how modern open-source technology and focused internal development can transform legacy systems into sustainable institutional infrastructure.
+              For i3, Laravel enables rapid development of internal tools that integrate institutional data and evolve alongside the University's needs. Lincus demonstrates how modern open-source technology and focused internal development can transform legacy systems into sustainable institutional infrastructure.
             </p>
         </div>
           <div class="col-lg-7">
@@ -706,13 +706,13 @@ Lincus was built using the <a href="https://laravel.com/" target="_blank">Larave
         <div class="row">
           <span class="inter-light fs-3 mb-3">A <span class="inter-med">centralized</span>, living source of academic expertise.</span>
           <p class="w-100 fs-5 inter-light">
-            Lincus provides more than search functionality—it reveals the research ecosystem of the university.
+            Lincus provides more than search functionality—it reveals the research ecosystem of the University.
             Users can explore faculty collaboration networks, discover connections, and gain a fuller picture of
             academic work that often remains invisible outside of publications or individual departments.
             <br />
             <br />
             For i3, Lincus represents a scalable model for institutional tools:
-            systems that serve multiple audiences, rely on authoritative internal data, and evolve alongside the university.
+            systems that serve multiple audiences, rely on authoritative internal data, and evolve alongside the University.
             By investing in internal development talent and modern infrastructure, i3 is helping UConn better showcase its
             expertise—both internally and to the broader public.
           </p>
@@ -1094,7 +1094,7 @@ Lincus was built using the <a href="https://laravel.com/" target="_blank">Larave
       <div class="row mb-2">
         <p class="w-100 fs-3 inter-light">
           With Lincus, i3 has laid the foundation for
-          a <span class="inter-med">long-term research discovery platform </span> that reflects the university as it exists today, not as it existed years ago.
+          a <span class="inter-med">long-term research discovery platform </span> that reflects the University as it exists today, not as it existed years ago.
         </p>
       </div>
       <!-- hide for  now
@@ -1175,7 +1175,7 @@ Lincus was built using the <a href="https://laravel.com/" target="_blank">Larave
             The project demonstrates how thoughtful innovation—paired with strong technical execution—can transform underused systems into essential institutional resources.
             <br />
             <br />
-            As Lincus continues to grow, it stands as a case study in how i3 supports the university by turning complex data into accessible insight, strengthening connections across campus, and making UConn’s research more visible to everyone who needs it.
+            As Lincus continues to grow, it stands as a case study in how i3 supports the University by turning complex data into accessible insight, strengthening connections across campus, and making UConn's research more visible to everyone who needs it.
           </p>
 
 
