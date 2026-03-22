@@ -1131,6 +1131,39 @@ span.tab-3 {
   background: #4A8DAF;
 }
 
+/* Mobile: disable autoscroll, enable regular horizontal scroll */
+@media (max-width: 768px) {
+  .testimonials-control-btn {
+    display: none;
+  }
+
+  .testimonies-row-1 {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    display: flex;
+    gap: 15px;
+    padding: 0 16px;
+  }
+
+  .testimony-card-abs {
+    position: relative;
+    top: auto;
+    left: auto;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    transform: none !important;
+    height: auto;
+    min-height: 200px;
+  }
+
+  .testimony-card {
+    max-width: 320px;
+    width: 85vw;
+  }
+}
+
 .testimony-card {
   border-bottom:5px solid #F8B81D;
 }

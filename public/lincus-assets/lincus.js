@@ -560,7 +560,7 @@ const testimonies = [
   {
     quote: '“Without Lincus, I would have to manually search individual department websites and faculty pages to piece together expertise areas, a time‑consuming and far less efficient process. Lincus streamlines all of that into one reliable tool.”',
     name: 'Kaylei Arcangel',
-    title: 'Limited Submission Coordinator,OVPR'
+    title: 'Limited Submission Coordinator, OVPR'
   }
   ,
   {
@@ -587,6 +587,11 @@ let updateTestimonies = true;
 let cardDivs1 = [];
 // total width of one full pass (recomputed on resize)
 let seamlessWidth = 0;
+
+// Mobile: use regular scroll instead of autoscroll
+function isMobileTestimonials() {
+  return window.innerWidth <= 768;
+}
 
 function createTestimonyCard(testimony) {
   const wrap = document.createElement('div');
@@ -636,7 +641,13 @@ function buildTestimonies() {
     cardDivs1.push(card);
   }
 
-  // measure card width and determine how many cards we need to cover the
+  // Mobile: single set of cards, no duplication (CSS handles scroll)
+  if (isMobileTestimonials()) {
+    seamlessWidth = 0;
+    return;
+  }
+
+  // Desktop: measure card width and determine how many cards we need to cover the
   // container plus some extra so the animation never runs out of items.
   const cardWidth = getTestimonyCardWidth();
   if (!cardWidth) return;
@@ -644,9 +655,6 @@ function buildTestimonies() {
 
   const containerWidth = testimoniesRow1.offsetWidth || window.innerWidth;
   let neededCards = Math.ceil((containerWidth + window.innerWidth) / step) + 1;
-  if(window.innerWidth < 450) {
-    neededCards = 4
-  }
   const passesNeeded = Math.ceil(neededCards / row1Tests.length);
 
   // add additional passes as required
@@ -668,6 +676,9 @@ function getTestimonyCardWidth() {
 }
 
 function positionTestimonyCards() {
+  // Mobile: CSS flexbox handles positioning
+  if (isMobileTestimonials()) return;
+
   const testimonyCardWidth = getTestimonyCardWidth();
   if (!testimonyCardWidth) return;
 
@@ -679,6 +690,12 @@ function positionTestimonyCards() {
 }
 
 function animateTestimonies() {
+  // Mobile: no autoscroll animation
+  if (isMobileTestimonials()) {
+    testimonyAnimating = false;
+    return;
+  }
+
   if (!updateTestimonies) {
     testimonyAnimating = false;
     return;
