@@ -573,7 +573,7 @@ faculty expertise and research at UConn.')
           <span class="inter-light fs-3 mb-3">A <span class="inter-med">useful tool</span> in need of
             modernization.</span>
           <p class="w-100 fs-5 inter-light">Prior to its redevelopment, Lincus already existed as a research discovery
-            tool—but it had significant limitations. For example, the website was difficult to navigate and users had
+            tool, but it had significant limitations. For example, the website was difficult to navigate and users had
             little insight into a professor's full academic profile beyond basic directory-style information.
           </p>
         </div>
@@ -847,7 +847,7 @@ faculty expertise and research at UConn.')
         <div class="row">
           <span class="inter-light fs-3 mb-3">Connecting <span class="inter-med">people, topics, and research</span>.</span>
           <p class="w-100 fs-5 inter-light">
-            Lincus provides more than search functionality—it reveals the research ecosystem of the University.
+            With its robust search engine and faculty profiles, it reveals the research ecosystem of the University.
             Users can explore faculty collaboration networks, discover connections, and gain a fuller picture of
             academic work that often remains invisible outside of publications or individual departments.
             <br />
@@ -857,7 +857,7 @@ faculty expertise and research at UConn.')
             University.
             By investing in internal development talent and modern infrastructure, i3 is helping UConn better showcase
             its
-            expertise—both internally and to the broader public.
+            expertise both internally and to the broader public.
           </p>
         </div>
         <!-- hide for now
@@ -1392,7 +1392,7 @@ faculty expertise and research at UConn.')
       <div class="row">
         <div class="col-12">
           <p class="mb-4 inter-light fs-5">
-            The project demonstrates how thoughtful innovation—paired with strong technical execution—can transform
+            The project demonstrates how thoughtful innovation, paired with strong technical execution, can transform
             underused systems into essential institutional resources.
             <br />
             <br />
