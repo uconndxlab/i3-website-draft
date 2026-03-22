@@ -402,9 +402,22 @@ if(window.innerWidth > 768) {
   bubbleObserver.observe(bubble)
 
   const processCards = Array.from(document.querySelectorAll('.process-card'));
+  const requiresArrowTap = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
   processCards.forEach(card => {
-    // Handle mouse/touch interactions
-    card.addEventListener('pointerdown', () => toggleCard(card));
+    // Touch devices: flip only from the arrow tap to avoid scroll hijacking.
+    card.addEventListener('pointerdown', (e) => {
+      if (requiresArrowTap()) {
+        const tappedArrow = Boolean(e.target.closest('.card-arrow, .arrow-bg'));
+        const isFlipped = card.classList.contains('flipped');
+
+        if (!tappedArrow && !isFlipped) {
+          return;
+        }
+      }
+
+      toggleCard(card);
+    });
 
     // Handle keyboard interactions (Enter and Space)
     card.addEventListener('keydown', (e) => {

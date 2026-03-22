@@ -387,6 +387,17 @@ svg .shown {
   transition: background-color 0.5s ease;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .process-card {
+    cursor: default;
+  }
+
+  .process-card .card-arrow,
+  .process-card .arrow-bg {
+    cursor: pointer;
+  }
+}
+
 /* Content layout */
 .process-content {
   margin-top: auto;
