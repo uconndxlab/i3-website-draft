@@ -80,6 +80,7 @@ faculty expertise and research at UConn.')
           Finding the <span class="inter-med">right expert</span> at a large research university can be harder than it
           should be. While faculty webpages provide basic information, they rarely capture the depth of a scholar's work
           or the <span class="inter-med">connections</span> that shape <span class="inter-med">academic research.</span>
+          This is the story of how an i3 student developer took a great idea and turned it into a powerful tool for the UConn community.
         </p>
       </div>
 
@@ -308,7 +309,7 @@ faculty expertise and research at UConn.')
           discovery platform, i3 relaunched Lincus as part of a broader effort to make faculty expertise across the
           University more visible, searchable, and up to date. As part of this initiative, i3 hired <a target="_blank"
             href="https://www.linkedin.com/in/magdalena-danielewicz"><span class="yellow-shadow-sm">Maggie
-              Danielewicz</span></a>, a senior computer science student, to serve as the project's lead developer and
+              Danielewicz</span></a> '26 (ENG), a senior computer science student, to serve as the project's lead developer and
           rebuild Lincus for long-term use by the UConn community.
         </p>
       </div>
