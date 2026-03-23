@@ -291,7 +291,7 @@ faculty expertise and research at UConn.')
       <span class="text-start inter-light fs-5">02 Origins</span>
       <div class="row mb-2">
         <p class="w-100 fs-3 inter-light">
-          Reimagining <span class="inter-med">Research Discovery</span> at UConn with Lincus.</p>
+          Reimagining <span class="inter-med">research discovery</span> at UConn with Lincus.</p>
       </div>
       <div class="row">
         <p class="w-100 fs-5 inter-light mb-2">The concept behind <a target="_blank"
@@ -309,7 +309,7 @@ faculty expertise and research at UConn.')
           discovery platform, i3 relaunched Lincus as part of a broader effort to make faculty expertise across the
           University more visible, searchable, and up to date. As part of this initiative, i3 hired <a target="_blank"
             href="https://www.linkedin.com/in/magdalena-danielewicz"><span class="yellow-shadow-sm">Maggie
-              Danielewicz</span></a> '26 (ENG), a senior computer science student, to serve as the project's lead developer and
+              Danielewicz '26 (ENG)</span></a>, a senior computer science student, to serve as the project's lead developer and
           rebuild Lincus for long-term use by the UConn community.
         </p>
       </div>
