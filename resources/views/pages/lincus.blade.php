@@ -297,7 +297,7 @@ faculty expertise and research at UConn.')
         <p class="w-100 fs-5 inter-light mb-2">The concept behind <a target="_blank"
             href="https://lincus.uconn.edu/"><span class="yellow-shadow-sm">Lincus</span></a> originated with <a
             target="_blank" href="https://www.linkedin.com/in/dschwartz24"><span class="yellow-shadow-sm">Dan
-              Schwartz</span></a> now UConn's Vice Provost for Academic Operations, who developed the original platform with undergraduate students in his lab in 2013.
+              Schwartz</span></a>, now UConn's Vice Provost for Academic Operations, who developed the original platform with undergraduate students in his lab in 2013.
           The early version of Lincus gained significant traction at the University of Connecticut, reaching more than
           4,000 student, faculty, and staff users. The platform was later spun out as a company and adopted by several
           Ivy League institutions on an annual contract basis. The company is no longer active, and the intellectual
