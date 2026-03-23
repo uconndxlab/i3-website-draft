@@ -1440,7 +1440,7 @@ faculty expertise and research at UConn.')
               and student research grow — is an opportunity I will always value.
             </p>
 
-            <p class=" mb-0 lust-light">Maggie, 2026</p>
+            <p class=" mb-0 lust-light">Maggie Danielewicz '26 (ENG), Lead Developer on the Lincus project</p>
           </div>
         </div>
 
