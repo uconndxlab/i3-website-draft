@@ -80,7 +80,7 @@ faculty expertise and research at UConn.')
           Finding the <span class="inter-med">right expert</span> at a large research university can be harder than it
           should be. While faculty webpages provide basic information, they rarely capture the depth of a scholar's work
           or the <span class="inter-med">connections</span> that shape <span class="inter-med">academic research.</span>
-          This is the story of how an i3 student developer took a great idea and turned it into a powerful, reimagined new platform.
+          This is the story of how a student developer took a great idea and turned it into a powerful, reimagined new platform.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ faculty expertise and research at UConn.')
             <div class="stat d-flex flex-column ms-3">
               <div class="contribution-odometer odometer-auto-theme"
                 style="font-size: 30px; font-weight: bold; display: inline-block;">0</div>
-              <span class="fs-6 lust-light stat-label">Contributions</span>
+              <span class="fs-6 lust-light stat-label">Scholarly Contributions</span>
             </div>
             <!-- Contributions icon -->
             <svg width="183" height="155" viewBox="0 0 183 155" class="icon" xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +176,7 @@ faculty expertise and research at UConn.')
             <div class="stat d-flex flex-column ms-3">
               <div class="faculty-odometer odometer-auto-theme"
                 style="font-size: 30px; font-weight: bold; display: inline-block;">0</div>
-              <span class="fs-6 lust-light stat-label">Faculty</span>
+              <span class="fs-6 lust-light stat-label">Faculty Profiles</span>
             </div>
             <!-- Faculty icon -->
             <svg width="179" height="156" viewBox="0 0 179 156" fill="none" class="icon align-self-end overflow-hidden"
@@ -297,7 +297,7 @@ faculty expertise and research at UConn.')
         <p class="w-100 fs-5 inter-light mb-2">The concept behind <a target="_blank"
             href="https://lincus.uconn.edu/"><span class="yellow-shadow-sm">Lincus</span></a> originated with <a
             target="_blank" href="https://www.linkedin.com/in/dschwartz24"><span class="yellow-shadow-sm">Dan
-              Schwartz</span></a>, who developed the original platform with undergraduate students in his lab in 2013.
+              Schwartz</span></a> now UConn's Vice Provost for Academic Operations, who developed the original platform with undergraduate students in his lab in 2013.
           The early version of Lincus gained significant traction at the University of Connecticut, reaching more than
           4,000 student, faculty, and staff users. The platform was later spun out as a company and adopted by several
           Ivy League institutions on an annual contract basis. The company is no longer active, and the intellectual
