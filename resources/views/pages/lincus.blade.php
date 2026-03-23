@@ -289,8 +289,8 @@ faculty expertise and research at UConn.')
   <section id="origins">
     <div class="container mt-5">
       <span class="text-start inter-light fs-5">02 Origins</span>
-      <div class="row mb-2">
-        <p class="w-100 fs-3 inter-light">
+      <div class="row">
+        <p class="w-100 fs-3 inter-light mb-3">
           Reimagining <span class="inter-med">research discovery</span> at UConn with Lincus.</p>
       </div>
       <div class="row">
@@ -1311,8 +1311,8 @@ faculty expertise and research at UConn.')
   <section id="looking-ahead">
     <div class="container looking-ahead pt-5 mt-4" style="min-height: 1000px">
       <span class="text-start inter-light fs-5">08 Looking Ahead</span>
-      <div class="row mb-2">
-        <p class="w-100 fs-3 inter-light">
+      <div class="row">
+        <p class="w-100 fs-3 inter-light mb-3">
           
           A <span class="inter-med">research discovery platform </span> built to evolve.
         </p>
