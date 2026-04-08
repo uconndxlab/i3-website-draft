@@ -392,7 +392,7 @@
                 </h1>
 
                 <div class="nl-subheading mb-4" data-aos="fade-up" data-aos-delay="50">
-                    We do <span class="highlight">(digital)</span> for <span class="blue">UConn</span>
+                    We do <span class="blue">(</span>digital<span class="blue">)</span> for <span class="blue">UConn</span>
                 </div>
 
                 <div class="row">
