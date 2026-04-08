@@ -706,7 +706,7 @@
             aria-label="Important announcement about i3 merger" aria-live="polite" style="display:none;">
             <div class="banner-header">
                 <div class="banner-icon" aria-hidden="true">
-                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                     <svg fill="#000000" width="800px" height="800px" viewBox="0 0 512 512"
                         xmlns="http://www.w3.org/2000/svg">
                         <title>git merge icon</title>

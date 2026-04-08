@@ -86,6 +86,21 @@ class PageController extends Controller
         return view('pages.beyond-nuremberg');
     }
 
+    public function newsletter() {
+        $alumni = TeamMember::where('tags', 'like', '%alumni%')
+            ->get()
+            ->sortBy(function ($person) {
+                $parts = explode(' ', $person->name);
+                return end($parts);
+            });
+
+        $spotlight = TeamMember::where('tags', 'like', '%senior-staff%')
+            ->inRandomOrder()
+            ->first();
+
+        return view('pages.newsletter', compact('alumni', 'spotlight'));
+    }
+
     public function blogs(Request $request) {
 
         // TODO: SHOW MORE POSTS button to get past the paginate 21
