@@ -140,7 +140,7 @@
                             <h3 class="h4 mb-3 border-bottom border-primary pb-2">To Apply</h3>
                             <p>
                                 Please send a cover letter, resume and list of three professional references 
-                                with contact information to <a href="mailto:sara.sikes@uconn.edu" class="text-info">sara.sikes@uconn.edu</a> (Ref #HR26-14)
+                                with contact information to <a href="mailto:i3@uconn.edu" class="text-info">i3@uconn.edu</a> (Ref #HR26-14)
                             </p>
                             <p>
                                 The review of applications will begin immediately and continue until the position is filled.
