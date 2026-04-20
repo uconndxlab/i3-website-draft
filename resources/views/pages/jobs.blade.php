@@ -30,10 +30,6 @@ We're hiring for 2026! i3 is a small, agile team building digital solutions that
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-code-slash display-5 mb-3 text-light"></i>
                             <h3 class="fw-bold mt-3 fs-4">Web Application Developer</h3>
-                            <p class="small text-light opacity-75 mb-2">
-                                <span class="badge bg-primary me-1">Hybrid</span>
-                                <span class="badge bg-secondary">$75,000 – $80,000</span>
-                            </p>
                             <p class="mb-4">
                                 Join a fast-paced, collaborative team building custom Laravel-based 
                                 web applications. Ideal for developers who enjoy working across projects, 
@@ -59,10 +55,6 @@ We're hiring for 2026! i3 is a small, agile team building digital solutions that
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-kanban display-5 mb-3 text-light"></i>
                             <h3 class="fw-bold mt-3 fs-4">Junior Digital Project Specialist</h3>
-                            <p class="small text-light opacity-75 mb-2">
-                                <span class="badge bg-primary me-1">Hybrid</span>
-                                <span class="badge bg-secondary">$60,000 – $70,000</span>
-                            </p>
                             <p class="mb-4">
                                 A versatile role combining WordPress development, project coordination, 
                                 QA testing, and digital support. Perfect for early-career professionals 
