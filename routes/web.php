@@ -36,6 +36,11 @@ Route::controller(PageController::class)->group(function () {
     })->name('beyond-nuremberg');
     
     Route::get('/lincus', 'lincus')->name('lincus');
+    
+    // Jobs routes
+    Route::get('/jobs', 'jobs')->name('jobs');
+    Route::get('/jobs/2026-web-application-developer', 'jobWebDev')->name('jobs.web-dev');
+    Route::get('/jobs/2026-junior-digital-project-specialist', 'jobProjectSpecialist')->name('jobs.project-specialist');
 });
 
 Route::resource('work', WorkController::class)->only(['index']);

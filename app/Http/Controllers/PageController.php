@@ -90,6 +90,18 @@ class PageController extends Controller
         return view('pages.lincus');
     }
 
+    public function jobs() {
+        return view('pages.jobs');
+    }
+
+    public function jobWebDev() {
+        return view('pages.jobs.2026-web-application-developer');
+    }
+
+    public function jobProjectSpecialist() {
+        return view('pages.jobs.2026-junior-digital-project-specialist');
+    }
+
     public function blogs(Request $request) {
 
         // TODO: SHOW MORE POSTS button to get past the paginate 21

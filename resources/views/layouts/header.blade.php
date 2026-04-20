@@ -92,16 +92,13 @@
                           </a>
                       </li>
                       
-                      @if(now()->gte('2025-09-03'))
                       <li class="nav-item ms-2">
-                          <a class="nav-link{{ request()->routeIs('merger') ? ' active' : '' }}" 
-                             href="{{ route('merger') }}"
-                             style="background: rgba(140, 201, 71, 0.1); border: 1px solid rgba(140, 201, 71, 0.3); border-radius: 6px; padding: 0.4rem 0.8rem;">
-                              <img src="{{ asset('img/i3/g-icon-white.png') }}" alt="GS" style="height: 28px; width: auto; margin-right: 6px;">
-                              <span style="color: #8CC947; font-weight: bold; font-size: 0.8em;">Big News! 👀</span>
+                          <a class="nav-link{{ request()->routeIs('jobs') || request()->routeIs('jobs.*') ? ' active' : '' }}" 
+                             href="{{ route('jobs') }}"
+                             style="background: rgba(36, 147, 225, 0.1); border: 1px solid rgba(36, 147, 225, 0.3); border-radius: 6px; padding: 0.4rem 0.8rem;">
+                              <span style="color: #fff; font-weight: bold; font-size: 0.8em;">We're Hiring! 🎉</span>
                           </a>
                       </li>
-                      @endif
                   </ul>
               </div>
           </div>
