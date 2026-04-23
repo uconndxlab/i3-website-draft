@@ -247,6 +247,19 @@
 
                 <!-- Filter Controls -->
                 <div class="row g-3 mb-0">
+                    @php
+                        $allTeamMembers = collect($allProjects)
+                            ->pluck('team')
+                            ->filter()
+                            ->flatMap(function ($teamList) {
+                                return collect(explode(',', $teamList))
+                                    ->map(fn ($member) => trim(preg_replace('/\s+/', ' ', $member) ?? ''))
+                                    ->filter();
+                            })
+                            ->unique()
+                            ->sort(SORT_NATURAL | SORT_FLAG_CASE)
+                            ->values();
+                    @endphp
                     <div class="col-12 col-lg-4">
                         <div class="form-group">
                             <label for="status-filter" class="form-label">Filter by Status</label>
@@ -273,6 +286,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="form-group">
+                            <label for="team-filter" class="form-label">Filter by Team Member</label>
+                            <select id="team-filter" class="form-select">
+                                <option value="">All Team Members</option>
+                                @foreach($allTeamMembers as $member)
+                                    <option value="{{ $member }}">{{ $member }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -284,11 +308,12 @@
                             <th style="cursor: pointer;" class="sortable" data-sort="name">Project Name ⬍</th>
                             <th style="cursor: pointer;" class="sortable" data-sort="status">Status ⬍</th>
                             <th style="cursor: pointer;" class="sortable" data-sort="department">Department ⬍</th>
+                            <th style="cursor: pointer;" class="sortable" data-sort="team">Team ⬍</th>
                         </tr>
                     </thead>
                     <tbody id="projects-tbody">
                         @forelse(collect($allProjects)->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE) as $project)
-                            <tr class="project-row" data-status="{{ $project['status'] }}" data-department="{{ $project['department'] }}" data-client="{{ $project['client'] }}" data-category="{{ $project['is_grant'] ? 'research-enablement' : 'institutional-efficiencies' }}">
+                            <tr class="project-row" data-status="{{ $project['status'] }}" data-department="{{ $project['department'] }}" data-client="{{ $project['client'] }}" data-team="{{ $project['team'] }}" data-category="{{ $project['is_grant'] ? 'research-enablement' : 'institutional-efficiencies' }}">
                                 <td class="project-name">{{ $project['name'] }}</td>
                                 <td>
                                     <span class="badge status-badge status-{{ Str::slug($project['status']) }}">
@@ -296,10 +321,11 @@
                                     </span>
                                 </td>
                                 <td class="text-muted">{{ $project['department'] ?: '—' }}</td>
+                                <td class="text-muted">{{ $project['team'] ?: '—' }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center text-muted py-4">No projects found.</td>
+                                <td colspan="4" class="text-center text-muted py-4">No projects found.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -987,6 +1013,7 @@
             const projectsSection = document.getElementById('projects-section');
             const statusFilter = document.getElementById('status-filter');
             const deptFilter = document.getElementById('department-filter');
+            const teamFilter = document.getElementById('team-filter');
             const clientFilter = document.getElementById('client-filter');
             const tbody = document.getElementById('projects-tbody');
             const rows = document.querySelectorAll('.project-row');
@@ -1037,6 +1064,10 @@
                         clientFilter.value = '';
                     }
 
+                    if (teamFilter) {
+                        teamFilter.value = '';
+                    }
+
                     applyFilters();
 
                     if (projectsSection) {
@@ -1048,6 +1079,7 @@
             function applyFilters() {
                 const selectedStatus = statusFilter.value.toLowerCase();
                 const selectedDept = (deptFilter.value || forcedDepartment || '').trim();
+                const selectedTeamMember = (teamFilter?.value || '').trim().toLowerCase();
                 //const selectedClient = clientFilter.value;
 
                 rows.forEach(row => {
@@ -1055,13 +1087,18 @@
                     const rowStatus = row.dataset.status.toLowerCase();
                     const rowDept = (row.dataset.department || '').trim();
                     const rowClient = row.dataset.client;
+                    const rowTeamMembers = (row.dataset.team || '')
+                        .split(',')
+                        .map(member => member.trim().toLowerCase())
+                        .filter(Boolean);
 
                     const categoryMatch = !selectedCategory || rowCategory === selectedCategory;
                     const statusMatch = !selectedStatus || rowStatus === selectedStatus;
                     const deptMatch = !selectedDept || rowDept.toLowerCase() === selectedDept.toLowerCase();
+                    const teamMatch = !selectedTeamMember || rowTeamMembers.includes(selectedTeamMember);
                     //const clientMatch = !selectedClient || rowClient === selectedClient;
 
-                    row.style.display = categoryMatch && statusMatch && deptMatch ? '' : 'none';
+                    row.style.display = categoryMatch && statusMatch && deptMatch && teamMatch ? '' : 'none';
                 });
             }
 
@@ -1070,6 +1107,9 @@
                 forcedDepartment = '';
                 applyFilters();
             });
+            if (teamFilter) {
+                teamFilter.addEventListener('change', applyFilters);
+            }
             //clientFilter.addEventListener('change', applyFilters);
 
             // Sort functionality
@@ -1099,6 +1139,9 @@
                         } else if (sortKey === 'department') {
                             aVal = a.dataset.department.toLowerCase();
                             bVal = b.dataset.department.toLowerCase();
+                        } else if (sortKey === 'team') {
+                            aVal = (a.dataset.team || '').toLowerCase();
+                            bVal = (b.dataset.team || '').toLowerCase();
                         }
 
                         return isAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
