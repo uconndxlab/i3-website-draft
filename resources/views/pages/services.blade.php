@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tools')
+@section('title', 'Services')
 @section('meta_description', 'Explore our diverse portfolio of web design, web development, and UX design projects at
     i3. See how we create innovative digital solutions for the UConn community.')
 
