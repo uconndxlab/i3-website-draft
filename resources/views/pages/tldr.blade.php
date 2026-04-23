@@ -287,7 +287,7 @@
                         </tr>
                     </thead>
                     <tbody id="projects-tbody">
-                        @forelse($allProjects as $project)
+                        @forelse(collect($allProjects)->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE) as $project)
                             <tr class="project-row" data-status="{{ $project['status'] }}" data-department="{{ $project['department'] }}" data-client="{{ $project['client'] }}" data-category="{{ $project['is_grant'] ? 'research-enablement' : 'institutional-efficiencies' }}">
                                 <td class="project-name">{{ $project['name'] }}</td>
                                 <td>
