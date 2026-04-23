@@ -224,6 +224,14 @@
             </div>
 
             <div class="tldr-filter-panel" data-aos="fade-up">
+                <div class="tldr-results-wrap mb-3">
+                    <div id="results-count" class="tldr-results-chip" aria-live="polite">
+                        <span class="tldr-results-kicker">Showing</span>
+                        <span class="tldr-results-value">{{ count($allProjects) }}</span>
+                        <span class="tldr-results-total">of {{ count($allProjects) }} projects</span>
+                    </div>
+                </div>
+
                 <!-- Category Filter Buttons -->
                 <div class="row mb-3">
                     <div class="col-12">
@@ -685,6 +693,48 @@
             margin-bottom: 1.5rem;
         }
 
+        .tldr-results-wrap {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .tldr-results-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(126, 199, 255, 0.28), rgba(126, 199, 255, 0) 42%),
+                linear-gradient(130deg, #0e1a2b 0%, #17314d 100%);
+            border: 1px solid rgba(126, 199, 255, 0.35);
+            box-shadow: 0 12px 24px rgba(8, 22, 38, 0.24);
+        }
+
+        .tldr-results-kicker {
+            font-family: "Proxima Nova", Arial, Helvetica, sans-serif;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.88;
+        }
+
+        .tldr-results-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
+            text-shadow: 0 0 12px rgba(126, 199, 255, 0.32);
+        }
+
+        .tldr-results-total {
+            font-family: "Proxima Nova", Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            opacity: 0.88;
+        }
+
         .form-label {
             font-family: "Proxima Nova", Arial, Helvetica, sans-serif;
             font-size: 0.78rem;
@@ -847,6 +897,10 @@
         @media (max-width: 991px) {
             .tldr-filter-panel {
                 padding: 1rem;
+            }
+
+            .tldr-results-wrap {
+                justify-content: flex-start;
             }
         }
 
@@ -1015,11 +1069,27 @@
             const deptFilter = document.getElementById('department-filter');
             const teamFilter = document.getElementById('team-filter');
             const clientFilter = document.getElementById('client-filter');
+            const resultsCount = document.getElementById('results-count');
             const tbody = document.getElementById('projects-tbody');
             const rows = document.querySelectorAll('.project-row');
             const sortables = document.querySelectorAll('.sortable');
             let selectedCategory = '';
             let forcedDepartment = '';
+
+            function updateResultCount() {
+                if (!resultsCount) {
+                    return;
+                }
+
+                const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
+                const totalRows = rows.length;
+
+                resultsCount.innerHTML = `
+                    <span class="tldr-results-kicker">Showing</span>
+                    <span class="tldr-results-value">${visibleRows}</span>
+                    <span class="tldr-results-total">of ${totalRows} projects</span>
+                `;
+            }
 
             categoryBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1100,6 +1170,8 @@
 
                     row.style.display = categoryMatch && statusMatch && deptMatch && teamMatch ? '' : 'none';
                 });
+
+                updateResultCount();
             }
 
             statusFilter.addEventListener('change', applyFilters);
@@ -1150,8 +1222,11 @@
                     // Clear and repopulate tbody
                     tbody.innerHTML = '';
                     sortedRows.forEach(row => tbody.appendChild(row));
+                    updateResultCount();
                 });
             });
+
+            updateResultCount();
         });
     </script>
 @endsection
