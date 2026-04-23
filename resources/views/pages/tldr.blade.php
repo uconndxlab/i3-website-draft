@@ -8,6 +8,7 @@
         $teamMembers = \App\Models\TeamMember::where(function ($query) {
             $query->whereNull('tags')->orWhere('tags', 'not like', '%alumni%');
         })->get();
+        $projectScrollerItems = \App\Models\WorkItem::all();
     @endphp
 
     <h1 class="page-h1">TLDR</h1>
@@ -146,6 +147,22 @@
 
     <!-- Departments Section -->
     <section class="tldr-departments py-5 px-3 px-md-5 bg-dark text-light">
+        <div id="tldrDepartmentsProjectScrollerContainer"
+            class="tldr-departments-project-scroller"
+            style="visibility: hidden;"
+            aria-hidden="true"
+            role="presentation">
+            <div class="mobile-scaledown">
+                <div id="tldrDepartmentsProjectScroller">
+                    @foreach ($projectScrollerItems as $item)
+                        <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->best_thumbnail_url }}">
+                            <img src="{{ $item->best_thumbnail_url }}" alt="" role="presentation">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         <div class="container py-md-5">
             <div class="row justify-content-center">
                 <div class="col-xl-10 text-center">
@@ -483,6 +500,26 @@
         .tldr-departments {
             background:
                 linear-gradient(180deg, #08111c 0%, #0e1a2b 100%);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .tldr-departments-project-scroller {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .tldr-departments .container {
+            position: relative;
+            z-index: 2;
         }
 
         .dept-count-badge {
@@ -838,6 +875,8 @@
             const teamScrollerContainer2 = document.getElementById('tldrTeamScrollerContainer2');
             const teamScroller1Element = document.getElementById('tldrTeamScroller1');
             const teamScroller2Element = document.getElementById('tldrTeamScroller2');
+            const departmentsProjectScrollerContainer = document.getElementById('tldrDepartmentsProjectScrollerContainer');
+            const departmentsProjectScroller = document.getElementById('tldrDepartmentsProjectScroller');
 
             if (teamScrollerContainer1 && teamScrollerContainer2 && teamScroller1Element && teamScroller2Element && window.createPhotoScroller) {
                 if (!prefersReducedMotion) {
@@ -870,6 +909,26 @@
                 } else {
                     teamScrollerContainer1.style.display = 'none';
                     teamScrollerContainer2.style.display = 'none';
+                }
+            }
+
+            if (departmentsProjectScrollerContainer && departmentsProjectScroller && window.createPhotoScroller) {
+                if (!prefersReducedMotion) {
+                    window.createPhotoScroller({
+                        selector: '#tldrDepartmentsProjectScroller',
+                        rows: 2,
+                        aspectRatio: 16 / 9,
+                        speed: 20,
+                        maxImageWidth: 400,
+                        gap: 70,
+                        rowGap: 100,
+                        direction: -10,
+                        imageClass: 'photo-scroller-image',
+                        wrapperClass: 'photo-box-effect'
+                    });
+                    departmentsProjectScrollerContainer.style.visibility = '';
+                } else {
+                    departmentsProjectScrollerContainer.style.display = 'none';
                 }
             }
 
