@@ -87,8 +87,8 @@
                             </div>
                             <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="240">
                                 <article class="tldr-glance-card">
-                                    <p class="tldr-glance-value">$2M+</p>
-                                    <p class="tldr-glance-label">Grant-Supported Portfolio Impact</p>
+                                    <p class="tldr-glance-value">$15M+</p>
+                                    <p class="tldr-glance-label">In Affiliated Grant Value</p>
                                 </article>
                             </div>
                         </div>
