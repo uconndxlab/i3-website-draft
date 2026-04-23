@@ -872,6 +872,40 @@
             #projects-table th {
                 padding: 0.8rem 0.65rem;
             }
+
+            .tldr-departments h2,
+            .tldr-projects h2 {
+                position: relative;
+                display: inline-block;
+                padding-bottom: 1rem !important;
+            }
+
+            .tldr-departments h2 > .border-bottom,
+            .tldr-projects h2 > .border-bottom {
+                border-bottom: 0 !important;
+                padding-bottom: 0 !important;
+                display: inline-flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 0.35rem 0.5rem;
+            }
+
+            .tldr-departments h2::after,
+            .tldr-projects h2::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 2px;
+                background: var(--bs-primary);
+            }
+
+            .tldr-departments h2 .dept-count-badge,
+            .tldr-projects h2 .dept-count-badge {
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 575px) {
