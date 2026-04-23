@@ -172,15 +172,19 @@
                 <!-- Category Filter Buttons -->
                 <div class="row mb-3">
                     <div class="col-12">
+                        @php
+                            $researchCount = collect($allProjects)->where('is_grant', true)->count();
+                            $institutionalCount = collect($allProjects)->where('is_grant', false)->count();
+                        @endphp
                         <div class="category-buttons-group">
                             <button class="category-btn" data-category="">
                                 All Projects
                             </button>
                             <button class="category-btn" data-category="research-enablement">
-                                Research Enablement
+                                Research Enablement <span class="dept-count-badge">{{ $researchCount }}</span>
                             </button>
                             <button class="category-btn" data-category="institutional-efficiencies">
-                                Institutional Efficiencies
+                                Institutional Efficiencies <span class="dept-count-badge">{{ $institutionalCount }}</span>
                             </button>
                         </div>
                     </div>
@@ -426,7 +430,7 @@
             place-items: center;
             background: #fff;
             color: #000;
-            width: 1.7em;
+            min-width: 1.7em;
             height: 1.7em;
             border-radius: 5px;
             margin-left: 0.6em;
@@ -434,7 +438,7 @@
             font-size: 0.64em;
             font-weight: 800;
             line-height: 1;
-            padding: 0;
+            padding: 0 0.5em;
             font-family: "Proxima Nova", Arial, Helvetica, sans-serif;
             font-variant-numeric: tabular-nums;
         }
@@ -599,6 +603,11 @@
             border-color: #0e1a2b;
             color: #fff;
             box-shadow: 0 10px 24px rgba(14, 26, 43, 0.16);
+        }
+
+        .category-btn.active .dept-count-badge {
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
         }
 
         .tldr-table-shell {
@@ -796,7 +805,7 @@
             function applyFilters() {
                 const selectedStatus = statusFilter.value.toLowerCase();
                 const selectedDept = deptFilter.value;
-                const selectedClient = clientFilter.value;
+                //const selectedClient = clientFilter.value;
 
                 rows.forEach(row => {
                     const rowCategory = row.dataset.category;
@@ -807,15 +816,15 @@
                     const categoryMatch = !selectedCategory || rowCategory === selectedCategory;
                     const statusMatch = !selectedStatus || rowStatus === selectedStatus;
                     const deptMatch = !selectedDept || rowDept === selectedDept;
-                    const clientMatch = !selectedClient || rowClient === selectedClient;
+                    //const clientMatch = !selectedClient || rowClient === selectedClient;
 
-                    row.style.display = categoryMatch && statusMatch && deptMatch && clientMatch ? '' : 'none';
+                    row.style.display = categoryMatch && statusMatch && deptMatch ? '' : 'none';
                 });
             }
 
             statusFilter.addEventListener('change', applyFilters);
             deptFilter.addEventListener('change', applyFilters);
-            clientFilter.addEventListener('change', applyFilters);
+            //clientFilter.addEventListener('change', applyFilters);
 
             // Sort functionality
             sortables.forEach(header => {
