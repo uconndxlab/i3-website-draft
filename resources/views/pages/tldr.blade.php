@@ -57,6 +57,13 @@
                 </div>
             </div>
             <div class="row justify-content-center mt-4">
+                <div class="col-xl-9 col-lg-10">
+                    <p class="tldr-whimsy-copy text-center mb-0" data-aos="fade-up" data-aos-delay="80">
+                        This is our TLDR page. TLDR means "Too Long, Didn't Read". It's the page we send when someone asks who we are, what we do, and who we do it for.
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-4">
                 <div class="col-xl-10">
                     <div class="mt-4" data-aos="fade-up" data-bs-theme="dark">
                         <div class="row g-4">
@@ -376,6 +383,15 @@
             color: rgba(255, 255, 255, 0.88);
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .tldr-whimsy-copy {
+            max-width: 58ch;
+            margin-inline: auto;
+            color: rgba(224, 241, 255, 0.9);
+            font-size: 1.03rem;
+            line-height: 1.75;
+            text-wrap: balance;
         }
 
         .tldr-glance-row {
