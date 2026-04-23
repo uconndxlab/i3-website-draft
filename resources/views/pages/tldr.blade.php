@@ -5,12 +5,43 @@
 @section('content')
     @php
         $allClients = collect($allProjects)->pluck('client')->filter()->unique()->sort()->values();
+        $teamMembers = \App\Models\TeamMember::where(function ($query) {
+            $query->whereNull('tags')->orWhere('tags', 'not like', '%alumni%');
+        })->get();
     @endphp
 
     <h1 class="page-h1">TLDR</h1>
 
     <!-- YouTube Hero -->
     <section class="tldr-hero" data-bs-theme="dark">
+        <div id="tldrTeamScrollerContainer1"
+            class="tldr-team-scroller-container tldr-team-scroller-container-left"
+            style="visibility: hidden;"
+            aria-hidden="true"
+            role="presentation">
+            <div class="mobile-scaledown">
+                <div id="tldrTeamScroller1">
+                    @foreach ($teamMembers as $member)
+                        <img src="{{ $member->best_image_url }}" alt="" role="presentation">
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div id="tldrTeamScrollerContainer2"
+            class="tldr-team-scroller-container tldr-team-scroller-container-right"
+            style="visibility: hidden;"
+            aria-hidden="true"
+            role="presentation">
+            <div class="mobile-scaledown">
+                <div id="tldrTeamScroller2">
+                    @foreach ($teamMembers->reverse() as $member)
+                        <img src="{{ $member->best_image_url }}" alt="" role="presentation">
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         <div class="container py-5">
             <div class="row align-items-center g-4">
                 <div class="col-lg-8 mx-auto">
@@ -261,6 +292,35 @@
                 linear-gradient(180deg, #05070c 0%, #0a1219 100%);
             padding-top: clamp(2.5rem, 7vh, 5rem);
             padding-bottom: clamp(3rem, 8vh, 5.5rem);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .tldr-team-scroller-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .tldr-team-scroller-container-left {
+            justify-content: flex-start;
+            padding-left: 15vw;
+        }
+
+        .tldr-team-scroller-container-right {
+            justify-content: flex-end;
+            padding-right: 15vw;
+        }
+
+        .tldr-hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .tldr-hero-copy {
@@ -769,9 +829,50 @@
     </style>
 
     @vite('resources/js/odometerAnimation.js')
+    @vite('resources/js/photoScroller.js')
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const teamScrollerContainer1 = document.getElementById('tldrTeamScrollerContainer1');
+            const teamScrollerContainer2 = document.getElementById('tldrTeamScrollerContainer2');
+            const teamScroller1Element = document.getElementById('tldrTeamScroller1');
+            const teamScroller2Element = document.getElementById('tldrTeamScroller2');
+
+            if (teamScrollerContainer1 && teamScrollerContainer2 && teamScroller1Element && teamScroller2Element && window.createPhotoScroller) {
+                if (!prefersReducedMotion) {
+                    window.createPhotoScroller({
+                        selector: '#tldrTeamScroller1',
+                        rows: 1,
+                        aspectRatio: 1.5 / 1,
+                        speed: 50,
+                        gap: 70,
+                        rowGap: 100,
+                        maxImageWidth: 200,
+                        direction: 85,
+                        imageClass: 'photo-scroller-image',
+                        wrapperClass: 'photo-box-effect'
+                    });
+                    teamScrollerContainer1.style.visibility = '';
+
+                    window.createPhotoScroller({
+                        selector: '#tldrTeamScroller2',
+                        rows: 1,
+                        aspectRatio: 1.5 / 1,
+                        speed: 50,
+                        gap: 70,
+                        maxImageWidth: 200,
+                        direction: -85,
+                        imageClass: 'photo-scroller-image',
+                        wrapperClass: 'photo-box-effect'
+                    });
+                    teamScrollerContainer2.style.visibility = '';
+                } else {
+                    teamScrollerContainer1.style.display = 'none';
+                    teamScrollerContainer2.style.display = 'none';
+                }
+            }
+
             const categoryBtns = document.querySelectorAll('.category-btn');
             const wordCloudTriggers = document.querySelectorAll('.word-cloud-trigger');
             const projectsSection = document.getElementById('projects-section');
