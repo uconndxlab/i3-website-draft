@@ -103,13 +103,13 @@
         <div class="container py-md-5">
             <div class="row justify-content-center">
                 <div class="col-xl-10">
-                    <h2 class="tldr-stats-heading text-center mb-2" data-aos="zoom-in">Our Footprint</h2>
+                    <h2 class="tldr-stats-heading text-center mb-4" data-aos="zoom-in">Our Footprint</h2>
                     <div class="tldr-stat-grid">
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="0">
                             <div class="tldr-stat-value">
                                 <span class="odometer" data-odometer-final="{{ $projectInventoryStats['projects'] }}">0</span>
                             </div>
-                            <p class="tldr-stat-label">Projects</p>
+                            <p class="tldr-stat-label">Total Projects</p>
                         </div>
 
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="100">
@@ -123,7 +123,7 @@
                             <div class="tldr-stat-value">
                                 <span class="odometer" data-odometer-final="{{ $projectInventoryStats['grants'] }}">0</span>
                             </div>
-                            <p class="tldr-stat-label">Grants</p>
+                            <p class="tldr-stat-label">Grant-funded Projects</p>
                         </div>
 
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="300">
