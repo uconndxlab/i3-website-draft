@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'TLDR')
-@section('meta_description', 'TLDR presentation view with project inventory highlights from the i3 project-inventory dataset.')
+@section('meta_description', 'The i3 TLDR page (Too Long, Didn\'t Read) offers a concise snapshot of our impact and portfolio.')
 
 @section('content')
     @php
@@ -134,7 +134,7 @@
                 <div class="word-cloud-container">
                 @forelse($departmentCounts as $item)
                         <button type="button" class="word-cloud-item word-cloud-trigger" data-department="{{ $item['name'] }}" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 30 }}" title="Show {{ $item['name'] }} projects in table">
-                            <span class="word-cloud-badge" style="font-size: {{ $item['size'] }}rem;">
+                            <span class="word-cloud-badge" style="--cloud-size: {{ $item['size'] }}rem;">
                             {{ $item['name'] }}
                             @if($item['count'] > 1)
                                 <span class="project-count">{{ $item['count'] }}</span>
@@ -496,12 +496,14 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
+            font-size: var(--cloud-size, 1rem);
             font-weight: 600;
             color: #fff;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             line-height: 1;
             height: fit-content;
+            max-width: 100%;
         }
 
         .word-cloud-item:hover .word-cloud-badge {
@@ -720,13 +722,25 @@
                 grid-template-columns: 1fr;
             }
 
+            .tldr-cloud-panel {
+                padding: 1rem;
+            }
+
             .word-cloud-container {
-                gap: 0.75rem;
+                justify-content: flex-start;
+                gap: 0.55rem;
             }
 
             .word-cloud-badge {
-                font-size: 0.9rem;
-                padding: 0.45rem 0.75rem;
+                font-size: min(var(--cloud-size, 1rem), 1rem);
+                padding: 0.4rem 0.7rem;
+                white-space: normal;
+                line-height: 1.2;
+                text-align: left;
+            }
+
+            .word-cloud-item {
+                max-width: 100%;
             }
 
             .category-buttons-group {
