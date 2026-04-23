@@ -491,6 +491,7 @@ class PageController extends Controller
     protected function getDepartmentProjectCounts(string $csvPath): array
     {
         $counts = [];
+        $originalNames = [];
         $handle = fopen($csvPath, 'r');
         if ($handle === false) {
             return [];
@@ -520,10 +521,15 @@ class PageController extends Controller
             
             // Only count rows with a project name and department
             if ($projectName !== '' && $department !== '') {
-                if (!isset($counts[$department])) {
-                    $counts[$department] = 0;
+                $deptKey = Str::lower(trim($department));
+                if ($deptKey === '') {
+                    continue;
                 }
-                $counts[$department]++;
+                if (!isset($counts[$deptKey])) {
+                    $counts[$deptKey] = 0;
+                    $originalNames[$deptKey] = $department;
+                }
+                $counts[$deptKey]++;
             }
         }
 
@@ -531,23 +537,24 @@ class PageController extends Controller
         
         // Sort by count descending
         arsort($counts);
-        
+
         // Calculate size weights (1-5 scale for CSS sizing)
-        $max = max($counts) ?: 1;
-        $min = min($counts) ?: 1;
+        $values = array_values($counts);
+        $max = max($values) ?: 1;
+        $min = min($values) ?: 1;
         $range = $max - $min ?: 1;
-        
+
         $weighted = [];
-        foreach ($counts as $dept => $count) {
+        foreach ($counts as $deptKey => $count) {
             $normalized = ($count - $min) / $range;
             $size = 1 + ($normalized * 1.5); // Scale 1-2.5
             $weighted[] = [
-                'name' => $dept,
+                'name' => $originalNames[$deptKey] ?? $deptKey,
                 'count' => $count,
                 'size' => $size,
             ];
         }
-        
+
         return $weighted;
     }
 }
