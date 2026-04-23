@@ -782,6 +782,7 @@
             const rows = document.querySelectorAll('.project-row');
             const sortables = document.querySelectorAll('.sortable');
             let selectedCategory = '';
+            let forcedDepartment = '';
 
             categoryBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -798,6 +799,8 @@
 
             wordCloudTriggers.forEach(trigger => {
                 trigger.addEventListener('click', function() {
+                    const clickedDepartment = (this.dataset.department || '').trim();
+
                     selectedCategory = '';
                     categoryBtns.forEach(btn => btn.classList.remove('active'));
 
@@ -806,8 +809,24 @@
                     }
 
                     statusFilter.value = '';
-                    deptFilter.value = this.dataset.department;
-                    clientFilter.value = '';
+
+                    // Match option values case-insensitively in case source strings differ slightly.
+                    const matchingOption = Array.from(deptFilter.options).find(option => {
+                        return option.value.trim().toLowerCase() === clickedDepartment.toLowerCase();
+                    });
+
+                    if (matchingOption) {
+                        deptFilter.value = matchingOption.value;
+                        forcedDepartment = '';
+                    } else {
+                        deptFilter.value = '';
+                        forcedDepartment = clickedDepartment;
+                    }
+
+                    if (clientFilter) {
+                        clientFilter.value = '';
+                    }
+
                     applyFilters();
 
                     if (projectsSection) {
@@ -818,18 +837,18 @@
 
             function applyFilters() {
                 const selectedStatus = statusFilter.value.toLowerCase();
-                const selectedDept = deptFilter.value;
+                const selectedDept = (deptFilter.value || forcedDepartment || '').trim();
                 //const selectedClient = clientFilter.value;
 
                 rows.forEach(row => {
                     const rowCategory = row.dataset.category;
                     const rowStatus = row.dataset.status.toLowerCase();
-                    const rowDept = row.dataset.department;
+                    const rowDept = (row.dataset.department || '').trim();
                     const rowClient = row.dataset.client;
 
                     const categoryMatch = !selectedCategory || rowCategory === selectedCategory;
                     const statusMatch = !selectedStatus || rowStatus === selectedStatus;
-                    const deptMatch = !selectedDept || rowDept === selectedDept;
+                    const deptMatch = !selectedDept || rowDept.toLowerCase() === selectedDept.toLowerCase();
                     //const clientMatch = !selectedClient || rowClient === selectedClient;
 
                     row.style.display = categoryMatch && statusMatch && deptMatch ? '' : 'none';
@@ -837,7 +856,10 @@
             }
 
             statusFilter.addEventListener('change', applyFilters);
-            deptFilter.addEventListener('change', applyFilters);
+            deptFilter.addEventListener('change', function() {
+                forcedDepartment = '';
+                applyFilters();
+            });
             //clientFilter.addEventListener('change', applyFilters);
 
             // Sort functionality
