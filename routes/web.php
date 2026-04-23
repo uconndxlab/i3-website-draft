@@ -34,6 +34,8 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/beyond-nuremberg', function () {
         return app(PageController::class)->beyond_nuremberg();
     })->name('beyond-nuremberg');
+
+    Route::get('/tldr', 'tldr')->name('tldr');
     
     Route::get('/lincus', 'lincus')->name('lincus');
     

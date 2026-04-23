@@ -90,6 +90,54 @@ class PageController extends Controller
         return view('pages.lincus');
     }
 
+    public function tldr()
+    {
+        $stats = [
+            'projects' => 0,
+            'departments' => 0,
+            'grants' => 0,
+            'clients' => 0,
+            'ongoing_in_progress' => 0,
+            'maintenance' => 0,
+        ];
+        $allProjects = [];
+        $allDepartments = [];
+        $departmentCounts = [];
+        $workforceStats = [
+            'staff' => 0,
+            'students' => 0,
+        ];
+
+        $csvPath = public_path('data/Project Inventory(Sheet1).csv');
+        if (is_readable($csvPath)) {
+            $stats = $this->calculateProjectInventoryStats($csvPath);
+            $allProjects = $this->parseAllProjects($csvPath);
+            $allDepartments = $this->parseUniqueDepartments($csvPath);
+            $departmentCounts = $this->getDepartmentProjectCounts($csvPath);
+        }
+
+        $people = TeamMember::all();
+        $workforceStats['students'] = $people->filter(function ($person) {
+            $tags = is_array($person->tags) ? $person->tags : [];
+            return in_array('student-staff', $tags, true);
+        })->count();
+
+        $workforceStats['staff'] = $people->filter(function ($person) {
+            $tags = is_array($person->tags) ? $person->tags : [];
+            $isStaff = in_array('staff', $tags, true) || in_array('senior-staff', $tags, true);
+            $isStudent = in_array('student-staff', $tags, true);
+            return $isStaff && !$isStudent;
+        })->count();
+
+        return view('pages.tldr', [
+            'projectInventoryStats' => $stats,
+            'allProjects' => $allProjects,
+            'allDepartments' => $allDepartments,
+            'departmentCounts' => $departmentCounts,
+            'workforceStats' => $workforceStats,
+        ]);
+    }
+
     public function jobs() {
         return view('pages.jobs');
     }
@@ -240,5 +288,266 @@ class PageController extends Controller
         }
 
         return null;
+    }
+
+    protected function calculateProjectInventoryStats(string $csvPath): array
+    {
+        $handle = fopen($csvPath, 'r');
+        if ($handle === false) {
+            return [
+                'projects' => 0,
+                'departments' => 0,
+                'grants' => 0,
+                'clients' => 0,
+                'ongoing_in_progress' => 0,
+                'maintenance' => 0,
+            ];
+        }
+
+        $header = fgetcsv($handle);
+        if (!is_array($header)) {
+            fclose($handle);
+            return [
+                'projects' => 0,
+                'departments' => 0,
+                'grants' => 0,
+                'clients' => 0,
+                'ongoing_in_progress' => 0,
+                'maintenance' => 0,
+            ];
+        }
+
+        $headerMap = [];
+        foreach ($header as $index => $columnName) {
+            $normalizedColumn = trim((string) $columnName);
+            if ($normalizedColumn !== '') {
+                $headerMap[$normalizedColumn] = $index;
+            }
+        }
+
+        $projects = 0;
+        $grants = 0;
+        $departments = [];
+        $clients = [];
+        $ongoingInProgress = 0;
+        $maintenance = 0;
+
+        while (($row = fgetcsv($handle)) !== false) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $status = $this->csvColumnValue($row, $headerMap, 'Status');
+            $projectName = $this->csvColumnValue($row, $headerMap, 'Project Name');
+            $department = $this->csvColumnValue($row, $headerMap, 'Home Department');
+            $client = $this->csvColumnValue($row, $headerMap, 'Client/PI');
+            $grantValue = $this->csvColumnValue($row, $headerMap, 'Grant Y/N');
+
+            $hasContent = $status !== '' || $projectName !== '' || $department !== '' || $client !== '' || $grantValue !== '';
+            if (!$hasContent) {
+                continue;
+            }
+
+            $projects++;
+
+            if ($department !== '') {
+                $departments[Str::lower($department)] = true;
+            }
+
+            if ($client !== '') {
+                $clients[Str::lower($client)] = true;
+            }
+
+            if (Str::upper($grantValue) === 'Y') {
+                $grants++;
+            }
+
+            $normalizedStatus = Str::lower($status);
+            if (in_array($normalizedStatus, ['ongoing', 'being built'], true)) {
+                $ongoingInProgress++;
+            }
+
+            if ($normalizedStatus === 'maintenance') {
+                $maintenance++;
+            }
+        }
+
+        fclose($handle);
+
+        return [
+            'projects' => $projects,
+            'departments' => count($departments),
+            'grants' => $grants,
+            'clients' => count($clients),
+            'ongoing_in_progress' => $ongoingInProgress,
+            'maintenance' => $maintenance,
+        ];
+    }
+
+    protected function csvColumnValue(array $row, array $headerMap, string $columnName): string
+    {
+        if (!array_key_exists($columnName, $headerMap)) {
+            return '';
+        }
+
+        $columnIndex = $headerMap[$columnName];
+        $value = $row[$columnIndex] ?? '';
+
+        if (!is_string($value)) {
+            return '';
+        }
+
+        return trim(preg_replace('/\s+/', ' ', $value) ?? '');
+    }
+
+    protected function parseAllProjects(string $csvPath): array
+    {
+        $projects = [];
+        $handle = fopen($csvPath, 'r');
+        if ($handle === false) {
+            return [];
+        }
+
+        $header = fgetcsv($handle);
+        if (!is_array($header)) {
+            fclose($handle);
+            return [];
+        }
+
+        $headerMap = [];
+        foreach ($header as $index => $columnName) {
+            $normalizedColumn = trim((string) $columnName);
+            if ($normalizedColumn !== '') {
+                $headerMap[$normalizedColumn] = $index;
+            }
+        }
+
+        while (($row = fgetcsv($handle)) !== false) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $status = $this->csvColumnValue($row, $headerMap, 'Status');
+            $projectName = $this->csvColumnValue($row, $headerMap, 'Project Name');
+            $department = $this->csvColumnValue($row, $headerMap, 'Home Department');
+            $client = $this->csvColumnValue($row, $headerMap, 'Client/PI');
+            $grantValue = $this->csvColumnValue($row, $headerMap, 'Grant Y/N');
+
+            $hasContent = $status !== '' || $projectName !== '' || $department !== '' || $client !== '' || $grantValue !== '';
+            if (!$hasContent || $projectName === '') {
+                continue;
+            }
+
+            $projects[] = [
+                'name' => $projectName,
+                'status' => $status,
+                'department' => $department,
+                'client' => $client,
+                'is_grant' => Str::upper($grantValue) === 'Y',
+            ];
+        }
+
+        fclose($handle);
+        return $projects;
+    }
+
+    protected function parseUniqueDepartments(string $csvPath): array
+    {
+        $departments = [];
+        $handle = fopen($csvPath, 'r');
+        if ($handle === false) {
+            return [];
+        }
+
+        $header = fgetcsv($handle);
+        if (!is_array($header)) {
+            fclose($handle);
+            return [];
+        }
+
+        $headerMap = [];
+        foreach ($header as $index => $columnName) {
+            $normalizedColumn = trim((string) $columnName);
+            if ($normalizedColumn !== '') {
+                $headerMap[$normalizedColumn] = $index;
+            }
+        }
+
+        while (($row = fgetcsv($handle)) !== false) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $department = $this->csvColumnValue($row, $headerMap, 'Home Department');
+            if ($department !== '') {
+                $departments[$department] = true;
+            }
+        }
+
+        fclose($handle);
+        return array_keys($departments);
+    }
+
+    protected function getDepartmentProjectCounts(string $csvPath): array
+    {
+        $counts = [];
+        $handle = fopen($csvPath, 'r');
+        if ($handle === false) {
+            return [];
+        }
+
+        $header = fgetcsv($handle);
+        if (!is_array($header)) {
+            fclose($handle);
+            return [];
+        }
+
+        $headerMap = [];
+        foreach ($header as $index => $columnName) {
+            $normalizedColumn = trim((string) $columnName);
+            if ($normalizedColumn !== '') {
+                $headerMap[$normalizedColumn] = $index;
+            }
+        }
+
+        while (($row = fgetcsv($handle)) !== false) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $projectName = $this->csvColumnValue($row, $headerMap, 'Project Name');
+            $department = $this->csvColumnValue($row, $headerMap, 'Home Department');
+            
+            // Only count rows with a project name and department
+            if ($projectName !== '' && $department !== '') {
+                if (!isset($counts[$department])) {
+                    $counts[$department] = 0;
+                }
+                $counts[$department]++;
+            }
+        }
+
+        fclose($handle);
+        
+        // Sort by count descending
+        arsort($counts);
+        
+        // Calculate size weights (1-5 scale for CSS sizing)
+        $max = max($counts) ?: 1;
+        $min = min($counts) ?: 1;
+        $range = $max - $min ?: 1;
+        
+        $weighted = [];
+        foreach ($counts as $dept => $count) {
+            $normalized = ($count - $min) / $range;
+            $size = 1 + ($normalized * 1.5); // Scale 1-2.5
+            $weighted[] = [
+                'name' => $dept,
+                'count' => $count,
+                'size' => $size,
+            ];
+        }
+        
+        return $weighted;
     }
 }
