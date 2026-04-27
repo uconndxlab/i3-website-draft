@@ -24,7 +24,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mt-4">
+                <div class="row justify-content-center pt-5 pb-3">
+        <div class="col-lg-8">
+            <p class="text-center mb-0" style="font-size: 1.1rem; line-height: 1.8;">
+                Institutional Insights & Innovation (i3) is UConn's agile digital enablement team, embedded in the university's academic and research context. We support dozens of active initiatives spanning student success, research growth, fee-based programs, and operational efficiency. i3 partners with faculty, administrators, and leadership to build institutionally owned tools that solve real problems and adapt as needs evolve.
+            </p>
+        </div>
+    </div>
+            <div class="row justify-content-center mt-2">
                 <div class="col-xl-10">
                     <div class="mt-4" data-aos="fade-up" data-bs-theme="dark">
                         <div class="row g-4">
@@ -58,6 +65,8 @@
             </div>
         </div>
     </section>
+
+
 
     <!-- Stats Section: Minimal Fly-in Design -->
     <section class="tldr-stats py-5 px-3 px-md-5" data-bs-theme="light">
