@@ -44,32 +44,28 @@
                         <div class="card-body p-4">
                             <h3 class="h4 mb-3 border-bottom border-primary pb-2">Position Summary</h3>
                             <p>
-                                i3 is seeking a motivated Web Application Developer to join a fast-paced, collaborative 
-                                team building custom web applications for a wide range of university initiatives. This 
-                                role is ideal for a developer who enjoys working across projects, communicating with 
-                                stakeholders, and using modern tools (including AI-assisted development workflows) to 
-                                deliver practical, high-impact solutions.
+i3 is seeking a motivated Web Application Developer to join a fast-paced, collaborative team building custom web applications for a wide range of university initiatives. This role is ideal for a developer who enjoys working across projects, communicating with stakeholders, and using modern tools (including AI-assisted development workflows) to deliver practical, high-impact solutions.
                             </p>
                             <p class="mb-0">
-                                The successful candidate will contribute to the design, development, and maintenance 
-                                of Laravel-based applications while working closely with team members and campus 
-                                partners to iteratively deliver features and improvements.
+The successful candidate will contribute to the design, development, and maintenance of Laravel-based applications while working closely with team members and campus partners to iteratively deliver features and improvements. They will bring to the position an enthusiasm for working in a fast-paced environment where developers help shape solutions, not just implement specifications.
+
+
                             </p>
                         </div>
                     </div>
 
                     <div class="card bg-dark border-0 mb-4" data-aos="fade-up" data-aos-delay="150">
                         <div class="card-body p-4">
-                            <h3 class="h4 mb-3 border-bottom border-primary pb-2">Responsibilities</h3>
+                            <h3 class="h4 mb-3 border-bottom border-primary pb-2">Duties and Responsibilities</h3>
                             <ul class="mb-0">
-                                <li class="mb-2">Develop and maintain web applications using Laravel and related technologies</li>
-                                <li class="mb-2">Collaborate with stakeholders to understand requirements and translate them into working software</li>
-                                <li class="mb-2">Contribute to multiple concurrent projects supporting academic, research, and operational initiatives</li>
-                                <li class="mb-2">Participate in architectural and technical decision-making within a small team environment</li>
-                                <li class="mb-2">Use Git for version control and collaborative development</li>
-                                <li class="mb-2">Leverage AI-assisted tools to accelerate development and problem-solving</li>
-                                <li class="mb-2">Troubleshoot, debug, and enhance existing applications</li>
-                                <li class="mb-2">Support deployment, testing, and documentation efforts as needed</li>
+                                <li class="mb-2">Develop and maintain web applications using Laravel and related technologies.</li>
+                                <li class="mb-2">Collaborate with stakeholders to understand requirements and translate them into working software.</li>
+                                <li class="mb-2">Contribute to multiple concurrent projects supporting academic, research, and operational initiative.</li>
+                                <li class="mb-2">Participate in architectural and technical decision-making within a small team environment.</li>
+                                <li class="mb-2">Use Git for version control and collaborative development.</li>
+                                <li class="mb-2">Leverage AI-assisted tools to accelerate development and problem-solving.</li>
+                                <li class="mb-2">Troubleshoot, debug, and enhance existing applications.</li>
+                                <li class="mb-2">Support deployment, testing, and documentation efforts as needed.</li>
                             </ul>
                         </div>
                     </div>
@@ -79,24 +75,23 @@
                             <h3 class="h4 mb-3 border-bottom border-primary pb-2">Qualifications</h3>
                             <h5 class="mt-3">Minimum Qualifications</h5>
                             <ul>
-                                <li class="mb-2">Enthusiasm for working in a fast-paced environment where developers help shape solutions, not just implement specifications</li>
-                                <li class="mb-2">Strong problem-solving skills and a demonstrated ability to work through ambiguous requirements</li>
-                                <li class="mb-2">Interest in understanding user needs and translating them into practical software solutions</li>
-                                <li class="mb-2">Ability to communicate technical concepts clearly and collaborate with non-technical stakeholders</li>
-                                <li class="mb-2">Self-directed, motivated approach to learning new tools and technologies</li>
-                                <li class="mb-2">Approximately 3-5 years of professional web application development experience</li>
-                                <li class="mb-2">Experience developing applications in PHP (Laravel strongly preferred)</li>
-                                <li class="mb-2">Experience working with relational databases (MySQL, PostgreSQL, or SQLite)</li>
-                                <li class="mb-2">Experience using Git and collaborative version control workflows</li>
+                                <li class="mb-2">3-5 years of professional web application development experience.</li>
+                                <li class="mb-2">Experience developing applications in PHP (Laravel strongly preferred).</li>
+                                <li class="mb-2">Experience working with relational databases (MySQL, PostgreSQL, or SQLite).</li>
+                                <li class="mb-2">Experience using Git and collaborative version control workflows.</li>
+                                <li class="mb-2">Demonstrated problem-solving skills and ability to work through ambiguous requirements.</li>
+                                <li class="mb-2">Demonstrated interest in understanding user needs and translating them into practical software solutions.</li>
+                                <li class="mb-2">Proven ability to communicate technical concepts clearly and collaborate with non-technical stakeholders.</li>
+                                <li class="mb-2">Demonstrated self-directed, motivated approach to learning new tools and technologies.</li>
                             </ul>
                             
                             <h5 class="mt-4">Preferred Qualifications</h5>
                             <ul class="mb-0">
-                                <li class="mb-2">Experience with Laravel or willingness to learn quickly</li>
-                                <li class="mb-2">Experience working in agile or small-team environments</li>
-                                <li class="mb-2">Familiarity with Bootstrap or similar UI frameworks</li>
-                                <li class="mb-2">Experience using AI tools (e.g., Copilot, Claude, ChatGPT) in development workflows</li>
-                                <li class="mb-2">Interest in higher education, research, or mission-driven technology work</li>
+                                <li class="mb-2">Experience with Laravel or demonstrated willingness to learn.</li>
+                                <li class="mb-2">Experience working in agile or small-team environments.</li>
+                                <li class="mb-2">Demonstrated familiarity with Bootstrap or similar UI frameworks.</li>
+                                <li class="mb-2">Experience using AI tools (e.g., Copilot, Claude, ChatGPT) in development workflows.</li>
+                                <li class="mb-2">Stated interest in higher education, research, or mission-driven technology work.</li>
                             </ul>
                         </div>
                     </div>

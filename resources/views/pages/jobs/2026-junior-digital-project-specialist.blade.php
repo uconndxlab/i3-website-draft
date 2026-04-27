@@ -30,12 +30,7 @@
                         <div class="card-body p-4">
                             <h3 class="h4 mb-3 border-bottom border-primary pb-2">About i3</h3>
                             <p class="mb-0">
-                                Institutional Insights & Innovation (i3) is a small, agile digital enablement group 
-                                embedded within academic and research context at UConn. The team currently supports 
-                                dozens of active projects spanning student success, research advancement, fee-based 
-                                program support, and operational efficiency initiatives. i3 partners directly with 
-                                faculty, administrators, and university leadership to design and build institutionally 
-                                owned applications that solve real problems and evolve with changing needs.
+Institutional Insights & Innovation (i3) is a small, agile digital enablement group embedded within academic and research context at UConn. The team currently supports dozens of active projects spanning student success, research advancement, fee-based program support, and operational efficiency initiatives. i3 partners directly with faculty, administrators, and university leadership to design and build institutionally owned applications that solve real problems and evolve with changing needs.
                             </p>
                         </div>
                     </div>
@@ -44,37 +39,30 @@
                         <div class="card-body p-4">
                             <h3 class="h4 mb-3 border-bottom border-primary pb-2">Position Summary</h3>
                             <p>
-                                i3 is seeking a versatile Junior Digital Project Specialist to support a range of web 
-                                and application initiatives. This hybrid role combines design, strategy, website development, 
-                                project coordination, quality assurance, and general digital support responsibilities within 
-                                a small, fast-paced team. The position is ideal for an early-career professional interested 
-                                in gaining broad, hands-on experience across web development, application delivery, and 
-                                digital project support.
+i3 is seeking a versatile Junior Digital Project Specialist to support a range of web and application initiatives. This hybrid role combines design, strategy, website development, project coordination, quality assurance, and general digital support responsibilities within a small, fast-paced team. The position is ideal for an early-career professional interested in gaining broad, hands-on experience across web development, application delivery, and digital project support.
                             </p>
                             <p class="mb-0">
-                                The successful candidate will work closely with developers, designers, and stakeholders to 
-                                maintain and build WordPress sites, assist with migrations and updates, perform testing, and 
-                                manage smaller projects independently. This role offers significant opportunity for growth, 
-                                with exposure to both website and custom application development in a collaborative, 
-                                mission-driven environment.
+The successful candidate will work closely with developers, designers, and stakeholders to maintain and build WordPress sites, assist with migrations and updates, perform testing, and manage smaller projects independently. This role offers significant opportunity for growth, with exposure to both website and custom application development in a collaborative, mission-driven environment.
+
+
                             </p>
                         </div>
                     </div>
 
                     <div class="card bg-dark border-0 mb-4" data-aos="fade-up" data-aos-delay="150">
                         <div class="card-body p-4">
-                            <h3 class="h4 mb-3 border-bottom border-primary pb-2">Responsibilities</h3>
+                            <h3 class="h4 mb-3 border-bottom border-primary pb-2">Duties and Responsibilities</h3>
                             <ul class="mb-0">
-                                <li class="mb-2">Build and maintain WordPress websites and assist with site migrations</li>
-                                <li class="mb-2">Support website updates, content management, and configuration changes</li>
-                                <li class="mb-2">Collaborate with design staff to implement accessible, user-centered interfaces</li>
-                                <li class="mb-2">Perform quality assurance testing for web applications and websites</li>
-                                <li class="mb-2">Track tasks, coordinate small projects, and communicate status updates</li>
-                                <li class="mb-2">Assist with documentation and implementation planning</li>
-                                <li class="mb-2">Support accessibility best practices in web content and applications</li>
-                                <li class="mb-2">Provide general support across i3's portfolio of digital projects</li>
-                                <li class="mb-2">Contribute HTML and CSS updates as needed</li>
-                                <li class="mb-2">Assist with testing and rollout of new features and tools</li>
+                                <li class="mb-2">Build and maintain WordPress websites and assist with site migrations.</li>
+                                <li class="mb-2">Support website updates, content management, and configuration changes.</li>
+                                <li class="mb-2">Collaborate with design staff to implement accessible, user-centered interfaces.</li>
+                                <li class="mb-2">Perform quality assurance testing for web applications and websites.</li>
+                                <li class="mb-2">Track tasks, coordinate small projects, and communicate status updates.</li>
+                                <li class="mb-2">Assist with documentation and implementation planning.</li>
+                                <li class="mb-2">Support accessibility best practices in web content and applications.</li>
+                                <li class="mb-2">Provide general support across i3's portfolio of digital projects.</li>
+                                <li class="mb-2">Contribute HTML and CSS updates as needed.</li>
+                                <li class="mb-2">Assist with testing and rollout of new features and tools.</li>
                             </ul>
                         </div>
                     </div>
@@ -84,25 +72,25 @@
                             <h3 class="h4 mb-3 border-bottom border-primary pb-2">Qualifications</h3>
                             <h5 class="mt-3">Minimum Qualifications</h5>
                             <ul>
-                                <li class="mb-2">Bachelor's degree or equivalent experience in a relevant field</li>
-                                <li class="mb-2">Experience working with WordPress, including site updates and configuration</li>
-                                <li class="mb-2">Basic knowledge of HTML and CSS</li>
-                                <li class="mb-2">Strong organizational and communication skills</li>
-                                <li class="mb-2">Ability to manage multiple tasks and shift priorities in a fast-paced environment</li>
-                                <li class="mb-2">Interest in learning web application development and expanding technical skills</li>
-                                <li class="mb-2">Comfort working across both technical and non-technical tasks as part of a small team</li>
-                                <li class="mb-2">Demonstrated initiative and willingness to take ownership of assigned projects</li>
-                                <li class="mb-2">Ability to collaborate with developers, designers, and stakeholders</li>
+                                <li class="mb-2">Bachelor's degree or equivalent years of experience in a relevant field.</li>
+                                <li class="mb-2">Experience working with WordPress, including site updates and configuration.</li>
+                                <li class="mb-2">Demonstrated basic knowledge of HTML and CSS.</li>
+                                <li class="mb-2">Demonstrated organizational and communication skills.</li>
+                                <li class="mb-2">Proven ability to manage multiple tasks and shift priorities in a fast-paced environment.</li>
+                                <li class="mb-2">Stated interest in learning web application development and expanding technical skills.</li>
+                                <li class="mb-2">Experience working across both technical and non-technical tasks as part of a small team.</li>
+                                <li class="mb-2">Demonstrated initiative and willingness to take ownership of assigned projects.</li>
+                                <li class="mb-2">Proven ability to collaborate with developers, designers, and stakeholders.</li>
                             </ul>
                             
                             <h5 class="mt-4">Preferred Qualifications</h5>
                             <ul class="mb-0">
-                                <li class="mb-2">Experience supporting website migrations or redesign projects</li>
-                                <li class="mb-2">Familiarity with accessibility standards and best practices</li>
-                                <li class="mb-2">Experience working with designers and implementing layouts</li>
-                                <li class="mb-2">Experience performing QA testing for web applications</li>
-                                <li class="mb-2">Exposure to project tracking tools or agile workflows</li>
-                                <li class="mb-2">Interest in growing into a software development or technical role</li>
+                                <li class="mb-2">Experience supporting website migrations or redesign projects.</li>
+                                <li class="mb-2">Experience or demonstrated familiarity with accessibility standards and best practices.</li>
+                                <li class="mb-2">Experience working with designers and implementing layouts.</li>
+                                <li class="mb-2">Experience performing QA testing for web applications.</li>
+                                <li class="mb-2">Exposure to project tracking tools or agile workflows.</li>
+                                <li class="mb-2">Stated interest in growing into a software development or technical role.</li>
                             </ul>
                         </div>
                     </div>

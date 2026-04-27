@@ -57,8 +57,7 @@ We're hiring for 2026! i3 is a small, agile team building digital solutions that
                             <h3 class="fw-bold mt-3 fs-4">Junior Digital Project Specialist</h3>
                             <p class="mb-4">
                                 A versatile role combining WordPress development, project coordination, 
-                                QA testing, and digital support. Perfect for early-career professionals 
-                                seeking hands-on experience across web development and application delivery.
+                                QA testing, and digital support. This role offers significant opportunity for growth, with exposure to both website and custom application development in a collaborative, mission-driven environment.
                             </p>
                             <div class="btn display-btn btn-arrow-slide">
                                 <a href="{{ route('jobs.project-specialist') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
