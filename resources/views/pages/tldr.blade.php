@@ -1,48 +1,16 @@
 @extends('layouts.app')
 @section('title', 'TLDR')
-@section('meta_description', 'The i3 TLDR page (Too Long, Didn\'t Read) offers a concise snapshot of our impact and portfolio.')
+@section('meta_description', 'TLDR presentation view with project inventory highlights from the i3 project-inventory dataset.')
 
 @section('content')
     @php
         $allClients = collect($allProjects)->pluck('client')->filter()->unique()->sort()->values();
-        $teamMembers = \App\Models\TeamMember::where(function ($query) {
-            $query->whereNull('tags')->orWhere('tags', 'not like', '%alumni%');
-        })->get();
-        $projectScrollerItems = \App\Models\WorkItem::all();
     @endphp
 
     <h1 class="page-h1">TLDR</h1>
 
     <!-- YouTube Hero -->
     <section class="tldr-hero" data-bs-theme="dark">
-        <div id="tldrTeamScrollerContainer1"
-            class="tldr-team-scroller-container tldr-team-scroller-container-left"
-            style="visibility: hidden;"
-            aria-hidden="true"
-            role="presentation">
-            <div class="mobile-scaledown">
-                <div id="tldrTeamScroller1">
-                    @foreach ($teamMembers as $member)
-                        <img src="{{ $member->best_image_url }}" alt="" role="presentation">
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-        <div id="tldrTeamScrollerContainer2"
-            class="tldr-team-scroller-container tldr-team-scroller-container-right"
-            style="visibility: hidden;"
-            aria-hidden="true"
-            role="presentation">
-            <div class="mobile-scaledown">
-                <div id="tldrTeamScroller2">
-                    @foreach ($teamMembers->reverse() as $member)
-                        <img src="{{ $member->best_image_url }}" alt="" role="presentation">
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
         <div class="container py-5">
             <div class="row align-items-center g-4">
                 <div class="col-lg-8 mx-auto">
@@ -54,13 +22,6 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-4">
-                <div class="col-xl-9 col-lg-10">
-                    <p class="tldr-whimsy-copy text-center mb-0" data-aos="fade-up" data-aos-delay="80">
-                        This is our TLDR page. TLDR means "Too Long, Didn't Read". It's the page we send when someone asks who we are, what we do, and who we do it for.
-                    </p>
                 </div>
             </div>
             <div class="row justify-content-center mt-4">
@@ -87,8 +48,8 @@
                             </div>
                             <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="240">
                                 <article class="tldr-glance-card">
-                                    <p class="tldr-glance-value">$15M+</p>
-                                    <p class="tldr-glance-label">In Affiliated Grant Value</p>
+                                    <p class="tldr-glance-value">$2M+</p>
+                                    <p class="tldr-glance-label">Grant-Supported Portfolio Impact</p>
                                 </article>
                             </div>
                         </div>
@@ -103,13 +64,13 @@
         <div class="container py-md-5">
             <div class="row justify-content-center">
                 <div class="col-xl-10">
-                    <h2 class="tldr-stats-heading text-center mb-4" data-aos="zoom-in">Our Footprint</h2>
+                    <h2 class="tldr-stats-heading text-center mb-2" data-aos="zoom-in">Our Footprint</h2>
                     <div class="tldr-stat-grid">
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="0">
                             <div class="tldr-stat-value">
                                 <span class="odometer" data-odometer-final="{{ $projectInventoryStats['projects'] }}">0</span>
                             </div>
-                            <p class="tldr-stat-label">Total Projects</p>
+                            <p class="tldr-stat-label">Projects</p>
                         </div>
 
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="100">
@@ -123,7 +84,7 @@
                             <div class="tldr-stat-value">
                                 <span class="odometer" data-odometer-final="{{ $projectInventoryStats['grants'] }}">0</span>
                             </div>
-                            <p class="tldr-stat-label">Grant-funded Projects</p>
+                            <p class="tldr-stat-label">Grants</p>
                         </div>
 
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="300">
@@ -137,14 +98,14 @@
                             <div class="tldr-stat-value">
                                 <span class="odometer" data-odometer-final="{{ $projectInventoryStats['ongoing_in_progress'] }}">0</span>
                             </div>
-                            <p class="tldr-stat-label">Ongoing/In Progress</p>
+                            <p class="tldr-stat-label">Projects Ongoing/In Progress</p>
                         </div>
 
                         <div class="tldr-stat" data-aos="fade-up" data-aos-delay="500">
                             <div class="tldr-stat-value">
                                 <span class="odometer" data-odometer-final="{{ $projectInventoryStats['maintenance'] }}">0</span>
                             </div>
-                            <p class="tldr-stat-label">In Maintenance</p>
+                            <p class="tldr-stat-label">Projects In Maintenance</p>
                         </div>
                     </div>
                 </div>
@@ -154,22 +115,6 @@
 
     <!-- Departments Section -->
     <section class="tldr-departments py-5 px-3 px-md-5 bg-dark text-light">
-        <div id="tldrDepartmentsProjectScrollerContainer"
-            class="tldr-departments-project-scroller"
-            style="visibility: hidden;"
-            aria-hidden="true"
-            role="presentation">
-            <div class="mobile-scaledown">
-                <div id="tldrDepartmentsProjectScroller">
-                    @foreach ($projectScrollerItems as $item)
-                        <div class="project-card" data-title="{{ $item->title }}" data-thumbnail="{{ $item->best_thumbnail_url }}">
-                            <img src="{{ $item->best_thumbnail_url }}" alt="" role="presentation">
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
         <div class="container py-md-5">
             <div class="row justify-content-center">
                 <div class="col-xl-10 text-center">
@@ -189,7 +134,7 @@
                 <div class="word-cloud-container">
                 @forelse($departmentCounts as $item)
                         <button type="button" class="word-cloud-item word-cloud-trigger" data-department="{{ $item['name'] }}" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 30 }}" title="Show {{ $item['name'] }} projects in table">
-                            <span class="word-cloud-badge" style="--cloud-size: {{ $item['size'] }}rem;">
+                            <span class="word-cloud-badge" style="--word-cloud-size: {{ $item['size'] }}rem;">
                             {{ $item['name'] }}
                             @if($item['count'] > 1)
                                 <span class="project-count">{{ $item['count'] }}</span>
@@ -224,14 +169,6 @@
             </div>
 
             <div class="tldr-filter-panel" data-aos="fade-up">
-                <div class="tldr-results-wrap mb-3">
-                    <div id="results-count" class="tldr-results-chip" aria-live="polite">
-                        <span class="tldr-results-kicker">Showing</span>
-                        <span class="tldr-results-value">{{ count($allProjects) }}</span>
-                        <span class="tldr-results-total">of {{ count($allProjects) }} projects</span>
-                    </div>
-                </div>
-
                 <!-- Category Filter Buttons -->
                 <div class="row mb-3">
                     <div class="col-12">
@@ -255,31 +192,31 @@
 
                 <!-- Filter Controls -->
                 <div class="row g-3 mb-0">
-                    @php
-                        $allTeamMembers = collect($allProjects)
-                            ->pluck('team')
-                            ->filter()
-                            ->flatMap(function ($teamList) {
-                                return collect(explode(',', $teamList))
-                                    ->map(fn ($member) => trim(preg_replace('/\s+/', ' ', $member) ?? ''))
-                                    ->filter();
-                            })
-                            ->unique()
-                            ->sort(SORT_NATURAL | SORT_FLAG_CASE)
-                            ->values();
-                    @endphp
                     <div class="col-12 col-lg-4">
                         <div class="form-group">
                             <label for="status-filter" class="form-label">Filter by Status</label>
+                            @php
+                                $statusOptions = [
+                                    'being built' => 'Being Built',
+                                    'discovery phase' => 'Discovery Phase',
+                                    'launched' => 'Launched',
+                                    'maintenance' => 'Maintenance',
+                                    'ongoing' => 'Ongoing',
+                                    'pending approval' => 'Pending Approval',
+                                    'sunsetted' => 'Sunsetted',
+                                ];
+
+                                $sortedDepartments = collect($allDepartments)
+                                    ->filter()
+                                    ->unique()
+                                    ->sort(SORT_NATURAL | SORT_FLAG_CASE)
+                                    ->values();
+                            @endphp
                             <select id="status-filter" class="form-select">
                                 <option value="">All Statuses</option>
-                                <option value="launched">Launched</option>
-                                <option value="being built">Being Built</option>
-                                <option value="discovery phase">Discovery Phase</option>
-                                <option value="maintenance">Maintenance</option>
-                                <option value="ongoing">Ongoing</option>
-                                <option value="sunsetted">Sunsetted</option>
-                                <option value="pending approval">Pending Approval</option>
+                                @foreach($statusOptions as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -288,19 +225,8 @@
                             <label for="department-filter" class="form-label">Filter by Department</label>
                             <select id="department-filter" class="form-select">
                                 <option value="">All Departments</option>
-                                @foreach($allDepartments as $dept)
+                                @foreach($sortedDepartments as $dept)
                                     <option value="{{ $dept }}">{{ $dept }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="form-group">
-                            <label for="team-filter" class="form-label">Filter by Team Member</label>
-                            <select id="team-filter" class="form-select">
-                                <option value="">All Team Members</option>
-                                @foreach($allTeamMembers as $member)
-                                    <option value="{{ $member }}">{{ $member }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -316,12 +242,11 @@
                             <th style="cursor: pointer;" class="sortable" data-sort="name">Project Name ⬍</th>
                             <th style="cursor: pointer;" class="sortable" data-sort="status">Status ⬍</th>
                             <th style="cursor: pointer;" class="sortable" data-sort="department">Department ⬍</th>
-                            <th style="cursor: pointer;" class="sortable" data-sort="team">Team ⬍</th>
                         </tr>
                     </thead>
                     <tbody id="projects-tbody">
-                        @forelse(collect($allProjects)->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE) as $project)
-                            <tr class="project-row" data-status="{{ $project['status'] }}" data-department="{{ $project['department'] }}" data-client="{{ $project['client'] }}" data-team="{{ $project['team'] }}" data-category="{{ $project['is_grant'] ? 'research-enablement' : 'institutional-efficiencies' }}">
+                        @forelse($allProjects as $project)
+                            <tr class="project-row" data-status="{{ $project['status'] }}" data-department="{{ $project['department'] }}" data-client="{{ $project['client'] }}" data-category="{{ $project['is_grant'] ? 'research-enablement' : 'institutional-efficiencies' }}">
                                 <td class="project-name">{{ $project['name'] }}</td>
                                 <td>
                                     <span class="badge status-badge status-{{ Str::slug($project['status']) }}">
@@ -329,11 +254,10 @@
                                     </span>
                                 </td>
                                 <td class="text-muted">{{ $project['department'] ?: '—' }}</td>
-                                <td class="text-muted">{{ $project['team'] ?: '—' }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center text-muted py-4">No projects found.</td>
+                                <td colspan="3" class="text-center text-muted py-4">No projects found.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -350,35 +274,6 @@
                 linear-gradient(180deg, #05070c 0%, #0a1219 100%);
             padding-top: clamp(2.5rem, 7vh, 5rem);
             padding-bottom: clamp(3rem, 8vh, 5.5rem);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        .tldr-team-scroller-container {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            opacity: 0.2;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .tldr-team-scroller-container-left {
-            justify-content: flex-start;
-            padding-left: 15vw;
-        }
-
-        .tldr-team-scroller-container-right {
-            justify-content: flex-end;
-            padding-right: 15vw;
-        }
-
-        .tldr-hero .container {
-            position: relative;
-            z-index: 2;
         }
 
         .tldr-hero-copy {
@@ -417,15 +312,6 @@
             color: rgba(255, 255, 255, 0.88);
             margin-left: auto;
             margin-right: auto;
-        }
-
-        .tldr-whimsy-copy {
-            max-width: 58ch;
-            margin-inline: auto;
-            color: rgba(224, 241, 255, 0.9);
-            font-size: 1.03rem;
-            line-height: 1.75;
-            text-wrap: balance;
         }
 
         .tldr-glance-row {
@@ -550,26 +436,6 @@
         .tldr-departments {
             background:
                 linear-gradient(180deg, #08111c 0%, #0e1a2b 100%);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        .tldr-departments-project-scroller {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .tldr-departments .container {
-            position: relative;
-            z-index: 2;
         }
 
         .dept-count-badge {
@@ -643,14 +509,13 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            font-size: var(--cloud-size, 1rem);
+            font-size: var(--word-cloud-size, 1rem);
             font-weight: 600;
             color: #fff;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             line-height: 1;
             height: fit-content;
-            max-width: 100%;
         }
 
         .word-cloud-item:hover .word-cloud-badge {
@@ -691,48 +556,6 @@
             box-shadow: 0 18px 40px rgba(14, 26, 43, 0.08);
             padding: 1.25rem;
             margin-bottom: 1.5rem;
-        }
-
-        .tldr-results-wrap {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .tldr-results-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            padding: 0.55rem 0.9rem;
-            border-radius: 999px;
-            color: #fff;
-            background:
-                radial-gradient(circle at 18% 20%, rgba(126, 199, 255, 0.28), rgba(126, 199, 255, 0) 42%),
-                linear-gradient(130deg, #0e1a2b 0%, #17314d 100%);
-            border: 1px solid rgba(126, 199, 255, 0.35);
-            box-shadow: 0 12px 24px rgba(8, 22, 38, 0.24);
-        }
-
-        .tldr-results-kicker {
-            font-family: "Proxima Nova", Arial, Helvetica, sans-serif;
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.88;
-        }
-
-        .tldr-results-value {
-            font-size: 1.15rem;
-            font-weight: 800;
-            line-height: 1;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -0.01em;
-            text-shadow: 0 0 12px rgba(126, 199, 255, 0.32);
-        }
-
-        .tldr-results-total {
-            font-family: "Proxima Nova", Arial, Helvetica, sans-serif;
-            font-size: 0.8rem;
-            opacity: 0.88;
         }
 
         .form-label {
@@ -898,10 +721,6 @@
             .tldr-filter-panel {
                 padding: 1rem;
             }
-
-            .tldr-results-wrap {
-                justify-content: flex-start;
-            }
         }
 
         @media (max-width: 991px) {
@@ -915,24 +734,28 @@
                 grid-template-columns: 1fr;
             }
 
-            .tldr-cloud-panel {
-                padding: 1rem;
+            .tldr-table-shell {
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            #projects-table {
+                min-width: 640px;
             }
 
             .word-cloud-container {
-                justify-content: flex-start;
-                gap: 0.55rem;
+                gap: 0.75rem;
             }
 
             .word-cloud-badge {
-                font-size: min(var(--cloud-size, 1rem), 1rem);
-                padding: 0.4rem 0.7rem;
+                font-size: min(var(--word-cloud-size, 1rem), 1rem);
+                padding: 0.45rem 0.75rem;
                 white-space: normal;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+                text-align: center;
                 line-height: 1.2;
-                text-align: left;
-            }
-
-            .word-cloud-item {
                 max-width: 100%;
             }
 
@@ -952,40 +775,6 @@
             #projects-table th {
                 padding: 0.8rem 0.65rem;
             }
-
-            .tldr-departments h2,
-            .tldr-projects h2 {
-                position: relative;
-                display: inline-block;
-                padding-bottom: 1rem !important;
-            }
-
-            .tldr-departments h2 > .border-bottom,
-            .tldr-projects h2 > .border-bottom {
-                border-bottom: 0 !important;
-                padding-bottom: 0 !important;
-                display: inline-flex;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: center;
-                gap: 0.35rem 0.5rem;
-            }
-
-            .tldr-departments h2::after,
-            .tldr-projects h2::after {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                height: 2px;
-                background: var(--bs-primary);
-            }
-
-            .tldr-departments h2 .dept-count-badge,
-            .tldr-projects h2 .dept-count-badge {
-                margin-left: 0;
-            }
         }
 
         @media (max-width: 575px) {
@@ -996,100 +785,19 @@
     </style>
 
     @vite('resources/js/odometerAnimation.js')
-    @vite('resources/js/photoScroller.js')
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const teamScrollerContainer1 = document.getElementById('tldrTeamScrollerContainer1');
-            const teamScrollerContainer2 = document.getElementById('tldrTeamScrollerContainer2');
-            const teamScroller1Element = document.getElementById('tldrTeamScroller1');
-            const teamScroller2Element = document.getElementById('tldrTeamScroller2');
-            const departmentsProjectScrollerContainer = document.getElementById('tldrDepartmentsProjectScrollerContainer');
-            const departmentsProjectScroller = document.getElementById('tldrDepartmentsProjectScroller');
-
-            if (teamScrollerContainer1 && teamScrollerContainer2 && teamScroller1Element && teamScroller2Element && window.createPhotoScroller) {
-                if (!prefersReducedMotion) {
-                    window.createPhotoScroller({
-                        selector: '#tldrTeamScroller1',
-                        rows: 1,
-                        aspectRatio: 1.5 / 1,
-                        speed: 50,
-                        gap: 70,
-                        rowGap: 100,
-                        maxImageWidth: 200,
-                        direction: 85,
-                        imageClass: 'photo-scroller-image',
-                        wrapperClass: 'photo-box-effect'
-                    });
-                    teamScrollerContainer1.style.visibility = '';
-
-                    window.createPhotoScroller({
-                        selector: '#tldrTeamScroller2',
-                        rows: 1,
-                        aspectRatio: 1.5 / 1,
-                        speed: 50,
-                        gap: 70,
-                        maxImageWidth: 200,
-                        direction: -85,
-                        imageClass: 'photo-scroller-image',
-                        wrapperClass: 'photo-box-effect'
-                    });
-                    teamScrollerContainer2.style.visibility = '';
-                } else {
-                    teamScrollerContainer1.style.display = 'none';
-                    teamScrollerContainer2.style.display = 'none';
-                }
-            }
-
-            if (departmentsProjectScrollerContainer && departmentsProjectScroller && window.createPhotoScroller) {
-                if (!prefersReducedMotion) {
-                    window.createPhotoScroller({
-                        selector: '#tldrDepartmentsProjectScroller',
-                        rows: 2,
-                        aspectRatio: 16 / 9,
-                        speed: 20,
-                        maxImageWidth: 400,
-                        gap: 70,
-                        rowGap: 100,
-                        direction: -10,
-                        imageClass: 'photo-scroller-image',
-                        wrapperClass: 'photo-box-effect'
-                    });
-                    departmentsProjectScrollerContainer.style.visibility = '';
-                } else {
-                    departmentsProjectScrollerContainer.style.display = 'none';
-                }
-            }
-
             const categoryBtns = document.querySelectorAll('.category-btn');
             const wordCloudTriggers = document.querySelectorAll('.word-cloud-trigger');
             const projectsSection = document.getElementById('projects-section');
             const statusFilter = document.getElementById('status-filter');
             const deptFilter = document.getElementById('department-filter');
-            const teamFilter = document.getElementById('team-filter');
             const clientFilter = document.getElementById('client-filter');
-            const resultsCount = document.getElementById('results-count');
             const tbody = document.getElementById('projects-tbody');
             const rows = document.querySelectorAll('.project-row');
             const sortables = document.querySelectorAll('.sortable');
             let selectedCategory = '';
-            let forcedDepartment = '';
-
-            function updateResultCount() {
-                if (!resultsCount) {
-                    return;
-                }
-
-                const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
-                const totalRows = rows.length;
-
-                resultsCount.innerHTML = `
-                    <span class="tldr-results-kicker">Showing</span>
-                    <span class="tldr-results-value">${visibleRows}</span>
-                    <span class="tldr-results-total">of ${totalRows} projects</span>
-                `;
-            }
 
             categoryBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1106,8 +814,6 @@
 
             wordCloudTriggers.forEach(trigger => {
                 trigger.addEventListener('click', function() {
-                    const clickedDepartment = (this.dataset.department || '').trim();
-
                     selectedCategory = '';
                     categoryBtns.forEach(btn => btn.classList.remove('active'));
 
@@ -1116,28 +822,8 @@
                     }
 
                     statusFilter.value = '';
-
-                    // Match option values case-insensitively in case source strings differ slightly.
-                    const matchingOption = Array.from(deptFilter.options).find(option => {
-                        return option.value.trim().toLowerCase() === clickedDepartment.toLowerCase();
-                    });
-
-                    if (matchingOption) {
-                        deptFilter.value = matchingOption.value;
-                        forcedDepartment = '';
-                    } else {
-                        deptFilter.value = '';
-                        forcedDepartment = clickedDepartment;
-                    }
-
-                    if (clientFilter) {
-                        clientFilter.value = '';
-                    }
-
-                    if (teamFilter) {
-                        teamFilter.value = '';
-                    }
-
+                    deptFilter.value = this.dataset.department;
+                    clientFilter.value = '';
                     applyFilters();
 
                     if (projectsSection) {
@@ -1148,40 +834,26 @@
 
             function applyFilters() {
                 const selectedStatus = statusFilter.value.toLowerCase();
-                const selectedDept = (deptFilter.value || forcedDepartment || '').trim();
-                const selectedTeamMember = (teamFilter?.value || '').trim().toLowerCase();
+                const selectedDept = deptFilter.value;
                 //const selectedClient = clientFilter.value;
 
                 rows.forEach(row => {
                     const rowCategory = row.dataset.category;
                     const rowStatus = row.dataset.status.toLowerCase();
-                    const rowDept = (row.dataset.department || '').trim();
+                    const rowDept = row.dataset.department;
                     const rowClient = row.dataset.client;
-                    const rowTeamMembers = (row.dataset.team || '')
-                        .split(',')
-                        .map(member => member.trim().toLowerCase())
-                        .filter(Boolean);
 
                     const categoryMatch = !selectedCategory || rowCategory === selectedCategory;
                     const statusMatch = !selectedStatus || rowStatus === selectedStatus;
-                    const deptMatch = !selectedDept || rowDept.toLowerCase() === selectedDept.toLowerCase();
-                    const teamMatch = !selectedTeamMember || rowTeamMembers.includes(selectedTeamMember);
+                    const deptMatch = !selectedDept || rowDept === selectedDept;
                     //const clientMatch = !selectedClient || rowClient === selectedClient;
 
-                    row.style.display = categoryMatch && statusMatch && deptMatch && teamMatch ? '' : 'none';
+                    row.style.display = categoryMatch && statusMatch && deptMatch ? '' : 'none';
                 });
-
-                updateResultCount();
             }
 
             statusFilter.addEventListener('change', applyFilters);
-            deptFilter.addEventListener('change', function() {
-                forcedDepartment = '';
-                applyFilters();
-            });
-            if (teamFilter) {
-                teamFilter.addEventListener('change', applyFilters);
-            }
+            deptFilter.addEventListener('change', applyFilters);
             //clientFilter.addEventListener('change', applyFilters);
 
             // Sort functionality
@@ -1211,9 +883,6 @@
                         } else if (sortKey === 'department') {
                             aVal = a.dataset.department.toLowerCase();
                             bVal = b.dataset.department.toLowerCase();
-                        } else if (sortKey === 'team') {
-                            aVal = (a.dataset.team || '').toLowerCase();
-                            bVal = (b.dataset.team || '').toLowerCase();
                         }
 
                         return isAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
@@ -1222,11 +891,8 @@
                     // Clear and repopulate tbody
                     tbody.innerHTML = '';
                     sortedRows.forEach(row => tbody.appendChild(row));
-                    updateResultCount();
                 });
             });
-
-            updateResultCount();
         });
     </script>
 @endsection
