@@ -9,7 +9,7 @@ const statList = [
     text: "Different UConn Partners (and counting!)"
   },
   {
-    head: "500,000",
+    head: "1.5 M",
     text: "Monthly Pageviews"
   },
   {
