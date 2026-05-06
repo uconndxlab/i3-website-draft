@@ -90,6 +90,10 @@ class PageController extends Controller
         return view('pages.lincus');
     }
 
+    public function comingOutWithCare() {
+        return view('pages.coming-out-with-care');
+    }
+
     public function tldr()
     {
         $stats = [

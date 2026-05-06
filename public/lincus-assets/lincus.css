@@ -334,7 +334,7 @@ svg .shown {
   z-index: 1;
 }
 
-/* Gradient overlays (your original styles) */
+/* Gradient overlays */
 .process-card-front::after,
 .process-card-back::after {
   position: absolute;

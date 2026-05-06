@@ -1,0 +1,10 @@
+.bg-primary {
+  background-color: #000f30 !important;
+}
+
+#hero-section {
+    background-image: url(assets/waves-animated.svg);
+    background-size: cover;
+    background-position: 50% 80%;
+    min-height: 550px;
+}

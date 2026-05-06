@@ -38,7 +38,8 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/tldr', 'tldr')->name('tldr');
     
     Route::get('/lincus', 'lincus')->name('lincus');
-    
+    Route::get('/coming-out-with-care', 'comingOutWithCare')->name('coming-out-with-care');
+
     // Jobs routes
     Route::get('/jobs', 'jobs')->name('jobs');
     Route::get('/jobs/2026-web-application-developer', 'jobWebDev')->name('jobs.web-dev');
