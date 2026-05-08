@@ -32,11 +32,11 @@
       .care-page span {
         font-family: inherit;
         color: inherit;
-        text-transform: unset;
+        text-text-anchor="middle" transform: unset;
         -webkit-text-stroke: unset;
         text-stroke: unset;
         letter-spacing: 1px;
-        line-height: 2.5rem;
+        line-height: 170%;
       }
       .care-page p,
       .care-page span {
@@ -384,7 +384,7 @@
                             self-reflective exercises, and safety features. These tools can be critical for
                             individuals navigating the complexities of coming out. After being approached
                             by the National SOGIE Center with the idea to turn the PDF into an interactive website,
-                            i3 identified the project as an opportunity to transform an important document into an engaging resource.
+                            i3 identified the project as an opportunity to text-anchor="middle" transform an important document into an engaging resource.
                         </p>
                     </div>
 
@@ -432,62 +432,74 @@
             </div>
         </section>
 
+        <!-- Build -->
         <section id="build">
             <div class="container-fluid mt-5">
                 <div class="container">
-
                     <div class="row book-row">
                         <span class="text-start fs-5">04 The Challenge</span>
-                        <div class="col-7">
+                        <div class="col-6" data-aos="fade-right" data-aos-duration="800">
                             <span class="fs-3">A valuable resource with
                             <span class="fw-medium">limited accessibility.</span></span>
-                                <p class="fs-5 pt-2">
-                                    The development of the Coming Out With Care website followed an iterative,
-                                    collaborative process grounded in both technical execution and user needs.
-                                    The team of three began by closely reviewing the original PDF guide to fully
-                                    understand its content, tone, and purpose. This initial research ensured
-                                    that the digital version would remain faithful to the guide’s mission while
-                                    identifying opportunities to improve accessibility and engagement.
-                                </p>
-
+                            <p class="fs-5 pt-2">
+                                The development of the Coming Out With Care website followed an iterative,
+                                collaborative process grounded in both technical execution and user needs.
+                                The team of three began by closely reviewing the original PDF guide to fully
+                                understand its content, tone, and purpose. This initial research ensured
+                                that the digital version would remain faithful to the guide’s mission while
+                                identifying opportunities to improve accessibility and engagement.
+                            </p>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6 d-flex justify-content-center align-items-end" data-aos="fade-left" data-aos-duration="800">
                             <object class="build-book" data="/care-assets/assets/book-img-small.webp" type="image/webp" aria-label="Image of coming out with care guide in book format">
-                                <img class="build-book" src="/care-assets/assets/book-img-full.jpg" alt="Image of coming out with care guide in book format" />
+                                <img class="build-book" src="/care-assets/assets/book-img-full.png" alt="Image of coming out with care guide in book format" />
                             </object>
                         </div>
                     </div>
                     <div class="row blocks-row">
-                        <div class="col-7">
-                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583.203733 595.238113">
+                        <div class="col-6 mb-5" data-aos="fade-up" data-aos-duration="800">
+                            <svg id="blocks-svg" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 641.124327 595.238113">
                                 <defs>
                                     <style>
-                                      .cls-1 {
-                                        fill: #f849c1;
+                                      .cls-blocks-1 {
+                                        letter-spacing: .009961em;
                                       }
 
-                                      .cls-2 {
-                                        fill: #66d575;
-                                      }
-
-                                      .cls-3, .cls-4, .cls-5 {
-                                        letter-spacing: -.030008em;
-                                      }
-
-                                      .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+                                      .cls-blocks-1, .cls-blocks-2, .cls-blocks-3, .cls-blocks-4, .cls-blocks-5, .cls-blocks-6, .cls-blocks-7, .cls-blocks-8 {
                                         font-family: "Poppins", Arial, Helvetica, BlinkMacSystemFont, sans-serif;
+                                        font-size: 15px;
                                         font-weight: 500;
                                       }
 
-                                      .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-9 {
-                                        font-size: 16px;
+                                      .cls-blocks-1, .cls-blocks-4, .cls-blocks-8 {
+                                        opacity: .8;
                                       }
 
-                                      .cls-3, .cls-6, .cls-8 {
+                                      .cls-blocks-9 {
+                                        fill: #f849c1;
+                                      }
+
+                                      .cls-blocks-10 {
+                                        fill: #66d575;
+                                      }
+
+                                      .cls-blocks-2, .cls-blocks-7, .cls-blocks-8 {
+                                        letter-spacing: .010026em;
+                                      }
+
+                                      .cls-blocks-3 {
+                                        letter-spacing: .010032em;
+                                      }
+
+                                      .cls-blocks-3, .cls-blocks-6, .cls-blocks-7 {
                                         fill: #fff;
                                       }
 
-                                      .cls-10 {
+                                      .cls-blocks-4, .cls-blocks-5, .cls-blocks-6 {
+                                        letter-spacing: .009993em;
+                                      }
+
+                                      .cls-blocks-11 {
                                         fill: none;
                                         stroke: #757575;
                                         stroke-linecap: round;
@@ -495,201 +507,325 @@
                                         stroke-width: 4px;
                                       }
 
-                                      .cls-11 {
+                                      .cls-blocks-12 {
                                         fill: #1e1e1e;
                                       }
 
-                                      .cls-5, .cls-9 {
-                                        opacity: .8;
-                                      }
-
-                                      .cls-12 {
+                                      .cls-blocks-13 {
                                         fill: #ffe0c2;
                                       }
 
-                                      .cls-13 {
+                                      .cls-blocks-14 {
                                         fill: #dcccff;
                                       }
 
-                                      .cls-14 {
+                                      .cls-blocks-15 {
                                         fill: #ffc2ec;
                                       }
 
-                                      .cls-6, .cls-7 {
-                                        letter-spacing: -.029947em;
-                                      }
-
-                                      .cls-15 {
+                                      .cls-blocks-16 {
                                         fill: #cdf4d3;
                                       }
 
-                                      .cls-8 {
-                                        font-size: 15.577569px;
-                                        letter-spacing: -.029978em;
-                                      }
-
-                                      .cls-9 {
-                                        letter-spacing: -.029978em;
-                                      }
-
-                                      .cls-16 {
+                                      .cls-blocks-17 {
                                         fill: #874fff;
                                       }
 
-                                      .cls-17 {
+                                      .cls-blocks-18 {
                                         fill: #ffecbd;
                                       }
 
-                                      .cls-18 {
+                                      .cls-blocks-19 {
                                         fill: #ff9e42;
                                       }
                                     </style>
                                 </defs>
                                 <g id="Layer_1-2" data-name="Layer 1">
-                                    <g id="home">
-                                        <path class="cls-11" d="M356.2986,0h-129.393468c-1.029567,0-1.866252.83546-1.866252,1.866252v46.345257c0,1.030801.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.835451,1.866252-1.866252V1.866252c0-1.030792-.836685-1.866252-1.866252-1.866252Z"/>
-                                        <text class="cls-8" transform="translate(268.076413 29.919922) scale(1.0383 1)"><tspan x="0" y="0">Home</tspan></text>
+                                    <g>
+                                        <path class="cls-blocks-12" d="M356.2986,0h-129.393468c-1.029567,0-1.866252.83546-1.866252,1.866252v46.345257c0,1.030801.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.835451,1.866252-1.866252V1.866252c0-1.030792-.836685-1.866252-1.866252-1.866252Z"/>
+                                        <text class="cls-blocks-3" text-anchor="middle" transform="translate(291.601312 29.919927) scale(1.0383 1)"><tspan x="0" y="0">Home</tspan></text>
                                     </g>
-                                    <g id="section-1">
-                                        <g>
-                                            <path class="cls-2" d="M131.570762,145.471394H1.866252c-1.030792,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-4" transform="translate(33.449034 175.943191)"><tspan x="0" y="0">Section 1</tspan></text>
+                                    <g id="section-1-group">
+                                        <g id="section-1-6">
+                                            <path class="cls-blocks-18" d="M131.570762,545.160352H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(66.718565 575.937334)"><tspan x="0" y="0">Brain Break!</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-15" d="M131.570762,212.03438H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(31.8338 242.811843)"><tspan x="0" y="0">About Us</tspan></text>
+                                        <g id="section-1-5">
+                                            <path class="cls-blocks-16" d="M131.570762,478.597366H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(66.727843 509.374834)"><tspan x="0" y="0">Self-Care</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-15" d="M131.570762,412.03438H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(11.290831 442.741042)"><tspan x="0" y="0">Prepare for C...</tspan></text>
+                                        <g id="section-1-4">
+                                            <path class="cls-blocks-16" d="M131.570762,412.03438H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(66.872374 442.741045)"><tspan x="0" y="0">Prepare for C...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-15" d="M131.570762,278.597366H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(35.130675 309.528152)"><tspan x="0" y="0">Purpose</tspan></text>
+
+
+                                        <g id="section-1-3">
+                                            <path class="cls-blocks-16" d="M131.570762,345.471394H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(66.672179 375.937334)"><tspan x="0" y="0">Take Care of Y...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-15" d="M131.570762,345.471394H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(6.319151 375.937331)"><tspan x="0" y="0">Take Care of Y...</tspan></text>
+
+                                        <g id="section-1-2">
+                                            <path class="cls-blocks-16" d="M131.570762,278.597366H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(66.790831 309.528154)"><tspan x="0" y="0">Purpose</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-17" d="M131.570762,545.160352H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(20.469542 575.937331)"><tspan x="0" y="0">Brain Break!</tspan></text>
+
+                                        <g id="section-1-1">
+                                            <path class="cls-blocks-16" d="M131.570762,212.03438H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(66.672179 242.811845)"><tspan x="0" y="0">About Us</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-15" d="M131.570762,478.597366H1.866252c-1.030792,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.835451-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(29.414855 509.374831)"><tspan x="0" y="0">Self-Care</tspan></text>
+                                        <g id="section-1-0">
+                                            <path class="cls-blocks-10" d="M131.570762,145.471394H1.866252c-1.030792,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.83546,1.866252,1.866252,1.866252h129.70451c1.030801,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.835451-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-5" text-anchor="middle" transform="translate(66.562987 176.072569)"><tspan x="0" y="0">Section 1</tspan></text>
                                         </g>
+
                                     </g>
-                                    <g id="section-2">
-                                        <g>
-                                            <path class="cls-16" d="M281.493002,145.471394h-129.70451c-1.030801,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-3" transform="translate(181.53546 175.798171)"><tspan x="0" y="0">Section 2</tspan></text>
+                                    <g id="section-2-group">
+
+
+
+
+
+                                        <g id="section-2-4">
+                                            <path class="cls-blocks-18" d="M281.493002,412.03438h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(216.640929 442.812334)"><tspan x="0" y="0">Brain Break!</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-13" d="M281.493002,278.597366h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-9" transform="translate(157.930968 309.374831)"><tspan x="0" y="0">Developing a...</tspan></text>
+                                        <g id="section-2-3">
+                                            <path class="cls-blocks-14" d="M281.493002,345.471394h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(216.640747 375.937334)"><tspan x="0" y="0">A Deeper Scri...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-13" d="M281.493002,212.03438h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(157.061339 242.811843)"><tspan x="0" y="0">Preparing for...</tspan></text>
+                                        <g id="section-2-2">
+                                            <path class="cls-blocks-14" d="M281.493002,278.597366h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(216.640747 309.374834)"><tspan x="0" y="0">Developing a...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-13" d="M281.493002,345.471394h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(157.555968 375.937331)"><tspan x="0" y="0">A Deeper Scri...</tspan></text>
+                                        <g id="section-2-1">
+                                            <path class="cls-blocks-14" d="M281.493002,212.03438h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-4" text-anchor="middle" transform="translate(216.640747 242.811845)"><tspan x="0" y="0">Preparing for...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-17" d="M281.493002,412.03438h-129.70451c-1.030801,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(170.391905 442.812331)"><tspan x="0" y="0">Brain Break!</tspan></text>
-                                        </g>
-                                    </g>
-                                    <g id="section-3">
-                                        <g>
-                                            <path class="cls-18" d="M431.415241,145.471394h-129.70451c-1.029567,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-7" transform="translate(331.31964 175.93782)"><tspan x="0" y="0">Section 3</tspan></text>
-                                        </g>
-                                        <g>
-                                            <path class="cls-12" d="M431.415241,212.03438h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(304.798155 242.811843)"><tspan x="0" y="0">The Painful Exp...</tspan></text>
-                                        </g>
-                                        <g>
-                                            <path class="cls-12" d="M431.415241,478.597366h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(305.56671 509.374831)"><tspan x="0" y="0">Benefits to Co...</tspan></text>
-                                        </g>
-                                        <g>
-                                            <path class="cls-12" d="M431.415241,412.03438h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(308.520812 442.863113)"><tspan x="0" y="0">Things You Mi...</tspan></text>
-                                        </g>
-                                        <g>
-                                            <path class="cls-12" d="M431.415241,345.471394h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(304.901671 376.062331)"><tspan x="0" y="0">How to Assess...</tspan></text>
-                                        </g>
-                                        <g>
-                                            <path class="cls-12" d="M431.415241,278.597366h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(309.043273 309.374831)"><tspan x="0" y="0">Reacting to B...</tspan></text>
-                                        </g>
-                                        <g>
-                                            <path class="cls-17" d="M431.415241,545.160352h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(320.433898 576.07112)"><tspan x="0" y="0">Brain Break!</tspan></text>
+                                        <g id="section-2-0">
+                                            <path class="cls-blocks-17" d="M281.493002,145.471394h-129.70451c-1.030801,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.835451,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-6" text-anchor="middle" transform="translate(216.640929 175.798173)"><tspan x="0" y="0">Section 2</tspan></text>
                                         </g>
                                     </g>
-                                    <g id="section-4">
-                                        <g>
-                                            <path class="cls-1" d="M581.337481,145.471394h-129.393468c-1.029567,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-6" transform="translate(480.835265 176.082839)"><tspan x="0" y="0">Section 4</tspan></text>
+                                    <g id="section-3-group">
+                                        <g id="section-3-6">
+                                            <path class="cls-blocks-18" d="M431.415241,545.160352h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-1" text-anchor="middle" transform="translate(366.682921 576.071123)"><tspan x="0" y="0">Brain Break!</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-14" d="M581.337481,278.597366h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(454.703429 309.534011)"><tspan x="0" y="0">Know Your Hist...</tspan></text>
+                                        <g id="section-3-5">
+                                            <path class="cls-blocks-13" d="M431.415241,478.597366h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-1" text-anchor="middle" transform="translate(365.784483 509.374834)"><tspan x="0" y="0">Benefits to Co...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-14" d="M581.337481,212.03438h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(455.75128 242.811843)"><tspan x="0" y="0">Centering Que...</tspan></text>
+                                        <g id="section-3-4">
+                                            <path class="cls-blocks-13" d="M431.415241,412.03438h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(366.562986 442.947081)"><tspan x="0" y="0">Things You Mi...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-14" d="M581.337481,412.03438h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(459.28839 442.671706)"><tspan x="0" y="0">Resources for...</tspan></text>
+                                        <g id="section-3-3">
+                                            <path class="cls-blocks-13" d="M431.415241,345.471394h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-1" text-anchor="middle" transform="translate(366.563809 376.072081)"><tspan x="0" y="0">How to Assess...</tspan></text>
                                         </g>
-                                        <g>
-                                            <path class="cls-14" d="M581.337481,345.471394h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
-                                            <text class="cls-5" transform="translate(458.400694 375.937331)"><tspan x="0" y="0">The Data Prov...</tspan></text>
+                                        <g id="section-3-2">
+                                            <path class="cls-blocks-13" d="M431.415241,278.597366h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(366.562986 309.374834)"><tspan x="0" y="0">Reacting to B...</tspan></text>
+                                        </g>
+                                        <g id="section-3-1">
+                                            <path class="cls-blocks-13" d="M431.415241,212.03438h-129.70451c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(367.026671 242.811845)"><tspan x="0" y="0">The Painful Exp...</tspan></text>
+                                        </g>
+                                        <g id="section-3-0">
+                                            <path class="cls-blocks-19" d="M431.415241,145.471394h-129.70451c-1.029567,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.70451c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-2" text-anchor="middle" transform="translate(366.562804 175.937822)"><tspan x="0" y="0">Section 3</tspan></text>
+                                        </g>
+                                    </g>
+                                    <g id="section-4-group">
+                                        <g id="section-4-4">
+                                            <path class="cls-blocks-15" d="M581.337481,412.03438h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(516.640929 442.671709)"><tspan x="0" y="0">Resources for...</tspan></text>
+                                        </g>
+                                        <g id="section-4-3">
+                                            <path class="cls-blocks-15" d="M581.337481,345.471394h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(517.054991 375.937334)"><tspan x="0" y="0">The Data Prov...</tspan></text>
+                                        </g>
+                                        <g id="section-4-2">
+                                            <path class="cls-blocks-15" d="M581.337481,278.597366h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-1" text-anchor="middle" transform="translate(516.640929 309.534013)"><tspan x="0" y="0">Know Your Hist...</tspan></text>
+                                        </g>
+                                        <g id="section-4-1">
+                                            <path class="cls-blocks-15" d="M581.337481,212.03438h-129.393468c-1.029567,0-1.866252.836685-1.866252,1.866252v46.345257c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.345257c0-1.029567-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-8" text-anchor="middle" transform="translate(517.123351 242.811845)"><tspan x="0" y="0">Centering Que...</tspan></text>
+                                        </g>
+                                        <g id="section-4-0">
+                                            <path class="cls-blocks-9" d="M581.337481,145.471394h-129.393468c-1.029567,0-1.866252.835451-1.866252,1.866252v46.034215c0,1.029567.836685,1.866252,1.866252,1.866252h129.393468c1.029567,0,1.866252-.836685,1.866252-1.866252v-46.034215c0-1.030801-.836685-1.866252-1.866252-1.866252Z"/>
+                                            <text class="cls-blocks-7" text-anchor="middle" transform="translate(516.506163 176.082841)"><tspan x="0" y="0">Section 4</tspan></text>
                                         </g>
                                     </g>
                                     <g id="arrow-4">
                                         <g>
-                                            <line class="cls-10" x1="516.640746" y1="141.347805" x2="503.75396" y2="128.461019"/>
-                                            <line class="cls-10" x1="516.640746" y1="141.347805" x2="529.525886" y2="128.462664"/>
+                                            <line class="cls-blocks-11" x1="516.640746" y1="141.347805" x2="503.75396" y2="128.461019"/>
+                                            <line class="cls-blocks-11" x1="516.640746" y1="141.347805" x2="529.525886" y2="128.462664"/>
                                         </g>
-                                        <path class="cls-10" d="M291.601866,53.12907v34.086771c0,4.128694,3.346968,7.475662,7.475662,7.475662h210.087556c4.128694,0,7.475662,3.346968,7.475662,7.475662v39.18064"/>
+                                        <path class="cls-blocks-11" d="M291.601866,53.12907v34.086771c0,4.128694,3.346968,7.475662,7.475662,7.475662h210.087556c4.128694,0,7.475662,3.346968,7.475662,7.475662v39.18064"/>
                                     </g>
                                     <g id="arrow-3">
-                                        <path class="cls-10" d="M291.601866,53.12907v33.947144c0,4.205809,3.409482,7.615291,7.615291,7.615291h59.730537c4.205809,0,7.615291,3.409482,7.615291,7.615291v39.051238"/>
+                                        <path class="cls-blocks-11" d="M291.601866,53.12907v33.947144c0,4.205809,3.409482,7.615291,7.615291,7.615291h59.730537c4.205809,0,7.615291,3.409482,7.615291,7.615291v39.051238"/>
                                         <g>
-                                            <line class="cls-10" x1="366.563809" y1="141.358035" x2="353.677023" y2="128.471249"/>
-                                            <line class="cls-10" x1="366.563809" y1="141.358035" x2="379.448949" y2="128.472895"/>
+                                            <line class="cls-blocks-11" x1="366.563809" y1="141.358035" x2="353.677023" y2="128.471249"/>
+                                            <line class="cls-blocks-11" x1="366.563809" y1="141.358035" x2="379.448949" y2="128.472895"/>
                                         </g>
                                     </g>
                                     <g id="arrow-2">
-                                        <path class="cls-10" d="M291.601866,53.123955v33.947144c0,4.205809-3.409482,7.615291-7.615291,7.615291h-59.730537c-4.205809,0-7.615291,3.409482-7.615291,7.615291v39.051238"/>
+                                        <path class="cls-blocks-11" d="M291.601866,53.123955v33.947144c0,4.205809-3.409482,7.615291-7.615291,7.615291h-59.730537c-4.205809,0-7.615291,3.409482-7.615291,7.615291v39.051238"/>
                                         <g>
-                                            <line class="cls-10" x1="216.639924" y1="141.35292" x2="229.526709" y2="128.466134"/>
-                                            <line class="cls-10" x1="216.639924" y1="141.35292" x2="203.754784" y2="128.467779"/>
+                                            <line class="cls-blocks-11" x1="216.639924" y1="141.35292" x2="229.526709" y2="128.466134"/>
+                                            <line class="cls-blocks-11" x1="216.639924" y1="141.35292" x2="203.754784" y2="128.467779"/>
                                         </g>
                                     </g>
                                     <g id="arrow-1">
                                         <g>
-                                            <line class="cls-10" x1="66.562987" y1="141.35292" x2="79.449773" y2="128.466134"/>
-                                            <line class="cls-10" x1="66.562987" y1="141.35292" x2="53.677847" y2="128.467779"/>
+                                            <line class="cls-blocks-11" x1="66.562987" y1="141.35292" x2="79.449773" y2="128.466134"/>
+                                            <line class="cls-blocks-11" x1="66.562987" y1="141.35292" x2="53.677847" y2="128.467779"/>
                                         </g>
-                                        <path class="cls-10" d="M291.601866,53.134185v34.086771c0,4.128694-3.346968,7.475662-7.475662,7.475662H74.038649c-4.128694,0-7.475662,3.346968-7.475662,7.475662v39.18064"/>
+                                        <path class="cls-blocks-11" d="M291.601866,53.134185v34.086771c0,4.128694-3.346968,7.475662-7.475662,7.475662H74.038649c-4.128694,0-7.475662,3.346968-7.475662,7.475662v39.18064"/>
                                     </g>
                                 </g>
                             </svg>
                         </div>
+                        <div class="col-6 d-flex justify-content-center align-items-center" data-aos="fade-left" data-aos-duration="800">
+                            <p class="fs-5 pt-2 my-auto">
+                                From there, the team used Eleventy, a software system used to create websites,
+                                to generate a simple, barebones version of the site based directly on the PDF.
+                                This early prototype established the site’s structure and allowed the team to begin
+                                transforming static content into a more dynamic experience. Working closely with the
+                                National SOGIE Center, the team refined the platform’s communication style to ensure
+                                it felt supportive, affirming, and accessible to users.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row laptop-row">
+                        <div class="col-9 mb-3">
+                            <p class="fs-5 my-auto">
+                                As development progressed, the team introduced interactive features
+                                designed to support both user safety and engagement. These included tools
+                                for reflection, interactive activities, and safety-focused elements like the
+                                quick escape button. Throughout this process, i3 and the SOGIE team met regularly
+                                to review progress, gather feedback, and make iterative improvements based on user
+                                needs and safety considerations.
+                            </p>
+                        </div>
+                        <div class="col-8 my-4">
+                            <p class="fs-5 my-auto">
+                                The final stages of development focused on ensuring the platform was fully accessible
+                                and easy to navigate. After completing these refinements, the SOGIE team presented
+                                the site to key stakeholders for final approval. Once approved, the platform was
+                                deployed and optimized for search visibility. This consideration helped ensure
+                                that users can easily find and benefit from this resource.
+                            </p>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="laptop-wrap w-75">
+                                <img class="w-100 mx-auto" src="/care-assets/assets/laptop-blank.png" alt="Laptop with Coming Out With Care opened">
+                                <div class="cards-abs">
+                                    <div class="flip-card left top" data-aos="fade-up" data-aos-once="true" data-aos-duration="800">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/safety.svg') center / cover no-repeat var(--flip-green);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4"
+                                            style="background: url('/care-assets/assets/laptop-card-svgs/text-long.svg') center / cover no-repeat var(--flip-green);">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card mid top" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="50">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/acceptance.svg') center / cover no-repeat var(--flip-green);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card right top" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="100">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/emotional.svg') center / cover no-repeat var(--flip-green);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card left center" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="150">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/support.svg') center / cover no-repeat var(--theme-pink);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card mid center" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="200">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/timing.svg') center / cover no-repeat var(--theme-pink);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card right center" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="250">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/education.svg') center / cover no-repeat var(--theme-pink);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card left bot" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="300">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/boundaries.svg') center / cover no-repeat var(--theme-orange);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card mid bot" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="350">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/self-care.svg') center / cover no-repeat var(--theme-orange);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flip-card right bot" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="400">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-arrow"></div>
+                                            <div class="flip-card-front d-flex align-items-center justify-content-center text-center p-4"
+                                                 style="background: url('/care-assets/assets/laptop-card-svgs/legal.svg') center / cover no-repeat var(--theme-orange);">
+                                            </div>
+                                            <div class="flip-card-back d-flex align-items-center justify-content-center text-center p-4">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-
             </div>
-
         </section>
 
         <script src="https://d3js.org/d3.v7.min.js"></script>
