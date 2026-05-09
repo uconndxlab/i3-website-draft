@@ -117,7 +117,7 @@
             <div class="container overview position-relative">
                 <span class="text-start fs-5">01 Overview</span>
                 <div class="row mb-2">
-                    <span class="fs-3 fw-light py-2">Coming out is a <span class="fw-medium">deeply personal</span> and often <span class="fw-medium">emotionally challenging</span> process.</span>
+                    <span class="fs-3 fw-light py-2">Coming out is a <span class="fw-mediumium">deeply personal</span> and often <span class="fw-mediumium">emotionally challenging</span> process.</span>
                     <p class="w-100 fs-5">
                         The University of Connecticut's Institutional Insights and Innovations (i3) helped develop Coming Out With Care:
                         A Guide for Your Well-Being, an interactive platform designed to empower LGBTQIA2S+ individuals to navigate the
@@ -212,7 +212,7 @@
             <div class="container process mt-3">
                 <span class="text-start fs-5">02 Process</span>
                 <div class="row">
-        <span class=" fs-3 mb-3">Start small. Learn fast. <span class="fw-medium">Build what
+        <span class=" fs-3 mb-3">Start small. Learn fast. <span class="fw-mediumium">Build what
             matters.</span></span>
                     <p class="w-100 fs-5">
                         At i3, we begin by putting something real in front of people. A rough draft,
@@ -372,20 +372,20 @@
                 <div class="container challenge text-white my-4 pb-5">
                     <span class="text-start fs-5">04 The Challenge</span>
                     <div class="row">
-          <span class="fs-3 mb-3">A valuable resource with
-              <span class="fw-medium">limited accessibility.</span></span>
-                        <p class="w-100 fs-5 mb-5">Before i3’s involvement, Coming Out With Care existed as a
-                            comprehensive PDF guide. While full of practical guidance and support strategies,
-                            its static format made it difficult to navigate and limited accessibility
-                            for users seeking a personalized learning experience.
-                        </p>
-                        <p class="w-100 fs-5 mb-3">
-                            This static format also restricted the guide’s ability to provide interactive tools,
-                            self-reflective exercises, and safety features. These tools can be critical for
-                            individuals navigating the complexities of coming out. After being approached
-                            by the National SOGIE Center with the idea to turn the PDF into an interactive website,
-                            i3 identified the project as an opportunity to text-anchor="middle" transform an important document into an engaging resource.
-                        </p>
+                      <span class="fs-3 mb-3">A valuable resource with
+                          <span class="fw-mediumium">limited accessibility.</span></span>
+                    <p class="w-100 fs-5 mb-5">Before i3’s involvement, Coming Out With Care existed as a
+                        comprehensive PDF guide. While full of practical guidance and support strategies,
+                        its static format made it difficult to navigate and limited accessibility
+                        for users seeking a personalized learning experience.
+                    </p>
+                    <p class="w-100 fs-5 mb-3">
+                        This static format also restricted the guide’s ability to provide interactive tools,
+                        self-reflective exercises, and safety features. These tools can be critical for
+                        individuals navigating the complexities of coming out. After being approached
+                        by the National SOGIE Center with the idea to turn the PDF into an interactive website,
+                        i3 identified the project as an opportunity to text-anchor="middle" transform an important document into an engaging resource.
+                    </p>
                     </div>
 
                     <!-- Gradient cards -->
@@ -434,13 +434,71 @@
 
         <!-- Build -->
         <section id="build">
-            <div class="container-fluid mt-5">
+            <div class="container-fluid mt-5 position-relative">
+                <div class="bars-wrap">
+                    <svg id="rainbow-bars" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 241.317397 1152.649562">
+                        <defs>
+                            <style>
+                              .cls-bars-1 {
+                                stroke: #6761e5;
+                              }
+
+                              .cls-bars-1, .cls-bars-2, .cls-bars-3, .cls-bars-4, .cls-bars-5, .cls-bars-6, .cls-bars-7 {
+                                fill: none;
+                              }
+
+                              .cls-bars-1, .cls-bars-3, .cls-bars-4, .cls-bars-5, .cls-bars-6, .cls-bars-7 {
+                                stroke-miterlimit: 10;
+                                stroke-width: 29px;
+                              }
+
+                              .cls-bars-3 {
+                                stroke: #67cc96;
+                              }
+
+                              .cls-bars-4 {
+                                stroke: #efa139;
+                              }
+
+                              .cls-bars-5 {
+                                stroke: #ea9fe8;
+                              }
+
+                              .cls-bars-6 {
+                                stroke: #ea6242;
+                              }
+
+                              .cls-bars-7 {
+                                stroke: #644fb5;
+                              }
+
+                              .cls-bars-8 {
+                                clip-path: url(#clippath);
+                              }
+                            </style>
+                            <clipPath id="clippath">
+                                <rect class="cls-bars-2" width="241.317397" height="1152.649562"/>
+                            </clipPath>
+                        </defs>
+                        <g class="cls-bars-8">
+                            <polyline class="cls-bars-6" points="413.829425 79.533554 159.282088 268.581391 159.280039 1155.181477"/>
+                            <polyline class="cls-bars-4" points="381.40378 67.802448 130.316315 253.925435 130.23229 1155.181477"/>
+                            <polyline class="cls-bars-5" points="348.41739 56.34559 101.301194 239.121499 101.299145 1155.181477"/>
+                            <polyline class="cls-bars-3" points="315.276596 45 72.337206 224.417561 72.335157 1155.181477"/>
+                            <polyline class="cls-bars-1" points="283.698616 32.244778 43.503326 209.970489 43.501277 1155.181477"/>
+                            <polyline class="cls-bars-7" points="252.687985 19.282802 14.542635 195.52185 14.540586 1155.181477"/>
+                        </g>
+                    </svg>
+                    <img src="/care-assets/assets/bars-img-1.png" class="bars-img img-1" />
+                    <img src="/care-assets/assets/bars-img-2.png" class="bars-img img-2" />
+                </div>
+
                 <div class="container">
                     <div class="row book-row">
                         <span class="text-start fs-5">04 The Challenge</span>
                         <div class="col-6" data-aos="fade-right" data-aos-duration="800">
                             <span class="fs-3">A valuable resource with
-                            <span class="fw-medium">limited accessibility.</span></span>
+                            <span class="fw-mediumium">limited accessibility.</span></span>
                             <p class="fs-5 pt-2">
                                 The development of the Coming Out With Care website followed an iterative,
                                 collaborative process grounded in both technical execution and user needs.
@@ -822,6 +880,123 @@
 
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Result -->
+        <section id="result">
+            <div class="result-wrap text-black pt-5 pb-5 position-relative rounded-top-4">
+                <div class="container result mt-4">
+                    <span class="text-startfs-5">07 The Result</span>
+
+                    <div class="row">
+                        <span class=" fs-3 mb-3">Connecting <span class="fw-medium">people, topics, and research</span>.</span>
+                        <p class="w-100 fs-5">
+                            The interactive Coming Out With Care platform provides more than guidance—it offers an accessible, safe,
+                            and empowering space for LGBTQIA2S+ individuals. For i3, the project demonstrates how thoughtful design
+                            and collaboration can transform a valuable but underutilized resource into a meaningful, high-impact tool.
+                            <br />
+                            <br />
+                            By leading the transformation, i3 showcased its ability to take mission-driven projects from concept to reality,
+                            prioritizing accessibility, user experience, and well-being. The platform continues to provide immediate value to users,
+                            helping individuals navigate a complex life experience with confidence and self-respect.
+                        </p>
+                    </div>
+
+
+                    <div class="row justify-content-between mx-auto gx-4">
+                        <div class="col-xxl-6 col-xl-6 col-sm-11 col-12 d-flex justify-content-between mx-auto mx-xl-0 align-items-center result-colors text-center gap-1 mt-4">
+                            <div class="d-flex flex-column justify-content-center gap-2">
+                                <span id="blue-violet" class="color"></span>
+                                <span class="fw-medium text-slate-grey fs-6">blue violet</span>
+                                <span class="fs-6 text-slate-grey opacity-50">#644FB5</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center gap-2">
+                                <span id="slate-blue" class="color"></span>
+                                <span class="fw-medium text-slate-grey fs-6">slate blue</span>
+                                <span class="fs-6 text-slate-grey opacity-50">#6761E5</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center gap-2">
+                                <span id="sea-green" class="color"></span>
+                                <span class="fw-mediumium text-slate-grey fs-6">sea green</span>
+                                <span class="fs-6 text-slate-grey opacity-50">#67CC96</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center gap-2">
+                                <span id="taffy" class="color"></span>
+                                <span class="fw-medium text-slate-grey fs-6">taffy</span>
+                                <span class="fs-6 text-slate-grey opacity-50">#EA9FE8</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center gap-2">
+                                <span id="cantaloupe" class="color"></span>
+                                <span class="fw-medium text-slate-grey fs-6">cantaloupe</span>
+                                <span class="fs-6 text-slate-grey opacity-50">#EFA139</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center gap-2">
+                                <span id="poppy" class="color"></span>
+                                <span class="fw-medium text-slate-grey fs-6">poppy</span>
+                                <span class="fs-6 text-slate-grey opacity-50">#EA6242</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xxl-6 col-xl-6 col-12 heads-wrap d-flex px-2 justify-content-xxl-center justify-content-evenly align-items-center gap-xxl-5 gap-5 mt-4">
+                            <div class="d-flex flex-column">
+                                <span class="result-header-1 fw-bold">Header 1</span>
+                                <span class="fs-6 text-slate-grey  opacity-50 result-head-1-desc">Bold Poppins / 56px</span>
+                                <span class="result-header-2 fw-medium">Header 2</span>
+                                <span class="fs-6 text-slate-grey opacity-50 result-head-2-desc">Medium Poppins / 32px</span>
+                            </div>
+
+                            <div class="d-flex flex-column me-2 d-flex justify-content-end h-100 gap-4">
+                                <div>
+                                    <div class="result-header-3 fw-medium">Header 3</div>
+                                    <span class="fs-6 text-slate-grey opacity-50 mb-4">Medium Poppins / 22px</span>
+                                </div>
+                                <div>
+                                    <div class="result-paragraph fw-normal">Paragraph</div>
+                                    <span class="fs-6 text-slate-grey opacity-50">Poppins / 16px</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row words-row justify-content-center gap-5">
+                        <div class="col-4 word-answers-wrap d-flex flex-column">
+                            <div class="word-answers-wrap">
+                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
+                                    <span>Fabulous</span>
+                                </div>
+                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
+                                    <span>Pride</span>
+                                </div>
+                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                                    <span>Resilience</span>
+                                </div>
+                                <div class="word-answer rounded-2 py-4 text-center" style="background: rgba(255,255,255,.4)" data-aos="fade-up" data-aos-delay="100">
+                                    <span style="text-decoration: line-through;">Authenticity</span>
+                                </div>
+                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                                    <span>Love</span>
+                                </div>
+                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                                    <span>Solidarity</span>
+                                </div>
+                                <div class="word-answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="300">
+                                    <span>Freedom</span>
+                                </div>
+                                <div class="word-answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="300">
+                                    <span>Visibility</span>
+                                </div>
+                            </div>
+                            <div class="search-info">
+
+                            </div>
+                        </div>
+
+                        <div class="col-5 grid-container">
+                            <div class="grid"></div>
                         </div>
                     </div>
                 </div>

@@ -267,5 +267,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
+
+
+  const rainbowBars = document.querySelector('#rainbow-bars');
+  if(rainbowBars) {
+    const lines = Array.from(rainbowBars.querySelectorAll('polyline')).reverse();
+    const imgs = Array.from(document.querySelectorAll('.bars-img'));
+    if(lines) {
+      lines.forEach(line => {
+        const len = line.getTotalLength();
+        line.style.strokeDasharray = `${len}px`;
+        line.style.strokeDashoffset = `${len}px`;
+      })
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            lines.forEach((line, idx) => {
+              line.style.transition = `stroke-dashoffset 3s ease-in`;
+              line.style.transitionDelay = `${idx * .1}s`
+              line.style.strokeDashoffset = '0px';
+            })
+            if(imgs.length > 0) {
+              imgs.forEach(img => {
+                img.style.transform = 'none';
+              })
+            }
+            observer.unobserve(rainbowBars);
+          }
+
+        })
+      }, {threshold: .5})
+      observer.observe(rainbowBars)
+    }
+  }
+
+  let grid = Array.from({ length: 15 }, () => Array(15).fill(''));
+  const gridDiv = document.querySelector('.grid');
+  const letters = 'NVAEQUALITYCCRHAKQWSKVKRDVDHLDRTNEMREWOPMENLPYEXBBLYTITNEDIQSCYTICITNEHTUACONYMFREEDOMLCIPLETMQEUSIDRQTEWIIPVQDJBYCXNJSKDLTFQWASGVHQFTXAIIZAZLFABULOUSRSYTILIBISIVPOVIEKAQUNAGAVPZCJTRJEDIRPYNMWOKZYOHPLOVEQWFVXMOALOLOEIBKDYMXMO';
+  let strIdx = 0
+  grid.forEach((col, colIdx) => {
+    col.forEach((letter, rowIdx) => {
+      const div = document.createElement('div');
+      div.id = `cell-${colIdx+1}-${rowIdx+1}`;
+      div.className = 'cell';
+      const span = document.createElement('span');
+      span.innerText = letters[strIdx];
+      strIdx += 1
+      div.appendChild(span);
+      gridDiv.appendChild(div);
+    })
+  })
 })
 
