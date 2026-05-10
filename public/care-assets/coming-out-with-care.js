@@ -302,21 +302,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  let grid = Array.from({ length: 15 }, () => Array(15).fill(''));
-  const gridDiv = document.querySelector('.grid');
-  const letters = 'NVAEQUALITYCCRHAKQWSKVKRDVDHLDRTNEMREWOPMENLPYEXBBLYTITNEDIQSCYTICITNEHTUACONYMFREEDOMLCIPLETMQEUSIDRQTEWIIPVQDJBYCXNJSKDLTFQWASGVHQFTXAIIZAZLFABULOUSRSYTILIBISIVPOVIEKAQUNAGAVPZCJTRJEDIRPYNMWOKZYOHPLOVEQWFVXMOALOLOEIBKDYMXMO';
-  let strIdx = 0
-  grid.forEach((col, colIdx) => {
-    col.forEach((letter, rowIdx) => {
-      const div = document.createElement('div');
-      div.id = `cell-${colIdx+1}-${rowIdx+1}`;
-      div.className = 'cell';
-      const span = document.createElement('span');
-      span.innerText = letters[strIdx];
-      strIdx += 1
-      div.appendChild(span);
-      gridDiv.appendChild(div);
-    })
-  })
+  const searchSVG = document.querySelector('#word-search-svg');
+  if(searchSVG) {
+    const lines = Array.from(searchSVG.querySelectorAll('path'));
+    if(lines.length > 0) {
+      lines.forEach(line => {
+        const len = line.getTotalLength();
+        line.style.strokeDashoffset = `-${len}px`;
+        line.style.strokeDasharray = `${len}px`;
+      })
+
+      const searchObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            lines.forEach(line => {
+              line.style.transition = 'stroke-dashoffset 2.5s ease-in-out';
+              line.style.transitionDelay = '1s';
+              line.style.strokeDashoffset = '0px';
+            })
+            searchObserver.unobserve(searchSVG)
+          }
+        })
+      }, {threshold: .5});
+      searchObserver.observe(searchSVG);
+    }
+  }
+
+  const checkOut = document.querySelector('#check-out-link');
+  if(checkOut) {
+    const text = checkOut.innerText;
+    if(text) {
+      checkOut.innerText = '';
+      const linkObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            linkObserver.unobserve(checkOut);
+            let idx = 0;
+            setInterval(function type () {
+              checkOut.innerText = text.slice(0, idx);
+              idx++;
+              if(idx >= text.length) clearInterval(type);
+            }, 110)
+          }
+        })
+
+      })
+      linkObserver.observe(checkOut)
+
+    }
+  }
+
+
 })
 

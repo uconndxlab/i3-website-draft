@@ -17,9 +17,10 @@
       /* Care Page Style Reset - Override i3 Global Styles */
       .care-page {
         font-family: "Poppins", Arial, Helvetica, BlinkMacSystemFont, sans-serif;
-        background-color: white;
         color: #212529;
-
+      }
+      body {
+        background: white;
       }
 
       .care-page p,
@@ -117,7 +118,7 @@
             <div class="container overview position-relative">
                 <span class="text-start fs-5">01 Overview</span>
                 <div class="row mb-2">
-                    <span class="fs-3 fw-light py-2">Coming out is a <span class="fw-mediumium">deeply personal</span> and often <span class="fw-mediumium">emotionally challenging</span> process.</span>
+                    <span class="fs-3 fw-light py-2">Coming out is a <span class="fw-medium">deeply personal</span> and often <span class="fw-medium">emotionally challenging</span> process.</span>
                     <p class="w-100 fs-5">
                         The University of Connecticut's Institutional Insights and Innovations (i3) helped develop Coming Out With Care:
                         A Guide for Your Well-Being, an interactive platform designed to empower LGBTQIA2S+ individuals to navigate the
@@ -212,7 +213,7 @@
             <div class="container process mt-3">
                 <span class="text-start fs-5">02 Process</span>
                 <div class="row">
-        <span class=" fs-3 mb-3">Start small. Learn fast. <span class="fw-mediumium">Build what
+        <span class=" fs-3 mb-3">Start small. Learn fast. <span class="fw-medium">Build what
             matters.</span></span>
                     <p class="w-100 fs-5">
                         At i3, we begin by putting something real in front of people. A rough draft,
@@ -368,12 +369,12 @@
 
         <!-- Challenge -->
         <section id="challenge">
-            <div class="container-fluid mt-5 bg-midnight pt-5 pb-3 rounded-4">
+            <div class="container-fluid mt-5 bg-midnight pt-5 pb-3 rounded-5">
                 <div class="container challenge text-white my-4 pb-5">
                     <span class="text-start fs-5">04 The Challenge</span>
                     <div class="row">
                       <span class="fs-3 mb-3">A valuable resource with
-                          <span class="fw-mediumium">limited accessibility.</span></span>
+                          <span class="fw-medium">limited accessibility.</span></span>
                     <p class="w-100 fs-5 mb-5">Before i3’s involvement, Coming Out With Care existed as a
                         comprehensive PDF guide. While full of practical guidance and support strategies,
                         its static format made it difficult to navigate and limited accessibility
@@ -498,7 +499,7 @@
                         <span class="text-start fs-5">04 The Challenge</span>
                         <div class="col-6" data-aos="fade-right" data-aos-duration="800">
                             <span class="fs-3">A valuable resource with
-                            <span class="fw-mediumium">limited accessibility.</span></span>
+                            <span class="fw-medium">limited accessibility.</span></span>
                             <p class="fs-5 pt-2">
                                 The development of the Coming Out With Care website followed an iterative,
                                 collaborative process grounded in both technical execution and user needs.
@@ -888,9 +889,9 @@
 
         <!-- Result -->
         <section id="result">
-            <div class="result-wrap text-black pt-5 pb-5 position-relative rounded-top-4">
-                <div class="container result mt-4">
-                    <span class="text-startfs-5">07 The Result</span>
+            <div class="result-wrap text-black pt-5 pb-5 position-relative rounded-top-5">
+                <div class="container result mt-4 pb-5">
+                    <span class="text-start fs-5">07 The Result</span>
 
                     <div class="row">
                         <span class=" fs-3 mb-3">Connecting <span class="fw-medium">people, topics, and research</span>.</span>
@@ -921,7 +922,7 @@
                             </div>
                             <div class="d-flex flex-column justify-content-center gap-2">
                                 <span id="sea-green" class="color"></span>
-                                <span class="fw-mediumium text-slate-grey fs-6">sea green</span>
+                                <span class="fw-medium text-slate-grey fs-6">sea green</span>
                                 <span class="fs-6 text-slate-grey opacity-50">#67CC96</span>
                             </div>
                             <div class="d-flex flex-column justify-content-center gap-2">
@@ -962,45 +963,146 @@
                         </div>
                     </div>
 
-                    <div class="row words-row justify-content-center gap-5">
-                        <div class="col-4 word-answers-wrap d-flex flex-column">
-                            <div class="word-answers-wrap">
-                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
+                    <div class="row words-row justify-content-center gap-5 py-5 mb-5">
+                        <div class="col-5 d-flex flex-column justify-content-between">
+                            <div class="word-answers">
+                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
                                     <span>Fabulous</span>
                                 </div>
-                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
+                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
                                     <span>Pride</span>
                                 </div>
-                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="50">
                                     <span>Resilience</span>
                                 </div>
-                                <div class="word-answer rounded-2 py-4 text-center" style="background: rgba(255,255,255,.4)" data-aos="fade-up" data-aos-delay="100">
+                                <div class="answer rounded-2 py-4 text-center" style="background: rgba(255,255,255,.4)" data-aos="fade-up" data-aos-delay="50">
                                     <span style="text-decoration: line-through;">Authenticity</span>
                                 </div>
-                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="100">
                                     <span>Love</span>
                                 </div>
-                                <div class="word-answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="100">
                                     <span>Solidarity</span>
                                 </div>
-                                <div class="word-answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="300">
+                                <div class="answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="150">
                                     <span>Freedom</span>
                                 </div>
-                                <div class="word-answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="300">
+                                <div class="answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="150">
                                     <span>Visibility</span>
                                 </div>
-                            </div>
-                            <div class="search-info">
-
+                                <div class="search-info py-3 pe-3 ps-5 rounded-2" data-aos="fade-up" data-aos-delay="200">
+                                    <span class="fw-medium fs-5">Wordsearch</span>
+                                    <p class="fs-6 fw-normal mb-0">This custom built wordsearch was designed to change each time the user refreshes, ensuring it is reusable and offers a unique experience.</p>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-5 grid-container">
-                            <div class="grid"></div>
+                            <svg id="word-search-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1276 1273">
+                                <defs>
+                                    <style>
+                                      .cls-search-1 {
+                                        fill: none;
+                                        stroke: #000;
+                                        stroke-miterlimit: 10;
+                                        stroke-width: 3px;
+                                      }
+                                    </style>
+                                </defs>
+                                <path class="cls-search-1" d="M162.125923,372.363656v-.000027c0-14.946926,12.116877-27.063803,27.063803-27.063803h981.446863c14.946926,0,27.063803,12.116877,27.063803,27.063803v.000027"/>
+                                <path class="cls-search-1" d="M162.125923,372.363656v.000027c0,14.946926,12.116877,27.063803,27.063803,27.063803h981.446863c14.946926,0,27.063803-12.116877,27.063803-27.063803v-.000027"/>
+                                <image width="1276" height="1273" xlink:href="/care-assets/assets/word-search.png"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+
+        <section id="looking-ahead">
+            <div class="container-fluid looking-container rounded-top-5 py-5">
+                <div class="container mt-5">
+                    <span class="text-start fs-5">08 Looking Ahead</span>
+
+                    <div class="row">
+                        <span class="fs-3 mb-3">Providing <span class="fw-medium">guidance and support</span> to our community.</span>
+                        <p class="w-100 fs-5 mb-4">
+                            Through Coming Out With Care, i3 has supported the creation of a resource that not only meets
+                            immediate user needs but also serves as a model for mission-driven, user-focused digital projects.
+                            While the development phase has concluded, the platform’s impact endures and demonstrates how i3 turns
+                            valuable resources into accessible, meaningful, and empowering tools for the community.
+                        </p>
+                        <span class="mb-1 fs-2">
+                            And for <a target="_blank" href="https://www.linkedin.com/in/victoria-brey/"><span class="fw-medium purple-shadow">Victoria?</span></a></span>
+                        <p class="w-100 fs-5">
+                            Victoria came into her studies with plans focused primarily on back-end web development,
+                            with longer-term ambitions in game design. Her time at i3 reshaped that trajectory entirely.
+                            Through her work on projects like Coming Out With Care, she discovered a genuine passion for
+                            front-end development — particularly interactive animations and the craft of building experiences
+                            that feel alive to the user. She credits i3 with dramatically accelerating both her technical
+                            skills and her confidence working with real clients and stakeholders.
+                            <br />
+                            <br />
+                            Looking ahead, Victoria plans to stay rooted in the Mansfield area and pursue a career in
+                            web development close to the UConn community she has come to call home. She sees her future
+                            path moving toward full-stack development as her career matures
+                        </p>
+                    </div>
+
+                    <div class="row g-4 align-items-stretch victoria-row mt-4">
+                        <div class="col-lg-6">
+                            <div class="radius rounded-2 quote-wrap px-5 h-100 position-relative d-flex flex-column justify-content-center position-relative" data-aos="fade-right">
+                                <svg width="54" height="30" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                     class="quotation">
+                                    <path
+                                        d="M6.91197 29.5679C4.77864 29.5679 3.11464 28.7999 1.91997 27.2639C0.639974 25.7279 -2.64645e-05 23.6372 -2.64645e-05 20.9919C-2.64645e-05 17.0666 0.853307 13.4826 2.55997 10.2399C4.35197 6.99723 7.21064 3.9679 11.136 1.1519C12.16 0.383901 12.9706 0.213234 13.568 0.6399C13.9093 0.895902 14.08 1.2799 14.08 1.7919C14.08 2.21857 13.7813 2.64523 13.184 3.0719C10.2826 5.54657 8.40531 7.46657 7.55197 8.8319C6.78397 10.1119 6.39997 11.4772 6.39997 12.9279C6.39997 14.4639 6.74131 15.6586 7.42397 16.5119C8.10664 17.2799 8.87464 17.9626 9.72797 18.5599C10.5813 19.0719 11.3493 19.7119 12.032 20.4799C12.7146 21.2479 13.056 22.3999 13.056 23.9359C13.056 25.4719 12.5013 26.7946 11.392 27.9039C10.368 29.0132 8.87464 29.5679 6.91197 29.5679ZM26.112 29.5679C23.9786 29.5679 22.272 28.7999 20.992 27.2639C19.7973 25.7279 19.2 23.6372 19.2 20.9919C19.2 17.0666 20.0533 13.4826 21.76 10.2399C23.552 6.99723 26.4106 3.9679 30.336 1.1519C31.36 0.383901 32.1706 0.213234 32.768 0.6399C33.1093 0.895902 33.28 1.2799 33.28 1.7919C33.28 2.21857 32.9813 2.64523 32.384 3.0719C29.4826 5.54657 27.6053 7.46657 26.752 8.8319C25.984 10.1119 25.6 11.4772 25.6 12.9279C25.6 14.4639 25.9413 15.6586 26.624 16.5119C27.3066 17.2799 28.0746 17.9626 28.928 18.5599C29.7813 19.0719 30.5493 19.7119 31.232 20.4799C31.9146 21.2479 32.256 22.3999 32.256 23.9359C32.256 25.4719 31.7013 26.7946 30.592 27.9039C29.568 29.0132 28.0746 29.5679 26.112 29.5679Z"
+                                        fill="#31324E" fill-opacity="0.2" />
+                                </svg>
+
+                                <p class="fs-4 fst-italic">
+                                    No matter the hardship someone may be experiencing,
+                                    I hope they can learn what it means to be proud of who they are,
+                                    and that they deserve to live their life the way they choose.
+                                </p>
+                                <p class="mb-0 fs-6 fw-normal">Victoria, 2026</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <figure class="position-relative h-100 m-0" data-aos="fade-left">
+                                <img src="/lincus-assets/assets/mags-engineering.png" alt="Victoria and her cat Apollo"
+                                     class="img-fluid w-100 h-100 object-fit-cover rounded-2" style="min-height:340px;">
+                                <figcaption class="position-absolute bottom-0 start-0 img-caption m-2 px-2 py-1 fs-6 text-black radius"
+                                            style="background:rgba(255,255,255,.6);">
+                                    Victoria with her loving cat Apollo (image to come).
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="check-out d-flex flex-column align-items-center gap-2 mt-4 py-5">
+                        <span class="fs-3 text-center">
+                            Check out Coming out with Care!
+                        </span>
+                        <a class="check-out-search d-flex rounded-4" href="https://coming-out-guide.sogiecenter.org/" target="_blank">
+
+
+                            <span class="d-flex align-items-center py-2 px-2">
+                                <svg class="me-2" width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.525 15.75L9.0125 10.2375C8.575 10.5875 8.07187 10.8646 7.50312 11.0687C6.93437 11.2729 6.32917 11.375 5.6875 11.375C4.09792 11.375 2.7526 10.8245 1.65156 9.72344C0.550521 8.6224 0 7.27708 0 5.6875C0 4.09792 0.550521 2.7526 1.65156 1.65156C2.7526 0.550521 4.09792 0 5.6875 0C7.27708 0 8.6224 0.550521 9.72344 1.65156C10.8245 2.7526 11.375 4.09792 11.375 5.6875C11.375 6.32917 11.2729 6.93437 11.0687 7.50312C10.8646 8.07187 10.5875 8.575 10.2375 9.0125L15.75 14.525L14.525 15.75ZM5.6875 9.625C6.78125 9.625 7.71094 9.24219 8.47656 8.47656C9.24219 7.71094 9.625 6.78125 9.625 5.6875C9.625 4.59375 9.24219 3.66406 8.47656 2.89844C7.71094 2.13281 6.78125 1.75 5.6875 1.75C4.59375 1.75 3.66406 2.13281 2.89844 2.89844C2.13281 3.66406 1.75 4.59375 1.75 5.6875C1.75 6.78125 2.13281 7.71094 2.89844 8.47656C3.66406 9.24219 4.59375 9.625 5.6875 9.625Z" fill="#6761E5"/>
+                                </svg>
+                                <span class="check-out-link-hidden fw-medium fs-4" style="color: rgba(0,0,0,0)">coming-out-guide.sogiecenter.org
+                                <span id="check-out-link" class="fw-medium fs-4" style="color: #212529">coming-out-guide.sogiecenter.org</span>
+                                </span>
+
+                            </span>
+                            <span class="fw-medium text-white fs-5 d-flex align-items-center px-3 py-2 visit">VISIT</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <script src="https://d3js.org/d3.v7.min.js"></script>
