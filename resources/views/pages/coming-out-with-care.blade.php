@@ -436,7 +436,7 @@
         <!-- Build -->
         <section id="build">
             <div class="container-fluid mt-5 position-relative">
-                <div class="bars-wrap">
+                <div class="bars-wrap d-none d-lg-block">
                     <svg id="rainbow-bars" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 241.317397 1152.649562">
                         <defs>
                             <style>
@@ -495,9 +495,9 @@
                 </div>
 
                 <div class="container">
-                    <div class="row book-row">
+                    <div class="row book-row mb-5 mb-xxl-0">
                         <span class="text-start fs-5">04 The Challenge</span>
-                        <div class="col-6" data-aos="fade-right" data-aos-duration="800">
+                        <div class="col-12 col-lg-6" data-aos="fade-right" data-aos-duration="800">
                             <span class="fs-3">A valuable resource with
                             <span class="fw-medium">limited accessibility.</span></span>
                             <p class="fs-5 pt-2">
@@ -509,14 +509,14 @@
                                 identifying opportunities to improve accessibility and engagement.
                             </p>
                         </div>
-                        <div class="col-6 d-flex justify-content-center align-items-end" data-aos="fade-left" data-aos-duration="800">
+                        <div class="col-12 col-lg-6 d-flex justify-content-center align-items-end" data-aos="fade-left" data-aos-duration="800">
                             <object class="build-book" data="/care-assets/assets/book-img-small.webp" type="image/webp" aria-label="Image of coming out with care guide in book format">
                                 <img class="build-book" src="/care-assets/assets/book-img-full.png" alt="Image of coming out with care guide in book format" />
                             </object>
                         </div>
                     </div>
-                    <div class="row blocks-row">
-                        <div class="col-6 mb-5" data-aos="fade-up" data-aos-duration="800">
+                    <div class="row blocks-row mb-5 mb-xxl-0 ">
+                        <div class="col-12 col-lg-6 mb-5 mt-4 mt-lg-auto order-2 order-lg-1 d-flex d-lg-block justify-content-center" data-aos="fade-up" data-aos-duration="800">
                             <svg id="blocks-svg" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 641.124327 595.238113">
                                 <defs>
                                     <style>
@@ -749,7 +749,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <div class="col-6 d-flex justify-content-center align-items-center" data-aos="fade-left" data-aos-duration="800">
+                        <div class="col-12 col-lg-6 order-1 order-lg-2 mb-5 mb-lg-0 d-flex justify-content-center align-items-center" data-aos="fade-left" data-aos-duration="800">
                             <p class="fs-5 pt-2 my-auto">
                                 From there, the team used Eleventy, a software system used to create websites,
                                 to generate a simple, barebones version of the site based directly on the PDF.
@@ -762,7 +762,7 @@
                     </div>
 
                     <div class="row laptop-row">
-                        <div class="col-9 mb-3">
+                        <div class="col-12 col-lg-9 mb-3">
                             <p class="fs-5 my-auto">
                                 As development progressed, the team introduced interactive features
                                 designed to support both user safety and engagement. These included tools
@@ -772,7 +772,7 @@
                                 needs and safety considerations.
                             </p>
                         </div>
-                        <div class="col-8 my-4">
+                        <div class="col-12 col-lg-9 my-4">
                             <p class="fs-5 my-auto">
                                 The final stages of development focused on ensuring the platform was fully accessible
                                 and easy to navigate. After completing these refinements, the SOGIE team presented
@@ -783,8 +783,12 @@
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <div class="laptop-wrap w-75">
-                                <img class="w-100 mx-auto" src="/care-assets/assets/laptop-blank.png" alt="Laptop with Coming Out With Care opened">
-                                <div class="cards-abs">
+                                <picture>
+                                    <source class="w-100 mx-auto" srcset="/care-assets/assets/laptop-blank.png" media="(min-width:576px)">
+                                    <img class="w-100 mx-auto" src="/care-assets/assets/laptop.png" alt="Laptop with Coming Out With Care opened">
+
+                                </picture>
+                                <div class="cards-abs d-none d-sm-grid">
                                     <div class="flip-card left top" data-aos="fade-up" data-aos-once="true" data-aos-duration="800">
                                         <div class="flip-card-inner">
                                             <div class="flip-arrow"></div>
@@ -890,7 +894,7 @@
         <!-- Result -->
         <section id="result">
             <div class="result-wrap text-black pt-5 pb-5 position-relative rounded-top-5">
-                <div class="container result mt-4 pb-5">
+                <div class="container result mt-4 pb-0 pb-lg-5">
                     <span class="text-start fs-5">07 The Result</span>
 
                     <div class="row">
@@ -909,7 +913,7 @@
 
 
                     <div class="row justify-content-between mx-auto gx-4">
-                        <div class="col-xxl-6 col-xl-6 col-sm-11 col-12 d-flex justify-content-between mx-auto mx-xl-0 align-items-center result-colors text-center gap-1 mt-4">
+                        <div class="col-xxl-6 col-xl-6 col-sm-11 col-12 d-flex  justify-content-between mx-auto mx-xl-0 align-items-center result-colors text-center gap-1 mt-4">
                             <div class="d-flex flex-column justify-content-center gap-2">
                                 <span id="blue-violet" class="color"></span>
                                 <span class="fw-medium text-slate-grey fs-6">blue violet</span>
@@ -942,7 +946,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xxl-6 col-xl-6 col-12 heads-wrap d-flex px-2 justify-content-xxl-center justify-content-evenly align-items-center gap-xxl-5 gap-5 mt-4">
+                        <div class="col-xxl-6 col-xl-6 col-12 heads-wrap d-flex px-2 justify-content-xxl-center justify-content-evenly align-items-center gap-xxl-5 gap-md-5 gap-2 mt-4">
                             <div class="d-flex flex-column">
                                 <span class="result-header-1 fw-bold">Header 1</span>
                                 <span class="fs-6 text-slate-grey  opacity-50 result-head-1-desc">Bold Poppins / 56px</span>
@@ -950,7 +954,7 @@
                                 <span class="fs-6 text-slate-grey opacity-50 result-head-2-desc">Medium Poppins / 32px</span>
                             </div>
 
-                            <div class="d-flex flex-column me-2 d-flex justify-content-end h-100 gap-4">
+                            <div class="d-flex flex-column me-0 me-sm-0 d-flex justify-content-end h-100 gap-4">
                                 <div>
                                     <div class="result-header-3 fw-medium">Header 3</div>
                                     <span class="fs-6 text-slate-grey opacity-50 mb-4">Medium Poppins / 22px</span>
@@ -963,31 +967,31 @@
                         </div>
                     </div>
 
-                    <div class="row words-row justify-content-center gap-5 py-5 mb-5">
-                        <div class="col-5 d-flex flex-column justify-content-between">
+                    <div class="row words-row justify-content-center align-items-center gap-2 gap-xl-5 py-5 mb-0 mb-lg-5">
+                        <div class="col-12 col-lg-5 d-flex flex-column justify-content-between">
                             <div class="word-answers">
-                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
+                                <div class="answer bg-white rounded-2 py-3 py-lg-2 py-xl-4 text-center" data-aos="fade-up">
                                     <span>Fabulous</span>
                                 </div>
-                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up">
+                                <div class="answer bg-white rounded-2 py-3 py-lg-2 py-xl-4  text-center" data-aos="fade-up">
                                     <span>Pride</span>
                                 </div>
-                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="50">
+                                <div class="answer bg-white rounded-2 py-3 py-lg-2 py-xl-4  text-center" data-aos="fade-up" data-aos-delay="50">
                                     <span>Resilience</span>
                                 </div>
-                                <div class="answer rounded-2 py-4 text-center" style="background: rgba(255,255,255,.4)" data-aos="fade-up" data-aos-delay="50">
+                                <div class="answer rounded-2 py-3 py-lg-2 py-xl-4  text-center" style="background: rgba(255,255,255,.4)" data-aos="fade-up" data-aos-delay="50">
                                     <span style="text-decoration: line-through;">Authenticity</span>
                                 </div>
-                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                                <div class="answer bg-white rounded-2 py-3 py-lg-2 py-xl-4  text-center" data-aos="fade-up" data-aos-delay="100">
                                     <span>Love</span>
                                 </div>
-                                <div class="answer bg-white rounded-2 py-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                                <div class="answer bg-white rounded-2 py-3 py-lg-2 py-xl-4  text-center" data-aos="fade-up" data-aos-delay="100">
                                     <span>Solidarity</span>
                                 </div>
-                                <div class="answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="150">
+                                <div class="answer bg-white rounded-2 px-2 py-3 py-lg-2 py-xl-4 text-center" data-aos="fade-up" data-aos-delay="150">
                                     <span>Freedom</span>
                                 </div>
-                                <div class="answer bg-white rounded-2 px-2 py-4 text-center" data-aos="fade-up" data-aos-delay="150">
+                                <div class="answer bg-white rounded-2 px-2 py-3 py-lg-2 py-xl-4 text-center" data-aos="fade-up" data-aos-delay="150">
                                     <span>Visibility</span>
                                 </div>
                                 <div class="search-info py-3 pe-3 ps-5 rounded-2" data-aos="fade-up" data-aos-delay="200">
@@ -997,7 +1001,7 @@
                             </div>
                         </div>
 
-                        <div class="col-5 grid-container">
+                        <div class="col-12 col-lg-6 d-flex d-lg-block justify-content-center mt-4 mt-lg-auto col-xxl-5 grid-container">
                             <svg id="word-search-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1276 1273">
                                 <defs>
                                     <style>
@@ -1072,16 +1076,16 @@
 
                         <div class="col-lg-6">
                             <figure class="position-relative h-100 m-0" data-aos="fade-left">
-                                <img src="/lincus-assets/assets/mags-engineering.png" alt="Victoria and her cat Apollo"
+                                <img src="/care-assets/assets/apollo-pic.jpg" alt="Victoria and her cat Apollo"
                                      class="img-fluid w-100 h-100 object-fit-cover rounded-2" style="min-height:340px;">
                                 <figcaption class="position-absolute bottom-0 start-0 img-caption m-2 px-2 py-1 fs-6 text-black radius"
                                             style="background:rgba(255,255,255,.6);">
-                                    Victoria with her loving cat Apollo (image to come).
+                                    Victoria with her loving cat Apollo.
                                 </figcaption>
                             </figure>
                         </div>
                     </div>
-                    <div class="check-out d-flex flex-column align-items-center gap-2 mt-4 py-5">
+                    <div class="check-out d-flex flex-column align-items-center gap-2 mt-4 pt-5 pb-5">
                         <span class="fs-3 text-center">
                             Check out Coming out with Care!
                         </span>
@@ -1092,13 +1096,13 @@
                                 <svg class="me-2" width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14.525 15.75L9.0125 10.2375C8.575 10.5875 8.07187 10.8646 7.50312 11.0687C6.93437 11.2729 6.32917 11.375 5.6875 11.375C4.09792 11.375 2.7526 10.8245 1.65156 9.72344C0.550521 8.6224 0 7.27708 0 5.6875C0 4.09792 0.550521 2.7526 1.65156 1.65156C2.7526 0.550521 4.09792 0 5.6875 0C7.27708 0 8.6224 0.550521 9.72344 1.65156C10.8245 2.7526 11.375 4.09792 11.375 5.6875C11.375 6.32917 11.2729 6.93437 11.0687 7.50312C10.8646 8.07187 10.5875 8.575 10.2375 9.0125L15.75 14.525L14.525 15.75ZM5.6875 9.625C6.78125 9.625 7.71094 9.24219 8.47656 8.47656C9.24219 7.71094 9.625 6.78125 9.625 5.6875C9.625 4.59375 9.24219 3.66406 8.47656 2.89844C7.71094 2.13281 6.78125 1.75 5.6875 1.75C4.59375 1.75 3.66406 2.13281 2.89844 2.89844C2.13281 3.66406 1.75 4.59375 1.75 5.6875C1.75 6.78125 2.13281 7.71094 2.89844 8.47656C3.66406 9.24219 4.59375 9.625 5.6875 9.625Z" fill="#6761E5"/>
                                 </svg>
-                                <span class="check-out-link-hidden fw-medium fs-4" style="color: rgba(0,0,0,0)">coming-out-guide.sogiecenter.org
-                                <span id="check-out-link" class="fw-medium fs-4" style="color: #212529">coming-out-guide.sogiecenter.org</span>
+                                <span class="check-out-link-hidden fw-medium fs-6 fs-sm-5 fs-md-4 text-nowrap" style="color: rgba(0,0,0,0)">coming-out-guide.sogiecenter.org<span id="check-out-link" class="fw-medium fs-6 fs-sm-5 fs-md-4" style="color: #212529">coming-out-guide.sogiecenter.org</span>
                                 </span>
 
                             </span>
-                            <span class="fw-medium text-white fs-5 d-flex align-items-center px-3 py-2 visit">VISIT</span>
+                            <span class="fw-medium text-white fs-5 d-none d-sm-flex align-items-center px-3 py-2 visit">VISIT</span>
                         </a>
+                        <a class="fw-medium text-white fs-5 d-flex d-sm-none align-items-center px-3 py-2 mt-2 visit sm rounded-4" href="https://coming-out-guide.sogiecenter.org/" target="_blank">VISIT</a>
                     </div>
                 </div>
             </div>

@@ -338,11 +338,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if(entry.isIntersecting) {
             linkObserver.unobserve(checkOut);
             let idx = 0;
-            setInterval(function type () {
+            const type = setInterval(() => {
               checkOut.innerText = text.slice(0, idx);
               idx++;
-              if(idx >= text.length) clearInterval(type);
+              if(idx > text.length) clearInterval(type);
             }, 110)
+
           }
         })
 
