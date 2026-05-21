@@ -753,7 +753,7 @@
                             </g>
 
                             <!-- Husky Head Character -->
-                            <g id="huskyCharacter" transform="translate(100,80)"
+                            <g class="d-none" id="huskyCharacter" transform="translate(100,80)"
                                 title="This was really the UConn Husky logo in 1959."
                                 aria-label="UConn Husky Logo from 1959" role="img">
                                 <!-- Rotation wrapper - this will handle only rotation -->
@@ -859,9 +859,7 @@
                             });
                         </script>
 
-                        <span class="text-dark text-small mt-2" style="font-size:0.8rem" aria-hidden="true">
-                            * this was really the UConn Husky logo in 1959.
-                        </span>
+
                     </div>
                 </div>
             </div>
