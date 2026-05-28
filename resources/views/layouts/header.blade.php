@@ -92,7 +92,7 @@
                           </a>
                       </li>
                       
-                      <li class="nav-item ms-2">
+                      <li class="nav-item ms-2 d-none">
                           <a class="nav-link{{ request()->routeIs('jobs') || request()->routeIs('jobs.*') ? ' active' : '' }}" 
                              href="{{ route('jobs') }}"
                              style="background: rgba(36, 147, 225, 0.1); border: 1px solid rgba(36, 147, 225, 0.3); border-radius: 6px; padding: 0.4rem 0.8rem;">
