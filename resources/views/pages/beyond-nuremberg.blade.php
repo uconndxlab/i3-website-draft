@@ -5,108 +5,88 @@
 @section('content')
 
 <style>
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 50px;
-
-
-}
-
-@media(max-width: 768px) {
-  .main-container {
-    padding: 0 20px;
-  }
-}
-
-.text-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+.bn { max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 50px); }
+.bn-hero img { max-width: 560px; }
+.bn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+.bn-row--flip .bn-figure { order: 2; }
+.bn-figure figcaption { font-size: 0.85rem; color: #999; font-style: italic; margin-top: 0.6rem; }
+.bn-logos img { height: 48px; max-width: 220px; object-fit: contain; }
+.bn-logos img.bn-logos__unc { height: 140px; max-width: 420px; }
+.funding-callout { background: rgba(36,147,225,.1); border: 1px solid rgba(77,179,255,.3); border-left: 4px solid #4DB3FF; border-radius: 0 8px 8px 0; padding: 1.25rem 1.5rem; }
+@media (max-width: 768px) { .bn-row { grid-template-columns: 1fr; } .bn-row--flip .bn-figure { order: 0; } }
 </style>
 
-<div class="main-container pt-5">
-  <h1>Beyond Nuremberg</h1>
-  <h3 class="widget-title">A VR History Quest</h3>
+<div class="bn pt-5">
+  <h1 class="text-center mb-5 bn-hero">
+    <img class="img-fluid d-block mx-auto" src="{{ asset('img/beyond-nuremberg/HeroWhite.png') }}" alt="Beyond Nuremberg: A VR History Quest">
+  </h1>
 
-  <div class="line-height-1_8">
-    <div>
-      <div>
-        <div>
-          <div>
-            <div class="text-container">
-              <span data-contrast="none">Players of this VR time-travel quest will investigate Holocaust history as it unfolded in what is today Western Ukraine. With the aid of an archivist-guide, individuals journey across time and space to collect clues at different sites. These include Courtroom 600 in 1946, where the Trial of the Major War Criminals is underway before the International Military Tribunal (IMT) in Nuremberg, Germany. With the aid of feedback loops that support a levelling-up of mastery, the player collects, analyzes, and pieces together a story told across documents, maps, photographs, oral histories, objects, and other primary sources related to the Holocaust as perpetrated and experienced in the Reichkommisariat Ukraine under the administration of Alfred Rosenberg, Reich Minister for the Occupied Eastern Territories, and his subordinate Erich Koch, who implemented policies in that region.   </span>
+  <div class="d-flex flex-column gap-3 line-height-1_8">
+              <strong>Beyond Nuremberg: A VR History Quest</strong>
+              <span data-contrast="none"><em>Beyond Nuremberg</em> is an interactive, headset-based virtual reality (VR) game in which players join a time-travel research team. Armed with a chronogeometer, the tech that makes jumping to past times and places possible, they visit historic sites, search for artifacts, and collect clues to analyze back in the Archives. The first chapter, "Mission: Ukraine," connects Nazi war crimes tried in 1945–46 before the International Military Tribunal (IMT) in Nuremberg, Germany, to the Jewish community of Tuchyn, Ukraine.  </span>
               <b><span data-contrast="none">The Tuchyn Story </span></b>
-              <span data-contrast="none">Next, the story moves beyond Nuremberg as trial evidence connects Rosenberg and Koch to the small town of Tuchyn and its Jewish community—a community that mounted an armed uprising in 1942 and was decimated under their command. Here, just months before the revolt, the player explores a garment factory where a spool of thread, crust of bread, and other items reveal the stories of individuals who experienced theft of property, the grind of forced labor, starvation, and the other lived realities of the Reich's murderous policies. This progression connects legal accountability with lived experience, revealing both the administrative machinery of genocide and its devastating impacts on specific people. Players learn their stories, their strategies for resistance, for survival, and the continued work of remembrance. </span>
-              <span data-contrast="none">Eyewitness stories from survivors and those who sought to bring to bring perpetrators to justice for their Crimes Against Humanity are at the heart of this game's mission to foster awareness of the human impacts and legacies of Holocaust and IMT history for a digital generation. As recent reports indicate, broad cultural knowledge of the Holocaust in the U.S. is in decline among younger generations even as misinformation and outright denial of historical facts—including the evidence presented at Nuremberg—continue to proliferate online. Beyond Nuremberg aims to engage 18- to 34-year-olds who are among the 65% percent of U.S. adults who play video games. Complex interrelated narratives that unfold across time and space, while demanding skills acquisition and mastery, are not only core features of our plans for Beyond Nuremberg, they are also common and highly valued aspects of games.</span>
-              <figure class="text-muted fst-italic small">
-                <img class="alignright wp-image-3788 size-large" src="https://dev-greenhouse-studios.pantheonsite.io/wp-content/uploads/2020/05/Charrette-scaled-2-1024x554.jpg" alt="" width="100%" height="auto" />
-                <figcaption style="margin-top: 10px;">External and UConn advisors, including colleagues from the United States Holocaust Memorial Museum, Memorium Nürnberger Prozesse, and The Museum of Jewish Civilization, deliberated with the Beyond Nuremberg team in Summer of 2019 as part of Greenhouse Studios' iterative design process.</figcaption>
+              <span data-contrast="none">The journey begins in Courtroom 600 of Nuremberg's Palace of Justice, where the trial of Nazi war criminals is underway. Successfully collecting and examining clues unlocks new destinations. The player decides which trail to follow next. One path leads back in time and east to Tuchyn, a town where 3,000 Jews lived and raised families under Nazi occupation. Players explore a garment factory where a spool of thread, a crust of bread, and other ordinary objects reveal individual lives. They meet survivor Herman Wajcman, whose testimony teaches players about forced labor, persecution, and the armed uprising that the Jewish community mounted in 1942. The unfolding story connects individual experiences to the administrative machinery of genocide as overseen by IMT defendant Alfred Rosenberg, the Nazi official responsible for the Occupied Eastern Territories. This progression links legal accountability with lived experience, foregrounding Jewish lives, agency, and testimony. </span>
+              <figure class="bn-figure m-0">
+                <img class="img-fluid rounded" src="{{ asset('img/beyond-nuremberg/Fig 1_DefendantBox.jpg') }}" alt="The defendants' box in Courtroom 600, rendered in a style inspired by courtroom sketches from the Trial of the Major War Criminals at Nuremberg, 1945–46.">
+                <figcaption>The defendants' box in Courtroom 600, rendered in a style inspired by courtroom sketches from the Trial of the Major War Criminals at Nuremberg, 1945–46.</figcaption>
               </figure>
-              <strong>Next Step: Prototyping </strong>
-              Supported by numerous grants including an NEH Digital Projects for the Public Discovery Grant, the team consists of faculty, designers, and students at the University of Connecticut Greenhouse Studios and UNC Greensboro. In 2019, an international board of scholarly advisors met with the UConn team as part of Greenhouse Studios' iterative design process. The group reviewed early-stage concepts and discussed issues surrounding the adaptation of serious historical subject matter to this digital medium.
-              We are currently testing early-stage prototypes—both informally and formally—to explore larger conceptual possibilities as well as refine key in-game mechanics. Examples include how players choose when and where to travel to a specific time and place and how to best guide players in querying the objects that they discover so that they can unlock the clues and stories each item holds. These other early decision points design benefit from quick, informal feedback loops that allow rapid iteration on core mechanics and spatial design while we're still in a flexible phase of early development.
-              <strong>Critical Making and Broader Implications for Digital Public Humanities </strong>
-              <figure id="attachment_3678" class="small text-muted fst-italic wp-caption alignright" aria-describedby="caption-attachment-3678">
-                <img class="alignright wp-image-6325 size-full" src="https://dev-greenhouse-studios.pantheonsite.io/wp-content/uploads/2022/08/thumbnail_DSC03943-1-1024x685-1.jpeg" alt="" width="100%" height="auto" />
-                <figcaption style="margin-top: 10px;">Attendee at 2020 ED Games Expo, a showcase of government-supported educational learning games and technologies, explores an early Courtroom 600 proof-of-concept.</figcaption>
-              </figure>
-              In addition to developing new open-source software (the Archive Access Plug-in) that allows materials in online repositories to be rendered and “handled” in Unity3D environments, the project's interdisciplinary team of game developers, historians, instructional designers, archivists, students, and others is also interrogating methodological, ethical, and practical issues raised by using headset-based interactive VR as a medium for history telling and learning. This practice of critical making is, in essence, "attentive learning-by-doing." So while the Greenhouse Studios-UConn and UNC Greensboro team are, indeed, making a playable VR game, we also treat the researching, testing, and start-to-finish iterative making of Beyond Nuremberg as an opportunity to interrogate the many questions that arise along the way. These queries include: how the mixed temporal frames of VR “time travel” impact historical understanding; how to deliver sufficient context in an interactive experience; what safeguards are needed to curb misuse of content by “bad actors”; and how to ethically handle visual representations of traumatic themes and perpetrators in a 3D digital context where the emotional impacts of virtual embodiment are not yet well understood.
-              <em>Development of Beyond Nuremberg is supported by a National Endowment for the Humanities Digital Projects for the Public Discovery Grant, a University of Connecticut Research Excellence Program and School of Fine Arts Dean's Grant; funding from The Dodd Center and the UConn Office of Global Affairs, and a UNC Greensboro Internal Research Award.</em>
-              &nbsp;
+              <div class="bn-row bn-row--flip">
+                <span data-contrast="none">The game's journey culminates at the Holocaust memorial in present-day Tuchyn, where the player lights candles to illuminate the monument. Through photographs laid at its base, they encounter familiar names and new ones among the honored dead, including Paula Wajcman, Herman’s sister. Each name is specific. Each life is particular. A Mission Report at the close of the experience connects players to museums, archives, and other repositories where they can continue exploring the primary sources and history they encountered in the game.</span>
+                <figure class="bn-figure m-0">
+                  <img class="img-fluid rounded" src="{{ asset('img/beyond-nuremberg/Fig 2_Monument detail.png') }}" alt="Detail of the present-day Holocaust memorial in Tuchyn, Ukraine, recreated using 3D photogrammetry of the monument and environs.">
+                  <figcaption>Detail of the present-day Holocaust memorial in Tuchyn, Ukraine, recreated using 3D photogrammetry of the monument and environs.</figcaption>
+                </figure>
+              </div>
+
+              <strong>Sharpening Critical Thinking  </strong>
+              <div class="bn-row">
+                <figure class="bn-figure m-0">
+                  <img class="img-fluid rounded" src="{{ asset('img/beyond-nuremberg/Fig 3_Ed Expo player.JPG') }}" alt="An attendee at ED Games Expo investigates objects in the courtroom as they explore an early proof-of-concept build.">
+                  <figcaption>An attendee at ED Games Expo investigates objects in the courtroom as they explore an early proof-of-concept build.</figcaption>
+                </figure>
+                <span data-contrast="none">Analyzing clues is not only how the story unfolds; it is also how players build skills. Question-and-answer sequences guide players as they examine court documents, photographs, oral testimonies, and other primary sources drawn from Holocaust museums and archives. As players progress, the game grows more demanding. Not everything they encounter is what it appears.</span>
+              </div>
+              <span data-contrast="none">Some historic sources are intentional instruments of deception: propaganda that presents dehumanizing falsehoods as fact. Players must learn to identify not just what these documents say, but what they are and what they did. A second category is more unsettling: modern-day forgeries planted in the past by another time traveler. An alert from the team’s equipment signals when something is amiss in the environment. How and why these fakes got to the past is a mystery the player must help solve. Distinguishing period propaganda from faked history builds players' ability to evaluate evidence and assess its validity—timely skills in an age of digital disinformation. </span>
+              <div class="bn-row bn-row--flip">
+                <span data-contrast="none"><em>Beyond Nuremberg</em>'s mission is to foster awareness of the human impacts and legacies of the Holocaust for a new generation. Recent studies show that broad cultural knowledge of the Holocaust is declining among younger Americans even as misinformation and denial, including denial of the evidence presented at Nuremberg, continue to proliferate online. The game is designed to engage the 18- to 34-year-olds who are among the 158.6 million U.S. adults (60% of the adult population) who currently play video games. Complex narratives that unfold across time and space, rewarding gradual mastery of new skills, are central to this project. They are also features valued by the story-driven players we aim to reach.</span>
+                <figure class="bn-figure m-0">
+                  <img class="img-fluid rounded" src="{{ asset('img/beyond-nuremberg/Fig 4_Pop Up.jpg') }}" alt="Etched in Stone is a pop-up exhibit about Tuchyn's Jewish community developed by UNC Greensboro researchers. It enriches current playtesting and points to the deep historical research shaping the game.">
+                  <figcaption>Etched in Stone is a pop-up exhibit about Tuchyn's Jewish community developed by UNC Greensboro researchers. It enriches current playtesting and points to the deep historical research shaping the game.</figcaption>
+                </figure>
+              </div>
+
+              <strong>Building the Game, Advancing the Field   </strong>
+              <span data-contrast="none"><em>Beyond Nuremberg</em> is being developed by an interdisciplinary team of faculty, developers, designers, and other talents working at the University of Connecticut and the University of North Carolina Greensboro. The game is designed for MetaQuest 3 and Vive Pro headsets and built for 3–5 hours of single-player engagement. The team is currently constructing a full playable build of “Mission: Ukraine,” with formative assessments guiding ongoing iteration to ensure the game meets its core goals: building historical knowledge, developing critical thinking skills, and fostering sustained engagement with Holocaust history.  </span>
+              <span data-contrast="none">As part of that work, the team is developing the Archive Access Plug-in, new open-source software that allows materials held in online repositories to be rendered and handled in Unity3D environments. The plug-in addresses a technical gap to better allow the use of archival primary sources in VR environments. It will be freely available to others working at the intersection of public history and immersive media. </span>
+
+
+              <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 my-4 bn-logos">
+                <img src="{{ asset('img/beyond-nuremberg/uconnWhite.png') }}" alt="University of Connecticut">
+                <img src="{{ asset('img/beyond-nuremberg/uconnWhite.png') }}" alt="i3 logo placeholder">
+                <img class="bn-logos__unc" src="{{ asset('img/beyond-nuremberg/uncGreensboroDOH.png') }}" alt="UNC Greensboro Department of History">
+              </div>
+
+
+              <div class="funding-callout">
+                <span>Development of <em>Beyond Nuremberg</em> is supported by a National Endowment for the Humanities Digital Projects for the Public Discovery Grant, a University of Connecticut Research Excellence Program and School of Fine Arts Dean’s Grant; funding from The Dodd Center and the UConn Office of Global Affairs, and a UNC Greensboro Internal Research Award.</span>
+              </div>
+
+
               <strong><em>Beyond Nuremberg</em> in the News:</strong>
               <ul>
                 <li style="list-style-type: none;">
                   <ul>
                     <li>"Beyond Nuremberg: A Prototype Playtest," showcase at <a href="https://www.digitalmemorylab.com/events/" target="_blank" rel="noopener">Inaugural Connective Holocaust Commemoration Expo 2025</a>, Landecker Digital Memory Lab, University of Sussex, England.</li>
-                    <li>"Beyond Nuremberg: Critical Game Making as Public History Research," 2023 <a href="https://www.uni.lu/c2dh-en/events/beyond-nuremberg-critical-game-making-as-public-history-research/" target="_blank" rel="noopener">History@Play lecture</a> , Centre for Contemporary and Digital History (C²DH), University of Luxembourg.</li>
-                    <li><a href="https://youtu.be/QAtibihA2XU" target="_blank" rel="noopener">A Virtual Reality Encounter with Evidence of the Holocaust</a> presentation at <em>The Digitalisation of Memory: Technology - Possibilities - Boundaries</em>,  a 2021 symposium of the Falstad Centre and Museum (Norway) and POLIN Museum (Poland).</li>
-                    <li>Courtroom 600 Team Immerses Users in Nuremberg Trials at the 2020 ED Games Expo</li>
-                    <li><a href="https://www.apa.org/monitor/2019/09/games-impact" rel="noopener">Monitor on Psychology: Games with Impact</a></li>
-                    <li><a href="https://today.uconn.edu/2019/01/reviving-holocaust-history-virtual-reality/" rel="noopener">UConn Today: Engaging Holocaust History with Virtual Reality</a></li>
-                    <li><a href="https://theconversation.com/digital-technology-offers-new-ways-to-teach-lessons-from-the-holocaust-102023" rel="noopener">The Conversation: Digital technology offers new ways to teach lessons from the Holocaust</a></li>
-                    <li><a href="https://www.timesofisrael.com/the-virtual-future-of-holocaust-education-is-already-here/" rel="noopener">The Times of Israel: The ‘virtual' future of Holocaust education is already here</a></li>
+                    <li><a href="https://youtu.be/QAtibihA2XU" target="_blank" rel="noopener">A Virtual Reality Encounter with Evidence of the Holocaust</a> presentation at The Digitalisation of Memory: Technology – Possibilities – Boundaries,  a 2021 symposium of the Falstad Centre and Museum (Norway) and POLIN Museum (Poland).</li>
+                    <li>Vos, R., &amp; Stolk, S. (2022). "Courtroom 600: The (Virtual) Reality of Being There." International Criminal Law Review, 22(1-2), 308-327. <a href="https://doi.org/10.1163/15718123-bja10090" target="_blank" rel="noopener">https://doi.org/10.1163/15718123-bja10090</a></li>
+                    <li><a href="https://www.apa.org/monitor/2019/09/games-impact" target="_blank" rel="noopener">Monitor on Psychology: Games with Impact</a></li>
+                    <li><a href="https://today.uconn.edu/2019/01/reviving-holocaust-history-virtual-reality/" target="_blank" rel="noopener">UConn Today: Engaging Holocaust History with Virtual Reality</a></li>
+                    <li><a href="https://theconversation.com/digital-technology-offers-new-ways-to-teach-lessons-from-the-holocaust-102023" target="_blank" rel="noopener">The Conversation: Digital technology offers new ways to teach lessons from the Holocaust</a></li>
+                    <li><a href="https://www.timesofisrael.com/the-virtual-future-of-holocaust-education-is-already-here/" target="_blank" rel="noopener">The Times of Israel: The 'virtual' future of Holocaust education is already here</a></li>
                   </ul>
                 </li>
               </ul>
-              &nbsp;
-              <hr />
-              <strong>Project Team: </strong>
-              <ul>
-                <li>Clarissa J. Ceglio / Associate Director of Research, Greenhouse Studios at UConn;
-                  Associate Professor, Digital Media and Design Department
-                </li>
-                <li>Anne Parsons / Director of Public History, Department of History, Jewish Studies, and Women, Gender, and Sexuality Studies at UNC Greensboro</li>
-                <li>Varun Saxena / Post-MFA Fellow in Interactive Design, College of Visual and Performing Arts, UNC Greensboro</li>
-                <li>Graham Stinnett / Archivist for Human Rights and Alternative Press Collections</li>
-                <li>Ken Thompson / Assistant Professor, Digital Media and Design Department</li>
-                <li>
-                  Graduate and Undergraduate Student Researchers
-                  <ul>
-                    <li>Sasha Steffey, programmer, UNC Greensboro</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div><strong>Project Alumni: </strong></div>
-        <ul>
-          <li>Greg Colati / Assistant University Librarian for University Archives, Special Collections &amp; Digital Curation</li>
-          <li>Tom Lee / formerly Design Technologist, Greenhouse Studios at UConn</li>
-          <li>Avinoam Patt /currently Maurice and Corinne Greenberg Professor of Holocaust Studies at New York University and Ingeborg H. and Ira Leon Rennert Director at the NYU Center for the Study of Antisemitism</li>
-          <li>Stephen T. Slota / formerly Assistant Professor-in-Residence of Educational Technology, Department of Educational Psychology, Neag School of Education jointly with the Digital Media and Design Department</li>
-        </ul>
-      </div>
-    </div>
+              <hr class="my-4" />
   </div>
 </div>
 
