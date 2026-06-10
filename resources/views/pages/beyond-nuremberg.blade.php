@@ -10,10 +10,18 @@
 .bn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
 .bn-row--flip .bn-figure { order: 2; }
 .bn-figure figcaption { font-size: 0.85rem; color: #999; font-style: italic; margin-top: 0.6rem; }
-.bn-logos img { height: 48px; max-width: 220px; object-fit: contain; }
-.bn-logos img.bn-logos__unc { height: 140px; max-width: 420px; }
+.bn-logos { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; justify-items: center; width: 100%; max-width: 900px; margin-inline: auto; }
+.bn-logos__slot { display: flex; align-items: center; justify-content: center; width: 100%; height: 140px; }
+.bn-logos img { height: 48px; max-width: 100%; object-fit: contain; display: block; }
+.bn-logos img.bn-logos__i3 { height: 96px; }
+.bn-logos img.bn-logos__unc { height: 140px; }
 .funding-callout { background: rgba(36,147,225,.1); border: 1px solid rgba(77,179,255,.3); border-left: 4px solid #4DB3FF; border-radius: 0 8px 8px 0; padding: 1.25rem 1.5rem; }
-@media (max-width: 768px) { .bn-row { grid-template-columns: 1fr; } .bn-row--flip .bn-figure { order: 0; } }
+@media (max-width: 768px) {
+  .bn-row { grid-template-columns: 1fr; }
+  .bn-row--flip .bn-figure { order: 0; }
+  .bn-logos { grid-template-columns: 1fr; max-width: 320px; }
+  .bn-logos__slot { height: auto; min-height: 80px; }
+}
 </style>
 
 <div class="bn pt-5">
@@ -60,10 +68,16 @@
               <span data-contrast="none">As part of that work, the team is developing the Archive Access Plug-in, new open-source software that allows materials held in online repositories to be rendered and handled in Unity3D environments. The plug-in addresses a technical gap to better allow the use of archival primary sources in VR environments. It will be freely available to others working at the intersection of public history and immersive media. </span>
 
 
-              <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 my-4 bn-logos">
-                <img src="{{ asset('img/beyond-nuremberg/uconnWhite.png') }}" alt="University of Connecticut">
-                <img src="{{ asset('img/beyond-nuremberg/uconnWhite.png') }}" alt="i3 logo placeholder">
-                <img class="bn-logos__unc" src="{{ asset('img/beyond-nuremberg/uncGreensboroDOH.png') }}" alt="UNC Greensboro Department of History">
+              <div class="bn-logos my-4">
+                <div class="bn-logos__slot">
+                  <img class="bn-logos__i3" src="{{ asset('img/i3/CORE Logos (white vector) PNG-21.png') }}" alt="Institutional Insights and Innovation">
+                </div>
+                <div class="bn-logos__slot">
+                  <img src="{{ asset('img/beyond-nuremberg/uconnWhite.png') }}" alt="University of Connecticut">
+                </div>
+                <div class="bn-logos__slot">
+                  <img class="bn-logos__unc" src="{{ asset('img/beyond-nuremberg/uncGreensboroDOH.png') }}" alt="UNC Greensboro Department of History">
+                </div>
               </div>
 
 
@@ -86,7 +100,8 @@
                   </ul>
                 </li>
               </ul>
-              <hr class="my-4" />
+              
+              <strong><a href="https://s.uconn.edu/ck9fz5qhe7" target="_blank" rel="noopener">Project Contibuters</a></strong>
   </div>
 </div>
 
