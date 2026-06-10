@@ -112,7 +112,19 @@ strong {
                 </li>
               </ul>
               
-              <strong>Project Contibuters</strong>
+              <strong>Project Contributors</strong>
+              <ul>
+                <li style="list-style-type: none;">
+                  <ul>
+                    <li>Ken Thompson / Assistant Professor, Digital Media and Design Department</li>
+                    <li>Clarissa J. Ceglio / Associate Director of Collaborative Research, UConn Humanities Institute and Associate Professor of Digital Public History, Digital Media and Design Department, and Department of History</li>
+                    <li>Anne Parsons / Director of Public History, Department of History, Jewish Studies, and Women, Gender, and Sexuality Studies at UNC Greensboro</li>
+                    <li>John W. Borchert / Director, ARCADE (Applied Research in Computer Arts, Digitization, and Esports) at UNC Greensboro</li>
+                    <li><a href="https://s.uconn.edu/ck9fz5qhe7" target="_blank" rel="noopener">UConn and UNC Greensboro Graduate and Undergraduate Student Researchers</a></li>
+                    <li><a href="https://s.uconn.edu/ck9fz5qhe7" target="_blank" rel="noopener">Project Alumni and Advisors</a></li>
+                  </ul>
+                </li>
+              </ul>
   </div>
 </div>
 
