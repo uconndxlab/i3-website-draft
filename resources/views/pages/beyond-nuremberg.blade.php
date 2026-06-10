@@ -19,6 +19,7 @@
 .bn-logos img.bn-logos__unc { height: 140px; }
 .funding-callout { background: rgba(36,147,225,.1); border: 1px solid rgba(77,179,255,.3); border-left: 4px solid #4DB3FF; border-radius: 0 8px 8px 0; padding: 1.25rem 1.5rem; }
 @media (max-width: 768px) {
+  .bn-hero img { max-width: 100%; }
   .bn-row { grid-template-columns: 1fr; }
   .bn-wrap .bn-figure--end { float: none; width: 100%; margin: 0 0 1rem; }
   .bn-logos { grid-template-columns: 1fr; max-width: 320px; }
