@@ -10,7 +10,7 @@
 .bn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
 .bn-row--flip .bn-figure { order: 2; }
 .bn-figure figcaption { font-size: 0.85rem; color: #999; font-style: italic; margin-top: 0.6rem; }
-.bn-logos { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; justify-items: center; width: 100%; max-width: 900px; margin-inline: auto; }
+.bn-logos { display: grid; grid-template-columns: repeat(2, 1fr); align-items: center; justify-items: center; width: 100%; max-width: 900px; margin-inline: auto; }
 .bn-logos__slot { display: flex; align-items: center; justify-content: center; width: 100%; height: 140px; }
 .bn-logos img { height: 48px; max-width: 100%; object-fit: contain; display: block; }
 .bn-logos img.bn-logos__i3 { height: 96px; }
@@ -70,10 +70,7 @@
 
               <div class="bn-logos my-4">
                 <div class="bn-logos__slot">
-                  <img class="bn-logos__i3" src="{{ asset('img/i3/CORE Logos (white vector) PNG-21.png') }}" alt="Institutional Insights and Innovation">
-                </div>
-                <div class="bn-logos__slot">
-                  <img src="{{ asset('img/beyond-nuremberg/uconnWhite.png') }}" alt="University of Connecticut">
+                  <img class="bn-logos__i3" src="{{ asset('img/beyond-nuremberg/i3Stacked.png') }}" alt="Institutional Insights and Innovation">
                 </div>
                 <div class="bn-logos__slot">
                   <img class="bn-logos__unc" src="{{ asset('img/beyond-nuremberg/uncGreensboroDOH.png') }}" alt="UNC Greensboro Department of History">
@@ -101,7 +98,7 @@
                 </li>
               </ul>
               
-              <strong><a href="https://s.uconn.edu/ck9fz5qhe7" target="_blank" rel="noopener">Project Contibuters</a></strong>
+              <strong>Project Contibuters</strong>
   </div>
 </div>
 
