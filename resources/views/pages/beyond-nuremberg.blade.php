@@ -94,7 +94,7 @@ strong {
 
 
               <div class="funding-callout">
-                <span>Development of <em>Beyond Nuremberg</em> is supported by a National Endowment for the Humanities Digital Projects for the Public Discovery Grant, a University of Connecticut Research Excellence Program and School of Fine Arts Dean’s Grant; funding from The Dodd Center and the UConn Office of Global Affairs, and a UNC Greensboro Internal Research Award.</span>
+                <span>Development of <em>Beyond Nuremberg</em> is supported by a National Endowment for the Humanities Digital Projects for the Public Discovery Grant, a University of Connecticut Research Excellence Program Award, and a School of Fine Arts Dean’s Grant; funding from The Dodd Center and the UConn Office of Global Affairs, and a UNC Greensboro Internal Research Award.</span>
               </div>
 
 
@@ -117,7 +117,7 @@ strong {
               <ul>
                 <li style="list-style-type: none;">
                   <ul>
-                    <li>Ken Thompson / Assistant Professor, Digital Media and Design Department</li>
+                    <li>Ken Thompson / Assistant Professor, Digital Media and Design Department, UConn</li>
                     <li>Clarissa J. Ceglio / Associate Director of Collaborative Research, UConn Humanities Institute and Associate Professor of Digital Public History, Digital Media and Design Department, and Department of History</li>
                     <li>Anne Parsons / Director of Public History, Department of History, Jewish Studies, and Women, Gender, and Sexuality Studies at UNC Greensboro</li>
                     <li>John W. Borchert / Director, ARCADE (Applied Research in Computer Arts, Digitization, and Esports) at UNC Greensboro</li>
