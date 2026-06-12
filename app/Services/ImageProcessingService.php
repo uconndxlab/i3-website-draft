@@ -29,15 +29,14 @@ class ImageProcessingService
         $timestamp = time();
         
         // Create unique filenames
-        $originalPath = "{$directory}/{$originalName}_{$timestamp}." . $uploadedFile->getClientOriginalExtension();
+        $originalFilename = "{$originalName}_{$timestamp}." . $uploadedFile->getClientOriginalExtension();
+        $originalPath = "{$directory}/{$originalFilename}";
         $mediumPath = "{$directory}/{$originalName}_{$timestamp}_medium.webp";
         $webpPath = "{$directory}/{$originalName}_{$timestamp}_webp.webp";
 
-        // Store the original file
-        $uploadedFile->storeAs('public', $originalPath);
-
-        // Load the image
+        // Load before moving the upload; store original on the public disk (not default local/private).
         $image = $this->imageManager->read($uploadedFile->getRealPath());
+        Storage::disk('public')->putFileAs($directory, $uploadedFile, $originalFilename);
 
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
@@ -125,15 +124,14 @@ class ImageProcessingService
         $timestamp = time();
         
         // Create unique filenames
-        $originalPath = "{$directory}/{$originalName}_{$timestamp}." . $uploadedFile->getClientOriginalExtension();
+        $originalFilename = "{$originalName}_{$timestamp}." . $uploadedFile->getClientOriginalExtension();
+        $originalPath = "{$directory}/{$originalFilename}";
         $mediumPath = "{$directory}/{$originalName}_{$timestamp}_medium.webp";
         $webpPath = "{$directory}/{$originalName}_{$timestamp}_webp.webp";
 
-        // Store the original file
-        $uploadedFile->storeAs('public', $originalPath);
-
-        // Load the image
+        // Load before moving the upload; store original on the public disk (not default local/private).
         $image = $this->imageManager->read($uploadedFile->getRealPath());
+        Storage::disk('public')->putFileAs($directory, $uploadedFile, $originalFilename);
 
         // Generate medium sized version (600px width, maintain aspect ratio)
         $mediumImage = clone $image;
