@@ -37,6 +37,8 @@ class CheckNetidAuthorization
             return abort(404, 'Unauthorized access.');
         }
 
+        $request->session()->regenerateToken();
+        
         return $next($request);
     }
 }
