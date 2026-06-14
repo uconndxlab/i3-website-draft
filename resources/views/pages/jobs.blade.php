@@ -16,51 +16,30 @@
             <div class="text-light text-center mx-auto aos-init aos-animate my-4" style="max-width: 700px;"
                 data-aos="fade-up">
                 <p class="fs-5">
-We're hiring for 2026! i3 is a small, agile team building digital solutions that actually get used across UConn. We offer hybrid work, high autonomy, and the chance to work directly with faculty and administrators on projects that matter. Whether you're looking to grow your technical skills or take on leadership, there's room to do both here.
-
-
+                    Institutional Insights &amp; Innovation (i3) is a small, agile digital enablement group
+                                embedded within the academic and research context at UConn. The team currently supports
+                                dozens of active projects spanning student success, research advancement, fee-based
+                                program support, and operational efficiency initiatives. i3 partners directly with
+                                faculty, administrators, and university leadership to design and build institutionally
+                                owned applications that solve real problems and evolve with changing needs.
                 </p>
             </div>
 
-            <div class="row mt-5 g-5 justify-content-center">
-                <!-- Web Application Developer Card -->
-                <div class="col-md-6 col-lg-5" data-aos="fade-up" data-aos-delay="100">
-                    <div class="position-relative mb-4">
-                        <div class="card-outline"></div>
-                        <div class="card-content p-4 rounded-3">
-                            <i class="bi bi-code-slash display-5 mb-3 text-light"></i>
-                            <h3 class="fw-bold mt-3 fs-4">Web Application Developer</h3>
-                            <p class="mb-4">
-                                Join a fast-paced, collaborative team building custom Laravel-based 
-                                web applications. Ideal for developers who enjoy working across projects, 
-                                communicating with stakeholders, and using modern tools including 
-                                AI-assisted development workflows.
-                            </p>
-                            <div class="btn display-btn btn-arrow-slide">
-                                <a href="{{ route('jobs.web-dev') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
-                                    <span class="btn-arrow-slide-circle" aria-hidden="true">
-                                        <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
-                                    </span>
-                                    <span class="btn-arrow-slide-text">Learn More</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Junior Digital Project Specialist Card -->
-                <div class="col-md-6 col-lg-5" data-aos="fade-up" data-aos-delay="200">
+            <div class="row mt-5 justify-content-center">
+                <!-- Product Delivery Lead Card -->
+                <div class="col-md-8 col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="position-relative mb-4">
                         <div class="card-outline"></div>
                         <div class="card-content p-4 rounded-3">
                             <i class="bi bi-kanban display-5 mb-3 text-light"></i>
-                            <h3 class="fw-bold mt-3 fs-4">Junior Digital Project Specialist</h3>
+                            <h3 class="fw-bold mt-3 fs-4">Product Delivery Lead</h3>
                             <p class="mb-4">
-                                A versatile role combining WordPress development, project coordination, 
-                                QA testing, and digital support. This role offers significant opportunity for growth, with exposure to both website and custom application development in a collaborative, mission-driven environment.
+                                Help drive operational maturity and agile product delivery across i3's growing
+                                portfolio of institutional platforms. Ideal for someone who enjoys bringing structure
+                                to ambitious initiatives and coordinating across teams.
                             </p>
                             <div class="btn display-btn btn-arrow-slide">
-                                <a href="{{ route('jobs.project-specialist') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
+                                <a href="{{ route('jobs.product-delivery-lead') }}" class="btn-arrow-slide-cont btn-arrow-slide-cont--white">
                                     <span class="btn-arrow-slide-circle" aria-hidden="true">
                                         <span class="btn-arrow-slide-arrow btn-arrow-slide-icon"></span>
                                     </span>
