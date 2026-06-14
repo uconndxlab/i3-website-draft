@@ -152,7 +152,6 @@ class PageController extends Controller
 
     public function blogs(Request $request) {
 
-        // TODO: SHOW MORE POSTS button to get past the paginate 21
         $query = Post::where('published', true)
             ->whereNotNull('published_at');
         
@@ -170,7 +169,7 @@ class PageController extends Controller
             $query->orderBy('published_at', 'desc');
         }
         
-        $posts = $query->paginate(21);
+        $posts = $query->get();
         
         return view('pages.blogs.index', compact('posts', 'filterTag', 'sort'));
     }
@@ -185,16 +184,8 @@ class PageController extends Controller
         return $this->renderBlogView($post);
     }
 
-    protected function renderBlogView(?Post $post)
+    protected function renderBlogView(Post $post)
     {
-        if (!$post) {
-            return view('pages.blogs.empty', [
-                'post' => null,
-                'nextPost' => null,
-                'prevPost' => null,
-            ]);
-        }
-
         $nextPost = Post::where('published', true)
             ->whereNotNull('published_at')
             ->where(function ($query) use ($post) {
@@ -221,8 +212,12 @@ class PageController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        $view = $this->resolvePostTemplate($post->blade_file)
-            ?: 'pages.blogs.template-missing';
+        // New posts use body_markdown stored in DB; legacy posts resolve a custom blade file.
+        if (!empty(trim((string) ($post->body_markdown ?? '')))) {
+            $view = 'pages.blogs.backgrounds.blogs';
+        } else {
+            $view = $this->resolvePostTemplate($post->blade_file) ?: 'pages.blogs.template-missing';
+        }
 
         return view($view, compact('post', 'nextPost', 'prevPost'));
     }

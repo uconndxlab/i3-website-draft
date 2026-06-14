@@ -7,10 +7,9 @@ use App\Models\Post;
 use App\Enums\PostTag;
 use App\Services\ImageProcessingService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -33,7 +32,7 @@ class PostController extends Controller
     public function create()
     {
         return view('admin.posts.create', [
-            'bladeTemplates' => $this->getBlogBladeTemplates(),
+            'backgroundTemplates' => $this->backgroundTemplates(),
         ]);
     }
 
@@ -48,17 +47,19 @@ class PostController extends Controller
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:' . implode(',', PostTag::all()),
-            'blade_file' => 'nullable|string',
+            'blade_file' => ['nullable', 'string', Rule::in(array_keys($this->backgroundTemplates()))],
+            'body_markdown' => 'nullable|string',
         ], [
             'featured_image.image' => 'The featured image must be a valid image file.',
             'featured_image.max' => 'The featured image must not be larger than 10MB.',
+            'blade_file.in' => 'Please choose a valid background template.',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
             ? Str::slug($data['url_friendly'])
             : Str::slug($data['title']);
 
-            if (Post::where('url_friendly', $data['url_friendly'])->exists()) {
+        if (Post::where('url_friendly', $data['url_friendly'])->exists()) {
             return back()
                 ->withInput()
                 ->withErrors(['url_friendly' => 'This permalink is already in use. Please use a different slug.']);
@@ -88,7 +89,14 @@ class PostController extends Controller
                 ->withInput()
                 ->withErrors(['published_at' => 'Please select a published date to publish this post.']);
         }
-        
+
+        $hasBody = !empty(trim((string) ($data['body_markdown'] ?? '')));
+        if ($shouldPublish && !$hasBody) {
+            return back()
+                ->withInput()
+                ->withErrors(['body_markdown' => 'Add post content in the visual editor before publishing.']);
+        }
+
         $data['published'] = $shouldPublish;
 
         // Allow blank publish date to keep as draft
@@ -102,10 +110,6 @@ class PostController extends Controller
         // Handle tags - checkboxes return array, convert to empty array if not set
         if (!isset($data['tags']) || !is_array($data['tags'])) {
             $data['tags'] = [];
-        }
-
-        if (empty($data['blade_file'])) {
-            $data['blade_file'] = null;
         }
 
         $post = Post::create($data);
@@ -126,7 +130,7 @@ class PostController extends Controller
     {
         return view('admin.posts.edit', [
             'post' => $post,
-            'bladeTemplates' => $this->getBlogBladeTemplates(),
+            'backgroundTemplates' => $this->backgroundTemplates(),
         ]);
     }
 
@@ -141,10 +145,12 @@ class PostController extends Controller
             'url_friendly' => 'nullable|string|max:255',
             'tags' => 'nullable|array',
             'tags.*' => 'string|in:' . implode(',', PostTag::all()),
-            'blade_file' => 'nullable|string',
+            'blade_file' => ['nullable', 'string', Rule::in(array_keys($this->backgroundTemplates()))],
+            'body_markdown' => 'nullable|string',
         ], [
             'featured_image.image' => 'The featured image must be a valid image file.',
             'featured_image.max' => 'The featured image must not be larger than 10MB.',
+            'blade_file.in' => 'Please choose a valid background template.',
         ]);
 
         $data['url_friendly'] = $data['url_friendly']
@@ -190,16 +196,19 @@ class PostController extends Controller
             $data['tags'] = [];
         }
 
-        if (empty($data['blade_file'])) {
-            $data['blade_file'] = null;
-        }
-
         $shouldPublish = $request->input('publish_action') === 'publish';
 
         if ($shouldPublish && !$request->filled('published_at')) {
             return back()
                 ->withInput()
                 ->withErrors(['published_at' => 'Please select a published date to publish this post.']);
+        }
+
+        $hasBody = !empty(trim((string) ($data['body_markdown'] ?? '')));
+        if ($shouldPublish && !$hasBody) {
+            return back()
+                ->withInput()
+                ->withErrors(['body_markdown' => 'Add post content in the visual editor before publishing.']);
         }
 
         if (!$request->filled('published_at')) {
@@ -243,6 +252,10 @@ class PostController extends Controller
         if (!$post->published_at) {
             return back()->with('error', 'Cannot publish post without a published date. Please edit the post and set a published date first.');
         }
+
+        if (empty(trim((string) ($post->body_markdown ?? '')))) {
+            return back()->with('error', 'Cannot publish post without editor content. Add post body content first.');
+        }
         
         $post->update(['published' => true]);
         return back()->with('success', 'Post published successfully.');
@@ -256,9 +269,13 @@ class PostController extends Controller
 
     public function preview(Post $post)
     {
-        $view = $post->blade_file && View::exists($post->blade_file)
-            ? $post->blade_file
-            : 'pages.blogs.default';
+        if (!empty(trim((string) ($post->body_markdown ?? '')))) {
+            $view = 'pages.blogs.backgrounds.blogs';
+        } elseif ($post->blade_file && \Illuminate\Support\Facades\View::exists($post->blade_file)) {
+            $view = $post->blade_file;
+        } else {
+            $view = 'pages.blogs.template-missing';
+        }
 
         return view($view, [
             'post' => $post,
@@ -283,32 +300,23 @@ class PostController extends Controller
         ]);
     }
 
-    protected function getBlogBladeTemplates(): array
+    protected function backgroundTemplates(): array
     {
-        $directory = resource_path('views/pages/blogs');
-
-        if (!is_dir($directory)) {
-            return [];
-        }
-
-        return collect(File::files($directory))
-            ->filter(fn ($file) => Str::endsWith($file->getFilename(), '.blade.php'))
-            ->filter(fn ($file) => Str::startsWith($file->getFilename(), 'blog-'))
-            ->map(function ($file) {
-                $filename = $file->getFilename();
-                $viewName = 'pages.blogs.' . Str::of($filename)->replace('.blade.php', '');
-
-                return [
-                    'value' => $viewName,
-                    'label' => Str::of($filename)
-                        ->replace('.blade.php', '')
-                        ->replace(['-', '_'], ' ')
-                        ->title(),
-                ];
-            })
-            ->sortBy('label')
-            ->values()
-            ->all();
+        return [
+            'ocean-blue' => [
+                'label' => 'Ocean Blue',
+                'preview' => 'linear-gradient(180deg, #071826 0%, #0f2e4b 60%, #111 100%)',
+            ],
+            'teal' => [
+                'label' => 'Teal',
+                'preview' => 'linear-gradient(180deg, #072e28 0%, #0d3941 60%, #111 100%)',
+            ],
+            'purple' => [
+                'label' => 'Purple',
+                'preview' => 'linear-gradient(180deg, #1a0828 0%, #280E3A 60%, #111 100%)',
+            ],
+        ];
     }
+
 }
 

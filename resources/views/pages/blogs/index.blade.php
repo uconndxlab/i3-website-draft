@@ -55,8 +55,17 @@
                                              class="blog-card-image"
                                              loading="lazy">
                                     @else
-                                        <div class="blog-card-image-placeholder">
-                                            <i class="bi bi-file-text" style="font-size: 3rem; opacity: 0.3;"></i>
+                                        @php
+                                            $cardTheme = $post->blade_file ?? 'ocean-blue';
+                                            $cardGradient = match($cardTheme) {
+                                                'teal'   => ['#072e28', '#0d3941', '#2dd4bf22'],
+                                                'purple' => ['#1a0828', '#280E3A', '#c084fc22'],
+                                                default  => ['#071826', '#0f2e4b', '#0ea5e922'],
+                                            };
+                                        @endphp
+                                        <div class="blog-card-image-placeholder" style="background: linear-gradient(135deg, {{ $cardGradient[0] }} 0%, {{ $cardGradient[1] }} 100%);">
+                                            <div class="blog-card-placeholder-dots" style="--dot-color: {{ $cardGradient[2] }}"></div>
+                                            <i class="bi bi-pencil-square" style="font-size: 2.5rem; opacity: 0.35; position: relative; z-index: 1;"></i>
                                         </div>
                                     @endif
                                     <div class="blog-card-overlay"></div>
@@ -145,8 +154,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
         color: #fff;
+        overflow: hidden;
+    }
+
+    .blog-card-placeholder-dots {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(var(--dot-color, #0ea5e922) 7.5%, transparent 0);
+        background-size: 28px 28px;
+        background-repeat: repeat;
     }
 
     .blog-card:hover .blog-card-image {
