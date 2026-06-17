@@ -436,6 +436,13 @@ class PageController extends Controller
             $department = $this->csvColumnValue($row, $headerMap, 'Home Department');
             $client = $this->csvColumnValue($row, $headerMap, 'Client/PI');
             $grantValue = $this->csvColumnValue($row, $headerMap, 'Grant Y/N');
+            $primaryStaff = $this->csvColumnValue($row, $headerMap, 'i3 Primary');
+            $staffList = $this->csvColumnValue($row, $headerMap, 'i3 Staff');
+            $team = collect([$primaryStaff, $staffList])
+                ->filter()
+                ->unique()
+                ->values()
+                ->implode(', ');
 
             $hasContent = $status !== '' || $projectName !== '' || $department !== '' || $client !== '' || $grantValue !== '';
             if (!$hasContent || $projectName === '') {
@@ -447,6 +454,7 @@ class PageController extends Controller
                 'status' => $status,
                 'department' => $department,
                 'client' => $client,
+                'team' => $team,
                 'is_grant' => Str::upper($grantValue) === 'Y',
             ];
         }
