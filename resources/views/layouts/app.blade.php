@@ -144,7 +144,7 @@
                         <div class="col-lg-6" data-aos="fade-left">
                             <div class="maps">
                                 <iframe title="Google Map of our Location in the Whetten Building at UConn"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4886.890665260858!2d-72.26192202229005!3d41.807715800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e68bee10433b09%3A0x9da32f236598c077!2sUConn%20Rowe%20Center%20for%20Undergraduate%20Education%20(ROWE)!5e1!3m2!1sen!2sus!4v1740006421026!5m2!1sen!2sus"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d743.5098076635612!2d-72.25263837154274!3d41.80591529786495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e68a3c4358f36d%3A0x198abac0879ffd32!2sNathan%20L.%20Whetten%20Graduate%20Center%2C%20438%20Whitney%20Rd%20Ext%2C%20Storrs%2C%20CT%2006269!5e0!3m2!1sen!2sus!4v1782487560988!5m2!1sen!2sus"
                                     width="100%" height="80%" frameborder="0" style="border:0;border-radius: 20px"
                                     allowfullscreen="" aria-hidden="false" tabindex="0" class="col-lg-9"></iframe>
                                 <p>Visit Us in <strong>Whetten 200!</strong></p>
@@ -155,7 +155,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
         @endif
 
