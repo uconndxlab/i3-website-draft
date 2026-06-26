@@ -89,14 +89,14 @@
         <div class="container hero-overlay">
             <div class="hero-card shadow-lg">
                 <div class="mb-2 text-light small">
-                    <i class="bi bi-geo-alt"></i> Rowe 321, Storrs Campus
+                    <i class="bi bi-geo-alt"></i> Whetten 200, Storrs Campus
                     &nbsp;|&nbsp;<i class="bi bi-envelope"></i> <a href="mailto:i3@uconn.edu"
                         class="text-light text-decoration-underline">i3@uconn.edu</a>
                 </div>
                 <h2 class="my-3 d-inline-block pb-3 text-uppercase" data-aos="fade-down"><span
                         class="border-bottom border-2 pb-3 border-primary">Let's</span> Connect</h2>
                 <p>
-                    All aboard the Rowe Boat! Here at Rowe 321, we're always shipping.
+                    <!--We work better Whe(tte)n we're together! -->Here at Whetten 200, we're always shipping.
                     Conveniently located in the heart of campus (and right by The Beanery), we're in a great spot for
                     students and clients to collaborate. Swing by to check out what we're working on, hang out on our comfy
                     couches, and get a great view of campus!
