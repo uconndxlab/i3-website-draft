@@ -12,7 +12,7 @@ class FetchGitHubCommits extends Command
     protected $signature = 'github:fetch-commits
         {--orgs=uconndxlab,sourceryapp : Comma-separated list of GitHub organization names}
         {--token= : GitHub API token (overrides env vars)}
-        {--year=2025 : Year to fetch commit history for}
+        {--year=2026 : Year to fetch commit history for}
         {--all : Fetch data for all configured organizations}';
 
     protected $description = 'Fetch daily GitHub commit counts for all repos in one or more GitHub organizations for a given year.';

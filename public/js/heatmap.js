@@ -7,7 +7,7 @@ const colors = ["#ebedf0", "#9ecae1", "#6baed6", "#4292c6", "#08519c"];
 
 const CONFIG = {
     organizations: ['uconndxlab', 'sourceryapp'], // Array of organizations - add more as needed
-    year: 2025,
+    year: 2026,
 };
 
 let today, startDate, endDate;
