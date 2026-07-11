@@ -114,37 +114,6 @@
             <button class="btn btn-outline-primary filter-btn" data-filter="Insight">Insight</button>
         </div>
     </div> --}}
-    <section role="region" aria-label="Our Leadership" id="senior-staff"
-        class="bg-blue-gradient d-flex align-items-center px-5 py-5" style="min-height: 80vh;">
-
-        <div class="container">
-            <div class="row align-items-center justify-content-center mb-3 ">
-                <h2 class="mb-0 d-inline-block pb-2 text-center" data-aos="fade-down">Our Leadership</h2>
-                <span class="border-bottom border-2 border-primary text-center" data-aos="fade-up"
-                    style="width:50px"></span>
-
-            </div>
-            <div class="text-light text-center mx-auto" style="max-width: 600px;" data-aos="fade-up">
-                <p>
-                We're the type of nerds who eat, sleep, and breathe UConn. From leading projects & initiatives to mentoring students, we are committed to pushing the boundaries of what's possible at UConn.
-                </p>
-            </div>
-            <div class="row justify-content-center">
-                @foreach ($senior_staff as $person)
-                    <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
-                         data-aos="fade-up" 
-                         data-aos-delay="{{ $loop->index * 100 }}"
-                         data-tags="{{ json_encode($person->tags ?? []) }}">
-                        <x-person-card 
-                            :person="$person" 
-                            overlay-class="bg-blue-to-transparent" 
-                            name-size="fs-6" 
-                        />
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
 
     <section role="region" aria-label="Our Staff" id="staff"
         class="d-flex align-items-center px-5 bg-green-gradient py-5" style="min-height: 80vh;">

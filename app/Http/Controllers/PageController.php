@@ -37,12 +37,9 @@ class PageController extends Controller
             return end($nameParts);
         });
 
-        $senior_staff = $people->filter(function ($person) {
-            return in_array('senior-staff', $person->tags);
-        });
-
         $staff = $people->filter(function ($person) {
-                return in_array('staff', $person->tags);
+            return in_array('senior-staff', $person->tags)
+                || in_array('staff', $person->tags);
         });
 
         $student_staff = $people->filter(function ($person) {
@@ -53,7 +50,7 @@ class PageController extends Controller
             return in_array('faculty-advisor', $person->tags);
         });
 
-        return view('pages.people', compact('people', 'senior_staff', 'staff', 'student_staff', 'faculty_advisors'));
+        return view('pages.people', compact('people', 'staff', 'student_staff', 'faculty_advisors'));
     }
     public function connect()
     {
