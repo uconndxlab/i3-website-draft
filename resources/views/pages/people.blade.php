@@ -137,7 +137,7 @@
 
                 </div>
 
-                @foreach ($senior_staff->merge($staff) as $staff_member)
+                @foreach ($staff as $staff_member)
                     <div class="col-6 col-md-3 mb-4 person-card-wrapper" 
                          data-aos="fade-up" 
                          data-aos-delay="{{ $loop->index * 100 }}"
