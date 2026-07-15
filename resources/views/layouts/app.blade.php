@@ -182,6 +182,20 @@
                                 class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-linkedin"></i>
                             </a>
+
+                            
+                            <a title="View our Instagram" aria-label="Instagram Profile"
+                                href="https://www.instagram.com/uconni3/" target="_blank"
+                                class="text-light opacity-75 hover-opacity-100 fs-5">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            
+                            <a title="View our YouTube Channel" aria-label="YouTube Channel"
+                                href="http://www.youtube.com/@i3uconn" target="_blank"
+                                class="text-light opacity-75 hover-opacity-100 fs-5">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+
                             <a title="Email Us" href="mailto:i3@uconn.edu" aria-label="Email i3@uconn.edu"
                                 class="text-light opacity-75 hover-opacity-100 fs-5">
                                 <i class="bi bi-envelope"></i>
