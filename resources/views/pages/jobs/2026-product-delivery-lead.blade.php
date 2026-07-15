@@ -19,7 +19,7 @@
                     <div class="mb-5" data-aos="fade-up">
                         <span class="badge bg-primary mb-3">Full-Time</span>
                         <span class="badge bg-secondary mb-3 ms-2">Permanent</span>
-                        <span class="badge bg-danger mb-3 ms-2">Closes Jun 26, 2026</span>
+                        <span class="badge bg-danger mb-3 ms-2">Closed Jun 26, 2026</span>
                         <span class="badge bg-secondary mb-3 ms-2">$75,786 - $98,522</span>
 
                         <h2 class="fw-bold mb-4" style="font-size: 1.75rem;">Product Delivery Lead (<small>Senior Administrative Program Support</small>)</h2>
